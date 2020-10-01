@@ -8,7 +8,7 @@
     <link href='https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.css' rel='stylesheet' />
     -->
     <link href="css/app.css" rel="stylesheet">
-    <link href="css/topmenu.css" rel="stylesheet">
+    <link href="css/topmenu.css?v=<?=time();?>" rel="stylesheet">
 
     <title>Laravel</title>
 
@@ -23,7 +23,6 @@
             color: #636b6f;
             font-family: 'Roboto', sans-serif;
             font-weight: 200;
-            height: 100vh;
             margin: 0;
         }
 
@@ -55,15 +54,6 @@
             font-size: 84px;
         }
 
-        .headlinks a {
-            color: #000000;
-            padding: 0 25px;
-            font-family: 'Oswald', sans-serif;
-            font-size: 15px;
-            letter-spacing: .1rem;
-            text-decoration: none;
-            text-transform: uppercase;
-        }
 
         .m-b-md {
             margin-bottom: 30px;
@@ -72,19 +62,25 @@
 </head>
 <body>
 <header>
-    <img class="logo" src="images/logo_euro2020.png">
     <nav>
-        <ul class="nav__links">
-            <li><a href="#">stadiums</a></li>
-            <li><a href="#">groups</a></li>
-            <li><a href="#">teams</a></li>
-            <li><a href="#">games</a></li>
-        </ul>
+        <div class="topmenu">
+            <div style="float: left">
+                <img class="logo" src="images/logo_euro2020.png">
+            </div>
+            <div style="background-color: #ffffff; height: 100%">
+                <ul class="menu-main">
+                    <li><a href="#">Stadiums</a></li>
+                    <li><a href="#">Groups</a></li>
+                    <li><a href="#">Teams</a></li>
+                    <li><a href="#">Games</a></li>
+                </ul>
+            </div>
+        </div>
     </nav>
 </header>
-
+<!--
 <div id='map_background' style="height:100%; width:100%; position: absolute; z-index: 0"></div>
-
+-->
 
 </body>
 <!-- mapbox background

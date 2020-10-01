@@ -21,9 +21,8 @@
   <component name="ChangeListManager">
     <list default="true" id="cf82d037-ce69-45df-857e-a29fb7732fae" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/navbar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/nav.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/topmenu.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/topmenu.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/navi.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/navi.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -198,7 +197,8 @@
       <updated>1601330085395</updated>
       <workItem from="1601330086824" duration="492000" />
       <workItem from="1601412880177" duration="980000" />
-      <workItem from="1601468275920" duration="8825000" />
+      <workItem from="1601468275920" duration="8882000" />
+      <workItem from="1601556494529" duration="7711000" />
     </task>
     <servers />
   </component>
@@ -215,6 +215,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
     <state x="2865" y="579" key="FileChooserDialogImpl" timestamp="1601468970701">
