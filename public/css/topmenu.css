@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
 .topmenu {
     -webkit-box-shadow: 0px 3px 13px -2px rgba(0,0,0,0.75);
@@ -8,7 +9,7 @@
     width: 100%;
     background: #fff;
     z-index: 5;
-    overflow: hidden;
+
 }
 
 * {
@@ -27,13 +28,15 @@ nav ul {
 nav li {
     display: inline-block;
     width: min-content;
-    border-bottom: solid #2d3748 20px;
-    background-color: #2a9055;
     margin-left: 25px;
 }
 
+nav li img {
+    position: relative;
+}
+
 nav li:nth-child(1) {
-    border-bottom: solid #CCCCCC 20px;
+    border-bottom: solid #000000 10px;
     width: fit-content;
 }
 
@@ -47,16 +50,55 @@ nav a {
     text-transform: uppercase;
 }
 
-nav a:hover {
+nav li:hover {
     text-decoration: none;
     color: #2e7f9d;
 }
 
-nav li:hover {
+nav li:hover a{
+    color: #1d643b;
+}
 
+nav li:nth-child(1) a:hover {
+    text-decoration: underline;
+    color: #000000;
+}
+
+.menu-sub-stadium {
+    position: absolute;
+    top: 65px;
+    left: 0px;
+    font-size: 10px;
+    display: none;
+    background-color: #CCCC11;
+    width: 375px;
+    height: 600px;
+    z-index: -1;
+}
+
+nav li:hover .menu-sub-stadium {
+    display: block;
+}
+
+.menu-sub-stadium li {
+    display: block;
+
+}
+
+.stadium-sub-link {
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px;
+    margin-left: -25px;
 }
 
 .logo {
     padding: 5px 5px 5px 5px;
 }
 
+#stadium a{
+    color: red;
+}
+
+#stadium a:hover {
+    color: green;
+}

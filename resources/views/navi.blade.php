@@ -7,8 +7,7 @@
     <script src='https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.js'></script>
     <link href='https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.css' rel='stylesheet' />
     -->
-    <link href="css/app.css" rel="stylesheet">
-    <link href="css/topmenu.css?v=<?=time();?>" rel="stylesheet">
+    <link href="css/topmenu.css?v={{ time() }}" rel="stylesheet">
 
     <title>Laravel</title>
 
@@ -64,12 +63,23 @@
 <header>
     <nav>
         <div class="topmenu">
+            <!-- EURO 2020 LOGO -->
             <div style="float: left">
                 <img class="logo" src="images/logo_euro2020.png">
             </div>
+            <!-------------------->
+
             <div style="background-color: #ffffff; height: 100%">
                 <ul class="menu-main">
-                    <li><a href="#">Stadiums</a></li>
+                    <li><a href="#">Stadiums</a><img src="images/arrow-drop-down.svg">
+                        <div class="menu-sub-stadium">
+                            <ul>
+                                <li id="stadium"><a href="#">Amsterdam</a></li>
+                                <li id="stadium"><a href="#">Amsterdam</a></li>
+                                <li><a href="#">Amsterdam</a></li>
+                                <li><a href="#">Amsterdam</a></li>
+                            </ul>
+                        </div>
                     <li><a href="#">Groups</a></li>
                     <li><a href="#">Teams</a></li>
                     <li><a href="#">Games</a></li>

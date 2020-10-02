@@ -175,6 +175,9 @@
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\EC2020\public\images" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\xampp\htdocs\EC2020\public\images" />
     </key>
@@ -198,7 +201,8 @@
       <workItem from="1601330086824" duration="492000" />
       <workItem from="1601412880177" duration="980000" />
       <workItem from="1601468275920" duration="8882000" />
-      <workItem from="1601556494529" duration="7711000" />
+      <workItem from="1601556494529" duration="8005000" />
+      <workItem from="1601640177272" duration="10455000" />
     </task>
     <servers />
   </component>
