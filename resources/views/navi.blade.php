@@ -69,18 +69,62 @@
             </div>
             <!-------------------->
 
-            <div style="background-color: #ffffff; height: 100%">
+            <div class="container">
                 <ul class="menu-main">
-                    <li><a href="#">Stadiums</a><img src="images/arrow-drop-down.svg">
-                        <div class="menu-sub-stadium">
+
+                    <li id="sub_item_stadium"><a href="#">Stadiums</a><img src="images/arrow-drop-down.svg">
+                        <div class="menu_sub_stadium">
                             <ul>
-                                <li id="stadium"><a href="#">Amsterdam</a></li>
-                                <li id="stadium"><a href="#">Amsterdam</a></li>
-                                <li><a href="#">Amsterdam</a></li>
-                                <li><a href="#">Amsterdam</a></li>
+                                <li id="stadium">
+                                    <div class="stadium_link">
+                                        <a href="#">Dit is groter dan ons allemaal</a>
+                                    </div>
+                                </li>
+                                <li id="stadium">
+                                    <div class="stadium_link">
+                                        <a href="#">Dit is groter dan ons allemaal</a>
+                                    </div>
+                                </li>
+                                <li id="stadium">
+                                    <div class="stadium_link">
+                                        <a href="#">Dit is groter dan ons allemaal</a>
+                                    </div>
+                                </li>
+                                <li id="stadium">
+                                    <div class="stadium_link">
+                                        <a href="#">Dit is groter dan ons allemaal</a>
+                                    </div>
+                                </li>
                             </ul>
                         </div>
-                    <li><a href="#">Groups</a></li>
+                    </li>
+
+                    <li id="sub_item_groups"><a href="#">Groups</a><img src="images/arrow-drop-down.svg">
+                        <div class="menu_sub_groups">
+                            <ul>
+                                <li id="group">
+                                    <div class="group_link">
+                                        <a href="#">Dit is groter dan ons allemaal</a>
+                                    </div>
+                                </li>
+                                <li id="group">
+                                    <div class="group_link">
+                                        <a href="#">Dit is groter dan ons allemaal</a>
+                                    </div>
+                                </li>
+                                <li id="group">
+                                    <div class="group_link">
+                                        <a href="#">Dit is groter dan ons allemaal</a>
+                                    </div>
+                                </li>
+                                <li id="group">
+                                    <div class="group_link">
+                                        <a href="#">Dit is groter dan ons allemaal</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
                     <li><a href="#">Teams</a></li>
                     <li><a href="#">Games</a></li>
                 </ul>

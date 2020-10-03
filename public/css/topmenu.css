@@ -12,6 +12,16 @@
 
 }
 
+.logo {
+    padding: 5px 5px 5px 5px;
+}
+
+.container {
+    background-color: #ffffff;
+    height: 100%
+
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -19,8 +29,6 @@
 }
 
 nav ul {
-    margin: 0;
-    padding-top: 10px;
     list-style: none;
     position: relative;
 }
@@ -33,11 +41,6 @@ nav li {
 
 nav li img {
     position: relative;
-}
-
-nav li:nth-child(1) {
-    border-bottom: solid #000000 10px;
-    width: fit-content;
 }
 
 nav a {
@@ -55,50 +58,119 @@ nav li:hover {
     color: #2e7f9d;
 }
 
-nav li:hover a{
-    color: #1d643b;
-}
-
+/* STADIUMS MAIN LINK */
 nav li:nth-child(1) a:hover {
     text-decoration: underline;
     color: #000000;
 }
+/* GROUPS MAIN LINK */
+nav li:nth-child(2) a:hover {
+    text-decoration: underline;
+    color: black;
+}
+/* TEAMS MAIN LINK */
+nav li:nth-child(3) a:hover {
+    text-decoration: underline;
+    color: #000000;
+}
+/* GAMES MAIN LINK */
+nav li:nth-child(4) a:hover {
+    text-decoration: underline;
+    color: black;
+}
 
-.menu-sub-stadium {
+/* --------------- STADIUM ----------------- */
+/* ----------------------------------------- */
+#sub_item_stadium {
+    border-bottom: solid #000000 7px;
+    width: auto;
+    padding-bottom: 3px;
+    margin-top: 10px;
+}
+
+.menu_sub_stadium {
     position: absolute;
     top: 65px;
-    left: 0px;
+    left: 0;
     font-size: 10px;
     display: none;
-    background-color: #CCCC11;
+    background-color: #CCCC99;
     width: 375px;
     height: 600px;
     z-index: -1;
 }
 
-nav li:hover .menu-sub-stadium {
+nav li:hover .menu_sub_stadium {
     display: block;
 }
 
-.menu-sub-stadium li {
+.menu_sub_stadium li {
     display: block;
-
-}
-
-.stadium-sub-link {
-    font-family: 'Roboto', sans-serif;
-    font-size: 12px;
-    margin-left: -25px;
-}
-
-.logo {
-    padding: 5px 5px 5px 5px;
+    width: 375px;
+    margin-left: 0;
+    margin-top: 0;
+    padding-top: 0;
 }
 
 #stadium a{
     color: red;
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px;
 }
 
 #stadium a:hover {
     color: green;
+}
+
+.stadium_link {
+    background: #CCCCCC;
+    width: inherit;
+    height: 15px;
+}
+/* --------------------------------------- */
+
+/* --------------- GROUP ----------------- */
+/* --------------------------------------- */
+
+#sub_item_groups {
+    border-bottom: solid #000000 7px;
+    width: auto;
+    padding-bottom: 3px;
+    margin-top: 10px;
+}
+
+.menu_sub_groups {
+    position: absolute;
+    top: 65px;
+    left: 404px;
+    font-size: 10px;
+    display: none;
+    background-color: lightblue;
+    width: 375px;
+    height: 600px;
+    z-index: -1;
+}
+
+nav li:hover .menu_sub_groups {
+    display: block;
+}
+
+.menu_sub_groups li {
+    display: block;
+    width: 375px;
+    margin-left: 0;
+    margin-top: 0;
+    padding-top: 0;
+}
+
+#group a{
+    color: #ff0000;
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px;
+}
+
+.group_link {
+    background: #CCCCCC;
+    width: 375px;
+    height: 15px;
 }
