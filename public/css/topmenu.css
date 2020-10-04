@@ -12,6 +12,13 @@
 
 }
 
+#map_background {
+    height:100vh;
+    width:100%; position: absolute;
+    top:0;
+    z-index: -2;
+}
+
 .logo {
     padding: 5px 5px 5px 5px;
 }
@@ -82,7 +89,7 @@ nav li:nth-child(4) a:hover {
 /* --------------- STADIUM ----------------- */
 /* ----------------------------------------- */
 #sub_item_stadium {
-    border-bottom: solid #000000 7px;
+    border-bottom: solid #c9d466 7px;
     width: auto;
     padding-bottom: 3px;
     margin-top: 10px;
@@ -133,7 +140,7 @@ nav li:hover .menu_sub_stadium {
 /* --------------------------------------- */
 
 #sub_item_groups {
-    border-bottom: solid #000000 7px;
+    border-bottom: solid #e58d37 7px;
     width: auto;
     padding-bottom: 3px;
     margin-top: 10px;
@@ -142,7 +149,6 @@ nav li:hover .menu_sub_stadium {
 .menu_sub_groups {
     position: absolute;
     top: 65px;
-    left: 404px;
     font-size: 10px;
     display: none;
     background-color: lightblue;
@@ -171,6 +177,97 @@ nav li:hover .menu_sub_groups {
 
 .group_link {
     background: #CCCCCC;
+    width: 375px;
+    height: 15px;
+}
+
+/* --------------- TEAMS ----------------- */
+/* --------------------------------------- */
+
+#sub_item_teams {
+    border-bottom: solid #c34c26 7px;
+    width: auto;
+    padding-bottom: 3px;
+    margin-top: 10px;
+}
+
+.menu_sub_teams {
+    position: absolute;
+    top: 65px;
+    font-size: 10px;
+    display: none;
+    background-color: mediumpurple;
+    width: 375px;
+    height: 600px;
+    z-index: -1;
+}
+
+nav li:hover .menu_sub_teams {
+    display: block;
+}
+
+.menu_sub_teams li {
+    display: block;
+    width: 375px;
+    margin-left: 0;
+    margin-top: 0;
+    padding-top: 0;
+}
+
+#team a{
+    color: #ff0000;
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px;
+}
+
+.team_link {
+    background: #CCCCCC;
+    width: 375px;
+    height: 15px;
+}
+
+/* --------------- GAMES ----------------- */
+/* --------------------------------------- */
+
+#sub_item_games {
+    border-bottom: solid #4cb4e7 7px;
+    width: auto;
+    padding-bottom: 3px;
+    margin-top: 10px;
+}
+
+.menu_sub_games {
+    position: absolute;
+    top: 65px;
+    left: 0;
+    font-size: 10px;
+    display: none;
+    background-color: #dbdae0;
+    width: 100%;
+    height: 300px;
+    z-index: -1;
+}
+
+nav li:hover .menu_sub_games {
+    display: block;
+}
+
+.menu_sub_games li {
+    display: block;
+    width: 375px;
+    margin-left: 0;
+    margin-top: 0;
+    padding-top: 0;
+}
+
+#game a{
+    color: #ff0000;
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px;
+}
+
+.game_link {
+    background: #cccccc;
     width: 375px;
     height: 15px;
 }

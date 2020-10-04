@@ -3,13 +3,13 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- mapbox related
+
     <script src='https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.js'></script>
     <link href='https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.css' rel='stylesheet' />
-    -->
+
     <link href="css/topmenu.css?v={{ time() }}" rel="stylesheet">
 
-    <title>Laravel</title>
+    <title>Euro 2020</title>
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
@@ -125,19 +125,72 @@
                             </ul>
                         </div>
                     </li>
-                    <li><a href="#">Teams</a></li>
-                    <li><a href="#">Games</a></li>
+
+                    <li id="sub_item_teams"><a href="#">Teams</a><img src="images/arrow-drop-down.svg">
+                        <div class="menu_sub_teams">
+                            <ul>
+                                <li id="team">
+                                    <div class="team_link">
+                                        <a href="#">Dit is groter dan ons allemaal</a>
+                                    </div>
+                                </li>
+                                <li id="team">
+                                    <div class="team_link">
+                                        <a href="#">Dit is groter dan ons allemaal</a>
+                                    </div>
+                                </li>
+                                <li id="team">
+                                    <div class="team_link">
+                                        <a href="#">Dit is groter dan ons allemaal</a>
+                                    </div>
+                                </li>
+                                <li id="team">
+                                    <div class="team_link">
+                                        <a href="#">Dit is groter dan ons allemaal</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li id="sub_item_games"><a href="#">Games</a><img src="images/arrow-drop-down.svg">
+                        <div class="menu_sub_games">
+                            <ul>
+                                <li id="game">
+                                    <div class="game_link">
+                                        <a href="#">Dit is groter dan ons allemaal</a>
+                                    </div>
+                                </li>
+                                <li id="game">
+                                    <div class="game_link">
+                                        <a href="#">Dit is groter dan ons allemaal</a>
+                                    </div>
+                                </li>
+                                <li id="game">
+                                    <div class="game_link">
+                                        <a href="#">Dit is groter dan ons allemaal</a>
+                                    </div>
+                                </li>
+                                <li id="game">
+                                    <div class="game_link">
+                                        <a href="#">Dit is groter dan ons allemaal</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+
                 </ul>
             </div>
         </div>
     </nav>
 </header>
-<!--
-<div id='map_background' style="height:100%; width:100%; position: absolute; z-index: 0"></div>
--->
+
+<div id='map_background'></div>
+
 
 </body>
-<!-- mapbox background
+
 <script src="js/mapbox.js"></script>
--->
+
 </html>

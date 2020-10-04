@@ -170,15 +170,16 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="ignore.virus.scanning.warn.message" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/images" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/js" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\EC2020\public\js" />
       <recent name="C:\xampp\htdocs\EC2020\public\images" />
     </key>
-    <key name="CopyFile.RECENT_KEYS">
+    <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\xampp\htdocs\EC2020\public\images" />
     </key>
   </component>
@@ -204,7 +205,8 @@
       <workItem from="1601556494529" duration="8005000" />
       <workItem from="1601640177272" duration="10455000" />
       <workItem from="1601719659668" duration="2833000" />
-      <workItem from="1601736746838" duration="9864000" />
+      <workItem from="1601736746838" duration="11031000" />
+      <workItem from="1601841401257" duration="6191000" />
     </task>
     <servers />
   </component>
@@ -224,10 +226,10 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="2865" y="579" key="FileChooserDialogImpl" timestamp="1601468970701">
+    <state x="2865" y="579" key="FileChooserDialogImpl" timestamp="1601850427989">
       <screen x="2560" y="0" width="1050" height="1650" />
     </state>
-    <state x="2865" y="579" key="FileChooserDialogImpl/0.0.2560.1410/2560.0.1050.1650@2560.0.1050.1650" timestamp="1601468970701" />
+    <state x="2865" y="579" key="FileChooserDialogImpl/0.0.2560.1410/2560.0.1050.1650@2560.0.1050.1650" timestamp="1601850427989" />
     <state width="1007" height="483" key="GridCell.Tab.0.bottom" timestamp="1601413506139">
       <screen x="2560" y="0" width="1050" height="1650" />
     </state>
