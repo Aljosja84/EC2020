@@ -72,7 +72,7 @@
             <div class="container">
                 <ul class="menu-main">
 
-                    <li id="sub_item_stadium"><a href="#">Stadiums</a><img src="images/arrow-drop-down.svg">
+                    <li id="sub_item_stadium"><a id="main_link" href="#">Stadiums</a><img src="images/arrow-drop-down.svg">
                         <div class="menu_sub_stadium">
                             <ul>
                                 <li id="stadium">
@@ -99,7 +99,7 @@
                         </div>
                     </li>
 
-                    <li id="sub_item_groups"><a href="#">Groups</a><img src="images/arrow-drop-down.svg">
+                    <li id="sub_item_groups"><a id="main_link" href="#">Groups</a><img src="images/arrow-drop-down.svg">
                         <div class="menu_sub_groups">
                             <ul>
                                 <li id="group">
@@ -126,7 +126,7 @@
                         </div>
                     </li>
 
-                    <li id="sub_item_teams"><a href="#">Teams</a><img src="images/arrow-drop-down.svg">
+                    <li id="sub_item_teams"><a id="main_link" href="#">Teams</a><img src="images/arrow-drop-down.svg">
                         <div class="menu_sub_teams">
                             <ul>
                                 <li id="team">
@@ -153,7 +153,7 @@
                         </div>
                     </li>
 
-                    <li id="sub_item_games"><a href="#">Games</a><img src="images/arrow-drop-down.svg">
+                    <li id="sub_item_games"><a id="main_link" href="#">Games</a><img src="images/arrow-drop-down.svg">
                         <div class="menu_sub_games">
                             <ul>
                                 <li id="game">
@@ -187,7 +187,6 @@
 </header>
 
 <div id='map_background'></div>
-
 
 </body>
 

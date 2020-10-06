@@ -170,7 +170,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="ignore.virus.scanning.warn.message" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/js" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Euro2020" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
@@ -206,7 +206,10 @@
       <workItem from="1601640177272" duration="10455000" />
       <workItem from="1601719659668" duration="2833000" />
       <workItem from="1601736746838" duration="11031000" />
-      <workItem from="1601841401257" duration="6191000" />
+      <workItem from="1601841401257" duration="6785000" />
+      <workItem from="1601901403865" duration="2819000" />
+      <workItem from="1601930369228" duration="4145000" />
+      <workItem from="1601993210707" duration="1953000" />
     </task>
     <servers />
   </component>
@@ -226,10 +229,10 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="2865" y="579" key="FileChooserDialogImpl" timestamp="1601850427989">
+    <state x="2865" y="579" key="FileChooserDialogImpl" timestamp="1601904576125">
       <screen x="2560" y="0" width="1050" height="1650" />
     </state>
-    <state x="2865" y="579" key="FileChooserDialogImpl/0.0.2560.1410/2560.0.1050.1650@2560.0.1050.1650" timestamp="1601850427989" />
+    <state x="2865" y="579" key="FileChooserDialogImpl/0.0.2560.1410/2560.0.1050.1650@2560.0.1050.1650" timestamp="1601904576125" />
     <state width="1007" height="483" key="GridCell.Tab.0.bottom" timestamp="1601413506139">
       <screen x="2560" y="0" width="1050" height="1650" />
     </state>
