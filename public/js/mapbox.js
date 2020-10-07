@@ -12,7 +12,7 @@ var map = new mapboxgl.Map({
 /**
  ------------ AMSTERDAM --------------
  */
-document.getElementById('AMS').addEventListener('click', function() {
+document.getElementById('AMS').addEventListener('mouseover', function() {
     // Fly to a random location by offsetting the point -74.50, 40
     // by up to 5 degrees.
     map.flyTo({
@@ -20,7 +20,7 @@ document.getElementById('AMS').addEventListener('click', function() {
         zoom: 4.84,
         pitch: 0.00,
         bearing: 0.00,
-        speed:0.3,
+        speed:0.7,
         essential: true // this animation is considered essential with respect to prefers-reduced-motion
     });
 });
@@ -28,7 +28,7 @@ document.getElementById('AMS').addEventListener('click', function() {
 /**
  ------------ GLASGOW --------------
  */
-document.getElementById('GLA').addEventListener('click', function() {
+document.getElementById('GLA').addEventListener('mouseover', function() {
     // Fly to a random location by offsetting the point -74.50, 40
     // by up to 5 degrees.
     map.flyTo({
@@ -36,7 +36,7 @@ document.getElementById('GLA').addEventListener('click', function() {
         zoom: 4.84,
         pitch: 0.00,
         bearing: 0.00,
-        speed:0.3,
+        speed:0.7,
         essential: true // this animation is considered essential with respect to prefers-reduced-motion
     });
 });
@@ -44,7 +44,7 @@ document.getElementById('GLA').addEventListener('click', function() {
 /**
  ------------ BAKU --------------
  */
-document.getElementById('BAK').addEventListener('click', function() {
+document.getElementById('BAK').addEventListener('mouseover', function() {
     // Fly to a random location by offsetting the point -74.50, 40
     // by up to 5 degrees.
     map.flyTo({
@@ -60,6 +60,7 @@ document.getElementById('BAK').addEventListener('click', function() {
 /**
  ------------ LONDON --------------
  */
+/*
 document.getElementById('LON').addEventListener('click', function() {
     // Fly to a random location by offsetting the point -74.50, 40
     // by up to 5 degrees.
@@ -72,11 +73,11 @@ document.getElementById('LON').addEventListener('click', function() {
         essential: true // this animation is considered essential with respect to prefers-reduced-motion
     });
 });
-
+*/
 /**
  ------------ DUBLIN --------------
  */
-document.getElementById('DUB').addEventListener('click', function() {
+document.getElementById('DUB').addEventListener('mouseover', function() {
     // Fly to a random location by offsetting the point -74.50, 40
     // by up to 5 degrees.
     map.flyTo({
@@ -84,7 +85,7 @@ document.getElementById('DUB').addEventListener('click', function() {
         zoom: 4.84,
         pitch: 0.00,
         bearing: 0.00,
-        speed:0.5,
+        speed:0.7,
         essential: true // this animation is considered essential with respect to prefers-reduced-motion
     });
 });
@@ -92,7 +93,7 @@ document.getElementById('DUB').addEventListener('click', function() {
 /**
  ------------ COPENHAGEN --------------
  */
-document.getElementById('COP').addEventListener('click', function() {
+document.getElementById('COP').addEventListener('mouseover', function() {
     // Fly to a random location by offsetting the point -74.50, 40
     // by up to 5 degrees.
     map.flyTo({
@@ -100,7 +101,7 @@ document.getElementById('COP').addEventListener('click', function() {
         zoom: 4.84,
         pitch: 0.00,
         bearing: 0.00,
-        speed:0.5,
+        speed:0.7,
         essential: true // this animation is considered essential with respect to prefers-reduced-motion
     });
 });
@@ -108,7 +109,7 @@ document.getElementById('COP').addEventListener('click', function() {
 /**
  ------------ BUDAPEST --------------
  */
-document.getElementById('BUD').addEventListener('click', function() {
+document.getElementById('BUD').addEventListener('mouseover', function() {
     // Fly to a random location by offsetting the point -74.50, 40
     // by up to 5 degrees.
     map.flyTo({
@@ -116,7 +117,7 @@ document.getElementById('BUD').addEventListener('click', function() {
         zoom: 4.84,
         pitch: 0.00,
         bearing: 0.00,
-        speed:0.5,
+        speed:0.7,
         essential: true // this animation is considered essential with respect to prefers-reduced-motion
     });
 });
@@ -124,7 +125,7 @@ document.getElementById('BUD').addEventListener('click', function() {
 /**
  ------------ BUCHAREST --------------
  */
-document.getElementById('BUC').addEventListener('click', function() {
+document.getElementById('BUC').addEventListener('mouseover', function() {
     // Fly to a random location by offsetting the point -74.50, 40
     // by up to 5 degrees.
     map.flyTo({
@@ -132,7 +133,7 @@ document.getElementById('BUC').addEventListener('click', function() {
         zoom: 4.84,
         pitch: 0.00,
         bearing: 0.00,
-        speed:0.5,
+        speed:0.7,
         essential: true // this animation is considered essential with respect to prefers-reduced-motion
     });
 });
@@ -140,7 +141,7 @@ document.getElementById('BUC').addEventListener('click', function() {
 /**
  ------------ BILBOA --------------
  */
-document.getElementById('BIL').addEventListener('click', function() {
+document.getElementById('BIL').addEventListener('mouseover', function() {
     // Fly to a random location by offsetting the point -74.50, 40
     // by up to 5 degrees.
     map.flyTo({
@@ -148,7 +149,7 @@ document.getElementById('BIL').addEventListener('click', function() {
         zoom: 4.84,
         pitch: 0.00,
         bearing: 0.00,
-        speed:0.5,
+        speed:0.7,
         essential: true // this animation is considered essential with respect to prefers-reduced-motion
     });
 });
@@ -156,7 +157,7 @@ document.getElementById('BIL').addEventListener('click', function() {
 /**
  ------------ MUNICH --------------
  */
-document.getElementById('MUN').addEventListener('click', function() {
+document.getElementById('MUN').addEventListener('mouseover', function() {
     // Fly to a random location by offsetting the point -74.50, 40
     // by up to 5 degrees.
     map.flyTo({
@@ -164,7 +165,7 @@ document.getElementById('MUN').addEventListener('click', function() {
         zoom: 4.84,
         pitch: 0.00,
         bearing: 0.00,
-        speed:0.5,
+        speed:0.7,
         essential: true // this animation is considered essential with respect to prefers-reduced-motion
     });
 });
@@ -172,7 +173,7 @@ document.getElementById('MUN').addEventListener('click', function() {
 /**
  ------------ ROME --------------
  */
-document.getElementById('ROM').addEventListener('click', function() {
+document.getElementById('ROM').addEventListener('mouseover', function() {
     // Fly to a random location by offsetting the point -74.50, 40
     // by up to 5 degrees.
     map.flyTo({
@@ -180,7 +181,7 @@ document.getElementById('ROM').addEventListener('click', function() {
         zoom: 4.84,
         pitch: 0.00,
         bearing: 0.00,
-        speed:0.5,
+        speed:0.7,
         essential: true // this animation is considered essential with respect to prefers-reduced-motion
     });
 });
@@ -188,7 +189,7 @@ document.getElementById('ROM').addEventListener('click', function() {
 /**
  ------------ SAINT PETERSBURG --------------
  */
-document.getElementById('PET').addEventListener('click', function() {
+document.getElementById('PET').addEventListener('mouseover', function() {
     // Fly to a random location by offsetting the point -74.50, 40
     // by up to 5 degrees.
     map.flyTo({
@@ -196,7 +197,7 @@ document.getElementById('PET').addEventListener('click', function() {
         zoom: 4.84,
         pitch: 0.00,
         bearing: 0.00,
-        speed:0.5,
+        speed:0.7,
         essential: true // this animation is considered essential with respect to prefers-reduced-motion
     });
 });
@@ -204,6 +205,7 @@ document.getElementById('PET').addEventListener('click', function() {
 /**
  ------------ HOME --------------
  */
+/*
 document.getElementById('HOME').addEventListener('click', function() {
     // Fly to a random location by offsetting the point -74.50, 40
     // by up to 5 degrees.
@@ -216,3 +218,5 @@ document.getElementById('HOME').addEventListener('click', function() {
         essential: true // this animation is considered essential with respect to prefers-reduced-motion
     });
 });
+*/
+

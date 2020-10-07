@@ -24,39 +24,6 @@
             font-weight: 200;
             margin: 0;
         }
-
-        .full-height {
-            height: 100vh;
-        }
-
-        .flex-center {
-            align-items: center;
-            display: flex;
-            justify-content: center;
-        }
-
-        .position-ref {
-            position: relative;
-        }
-
-        .top-right {
-            position: absolute;
-            right: 10px;
-            top: 18px;
-        }
-
-        .content {
-            text-align: center;
-        }
-
-        .title {
-            font-size: 84px;
-        }
-
-
-        .m-b-md {
-            margin-bottom: 30px;
-        }
     </style>
 </head>
 <body>
@@ -76,23 +43,99 @@
                         <div class="menu_sub_stadium">
                             <ul>
                                 <li id="stadium">
-                                    <div class="stadium_link">
-                                        <a href="#">Dit is groter dan ons allemaal</a>
+                                    <div class="stadium_link" id="AMS">
+                                        <p><img src="images/Amsterdam_Stadium_Menu.png"></p>
+                                        <p>Amsterdam</p>
+                                        <p>Johan Cruyff Arena</p>
+                                        <p>seats 55.500</p>
                                     </div>
                                 </li>
                                 <li id="stadium">
-                                    <div class="stadium_link">
-                                        <a href="#">Dit is groter dan ons allemaal</a>
+                                    <div class="stadium_link" id="BAK">
+                                        <p><img src="images/Baku_Stadium_Menu.png"></p>
+                                        <p>Baku</p>
+                                        <p>Olympic Stadium</p>
+                                        <p>seats 68.700</p>
                                     </div>
                                 </li>
                                 <li id="stadium">
-                                    <div class="stadium_link">
-                                        <a href="#">Dit is groter dan ons allemaal</a>
+                                    <div class="stadium_link" id="BIL">
+                                        <p><img src="images/Bilboa_Stadium_Menu.png"></p>
+                                        <p>Bilboa</p>
+                                        <p>San Mamés Stadium</p>
+                                        <p>seats 53.289</p>
                                     </div>
                                 </li>
                                 <li id="stadium">
-                                    <div class="stadium_link">
-                                        <a href="#">Dit is groter dan ons allemaal</a>
+                                    <div class="stadium_link" id="BRU">
+                                        <p><img src="images/Brussels_Stadium_Menu.png"></p>
+                                        <p>Brussels</p>
+                                        <p>Eurostadium</p>
+                                        <p>seats 62.613</p>
+                                    </div>
+                                </li>
+                                <li id="stadium">
+                                    <div class="stadium_link" id="BUC">
+                                        <p><img src="images/Bucharest_Stadium_Menu.png"></p>
+                                        <p>Bucharest</p>
+                                        <p>National Arena</p>
+                                        <p>seats 55.634</p>
+                                    </div>
+                                </li>
+                                <li id="stadium">
+                                    <div class="stadium_link" id="BUD">
+                                        <p><img src="images/Budapest_Stadium_Menu.png"></p>
+                                        <p>Budapest</p>
+                                        <p>Puskás Ferenc Stadion</p>
+                                        <p>seats 38.652</p>
+                                    </div>
+                                </li>
+                                <li id="stadium">
+                                    <div class="stadium_link" id="COP">
+                                        <p><img src="images/Copenhagen_Stadium_Menu.png"></p>
+                                        <p>Copenhagen</p>
+                                        <p>Parken Stadium</p>
+                                        <p>seats 38.065</p>
+                                    </div>
+                                </li>
+                                <li id="stadium">
+                                    <div class="stadium_link" id="DUB">
+                                        <p><img src="images/Dublin_Stadium_Menu.png"></p>
+                                        <p>Dublin</p>
+                                        <p>Aviva Stadium</p>
+                                        <p>seats 51.700</p>
+                                    </div>
+                                </li>
+                                <li id="stadium">
+                                    <div class="stadium_link" id="GLA">
+                                        <p><img src="images/Glasgow_Stadium_Menu.png"></p>
+                                        <p>Glasgow</p>
+                                        <p>Hampden Park</p>
+                                        <p>seats 51.866</p>
+                                    </div>
+                                </li>
+                                <li id="stadium">
+                                    <div class="stadium_link" id="MUN">
+                                        <p><img src="images/Munich_Stadium_Menu.png"></p>
+                                        <p>Munich</p>
+                                        <p>Allianz Arena</p>
+                                        <p>seats 75.024</p>
+                                    </div>
+                                </li>
+                                <li id="stadium">
+                                    <div class="stadium_link" id="PET">
+                                        <p><img src="images/Petersburg_Stadium_Menu.png"></p>
+                                        <p>St. Petersburg</p>
+                                        <p>Krestovsky Stadium</p>
+                                        <p>seats 68.000</p>
+                                    </div>
+                                </li>
+                                <li id="stadium">
+                                    <div class="stadium_link" id="ROM">
+                                        <p><img src="images/Rome_Stadium_Menu.png"></p>
+                                        <p>Rome</p>
+                                        <p>Stadio Olimpico</p>
+                                        <p>seats 72.698</p>
                                     </div>
                                 </li>
                             </ul>
@@ -179,7 +222,6 @@
                             </ul>
                         </div>
                     </li>
-
                 </ul>
             </div>
         </div>

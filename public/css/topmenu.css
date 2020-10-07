@@ -87,9 +87,9 @@ nav li:hover {
     visibility: hidden;
     font-size: 10px;
     opacity: 0;
-    background-color: #eaeaea;
+    background-color: #ffffff;
     width: 375px;
-    height: 600px;
+    height: 825px;
     z-index: -1;
     transition: 0.3s ease-in-out;
     border-bottom: solid #c9d466 3px;
@@ -106,7 +106,10 @@ nav li:hover .menu_sub_stadium {
     width: 375px;
     margin-left: 0;
     margin-top: 0;
-    padding-top: 0;
+}
+
+#stadium {
+    padding-bottom: 7px;
 }
 
 #stadium a{
@@ -120,15 +123,51 @@ nav li:hover .menu_sub_stadium {
 }
 
 .stadium_link {
-    background: #CCCCCC;
+    padding-top: 10px;
+    padding-left: 10px;
+    background: white;
     width: inherit;
-    height: 15px;
+    height: 60px;
+    cursor: pointer;
+    transition: padding-left 0.3s ease-in-out;
+}
+
+.stadium_link:hover {
+    padding-left: 15px;
 }
 
 .stadium_link a {
     color: red;
     font-family: 'Roboto', sans-serif;
     font-size: 12px;
+}
+
+.stadium_link p:nth-child(1)
+{
+    float: left;
+    padding-right: 15px
+}
+
+.stadium_link p:nth-child(2) {
+    line-height: 20px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 24px;
+    color: #515151;
+    text-transform: uppercase;
+    padding-bottom: 7px;
+}
+
+.stadium_link p:nth-child(3) {
+    font-family: 'Roboto', sans-serif;
+    font-size: 11px;
+    color: #515151;
+    padding-bottom: 5px;
+}
+
+.stadium_link p:nth-child(4) {
+    font-family: 'Roboto', sans-serif;
+    font-size: 11px;
+    color: #515151;
 }
 /* --------------------------------------- */
 
@@ -148,7 +187,7 @@ nav li:hover .menu_sub_stadium {
     font-size: 10px;
     visibility: hidden;
     opacity: 0;
-    background-color: #eaeaea;
+    background-color: #ffffff;
     width: 375px;
     height: 600px;
     z-index: -1;
@@ -198,7 +237,7 @@ nav li:hover .menu_sub_groups {
     font-size: 10px;
     visibility: hidden;
     opacity: 0;
-    background-color: #eaeaea;
+    background-color: #ffffff;
     width: 375px;
     height: 600px;
     z-index: -1;
@@ -249,7 +288,7 @@ nav li:hover .menu_sub_teams {
     font-size: 10px;
     visibility: hidden;
     opacity: 0;
-    background-color: #eaeaea;
+    background-color: #ffffff;
     width: 100%;
     height: 300px;
     z-index: -1;

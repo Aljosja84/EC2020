@@ -21,7 +21,9 @@
   <component name="ChangeListManager">
     <list default="true" id="cf82d037-ce69-45df-857e-a29fb7732fae" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/css/topmenu.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/topmenu.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/mapbox.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/mapbox.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/navi.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/navi.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -170,17 +172,17 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="ignore.virus.scanning.warn.message" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Euro2020" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/images" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\xampp\htdocs\EC2020\public\js" />
-      <recent name="C:\xampp\htdocs\EC2020\public\images" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\xampp\htdocs\EC2020\public\images" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\EC2020\public\images" />
+      <recent name="C:\xampp\htdocs\EC2020\public\js" />
     </key>
   </component>
   <component name="RunManager">
@@ -209,7 +211,8 @@
       <workItem from="1601841401257" duration="6785000" />
       <workItem from="1601901403865" duration="2819000" />
       <workItem from="1601930369228" duration="4145000" />
-      <workItem from="1601993210707" duration="1953000" />
+      <workItem from="1601993210707" duration="6285000" />
+      <workItem from="1602074562657" duration="10178000" />
     </task>
     <servers />
   </component>
