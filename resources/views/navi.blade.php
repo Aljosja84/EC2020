@@ -24,6 +24,13 @@
             font-weight: 200;
             margin: 0;
         }
+
+        .marker {
+            display: block;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+        }
     </style>
 </head>
 <body>
