@@ -14,14 +14,29 @@ var map = new mapboxgl.Map({
  * @type {{features: [{geometry: {coordinates: number[], type: string}, type: string, properties: {iconSize: number[], message: string}}, {geometry: {coordinates: number[], type: string}, type: string, properties: {iconSize: number[], message: string}}, {geometry: {coordinates: number[], type: string}, type: string, properties: {iconSize: number[], message: string}}], type: string}}
  */
 /** ------------------------------ SOCCER ICON LOCATIONS -------------------------- */
+var stadiums = [
+    '<b>AMSTERDAM</b>: Johan Cruyff ArenA',
+    '<b>GLASGOW</b>: Hampden Park',
+    '<b>BAKU</b>: Olympic Stadium',
+    '<b>DUBLIN</b>: Aviva Stadium',
+    '<b>COPENHAGEN</b>: Parken Stadium',
+    '<b>BUDAPEST</b>: Puskás Ferenc',
+    '<b>BUCAREST</b>: National Arena',
+    '<b>BILBOA</b>: San Mamés Stadium',
+    '<b>MUNICH</b>: Allianz Arena',
+    '<b>ROME</b>: Stadio Olimpico',
+    '<b>ST. PETERSBURG</b>: Krestovsky Stadium',
+    '<b>BRUSSELS</b>: Eurostadium'
+];
+
 var geojson = {
     'type': 'FeatureCollection',
     'features': [
         {
             'type': 'Feature',
             'properties': {
-                'message': 'AMS',
-                'iconSize': [35, 35]
+                'message': stadiums[0],
+                'iconSize': [25, 25]
             },
             'geometry': {
                 'type': 'Point',
@@ -31,8 +46,8 @@ var geojson = {
         {
             'type': 'Feature',
             'properties': {
-                'message': 'GLA',
-                'iconSize': [35, 35]
+                'message': stadiums[1],
+                'iconSize': [25, 25]
             },
             'geometry': {
                 'type': 'Point',
@@ -42,8 +57,8 @@ var geojson = {
         {
             'type': 'Feature',
             'properties': {
-                'message': 'BAK',
-                'iconSize': [35, 35]
+                'message': stadiums[2],
+                'iconSize': [25, 25]
             },
             'geometry': {
                 'type': 'Point',
@@ -53,8 +68,8 @@ var geojson = {
         {
             'type': 'Feature',
             'properties': {
-                'message': 'DUB',
-                'iconSize': [35, 35]
+                'message': stadiums[3],
+                'iconSize': [25, 25]
             },
             'geometry': {
                 'type': 'Point',
@@ -64,8 +79,8 @@ var geojson = {
         {
             'type': 'Feature',
             'properties': {
-                'message': 'COP',
-                'iconSize': [35, 35]
+                'message': stadiums[4],
+                'iconSize': [25, 25]
             },
             'geometry': {
                 'type': 'Point',
@@ -75,8 +90,8 @@ var geojson = {
         {
             'type': 'Feature',
             'properties': {
-                'message': 'BUD',
-                'iconSize': [35, 35]
+                'message': stadiums[5],
+                'iconSize': [25, 25]
             },
             'geometry': {
                 'type': 'Point',
@@ -86,8 +101,8 @@ var geojson = {
         {
             'type': 'Feature',
             'properties': {
-                'message': 'BUC',
-                'iconSize': [35, 35]
+                'message': stadiums[6],
+                'iconSize': [25, 25]
             },
             'geometry': {
                 'type': 'Point',
@@ -97,8 +112,8 @@ var geojson = {
         {
             'type': 'Feature',
             'properties': {
-                'message': 'BIL',
-                'iconSize': [35, 35]
+                'message': stadiums[7],
+                'iconSize': [25, 25]
             },
             'geometry': {
                 'type': 'Point',
@@ -108,8 +123,8 @@ var geojson = {
         {
             'type': 'Feature',
             'properties': {
-                'message': 'MUN',
-                'iconSize': [35, 35]
+                'message': stadiums[8],
+                'iconSize': [25, 25]
             },
             'geometry': {
                 'type': 'Point',
@@ -119,8 +134,8 @@ var geojson = {
         {
             'type': 'Feature',
             'properties': {
-                'message': 'ROM',
-                'iconSize': [35, 35]
+                'message': stadiums[9],
+                'iconSize': [25, 25]
             },
             'geometry': {
                 'type': 'Point',
@@ -130,8 +145,8 @@ var geojson = {
         {
             'type': 'Feature',
             'properties': {
-                'message': 'PET',
-                'iconSize': [35, 35]
+                'message': stadiums[10],
+                'iconSize': [25, 25]
             },
             'geometry': {
                 'type': 'Point',
@@ -141,8 +156,8 @@ var geojson = {
         {
             'type': 'Feature',
             'properties': {
-                'message': 'BRU',
-                'iconSize': [35, 35]
+                'message': stadiums[11],
+                'iconSize': [25, 25]
             },
             'geometry': {
                 'type': 'Point',
@@ -508,21 +523,37 @@ document.getElementById('BRU').addEventListener('mouseout', function() {
     });
 });
 
+// Create a popup, but don't add it to the map yet.
+var popup = new mapboxgl.Popup({
+    closeButton: false,
+    closeOnClick: false,
+    offset: 15,
+    className: 'popup'
+});
 
 // add markers to map
 geojson.features.forEach(function (marker) {
 // create a DOM element for the marker
+    var coordinates = marker.geometry.coordinates.slice();
+    var description = marker.properties.message;
+
     var el = document.createElement('div');
     el.className = 'marker';
     el.style.backgroundImage =
-        'url(images/soccer_icon.png)';
+        'url(images/soccer_icon_small.png)';
     el.style.width = marker.properties.iconSize[0] + 'px';
     el.style.height = marker.properties.iconSize[1] + 'px';
-    /*
-    el.addEventListener('click', function () {
-        window.alert(marker.properties.message);
+
+    // show pop up
+    el.addEventListener('mouseenter', function () {
+        popup.setLngLat(coordinates).setHTML(description).addTo(map);
     });
-    */
+    // hide pop up
+    el.addEventListener('mouseleave', function() {
+        popup.remove();
+    });
+
+
 // add marker to map
     new mapboxgl.Marker(el)
         .setLngLat(marker.geometry.coordinates)
