@@ -43,7 +43,7 @@
                     <li id="sub_item_stadium"><a id="main_link" href="#">Stadiums</a><img src="images/arrow-drop-down.svg">
                         <div class="menu_sub_stadium">
                             <ul>
-                                @foreach(App\Models\Stadium::orderBy('name', 'asc')->get() as $stadium)
+                                @foreach(App\Models\Stadium::orderBy('city', 'asc')->get() as $stadium)
                                     <li id="stadium">
                                         <div class="stadium_link" id="{{ $stadium->abv }}">
                                             <p><img src="images/{{ $stadium->url_menu }}"></p>
@@ -62,24 +62,89 @@
                             <ul>
                                 <li id="group">
                                     <div class="group_link">
-                                        <a href="#">Dit is groter dan ons allemaal</a>
+                                        <a href="#">group a</a><img src="images/arrow-drop-down.svg" style="float: right">
+                                    </div>
+                                    <div class="group_sub">
+                                        <div class="group_sub_wrapper">
+                                            <p><img src="images/country_flags/turkey.png"/>Turkey</p>
+                                            <p><img src="images/country_flags/italy.png"/>Italy</p>
+                                            <p><img src="images/country_flags/wales.png"/>Wales</p>
+                                            <p><img src="images/country_flags/switzerland.png"/>Switzerland</p>
+                                        </div>
                                     </div>
                                 </li>
+
                                 <li id="group">
                                     <div class="group_link">
-                                        <a href="#">Dit is groter dan ons allemaal</a>
+                                        <a href="#">group b</a><img src="images/arrow-drop-down.svg" style="float: right">
+                                    </div>
+                                    <div class="group_sub">
+                                        <div class="group_sub_wrapper">
+                                            <p><img src="images/country_flags/denmark.png"/>Denmark</p>
+                                            <p><img src="images/country_flags/finland.png"/>Finland</p>
+                                            <p><img src="images/country_flags/belgium.png"/>Belgium</p>
+                                            <p><img src="images/country_flags/russia.png"/>Russia</p>
+                                        </div>
                                     </div>
                                 </li>
+
                                 <li id="group">
                                     <div class="group_link">
-                                        <a href="#">Dit is groter dan ons allemaal</a>
+                                        <a href="#">group c</a><img src="images/arrow-drop-down.svg" style="float: right">
+                                    </div>
+                                    <div class="group_sub">
+                                        <div class="group_sub_wrapper">
+                                            <p><img src="images/country_flags/netherlands.png"/>Netherlands</p>
+                                            <p><img src="images/country_flags/ukraine.png"/>Ukraine</p>
+                                            <p><img src="images/country_flags/austria.png"/>Austria</p>
+                                            <p><img src="images/country_flags/qualifier.png"/>Play-off winner D</p>
+                                        </div>
                                     </div>
                                 </li>
+
                                 <li id="group">
                                     <div class="group_link">
-                                        <a href="#">Dit is groter dan ons allemaal</a>
+                                        <a href="#">group d</a><img src="images/arrow-drop-down.svg" style="float: right">
+                                    </div>
+                                    <div class="group_sub">
+                                        <div class="group_sub_wrapper">
+                                            <p><img src="images/country_flags/england.png"/>England</p>
+                                            <p><img src="images/country_flags/croatia.png"/>Croatia</p>
+                                            <p><img src="images/country_flags/qualifier.png"/>Play-off winner C</p>
+                                            <p><img src="images/country_flags/czechrepublic.png"/>Czech Republic</p>
+                                        </div>
                                     </div>
                                 </li>
+
+                                <li id="group">
+                                    <div class="group_link">
+                                        <a href="#">group e</a><img src="images/arrow-drop-down.svg" style="float: right">
+                                    </div>
+                                    <div class="group_sub">
+                                        <div class="group_sub_wrapper">
+                                            <p><img src="images/country_flags/spain.png"/>Spain</p>
+                                            <p><img src="images/country_flags/sweden.png"/>Sweden</p>
+                                            <p><img src="images/country_flags/poland.png"/>Poland</p>
+                                            <p><img src="images/country_flags/qualifier.png"/>Play-off winner B</p>
+                                        </div>
+                                    </div>
+                                </li>
+
+                                <li id="group">
+                                    <div class="group_link">
+                                        <a href="#">group f</a><img src="images/arrow-drop-down.svg" style="float: right">
+                                    </div>
+                                    <div class="group_sub">
+                                        <div class="group_sub_wrapper">
+                                            <p><img src="images/country_flags/qualifier.png"/>Play-off winner A</p>
+                                            <p><img src="images/country_flags/portugal.png"/>Portugal</p>
+                                            <p><img src="images/country_flags/france.png"/>France</p>
+                                            <p><img src="images/country_flags/germany.png"/>Germany</p>
+                                        </div>
+                                    </div>
+                                </li>
+
+
                             </ul>
                         </div>
                     </li>

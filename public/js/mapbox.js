@@ -21,12 +21,12 @@ var stadiums = [
     '<b>DUBLIN</b>: Aviva Stadium',
     '<b>COPENHAGEN</b>: Parken Stadium',
     '<b>BUDAPEST</b>: Puskás Ferenc',
-    '<b>BUCAREST</b>: National Arena',
+    '<b>BUCHAREST</b>: National Arena',
     '<b>BILBOA</b>: San Mamés Stadium',
     '<b>MUNICH</b>: Allianz Arena',
     '<b>ROME</b>: Stadio Olimpico',
     '<b>ST. PETERSBURG</b>: Krestovsky Stadium',
-    '<b>BRUSSELS</b>: Eurostadium'
+    '<b>LONDON</b>: Wembley Stadium'
 ];
 
 var geojson = {
@@ -161,7 +161,7 @@ var geojson = {
             },
             'geometry': {
                 'type': 'Point',
-                'coordinates': [4.35233, 50.85139]
+                'coordinates': [-0.11342, 51.50951]
             }
         },
 
@@ -253,11 +253,11 @@ document.getElementById('BAK').addEventListener('mouseout', function() {
         essential: true // this animation is considered essential with respect to prefers-reduced-motion
     });
 });
+
 /**
  ------------ LONDON --------------
  */
-/*
-document.getElementById('LON').addEventListener('click', function() {
+document.getElementById('LON').addEventListener('mouseover', function() {
     // Fly to a random location by offsetting the point -74.50, 40
     // by up to 5 degrees.
     map.flyTo({
@@ -265,11 +265,24 @@ document.getElementById('LON').addEventListener('click', function() {
         zoom: 4.84,
         pitch: 0.00,
         bearing: 0.00,
-        speed:0.5,
+        speed:0.7,
         essential: true // this animation is considered essential with respect to prefers-reduced-motion
     });
 });
-*/
+
+document.getElementById('LON').addEventListener('mouseout', function() {
+    // Fly to a random location by offsetting the point -74.50, 40
+    // by up to 5 degrees.
+    map.flyTo({
+        center: { lon: 5.25656, lat: 51.19153 },
+        zoom: 4.06,
+        pitch: 33.00,
+        bearing: 9.54,
+        speed:0.8,
+        essential: true // this animation is considered essential with respect to prefers-reduced-motion
+    });
+});
+
 /**
  ------------ DUBLIN --------------
  */
@@ -483,34 +496,6 @@ document.getElementById('PET').addEventListener('mouseover', function() {
 });
 
 document.getElementById('PET').addEventListener('mouseout', function() {
-    // Fly to a random location by offsetting the point -74.50, 40
-    // by up to 5 degrees.
-    map.flyTo({
-        center: { lon: 5.25656, lat: 51.19153 },
-        zoom: 4.06,
-        pitch: 33.00,
-        bearing: 9.54,
-        speed:0.8,
-        essential: true // this animation is considered essential with respect to prefers-reduced-motion
-    });
-});
-/**
- ------------ BRUSSELS --------------
- */
-document.getElementById('BRU').addEventListener('mouseover', function() {
-    // Fly to a random location by offsetting the point -74.50, 40
-    // by up to 5 degrees.
-    map.flyTo({
-        center: { lon: 4.35233, lat: 50.85139 },
-        zoom: 4.84,
-        pitch: 0.00,
-        bearing: 0.00,
-        speed:0.7,
-        essential: true // this animation is considered essential with respect to prefers-reduced-motion
-    });
-});
-
-document.getElementById('BRU').addEventListener('mouseout', function() {
     // Fly to a random location by offsetting the point -74.50, 40
     // by up to 5 degrees.
     map.flyTo({

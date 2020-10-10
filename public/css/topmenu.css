@@ -111,7 +111,7 @@ nav li:hover {
     height: 825px;
     z-index: -1;
     transition: 0.3s ease-in-out;
-    border-bottom: solid #c9d466 3px;
+    border-bottom: solid #c9d466 4px;
 }
 
 nav li:hover .menu_sub_stadium {
@@ -208,11 +208,11 @@ nav li:hover .menu_sub_stadium {
     visibility: hidden;
     opacity: 0;
     background-color: #ffffff;
-    width: 375px;
-    height: 600px;
+    width: 195px;
+    height: 376px;
     z-index: -1;
     transition: 0.3s ease-in-out;
-    border-bottom: solid #e58d37 3px;
+    border-bottom: solid #e58d37 4px;
 }
 
 nav li:hover .menu_sub_groups {
@@ -223,23 +223,66 @@ nav li:hover .menu_sub_groups {
 
 .menu_sub_groups li {
     display: block;
-    width: 375px;
+    width: 195px;
     margin-left: 0;
     margin-top: 0;
     padding-top: 0;
+    background-color: white;
+}
+
+.group_sub {
+    background-color: white;
+    width: 195px;
+    height: 0;
+    margin-top: 7px;
+    transition: 0.3s ease-in-out;
+    text-overflow: clip;
+    overflow: hidden;
+}
+
+.group_sub:hover {
+    background-color: #e6f3ff;
+}
+
+.group_sub_wrapper {
+    padding: 0 10px 10px 10px;
+    cursor: pointer;
+}
+
+.group_sub_wrapper p {
+    font-size: 14px;
+    font-family: 'Roboto', sans-serif;
+    color: #515151;
+    line-height: 30px;
+}
+
+.group_sub_wrapper img {
+    height: 22px;
+    width: 22px;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+
+#group:hover .group_sub {
+    height: 120px;
 }
 
 #group a{
-    color: #ff0000;
-    font-family: 'Roboto', sans-serif;
-    font-size: 12px;
+    color: #515151;
+    font-family: 'Oswald', sans-serif;
+    font-size: 24px;
+    text-transform: uppercase;
+    line-height: 20px;
+    text-decoration: none;
+    cursor: default;
 }
 
 .group_link {
-    background: #CCCCCC;
-    width: 375px;
-    height: 15px;
+    width: 195px;
+    height: 35px;
+    padding: 10px 10px 10px 10px;
 }
+
 
 /* --------------- TEAMS ----------------- */
 /* --------------------------------------- */
