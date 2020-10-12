@@ -81,54 +81,66 @@
                     <li id="sub_item_teams"><a id="main_link" href="#">Teams</a><img src="images/arrow-drop-down.svg">
                         <div class="menu_sub_teams">
                             <ul>
-                                <li id="team">
-                                    <div class="team_link">
-                                        <a href="#">Dit is groter dan ons allemaal</a>
-                                    </div>
-                                </li>
-                                <li id="team">
-                                    <div class="team_link">
-                                        <a href="#">Dit is groter dan ons allemaal</a>
-                                    </div>
-                                </li>
-                                <li id="team">
-                                    <div class="team_link">
-                                        <a href="#">Dit is groter dan ons allemaal</a>
-                                    </div>
-                                </li>
-                                <li id="team">
-                                    <div class="team_link">
-                                        <a href="#">Dit is groter dan ons allemaal</a>
-                                    </div>
-                                </li>
+                                @foreach(App\Models\Country::orderBy('name', 'asc')->get() as $country)
+                                    <li id="team">
+                                        <a href="#">
+                                            <div class="team_link">
+                                                <img src="images/country_flags/{{ $country->flag_url }}"/>{{ $country->name }}
+                                            </div>
+                                        </a>
+                                    </li>
+                                @endforeach
                             </ul>
                         </div>
                     </li>
 
                     <li id="sub_item_games"><a id="main_link" href="#">Games</a><img src="images/arrow-drop-down.svg">
                         <div class="menu_sub_games">
-                            <ul>
-                                <li id="game">
-                                    <div class="game_link">
-                                        <a href="#">Dit is groter dan ons allemaal</a>
-                                    </div>
-                                </li>
-                                <li id="game">
-                                    <div class="game_link">
-                                        <a href="#">Dit is groter dan ons allemaal</a>
-                                    </div>
-                                </li>
-                                <li id="game">
-                                    <div class="game_link">
-                                        <a href="#">Dit is groter dan ons allemaal</a>
-                                    </div>
-                                </li>
-                                <li id="game">
-                                    <div class="game_link">
-                                        <a href="#">Dit is groter dan ons allemaal</a>
-                                    </div>
-                                </li>
-                            </ul>
+                            <div class="calendar_container">
+                                <span id="calendar_title"><span class="june">june</span> / <span class="july">july</span> 2021</span>
+                                <ul class="flex-container wrap">
+                                    <li class="flex-item grey">07</li>
+                                    <li class="flex-item grey">08</li>
+                                    <li class="flex-item grey">09</li>
+                                    <li class="flex-item grey">10</li>
+                                    <li class="flex-item grey">11</li>
+                                    <li class="flex-item june">12</li>
+                                    <li class="flex-item june">13</li>
+                                    <li class="flex-item june">14</li>
+                                    <li class="flex-item june">15</li>
+                                    <li class="flex-item june">16</li>
+                                    <li class="flex-item june">17</li>
+                                    <li class="flex-item june">18</li>
+                                    <li class="flex-item june">19</li>
+                                    <li class="flex-item june">20</li>
+                                    <li class="flex-item june">21</li>
+                                    <li class="flex-item june">22</li>
+                                    <li class="flex-item june">23</li>
+                                    <li class="flex-item june">24</li>
+                                    <li class="flex-item june">25</li>
+                                    <li class="flex-item june">26</li>
+                                    <li class="flex-item june">27</li>
+                                    <li class="flex-item june">28</li>
+                                    <li class="flex-item june">29</li>
+                                    <li class="flex-item june">30</li>
+                                    <li class="flex-item july">01</li>
+                                    <li class="flex-item july">02</li>
+                                    <li class="flex-item july">03</li>
+                                    <li class="flex-item july">04</li>
+                                    <li class="flex-item july">05</li>
+                                    <li class="flex-item july">06</li>
+                                    <li class="flex-item july">07</li>
+                                    <li class="flex-item july">08</li>
+                                    <li class="flex-item july">09</li>
+                                    <li class="flex-item july">10</li>
+                                    <li class="flex-item july">11</li>
+                                    <li class="flex-item july">12</li>
+                                    <li class="flex-item grey">13</li>
+                                    <li class="flex-item grey">14</li>
+                                    <li class="flex-item grey">15</li>
+                                    <li class="flex-item grey">16</li>
+                                </ul>
+                            </div>
                         </div>
                     </li>
                 </ul>
