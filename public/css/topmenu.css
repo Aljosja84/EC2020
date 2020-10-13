@@ -23,7 +23,7 @@
     color: orange;
 }
 
-/* change background and tip color to yellow */
+/* change background and tip color to black */
 .popup .mapboxgl-popup-content {
     background-color: black;
 }
@@ -108,10 +108,11 @@ nav li:hover {
     opacity: 0;
     background-color: #ffffff;
     width: 375px;
-    height: 825px;
+    height: auto;
     z-index: -1;
     transition: 0.3s ease-in-out;
     border-bottom: solid #c9d466 4px;
+    padding-bottom: 7px;
 }
 
 nav li:hover .menu_sub_stadium {
@@ -371,7 +372,7 @@ nav li:hover .menu_sub_teams {
     opacity: 0;
     background-color: #ffffff;
     width: 100%;
-    height: 275px;
+    height: 260px;
     z-index: -1;
     transition: 0.3s ease-in-out;
     border-bottom: solid #4cb4e7 3px;
@@ -399,22 +400,34 @@ nav li:hover .menu_sub_games {
 }
 
 .calendar_container {
+    float: left;
     font-family: 'Roboto', sans-serif;
     font-size: 14px;
-    padding: 0 3px 10px 15px;
+    height: 235px;
+    width: 185px;
+    padding: 0 3px 0 15px;
+    border: solid lightgray;
+    border-right-width: 4px;
+    border-left-width: 0;
+    border-bottom-width: 0;
+    border-top-width: 0;
+    background-color: white;
+    margin-top: 10px;
 }
 
 #calendar_title {
     font-family: 'Oswald', sans-serif;
     font-size: 24px;
     text-transform: uppercase;
+    line-height: 20px;
+    color: #515151;
 }
 
 .flex-container {
     padding: 0;
-    margin-top: 10px;
-    width: 190px;
-    height: 190px;
+    margin-top: 15px;
+    width: 170px;
+    height: 200px;
     list-style: none;
     -ms-box-orient: horizontal;
     display: -webkit-box;
@@ -424,6 +437,7 @@ nav li:hover .menu_sub_games {
     display: -webkit-flex;
     display: flex;
     flex-direction: row;
+
 }
 
 .wrap    {
@@ -435,28 +449,41 @@ nav li:hover .menu_sub_games {
     background-color: white;
     width: 23px;
     height: 23px;
-    margin: 0 12px 5px 0;
+    margin: 0 11px 2px 0;
     transition: all 0.3s linear;
-}
-
-.wrap li:hover {
-    color: #515151;
-    background-color: whitesmoke;
-    cursor: pointer;
 }
 
 .flex-item {
     font-size: 14px;
     padding: 0;
-    width: 25px;
+    width: 23px;
     height: 25px;
-    color: black;
     line-height: 25px;
     text-align: center;
 }
 
+.flex-item-inactive {
+    font-size: 14px;
+    padding: 0;
+    width: 23px;
+    height: 25px;
+    line-height: 25px;
+    text-align: center;
+}
+
+.flex-item-inactive:hover {
+    color: lightgray;
+}
+
+.flex-item:hover {
+    color: #515151;
+    background-color: #b5b1b1;
+    cursor: pointer;
+}
+
 .grey {
     color: lightgray;
+    cursor: default;
 }
 
 .june {
@@ -465,4 +492,45 @@ nav li:hover .menu_sub_games {
 
 .july {
     color: #4cb4e7;
+}
+
+.games_container {
+
+}
+
+.gameday_container {
+    position: relative;
+    margin-left: 6px;
+    float: left;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    height: 235px;
+    width: 335px;
+    background-color: #e6f3ff;
+    margin-top: 10px;
+}
+
+.gameday_container li {
+    width: inherit;
+    display: block;
+    list-style: none;
+    height: 67px;
+    background-color: lightcyan;
+}
+
+.gameday_container li:nth-child(3) {
+    height: 69px;
+}
+
+.gameday_date {
+    border: solid 1px #b7dbfc;
+    border-top-width: 0;
+    border-left-width: 0;
+    border-right: 0;
+    padding: 7px 0 10px 0;
+    font-family: 'Oswald', sans-serif;
+    font-size: 24px;
+    line-height: 14px;
+    text-align: center;
+    text-transform: uppercase;
 }

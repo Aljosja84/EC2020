@@ -18,7 +18,7 @@
     <!-- Styles -->
     <style>
         html, body {
-            background-color: #fff;
+            background-color: lightblue;
             color: #636b6f;
             font-family: 'Roboto', sans-serif;
             font-weight: 200;
@@ -99,11 +99,11 @@
                             <div class="calendar_container">
                                 <span id="calendar_title"><span class="june">june</span> / <span class="july">july</span> 2021</span>
                                 <ul class="flex-container wrap">
-                                    <li class="flex-item grey">07</li>
-                                    <li class="flex-item grey">08</li>
-                                    <li class="flex-item grey">09</li>
-                                    <li class="flex-item grey">10</li>
-                                    <li class="flex-item grey">11</li>
+                                    <li class="flex-item-inactive grey">07</li>
+                                    <li class="flex-item-inactive grey">08</li>
+                                    <li class="flex-item-inactive grey">09</li>
+                                    <li class="flex-item-inactive grey">10</li>
+                                    <li class="flex-item-inactive grey">11</li>
                                     <li class="flex-item june">12</li>
                                     <li class="flex-item june">13</li>
                                     <li class="flex-item june">14</li>
@@ -135,11 +135,33 @@
                                     <li class="flex-item july">10</li>
                                     <li class="flex-item july">11</li>
                                     <li class="flex-item july">12</li>
-                                    <li class="flex-item grey">13</li>
-                                    <li class="flex-item grey">14</li>
-                                    <li class="flex-item grey">15</li>
-                                    <li class="flex-item grey">16</li>
+                                    <li class="flex-item-inactive grey">13</li>
+                                    <li class="flex-item-inactive grey">14</li>
+                                    <li class="flex-item-inactive grey">15</li>
+                                    <li class="flex-item-inactive grey">16</li>
                                 </ul>
+                            </div>
+
+                            <div class="games_container">
+                                <div class="gameday_container">
+                                    <div class="gameday_date">
+                                        sat <span class="june">june</span> 12
+                                    </div>
+                                    <ul>
+                                        <li>
+                                            wales 0 - 0 spain
+                                        </li>
+                                        <li>
+                                            france 0 - 0 germany
+                                        </li>
+                                        <li>
+                                            netherlands 0 - 0 switzerland
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="gameday_container">
+                                    content
+                                </div>
                             </div>
                         </div>
                     </li>
@@ -152,7 +174,7 @@
 <div id='map_background'></div>
 
 </body>
-
+<!--
 <script src="js/mapbox.js"></script>
-
+-->
 </html>
