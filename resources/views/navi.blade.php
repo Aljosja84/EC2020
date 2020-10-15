@@ -149,7 +149,14 @@
                                     </div>
                                     <ul>
                                         <li>
-                                            wales 0 - 0 spain
+                                            <span>15:00</span>
+                                            <span><img style="height: 33px; width: 33px; vertical-align: middle" src="images/country_flags/wales.png"></span>
+                                            <span>WALES</span>
+                                            <span>0</span>
+                                            <span>-</span>
+                                            <span>2</span>
+                                            <span>SPAIN</span>
+                                            <span><img style="height: 33px; width: 33px; vertical-align: middle" src="images/country_flags/spain.png"></span>
                                         </li>
                                         <li>
                                             france 0 - 0 germany
