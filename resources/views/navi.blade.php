@@ -149,25 +149,79 @@
                                     </div>
                                     <ul>
                                         <li>
-                                            <span>15:00</span>
-                                            <span><img style="height: 33px; width: 33px; vertical-align: middle" src="images/country_flags/wales.png"></span>
-                                            <span>WALES</span>
-                                            <span>0</span>
-                                            <span>-</span>
-                                            <span>2</span>
-                                            <span>SPAIN</span>
-                                            <span><img style="height: 33px; width: 33px; vertical-align: middle" src="images/country_flags/spain.png"></span>
+                                            <span id="gameday_time">15:00</span>
+                                            <span id="gameday_homeTeam">switzerland</span>
+                                            <span id="gameday_homeTeam_flag"><img src="images/country_flags/wales.png"></span>
+                                            <span id="gameday_homeTeam_score">0</span>
+                                            <span id="hyphen">-</span>
+                                            <span id="gameday_awayTeam_score">2</span>
+                                            <span id="gameday_awayTeam_flag"><img src="images/country_flags/spain.png"></span>
+                                            <span id="gameday_awayTeam">czech republic</span>
+                                            <p id="gameday_stadium">Johan Cruyff ArenA, Amsterdam</p>
                                         </li>
                                         <li>
-                                            france 0 - 0 germany
+                                            <span id="gameday_time">18:00</span>
+                                            <span id="gameday_homeTeam">france</span>
+                                            <span id="gameday_homeTeam_flag"><img src="images/country_flags/france.png"></span>
+                                            <span id="gameday_homeTeam_score">1</span>
+                                            <span id="hyphen">-</span>
+                                            <span id="gameday_awayTeam_score">3</span>
+                                            <span id="gameday_awayTeam_flag"><img src="images/country_flags/germany.png"></span>
+                                            <span id="gameday_awayTeam">germany</span>
+                                            <p id="gameday_stadium">Hampden Park, Glasgow</p>
                                         </li>
                                         <li>
-                                            netherlands 0 - 0 switzerland
+                                            <span id="gameday_time">21:00</span>
+                                            <span id="gameday_homeTeam">Netherlands</span>
+                                            <span id="gameday_homeTeam_flag"><img src="images/country_flags/netherlands.png"></span>
+                                            <span id="gameday_homeTeam_score">0</span>
+                                            <span id="hyphen">-</span>
+                                            <span id="gameday_awayTeam_score">2</span>
+                                            <span id="gameday_awayTeam_flag"><img src="images/country_flags/england.png"></span>
+                                            <span id="gameday_awayTeam">England</span>
+                                            <p id="gameday_stadium">Krestovsky Stadium, st. Petersburg</p>
                                         </li>
                                     </ul>
                                 </div>
                                 <div class="gameday_container">
-                                    content
+                                    <div class="gameday_date">
+                                        sun <span class="june">june</span> 13
+                                    </div>
+                                    <ul>
+                                        <li style="opacity: 0.3">
+                                            <span id="gameday_time">15:00</span>
+                                            <span id="gameday_homeTeam">france</span>
+                                            <span id="gameday_homeTeam_flag"><img src="images/country_flags/france.png"></span>
+                                            <span id="gameday_homeTeam_score">1</span>
+                                            <span id="hyphen">-</span>
+                                            <span id="gameday_awayTeam_score">3</span>
+                                            <span id="gameday_awayTeam_flag"><img src="images/country_flags/germany.png"></span>
+                                            <span id="gameday_awayTeam">germany</span>
+                                            <p id="gameday_stadium">Hampden Park, Glasgow</p>
+                                        </li>
+                                        <li>
+                                            <span id="gameday_time">18:00</span>
+                                            <span id="gameday_homeTeam">russia</span>
+                                            <span id="gameday_homeTeam_flag"><img src="images/country_flags/russia.png"></span>
+                                            <span id="gameday_homeTeam_score">2</span>
+                                            <span id="hyphen">-</span>
+                                            <span id="gameday_awayTeam_score">2</span>
+                                            <span id="gameday_awayTeam_flag"><img src="images/country_flags/portugal.png"></span>
+                                            <span id="gameday_awayTeam">portugal</span>
+                                            <p id="gameday_stadium">Wembley Stadium, London</p>
+                                        </li>
+                                        <li>
+                                            <span id="gameday_time">21:00</span>
+                                            <span id="gameday_homeTeam">italy</span>
+                                            <span id="gameday_homeTeam_flag"><img src="images/country_flags/italy.png"></span>
+                                            <span id="gameday_homeTeam_score">0</span>
+                                            <span id="hyphen">-</span>
+                                            <span id="gameday_awayTeam_score">0</span>
+                                            <span id="gameday_awayTeam_flag"><img src="images/country_flags/ukraine.png"></span>
+                                            <span id="gameday_awayTeam">ukraine</span>
+                                            <p id="gameday_stadium">Olypmpic Stadium, Baku</p>
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
@@ -181,7 +235,7 @@
 <div id='map_background'></div>
 
 </body>
-<!--
+
 <script src="js/mapbox.js"></script>
--->
+
 </html>
