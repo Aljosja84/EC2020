@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddGroupColumnToCountries extends Migration
+class AddGroupColumnToGames extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddGroupColumnToCountries extends Migration
      */
     public function up()
     {
-        Schema::table('countries', function (Blueprint $table) {
-            //
+        Schema::table('games', function (Blueprint $table) {
+            //$table->unsignedBigInteger('group_id')->nullable();
         });
     }
 
@@ -25,7 +25,7 @@ class AddGroupColumnToCountries extends Migration
      */
     public function down()
     {
-        Schema::table('countries', function (Blueprint $table) {
+        Schema::table('games', function (Blueprint $table) {
             //
         });
     }

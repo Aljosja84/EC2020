@@ -85,7 +85,7 @@
                                     <li id="team">
                                         <a href="#">
                                             <div class="team_link">
-                                                <img src="images/country_flags/{{ $country->flag_url }}"/>{{ $country->name }}
+                                                <img src={{ $country->flag_url() }}>{{ $country->name }}
                                             </div>
                                         </a>
                                     </li>

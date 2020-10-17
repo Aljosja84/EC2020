@@ -14,4 +14,9 @@ class Group extends Model
     {
         return $this->hasMany('App\Models\Country');
     }
+
+    public function games()
+    {
+        return $this->hasMany('App\Models\Game');
+    }
 }
