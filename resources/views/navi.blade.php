@@ -143,11 +143,14 @@
                             </div>
 
                             <div class="games_container">
+                                @foreach(App\Models\Game::selectRaw("DISTINCT DATE_FORMAT(game_date, '%Y-%m-%d') date")->get() as $games_dates)
                                 <div class="gameday_container">
                                     <div class="gameday_date">
+                                        {{ $games_dates->date }}
                                         sat <span class="june">june</span> 12
                                     </div>
                                     <ul>
+                                        @foreach(App\Models\Game::where("game_date", "LIKE", "%" . $games_dates->date ."%")->get() as $fixtures)
                                         <li>
                                             <span id="gameday_time">15:00</span>
                                             <span id="gameday_homeTeam">switzerland</span>
@@ -159,70 +162,10 @@
                                             <span id="gameday_awayTeam">czech republic</span>
                                             <p id="gameday_stadium">Johan Cruyff ArenA, Amsterdam</p>
                                         </li>
-                                        <li>
-                                            <span id="gameday_time">18:00</span>
-                                            <span id="gameday_homeTeam">france</span>
-                                            <span id="gameday_homeTeam_flag"><img src="images/country_flags/france.png"></span>
-                                            <span id="gameday_homeTeam_score">1</span>
-                                            <span id="hyphen">-</span>
-                                            <span id="gameday_awayTeam_score">3</span>
-                                            <span id="gameday_awayTeam_flag"><img src="images/country_flags/germany.png"></span>
-                                            <span id="gameday_awayTeam">germany</span>
-                                            <p id="gameday_stadium">Hampden Park, Glasgow</p>
-                                        </li>
-                                        <li>
-                                            <span id="gameday_time">21:00</span>
-                                            <span id="gameday_homeTeam">Netherlands</span>
-                                            <span id="gameday_homeTeam_flag"><img src="images/country_flags/netherlands.png"></span>
-                                            <span id="gameday_homeTeam_score">0</span>
-                                            <span id="hyphen">-</span>
-                                            <span id="gameday_awayTeam_score">2</span>
-                                            <span id="gameday_awayTeam_flag"><img src="images/country_flags/england.png"></span>
-                                            <span id="gameday_awayTeam">England</span>
-                                            <p id="gameday_stadium">Krestovsky Stadium, st. Petersburg</p>
-                                        </li>
+                                        @endforeach
                                     </ul>
                                 </div>
-                                <div class="gameday_container">
-                                    <div class="gameday_date">
-                                        sun <span class="june">june</span> 13
-                                    </div>
-                                    <ul>
-                                        <li style="opacity: 0.3">
-                                            <span id="gameday_time">15:00</span>
-                                            <span id="gameday_homeTeam">france</span>
-                                            <span id="gameday_homeTeam_flag"><img src="images/country_flags/france.png"></span>
-                                            <span id="gameday_homeTeam_score">1</span>
-                                            <span id="hyphen">-</span>
-                                            <span id="gameday_awayTeam_score">3</span>
-                                            <span id="gameday_awayTeam_flag"><img src="images/country_flags/germany.png"></span>
-                                            <span id="gameday_awayTeam">germany</span>
-                                            <p id="gameday_stadium">Hampden Park, Glasgow</p>
-                                        </li>
-                                        <li>
-                                            <span id="gameday_time">18:00</span>
-                                            <span id="gameday_homeTeam">russia</span>
-                                            <span id="gameday_homeTeam_flag"><img src="images/country_flags/russia.png"></span>
-                                            <span id="gameday_homeTeam_score">2</span>
-                                            <span id="hyphen">-</span>
-                                            <span id="gameday_awayTeam_score">2</span>
-                                            <span id="gameday_awayTeam_flag"><img src="images/country_flags/portugal.png"></span>
-                                            <span id="gameday_awayTeam">portugal</span>
-                                            <p id="gameday_stadium">Wembley Stadium, London</p>
-                                        </li>
-                                        <li>
-                                            <span id="gameday_time">21:00</span>
-                                            <span id="gameday_homeTeam">italy</span>
-                                            <span id="gameday_homeTeam_flag"><img src="images/country_flags/italy.png"></span>
-                                            <span id="gameday_homeTeam_score">0</span>
-                                            <span id="hyphen">-</span>
-                                            <span id="gameday_awayTeam_score">0</span>
-                                            <span id="gameday_awayTeam_flag"><img src="images/country_flags/ukraine.png"></span>
-                                            <span id="gameday_awayTeam">ukraine</span>
-                                            <p id="gameday_stadium">Olypmpic Stadium, Baku</p>
-                                        </li>
-                                    </ul>
-                                </div>
+                                @endforeach
                             </div>
                         </div>
                     </li>
