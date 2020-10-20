@@ -23,8 +23,18 @@ class Game extends Model
         return $this->belongsTo('App\Models\Country');
     }
 
-    public function probeersel()
+    public function playdate()
     {
-       return $this::selectRaw("DISTINCT DATE_FORMAT(game_date, '%Y-%m-%d') date")->get();
+        // convert the string to a time format
+        $time = strtotime($this->date);
+        // return the string
+       return date('l', $time) . ' <span class="' . strtolower(date('F', $time)) . '">' . date('F', $time) . '</span> ' . date('j', $time);
+    }
+
+    public function playtime()
+    {
+        // convert the string to a time format &
+        // return the string
+        return date('H:i', strtotime($this->game_date));
     }
 }

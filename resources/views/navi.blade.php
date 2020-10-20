@@ -103,7 +103,7 @@
                                     <li class="flex-item-inactive grey">08</li>
                                     <li class="flex-item-inactive grey">09</li>
                                     <li class="flex-item-inactive grey">10</li>
-                                    <li class="flex-item-inactive grey">11</li>
+                                    <li class="flex-item june">11</li>
                                     <li class="flex-item june">12</li>
                                     <li class="flex-item june">13</li>
                                     <li class="flex-item june">14</li>
@@ -116,25 +116,25 @@
                                     <li class="flex-item june">21</li>
                                     <li class="flex-item june">22</li>
                                     <li class="flex-item june">23</li>
-                                    <li class="flex-item june">24</li>
-                                    <li class="flex-item june">25</li>
+                                    <li class="flex-item-inactive grey">24</li>
+                                    <li class="flex-item-inactive grey">25</li>
                                     <li class="flex-item june">26</li>
                                     <li class="flex-item june">27</li>
                                     <li class="flex-item june">28</li>
                                     <li class="flex-item june">29</li>
-                                    <li class="flex-item june">30</li>
-                                    <li class="flex-item july">01</li>
+                                    <li class="flex-item-inactive grey">30</li>
+                                    <li class="flex-item-inactive grey">01</li>
                                     <li class="flex-item july">02</li>
                                     <li class="flex-item july">03</li>
-                                    <li class="flex-item july">04</li>
-                                    <li class="flex-item july">05</li>
+                                    <li class="flex-item-inactive grey">04</li>
+                                    <li class="flex-item-inactive grey">05</li>
                                     <li class="flex-item july">06</li>
                                     <li class="flex-item july">07</li>
-                                    <li class="flex-item july">08</li>
-                                    <li class="flex-item july">09</li>
-                                    <li class="flex-item july">10</li>
+                                    <li class="flex-item-inactive grey">08</li>
+                                    <li class="flex-item-inactive grey">09</li>
+                                    <li class="flex-item-inactive grey">10</li>
                                     <li class="flex-item july">11</li>
-                                    <li class="flex-item july">12</li>
+                                    <li class="flex-item-inactive grey">12</li>
                                     <li class="flex-item-inactive grey">13</li>
                                     <li class="flex-item-inactive grey">14</li>
                                     <li class="flex-item-inactive grey">15</li>
@@ -144,27 +144,26 @@
 
                             <div class="games_container">
                                 @foreach(App\Models\Game::selectRaw("DISTINCT DATE_FORMAT(game_date, '%Y-%m-%d') date")->get() as $games_dates)
-                                <div class="gameday_container">
-                                    <div class="gameday_date">
-                                        {{ $games_dates->date }}
-                                        sat <span class="june">june</span> 12
+                                    <div class="gameday_container">
+                                        <div class="gameday_date">
+                                            {!! $games_dates->playdate() !!}
+                                        </div>
+                                        <ul>
+                                            @foreach($fixturenum = App\Models\Game::where("game_date", "LIKE", "%" . $games_dates->date ."%")->get() as $fixture)
+                                                <li class="{{ $fixturenum->count() > 3 ? 'gameday_four' : 'gameday_three' }}">
+                                                    <span id="gameday_time">{{ $fixture->playtime() }}</span>
+                                                    <span id="gameday_homeTeam">{{ $fixture->group_id == 0 ? $fixture->hometeam_name : $fixture->homeTeam->name }}</span>
+                                                    <span id="gameday_homeTeam_flag"><img src="{{ $fixture->group_id == 0 ? "images/country_flags/qualifier.png" : $fixture->homeTeam->flag_url() }}"></span>
+                                                    <span id="gameday_homeTeam_score">{{ $fixture->home_team_score }}</span>
+                                                    <span id="hyphen">-</span>
+                                                    <span id="gameday_awayTeam_score">{{ $fixture->away_team_score }}</span>
+                                                    <span id="gameday_awayTeam_flag"><img src="{{ $fixture->group_id == 0 ? "images/country_flags/qualifier.png" : $fixture->awayTeam->flag_url() }}"></span>
+                                                    <span id="gameday_awayTeam">{{ $fixture->group_id == 0 ? $fixture->awayteam_name : $fixture->awayTeam->name }}</span>
+                                                    <p id="gameday_stadium">{{ $fixture->stadium->name }}, {{ $fixture->stadium->city }}</p>
+                                                </li>
+                                            @endforeach
+                                        </ul>
                                     </div>
-                                    <ul>
-                                        @foreach(App\Models\Game::where("game_date", "LIKE", "%" . $games_dates->date ."%")->get() as $fixtures)
-                                        <li>
-                                            <span id="gameday_time">15:00</span>
-                                            <span id="gameday_homeTeam">switzerland</span>
-                                            <span id="gameday_homeTeam_flag"><img src="images/country_flags/wales.png"></span>
-                                            <span id="gameday_homeTeam_score">0</span>
-                                            <span id="hyphen">-</span>
-                                            <span id="gameday_awayTeam_score">2</span>
-                                            <span id="gameday_awayTeam_flag"><img src="images/country_flags/spain.png"></span>
-                                            <span id="gameday_awayTeam">czech republic</span>
-                                            <p id="gameday_stadium">Johan Cruyff ArenA, Amsterdam</p>
-                                        </li>
-                                        @endforeach
-                                    </ul>
-                                </div>
                                 @endforeach
                             </div>
                         </div>
@@ -178,7 +177,7 @@
 <div id='map_background'></div>
 
 </body>
-
+<!--
 <script src="js/mapbox.js"></script>
-
+-->
 </html>

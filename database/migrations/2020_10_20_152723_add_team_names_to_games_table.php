@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddGroupColumnToGames extends Migration
+class AddTeamNamesToGamesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,8 @@ class AddGroupColumnToGames extends Migration
     public function up()
     {
         Schema::table('games', function (Blueprint $table) {
-            //$table->unsignedBigInteger('group_id')->nullable();
+            $table->string('hometeam_name');
+            $table->string('awayteam_name');
         });
     }
 
@@ -26,7 +27,8 @@ class AddGroupColumnToGames extends Migration
     public function down()
     {
         Schema::table('games', function (Blueprint $table) {
-            //$table->dropColumn('group_id');
+            $table->dropColumn('hometeam_name');
+            $table->dropColumn('awayteam_name');
         });
     }
 }
