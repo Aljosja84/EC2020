@@ -17,9 +17,4 @@ class Country extends Model
     {
         return "images/country_flags/{$this->flag_url}";
     }
-
-    public function question_url()
-    {
-        return "images/country_flags/qualifier.png";
-    }
 }

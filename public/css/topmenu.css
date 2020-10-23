@@ -1,6 +1,31 @@
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* height */
+::-webkit-scrollbar {
+    height: 9px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #b7dbfc;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #8fc4f5;
+}
+
 .topmenu {
     -webkit-box-shadow: 0 3px 13px -2px rgba(0,0,0,0.75);
     -moz-box-shadow: 0 3px 13px -2px rgba(0,0,0,0.75);
@@ -362,7 +387,7 @@ nav li:hover .menu_sub_teams {
     opacity: 0;
     background-color: #ffffff;
     width: 100%;
-    height: 260px;
+    height: 263px;
     z-index: -1;
     transition: 0.3s ease-in-out;
     border-bottom: solid #4cb4e7 3px;
@@ -401,7 +426,8 @@ nav li:hover .menu_sub_games {
     border-left-width: 0;
     border-bottom-width: 0;
     border-top-width: 0;
-    margin-top: 10px;
+    margin: 10px 5px 0 0;
+
 }
 
 #calendar_title {
@@ -441,6 +467,7 @@ nav li:hover .menu_sub_games {
     transition: all 0.3s linear;
 }
 
+
 .flex-item {
     font-size: 14px;
     padding: 0;
@@ -474,8 +501,13 @@ nav li:hover .menu_sub_games {
     cursor: default;
 }
 
-.june {
+.june{
     color: #c34c26;
+}
+
+.june a{
+    color: #c34c26;
+    text-decoration: none;
 }
 
 .july {
@@ -483,31 +515,37 @@ nav li:hover .menu_sub_games {
 }
 
 .games_container {
+    margin-left: 7px;
+    margin-top: 10px;
     width: auto;
-    height: 260px;
-    overflow-x: scroll;
+    height: 250px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scroll-snap-type: x;
     overflow-y: hidden;
     white-space: nowrap;
 }
 
 .gameday_container {
     background-image: url("../images/polaroid2.png");
-    margin-left: 6px;
+    background-color: #a35a33;
+    margin-left: 0;
     position: relative;
     display: inline-block;
     vertical-align: top;
     font-family: 'Roboto', sans-serif;
     font-size: 14px;
-    height: 235px;
+    height: 240px;
     width: max-content;
     white-space: nowrap;
-    margin-top: 10px;
-    margin-right: -3px;
+    margin-top: 0;
+    margin-right: 4px;
 }
 
 .gameday_container li {
     padding-top: 7px;
     width: inherit;
+    scroll-snap-align: start;
 }
 
 .gameday_three {
@@ -518,7 +556,7 @@ nav li:hover .menu_sub_games {
     border-left-width: 0;
     border-right-width: 0;
     width: auto;
-    height: 67px;
+    height: 69px;
     color: #515151;
     padding-top: 19px;
     cursor: pointer;
@@ -534,7 +572,7 @@ nav li:hover .menu_sub_games {
     border-right-width: 0;
     width: auto;
     vertical-align: top;
-    height: 50px;
+    height: 52px;
     color: #515151;
     padding-top:9px;
     cursor: pointer;

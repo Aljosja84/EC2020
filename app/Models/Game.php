@@ -37,4 +37,10 @@ class Game extends Model
         // return the string
         return date('H:i', strtotime($this->game_date));
     }
+
+    public function scroll_anchor()
+    {
+        $time = strtotime($this->date);
+        return strtolower(date('F', $time)) . date('j', $time);
+    }
 }

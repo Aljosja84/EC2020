@@ -103,37 +103,37 @@
                                     <li class="flex-item-inactive grey">08</li>
                                     <li class="flex-item-inactive grey">09</li>
                                     <li class="flex-item-inactive grey">10</li>
-                                    <li class="flex-item june">11</li>
-                                    <li class="flex-item june">12</li>
-                                    <li class="flex-item june">13</li>
-                                    <li class="flex-item june">14</li>
-                                    <li class="flex-item june">15</li>
-                                    <li class="flex-item june">16</li>
-                                    <li class="flex-item june">17</li>
-                                    <li class="flex-item june">18</li>
-                                    <li class="flex-item june">19</li>
-                                    <li class="flex-item june">20</li>
-                                    <li class="flex-item june">21</li>
-                                    <li class="flex-item june">22</li>
-                                    <li class="flex-item june">23</li>
+                                    <li class="flex-item june"><a onclick="scrollWin(june11);">11</a></li>
+                                    <li class="flex-item june"><a onclick="scrollWin(june12);">12</a></li>
+                                    <li class="flex-item june"><a onclick="scrollWin(june13);">13</a></li>
+                                    <li class="flex-item june"><a onclick="scrollWin(june14);">14</a></li>
+                                    <li class="flex-item june"><a onclick="scrollWin(june15);">15</a></li>
+                                    <li class="flex-item june"><a onclick="scrollWin(june16);">16</a></li>
+                                    <li class="flex-item june"><a onclick="scrollWin(june17);">17</a></li>
+                                    <li class="flex-item june"><a onclick="scrollWin(june18);">18</a></li>
+                                    <li class="flex-item june"><a onclick="scrollWin(june19);">19</a></li>
+                                    <li class="flex-item june"><a onclick="scrollWin(june20);">20</a></li>
+                                    <li class="flex-item june"><a onclick="scrollWin(june21);">21</a></li>
+                                    <li class="flex-item june"><a onclick="scrollWin(june22);">22</a></li>
+                                    <li class="flex-item june"><a onclick="scrollWin(june23);">23</a></li>
                                     <li class="flex-item-inactive grey">24</li>
                                     <li class="flex-item-inactive grey">25</li>
-                                    <li class="flex-item june">26</li>
-                                    <li class="flex-item june">27</li>
-                                    <li class="flex-item june">28</li>
-                                    <li class="flex-item june">29</li>
+                                    <li class="flex-item june"><a onclick="scrollWin(june26);">26</a></li>
+                                    <li class="flex-item june"><a onclick="scrollWin(june27);">27</a></li>
+                                    <li class="flex-item june"><a onclick="scrollWin(june28);">28</a></li>
+                                    <li class="flex-item june"><a onclick="scrollWin(june29);">29</a></li>
                                     <li class="flex-item-inactive grey">30</li>
                                     <li class="flex-item-inactive grey">01</li>
-                                    <li class="flex-item july">02</li>
-                                    <li class="flex-item july">03</li>
+                                    <li class="flex-item july"><a onclick="scrollWin(july2);">02</a></li>
+                                    <li class="flex-item july"><a onclick="scrollWin(july3);">03</a></li>
                                     <li class="flex-item-inactive grey">04</li>
                                     <li class="flex-item-inactive grey">05</li>
-                                    <li class="flex-item july">06</li>
-                                    <li class="flex-item july">07</li>
+                                    <li class="flex-item july"><a onclick="scrollWin(july6);">06</a></li>
+                                    <li class="flex-item july"><a onclick="scrollWin(july7);">07</a></li>
                                     <li class="flex-item-inactive grey">08</li>
                                     <li class="flex-item-inactive grey">09</li>
                                     <li class="flex-item-inactive grey">10</li>
-                                    <li class="flex-item july">11</li>
+                                    <li class="flex-item july"><a onclick="scrollWin(july11);">11</a></li>
                                     <li class="flex-item-inactive grey">12</li>
                                     <li class="flex-item-inactive grey">13</li>
                                     <li class="flex-item-inactive grey">14</li>
@@ -142,15 +142,15 @@
                                 </ul>
                             </div>
 
-                            <div class="games_container">
+                            <div class="games_container" id="games_container">
                                 @foreach(App\Models\Game::selectRaw("DISTINCT DATE_FORMAT(game_date, '%Y-%m-%d') date")->get() as $games_dates)
-                                    <div class="gameday_container">
+                                    <div class="gameday_container" id="{{ $games_dates->scroll_anchor() }}">
                                         <div class="gameday_date">
                                             {!! $games_dates->playdate() !!}
                                         </div>
                                         <ul>
                                             @foreach($fixturenum = App\Models\Game::where("game_date", "LIKE", "%" . $games_dates->date ."%")->get() as $fixture)
-                                                <li class="{{ $fixturenum->count() > 3 ? 'gameday_four' : 'gameday_three' }}">
+                                                <li class="{{ $fixturenum->count() > 3 ? 'gameday_four' : 'gameday_three' }}" id="{{ $fixture->id }}">
                                                     <span id="gameday_time">{{ $fixture->playtime() }}</span>
                                                     <span id="gameday_homeTeam">{{ $fixture->group_id == 0 ? $fixture->hometeam_name : $fixture->homeTeam->name }}</span>
                                                     <span id="gameday_homeTeam_flag"><img src="{{ $fixture->group_id == 0 ? "images/country_flags/qualifier.png" : $fixture->homeTeam->flag_url() }}"></span>
@@ -177,7 +177,61 @@
 <div id='map_background'></div>
 
 </body>
-<!--
+
 <script src="js/mapbox.js"></script>
--->
+
+<script>
+    var lekker = document.getElementById('games_container');
+    // Define the offset of the calendar
+    var offsetX = 190;
+    // Define all x positions of playdate divs
+    var june11 = document.getElementById('june11').getBoundingClientRect().x;
+    var june12 = document.getElementById('june12').getBoundingClientRect().x;
+    var june13 = document.getElementById('june13').getBoundingClientRect().x;
+    var june14 = document.getElementById('june14').getBoundingClientRect().x;
+    var june15 = document.getElementById('june15').getBoundingClientRect().x;
+    var june16 = document.getElementById('june16').getBoundingClientRect().x;
+    var june17 = document.getElementById('june17').getBoundingClientRect().x;
+    var june18 = document.getElementById('june18').getBoundingClientRect().x;
+    var june19 = document.getElementById('june19').getBoundingClientRect().x;
+    var june20 = document.getElementById('june20').getBoundingClientRect().x;
+    var june21 = document.getElementById('june21').getBoundingClientRect().x;
+    var june22 = document.getElementById('june22').getBoundingClientRect().x;
+    var june23 = document.getElementById('june23').getBoundingClientRect().x;
+    var june26 = document.getElementById('june26').getBoundingClientRect().x;
+    var june27 = document.getElementById('june27').getBoundingClientRect().x;
+    var june28 = document.getElementById('june28').getBoundingClientRect().x;
+    var june29 = document.getElementById('june29').getBoundingClientRect().x;
+    // July
+    var july2 = document.getElementById('july2').getBoundingClientRect().x;
+    var july3 = document.getElementById('july3').getBoundingClientRect().x;
+    var july6 = document.getElementById('july6').getBoundingClientRect().x;
+    var july7 = document.getElementById('july7').getBoundingClientRect().x;
+    var july11 = document.getElementById('july11').getBoundingClientRect().x;
+
+    // This function will scroll to the desired playdate
+    function scrollWin(waarheen) {
+        lekker.scroll(waarheen-offsetX, 0);
+    }
+
+    (function() {
+        function scrollHorizontally(e) {
+            e = window.event || e;
+            var delta = Math.max(-1, Math.min(1, (e.wheelDelta || -e.detail)));
+            // Multiplied by 400 so the scroll snapping is active and noticable
+            document.getElementById('games_container').scrollLeft -= (delta * 400);
+            // Prevent it from scroll vertically
+            e.preventDefault();
+        }
+        if (document.getElementById('games_container').addEventListener) {
+            // IE9, Chrome, Safari, Opera
+            document.getElementById('games_container').addEventListener('mousewheel', scrollHorizontally, false);
+            // Firefox
+            document.getElementById('games_container').addEventListener('DOMMouseScroll', scrollHorizontally, false);
+        } else {
+            // IE 6/7/8
+            document.getElementById('games_container').attachEvent('onmousewheel', scrollHorizontally);
+        }
+    })();
+</script>
 </html>
