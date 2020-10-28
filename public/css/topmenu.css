@@ -76,6 +76,11 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    /* make all text non selectable */
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
 }
 
 nav ul {
@@ -223,12 +228,16 @@ nav li:hover .menu_sub_stadium {
     font-size: 10px;
     visibility: hidden;
     opacity: 0;
-    background-color: #ffffff;
-    width: 195px;
+    background-color: transparent;
+    width: 1170px;
     height: auto;
     z-index: -1;
     transition: 0.3s ease-in-out;
-    border-bottom: solid #e58d37 4px;
+}
+
+.menu_sub_groups ul {
+    list-style: none;
+    display: inline-block;
 }
 
 nav li:hover .menu_sub_groups {
@@ -238,16 +247,18 @@ nav li:hover .menu_sub_groups {
 }
 
 .menu_sub_groups li {
-    display: block;
+    display: inline-block;
     width: 195px;
     margin-left: 0;
     margin-top: 0;
     padding-top: 0;
-    background-color: white;
+    background-color: #ffffff;
+    float: left;
+    border-bottom: solid #e58d37 4px;
 }
 
 .group_sub {
-    background-color: white;
+    background-color: #ffffff;
     width: 195px;
     height: 0;
     margin-top: 7px;
@@ -258,6 +269,7 @@ nav li:hover .menu_sub_groups {
 
 .group_sub:hover {
     background-color: #e6f3ff;
+    padding-top: 10px;
 }
 
 .group_sub_wrapper {
@@ -280,7 +292,7 @@ nav li:hover .menu_sub_groups {
 }
 
 #group:hover .group_sub {
-    height: 120px;
+    height: 155px;
 }
 
 #group a{
@@ -297,6 +309,11 @@ nav li:hover .menu_sub_groups {
     width: 195px;
     height: 35px;
     padding: 10px 10px 10px 10px;
+}
+
+#group {
+    list-style: none;
+    float: left;
 }
 
 

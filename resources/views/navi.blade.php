@@ -103,37 +103,37 @@
                                     <li class="flex-item-inactive grey">08</li>
                                     <li class="flex-item-inactive grey">09</li>
                                     <li class="flex-item-inactive grey">10</li>
-                                    <li class="flex-item june"><a onclick="scrollWin(june11);">11</a></li>
-                                    <li class="flex-item june"><a onclick="scrollWin(june12);">12</a></li>
-                                    <li class="flex-item june"><a onclick="scrollWin(june13);">13</a></li>
-                                    <li class="flex-item june"><a onclick="scrollWin(june14);">14</a></li>
-                                    <li class="flex-item june"><a onclick="scrollWin(june15);">15</a></li>
-                                    <li class="flex-item june"><a onclick="scrollWin(june16);">16</a></li>
-                                    <li class="flex-item june"><a onclick="scrollWin(june17);">17</a></li>
-                                    <li class="flex-item june"><a onclick="scrollWin(june18);">18</a></li>
-                                    <li class="flex-item june"><a onclick="scrollWin(june19);">19</a></li>
-                                    <li class="flex-item june"><a onclick="scrollWin(june20);">20</a></li>
-                                    <li class="flex-item june"><a onclick="scrollWin(june21);">21</a></li>
-                                    <li class="flex-item june"><a onclick="scrollWin(june22);">22</a></li>
-                                    <li class="flex-item june"><a onclick="scrollWin(june23);">23</a></li>
+                                    <li class="flex-item june"><a onclick="scrollWin(june11);return false;">11</a></li>
+                                    <li class="flex-item june"><a onclick="scrollWin(june12);return false;">12</a></li>
+                                    <li class="flex-item june"><a onclick="scrollWin(june13);return false;">13</a></li>
+                                    <li class="flex-item june"><a onclick="scrollWin(june14);return false;">14</a></li>
+                                    <li class="flex-item june"><a onclick="scrollWin(june15);return false;">15</a></li>
+                                    <li class="flex-item june"><a onclick="scrollWin(june16);return false;">16</a></li>
+                                    <li class="flex-item june"><a onclick="scrollWin(june17);return false;">17</a></li>
+                                    <li class="flex-item june"><a onclick="scrollWin(june18);return false;">18</a></li>
+                                    <li class="flex-item june"><a onclick="scrollWin(june19);return false;">19</a></li>
+                                    <li class="flex-item june"><a onclick="scrollWin(june20);return false;">20</a></li>
+                                    <li class="flex-item june"><a onclick="scrollWin(june21);return false;">21</a></li>
+                                    <li class="flex-item june"><a onclick="scrollWin(june22);return false;">22</a></li>
+                                    <li class="flex-item june"><a onclick="scrollWin(june23);return false;">23</a></li>
                                     <li class="flex-item-inactive grey">24</li>
                                     <li class="flex-item-inactive grey">25</li>
-                                    <li class="flex-item june"><a onclick="scrollWin(june26);">26</a></li>
-                                    <li class="flex-item june"><a onclick="scrollWin(june27);">27</a></li>
-                                    <li class="flex-item june"><a onclick="scrollWin(june28);">28</a></li>
-                                    <li class="flex-item june"><a onclick="scrollWin(june29);">29</a></li>
+                                    <li class="flex-item june"><a onclick="scrollWin(june26);return false;">26</a></li>
+                                    <li class="flex-item june"><a onclick="scrollWin(june27);return false;">27</a></li>
+                                    <li class="flex-item june"><a onclick="scrollWin(june28);return false;">28</a></li>
+                                    <li class="flex-item june"><a onclick="scrollWin(june29);return false;">29</a></li>
                                     <li class="flex-item-inactive grey">30</li>
                                     <li class="flex-item-inactive grey">01</li>
-                                    <li class="flex-item july"><a onclick="scrollWin(july2);">02</a></li>
-                                    <li class="flex-item july"><a onclick="scrollWin(july3);">03</a></li>
+                                    <li class="flex-item july"><a onclick="scrollWin(july2);return false;">02</a></li>
+                                    <li class="flex-item july"><a onclick="scrollWin(july3);return false;">03</a></li>
                                     <li class="flex-item-inactive grey">04</li>
                                     <li class="flex-item-inactive grey">05</li>
-                                    <li class="flex-item july"><a onclick="scrollWin(july6);">06</a></li>
-                                    <li class="flex-item july"><a onclick="scrollWin(july7);">07</a></li>
+                                    <li class="flex-item july"><a onclick="scrollWin(july6);return false;">06</a></li>
+                                    <li class="flex-item july"><a onclick="scrollWin(july7);return false;">07</a></li>
                                     <li class="flex-item-inactive grey">08</li>
                                     <li class="flex-item-inactive grey">09</li>
                                     <li class="flex-item-inactive grey">10</li>
-                                    <li class="flex-item july"><a onclick="scrollWin(july11);">11</a></li>
+                                    <li class="flex-item july"><a onclick="scrollWin(july11);return false;">11</a></li>
                                     <li class="flex-item-inactive grey">12</li>
                                     <li class="flex-item-inactive grey">13</li>
                                     <li class="flex-item-inactive grey">14</li>
