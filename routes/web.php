@@ -23,3 +23,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/navi', function() {
     return view('navi');
 });
+Route::get('/main', function() {
+    return view('main');
+});
+
+Route::get('/game', [App\Http\Controllers\HomeController::class, 'game'])->name('game');

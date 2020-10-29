@@ -1,0 +1,9 @@
+.games_div_container {
+    width: 100%;
+    height: calc(100% - 65px);
+    z-index: -3;
+    position: absolute;
+
+    background: rgb(91,169,241);
+    background: linear-gradient(180deg, rgba(91,169,241,1) 72%, rgba(255,255,255,1) 100%);
+}
