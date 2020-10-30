@@ -1914,19 +1914,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  name: "Events",
   mounted: function mounted() {
-    console.log('Component mounted.');
+    axios.get("https://v2.api-football.com/events/292855", {
+      headers: {
+        "X-RapidAPI-Host": "api-football-v1.p.rapidapi.com",
+        "X-RapidAPI-Key": "b1ae4a3fca89630148dadaa295a0b5b7"
+      }
+    }).then(function (response) {
+      console.log(response);
+    });
   }
 });
 
@@ -37521,23 +37519,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "row justify-content-center" }, [
-        _c("div", { staticClass: "col-md-8" }, [
-          _c("div", { staticClass: "card" }, [
-            _c("div", { staticClass: "card-header" }, [
-              _vm._v("Example Component")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-body" }, [
-              _vm._v(
-                "\n                    I'm an example component.\n                "
-              )
-            ])
-          ])
-        ])
-      ])
-    ])
+    return _c("div", [_c("h1", [_vm._v("Events")])])
   }
 ]
 render._withStripped = true
@@ -49774,7 +49756,6 @@ try {
 
 
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting

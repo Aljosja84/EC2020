@@ -7,6 +7,8 @@
     <script src='https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.js'></script>
     <link href='https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.css' rel='stylesheet' />
 
+    <script defer src="{{ mix('js/app.js') }}"></script>
+
     <link href="css/topmenu.css?v={{ time() }}" rel="stylesheet">
     <link href="css/ec2020.css?v={{ time() }}" rel="stylesheet">
 
