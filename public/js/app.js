@@ -1914,15 +1914,46 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Events",
+  data: function data() {
+    return {
+      list: []
+    };
+  },
+  computed: {
+    onlyGoals: function onlyGoals() {
+      return this.list.filter(function (x) {
+        return x.type == 'Goal';
+      });
+    }
+  },
   mounted: function mounted() {
+    var _this = this;
+
     axios.get("https://v2.api-football.com/events/292855", {
       headers: {
         "X-RapidAPI-Host": "api-football-v1.p.rapidapi.com",
         "X-RapidAPI-Key": "b1ae4a3fca89630148dadaa295a0b5b7"
       }
     }).then(function (response) {
+      _this.list = response.data.api.events;
       console.log(response);
     });
   }
@@ -37512,14 +37543,45 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", [
+    _c("h1", [_vm._v("Events")]),
+    _vm._v(" "),
+    _c(
+      "table",
+      { attrs: { border: "1px" } },
+      [
+        _vm._m(0),
+        _vm._v(" "),
+        _vm._l(_vm.onlyGoals, function(event) {
+          return _c("tr", { key: event.id }, [
+            _c("td", [_vm._v(_vm._s(event.elapsed))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(event.teamName))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(event.player))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(event.type))])
+          ])
+        })
+      ],
+      2
+    )
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [_c("h1", [_vm._v("Events")])])
+    return _c("tr", [
+      _c("td", [_vm._v("Minute")]),
+      _vm._v(" "),
+      _c("td", [_vm._v("Team")]),
+      _vm._v(" "),
+      _c("td", [_vm._v("Player")]),
+      _vm._v(" "),
+      _c("td", [_vm._v("Type")])
+    ])
   }
 ]
 render._withStripped = true
