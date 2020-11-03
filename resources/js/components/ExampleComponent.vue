@@ -10,10 +10,10 @@
             </tr>
 
             <tr v-for="event in onlyGoals" v-bind:key="event.id">
-                <td>{{ event.elapsed}}</td>
-                <td>{{ event.teamName}}</td>
-                <td>{{ event.player}}</td>
-                <td>{{ event.type}}</td>
+                <td>{{ event.elapsed }}</td>
+                <td>{{ event.teamName }}</td>
+                <td>{{ event.player }}</td>
+                <td>{{ event.type }}</td>
             </tr>
 
         </table>
@@ -37,7 +37,7 @@
         },
 
         mounted() {
-            axios.get("https://v2.api-football.com/events/292855", {
+            axios.get("httpppps://v2.api-football.com/events/292855", {
                 headers: {
                     "X-RapidAPI-Host": "api-football-v1.p.rapidapi.com",
                     "X-RapidAPI-Key": "b1ae4a3fca89630148dadaa295a0b5b7"
