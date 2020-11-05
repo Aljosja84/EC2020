@@ -2,42 +2,47 @@
     <div id="events_container">
         <div class="timeline">
             <ul>
-                <li class="homeTeam">
-                    <div class="contentLeft">
-                        <p>lol</p>
-                    </div>
-                    <div class="point-home">22'</div>
-                </li>
-                <li class="awayTeam">
-                    <div class="contentRight">
-                        <p>dit is een lange tekst</p>
-                    </div>
-                    <div class="point-away">25'</div>
-                </li>
-                <li class="homeTeam">
-                    <div class="contentLeft">
-                        <p>Event 3 Description</p>
-                    </div>
-                    <div class="point-home">35'</div>
-                </li>
-                <li class="homeTeam">
-                    <div class="contentLeft">
-                        <p>H. Ziyech</p>
-                    </div>
-                    <div class="point-home">42'</div>
-                </li>
+                <transition-group name="new_event">
+                    <li v-for="event in events" class="homeTeam" v-bind:key="event.event">
+                        <div class="contentLeft">
+                            <p>{{ event.event }}</p>
+                        </div>
+                        <div class="point-home">{{ event.time }}</div>
+                    </li>
+                </transition-group>
             </ul>
         </div>
+        <button @click="addEvent">add goal Ziyech</button>
     </div>
 </template>
 
 <script>
     export default {
-        name: "EventsWindow"
+        name: "EventsWindow",
+        data() {
+            return {
+                events: [{event: "test1", time: "12'"}, {event: "test2", time: "13'"}, {event: "test3", time: "80'"}]
+            }
+        },
+        methods: {
+            addEvent() {
+                this.events.push({event: "H. Ziyech", time: "92'"});
+            }
+        }
     }
 </script>
 
 <style scoped>
+    .new_event-enter-active .new_event-leave-active{
+        transition: all 0.3s;
+    }
+    .new_event-enter {
+        opacity: 0;
+    }
+    .new_event-enter-to {
+        opacity: 1;
+    }
+
     #events_container {
         width: 588px;
         height: 588px;
@@ -92,6 +97,8 @@
         font-family: 'Roboto', sans-serif;
         color: #515151;
         font-size: 14px;
+        height: auto;
+        transition: 0.3s all linear;
     }
     .timeline ul li .contentLeft {
         width: 50%;

@@ -21,11 +21,8 @@
   <component name="ChangeListManager">
     <list default="true" id="cf82d037-ce69-45df-857e-a29fb7732fae" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/ec2020.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/ec2020.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/LoadingBar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/LoadingBar.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/game.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/game.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/EventsWindow.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/EventsWindow.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -175,7 +172,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="ignore.virus.scanning.warn.message" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../LaravelForum" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
@@ -248,7 +245,9 @@
       <workItem from="1604264770417" duration="3971000" />
       <workItem from="1604324470571" duration="7809000" />
       <workItem from="1604418412695" duration="4025000" />
-      <workItem from="1604495263447" duration="19037000" />
+      <workItem from="1604495263447" duration="19432000" />
+      <workItem from="1604533242327" duration="435000" />
+      <workItem from="1604587117849" duration="5429000" />
     </task>
     <servers />
   </component>
@@ -272,10 +271,11 @@
       <screen x="2560" y="0" width="1050" height="1650" />
     </state>
     <state x="2843" y="628" key="#com.intellij.fileTypes.FileTypeChooser/0.0.2560.1410/2560.0.1050.1650@2560.0.1050.1650" timestamp="1604004887069" />
-    <state x="2865" y="579" key="FileChooserDialogImpl" timestamp="1604442774652">
+    <state x="2865" y="579" key="FileChooserDialogImpl" timestamp="1604612209588">
       <screen x="2560" y="0" width="1050" height="1650" />
     </state>
-    <state x="2865" y="579" key="FileChooserDialogImpl/0.0.2560.1410/2560.0.1050.1650@2560.0.1050.1650" timestamp="1604442774652" />
+    <state x="744" y="495" key="FileChooserDialogImpl/0.0.2560.1410/2560.0.1050.1650@0.0.2560.1410" timestamp="1604611779210" />
+    <state x="2865" y="579" key="FileChooserDialogImpl/0.0.2560.1410/2560.0.1050.1650@2560.0.1050.1650" timestamp="1604612209588" />
     <state width="1007" height="483" key="GridCell.Tab.0.bottom" timestamp="1601413506139">
       <screen x="2560" y="0" width="1050" height="1650" />
     </state>

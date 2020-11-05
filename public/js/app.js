@@ -1926,23 +1926,30 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "EventsWindow"
+  name: "EventsWindow",
+  data: function data() {
+    return {
+      events: [{
+        event: "test1",
+        time: "12'"
+      }, {
+        event: "test2",
+        time: "13'"
+      }, {
+        event: "test3",
+        time: "80'"
+      }]
+    };
+  },
+  methods: {
+    addEvent: function addEvent() {
+      this.events.push({
+        event: "H. Ziyech",
+        time: "92'"
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -6494,7 +6501,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n#events_container[data-v-9b4c6c58] {\n    width: 588px;\n    height: 588px;\n    background-color: #ffffff;\n    padding: 25px 0 0 45px;\n}\n.timeline[data-v-9b4c6c58] {\n    position: relative;\n    width: 90%;\n}\n.homeTeam[data-v-9b4c6c58]{\n    margin-bottom: 20px;\n    list-style-type: none;\n    display: flex;\n    flex-direction: row;\n    align-items: center;\n}\n.point-home[data-v-9b4c6c58] {\n    min-width: 28px;\n    height: 20px;\n    background-color: #d7dff7;\n    border-radius: 4px 4px 4px 4px;\n    z-index: 2;\n    position: relative;\n    left: -13px;\n    text-align: center;\n    font-family: 'Roboto', sans-serif;\n    color: #515151;\n    font-size: 14px;\n    padding-top: 2px;\n}\n.point-away[data-v-9b4c6c58] {\n    min-width: 28px;\n    height: 20px;\n    background-color: #d7dff7;\n    border-radius: 4px 4px 4px 4px;\n    z-index: 2;\n    position: relative;\n    left: 15px;\n    text-align: center;\n    font-family: 'Roboto', sans-serif;\n    color: #515151;\n    font-size: 14px;\n    padding-top: 2px;\n}\n.timeline ul li[data-v-9b4c6c58] {\n    font-family: 'Roboto', sans-serif;\n    color: #515151;\n    font-size: 14px;\n}\n.timeline ul li .contentLeft[data-v-9b4c6c58] {\n    width: 50%;\n    padding: 0 0;\n}\n.timeline ul li .contentRight[data-v-9b4c6c58] {\n    width: 50%;\n    padding: 0 10px 0;\n}\n.timeline ul li .contentLeft p[data-v-9b4c6c58] {\n    padding: 0 60px;\n    margin-top: 0;\n    text-align: right;\n}\n.timeline ul li .contentRight p[data-v-9b4c6c58] {\n    padding: 0 0 0 50px;\n    margin-top: 0;\n    text-align: left;\n}\n.awayTeam[data-v-9b4c6c58] {\n    margin-bottom: 20px;\n    list-style-type: none;\n    display: flex;\n    flex-direction: row-reverse;\n    align-items: center;\n}\n.timeline[data-v-9b4c6c58]::before {\n    content: \"\";\n    position: absolute;\n    height: 100%;\n    width: 1px;\n    left: 50%;\n    background-color: #d7dff7;\n}\n", ""]);
+exports.push([module.i, "\n.new_event-enter-active .new_event-leave-active[data-v-9b4c6c58]{\n    transition: all 0.3s;\n}\n.new_event-enter[data-v-9b4c6c58] {\n    opacity: 0;\n}\n.new_event-enter-to[data-v-9b4c6c58] {\n    opacity: 1;\n}\n#events_container[data-v-9b4c6c58] {\n    width: 588px;\n    height: 588px;\n    background-color: #ffffff;\n    padding: 25px 0 0 45px;\n}\n.timeline[data-v-9b4c6c58] {\n    position: relative;\n    width: 90%;\n}\n.homeTeam[data-v-9b4c6c58]{\n    margin-bottom: 20px;\n    list-style-type: none;\n    display: flex;\n    flex-direction: row;\n    align-items: center;\n}\n.point-home[data-v-9b4c6c58] {\n    min-width: 28px;\n    height: 20px;\n    background-color: #d7dff7;\n    border-radius: 4px 4px 4px 4px;\n    z-index: 2;\n    position: relative;\n    left: -13px;\n    text-align: center;\n    font-family: 'Roboto', sans-serif;\n    color: #515151;\n    font-size: 14px;\n    padding-top: 2px;\n}\n.point-away[data-v-9b4c6c58] {\n    min-width: 28px;\n    height: 20px;\n    background-color: #d7dff7;\n    border-radius: 4px 4px 4px 4px;\n    z-index: 2;\n    position: relative;\n    left: 15px;\n    text-align: center;\n    font-family: 'Roboto', sans-serif;\n    color: #515151;\n    font-size: 14px;\n    padding-top: 2px;\n}\n.timeline ul li[data-v-9b4c6c58] {\n    font-family: 'Roboto', sans-serif;\n    color: #515151;\n    font-size: 14px;\n    height: auto;\n    transition: 0.3s all linear;\n}\n.timeline ul li .contentLeft[data-v-9b4c6c58] {\n    width: 50%;\n    padding: 0 0;\n}\n.timeline ul li .contentRight[data-v-9b4c6c58] {\n    width: 50%;\n    padding: 0 10px 0;\n}\n.timeline ul li .contentLeft p[data-v-9b4c6c58] {\n    padding: 0 60px;\n    margin-top: 0;\n    text-align: right;\n}\n.timeline ul li .contentRight p[data-v-9b4c6c58] {\n    padding: 0 0 0 50px;\n    margin-top: 0;\n    text-align: left;\n}\n.awayTeam[data-v-9b4c6c58] {\n    margin-bottom: 20px;\n    list-style-type: none;\n    display: flex;\n    flex-direction: row-reverse;\n    align-items: center;\n}\n.timeline[data-v-9b4c6c58]::before {\n    content: \"\";\n    position: absolute;\n    height: 100%;\n    width: 1px;\n    left: 50%;\n    background-color: #d7dff7;\n}\n", ""]);
 
 // exports
 
@@ -38338,52 +38345,36 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { attrs: { id: "events_container" } }, [
+    _c("div", { staticClass: "timeline" }, [
+      _c(
+        "ul",
+        [
+          _c(
+            "transition-group",
+            { attrs: { name: "new_event" } },
+            _vm._l(_vm.events, function(event) {
+              return _c("li", { key: event.event, staticClass: "homeTeam" }, [
+                _c("div", { staticClass: "contentLeft" }, [
+                  _c("p", [_vm._v(_vm._s(event.event))])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "point-home" }, [
+                  _vm._v(_vm._s(event.time))
+                ])
+              ])
+            }),
+            0
+          )
+        ],
+        1
+      )
+    ]),
+    _vm._v(" "),
+    _c("button", { on: { click: _vm.addEvent } }, [_vm._v("add goal Ziyech")])
+  ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { attrs: { id: "events_container" } }, [
-      _c("div", { staticClass: "timeline" }, [
-        _c("ul", [
-          _c("li", { staticClass: "homeTeam" }, [
-            _c("div", { staticClass: "contentLeft" }, [
-              _c("p", [_vm._v("lol")])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "point-home" }, [_vm._v("22'")])
-          ]),
-          _vm._v(" "),
-          _c("li", { staticClass: "awayTeam" }, [
-            _c("div", { staticClass: "contentRight" }, [
-              _c("p", [_vm._v("dit is een lange tekst")])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "point-away" }, [_vm._v("25'")])
-          ]),
-          _vm._v(" "),
-          _c("li", { staticClass: "homeTeam" }, [
-            _c("div", { staticClass: "contentLeft" }, [
-              _c("p", [_vm._v("Event 3 Description")])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "point-home" }, [_vm._v("35'")])
-          ]),
-          _vm._v(" "),
-          _c("li", { staticClass: "homeTeam" }, [
-            _c("div", { staticClass: "contentLeft" }, [
-              _c("p", [_vm._v("H. Ziyech")])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "point-home" }, [_vm._v("42'")])
-          ])
-        ])
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -50912,15 +50903,14 @@ __webpack_require__.r(__webpack_exports__);
 /*!************************************************!*\
   !*** ./resources/js/components/LoadingBar.vue ***!
   \************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _LoadingBar_vue_vue_type_template_id_56180262_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./LoadingBar.vue?vue&type=template&id=56180262&scoped=true& */ "./resources/js/components/LoadingBar.vue?vue&type=template&id=56180262&scoped=true&");
 /* harmony import */ var _LoadingBar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./LoadingBar.vue?vue&type=script&lang=js& */ "./resources/js/components/LoadingBar.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _LoadingBar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _LoadingBar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _LoadingBar_vue_vue_type_style_index_0_id_56180262_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./LoadingBar.vue?vue&type=style&index=0&id=56180262&scoped=true&lang=css& */ "./resources/js/components/LoadingBar.vue?vue&type=style&index=0&id=56180262&scoped=true&lang=css&");
+/* empty/unused harmony star reexport *//* harmony import */ var _LoadingBar_vue_vue_type_style_index_0_id_56180262_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./LoadingBar.vue?vue&type=style&index=0&id=56180262&scoped=true&lang=css& */ "./resources/js/components/LoadingBar.vue?vue&type=style&index=0&id=56180262&scoped=true&lang=css&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -50952,7 +50942,7 @@ component.options.__file = "resources/js/components/LoadingBar.vue"
 /*!*************************************************************************!*\
   !*** ./resources/js/components/LoadingBar.vue?vue&type=script&lang=js& ***!
   \*************************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
