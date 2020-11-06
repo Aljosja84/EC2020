@@ -1931,25 +1931,99 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       events: [{
-        event: "test1",
-        time: "12'"
+        player: "P. van Hooijdonk",
+        elapsed: "12",
+        type: "Goal",
+        teamid: 35
       }, {
-        event: "test2",
-        time: "13'"
-      }, {
-        event: "test3",
-        time: "80'"
-      }]
+        player: "D. Neres",
+        elapsed: "22",
+        type: "Yellow Card",
+        teamid: 17
+      }],
+      answer: '',
+      hometeam: '',
+      awayteam: ''
     };
   },
   methods: {
     addEvent: function addEvent() {
-      this.events.push({
-        event: "H. Ziyech",
-        time: "92'"
-      });
+      this.events = [{
+        player: "P. van Hooijdonk",
+        elapsed: "12",
+        type: "Goal",
+        teamid: 35
+      }, {
+        player: "D. Neres",
+        elapsed: "22",
+        type: "Yellow Card",
+        teamid: 17
+      }, {
+        player: "W. Sneijder",
+        elapsed: "88",
+        type: "Goal",
+        teamid: 35
+      }, {
+        player: "L. Schone",
+        elapsed: "89",
+        type: "Yellow Card",
+        teamid: 17
+      }];
+    },
+    notice: function notice(e) {
+      if (e.teamid == this.hometeam) {
+        switch (e.type) {
+          case "Goal":
+            var answer = e.player + " goal";
+            break;
+
+          case "Yellow Card":
+            var answer = e.player + " yellow card";
+            break;
+        }
+      } else {
+        switch (e.type) {
+          case "Goal":
+            var answer = e.player + " goal";
+            break;
+
+          case "Yellow Card":
+            var answer = e.player + " yellow card";
+            break;
+        }
+      }
+
+      return answer;
+    },
+    whichteam: function whichteam(e) {
+      if (e.teamid == this.hometeam) {
+        var classteam = "homeTeam";
+      } else {
+        var classteam = "awayTeam";
+      }
+
+      return classteam;
     }
+  },
+  mounted: function mounted() {
+    this.hometeam = 35;
+    this.awayteam = 17;
+    console.log(this.events.length);
   }
+  /*
+  mounted() {
+      axios.get("https://v2.api-football.com/fixtures/id/592143", {
+          headers: {
+              "X-RapidAPI-Host": "api-football-v1.p.rapidapi.com",
+              "X-RapidAPI-Key": "b1ae4a3fca89630148dadaa295a0b5b7"
+          }
+      }).then((response)=> {
+          this.events = response.data.api.fixtures[0].events;
+          console.log(response);
+      })
+  }
+   */
+
 });
 
 /***/ }),
@@ -6501,7 +6575,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.new_event-enter-active .new_event-leave-active[data-v-9b4c6c58]{\n    transition: all 0.3s;\n}\n.new_event-enter[data-v-9b4c6c58] {\n    opacity: 0;\n}\n.new_event-enter-to[data-v-9b4c6c58] {\n    opacity: 1;\n}\n#events_container[data-v-9b4c6c58] {\n    width: 588px;\n    height: 588px;\n    background-color: #ffffff;\n    padding: 25px 0 0 45px;\n}\n.timeline[data-v-9b4c6c58] {\n    position: relative;\n    width: 90%;\n}\n.homeTeam[data-v-9b4c6c58]{\n    margin-bottom: 20px;\n    list-style-type: none;\n    display: flex;\n    flex-direction: row;\n    align-items: center;\n}\n.point-home[data-v-9b4c6c58] {\n    min-width: 28px;\n    height: 20px;\n    background-color: #d7dff7;\n    border-radius: 4px 4px 4px 4px;\n    z-index: 2;\n    position: relative;\n    left: -13px;\n    text-align: center;\n    font-family: 'Roboto', sans-serif;\n    color: #515151;\n    font-size: 14px;\n    padding-top: 2px;\n}\n.point-away[data-v-9b4c6c58] {\n    min-width: 28px;\n    height: 20px;\n    background-color: #d7dff7;\n    border-radius: 4px 4px 4px 4px;\n    z-index: 2;\n    position: relative;\n    left: 15px;\n    text-align: center;\n    font-family: 'Roboto', sans-serif;\n    color: #515151;\n    font-size: 14px;\n    padding-top: 2px;\n}\n.timeline ul li[data-v-9b4c6c58] {\n    font-family: 'Roboto', sans-serif;\n    color: #515151;\n    font-size: 14px;\n    height: auto;\n    transition: 0.3s all linear;\n}\n.timeline ul li .contentLeft[data-v-9b4c6c58] {\n    width: 50%;\n    padding: 0 0;\n}\n.timeline ul li .contentRight[data-v-9b4c6c58] {\n    width: 50%;\n    padding: 0 10px 0;\n}\n.timeline ul li .contentLeft p[data-v-9b4c6c58] {\n    padding: 0 60px;\n    margin-top: 0;\n    text-align: right;\n}\n.timeline ul li .contentRight p[data-v-9b4c6c58] {\n    padding: 0 0 0 50px;\n    margin-top: 0;\n    text-align: left;\n}\n.awayTeam[data-v-9b4c6c58] {\n    margin-bottom: 20px;\n    list-style-type: none;\n    display: flex;\n    flex-direction: row-reverse;\n    align-items: center;\n}\n.timeline[data-v-9b4c6c58]::before {\n    content: \"\";\n    position: absolute;\n    height: 100%;\n    width: 1px;\n    left: 50%;\n    background-color: #d7dff7;\n}\n", ""]);
+exports.push([module.i, "\n.new_event-enter-active .new_event-leave-active[data-v-9b4c6c58]{\n    transition: all 0.3s;\n}\n.new_event-enter[data-v-9b4c6c58] {\n    opacity: 0;\n}\n.new_event-enter-to[data-v-9b4c6c58] {\n    opacity: 1;\n}\n#events_container[data-v-9b4c6c58] {\n    width: 588px;\n    height: 588px;\n    background-color: #ffffff;\n    padding: 25px 0 0 5px;\n}\n.timeline[data-v-9b4c6c58] {\n    position: relative;\n    width: 100%;\n}\n.homeTeam[data-v-9b4c6c58]{\n    margin-bottom: 20px;\n    list-style-type: none;\n    display: flex;\n    flex-direction: row;\n    align-items: center;\n}\n.homeTeampoint[data-v-9b4c6c58] {\n    min-width: 28px;\n    height: 20px;\n    background-color: #d7dff7;\n    border-radius: 4px 4px 4px 4px;\n    z-index: 2;\n    position: relative;\n    left: -13px;\n    text-align: center;\n    font-family: 'Roboto', sans-serif;\n    color: #515151;\n    font-size: 14px;\n    padding-top: 2px;\n}\n.awayTeampoint[data-v-9b4c6c58] {\n    min-width: 28px;\n    height: 20px;\n    background-color: #d7dff7;\n    border-radius: 4px 4px 4px 4px;\n    z-index: 2;\n    position: relative;\n    left: 15px;\n    text-align: center;\n    font-family: 'Roboto', sans-serif;\n    color: #515151;\n    font-size: 14px;\n    padding-top: 2px;\n}\n.timeline ul li[data-v-9b4c6c58] {\n    font-family: 'Roboto', sans-serif;\n    color: #515151;\n    font-size: 12px;\n    height: auto;\n    transition: 0.3s all linear;\n}\n.timeline ul li .homeTeamcontent[data-v-9b4c6c58] {\n    width: 50%;\n    padding: 0 0;\n    background-color: #2a9055;\n}\n.timeline ul li .awayTeamcontent[data-v-9b4c6c58] {\n    width: 50%;\n    padding: 0 10px 0;\n    background-color: #2a9055;\n}\n.timeline ul li .homeTeamcontent p[data-v-9b4c6c58] {\n    padding: 0 40px;\n    margin-top: 0;\n    text-align: right;\n    width: 100%;\n}\n.timeline ul li .awayTeamcontent p[data-v-9b4c6c58] {\n    padding: 0 0 0 40px;\n    margin-top: 0;\n    text-align: left;\n    width: 100%;\n}\n.awayTeam[data-v-9b4c6c58] {\n    margin-bottom: 20px;\n    list-style-type: none;\n    display: flex;\n    flex-direction: row-reverse;\n    align-items: center;\n}\n.timeline[data-v-9b4c6c58]::before {\n    content: \"\";\n    position: absolute;\n    height: 100%;\n    width: 1px;\n    left: 50%;\n    background-color: #d7dff7;\n}\n", ""]);
 
 // exports
 
@@ -38354,15 +38428,22 @@ var render = function() {
             "transition-group",
             { attrs: { name: "new_event" } },
             _vm._l(_vm.events, function(event) {
-              return _c("li", { key: event.event, staticClass: "homeTeam" }, [
-                _c("div", { staticClass: "contentLeft" }, [
-                  _c("p", [_vm._v(_vm._s(event.event))])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "point-home" }, [
-                  _vm._v(_vm._s(event.time))
-                ])
-              ])
+              return _c(
+                "li",
+                {
+                  key: event.elapsed + event.type,
+                  class: _vm.whichteam(event)
+                },
+                [
+                  _c("div", { class: _vm.whichteam(event) + "content" }, [
+                    _c("p", [_vm._v(_vm._s(_vm.notice(event)))])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { class: _vm.whichteam(event) + "point" }, [
+                    _vm._v(_vm._s(event.elapsed))
+                  ])
+                ]
+              )
             }),
             0
           )

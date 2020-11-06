@@ -3,11 +3,11 @@
         <div class="timeline">
             <ul>
                 <transition-group name="new_event">
-                    <li v-for="event in events" class="homeTeam" v-bind:key="event.event">
-                        <div class="contentLeft">
-                            <p>{{ event.event }}</p>
+                    <li v-for="event in events" v-bind:class="whichteam(event)" v-bind:key="event.elapsed+event.type">
+                        <div v-bind:class="whichteam(event) + 'content'">
+                            <p>{{ notice(event) }}</p>
                         </div>
-                        <div class="point-home">{{ event.time }}</div>
+                        <div v-bind:class="whichteam(event) + 'point'">{{ event.elapsed }}</div>
                     </li>
                 </transition-group>
             </ul>
@@ -21,14 +21,71 @@
         name: "EventsWindow",
         data() {
             return {
-                events: [{event: "test1", time: "12'"}, {event: "test2", time: "13'"}, {event: "test3", time: "80'"}]
+                events: [{player: "P. van Hooijdonk", elapsed: "12", type: "Goal", teamid: 35}, {player: "D. Neres", elapsed: "22", type:"Yellow Card", teamid: 17}],
+                answer: '',
+                hometeam: '',
+                awayteam: ''
             }
         },
         methods: {
             addEvent() {
-                this.events.push({event: "H. Ziyech", time: "92'"});
+                this.events= [{player: "P. van Hooijdonk", elapsed: "12", type: "Goal", teamid: 35}, {player: "D. Neres", elapsed: "22", type:"Yellow Card", teamid: 17},{player: "W. Sneijder", elapsed: "88", type: "Goal", teamid: 35},{player: "L. Schone", elapsed: "89", type: "Yellow Card", teamid: 17}];
+            },
+
+            notice(e) {
+                if(e.teamid == this.hometeam) {
+                    switch(e.type) {
+                        case "Goal":
+                            var answer = e.player + " goal";
+                            break;
+                        case "Yellow Card":
+                            var answer = e.player + " yellow card";
+                            break;
+                    }
+                }   else {
+                    switch(e.type) {
+                        case "Goal":
+                            var answer = e.player + " goal";
+                            break;
+                        case "Yellow Card":
+                            var answer = e.player + " yellow card";
+                            break;
+                    }
+                }
+
+                return answer;
+            },
+
+            whichteam(e) {
+                if(e.teamid == this.hometeam) {
+                   var classteam = "homeTeam";
+                }   else {
+                    var classteam = "awayTeam";
+                }
+                return classteam;
             }
+
+        },
+        mounted() {
+            this.hometeam = 35;
+            this.awayteam = 17;
+            console.log(this.events.length);
         }
+
+        /*
+        mounted() {
+            axios.get("https://v2.api-football.com/fixtures/id/592143", {
+                headers: {
+                    "X-RapidAPI-Host": "api-football-v1.p.rapidapi.com",
+                    "X-RapidAPI-Key": "b1ae4a3fca89630148dadaa295a0b5b7"
+                }
+            }).then((response)=> {
+                this.events = response.data.api.fixtures[0].events;
+                console.log(response);
+            })
+        }
+
+        */
     }
 </script>
 
@@ -47,12 +104,12 @@
         width: 588px;
         height: 588px;
         background-color: #ffffff;
-        padding: 25px 0 0 45px;
+        padding: 25px 0 0 5px;
     }
 
     .timeline {
         position: relative;
-        width: 90%;
+        width: 100%;
     }
 
     .homeTeam{
@@ -63,7 +120,7 @@
         align-items: center;
     }
 
-    .point-home {
+    .homeTeampoint {
         min-width: 28px;
         height: 20px;
         background-color: #d7dff7;
@@ -78,7 +135,7 @@
         padding-top: 2px;
     }
 
-    .point-away {
+    .awayTeampoint {
         min-width: 28px;
         height: 20px;
         background-color: #d7dff7;
@@ -96,31 +153,35 @@
     .timeline ul li {
         font-family: 'Roboto', sans-serif;
         color: #515151;
-        font-size: 14px;
+        font-size: 12px;
         height: auto;
         transition: 0.3s all linear;
     }
-    .timeline ul li .contentLeft {
+    .timeline ul li .homeTeamcontent {
         width: 50%;
         padding: 0 0;
+        background-color: #2a9055;
     }
 
-    .timeline ul li .contentRight {
+    .timeline ul li .awayTeamcontent {
         width: 50%;
         padding: 0 10px 0;
+        background-color: #2a9055;
     }
 
 
-    .timeline ul li .contentLeft p {
-        padding: 0 60px;
+    .timeline ul li .homeTeamcontent p {
+        padding: 0 40px;
         margin-top: 0;
         text-align: right;
+        width: 100%;
     }
 
-    .timeline ul li .contentRight p {
-        padding: 0 0 0 50px;
+    .timeline ul li .awayTeamcontent p {
+        padding: 0 0 0 40px;
         margin-top: 0;
         text-align: left;
+        width: 100%;
     }
 
     .awayTeam {
