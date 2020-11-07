@@ -3,11 +3,12 @@
         <div class="timeline">
             <ul>
                 <transition-group name="new_event">
+                    <li class="homeTeam" v-bind:key="timer"><div class="homeTeamcontent"></div><div class="clock"><img src="images/start_timer.png"/></div></li>
                     <li v-for="event in events" v-bind:class="whichteam(event)" v-bind:key="event.elapsed+event.type">
                         <div v-bind:class="whichteam(event) + 'content'">
-                            <p>{{ notice(event) }}</p>
+                            <p v-html="notice(event)"></p>
                         </div>
-                        <div v-bind:class="whichteam(event) + 'point'">{{ event.elapsed }}</div>
+                        <div v-bind:class="whichteam(event) + 'point'">{{ event.elapsed + '\'' }}</div>
                     </li>
                 </transition-group>
             </ul>
@@ -24,22 +25,27 @@
                 events: [{player: "P. van Hooijdonk", elapsed: "12", type: "Goal", teamid: 35}, {player: "D. Neres", elapsed: "22", type:"Yellow Card", teamid: 17}],
                 answer: '',
                 hometeam: '',
-                awayteam: ''
+                awayteam: '',
+                timer: 'start'
             }
         },
         methods: {
             addEvent() {
-                this.events= [{player: "P. van Hooijdonk", elapsed: "12", type: "Goal", teamid: 35}, {player: "D. Neres", elapsed: "22", type:"Yellow Card", teamid: 17},{player: "W. Sneijder", elapsed: "88", type: "Goal", teamid: 35},{player: "L. Schone", elapsed: "89", type: "Yellow Card", teamid: 17}];
+                this.events= [{player: "P. van Hooijdonk", elapsed: "12", type: "Goal", teamid: 35}, {player: "D. Neres", elapsed: "22", type:"Yellow Card", teamid: 17},{player: "W. Sneijder", elapsed: "88", type: "Card", detail: "Red Card", teamid: 35},{player: "L. Schone", elapsed: "89", type: "Yellow Card", teamid: 17}];
             },
 
             notice(e) {
-                if(e.teamid == this.hometeam) {
+                if(e.teamid === this.hometeam) {
                     switch(e.type) {
                         case "Goal":
-                            var answer = e.player + " goal";
+                            var answer = e.player + ' <img src="images/goal.png" />';
                             break;
-                        case "Yellow Card":
-                            var answer = e.player + " yellow card";
+                        case "Card":
+                            var card = e.detail === 'Yellow Card' ? ' <img src="images/yellowcard.png" />' : ' <img src="images/redcard.png" />';
+                            var answer = e.player + card;
+                            break;
+                        case "Red Card":
+                            var answer = e.player + ' <img src="images/yellowcard.png" />';
                             break;
                     }
                 }   else {
@@ -57,12 +63,7 @@
             },
 
             whichteam(e) {
-                if(e.teamid == this.hometeam) {
-                   var classteam = "homeTeam";
-                }   else {
-                    var classteam = "awayTeam";
-                }
-                return classteam;
+                return e.teamid === this.hometeam ? 'homeTeam' : 'awayTeam';
             }
 
         },
@@ -150,6 +151,20 @@
         padding-top: 2px;
     }
 
+    .clock {
+        background-color: #ffffff;
+        border-radius: 4px 4px 4px 4px;
+        height: 21px;
+        z-index: 2;
+        position: relative;
+        left: -8px;
+        text-align: center;
+        font-family: 'Roboto', sans-serif;
+        color: #515151;
+        font-size: 14px;
+        padding-top: 2px;
+    }
+
     .timeline ul li {
         font-family: 'Roboto', sans-serif;
         color: #515151;
@@ -160,13 +175,13 @@
     .timeline ul li .homeTeamcontent {
         width: 50%;
         padding: 0 0;
-        background-color: #2a9055;
+        background-color: #ffffff;
     }
 
     .timeline ul li .awayTeamcontent {
         width: 50%;
         padding: 0 10px 0;
-        background-color: #2a9055;
+        background-color: #ffffff;
     }
 
 

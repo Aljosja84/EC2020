@@ -1926,6 +1926,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "EventsWindow",
   data: function data() {
@@ -1943,7 +1944,8 @@ __webpack_require__.r(__webpack_exports__);
       }],
       answer: '',
       hometeam: '',
-      awayteam: ''
+      awayteam: '',
+      timer: 'start'
     };
   },
   methods: {
@@ -1961,7 +1963,8 @@ __webpack_require__.r(__webpack_exports__);
       }, {
         player: "W. Sneijder",
         elapsed: "88",
-        type: "Goal",
+        type: "Card",
+        detail: "Red Card",
         teamid: 35
       }, {
         player: "L. Schone",
@@ -1971,14 +1974,19 @@ __webpack_require__.r(__webpack_exports__);
       }];
     },
     notice: function notice(e) {
-      if (e.teamid == this.hometeam) {
+      if (e.teamid === this.hometeam) {
         switch (e.type) {
           case "Goal":
-            var answer = e.player + " goal";
+            var answer = e.player + ' <img src="images/goal.png" />';
             break;
 
-          case "Yellow Card":
-            var answer = e.player + " yellow card";
+          case "Card":
+            var card = e.detail === 'Yellow Card' ? ' <img src="images/yellowcard.png" />' : ' <img src="images/redcard.png" />';
+            var answer = e.player + card;
+            break;
+
+          case "Red Card":
+            var answer = e.player + ' <img src="images/yellowcard.png" />';
             break;
         }
       } else {
@@ -1996,13 +2004,7 @@ __webpack_require__.r(__webpack_exports__);
       return answer;
     },
     whichteam: function whichteam(e) {
-      if (e.teamid == this.hometeam) {
-        var classteam = "homeTeam";
-      } else {
-        var classteam = "awayTeam";
-      }
-
-      return classteam;
+      return e.teamid === this.hometeam ? 'homeTeam' : 'awayTeam';
     }
   },
   mounted: function mounted() {
@@ -6575,7 +6577,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.new_event-enter-active .new_event-leave-active[data-v-9b4c6c58]{\n    transition: all 0.3s;\n}\n.new_event-enter[data-v-9b4c6c58] {\n    opacity: 0;\n}\n.new_event-enter-to[data-v-9b4c6c58] {\n    opacity: 1;\n}\n#events_container[data-v-9b4c6c58] {\n    width: 588px;\n    height: 588px;\n    background-color: #ffffff;\n    padding: 25px 0 0 5px;\n}\n.timeline[data-v-9b4c6c58] {\n    position: relative;\n    width: 100%;\n}\n.homeTeam[data-v-9b4c6c58]{\n    margin-bottom: 20px;\n    list-style-type: none;\n    display: flex;\n    flex-direction: row;\n    align-items: center;\n}\n.homeTeampoint[data-v-9b4c6c58] {\n    min-width: 28px;\n    height: 20px;\n    background-color: #d7dff7;\n    border-radius: 4px 4px 4px 4px;\n    z-index: 2;\n    position: relative;\n    left: -13px;\n    text-align: center;\n    font-family: 'Roboto', sans-serif;\n    color: #515151;\n    font-size: 14px;\n    padding-top: 2px;\n}\n.awayTeampoint[data-v-9b4c6c58] {\n    min-width: 28px;\n    height: 20px;\n    background-color: #d7dff7;\n    border-radius: 4px 4px 4px 4px;\n    z-index: 2;\n    position: relative;\n    left: 15px;\n    text-align: center;\n    font-family: 'Roboto', sans-serif;\n    color: #515151;\n    font-size: 14px;\n    padding-top: 2px;\n}\n.timeline ul li[data-v-9b4c6c58] {\n    font-family: 'Roboto', sans-serif;\n    color: #515151;\n    font-size: 12px;\n    height: auto;\n    transition: 0.3s all linear;\n}\n.timeline ul li .homeTeamcontent[data-v-9b4c6c58] {\n    width: 50%;\n    padding: 0 0;\n    background-color: #2a9055;\n}\n.timeline ul li .awayTeamcontent[data-v-9b4c6c58] {\n    width: 50%;\n    padding: 0 10px 0;\n    background-color: #2a9055;\n}\n.timeline ul li .homeTeamcontent p[data-v-9b4c6c58] {\n    padding: 0 40px;\n    margin-top: 0;\n    text-align: right;\n    width: 100%;\n}\n.timeline ul li .awayTeamcontent p[data-v-9b4c6c58] {\n    padding: 0 0 0 40px;\n    margin-top: 0;\n    text-align: left;\n    width: 100%;\n}\n.awayTeam[data-v-9b4c6c58] {\n    margin-bottom: 20px;\n    list-style-type: none;\n    display: flex;\n    flex-direction: row-reverse;\n    align-items: center;\n}\n.timeline[data-v-9b4c6c58]::before {\n    content: \"\";\n    position: absolute;\n    height: 100%;\n    width: 1px;\n    left: 50%;\n    background-color: #d7dff7;\n}\n", ""]);
+exports.push([module.i, "\n.new_event-enter-active .new_event-leave-active[data-v-9b4c6c58]{\n    transition: all 0.3s;\n}\n.new_event-enter[data-v-9b4c6c58] {\n    opacity: 0;\n}\n.new_event-enter-to[data-v-9b4c6c58] {\n    opacity: 1;\n}\n#events_container[data-v-9b4c6c58] {\n    width: 588px;\n    height: 588px;\n    background-color: #ffffff;\n    padding: 25px 0 0 5px;\n}\n.timeline[data-v-9b4c6c58] {\n    position: relative;\n    width: 100%;\n}\n.homeTeam[data-v-9b4c6c58]{\n    margin-bottom: 20px;\n    list-style-type: none;\n    display: flex;\n    flex-direction: row;\n    align-items: center;\n}\n.homeTeampoint[data-v-9b4c6c58] {\n    min-width: 28px;\n    height: 20px;\n    background-color: #d7dff7;\n    border-radius: 4px 4px 4px 4px;\n    z-index: 2;\n    position: relative;\n    left: -13px;\n    text-align: center;\n    font-family: 'Roboto', sans-serif;\n    color: #515151;\n    font-size: 14px;\n    padding-top: 2px;\n}\n.awayTeampoint[data-v-9b4c6c58] {\n    min-width: 28px;\n    height: 20px;\n    background-color: #d7dff7;\n    border-radius: 4px 4px 4px 4px;\n    z-index: 2;\n    position: relative;\n    left: 15px;\n    text-align: center;\n    font-family: 'Roboto', sans-serif;\n    color: #515151;\n    font-size: 14px;\n    padding-top: 2px;\n}\n.clock[data-v-9b4c6c58] {\n    background-color: #ffffff;\n    border-radius: 4px 4px 4px 4px;\n    height: 21px;\n    z-index: 2;\n    position: relative;\n    left: -8px;\n    text-align: center;\n    font-family: 'Roboto', sans-serif;\n    color: #515151;\n    font-size: 14px;\n    padding-top: 2px;\n}\n.timeline ul li[data-v-9b4c6c58] {\n    font-family: 'Roboto', sans-serif;\n    color: #515151;\n    font-size: 12px;\n    height: auto;\n    transition: 0.3s all linear;\n}\n.timeline ul li .homeTeamcontent[data-v-9b4c6c58] {\n    width: 50%;\n    padding: 0 0;\n    background-color: #ffffff;\n}\n.timeline ul li .awayTeamcontent[data-v-9b4c6c58] {\n    width: 50%;\n    padding: 0 10px 0;\n    background-color: #ffffff;\n}\n.timeline ul li .homeTeamcontent p[data-v-9b4c6c58] {\n    padding: 0 40px;\n    margin-top: 0;\n    text-align: right;\n    width: 100%;\n}\n.timeline ul li .awayTeamcontent p[data-v-9b4c6c58] {\n    padding: 0 0 0 40px;\n    margin-top: 0;\n    text-align: left;\n    width: 100%;\n}\n.awayTeam[data-v-9b4c6c58] {\n    margin-bottom: 20px;\n    list-style-type: none;\n    display: flex;\n    flex-direction: row-reverse;\n    align-items: center;\n}\n.timeline[data-v-9b4c6c58]::before {\n    content: \"\";\n    position: absolute;\n    height: 100%;\n    width: 1px;\n    left: 50%;\n    background-color: #d7dff7;\n}\n", ""]);
 
 // exports
 
@@ -38427,25 +38429,36 @@ var render = function() {
           _c(
             "transition-group",
             { attrs: { name: "new_event" } },
-            _vm._l(_vm.events, function(event) {
-              return _c(
-                "li",
-                {
-                  key: event.elapsed + event.type,
-                  class: _vm.whichteam(event)
-                },
-                [
-                  _c("div", { class: _vm.whichteam(event) + "content" }, [
-                    _c("p", [_vm._v(_vm._s(_vm.notice(event)))])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { class: _vm.whichteam(event) + "point" }, [
-                    _vm._v(_vm._s(event.elapsed))
-                  ])
-                ]
-              )
-            }),
-            0
+            [
+              _c("li", { key: _vm.timer, staticClass: "homeTeam" }, [
+                _c("div", { staticClass: "homeTeamcontent" }),
+                _c("div", { staticClass: "clock" }, [
+                  _c("img", { attrs: { src: "images/start_timer.png" } })
+                ])
+              ]),
+              _vm._v(" "),
+              _vm._l(_vm.events, function(event) {
+                return _c(
+                  "li",
+                  {
+                    key: event.elapsed + event.type,
+                    class: _vm.whichteam(event)
+                  },
+                  [
+                    _c("div", { class: _vm.whichteam(event) + "content" }, [
+                      _c("p", {
+                        domProps: { innerHTML: _vm._s(_vm.notice(event)) }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { class: _vm.whichteam(event) + "point" }, [
+                      _vm._v(_vm._s(event.elapsed + "'"))
+                    ])
+                  ]
+                )
+              })
+            ],
+            2
           )
         ],
         1

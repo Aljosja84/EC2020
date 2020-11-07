@@ -177,15 +177,15 @@
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\xampp\htdocs\EC2020\public\js" />
-      <recent name="C:\xampp\htdocs\EC2020\resources\views\layouts" />
-      <recent name="C:\xampp\htdocs\EC2020\public\images" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\xampp\htdocs\EC2020\public\images" />
       <recent name="C:\xampp\htdocs\EC2020\public\images\country_flags" />
       <recent name="C:\xampp\htdocs\EC2020\public\js" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\EC2020\public\images" />
+      <recent name="C:\xampp\htdocs\EC2020\public\js" />
+      <recent name="C:\xampp\htdocs\EC2020\resources\views\layouts" />
     </key>
   </component>
   <component name="RunManager">
@@ -249,7 +249,8 @@
       <workItem from="1604533242327" duration="435000" />
       <workItem from="1604587117849" duration="6212000" />
       <workItem from="1604671404533" duration="6604000" />
-      <workItem from="1604689525503" duration="6820000" />
+      <workItem from="1604689525503" duration="7137000" />
+      <workItem from="1604755256533" duration="7839000" />
     </task>
     <servers />
   </component>
