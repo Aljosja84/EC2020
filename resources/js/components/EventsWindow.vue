@@ -10,10 +10,10 @@
                         </div>
                         <div v-bind:class="whichteam(event) + 'point'">{{ event.elapsed + '\'' }}</div>
                     </li>
+                    <li v-show="fulltime" class="homeTeam" v-bind:key="fulltime"><div class="homeTeamcontent"></div><div class="fulltime">FULL TIME</div></li>
                 </transition-group>
             </ul>
         </div>
-        <button @click="addEvent">add goal Ziyech</button>
     </div>
 </template>
 
@@ -22,71 +22,75 @@
         name: "EventsWindow",
         data() {
             return {
-                events: [{player: "P. van Hooijdonk", elapsed: "12", type: "Goal", teamid: 35}, {player: "D. Neres", elapsed: "22", type:"Yellow Card", teamid: 17}],
+                events: [],
                 answer: '',
                 hometeam: '',
                 awayteam: '',
-                timer: 'start'
+                timer: 'start',
+                fulltime: false
             }
         },
         methods: {
             addEvent() {
-                this.events= [{player: "P. van Hooijdonk", elapsed: "12", type: "Goal", teamid: 35}, {player: "D. Neres", elapsed: "22", type:"Yellow Card", teamid: 17},{player: "W. Sneijder", elapsed: "88", type: "Card", detail: "Red Card", teamid: 35},{player: "L. Schone", elapsed: "89", type: "Yellow Card", teamid: 17}];
-            },
+                this.fulltime = true;
+                },
 
             notice(e) {
-                if(e.teamid === this.hometeam) {
+                if(e.team_id === this.hometeam) {
                     switch(e.type) {
                         case "Goal":
-                            var answer = e.player + ' <img src="images/goal.png" />';
+                            var answer = '<span style="color: #CCC">(' + e.detail + ')</span> ' + e.player + ' <img src="images/goal.png" />';
                             break;
                         case "Card":
                             var card = e.detail === 'Yellow Card' ? ' <img src="images/yellowcard.png" />' : ' <img src="images/redcard.png" />';
                             var answer = e.player + card;
                             break;
-                        case "Red Card":
-                            var answer = e.player + ' <img src="images/yellowcard.png" />';
+                        case "subst":
+                            var answer = '<span style="color: #CCC">' + e.assist + '</span> <img src="images/sub_off.png" /> ' + e.player + ' <img src="images/sub_on.png" />';
                             break;
                     }
                 }   else {
                     switch(e.type) {
                         case "Goal":
-                            var answer = e.player + " goal";
+                            var answer = '<img src="images/goal.png" /> ' + e.player + ' <span style="color: #CCC">(' + e.detail + ')</span>';
                             break;
-                        case "Yellow Card":
-                            var answer = e.player + " yellow card";
+                        case "Card":
+                            var card = e.detail === 'Yellow Card' ? '<img src="images/yellowcard.png" /> ' : '<img src="images/redcard.png" /> ';
+                            var answer = card + e.player;
+                            break;
+                        case "subst":
+                            var answer = '<img src="images/sub_on.png" /> ' + e.player + ' <img src="images/sub_off.png" /><span style="color: #CCC"> ' + e.assist + '</span>';
                             break;
                     }
                 }
-
                 return answer;
             },
 
             whichteam(e) {
-                return e.teamid === this.hometeam ? 'homeTeam' : 'awayTeam';
+                return e.team_id === this.hometeam ? 'homeTeam' : 'awayTeam';
             }
 
         },
-        mounted() {
-            this.hometeam = 35;
-            this.awayteam = 17;
-            console.log(this.events.length);
-        }
+        computed: {
 
-        /*
+        },
+
         mounted() {
-            axios.get("https://v2.api-football.com/fixtures/id/592143", {
+            axios.get("https://v2.api-football.com/fixtures/id/573209", {
                 headers: {
                     "X-RapidAPI-Host": "api-football-v1.p.rapidapi.com",
                     "X-RapidAPI-Key": "b1ae4a3fca89630148dadaa295a0b5b7"
                 }
             }).then((response)=> {
                 this.events = response.data.api.fixtures[0].events;
+                this.fulltime = response.data.api.fixtures[0].statusShort === 'FT';
+                this.hometeam = response.data.api.fixtures[0].homeTeam.team_id;
+                this.awayteam = response.data.api.fixtures[0].awayTeam.team_id;
                 console.log(response);
             })
         }
 
-        */
+
     }
 </script>
 
@@ -106,6 +110,7 @@
         height: 588px;
         background-color: #ffffff;
         padding: 25px 0 0 5px;
+        overflow-y: auto;
     }
 
     .timeline {
@@ -165,10 +170,24 @@
         padding-top: 2px;
     }
 
+    .fulltime {
+        background-color: #ffffff;
+        border-radius: 4px 4px 4px 4px;
+        height: 21px;
+        z-index: 2;
+        position: relative;
+        left: -25px;
+        text-align: center;
+        color: #515151;
+        font-size: 14px;
+        line-height: 14px;
+        padding-top: 0;
+    }
+
     .timeline ul li {
         font-family: 'Roboto', sans-serif;
         color: #515151;
-        font-size: 12px;
+        font-size: 13px;
         height: auto;
         transition: 0.3s all linear;
     }

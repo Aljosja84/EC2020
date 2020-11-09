@@ -6,10 +6,12 @@
             <!--
             <example-component></example-component>
             -->
-            <!--
+
             <loading-bar></loading-bar>
-            -->
+
+            <!--
             <events-window></events-window>
+            -->
         </div>
     </div>
 @endsection

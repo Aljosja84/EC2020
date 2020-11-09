@@ -22,7 +22,10 @@
     <list default="true" id="cf82d037-ce69-45df-857e-a29fb7732fae" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/EventsWindow.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/EventsWindow.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/LoadingBar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/matchStats.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/game.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/game.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -250,7 +253,8 @@
       <workItem from="1604587117849" duration="6212000" />
       <workItem from="1604671404533" duration="6604000" />
       <workItem from="1604689525503" duration="7137000" />
-      <workItem from="1604755256533" duration="7839000" />
+      <workItem from="1604755256533" duration="10210000" />
+      <workItem from="1604922940126" duration="15409000" />
     </task>
     <servers />
   </component>
@@ -279,6 +283,10 @@
     </state>
     <state x="744" y="495" key="FileChooserDialogImpl/0.0.2560.1410/2560.0.1050.1650@0.0.2560.1410" timestamp="1604611779210" />
     <state x="2865" y="579" key="FileChooserDialogImpl/0.0.2560.1410/2560.0.1050.1650@2560.0.1050.1650" timestamp="1604690066043" />
+    <state x="2560" y="0" key="FileDocumentManager.FileCacheConflict" timestamp="1604934492578">
+      <screen x="2560" y="0" width="1050" height="1650" />
+    </state>
+    <state x="2560" y="0" key="FileDocumentManager.FileCacheConflict/0.0.2560.1410/2560.0.1050.1650@2560.0.1050.1650" timestamp="1604934492578" />
     <state width="1007" height="483" key="GridCell.Tab.0.bottom" timestamp="1601413506139">
       <screen x="2560" y="0" width="1050" height="1650" />
     </state>
