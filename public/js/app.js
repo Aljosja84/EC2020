@@ -2141,6 +2141,68 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2177,13 +2239,42 @@ __webpack_require__.r(__webpack_exports__);
       offside_away: 0,
       total_offside: 0,
       offside_home_bar: 0,
-      offside_away_bar: 0
+      offside_away_bar: 0,
+
+      /* possession -------------------*/
+      possession_home: "0%",
+      possession_away: "0%",
+
+      /* yellow cards -----------------*/
+      yellow_cards_home: 0,
+      yellow_cards_away: 0,
+      total_yellow_cards: 0,
+      yellow_cards_home_bar: 0,
+      yellow_cards_away_bar: 0,
+
+      /* red cards --------------------*/
+      red_cards_home: 0,
+      red_cards_away: 0,
+      total_red_cards: 0,
+      red_cards_home_bar: 0,
+      red_cards_away_bar: 0,
+
+      /* total passes ------------------*/
+      passes_home: 0,
+      passes_away: 0,
+      total_passes: 0,
+      passes_home_bar: 0,
+      passes_away_bar: 0,
+
+      /* pass accuracy -----------------*/
+      passes_acc_home: "0%",
+      passes_acc_away: "0%"
     };
   },
   mounted: function mounted() {
     var _this = this;
 
-    axios.get("https://v2.api-football.com/fixtures/id/573209", {
+    axios.get("https://v2.api-football.com/fixtures/id/157193", {
       headers: {
         "X-RapidAPI-Host": "api-football-v1.p.rapidapi.com",
         "X-RapidAPI-Key": "b1ae4a3fca89630148dadaa295a0b5b7"
@@ -2192,42 +2283,118 @@ __webpack_require__.r(__webpack_exports__);
       var stats = response.data.api.fixtures[0].statistics;
       /* total shots -----------------------------------------------------------------------------------*/
 
-      _this.total_shots_home = parseInt(stats["Total Shots"].home);
-      _this.total_shots_away = parseInt(stats["Total Shots"].away);
+      _this.total_shots_home = parseInt(stats["Total Shots"].home) || 0;
+      _this.total_shots_away = parseInt(stats["Total Shots"].away) || 0;
       _this.total_shots = _this.total_shots_home + _this.total_shots_away;
       _this.total_shots_home_bar = Math.round(_this.total_shots_home / _this.total_shots * 100);
       _this.total_shots_away_bar = Math.round(_this.total_shots_away / _this.total_shots * 100);
       /* shots on goal ---------------------------------------------------------------------------------*/
 
-      _this.shots_on_goal_home = parseInt(stats["Shots on Goal"].home);
-      _this.shots_on_goal_away = parseInt(stats["Shots on Goal"].away);
+      _this.shots_on_goal_home = parseInt(stats["Shots on Goal"].home) || 0;
+      _this.shots_on_goal_away = parseInt(stats["Shots on Goal"].away) || 0;
       _this.total_shots_on_goal = _this.shots_on_goal_home + _this.shots_on_goal_away;
       _this.shots_on_goal_home_bar = Math.round(_this.shots_on_goal_home / _this.total_shots_on_goal * 100);
       _this.shots_on_goal_away_bar = Math.round(_this.shots_on_goal_away / _this.total_shots_on_goal * 100);
       /* fouls -----------------------------------------------------------------------------------------*/
 
-      _this.fouls_home = parseInt(stats["Fouls"].home);
-      _this.fouls_away = parseInt(stats["Fouls"].away);
+      _this.fouls_home = parseInt(stats["Fouls"].home) || 0;
+      _this.fouls_away = parseInt(stats["Fouls"].away) || 0;
       _this.total_fouls = _this.fouls_home + _this.fouls_away;
       _this.fouls_home_bar = Math.round(_this.fouls_home / _this.total_fouls * 100);
       _this.fouls_away_bar = Math.round(_this.fouls_away / _this.total_fouls * 100);
       /* corner kicks ----------------------------------------------------------------------------------*/
 
-      _this.corners_home = parseInt(stats["Corner Kicks"].home);
-      _this.corners_away = parseInt(stats["Corner Kicks"].away);
+      _this.corners_home = parseInt(stats["Corner Kicks"].home) || 0;
+      _this.corners_away = parseInt(stats["Corner Kicks"].away) || 0;
       _this.total_corners = _this.corners_home + _this.corners_away;
       _this.corners_home_bar = Math.round(_this.corners_home / _this.total_corners * 100);
       _this.corners_away_bar = Math.round(_this.corners_away / _this.total_corners * 100);
       /* offsides --------------------------------------------------------------------------------------*/
 
-      _this.offside_home = parseInt(stats["Offsides"].home);
-      _this.offside_away = parseInt(stats["Offsides"].away);
+      _this.offside_home = parseInt(stats["Offsides"].home) || 0;
+      _this.offside_away = parseInt(stats["Offsides"].away) || 0;
       _this.total_offside = _this.offside_home + _this.offside_away;
       _this.offside_home_bar = Math.round(_this.offside_home / _this.total_offside * 100);
       _this.offside_away_bar = Math.round(_this.offside_away / _this.total_offside * 100);
+      /* ball possession -------------------------------------------------------------------------------*/
+
+      _this.possession_home = stats["Ball Possession"].home || 0;
+      _this.possession_away = stats["Ball Possession"].away || 0;
+      /* yellow cards ----------------------------------------------------------------------------------*/
+
+      _this.yellow_cards_home = parseInt(stats["Yellow Cards"].home) || 0;
+      _this.yellow_cards_away = parseInt(stats["Yellow Cards"].away) || 0;
+      _this.total_yellow_cards = _this.yellow_cards_home + _this.yellow_cards_away;
+      _this.yellow_cards_home_bar = Math.round(_this.yellow_cards_home / _this.total_yellow_cards * 100);
+      _this.yellow_cards_away_bar = Math.round(_this.yellow_cards_away / _this.total_yellow_cards * 100);
+      /* red cards -------------------------------------------------------------------------------------*/
+
+      _this.red_cards_home = parseInt(stats["Red Cards"].home) || 0;
+      _this.red_cards_away = parseInt(stats["Red Cards"].away) || 0;
+      _this.total_red_cards = _this.red_cards_home + _this.red_cards_away;
+      _this.red_cards_home_bar = Math.round(_this.red_cards_home / _this.total_red_cards * 100);
+      _this.red_cards_away_bar = Math.round(_this.red_cards_away / _this.total_red_cards * 100);
+      /* total passes ----------------------------------------------------------------------------------*/
+
+      _this.passes_home = parseInt(stats["Total passes"].home) || 0;
+      _this.passes_away = parseInt(stats["Total passes"].away) || 0;
+      _this.total_passes = _this.passes_home + _this.passes_away;
+      _this.passes_home_bar = Math.round(_this.passes_home / _this.total_passes * 100);
+      _this.passes_away_bar = Math.round(_this.passes_away / _this.total_passes * 100);
+      /* pass accuracy ---------------------------------------------------------------------------------*/
+
+      _this.passes_acc_home = stats["Passes %"].home || 0;
+      _this.passes_acc_away = stats["Passes %"].away || 0;
     });
   },
-  name: "LoadingBar"
+  name: "matchStats"
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/possessionStats.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/possessionStats.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "possessionStats",
+  props: ['stats'],
+  data: function data() {
+    return {
+      possession_home: '0',
+      possession_away: '0'
+    };
+  },
+  watch: {
+    stats: {
+      immediate: true,
+      handler: function handler() {
+        this.possession_home = this.stats["Ball Possession"].home;
+        this.possession_away = this.stats["Ball Possession"].away;
+      }
+    }
+  }
 });
 
 /***/ }),
@@ -6683,7 +6850,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.bar_container[data-v-c5ce9d36] {\n    padding-bottom: 5px;\n}\n.stats_num_left[data-v-c5ce9d36] {\n    float:left;\n    color: #a3a7ab;\n    font-family: 'Roboto', sans-serif;\n    font-size: 13px;\n    width: 35px;\n    text-align: center;\n    padding: 0 15px 0 0;\n    margin-left: 10px\n}\n.stats_num_right[data-v-c5ce9d36] {\n    float: right;\n    color: #a3a7ab;\n    font-family: 'Roboto', sans-serif;\n    font-size: 13px;\n    width: 35px;\n    text-align: center;\n    padding: 0 0 0 15px;\n    margin-right: 10px;\n}\n.stats_title[data-v-c5ce9d36] {\n    font-family: 'Oswald', sans-serif;\n    font-size: 13px;\n    text-align: center;\n    margin: 10px 0 2px 0;\n}\n#title[data-v-c5ce9d36] {\n    font-family: 'Oswald', sans-serif;\n    font-size: 24px;\n    text-transform: uppercase;\n    text-align: center;\n    color: #515151;\n    border-bottom: 1px solid #CCC;\n}\n#stats_container[data-v-c5ce9d36] {\n    width: 1100px;\n    height: 475px;\n    background-color: white;\n}\n.progress_left[data-v-c5ce9d36] {\n    float: left;\n    width: 505px;\n    position: relative;\n    -webkit-animation: all 0.4s ease;\n            animation: all 0.4s ease;\n    background-color: #ebf0f6;\n    margin-top: 5px;\n}\n.progress_right[data-v-c5ce9d36] {\n    float: right;\n    width: 505px;\n    position: relative;\n    -webkit-animation: all 0.4s ease;\n            animation: all 0.4s ease;\n    background-color: #ebf0f6;\n    margin-top: 5px;\n}\n.bar_left[data-v-c5ce9d36] {\n    border-radius: 3px 0 0 3px;\n    float:right;\n    height: 6px;\n    background-color: #00acff;\n    width: 30%;\n    transition: all 0.5s ease-out;\n}\n.bar_right[data-v-c5ce9d36] {\n    border-radius: 0 3px 3px 0;\n    float:left;\n    height: 6px;\n    background-color: #8bed00;\n    width: 30%;\n    transition: all 0.5s ease-out;\n}\n", ""]);
+exports.push([module.i, "\n.bar_container[data-v-c5ce9d36] {\n    padding-bottom: 10px;\n}\n.stats_num_left[data-v-c5ce9d36] {\n    float:left;\n    color: #a3a7ab;\n    font-family: 'Roboto', sans-serif;\n    font-size: 13px;\n    width: 35px;\n    text-align: center;\n    padding: 0 15px 0 0;\n    margin-left: 10px\n}\n.stats_num_right[data-v-c5ce9d36] {\n    float: right;\n    color: #a3a7ab;\n    font-family: 'Roboto', sans-serif;\n    font-size: 13px;\n    width: 35px;\n    text-align: center;\n    padding: 0 0 0 15px;\n    margin-right: 10px;\n}\n.stats_title[data-v-c5ce9d36] {\n    font-family: 'Oswald', sans-serif;\n    font-size: 13px;\n    text-align: center;\n    margin: 10px 0 2px 0;\n}\n#title[data-v-c5ce9d36] {\n    font-family: 'Oswald', sans-serif;\n    font-size: 24px;\n    text-transform: uppercase;\n    text-align: center;\n    color: #515151;\n    border-bottom: 1px solid #CCC;\n}\n#stats_container[data-v-c5ce9d36] {\n    width: 1100px;\n    height: 475px;\n    background-color: white;\n}\n.progress_left[data-v-c5ce9d36] {\n    float: left;\n    width: 505px;\n    position: relative;\n    -webkit-animation: all 0.4s ease;\n            animation: all 0.4s ease;\n    background-color: #ebf0f6;\n    margin-top: 5px;\n}\n.progress_right[data-v-c5ce9d36] {\n    float: right;\n    width: 505px;\n    position: relative;\n    -webkit-animation: all 0.4s ease;\n            animation: all 0.4s ease;\n    background-color: #ebf0f6;\n    margin-top: 5px;\n}\n.bar_left[data-v-c5ce9d36] {\n    border-radius: 3px 0 0 3px;\n    float:right;\n    height: 6px;\n    background-color: #00acff;\n    width: 30%;\n    transition: all 0.5s ease-out;\n}\n.bar_right[data-v-c5ce9d36] {\n    border-radius: 0 3px 3px 0;\n    float:left;\n    height: 6px;\n    background-color: #8bed00;\n    width: 30%;\n    transition: all 0.5s ease-out;\n}\n", ""]);
 
 // exports
 
@@ -38788,6 +38955,186 @@ var render = function() {
           style: { width: _vm.offside_away_bar + "%" }
         })
       ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "stats_title" }, [_vm._v("ball possession")]),
+    _vm._v(" "),
+    _c("div", { staticClass: "bar_container" }, [
+      _c("div", { staticClass: "stats_num_left" }, [
+        _vm._v(_vm._s(_vm.possession_home))
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "progress_left" }, [
+        _c("div", {
+          staticClass: "bar_left",
+          style: { width: _vm.possession_home }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "stats_num_right" }, [
+        _vm._v(_vm._s(_vm.possession_away))
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "progress_right" }, [
+        _c("div", {
+          staticClass: "bar_right",
+          style: { width: _vm.possession_away }
+        })
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "stats_title" }, [_vm._v("yellow cards")]),
+    _vm._v(" "),
+    _c("div", { staticClass: "bar_container" }, [
+      _c("div", { staticClass: "stats_num_left" }, [
+        _vm._v(_vm._s(_vm.yellow_cards_home))
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "progress_left" }, [
+        _c("div", {
+          staticClass: "bar_left",
+          style: { width: _vm.yellow_cards_home_bar + "%" }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "stats_num_right" }, [
+        _vm._v(_vm._s(_vm.yellow_cards_away))
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "progress_right" }, [
+        _c("div", {
+          staticClass: "bar_right",
+          style: { width: _vm.yellow_cards_away_bar + "%" }
+        })
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "stats_title" }, [_vm._v("red cards")]),
+    _vm._v(" "),
+    _c("div", { staticClass: "bar_container" }, [
+      _c("div", { staticClass: "stats_num_left" }, [
+        _vm._v(_vm._s(_vm.red_cards_home))
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "progress_left" }, [
+        _c("div", {
+          staticClass: "bar_left",
+          style: { width: _vm.red_cards_home_bar + "%" }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "stats_num_right" }, [
+        _vm._v(_vm._s(_vm.red_cards_away))
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "progress_right" }, [
+        _c("div", {
+          staticClass: "bar_right",
+          style: { width: _vm.red_cards_away_bar + "%" }
+        })
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "stats_title" }, [_vm._v("total passes")]),
+    _vm._v(" "),
+    _c("div", { staticClass: "bar_container" }, [
+      _c("div", { staticClass: "stats_num_left" }, [
+        _vm._v(_vm._s(_vm.passes_home))
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "progress_left" }, [
+        _c("div", {
+          staticClass: "bar_left",
+          style: { width: _vm.passes_home_bar + "%" }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "stats_num_right" }, [
+        _vm._v(_vm._s(_vm.passes_away))
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "progress_right" }, [
+        _c("div", {
+          staticClass: "bar_right",
+          style: { width: _vm.passes_away_bar + "%" }
+        })
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "stats_title" }, [_vm._v("pass accuracy")]),
+    _vm._v(" "),
+    _c("div", { staticClass: "bar_container" }, [
+      _c("div", { staticClass: "stats_num_left" }, [
+        _vm._v(_vm._s(_vm.passes_acc_home))
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "progress_left" }, [
+        _c("div", {
+          staticClass: "bar_left",
+          style: { width: _vm.passes_acc_home }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "stats_num_right" }, [
+        _vm._v(_vm._s(_vm.passes_acc_away))
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "progress_right" }, [
+        _c("div", {
+          staticClass: "bar_right",
+          style: { width: _vm.passes_acc_away }
+        })
+      ])
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/possessionStats.vue?vue&type=template&id=362f5bfc&":
+/*!******************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/possessionStats.vue?vue&type=template&id=362f5bfc& ***!
+  \******************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "stats_title" }, [_vm._v("possession")]),
+    _vm._v(" "),
+    _c("div", { staticClass: "bar_container" }, [
+      _c("div", { staticClass: "stats_num_left" }, [
+        _vm._v(_vm._s(_vm.possession_home))
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "progress_left" }, [
+        _c("div", {
+          staticClass: "bar_left",
+          style: { width: _vm.possession_home }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "stats_num_right" }, [
+        _vm._v(_vm._s(_vm.possession_away))
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "progress_right" }, [
+        _c("div", {
+          staticClass: "bar_right",
+          style: { width: _vm.possession_away }
+        })
+      ])
     ])
   ])
 }
@@ -50988,6 +51335,7 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 Vue.component('example-component', __webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue")["default"]);
 Vue.component('loading-bar', __webpack_require__(/*! ./components/matchStats */ "./resources/js/components/matchStats.vue")["default"]);
 Vue.component('events-window', __webpack_require__(/*! ./components/EventsWindow */ "./resources/js/components/EventsWindow.vue")["default"]);
+Vue.component('possession', __webpack_require__(/*! ./components/possessionStats */ "./resources/js/components/possessionStats.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -51282,6 +51630,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_matchStats_vue_vue_type_template_id_c5ce9d36_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_matchStats_vue_vue_type_template_id_c5ce9d36_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/possessionStats.vue":
+/*!*****************************************************!*\
+  !*** ./resources/js/components/possessionStats.vue ***!
+  \*****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _possessionStats_vue_vue_type_template_id_362f5bfc___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./possessionStats.vue?vue&type=template&id=362f5bfc& */ "./resources/js/components/possessionStats.vue?vue&type=template&id=362f5bfc&");
+/* harmony import */ var _possessionStats_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./possessionStats.vue?vue&type=script&lang=js& */ "./resources/js/components/possessionStats.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _possessionStats_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _possessionStats_vue_vue_type_template_id_362f5bfc___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _possessionStats_vue_vue_type_template_id_362f5bfc___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/possessionStats.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/possessionStats.vue?vue&type=script&lang=js&":
+/*!******************************************************************************!*\
+  !*** ./resources/js/components/possessionStats.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_possessionStats_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./possessionStats.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/possessionStats.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_possessionStats_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/possessionStats.vue?vue&type=template&id=362f5bfc&":
+/*!************************************************************************************!*\
+  !*** ./resources/js/components/possessionStats.vue?vue&type=template&id=362f5bfc& ***!
+  \************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_possessionStats_vue_vue_type_template_id_362f5bfc___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./possessionStats.vue?vue&type=template&id=362f5bfc& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/possessionStats.vue?vue&type=template&id=362f5bfc&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_possessionStats_vue_vue_type_template_id_362f5bfc___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_possessionStats_vue_vue_type_template_id_362f5bfc___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

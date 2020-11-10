@@ -22,6 +22,7 @@ window.Vue = require('vue');
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('loading-bar', require('./components/matchStats').default);
 Vue.component('events-window', require('./components/EventsWindow').default);
+Vue.component('possession', require('./components/possessionStats').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

@@ -23,9 +23,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/EventsWindow.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/EventsWindow.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/LoadingBar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/matchStats.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/game.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/game.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/matchStats.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/matchStats.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -175,7 +173,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="ignore.virus.scanning.warn.message" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../LaravelForum" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
@@ -254,7 +252,9 @@
       <workItem from="1604671404533" duration="6604000" />
       <workItem from="1604689525503" duration="7137000" />
       <workItem from="1604755256533" duration="10210000" />
-      <workItem from="1604922940126" duration="15409000" />
+      <workItem from="1604922940126" duration="18306000" />
+      <workItem from="1605010154004" duration="10168000" />
+      <workItem from="1605029254309" duration="4656000" />
     </task>
     <servers />
   </component>
@@ -278,11 +278,11 @@
       <screen x="2560" y="0" width="1050" height="1650" />
     </state>
     <state x="2843" y="628" key="#com.intellij.fileTypes.FileTypeChooser/0.0.2560.1410/2560.0.1050.1650@2560.0.1050.1650" timestamp="1604004887069" />
-    <state x="2865" y="579" key="FileChooserDialogImpl" timestamp="1604690066043">
+    <state x="2865" y="579" key="FileChooserDialogImpl" timestamp="1605010218166">
       <screen x="2560" y="0" width="1050" height="1650" />
     </state>
     <state x="744" y="495" key="FileChooserDialogImpl/0.0.2560.1410/2560.0.1050.1650@0.0.2560.1410" timestamp="1604611779210" />
-    <state x="2865" y="579" key="FileChooserDialogImpl/0.0.2560.1410/2560.0.1050.1650@2560.0.1050.1650" timestamp="1604690066043" />
+    <state x="2865" y="579" key="FileChooserDialogImpl/0.0.2560.1410/2560.0.1050.1650@2560.0.1050.1650" timestamp="1605010218166" />
     <state x="2560" y="0" key="FileDocumentManager.FileCacheConflict" timestamp="1604934492578">
       <screen x="2560" y="0" width="1050" height="1650" />
     </state>
@@ -307,9 +307,9 @@
     </state>
     <state width="2517" height="404" key="GridCell.Tab.0.right/0.0.2560.1410/2560.0.1050.1650@0.0.2560.1410" timestamp="1601412914599" />
     <state width="1007" height="483" key="GridCell.Tab.0.right/0.0.2560.1410/2560.0.1050.1650@2560.0.1050.1650" timestamp="1601413506139" />
-    <state x="2748" y="377" width="672" height="678" key="search.everywhere.popup" timestamp="1604097290647">
+    <state x="2748" y="377" width="672" height="678" key="search.everywhere.popup" timestamp="1605021502364">
       <screen x="2560" y="0" width="1050" height="1650" />
     </state>
-    <state x="2748" y="377" width="672" height="678" key="search.everywhere.popup/0.0.2560.1410/2560.0.1050.1650@2560.0.1050.1650" timestamp="1604097290647" />
+    <state x="2748" y="377" width="672" height="678" key="search.everywhere.popup/0.0.2560.1410/2560.0.1050.1650@2560.0.1050.1650" timestamp="1605021502364" />
   </component>
 </project>

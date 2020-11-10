@@ -62,6 +62,68 @@
             </div>
         </div>
 
+        <div class="stats_title">ball possession</div>
+        <div class="bar_container">
+            <div class="stats_num_left">{{ possession_home }}</div>
+            <div class="progress_left">
+                <div class="bar_left" :style="{width: possession_home}"></div>
+            </div>
+            <div class="stats_num_right">{{ possession_away }}</div>
+            <div class="progress_right">
+                <div class="bar_right" :style="{width: possession_away}"></div>
+            </div>
+        </div>
+
+        <div class="stats_title">yellow cards</div>
+        <div class="bar_container">
+            <div class="stats_num_left">{{ yellow_cards_home }}</div>
+            <div class="progress_left">
+                <div class="bar_left" :style="{width: yellow_cards_home_bar+'%'}"></div>
+            </div>
+            <div class="stats_num_right">{{ yellow_cards_away }}</div>
+            <div class="progress_right">
+                <div class="bar_right" :style="{width: yellow_cards_away_bar+'%'}"></div>
+            </div>
+        </div>
+
+        <div class="stats_title">red cards</div>
+        <div class="bar_container">
+            <div class="stats_num_left">{{ red_cards_home }}</div>
+            <div class="progress_left">
+                <div class="bar_left" :style="{width: red_cards_home_bar+'%'}"></div>
+            </div>
+            <div class="stats_num_right">{{ red_cards_away }}</div>
+            <div class="progress_right">
+                <div class="bar_right" :style="{width: red_cards_away_bar+'%'}"></div>
+            </div>
+        </div>
+
+        <div class="stats_title">total passes</div>
+        <div class="bar_container">
+            <div class="stats_num_left">{{ passes_home }}</div>
+            <div class="progress_left">
+                <div class="bar_left" :style="{width: passes_home_bar+'%'}"></div>
+            </div>
+            <div class="stats_num_right">{{ passes_away }}</div>
+            <div class="progress_right">
+                <div class="bar_right" :style="{width: passes_away_bar+'%'}"></div>
+            </div>
+        </div>
+
+        <div class="stats_title">pass accuracy</div>
+        <div class="bar_container">
+            <div class="stats_num_left">{{ passes_acc_home }}</div>
+            <div class="progress_left">
+                <div class="bar_left" :style="{width: passes_acc_home}"></div>
+            </div>
+            <div class="stats_num_right">{{ passes_acc_away }}</div>
+            <div class="progress_right">
+                <div class="bar_right" :style="{width: passes_acc_away}"></div>
+            </div>
+        </div>
+
+
+
     </div>
 </template>
 
@@ -99,11 +161,36 @@
                 total_offside: 0,
                 offside_home_bar: 0,
                 offside_away_bar: 0,
+                /* possession -------------------*/
+                possession_home: "0%",
+                possession_away: "0%",
+                /* yellow cards -----------------*/
+                yellow_cards_home: 0,
+                yellow_cards_away: 0,
+                total_yellow_cards: 0,
+                yellow_cards_home_bar: 0,
+                yellow_cards_away_bar: 0,
+                /* red cards --------------------*/
+                red_cards_home: 0,
+                red_cards_away: 0,
+                total_red_cards: 0,
+                red_cards_home_bar: 0,
+                red_cards_away_bar: 0,
+                /* total passes ------------------*/
+                passes_home: 0,
+                passes_away: 0,
+                total_passes: 0,
+                passes_home_bar: 0,
+                passes_away_bar: 0,
+                /* pass accuracy -----------------*/
+                passes_acc_home: "0%",
+                passes_acc_away: "0%",
             }
         },
 
+
         mounted() {
-            axios.get("https://v2.api-football.com/fixtures/id/573209", {
+            axios.get("https://v2.api-football.com/fixtures/id/157193", {
                 headers: {
                     "X-RapidAPI-Host": "api-football-v1.p.rapidapi.com",
                     "X-RapidAPI-Key": "b1ae4a3fca89630148dadaa295a0b5b7"
@@ -111,46 +198,70 @@
             }).then((response)=> {
                 var stats = response.data.api.fixtures[0].statistics;
                 /* total shots -----------------------------------------------------------------------------------*/
-                this.total_shots_home = parseInt(stats["Total Shots"].home);
-                this.total_shots_away = parseInt(stats["Total Shots"].away);
+                this.total_shots_home = parseInt(stats["Total Shots"].home) || 0;
+                this.total_shots_away = parseInt(stats["Total Shots"].away) || 0;
                 this.total_shots = this.total_shots_home + this.total_shots_away;
                 this.total_shots_home_bar = Math.round(this.total_shots_home/this.total_shots * 100);
                 this.total_shots_away_bar = Math.round(this.total_shots_away/this.total_shots * 100);
                 /* shots on goal ---------------------------------------------------------------------------------*/
-                this.shots_on_goal_home = parseInt(stats["Shots on Goal"].home);
-                this.shots_on_goal_away = parseInt(stats["Shots on Goal"].away);
+                this.shots_on_goal_home = parseInt(stats["Shots on Goal"].home) || 0;
+                this.shots_on_goal_away = parseInt(stats["Shots on Goal"].away) || 0;
                 this.total_shots_on_goal = this.shots_on_goal_home + this.shots_on_goal_away;
                 this.shots_on_goal_home_bar = Math.round(this.shots_on_goal_home/this.total_shots_on_goal * 100);
                 this.shots_on_goal_away_bar = Math.round(this.shots_on_goal_away/this.total_shots_on_goal * 100);
                 /* fouls -----------------------------------------------------------------------------------------*/
-                this.fouls_home = parseInt(stats["Fouls"].home);
-                this.fouls_away = parseInt(stats["Fouls"].away);
+                this.fouls_home = parseInt(stats["Fouls"].home) || 0;
+                this.fouls_away = parseInt(stats["Fouls"].away) || 0;
                 this.total_fouls = this.fouls_home + this.fouls_away;
                 this.fouls_home_bar = Math.round(this.fouls_home/this.total_fouls * 100);
                 this.fouls_away_bar = Math.round(this.fouls_away/this.total_fouls * 100);
                 /* corner kicks ----------------------------------------------------------------------------------*/
-                this.corners_home = parseInt(stats["Corner Kicks"].home);
-                this.corners_away = parseInt(stats["Corner Kicks"].away);
+                this.corners_home = parseInt(stats["Corner Kicks"].home) || 0;
+                this.corners_away = parseInt(stats["Corner Kicks"].away) || 0;
                 this.total_corners = this.corners_home + this.corners_away;
                 this.corners_home_bar = Math.round(this.corners_home/this.total_corners * 100);
                 this.corners_away_bar = Math.round(this.corners_away/this.total_corners * 100);
                 /* offsides --------------------------------------------------------------------------------------*/
-                this.offside_home = parseInt(stats["Offsides"].home);
-                this.offside_away = parseInt(stats["Offsides"].away);
+                this.offside_home = parseInt(stats["Offsides"].home) || 0;
+                this.offside_away = parseInt(stats["Offsides"].away) || 0;
                 this.total_offside = this.offside_home + this.offside_away;
                 this.offside_home_bar = Math.round(this.offside_home/this.total_offside * 100);
                 this.offside_away_bar = Math.round(this.offside_away/this.total_offside * 100);
-            })
+                /* ball possession -------------------------------------------------------------------------------*/
+                this.possession_home = stats["Ball Possession"].home || 0;
+                this.possession_away = stats["Ball Possession"].away || 0;
+                /* yellow cards ----------------------------------------------------------------------------------*/
+                this.yellow_cards_home = parseInt(stats["Yellow Cards"].home) || 0;
+                this.yellow_cards_away = parseInt(stats["Yellow Cards"].away) || 0;
+                this.total_yellow_cards = this.yellow_cards_home + this.yellow_cards_away;
+                this.yellow_cards_home_bar = Math.round(this.yellow_cards_home/this.total_yellow_cards * 100);
+                this.yellow_cards_away_bar = Math.round(this.yellow_cards_away/this.total_yellow_cards * 100);
+                /* red cards -------------------------------------------------------------------------------------*/
+                this.red_cards_home = parseInt(stats["Red Cards"].home) || 0;
+                this.red_cards_away = parseInt(stats["Red Cards"].away) || 0;
+                this.total_red_cards = this.red_cards_home + this.red_cards_away;
+                this.red_cards_home_bar = Math.round(this.red_cards_home/this.total_red_cards * 100);
+                this.red_cards_away_bar = Math.round(this.red_cards_away/this.total_red_cards * 100);
+                /* total passes ----------------------------------------------------------------------------------*/
+                this.passes_home = parseInt(stats["Total passes"].home) || 0;
+                this.passes_away = parseInt(stats["Total passes"].away) || 0;
+                this.total_passes = this.passes_home + this.passes_away;
+                this.passes_home_bar = Math.round(this.passes_home/this.total_passes * 100);
+                this.passes_away_bar = Math.round(this.passes_away/this.total_passes * 100);
+                /* pass accuracy ---------------------------------------------------------------------------------*/
+                this.passes_acc_home = stats["Passes %"].home || 0;
+                this.passes_acc_away = stats["Passes %"].away || 0;
+            });
         },
 
 
-        name: "LoadingBar"
+        name: "matchStats"
     }
 </script>
 
 <style scoped>
     .bar_container {
-        padding-bottom: 5px;
+        padding-bottom: 10px;
     }
     .stats_num_left {
         float:left;
