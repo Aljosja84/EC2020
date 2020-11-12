@@ -20,9 +20,13 @@ window.Vue = require('vue');
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-Vue.component('loading-bar', require('./components/matchStats').default);
+Vue.component('stats-win', require('./components/matchStats').default);
 Vue.component('events-window', require('./components/EventsWindow').default);
 Vue.component('possession', require('./components/possessionStats').default);
+Vue.component('lineup', require('./components/lineup').default);
+Vue.component('test', require('./components/test').default);
+Vue.component('scoreboard', require('./components/scoreboard').default);
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

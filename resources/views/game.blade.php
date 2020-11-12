@@ -3,15 +3,25 @@
 @section('content')
     <div class="games_div_container">
         <div id="app">
-            <!--
-            <example-component></example-component>
-            -->
+            <div class="scoreboard_comp">
+                <scoreboard></scoreboard>
+            </div>
 
-            <loading-bar></loading-bar>
+            <div class="lineup_home">
+                <lineup team="hometeam"></lineup>
+            </div>
 
-            <!--
-            <events-window></events-window>
-            -->
+            <div class="event_win">
+                <events-window></events-window>
+            </div>
+
+            <div class="lineup_away">
+                <lineup team="awayteam"></lineup>
+            </div>
+
+            <div class="stats_win">
+               <stats-win></stats-win>
+            </div>
         </div>
     </div>
 @endsection

@@ -1,5 +1,5 @@
 <template>
-    <div id="stats_container">
+    <div class="stats_container">
         <div id="title">game statistics</div>
 
         <div class="stats_title">total shots</div>
@@ -190,7 +190,7 @@
 
 
         mounted() {
-            axios.get("https://v2.api-football.com/fixtures/id/157193", {
+            axios.get("https://v2.api-football.com/fixtures/id/573209", {
                 headers: {
                     "X-RapidAPI-Host": "api-football-v1.p.rapidapi.com",
                     "X-RapidAPI-Key": "b1ae4a3fca89630148dadaa295a0b5b7"
@@ -262,6 +262,7 @@
 <style scoped>
     .bar_container {
         padding-bottom: 10px;
+        background-color: white;
     }
     .stats_num_left {
         float:left;
@@ -301,10 +302,10 @@
         border-bottom: 1px solid #CCC;
     }
 
-    #stats_container {
+    .stats_container {
         width: 1100px;
         height: 475px;
-        background-color: white;
+        background-color: #ffffff;
     }
 
     .progress_left {

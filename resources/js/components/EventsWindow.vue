@@ -106,7 +106,7 @@
     }
 
     #events_container {
-        width: 588px;
+        width: 586px;
         height: 588px;
         background-color: #ffffff;
         padding: 25px 0 0 5px;
