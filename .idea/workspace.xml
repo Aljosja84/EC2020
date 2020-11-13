@@ -21,11 +21,12 @@
   <component name="ChangeListManager">
     <list default="true" id="cf82d037-ce69-45df-857e-a29fb7732fae" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/ec2020.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/ec2020.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/EventsWindow.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/EventsWindow.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/lineup.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/lineup.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/matchStats.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/matchStats.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/scoreboard.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/scoreboard.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/game.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/game.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -261,6 +262,7 @@
       <workItem from="1605094701865" duration="11747000" />
       <workItem from="1605186024135" duration="7759000" />
       <workItem from="1605197748847" duration="8483000" />
+      <workItem from="1605272411518" duration="5897000" />
     </task>
     <servers />
   </component>

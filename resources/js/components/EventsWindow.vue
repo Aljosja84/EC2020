@@ -76,7 +76,7 @@
         },
 
         mounted() {
-            axios.get("https://v2.api-football.com/fixtures/id/573209", {
+            axios.get("httpsss://v2.api-football.com/fixtures/id/65", {
                 headers: {
                     "X-RapidAPI-Host": "api-football-v1.p.rapidapi.com",
                     "X-RapidAPI-Key": "b1ae4a3fca89630148dadaa295a0b5b7"

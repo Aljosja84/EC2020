@@ -16,6 +16,9 @@
         name: "lineup",
 
         props: {
+            data: {
+                type: Object,
+            },
             team: {
                 type: String,
             }
@@ -29,20 +32,19 @@
             }
         },
 
-        mounted() {
-            axios.get("https://v2.api-football.com/fixtures/id/573209", {
-                headers: {
-                    "X-RapidAPI-Host": "api-football-v1.p.rapidapi.com",
-                    "X-RapidAPI-Key": "b1ae4a3fca89630148dadaa295a0b5b7"
+        watch: {
+            data: {
+                immediate: true,
+                handler() {
+                    var team = this.team === 'hometeam' ? this.data.homeTeam.team_name : this.data.awayTeam.team_name;
+                    this.players = this.data.lineups[team].startXI;
+                    this.subs = this.data.lineups[team].substitutes;
+                    this.coach = this.data.lineups[team].coach;
+
                 }
-            }).then((response)=> {
-                var data = response.data.api.fixtures[0];
-                var team = this.team === 'hometeam' ? data.homeTeam.team_name : data.awayTeam.team_name;
-                this.players = data.lineups[team].startXI;
-                this.subs = data.lineups[team].substitutes;
-                this.coach = data.lineups[team].coach;
-            })
-        }
+            }
+        },
+
     }
 </script>
 

@@ -26,6 +26,7 @@ Vue.component('possession', require('./components/possessionStats').default);
 Vue.component('lineup', require('./components/lineup').default);
 Vue.component('test', require('./components/test').default);
 Vue.component('scoreboard', require('./components/scoreboard').default);
+Vue.component('match', require('./components/Match').default);
 
 
 /**
