@@ -17,7 +17,7 @@
 
         props: {
             data: {
-                type: Object,
+                default: 'loading...'
             },
             team: {
                 type: String,
@@ -28,19 +28,18 @@
             return {
                 players: [],
                 subs: [],
-                coach: String,
+                coach: '',
             }
         },
 
         watch: {
             data: {
-                immediate: true,
+                immediate: false,
                 handler() {
                     var team = this.team === 'hometeam' ? this.data.homeTeam.team_name : this.data.awayTeam.team_name;
                     this.players = this.data.lineups[team].startXI;
                     this.subs = this.data.lineups[team].substitutes;
                     this.coach = this.data.lineups[team].coach;
-
                 }
             }
         },

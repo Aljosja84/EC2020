@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="scoreboard_comp">
-            <scoreboard></scoreboard>
+            <scoreboard :data="data"></scoreboard>
         </div>
 
         <div class="lineup_home">
@@ -9,7 +9,7 @@
         </div>
 
         <div class="event_win">
-            <events-window></events-window>
+            <events-window :data="data"></events-window>
         </div>
 
         <div class="lineup_away">
@@ -17,7 +17,7 @@
         </div>
 
         <div class="stats_win">
-            <stats-win></stats-win>
+            <stats-win :data="data"></stats-win>
         </div>
     </div>
 </template>
@@ -41,11 +41,8 @@
                 }
             }).then((response)=> {
                 this.data = response.data.api.fixtures[0];
-
             })
         }
-
-
     }
 </script>
 

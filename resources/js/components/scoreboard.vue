@@ -21,6 +21,12 @@
     export default {
         name: "scoreboard",
 
+        props: {
+            data: {
+                default: 'loading...'
+            }
+        },
+
         data() {
             return {
                 home_team: '',
@@ -33,24 +39,21 @@
                 status: ''
             }
         },
-        mounted() {
-            axios.get("httpsss://v2.api-football.com/fixtures/id/65", {
-                headers: {
-                    "X-RapidAPI-Host": "api-football-v1.p.rapidapi.com",
-                    "X-RapidAPI-Key": "b1ae4a3fca89630148dadaa295a0b5b7"
-                }
-            }).then((response)=> {
-                var data = response.data.api.fixtures[0]
 
-                this.home_team = data.homeTeam.team_name;
-                this.away_team = data.awayTeam.team_name;
-                this.home_img = data.homeTeam.logo;
-                this.away_img = data.awayTeam.logo;
-                this.home_score = data.goalsHomeTeam;
-                this.away_score = data.goalsAwayTeam;
-                this.elapsed = data.elapsed;
-                this.status = data.status;
-            })
+        watch: {
+            data: {
+                immediate: false,
+                handler() {
+                    this.home_team = this.data.homeTeam.team_name;
+                    this.away_team = this.data.awayTeam.team_name;
+                    this.home_img = this.data.homeTeam.logo;
+                    this.away_img = this.data.awayTeam.logo;
+                    this.home_score = this.data.goalsHomeTeam;
+                    this.away_score = this.data.goalsAwayTeam;
+                    this.elapsed = this.data.elapsed;
+                    this.status = this.data.status;
+                }
+            }
         }
     }
 </script>

@@ -20,6 +20,13 @@
 <script>
     export default {
         name: "EventsWindow",
+
+        props: {
+            data: {
+                default: 'loading...'
+            }
+        },
+
         data() {
             return {
                 events: [],
@@ -30,6 +37,7 @@
                 fulltime: false
             }
         },
+
         methods: {
             addEvent() {
                 this.fulltime = true;
@@ -46,7 +54,7 @@
                             var answer = e.player + card;
                             break;
                         case "subst":
-                            var answer = '<span style="color: #CCC">' + e.assist + '</span> <img src="images/sub_off.png" /> ' + e.player + ' <img src="images/sub_on.png" />';
+                            var answer = '<span style="color: #CCC">' + e.player + '</span> <img src="images/sub_off.png" /> ' + e.assist + ' <img src="images/sub_on.png" />';
                             break;
                     }
                 }   else {
@@ -59,7 +67,7 @@
                             var answer = card + e.player;
                             break;
                         case "subst":
-                            var answer = '<img src="images/sub_on.png" /> ' + e.player + ' <img src="images/sub_off.png" /><span style="color: #CCC"> ' + e.assist + '</span>';
+                            var answer = '<img src="images/sub_on.png" /> ' + e.assist + ' <img src="images/sub_off.png" /><span style="color: #CCC"> ' + e.player + '</span>';
                             break;
                     }
                 }
@@ -75,22 +83,17 @@
 
         },
 
-        mounted() {
-            axios.get("httpsss://v2.api-football.com/fixtures/id/65", {
-                headers: {
-                    "X-RapidAPI-Host": "api-football-v1.p.rapidapi.com",
-                    "X-RapidAPI-Key": "b1ae4a3fca89630148dadaa295a0b5b7"
+        watch: {
+            data: {
+                immediate: false,
+                handler() {
+                    this.events = this.data.events;
+                    this.fulltime =this.data.statusShort === 'FT';
+                    this.hometeam = this.data.homeTeam.team_id;
+                    this.awayteam = this.data.awayTeam.team_id;
                 }
-            }).then((response)=> {
-                this.events = response.data.api.fixtures[0].events;
-                this.fulltime = response.data.api.fixtures[0].statusShort === 'FT';
-                this.hometeam = response.data.api.fixtures[0].homeTeam.team_id;
-                this.awayteam = response.data.api.fixtures[0].awayTeam.team_id;
-                console.log(response);
-            })
+            }
         }
-
-
     }
 </script>
 

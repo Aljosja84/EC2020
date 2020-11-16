@@ -1929,6 +1929,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "EventsWindow",
+  props: {
+    data: {
+      "default": 'loading...'
+    }
+  },
   data: function data() {
     return {
       events: [],
@@ -1956,7 +1961,7 @@ __webpack_require__.r(__webpack_exports__);
             break;
 
           case "subst":
-            var answer = '<span style="color: #CCC">' + e.assist + '</span> <img src="images/sub_off.png" /> ' + e.player + ' <img src="images/sub_on.png" />';
+            var answer = '<span style="color: #CCC">' + e.player + '</span> <img src="images/sub_off.png" /> ' + e.assist + ' <img src="images/sub_on.png" />';
             break;
         }
       } else {
@@ -1971,7 +1976,7 @@ __webpack_require__.r(__webpack_exports__);
             break;
 
           case "subst":
-            var answer = '<img src="images/sub_on.png" /> ' + e.player + ' <img src="images/sub_off.png" /><span style="color: #CCC"> ' + e.assist + '</span>';
+            var answer = '<img src="images/sub_on.png" /> ' + e.assist + ' <img src="images/sub_off.png" /><span style="color: #CCC"> ' + e.player + '</span>';
             break;
         }
       }
@@ -1983,21 +1988,16 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   computed: {},
-  mounted: function mounted() {
-    var _this = this;
-
-    axios.get("httpsss://v2.api-football.com/fixtures/id/65", {
-      headers: {
-        "X-RapidAPI-Host": "api-football-v1.p.rapidapi.com",
-        "X-RapidAPI-Key": "b1ae4a3fca89630148dadaa295a0b5b7"
+  watch: {
+    data: {
+      immediate: false,
+      handler: function handler() {
+        this.events = this.data.events;
+        this.fulltime = this.data.statusShort === 'FT';
+        this.hometeam = this.data.homeTeam.team_id;
+        this.awayteam = this.data.awayTeam.team_id;
       }
-    }).then(function (response) {
-      _this.events = response.data.api.fixtures[0].events;
-      _this.fulltime = response.data.api.fixtures[0].statusShort === 'FT';
-      _this.hometeam = response.data.api.fixtures[0].homeTeam.team_id;
-      _this.awayteam = response.data.api.fixtures[0].awayTeam.team_id;
-      console.log(response);
-    });
+    }
   }
 });
 
@@ -2148,7 +2148,7 @@ __webpack_require__.r(__webpack_exports__);
   name: "lineup",
   props: {
     data: {
-      type: Object
+      "default": 'loading...'
     },
     team: {
       type: String
@@ -2158,12 +2158,12 @@ __webpack_require__.r(__webpack_exports__);
     return {
       players: [],
       subs: [],
-      coach: String
+      coach: ''
     };
   },
   watch: {
     data: {
-      immediate: true,
+      immediate: false,
       handler: function handler() {
         var team = this.team === 'hometeam' ? this.data.homeTeam.team_name : this.data.awayTeam.team_name;
         this.players = this.data.lineups[team].startXI;
@@ -2315,6 +2315,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    data: {
+      "default": 'loading...'
+    }
+  },
   data: function data() {
     return {
       /* total shots ---------------- */
@@ -2382,83 +2387,78 @@ __webpack_require__.r(__webpack_exports__);
       passes_acc_away: "0%"
     };
   },
-  mounted: function mounted() {
-    var _this = this;
+  watch: {
+    data: {
+      immediate: false,
+      handler: function handler() {
+        var stats = this.data.statistics;
+        /* total shots -----------------------------------------------------------------------------------*/
 
-    axios.get("httpsss://v2.api-football.com/fixtures/id/65", {
-      headers: {
-        "X-RapidAPI-Host": "api-football-v1.p.rapidapi.com",
-        "X-RapidAPI-Key": "b1ae4a3fca89630148dadaa295a0b5b7"
+        this.total_shots_home = parseInt(stats["Total Shots"].home) || 0;
+        this.total_shots_away = parseInt(stats["Total Shots"].away) || 0;
+        this.total_shots = this.total_shots_home + this.total_shots_away;
+        this.total_shots_home_bar = Math.round(this.total_shots_home / this.total_shots * 100);
+        this.total_shots_away_bar = Math.round(this.total_shots_away / this.total_shots * 100);
+        /* shots on goal ---------------------------------------------------------------------------------*/
+
+        this.shots_on_goal_home = parseInt(stats["Shots on Goal"].home) || 0;
+        this.shots_on_goal_away = parseInt(stats["Shots on Goal"].away) || 0;
+        this.total_shots_on_goal = this.shots_on_goal_home + this.shots_on_goal_away;
+        this.shots_on_goal_home_bar = Math.round(this.shots_on_goal_home / this.total_shots_on_goal * 100);
+        this.shots_on_goal_away_bar = Math.round(this.shots_on_goal_away / this.total_shots_on_goal * 100);
+        /* fouls -----------------------------------------------------------------------------------------*/
+
+        this.fouls_home = parseInt(stats["Fouls"].home) || 0;
+        this.fouls_away = parseInt(stats["Fouls"].away) || 0;
+        this.total_fouls = this.fouls_home + this.fouls_away;
+        this.fouls_home_bar = Math.round(this.fouls_home / this.total_fouls * 100);
+        this.fouls_away_bar = Math.round(this.fouls_away / this.total_fouls * 100);
+        /* corner kicks ----------------------------------------------------------------------------------*/
+
+        this.corners_home = parseInt(stats["Corner Kicks"].home) || 0;
+        this.corners_away = parseInt(stats["Corner Kicks"].away) || 0;
+        this.total_corners = this.corners_home + this.corners_away;
+        this.corners_home_bar = Math.round(this.corners_home / this.total_corners * 100);
+        this.corners_away_bar = Math.round(this.corners_away / this.total_corners * 100);
+        /* offsides --------------------------------------------------------------------------------------*/
+
+        this.offside_home = parseInt(stats["Offsides"].home) || 0;
+        this.offside_away = parseInt(stats["Offsides"].away) || 0;
+        this.total_offside = this.offside_home + this.offside_away;
+        this.offside_home_bar = Math.round(this.offside_home / this.total_offside * 100);
+        this.offside_away_bar = Math.round(this.offside_away / this.total_offside * 100);
+        /* ball possession -------------------------------------------------------------------------------*/
+
+        this.possession_home = stats["Ball Possession"].home || 0;
+        this.possession_away = stats["Ball Possession"].away || 0;
+        /* yellow cards ----------------------------------------------------------------------------------*/
+
+        this.yellow_cards_home = parseInt(stats["Yellow Cards"].home) || 0;
+        this.yellow_cards_away = parseInt(stats["Yellow Cards"].away) || 0;
+        this.total_yellow_cards = this.yellow_cards_home + this.yellow_cards_away;
+        this.yellow_cards_home_bar = Math.round(this.yellow_cards_home / this.total_yellow_cards * 100);
+        this.yellow_cards_away_bar = Math.round(this.yellow_cards_away / this.total_yellow_cards * 100);
+        /* red cards -------------------------------------------------------------------------------------*/
+
+        this.red_cards_home = parseInt(stats["Red Cards"].home) || 0;
+        this.red_cards_away = parseInt(stats["Red Cards"].away) || 0;
+        this.total_red_cards = this.red_cards_home + this.red_cards_away;
+        this.red_cards_home_bar = Math.round(this.red_cards_home / this.total_red_cards * 100);
+        this.red_cards_away_bar = Math.round(this.red_cards_away / this.total_red_cards * 100);
+        /* total passes ----------------------------------------------------------------------------------*/
+
+        this.passes_home = parseInt(stats["Total passes"].home) || 0;
+        this.passes_away = parseInt(stats["Total passes"].away) || 0;
+        this.total_passes = this.passes_home + this.passes_away;
+        this.passes_home_bar = Math.round(this.passes_home / this.total_passes * 100);
+        this.passes_away_bar = Math.round(this.passes_away / this.total_passes * 100);
+        /* pass accuracy ---------------------------------------------------------------------------------*/
+
+        this.passes_acc_home = stats["Passes %"].home || 0;
+        this.passes_acc_away = stats["Passes %"].away || 0;
       }
-    }).then(function (response) {
-      var stats = response.data.api.fixtures[0].statistics;
-      /* total shots -----------------------------------------------------------------------------------*/
-
-      _this.total_shots_home = parseInt(stats["Total Shots"].home) || 0;
-      _this.total_shots_away = parseInt(stats["Total Shots"].away) || 0;
-      _this.total_shots = _this.total_shots_home + _this.total_shots_away;
-      _this.total_shots_home_bar = Math.round(_this.total_shots_home / _this.total_shots * 100);
-      _this.total_shots_away_bar = Math.round(_this.total_shots_away / _this.total_shots * 100);
-      /* shots on goal ---------------------------------------------------------------------------------*/
-
-      _this.shots_on_goal_home = parseInt(stats["Shots on Goal"].home) || 0;
-      _this.shots_on_goal_away = parseInt(stats["Shots on Goal"].away) || 0;
-      _this.total_shots_on_goal = _this.shots_on_goal_home + _this.shots_on_goal_away;
-      _this.shots_on_goal_home_bar = Math.round(_this.shots_on_goal_home / _this.total_shots_on_goal * 100);
-      _this.shots_on_goal_away_bar = Math.round(_this.shots_on_goal_away / _this.total_shots_on_goal * 100);
-      /* fouls -----------------------------------------------------------------------------------------*/
-
-      _this.fouls_home = parseInt(stats["Fouls"].home) || 0;
-      _this.fouls_away = parseInt(stats["Fouls"].away) || 0;
-      _this.total_fouls = _this.fouls_home + _this.fouls_away;
-      _this.fouls_home_bar = Math.round(_this.fouls_home / _this.total_fouls * 100);
-      _this.fouls_away_bar = Math.round(_this.fouls_away / _this.total_fouls * 100);
-      /* corner kicks ----------------------------------------------------------------------------------*/
-
-      _this.corners_home = parseInt(stats["Corner Kicks"].home) || 0;
-      _this.corners_away = parseInt(stats["Corner Kicks"].away) || 0;
-      _this.total_corners = _this.corners_home + _this.corners_away;
-      _this.corners_home_bar = Math.round(_this.corners_home / _this.total_corners * 100);
-      _this.corners_away_bar = Math.round(_this.corners_away / _this.total_corners * 100);
-      /* offsides --------------------------------------------------------------------------------------*/
-
-      _this.offside_home = parseInt(stats["Offsides"].home) || 0;
-      _this.offside_away = parseInt(stats["Offsides"].away) || 0;
-      _this.total_offside = _this.offside_home + _this.offside_away;
-      _this.offside_home_bar = Math.round(_this.offside_home / _this.total_offside * 100);
-      _this.offside_away_bar = Math.round(_this.offside_away / _this.total_offside * 100);
-      /* ball possession -------------------------------------------------------------------------------*/
-
-      _this.possession_home = stats["Ball Possession"].home || 0;
-      _this.possession_away = stats["Ball Possession"].away || 0;
-      /* yellow cards ----------------------------------------------------------------------------------*/
-
-      _this.yellow_cards_home = parseInt(stats["Yellow Cards"].home) || 0;
-      _this.yellow_cards_away = parseInt(stats["Yellow Cards"].away) || 0;
-      _this.total_yellow_cards = _this.yellow_cards_home + _this.yellow_cards_away;
-      _this.yellow_cards_home_bar = Math.round(_this.yellow_cards_home / _this.total_yellow_cards * 100);
-      _this.yellow_cards_away_bar = Math.round(_this.yellow_cards_away / _this.total_yellow_cards * 100);
-      /* red cards -------------------------------------------------------------------------------------*/
-
-      _this.red_cards_home = parseInt(stats["Red Cards"].home) || 0;
-      _this.red_cards_away = parseInt(stats["Red Cards"].away) || 0;
-      _this.total_red_cards = _this.red_cards_home + _this.red_cards_away;
-      _this.red_cards_home_bar = Math.round(_this.red_cards_home / _this.total_red_cards * 100);
-      _this.red_cards_away_bar = Math.round(_this.red_cards_away / _this.total_red_cards * 100);
-      /* total passes ----------------------------------------------------------------------------------*/
-
-      _this.passes_home = parseInt(stats["Total passes"].home) || 0;
-      _this.passes_away = parseInt(stats["Total passes"].away) || 0;
-      _this.total_passes = _this.passes_home + _this.passes_away;
-      _this.passes_home_bar = Math.round(_this.passes_home / _this.total_passes * 100);
-      _this.passes_away_bar = Math.round(_this.passes_away / _this.total_passes * 100);
-      /* pass accuracy ---------------------------------------------------------------------------------*/
-
-      _this.passes_acc_home = stats["Passes %"].home || 0;
-      _this.passes_acc_away = stats["Passes %"].away || 0;
-    });
-  },
-  name: "matchStats"
+    }
+  }
 });
 
 /***/ }),
@@ -2540,6 +2540,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "scoreboard",
+  props: {
+    data: {
+      "default": 'loading...'
+    }
+  },
   data: function data() {
     return {
       home_team: '',
@@ -2552,25 +2557,20 @@ __webpack_require__.r(__webpack_exports__);
       status: ''
     };
   },
-  mounted: function mounted() {
-    var _this = this;
-
-    axios.get("httpsss://v2.api-football.com/fixtures/id/65", {
-      headers: {
-        "X-RapidAPI-Host": "api-football-v1.p.rapidapi.com",
-        "X-RapidAPI-Key": "b1ae4a3fca89630148dadaa295a0b5b7"
+  watch: {
+    data: {
+      immediate: false,
+      handler: function handler() {
+        this.home_team = this.data.homeTeam.team_name;
+        this.away_team = this.data.awayTeam.team_name;
+        this.home_img = this.data.homeTeam.logo;
+        this.away_img = this.data.awayTeam.logo;
+        this.home_score = this.data.goalsHomeTeam;
+        this.away_score = this.data.goalsAwayTeam;
+        this.elapsed = this.data.elapsed;
+        this.status = this.data.status;
       }
-    }).then(function (response) {
-      var data = response.data.api.fixtures[0];
-      _this.home_team = data.homeTeam.team_name;
-      _this.away_team = data.awayTeam.team_name;
-      _this.home_img = data.homeTeam.logo;
-      _this.away_img = data.awayTeam.logo;
-      _this.home_score = data.goalsHomeTeam;
-      _this.away_score = data.goalsAwayTeam;
-      _this.elapsed = data.elapsed;
-      _this.status = data.status;
-    });
+    }
   }
 });
 
@@ -39174,7 +39174,12 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("div", { staticClass: "scoreboard_comp" }, [_c("scoreboard")], 1),
+    _c(
+      "div",
+      { staticClass: "scoreboard_comp" },
+      [_c("scoreboard", { attrs: { data: _vm.data } })],
+      1
+    ),
     _vm._v(" "),
     _c(
       "div",
@@ -39183,7 +39188,12 @@ var render = function() {
       1
     ),
     _vm._v(" "),
-    _c("div", { staticClass: "event_win" }, [_c("events-window")], 1),
+    _c(
+      "div",
+      { staticClass: "event_win" },
+      [_c("events-window", { attrs: { data: _vm.data } })],
+      1
+    ),
     _vm._v(" "),
     _c(
       "div",
@@ -39192,7 +39202,12 @@ var render = function() {
       1
     ),
     _vm._v(" "),
-    _c("div", { staticClass: "stats_win" }, [_c("stats-win")], 1)
+    _c(
+      "div",
+      { staticClass: "stats_win" },
+      [_c("stats-win", { attrs: { data: _vm.data } })],
+      1
+    )
   ])
 }
 var staticRenderFns = []
