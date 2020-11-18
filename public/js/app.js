@@ -1941,7 +1941,8 @@ __webpack_require__.r(__webpack_exports__);
       hometeam: '',
       awayteam: '',
       timer: 'start',
-      fulltime: false
+      fulltime: false,
+      priorSub: []
     };
   },
   methods: {
@@ -1961,7 +1962,7 @@ __webpack_require__.r(__webpack_exports__);
             break;
 
           case "subst":
-            var answer = '<span style="color: #CCC">' + e.player + '</span> <img src="images/sub_off.png" /> ' + e.assist + ' <img src="images/sub_on.png" />';
+            var answer = this.whichPlayerHome(e);
             break;
         }
       } else {
@@ -1976,7 +1977,7 @@ __webpack_require__.r(__webpack_exports__);
             break;
 
           case "subst":
-            var answer = '<img src="images/sub_on.png" /> ' + e.assist + ' <img src="images/sub_off.png" /><span style="color: #CCC"> ' + e.player + '</span>';
+            var answer = this.whichPlayerAway(e);
             break;
         }
       }
@@ -1985,6 +1986,55 @@ __webpack_require__.r(__webpack_exports__);
     },
     whichteam: function whichteam(e) {
       return e.team_id === this.hometeam ? 'homeTeam' : 'awayTeam';
+    },
+    whichPlayerHome: function whichPlayerHome(e) {
+      /* --- notice: the API I'm consuming forced me to have this workaround ------*/
+      // set teamname and the starting XI of that team
+      var teamname = e.teamName;
+      var team = this.fixture.lineups[teamname].startXI; // check if the event's player was in the starting XI
+      // if so, that player will be subbed off in 99% of the cases
+
+      for (var i = 0; i < team.length; ++i) {
+        if (team[i].player_id === e.player_id) {
+          // if the player was in the starting XI, set the subbed on player in the subbed list
+          // in case that player must also be subbed off due to injury or a coach's dismay
+          if (!this.priorSub.includes(e.assist_id)) {
+            this.priorSub.push(e.assist_id);
+          }
+
+          return '<span style="color: #CCC">' + e.player + '</span> <img src="images/sub_off.png" /> ' + e.assist + ' <img src="images/sub_on.png" />';
+        }
+      } // check if the subbed player made a sub already
+
+
+      if (this.priorSub.includes(e.player_id)) {
+        return '<span style="color: #CCC">' + e.player + '</span> <img src="images/sub_off.png" /> ' + e.assist + ' <img src="images/sub_on.png" />';
+      }
+
+      return '<span style="color: #CCC">' + e.assist + '</span> <img src="images/sub_off.png" /> ' + e.player + ' <img src="images/sub_on.png" />';
+    },
+    whichPlayerAway: function whichPlayerAway(e) {
+      // set teamname and the starting XI of that team
+      var teamname = e.teamName;
+      var team = this.fixture.lineups[teamname].startXI; // check if the event's player was in the starting XI
+      // if so, that player will be subbed off in 99% of the cases
+
+      for (var i = 0; i < team.length; ++i) {
+        if (team[i].player_id === e.player_id) {
+          if (!this.priorSub.includes(e.assist_id)) {
+            this.priorSub.push(e.assist_id);
+          }
+
+          return '<img src="images/sub_on.png" /> ' + e.assist + ' <img src="images/sub_off.png" /><span style="color: #CCC"> ' + e.player + '</span>';
+        }
+      } // check if the subbed player made a sub already
+
+
+      if (this.priorSub.includes(e.player_id)) {
+        return '<img src="images/sub_on.png" /> ' + e.assist + ' <img src="images/sub_off.png" /><span style="color: #CCC"> ' + e.player + '</span>';
+      }
+
+      return '<img src="images/sub_on.png" /> ' + e.player + ' <img src="images/sub_off.png" /><span style="color: #CCC"> ' + e.assist + '</span>';
     }
   },
   computed: {},
@@ -1992,6 +2042,7 @@ __webpack_require__.r(__webpack_exports__);
     data: {
       immediate: false,
       handler: function handler() {
+        this.fixture = this.data;
         this.events = this.data.events;
         this.fulltime = this.data.statusShort === 'FT';
         this.hometeam = this.data.homeTeam.team_id;

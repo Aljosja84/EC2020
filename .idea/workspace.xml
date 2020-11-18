@@ -23,10 +23,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/EventsWindow.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/EventsWindow.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Match.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Match.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/lineup.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/lineup.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/matchStats.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/matchStats.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/scoreboard.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/scoreboard.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/game.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/game.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -182,15 +178,16 @@
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\EC2020\public\images\country_flags" />
+      <recent name="C:\xampp\htdocs\EC2020\public\images" />
+      <recent name="C:\xampp\htdocs\EC2020\public\js" />
+      <recent name="C:\xampp\htdocs\EC2020\resources\views\layouts" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\xampp\htdocs\EC2020\public\images" />
       <recent name="C:\xampp\htdocs\EC2020\public\images\country_flags" />
       <recent name="C:\xampp\htdocs\EC2020\public\js" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\xampp\htdocs\EC2020\public\images" />
-      <recent name="C:\xampp\htdocs\EC2020\public\js" />
-      <recent name="C:\xampp\htdocs\EC2020\resources\views\layouts" />
     </key>
   </component>
   <component name="RunManager">
@@ -266,6 +263,8 @@
       <workItem from="1605310633241" duration="1311000" />
       <workItem from="1605382892450" duration="2865000" />
       <workItem from="1605555028975" duration="5306000" />
+      <workItem from="1605567036782" duration="874000" />
+      <workItem from="1605619432237" duration="18089000" />
     </task>
     <servers />
   </component>
@@ -322,9 +321,9 @@
       <screen x="2560" y="0" width="1050" height="1650" />
     </state>
     <state x="2920" y="748" key="NewPhpFileDialog/0.0.2560.1410/2560.0.1050.1650@2560.0.1050.1650" timestamp="1605197911083" />
-    <state x="2748" y="377" width="672" height="678" key="search.everywhere.popup" timestamp="1605192712837">
+    <state x="2748" y="377" width="672" height="678" key="search.everywhere.popup" timestamp="1605652927945">
       <screen x="2560" y="0" width="1050" height="1650" />
     </state>
-    <state x="2748" y="377" width="672" height="678" key="search.everywhere.popup/0.0.2560.1410/2560.0.1050.1650@2560.0.1050.1650" timestamp="1605192712837" />
+    <state x="2748" y="377" width="672" height="678" key="search.everywhere.popup/0.0.2560.1410/2560.0.1050.1650@2560.0.1050.1650" timestamp="1605652927945" />
   </component>
 </project>
