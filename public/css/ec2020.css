@@ -9,6 +9,10 @@
     background: linear-gradient(180deg, rgba(91,169,241,1) 72%, rgba(255,255,255,1) 100%);
 }
 
+#app {
+    float: left;
+    padding: 0 0 0 9px;
+}
 .scoreboard_comp {
     padding: 0 0 8px 0;
 }
@@ -33,5 +37,15 @@
 
 .stats_win {
     clear: both;
+}
+
+/* ------------------------- stadium info ------------------------- */
+#stadium_info {
+    width: 267px;
+    height: 530px;
+    background-color: white;
+    display: inline-block;
+    float: left;
+    padding: 0 12px 0 20px;
 }
 

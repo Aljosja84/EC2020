@@ -84,6 +84,7 @@
                 // set teamname and the starting XI of that team
                 var teamname = e.teamName;
                 var team = this.fixture.lineups[teamname].startXI;
+
                 // check if the event's player was in the starting XI
                 // if so, that player will be subbed off in 99% of the cases
                 for (var i = 0; i < team.length; ++i) {

@@ -21,7 +21,7 @@
   <component name="ChangeListManager">
     <list default="true" id="cf82d037-ce69-45df-857e-a29fb7732fae" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/ec2020.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/ec2020.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/EventsWindow.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/EventsWindow.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/game.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/game.blade.php" afterDir="false" />
     </list>
@@ -178,16 +178,16 @@
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\xampp\htdocs\EC2020\public\images\country_flags" />
-      <recent name="C:\xampp\htdocs\EC2020\public\images" />
-      <recent name="C:\xampp\htdocs\EC2020\public\js" />
-      <recent name="C:\xampp\htdocs\EC2020\resources\views\layouts" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\xampp\htdocs\EC2020\public\images" />
       <recent name="C:\xampp\htdocs\EC2020\public\images\country_flags" />
       <recent name="C:\xampp\htdocs\EC2020\public\js" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\EC2020\public\images" />
+      <recent name="C:\xampp\htdocs\EC2020\public\images\country_flags" />
+      <recent name="C:\xampp\htdocs\EC2020\public\js" />
+      <recent name="C:\xampp\htdocs\EC2020\resources\views\layouts" />
     </key>
   </component>
   <component name="RunManager">
@@ -265,6 +265,8 @@
       <workItem from="1605555028975" duration="5306000" />
       <workItem from="1605567036782" duration="874000" />
       <workItem from="1605619432237" duration="18089000" />
+      <workItem from="1605718474940" duration="1465000" />
+      <workItem from="1605989462574" duration="3396000" />
     </task>
     <servers />
   </component>
