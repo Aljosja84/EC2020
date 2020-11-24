@@ -20,11 +20,14 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/games/{game}', [App\Http\Controllers\GamesController::class, 'show']);
 Route::get('/navi', function() {
     return view('navi');
 });
 Route::get('/main', function() {
     return view('main');
 });
+
+
 
 Route::get('/game', [App\Http\Controllers\HomeController::class, 'game'])->name('game');

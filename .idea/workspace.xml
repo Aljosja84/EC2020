@@ -22,8 +22,13 @@
     <list default="true" id="cf82d037-ce69-45df-857e-a29fb7732fae" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/css/ec2020.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/ec2020.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/mapbox.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/mapbox.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/EventsWindow.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/EventsWindow.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/game.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/game.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/navi.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/navi.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/main.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/main.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -266,7 +271,9 @@
       <workItem from="1605567036782" duration="874000" />
       <workItem from="1605619432237" duration="18089000" />
       <workItem from="1605718474940" duration="1465000" />
-      <workItem from="1605989462574" duration="3396000" />
+      <workItem from="1605989462574" duration="3645000" />
+      <workItem from="1606057755099" duration="2087000" />
+      <workItem from="1606141102177" duration="15940000" />
     </task>
     <servers />
   </component>
@@ -290,11 +297,11 @@
       <screen x="2560" y="0" width="1050" height="1650" />
     </state>
     <state x="2843" y="628" key="#com.intellij.fileTypes.FileTypeChooser/0.0.2560.1410/2560.0.1050.1650@2560.0.1050.1650" timestamp="1604004887069" />
-    <state x="2865" y="579" key="FileChooserDialogImpl" timestamp="1605198311519">
+    <state x="2865" y="579" key="FileChooserDialogImpl" timestamp="1606148171843">
       <screen x="2560" y="0" width="1050" height="1650" />
     </state>
     <state x="744" y="495" key="FileChooserDialogImpl/0.0.2560.1410/2560.0.1050.1650@0.0.2560.1410" timestamp="1604611779210" />
-    <state x="2865" y="579" key="FileChooserDialogImpl/0.0.2560.1410/2560.0.1050.1650@2560.0.1050.1650" timestamp="1605198311519" />
+    <state x="2865" y="579" key="FileChooserDialogImpl/0.0.2560.1410/2560.0.1050.1650@2560.0.1050.1650" timestamp="1606148171843" />
     <state x="2560" y="0" key="FileDocumentManager.FileCacheConflict" timestamp="1604934492578">
       <screen x="2560" y="0" width="1050" height="1650" />
     </state>
@@ -323,9 +330,9 @@
       <screen x="2560" y="0" width="1050" height="1650" />
     </state>
     <state x="2920" y="748" key="NewPhpFileDialog/0.0.2560.1410/2560.0.1050.1650@2560.0.1050.1650" timestamp="1605197911083" />
-    <state x="2748" y="377" width="672" height="678" key="search.everywhere.popup" timestamp="1605652927945">
+    <state x="2748" y="377" width="672" height="678" key="search.everywhere.popup" timestamp="1606148152110">
       <screen x="2560" y="0" width="1050" height="1650" />
     </state>
-    <state x="2748" y="377" width="672" height="678" key="search.everywhere.popup/0.0.2560.1410/2560.0.1050.1650@2560.0.1050.1650" timestamp="1605652927945" />
+    <state x="2748" y="377" width="672" height="678" key="search.everywhere.popup/0.0.2560.1410/2560.0.1050.1650@2560.0.1050.1650" timestamp="1606148152110" />
   </component>
 </project>

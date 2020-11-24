@@ -3,7 +3,7 @@
         <div class="timeline">
             <ul>
                 <transition-group name="new_event">
-                    <li class="homeTeam" v-bind:key="timer"><div class="homeTeamcontent"></div><div class="clock"><img src="images/start_timer.png"/></div></li>
+                    <li class="homeTeam" v-bind:key="timer"><div class="homeTeamcontent"></div><div class="clock"><img :src="'/images/start_timer.png'"></div></li>
                     <li v-for="event in events" v-bind:class="whichteam(event)" v-bind:key="event.elapsed+event.type">
                         <div v-bind:class="whichteam(event) + 'content'">
                             <p v-html="notice(event)"></p>
@@ -48,10 +48,10 @@
                 if(e.team_id === this.hometeam) {
                     switch(e.type) {
                         case "Goal":
-                            var answer = '<span style="color: #CCC">(' + e.detail + ')</span> ' + e.player + ' <img src="images/goal.png" />';
+                            var answer = '<span style="color: #CCC">(' + e.detail + ')</span> ' + e.player + ' <img src=' + assetBaseUrl + 'images/goal.png />';
                             break;
                         case "Card":
-                            var card = e.detail === 'Yellow Card' ? ' <img src="images/yellowcard.png" />' : ' <img src="images/redcard.png" />';
+                            var card = e.detail === 'Yellow Card' ? ' <img src=' + assetBaseUrl + 'images/yellowcard.png />' : ' <img src=' + assetBaseUrl + 'images/redcard.png />';
                             var answer = e.player + card;
                             break;
                         case "subst":

@@ -9,9 +9,9 @@
 
     <script defer src="{{ mix('js/app.js') }}"></script>
 
-    <link href="css/topmenu.css?v={{ time() }}" rel="stylesheet">
-    <link href="css/ec2020.css?v={{ time() }}" rel="stylesheet">
-
+    <!-- Styles -->
+    <link href={{ asset('css/topmenu.css') }} rel="stylesheet">
+    <link href={{ asset('css/ec2020.css') }} rel="stylesheet">
     <title>Euro 2020</title>
 
     <!-- Fonts -->
@@ -19,6 +19,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500&display=swap" rel="stylesheet">
 
     <!-- Styles -->
+    <script>
+        var assetBaseUrl = "{{ asset('') }}";
+    </script>
     <style>
 
 
@@ -30,20 +33,20 @@
         <div class="topmenu">
             <!-- EURO 2020 LOGO -->
             <div style="float: left">
-                <img class="logo" src="images/logo_euro2020.png">
+                <img class="logo" src={{ asset('images/logo_euro2020.png') }}>
             </div>
             <!-------------------->
 
             <div class="container">
                 <ul class="menu-main">
 
-                    <li id="sub_item_stadium"><a id="main_link" href="#">Stadiums</a><img src="images/arrow-drop-down.svg">
+                    <li id="sub_item_stadium"><a id="main_link" href="#">Stadiums</a><img src={{ asset('images/arrow-drop-down.svg') }}>
                         <div class="menu_sub_stadium">
                             <ul>
                                 @foreach(App\Models\Stadium::orderBy('city', 'asc')->get() as $stadium)
                                     <li id="stadium">
                                         <div class="stadium_link" id="{{ $stadium->abv }}">
-                                            <p><img src="images/{{ $stadium->url_menu }}"></p>
+                                            <p><img src="{{ asset('images/' . $stadium->url_menu) }}"></p>
                                             <p>{{ $stadium->city }}</p>
                                             <p>{{ $stadium->name }}</p>
                                             <p>seats {{ $stadium->capacity }}</p>
@@ -54,18 +57,18 @@
                         </div>
                     </li>
 
-                    <li id="sub_item_groups"><a id="main_link" href="#">Groups</a><img src="images/arrow-drop-down.svg">
+                    <li id="sub_item_groups"><a id="main_link" href="#">Groups</a><img src={{ asset('images/arrow-drop-down.svg') }}>
                         <div class="menu_sub_groups">
                             <ul>
                                 @foreach(App\Models\Group::orderBy('name', 'asc')->get() as $group)
                                 <li id="group">
                                     <div class="group_link">
-                                        <a href="#">group {{ $group->name }}</a><img src="images/arrow-drop-down.svg" style="float: right">
+                                        <a href="#">group {{ $group->name }}</a><img src={{ asset('images/arrow-drop-down.svg') }} style="float: right">
                                     </div>
                                     <div class="group_sub">
                                         <div class="group_sub_wrapper">
                                             @foreach($group->countries as $country)
-                                                <p><img src="images/country_flags/{{ $country->flag_url }}"/>{{ $country->name }}</p>
+                                                <p><img src="{{ asset('images/country_flags/' . $country->flag_url) }}"/>{{ $country->name }}</p>
                                             @endforeach
                                         </div>
                                     </div>
@@ -75,14 +78,14 @@
                         </div>
                     </li>
 
-                    <li id="sub_item_teams"><a id="main_link" href="#">Teams</a><img src="images/arrow-drop-down.svg">
+                    <li id="sub_item_teams"><a id="main_link" href="#">Teams</a><img src={{ asset('images/arrow-drop-down.svg') }}>
                         <div class="menu_sub_teams">
                             <ul>
                                 @foreach(App\Models\Country::orderBy('name', 'asc')->get() as $country)
                                     <li id="team">
                                         <a href="#">
                                             <div class="team_link">
-                                                <img src={{ $country->flag_url() }}>{{ $country->name }}
+                                                <img src="{{ asset($country->flag_url()) }}">{{ $country->name }}
                                             </div>
                                         </a>
                                     </li>
@@ -91,7 +94,7 @@
                         </div>
                     </li>
 
-                    <li id="sub_item_games"><a id="main_link" href="#">Games</a><img src="images/arrow-drop-down.svg">
+                    <li id="sub_item_games"><a id="main_link" href="#">Games</a><img src={{ asset('images/arrow-drop-down.svg') }}>
                         <div class="menu_sub_games">
                             <div class="calendar_container">
                                 <span id="calendar_title"><span class="june">june</span> / <span class="july">july</span> 2021</span>
@@ -150,11 +153,11 @@
                                                 <li class="{{ $fixturenum->count() > 3 ? 'gameday_four' : 'gameday_three' }}" id="{{ $fixture->id }}">
                                                     <span id="gameday_time">{{ $fixture->playtime() }}</span>
                                                     <span id="gameday_homeTeam">{{ $fixture->group_id == 0 ? $fixture->hometeam_name : $fixture->homeTeam->name }}</span>
-                                                    <span id="gameday_homeTeam_flag"><img src="{{ $fixture->group_id == 0 ? "images/country_flags/qualifier.png" : $fixture->homeTeam->flag_url() }}"></span>
+                                                    <span id="gameday_homeTeam_flag"><img src="{{ asset($fixture->group_id == 0 ? "images/country_flags/qualifier.png" : $fixture->homeTeam->flag_url()) }}"></span>
                                                     <span id="gameday_homeTeam_score">{{ $fixture->home_team_score }}</span>
                                                     <span id="hyphen">-</span>
                                                     <span id="gameday_awayTeam_score">{{ $fixture->away_team_score }}</span>
-                                                    <span id="gameday_awayTeam_flag"><img src="{{ $fixture->group_id == 0 ? "images/country_flags/qualifier.png" : $fixture->awayTeam->flag_url() }}"></span>
+                                                    <span id="gameday_awayTeam_flag"><img src="{{ asset($fixture->group_id == 0 ? "images/country_flags/qualifier.png" : $fixture->awayTeam->flag_url()) }}"></span>
                                                     <span id="gameday_awayTeam">{{ $fixture->group_id == 0 ? $fixture->awayteam_name : $fixture->awayTeam->name }}</span>
                                                     <p id="gameday_stadium">{{ $fixture->stadium->name }}, {{ $fixture->stadium->city }}</p>
                                                 </li>
@@ -170,7 +173,7 @@
         </div>
     </nav>
 </header>
-<script src="js/topmenu.js"></script>
+<script src={{ asset('js/topmenu.js') }}></script>
 @yield('content')
 
 

@@ -42,10 +42,45 @@
 /* ------------------------- stadium info ------------------------- */
 #stadium_info {
     width: 267px;
-    height: 530px;
+    min-height: 530px;
+    height: auto;
     background-color: white;
     display: inline-block;
     float: left;
-    padding: 0 12px 0 20px;
+    font-family: 'Roboto', sans-serif;
+    color: #515151;
+    font-size: 13px;
+    line-height: 21px;
+}
+
+.match_info {
+    font-family: 'Oswald', sans-serif;
+    font-size: 24px;
+    text-align: center;
+    text-transform: uppercase;
+    color: #515151;
+    width: auto;
+    padding-top: 15px;
+}
+
+.stad_pic {
+    height: 370px;
+    width: 100%;
+    background-color: #ffffff;
+    vertical-align: bottom;
+    padding: 130px 0 0 12px;
+}
+
+.stad_info_header {
+    display: inline-block;
+    width: 85px;
+    background-color: #ffffff;
+    padding: 0 0 0 12px;
+    font-weight: bold;
+}
+
+.stad_info_info {
+    width: auto;
+    background-color: #ffffff;
 }
 

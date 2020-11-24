@@ -525,7 +525,7 @@ geojson.features.forEach(function (marker) {
     var el = document.createElement('div');
     el.className = 'marker';
     el.style.backgroundImage =
-        'url(images/soccer_icon_small.png)';
+        'url(../images/soccer_icon_small.png)';
     el.style.width = marker.properties.iconSize[0] + 'px';
     el.style.height = marker.properties.iconSize[1] + 'px';
 

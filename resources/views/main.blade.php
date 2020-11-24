@@ -2,5 +2,5 @@
 
 @section('content')
     <div id="map_background"></div>
-    <script src="js/mapbox.js"></script>
+    <script src="{{ asset('js/mapbox.js') }}"></script>
 @endsection

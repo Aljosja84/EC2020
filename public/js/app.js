@@ -1953,11 +1953,11 @@ __webpack_require__.r(__webpack_exports__);
       if (e.team_id === this.hometeam) {
         switch (e.type) {
           case "Goal":
-            var answer = '<span style="color: #CCC">(' + e.detail + ')</span> ' + e.player + ' <img src="images/goal.png" />';
+            var answer = '<span style="color: #CCC">(' + e.detail + ')</span> ' + e.player + ' <img src=' + assetBaseUrl + 'images/goal.png />';
             break;
 
           case "Card":
-            var card = e.detail === 'Yellow Card' ? ' <img src="images/yellowcard.png" />' : ' <img src="images/redcard.png" />';
+            var card = e.detail === 'Yellow Card' ? ' <img src=' + assetBaseUrl + 'images/yellowcard.png />' : ' <img src=' + assetBaseUrl + 'images/redcard.png />';
             var answer = e.player + card;
             break;
 
@@ -39087,7 +39087,7 @@ var render = function() {
               _c("li", { key: _vm.timer, staticClass: "homeTeam" }, [
                 _c("div", { staticClass: "homeTeamcontent" }),
                 _c("div", { staticClass: "clock" }, [
-                  _c("img", { attrs: { src: "images/start_timer.png" } })
+                  _c("img", { attrs: { src: "/images/start_timer.png" } })
                 ])
               ]),
               _vm._v(" "),
