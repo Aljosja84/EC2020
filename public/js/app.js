@@ -1968,11 +1968,11 @@ __webpack_require__.r(__webpack_exports__);
       } else {
         switch (e.type) {
           case "Goal":
-            var answer = '<img src="images/goal.png" /> ' + e.player + ' <span style="color: #CCC">(' + e.detail + ')</span>';
+            var answer = '<img src=' + assetBaseUrl + 'images/goal.png /> ' + e.player + ' <span style="color: #CCC">(' + e.detail + ')</span>';
             break;
 
           case "Card":
-            var card = e.detail === 'Yellow Card' ? '<img src="images/yellowcard.png" /> ' : '<img src="images/redcard.png" /> ';
+            var card = e.detail === 'Yellow Card' ? '<img src=' + assetBaseUrl + 'images/yellowcard.png /> ' : '<img src=' + assetBaseUrl + 'images/redcard.png /> ';
             var answer = card + e.player;
             break;
 
@@ -2002,16 +2002,16 @@ __webpack_require__.r(__webpack_exports__);
             this.priorSub.push(e.assist_id);
           }
 
-          return '<span style="color: #CCC">' + e.player + '</span> <img src="images/sub_off.png" /> ' + e.assist + ' <img src="images/sub_on.png" />';
+          return '<span style="color: #CCC">' + e.player + '</span> <img src=' + assetBaseUrl + 'images/sub_off.png /> ' + e.assist + ' <img src=' + assetBaseUrl + 'images/sub_on.png />';
         }
       } // check if the subbed player made a sub already
 
 
       if (this.priorSub.includes(e.player_id)) {
-        return '<span style="color: #CCC">' + e.player + '</span> <img src="images/sub_off.png" /> ' + e.assist + ' <img src="images/sub_on.png" />';
+        return '<span style="color: #CCC">' + e.player + '</span> <img src=' + assetBaseUrl + 'images/sub_off.png /> ' + e.assist + ' <img src=' + assetBaseUrl + 'images/sub_on.png />';
       }
 
-      return '<span style="color: #CCC">' + e.assist + '</span> <img src="images/sub_off.png" /> ' + e.player + ' <img src="images/sub_on.png" />';
+      return '<span style="color: #CCC">' + e.assist + '</span> <img src=' + assetBaseUrl + 'images/sub_off.png /> ' + e.player + ' <img src=' + assetBaseUrl + 'images/sub_on.png />';
     },
     whichPlayerAway: function whichPlayerAway(e) {
       // set teamname and the starting XI of that team
@@ -2025,16 +2025,16 @@ __webpack_require__.r(__webpack_exports__);
             this.priorSub.push(e.assist_id);
           }
 
-          return '<img src="images/sub_on.png" /> ' + e.assist + ' <img src="images/sub_off.png" /><span style="color: #CCC"> ' + e.player + '</span>';
+          return '<img src=' + assetBaseUrl + 'images/sub_on.png /> ' + e.assist + ' <img src=' + assetBaseUrl + 'images/sub_off.png /><span style="color: #CCC"> ' + e.player + '</span>';
         }
       } // check if the subbed player made a sub already
 
 
       if (this.priorSub.includes(e.player_id)) {
-        return '<img src="images/sub_on.png" /> ' + e.assist + ' <img src="images/sub_off.png" /><span style="color: #CCC"> ' + e.player + '</span>';
+        return '<img src=' + assetBaseUrl + 'images/sub_on.png /> ' + e.assist + ' <img src=' + assetBaseUrl + 'images/sub_off.png /><span style="color: #CCC"> ' + e.player + '</span>';
       }
 
-      return '<img src="images/sub_on.png" /> ' + e.player + ' <img src="images/sub_off.png" /><span style="color: #CCC"> ' + e.assist + '</span>';
+      return '<img src=' + assetBaseUrl + 'images/sub_on.png /> ' + e.player + ' <img src=' + assetBaseUrl + 'images/sub_off.png /><span style="color: #CCC"> ' + e.assist + '</span>';
     }
   },
   computed: {},

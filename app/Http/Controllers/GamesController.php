@@ -54,7 +54,10 @@ class GamesController extends Controller
      */
     public function show(Game $game)
     {
-        return view('game');
+        return view('game', [
+            'game' => $game,
+            'stadium' => $game->stadium
+        ]);
     }
 
     /**

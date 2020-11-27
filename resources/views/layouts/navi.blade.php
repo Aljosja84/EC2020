@@ -150,17 +150,19 @@
                                         </div>
                                         <ul>
                                             @foreach($fixturenum = App\Models\Game::where("game_date", "LIKE", "%" . $games_dates->date ."%")->get() as $fixture)
-                                                <li class="{{ $fixturenum->count() > 3 ? 'gameday_four' : 'gameday_three' }}" id="{{ $fixture->id }}">
-                                                    <span id="gameday_time">{{ $fixture->playtime() }}</span>
-                                                    <span id="gameday_homeTeam">{{ $fixture->group_id == 0 ? $fixture->hometeam_name : $fixture->homeTeam->name }}</span>
-                                                    <span id="gameday_homeTeam_flag"><img src="{{ asset($fixture->group_id == 0 ? "images/country_flags/qualifier.png" : $fixture->homeTeam->flag_url()) }}"></span>
-                                                    <span id="gameday_homeTeam_score">{{ $fixture->home_team_score }}</span>
-                                                    <span id="hyphen">-</span>
-                                                    <span id="gameday_awayTeam_score">{{ $fixture->away_team_score }}</span>
-                                                    <span id="gameday_awayTeam_flag"><img src="{{ asset($fixture->group_id == 0 ? "images/country_flags/qualifier.png" : $fixture->awayTeam->flag_url()) }}"></span>
-                                                    <span id="gameday_awayTeam">{{ $fixture->group_id == 0 ? $fixture->awayteam_name : $fixture->awayTeam->name }}</span>
-                                                    <p id="gameday_stadium">{{ $fixture->stadium->name }}, {{ $fixture->stadium->city }}</p>
-                                                </li>
+                                                <a href="{{ $fixture->path() }}">
+                                                    <li class="{{ $fixturenum->count() > 3 ? 'gameday_four' : 'gameday_three' }}" id="{{ $fixture->id }}">
+                                                        <span id="gameday_time">{{ $fixture->playtime() }}</span>
+                                                        <span id="gameday_homeTeam">{{ $fixture->group_id == 0 ? $fixture->hometeam_name : $fixture->homeTeam->name }}</span>
+                                                        <span id="gameday_homeTeam_flag"><img src="{{ asset($fixture->group_id == 0 ? "images/country_flags/qualifier.png" : $fixture->homeTeam->flag_url()) }}"></span>
+                                                        <span id="gameday_homeTeam_score">{{ $fixture->home_team_score }}</span>
+                                                        <span id="hyphen">-</span>
+                                                        <span id="gameday_awayTeam_score">{{ $fixture->away_team_score }}</span>
+                                                        <span id="gameday_awayTeam_flag"><img src="{{ asset($fixture->group_id == 0 ? "images/country_flags/qualifier.png" : $fixture->awayTeam->flag_url()) }}"></span>
+                                                        <span id="gameday_awayTeam">{{ $fixture->group_id == 0 ? $fixture->awayteam_name : $fixture->awayTeam->name }}</span>
+                                                        <p id="gameday_stadium">{{ $fixture->stadium->name }}, {{ $fixture->stadium->city }}</p>
+                                                    </li>
+                                                </a>
                                             @endforeach
                                         </ul>
                                     </div>

@@ -23,6 +23,14 @@ class Game extends Model
         return $this->belongsTo('App\Models\Country');
     }
 
+    /**
+     * @return string
+     */
+    public function path()
+    {
+        return "/games/{$this->id}";
+    }
+
     public function playdate()
     {
         // convert the string to a time format
