@@ -8,6 +8,7 @@
     <link href='https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.css' rel='stylesheet' />
 
     <script defer src="{{ mix('js/app.js') }}"></script>
+    <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
 
     <!-- Styles -->
     <link href={{ asset('css/topmenu.css') }} rel="stylesheet">

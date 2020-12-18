@@ -16,6 +16,10 @@
             <lineup :data="data" team="awayteam"></lineup>
         </div>
 
+        <div class="tweets_win">
+            <tweets></tweets>
+        </div>
+
         <div class="stats_win">
             <stats-win :data="data"></stats-win>
         </div>

@@ -39,6 +39,14 @@
     clear: both;
 }
 
+.tweets_win {
+    position: absolute;
+    right: 0;
+    top: 10px;
+    display: inline-block;
+    float: right;
+}
+
 /* ------------------------- stadium info ------------------------- */
 #stadium_info {
     width: 267px;
