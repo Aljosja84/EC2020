@@ -33,6 +33,21 @@ class TweetsStream extends Command
     }
 
     /**
+     * @param $tweet
+     * @return bool
+     */
+    public function hasUrl($tweet) {
+        $reg_exUrl = "@((https?://)?([-\\w]+\\.[-\\w\\.]+)+\\w(:\\d+)?(/([-\\w/_\\.]*(\\?\\S+)?)?)*)@";
+
+        if(preg_match_all($reg_exUrl, $tweet))
+        {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * Execute the console command.
      *
      * @return mixed
@@ -41,28 +56,37 @@ class TweetsStream extends Command
     {
         TwitterStreamingApi::publicStream()
             ->setLocale('en')
-            ->whenHears('#cyberpunk2077', function(array $tweet) {
-                $tweet_data = [
-                    'text' => $tweet['text'],
-                    'user_name' => $tweet['user']['screen_name'],
-                    'name' => $tweet['user']['name'],
-                    'profile_image_url_https' => $tweet['user']['profile_image_url_https'],
-                    'retweet_count' => $tweet['retweet_count'],
-                    'reply_count' => $tweet['reply_count'],
-                    'favorite_count' => $tweet['favorite_count'],
-                ];
-                if (isset($tweet['extended_tweet'])) {
-                    $tweet_data['text'] = $tweet['extended_tweet']['full_text'];
-                }
+            ->whenHears('#newliv', function(array $tweet) {
+                // exclude tweets with an url in it
+                if(!$this->hasUrl($tweet['text'])) {
+                    // exclude all annoying retweets that are just clogging up the stream
+                    if (substr($tweet['text'], 0, 2) != 'RT') {
+                        // exclude replies and direct tweets, also just clogging it up
+                        if (substr($tweet['text'], 0, 1) != '@') {
+                            $tweet_data = [
+                                'text' => $tweet['text'],
+                                'user_name' => $tweet['user']['screen_name'],
+                                'name' => $tweet['user']['name'],
+                                'profile_image_url_https' => $tweet['user']['profile_image_url_https'],
+                                'retweet_count' => $tweet['retweet_count'],
+                                'reply_count' => $tweet['reply_count'],
+                                'favorite_count' => $tweet['favorite_count'],
+                            ];
+                            if (isset($tweet['extended_tweet'])) {
+                                $tweet_data['text'] = $tweet['extended_tweet']['full_text'];
+                            }
 
-                if (isset($tweet['created_at'])) {
-                    $tweet_data['date'] = date("M d", strtotime($tweet['created_at']));
-                }
+                            if (isset($tweet['created_at'])) {
+                                $tweet_data['date'] = date("M d", strtotime($tweet['created_at']));
+                            }
 
-                if (isset($tweet['extended_entities']['media'][0]['media_url'])) {
-                    $tweet_data['image'] = $tweet['extended_entities']['media'][0]['media_url'];
+                            if (isset($tweet['extended_entities']['media'][0]['media_url'])) {
+                                $tweet_data['image'] = $tweet['extended_entities']['media'][0]['media_url'];
+                            }
+                            event(new Tweets($tweet_data));
+                        }
+                    }
                 }
-                event(new Tweets($tweet_data));
             })
             ->startListening();
     }
