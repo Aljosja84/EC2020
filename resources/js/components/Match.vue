@@ -37,15 +37,29 @@
             }
         },
 
+        methods: {
+            callData() {
+                axios.get("https://v2.api-football.com/fixtures/id/" + this.matchid, {
+                    headers: {
+                        "X-RapidAPI-Host": "api-football-v1.p.rapidapi.com",
+                        "X-RapidAPI-Key": "b1ae4a3fca89630148dadaa295a0b5b7"
+                    }
+                }).then((response)=> {
+                    this.data = response.data.api.fixtures[0];
+                });
+            },
+
+            sayHello() {
+                alert('hello!');
+            }
+        },
+
         mounted() {
-            axios.get("https://v2.api-football.com/fixtures/id/" + this.matchid, {
-                headers: {
-                    "X-RapidAPI-Host": "api-football-v1.p.rapidapi.com",
-                    "X-RapidAPI-Key": "b1ae4a3fca89630148dadaa295a0b5b7"
-                }
-            }).then((response)=> {
-                this.data = response.data.api.fixtures[0];
-            })
+            this.callData();
+            // now refresh every one and a half minute
+            setInterval(() => {
+                this.callData();
+            }, 90000);
         }
     }
 </script>

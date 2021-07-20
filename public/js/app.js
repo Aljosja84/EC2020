@@ -2161,17 +2161,31 @@ __webpack_require__.r(__webpack_exports__);
       data: Object
     };
   },
-  mounted: function mounted() {
-    var _this = this;
+  methods: {
+    callData: function callData() {
+      var _this = this;
 
-    axios.get("https://v2.api-football.com/fixtures/id/" + this.matchid, {
-      headers: {
-        "X-RapidAPI-Host": "api-football-v1.p.rapidapi.com",
-        "X-RapidAPI-Key": "b1ae4a3fca89630148dadaa295a0b5b7"
-      }
-    }).then(function (response) {
-      _this.data = response.data.api.fixtures[0];
-    });
+      axios.get("https://v2.api-football.com/fixtures/id/" + this.matchid, {
+        headers: {
+          "X-RapidAPI-Host": "api-football-v1.p.rapidapi.com",
+          "X-RapidAPI-Key": "b1ae4a3fca89630148dadaa295a0b5b7"
+        }
+      }).then(function (response) {
+        _this.data = response.data.api.fixtures[0];
+      });
+    },
+    sayHello: function sayHello() {
+      alert('hello!');
+    }
+  },
+  mounted: function mounted() {
+    var _this2 = this;
+
+    this.callData(); // now refresh every one and a half minute
+
+    setInterval(function () {
+      _this2.callData();
+    }, 90000);
   }
 });
 
@@ -7248,7 +7262,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.container[data-v-1fc2f21f] {\n    background-color: white;\n    width: 1100px;\n    height: 85px;\n}\n[v-cloak][data-v-1fc2f21f] {\n    display: none;\n}\n.home_container[data-v-1fc2f21f] {\n    width: 250px;\n    float: left;\n    height: inherit;\n    padding: 12px 0 0 12px;\n}\n.home_container img[data-v-1fc2f21f] {\n    float: left;\n    width: 45px;\n    height: 45px;\n    margin-right: 12px;\n}\n.status_container[data-v-1fc2f21f] {\n    position: relative;\n    float: left;\n    width: 600px;\n    height: inherit;\n    align-content: center;\n    padding: 12px 0 0 0;\n}\n.status_container p[data-v-1fc2f21f] {\n    font-family: 'Roboto', sans-serif;\n    font-size: 36px;\n    color: #515151;\n    width: 50%;\n    margin: 0 auto;\n    background-color: white;\n    text-align: center;\n}\n.away_container[data-v-1fc2f21f] {\n    width: 250px;\n    height: inherit;\n    float: right;\n    padding: 12px 12px 0 0;\n}\n.away_container img[data-v-1fc2f21f] {\n    float: right;\n    width: 45px;\n    height: 45px;\n    margin-left: 12px;\n}\n.countryhome[data-v-1fc2f21f] {\n    display: block;\n    float: left;\n    font-family: 'Oswald', sans-serif;\n    text-transform: uppercase;\n    font-size: 20px;\n    line-height: 24px;\n    color: #515151;\n    padding-top: 8px;\n}\n.scoreaway[data-v-1fc2f21f] {\n    text-align: right;\n    display: block;\n    float: left;\n    font-family: 'Oswald', sans-serif;\n    font-size: 72px;\n    line-height: 50px;\n    color: #515151;\n}\n.countryaway[data-v-1fc2f21f] {\n    display: block;\n    float: right;\n    font-family: 'Oswald', sans-serif;\n    text-transform: uppercase;\n    font-size: 20px;\n    line-height: 24px;\n    color: #515151;\n    padding-top: 8px;\n}\n.scorehome[data-v-1fc2f21f] {\n    text-align: right;\n    display: block;\n    float: right;\n    font-family: 'Oswald', sans-serif;\n    font-size: 72px;\n    line-height: 50px;\n    color: #515151;\n}\n.status[data-v-1fc2f21f] {\n    text-align: center;\n    background-color: #ccc;\n    display: block;\n    width: 50%;\n    margin: 0 auto;\n}\n", ""]);
+exports.push([module.i, "\n.container[data-v-1fc2f21f] {\n    background-color: white;\n    width: 1100px;\n    height: 85px;\n}\n[v-cloak][data-v-1fc2f21f] {\n    display: none;\n}\n.home_container[data-v-1fc2f21f] {\n    width: 270px;\n    float: left;\n    height: inherit;\n    padding: 12px 0 0 12px;\n}\n.home_container img[data-v-1fc2f21f] {\n    float: left;\n    width: 45px;\n    height: 45px;\n    margin-right: 12px;\n}\n.status_container[data-v-1fc2f21f] {\n    position: relative;\n    float: left;\n    width: 560px;\n    height: inherit;\n    align-content: center;\n    padding: 12px 0 0 0;\n}\n.status_container p[data-v-1fc2f21f] {\n    font-family: 'Roboto', sans-serif;\n    font-size: 36px;\n    color: #515151;\n    width: 50%;\n    margin: 0 auto;\n    background-color: white;\n    text-align: center;\n}\n.away_container[data-v-1fc2f21f] {\n    width: 270px;\n    height: inherit;\n    float: right;\n    padding: 12px 12px 0 0;\n}\n.away_container img[data-v-1fc2f21f] {\n    float: right;\n    width: 45px;\n    height: 45px;\n    margin-left: 12px;\n}\n.countryhome[data-v-1fc2f21f] {\n    display: block;\n    float: left;\n    font-family: 'Oswald', sans-serif;\n    text-transform: uppercase;\n    font-size: 20px;\n    line-height: 24px;\n    color: #515151;\n    padding-top: 8px;\n}\n.scoreaway[data-v-1fc2f21f] {\n    text-align: right;\n    display: block;\n    float: left;\n    font-family: 'Oswald', sans-serif;\n    font-size: 68px;\n    line-height: 50px;\n    color: #515151;\n}\n.countryaway[data-v-1fc2f21f] {\n    display: block;\n    float: right;\n    font-family: 'Oswald', sans-serif;\n    text-transform: uppercase;\n    font-size: 20px;\n    line-height: 24px;\n    color: #515151;\n    padding-top: 8px;\n}\n.scorehome[data-v-1fc2f21f] {\n    text-align: right;\n    display: block;\n    float: right;\n    font-family: 'Oswald', sans-serif;\n    font-size: 68px;\n    line-height: 50px;\n    color: #515151;\n}\n.status[data-v-1fc2f21f] {\n    text-align: center;\n    background-color: #ccc;\n    display: block;\n    width: 50%;\n    margin: 0 auto;\n}\n", ""]);
 
 // exports
 

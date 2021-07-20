@@ -19,8 +19,12 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::get('/api', function() {
+    return view('api');
+});
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/games/{game}', [App\Http\Controllers\GamesController::class, 'show']);
+Route::get('/team/{team}', [App\Http\Controllers\TeamsController::class, 'show']);
 Route::get('/navi', function() {
     return view('navi');
 });

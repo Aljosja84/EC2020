@@ -71,7 +71,7 @@
     }
 
     .home_container {
-        width: 250px;
+        width: 270px;
         float: left;
         height: inherit;
         padding: 12px 0 0 12px;
@@ -87,7 +87,7 @@
     .status_container {
         position: relative;
         float: left;
-        width: 600px;
+        width: 560px;
         height: inherit;
         align-content: center;
         padding: 12px 0 0 0;
@@ -104,7 +104,7 @@
     }
 
     .away_container {
-        width: 250px;
+        width: 270px;
         height: inherit;
         float: right;
         padding: 12px 12px 0 0;
@@ -133,7 +133,7 @@
         display: block;
         float: left;
         font-family: 'Oswald', sans-serif;
-        font-size: 72px;
+        font-size: 68px;
         line-height: 50px;
         color: #515151;
     }
@@ -154,7 +154,7 @@
         display: block;
         float: right;
         font-family: 'Oswald', sans-serif;
-        font-size: 72px;
+        font-size: 68px;
         line-height: 50px;
         color: #515151;
     }

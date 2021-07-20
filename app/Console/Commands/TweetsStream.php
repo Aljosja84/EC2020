@@ -39,12 +39,7 @@ class TweetsStream extends Command
     public function hasUrl($tweet) {
         $reg_exUrl = "@((https?://)?([-\\w]+\\.[-\\w\\.]+)+\\w(:\\d+)?(/([-\\w/_\\.]*(\\?\\S+)?)?)*)@";
 
-        if(preg_match_all($reg_exUrl, $tweet))
-        {
-            return true;
-        } else {
-            return false;
-        }
+        return preg_match($reg_exUrl, $tweet) ? true : false;
     }
 
     /**
@@ -56,7 +51,7 @@ class TweetsStream extends Command
     {
         TwitterStreamingApi::publicStream()
             ->setLocale('en')
-            ->whenHears('#newliv', function(array $tweet) {
+            ->whenHears('#covid19', function(array $tweet) {
                 // exclude tweets with an url in it
                 if(!$this->hasUrl($tweet['text'])) {
                     // exclude all annoying retweets that are just clogging up the stream

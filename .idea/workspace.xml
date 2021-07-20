@@ -22,7 +22,14 @@
     <list default="true" id="cf82d037-ce69-45df-857e-a29fb7732fae" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Console/Commands/TweetsStream.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Console/Commands/TweetsStream.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/topmenu.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/topmenu.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Match.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Match.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/scoreboard.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/scoreboard.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/game.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/game.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -177,7 +184,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="ignore.virus.scanning.warn.message" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Euro2020" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
@@ -298,6 +305,35 @@
       <workItem from="1608525388702" duration="118000" />
       <workItem from="1609361724710" duration="10000" />
       <workItem from="1609361736405" duration="2004000" />
+      <workItem from="1609384790597" duration="726000" />
+      <workItem from="1609385667033" duration="130000" />
+      <workItem from="1609531596039" duration="2695000" />
+      <workItem from="1609773158861" duration="22000" />
+      <workItem from="1609775366905" duration="20000" />
+      <workItem from="1609788903698" duration="4112000" />
+      <workItem from="1609878039925" duration="11000" />
+      <workItem from="1613135123795" duration="2632000" />
+      <workItem from="1613650952708" duration="11000" />
+      <workItem from="1614606186511" duration="195000" />
+      <workItem from="1614701529598" duration="682000" />
+      <workItem from="1615557590236" duration="111000" />
+      <workItem from="1616767630604" duration="1186000" />
+      <workItem from="1617885179646" duration="1224000" />
+      <workItem from="1618844342751" duration="11000" />
+      <workItem from="1620735619252" duration="1836000" />
+      <workItem from="1620741720107" duration="305000" />
+      <workItem from="1621857214914" duration="12000" />
+      <workItem from="1621857853170" duration="676000" />
+      <workItem from="1621948478995" duration="8849000" />
+      <workItem from="1621978038909" duration="31000" />
+      <workItem from="1622029578494" duration="51000" />
+      <workItem from="1622634510639" duration="1478000" />
+      <workItem from="1623073960153" duration="4000" />
+      <workItem from="1623153477921" duration="2253000" />
+      <workItem from="1625007647572" duration="7000" />
+      <workItem from="1625171805246" duration="18000" />
+      <workItem from="1626019352760" duration="3000" />
+      <workItem from="1626788466302" duration="1503000" />
     </task>
     <servers />
   </component>
@@ -317,46 +353,18 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="2843" y="628" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1604004887069">
-      <screen x="2560" y="0" width="1050" height="1650" />
+    <state x="1115" y="551" key="FileChooserDialogImpl" timestamp="1622640446321">
+      <screen x="0" y="0" width="3840" height="1570" />
     </state>
-    <state x="2843" y="628" key="#com.intellij.fileTypes.FileTypeChooser/0.0.2560.1410/2560.0.1050.1650@2560.0.1050.1650" timestamp="1604004887069" />
-    <state x="2865" y="579" key="FileChooserDialogImpl" timestamp="1609365386066">
-      <screen x="2560" y="0" width="1050" height="1650" />
+    <state x="2865" y="579" key="FileChooserDialogImpl/0.0.2560.1410/2560.0.1050.1650@2560.0.1050.1650" timestamp="1616768822450" />
+    <state x="1115" y="551" key="FileChooserDialogImpl/0.0.3840.1570@0.0.3840.1570" timestamp="1622640446321" />
+    <state x="594" y="708" key="NewPhpFileDialog" timestamp="1621949533182">
+      <screen x="0" y="0" width="3840" height="1570" />
     </state>
-    <state x="744" y="495" key="FileChooserDialogImpl/0.0.2560.1410/2560.0.1050.1650@0.0.2560.1410" timestamp="1608303026333" />
-    <state x="2865" y="579" key="FileChooserDialogImpl/0.0.2560.1410/2560.0.1050.1650@2560.0.1050.1650" timestamp="1609365386066" />
-    <state x="2560" y="0" key="FileDocumentManager.FileCacheConflict" timestamp="1604934492578">
-      <screen x="2560" y="0" width="1050" height="1650" />
+    <state x="594" y="708" key="NewPhpFileDialog/0.0.3840.1570@0.0.3840.1570" timestamp="1621949533182" />
+    <state x="277" y="361" width="672" height="678" key="search.everywhere.popup" timestamp="1623153649146">
+      <screen x="0" y="0" width="3840" height="1570" />
     </state>
-    <state x="2560" y="0" key="FileDocumentManager.FileCacheConflict/0.0.2560.1410/2560.0.1050.1650@2560.0.1050.1650" timestamp="1604934492578" />
-    <state width="1007" height="483" key="GridCell.Tab.0.bottom" timestamp="1601413506139">
-      <screen x="2560" y="0" width="1050" height="1650" />
-    </state>
-    <state width="2517" height="404" key="GridCell.Tab.0.bottom/0.0.2560.1410/2560.0.1050.1650@0.0.2560.1410" timestamp="1601412914599" />
-    <state width="1007" height="483" key="GridCell.Tab.0.bottom/0.0.2560.1410/2560.0.1050.1650@2560.0.1050.1650" timestamp="1601413506139" />
-    <state width="1007" height="483" key="GridCell.Tab.0.center" timestamp="1601413506139">
-      <screen x="2560" y="0" width="1050" height="1650" />
-    </state>
-    <state width="2517" height="404" key="GridCell.Tab.0.center/0.0.2560.1410/2560.0.1050.1650@0.0.2560.1410" timestamp="1601412914599" />
-    <state width="1007" height="483" key="GridCell.Tab.0.center/0.0.2560.1410/2560.0.1050.1650@2560.0.1050.1650" timestamp="1601413506139" />
-    <state width="1007" height="483" key="GridCell.Tab.0.left" timestamp="1601413506139">
-      <screen x="2560" y="0" width="1050" height="1650" />
-    </state>
-    <state width="2517" height="404" key="GridCell.Tab.0.left/0.0.2560.1410/2560.0.1050.1650@0.0.2560.1410" timestamp="1601412914599" />
-    <state width="1007" height="483" key="GridCell.Tab.0.left/0.0.2560.1410/2560.0.1050.1650@2560.0.1050.1650" timestamp="1601413506139" />
-    <state width="1007" height="483" key="GridCell.Tab.0.right" timestamp="1601413506139">
-      <screen x="2560" y="0" width="1050" height="1650" />
-    </state>
-    <state width="2517" height="404" key="GridCell.Tab.0.right/0.0.2560.1410/2560.0.1050.1650@0.0.2560.1410" timestamp="1601412914599" />
-    <state width="1007" height="483" key="GridCell.Tab.0.right/0.0.2560.1410/2560.0.1050.1650@2560.0.1050.1650" timestamp="1601413506139" />
-    <state x="2920" y="748" key="NewPhpFileDialog" timestamp="1605197911083">
-      <screen x="2560" y="0" width="1050" height="1650" />
-    </state>
-    <state x="2920" y="748" key="NewPhpFileDialog/0.0.2560.1410/2560.0.1050.1650@2560.0.1050.1650" timestamp="1605197911083" />
-    <state x="2748" y="377" width="672" height="678" key="search.everywhere.popup" timestamp="1608322660796">
-      <screen x="2560" y="0" width="1050" height="1650" />
-    </state>
-    <state x="2748" y="377" width="672" height="678" key="search.everywhere.popup/0.0.2560.1410/2560.0.1050.1650@2560.0.1050.1650" timestamp="1608322660796" />
+    <state x="277" y="361" width="672" height="678" key="search.everywhere.popup/0.0.3840.1570@0.0.3840.1570" timestamp="1623153649146" />
   </component>
 </project>

@@ -15,7 +15,8 @@
         "laravel/framework": "^8.0",
         "laravel/tinker": "^2.0",
         "pusher/pusher-php-server": "^4.1",
-        "spatie/laravel-twitter-streaming-api": "^1.4"
+        "spatie/laravel-twitter-streaming-api": "^1.4",
+      "ext-http": "*"
     },
     "require-dev": {
         "facade/ignition": "^2.3.6",
