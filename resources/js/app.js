@@ -28,7 +28,7 @@ Vue.component('test', require('./components/test').default);
 Vue.component('scoreboard', require('./components/scoreboard').default);
 Vue.component('match', require('./components/Match').default);
 Vue.component('tweets', require('./components/RTTweets').default);
-Vue.component('teamform', require('./components/Teamform').default);
+Vue.component('team-form', require('./components/Teamform').default);
 
 
 /**

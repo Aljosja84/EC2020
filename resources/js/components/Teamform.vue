@@ -1,13 +1,21 @@
 <template>
     <div class="container">
-        teamnaam
+        <h1>{{details}}</h1>
+        <h1><img :src="flag"></h1>
     </div>
 </template>
 
 <script>
     export default {
-        name: "Teamform"
+        name: "Teamform",
+        props: ['details', 'flag'],
+
+
+        mounted() {
+            console.log('Component mounted.')
+        }
     }
+
 </script>
 
 <style scoped>
