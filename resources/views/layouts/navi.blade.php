@@ -84,7 +84,7 @@
                             <ul>
                                 @foreach(App\Models\Country::orderBy('name', 'asc')->get() as $country)
                                     <li id="team">
-                                        <a href="#">
+                                        <a href="/team/{{ $country->id }}">
                                             <div class="team_link">
                                                 <img src="{{ asset($country->flag_url()) }}">{{ $country->name }}
                                             </div>

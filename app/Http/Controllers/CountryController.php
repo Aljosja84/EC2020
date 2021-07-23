@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Country;
 use Illuminate\Http\Request;
 
-class TeamsController extends Controller
+class CountryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -40,12 +41,15 @@ class TeamsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Country $country
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function show($id)
+    public function show(Country $country)
     {
-        //
+
+        return view('team', [
+            'country' => $country
+        ]);
     }
 
     /**

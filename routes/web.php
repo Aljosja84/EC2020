@@ -24,7 +24,7 @@ Route::get('/api', function() {
 });
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/games/{game}', [App\Http\Controllers\GamesController::class, 'show']);
-Route::get('/team/{team}', [App\Http\Controllers\TeamsController::class, 'show']);
+Route::get('/team/{country}', [App\Http\Controllers\CountryController::class, 'show']);
 Route::get('/navi', function() {
     return view('navi');
 });

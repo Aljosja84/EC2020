@@ -21,14 +21,10 @@
   <component name="ChangeListManager">
     <list default="true" id="cf82d037-ce69-45df-857e-a29fb7732fae" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Console/Commands/TweetsStream.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Console/Commands/TweetsStream.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/topmenu.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/topmenu.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Match.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Match.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/scoreboard.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/scoreboard.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/game.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/game.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TeamsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CountryController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Teamform.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Teamform.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/navi.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/navi.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/team.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/team.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -333,7 +329,10 @@
       <workItem from="1625007647572" duration="7000" />
       <workItem from="1625171805246" duration="18000" />
       <workItem from="1626019352760" duration="3000" />
-      <workItem from="1626788466302" duration="1503000" />
+      <workItem from="1626788466302" duration="3606000" />
+      <workItem from="1626803065753" duration="128000" />
+      <workItem from="1627044331576" duration="4866000" />
+      <workItem from="1627050740279" duration="1332000" />
     </task>
     <servers />
   </component>
@@ -353,10 +352,13 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="977" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1626796875568">
+      <screen x="0" y="0" width="3840" height="1570" />
+    </state>
+    <state x="977" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.3840.1570@0.0.3840.1570" timestamp="1626796875568" />
     <state x="1115" y="551" key="FileChooserDialogImpl" timestamp="1622640446321">
       <screen x="0" y="0" width="3840" height="1570" />
     </state>
-    <state x="2865" y="579" key="FileChooserDialogImpl/0.0.2560.1410/2560.0.1050.1650@2560.0.1050.1650" timestamp="1616768822450" />
     <state x="1115" y="551" key="FileChooserDialogImpl/0.0.3840.1570@0.0.3840.1570" timestamp="1622640446321" />
     <state x="594" y="708" key="NewPhpFileDialog" timestamp="1621949533182">
       <screen x="0" y="0" width="3840" height="1570" />
