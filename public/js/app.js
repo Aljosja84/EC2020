@@ -2291,11 +2291,41 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Teamform",
-  props: ['details', 'flag'],
+  props: ['details', 'flag', 'teamid'],
+  data: function data() {
+    return {
+      formArr: [],
+      data: Object,
+      form: ''
+    };
+  },
+  methods: {
+    callData: function callData() {
+      var _this = this;
+
+      axios.get("https://v3.football.api-sports.io/teams/statistics?league=4&season=2020&team=" + this.teamid, {
+        headers: {
+          "X-RapidAPI-Host": "api-football-v1.p.rapidapi.com",
+          "X-RapidAPI-Key": "b1ae4a3fca89630148dadaa295a0b5b7"
+        }
+      }).then(function (response) {
+        //this.data = response.data.api.fixtures[0];
+        _this.form = response.data.response.form;
+      });
+    }
+  },
+  computed: {
+    // get the last ten games of the country/team.
+    lastTenForm: function lastTenForm() {
+      return Array.from(this.form.slice(this.form.length - 10));
+    }
+  },
   mounted: function mounted() {
     console.log('Component mounted.');
+    this.callData();
   }
 });
 
@@ -39578,7 +39608,9 @@ var render = function() {
   return _c("div", { staticClass: "container" }, [
     _c("h1", [_vm._v(_vm._s(_vm.details))]),
     _vm._v(" "),
-    _c("h1", [_c("img", { attrs: { src: _vm.flag } })])
+    _c("h1", [_c("img", { attrs: { src: _vm.flag } })]),
+    _vm._v(" "),
+    _c("h1", [_vm._v("Form: " + _vm._s(_vm.lastTenForm[4]))])
   ])
 }
 var staticRenderFns = []
