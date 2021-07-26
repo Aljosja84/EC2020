@@ -2,7 +2,13 @@
     <div class="container">
         <h1>{{details}}</h1>
         <h1><img :src="flag"></h1>
-        <h1>Form: {{ lastTenForm[4] }}</h1>
+        <h1>Form:
+            <span v-for="result in lastTenForm" :key="result">
+                <a href="#" v-if="result === 'W'" class="form_button button_win">{{ result }}</a>
+                <a href="#" v-else-if="result === 'L'" class="form_button button_lose">{{ result }}</a>
+                <a href="#" v-else-if="result === 'D'" class="form_button button_draw">{{ result }}</a>
+            </span>
+        </h1>
     </div>
 </template>
 
@@ -56,4 +62,20 @@
         height: 610px;
         background-color: white;
     }
+
+    .form_button {
+        background-color: #04AA6D;
+        border: none;
+        color: white;
+        padding: 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+    }
+
+    .button_win {border-radius: 12px; background-color: green;}
+    .button_lose {border-radius: 12px; background-color: red;}
+    .button_draw {border-radius: 12px; background-color: grey;}
 </style>

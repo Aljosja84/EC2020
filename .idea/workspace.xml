@@ -22,9 +22,7 @@
     <list default="true" id="cf82d037-ce69-45df-857e-a29fb7732fae" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/mix-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/mix-manifest.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/Teamform.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Teamform.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/team.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/team.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -334,7 +332,8 @@
       <workItem from="1627050740279" duration="5231000" />
       <workItem from="1627132266055" duration="2264000" />
       <workItem from="1627215622751" duration="5000" />
-      <workItem from="1627216788103" duration="4265000" />
+      <workItem from="1627216788103" duration="4763000" />
+      <workItem from="1627313036792" duration="1962000" />
     </task>
     <servers />
   </component>

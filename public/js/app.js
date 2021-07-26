@@ -2292,6 +2292,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Teamform",
   props: ['details', 'flag', 'teamid'],
@@ -2318,7 +2324,8 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   computed: {
-    // get the last ten games of the country/team.
+    // get the last ten games of the country/team
+    // and put them in an array so they each can be converted to buttons
     lastTenForm: function lastTenForm() {
       return Array.from(this.form.slice(this.form.length - 10));
     }
@@ -7280,7 +7287,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.container[data-v-221bb58c] {\n    width: 335px;\n    height: 610px;\n    background-color: white;\n}\n", ""]);
+exports.push([module.i, "\n.container[data-v-221bb58c] {\n    width: 335px;\n    height: 610px;\n    background-color: white;\n}\n.form_button[data-v-221bb58c] {\n    background-color: #04AA6D;\n    border: none;\n    color: white;\n    padding: 20px;\n    text-align: center;\n    text-decoration: none;\n    display: inline-block;\n    font-size: 16px;\n    margin: 4px 2px;\n}\n.button_win[data-v-221bb58c] {border-radius: 12px; background-color: green;}\n.button_lose[data-v-221bb58c] {border-radius: 12px; background-color: red;}\n.button_draw[data-v-221bb58c] {border-radius: 12px; background-color: grey;}\n", ""]);
 
 // exports
 
@@ -39610,7 +39617,45 @@ var render = function() {
     _vm._v(" "),
     _c("h1", [_c("img", { attrs: { src: _vm.flag } })]),
     _vm._v(" "),
-    _c("h1", [_vm._v("Form: " + _vm._s(_vm.lastTenForm[4]))])
+    _c(
+      "h1",
+      [
+        _vm._v("Form:\n        "),
+        _vm._l(_vm.lastTenForm, function(result) {
+          return _c("span", { key: result }, [
+            result === "W"
+              ? _c(
+                  "a",
+                  {
+                    staticClass: "form_button button_win",
+                    attrs: { href: "#" }
+                  },
+                  [_vm._v(_vm._s(result))]
+                )
+              : result === "L"
+              ? _c(
+                  "a",
+                  {
+                    staticClass: "form_button button_lose",
+                    attrs: { href: "#" }
+                  },
+                  [_vm._v(_vm._s(result))]
+                )
+              : result === "D"
+              ? _c(
+                  "a",
+                  {
+                    staticClass: "form_button button_draw",
+                    attrs: { href: "#" }
+                  },
+                  [_vm._v(_vm._s(result))]
+                )
+              : _vm._e()
+          ])
+        })
+      ],
+      2
+    )
   ])
 }
 var staticRenderFns = []
