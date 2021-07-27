@@ -2298,6 +2298,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Teamform",
   props: ['details', 'flag', 'teamid'],
@@ -7287,7 +7289,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.container[data-v-221bb58c] {\n    width: 335px;\n    height: 610px;\n    background-color: white;\n}\n.form_button[data-v-221bb58c] {\n    background-color: #04AA6D;\n    border: none;\n    color: white;\n    padding: 20px;\n    text-align: center;\n    text-decoration: none;\n    display: inline-block;\n    font-size: 16px;\n    margin: 4px 2px;\n}\n.button_win[data-v-221bb58c] {border-radius: 12px; background-color: green;}\n.button_lose[data-v-221bb58c] {border-radius: 12px; background-color: red;}\n.button_draw[data-v-221bb58c] {border-radius: 12px; background-color: grey;}\n", ""]);
+exports.push([module.i, "\n.container[data-v-221bb58c] {\n    width: 335px;\n    height: 610px;\n    background-color: white;\n}\n.team_header[data-v-221bb58c] {\n    line-height: 20px;\n    font-family: 'Oswald', sans-serif;\n    font-size: 24px;\n    color: #515151;\n    height: auto;\n    background-color: lightblue;\n    padding: 12px 0 8px 15px;\n    vertical-align: middle;\n}\n.header_flag[data-v-221bb58c] {\n    height: 45px;\n    width: 45px;\n    margin-right: 23px;\n}\n.form_button[data-v-221bb58c] {\n    min-width: 23px;\n    min-height: 23px;\n    max-width: 23px;\n    max-height: 23px;\n    font-family: \"Roboto\", sans-serif;\n    font-size: 11px;\n    background-color: #04AA6D;\n    border: none;\n    color: white;\n    padding: 6px;\n    text-align: center;\n    text-decoration: none;\n    display: inline-block;\n    margin: 4px 2px;\n}\n.button_win[data-v-221bb58c] {border-radius: 100%; background-color: green;}\n.button_lose[data-v-221bb58c] {border-radius: 100%; background-color: red;}\n.button_draw[data-v-221bb58c] {border-radius: 100%; background-color: grey;}\n", ""]);
 
 // exports
 
@@ -39613,9 +39615,11 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
-    _c("h1", [_vm._v(_vm._s(_vm.details))]),
-    _vm._v(" "),
-    _c("h1", [_c("img", { attrs: { src: _vm.flag } })]),
+    _c("div", { staticClass: "team_header" }, [
+      _c("img", { staticClass: "header_flag", attrs: { src: _vm.flag } }),
+      _vm._v(" "),
+      _c("span", [_vm._v(_vm._s(_vm.details))])
+    ]),
     _vm._v(" "),
     _c(
       "h1",

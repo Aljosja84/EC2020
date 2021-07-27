@@ -1,7 +1,9 @@
 <template>
     <div class="container">
-        <h1>{{details}}</h1>
-        <h1><img :src="flag"></h1>
+        <div class="team_header">
+            <img class="header_flag" :src="flag">
+            <span>{{details}}</span>
+        </div>
         <h1>Form:
             <span v-for="result in lastTenForm" :key="result">
                 <a href="#" v-if="result === 'W'" class="form_button button_win">{{ result }}</a>
@@ -61,21 +63,44 @@
         width: 335px;
         height: 610px;
         background-color: white;
+        padding: 0;
+    }
+
+    .team_header {
+        line-height: 20px;
+        font-family: 'Oswald', sans-serif;
+        font-size: 24px;
+        color: #515151;
+        text-transform: uppercase;
+        background-color: lightblue;
+        padding: 12px 0 8px 15px;
+        vertical-align: middle;
+    }
+
+    .header_flag {
+        height: 45px;
+        width: 45px;
+        margin-right: 23px;
     }
 
     .form_button {
+        min-width: 23px;
+        min-height: 23px;
+        max-width: 23px;
+        max-height: 23px;
+        font-family: "Roboto", sans-serif;
+        font-size: 11px;
         background-color: #04AA6D;
         border: none;
         color: white;
-        padding: 20px;
+        padding: 6px;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
         margin: 4px 2px;
     }
 
-    .button_win {border-radius: 12px; background-color: green;}
-    .button_lose {border-radius: 12px; background-color: red;}
-    .button_draw {border-radius: 12px; background-color: grey;}
+    .button_win {border-radius: 100%; background-color: green;}
+    .button_lose {border-radius: 100%; background-color: red;}
+    .button_draw {border-radius: 100%; background-color: grey;}
 </style>
