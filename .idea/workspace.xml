@@ -178,21 +178,22 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="ignore.virus.scanning.warn.message" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/js/components" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\xampp\htdocs\EC2020\public\images" />
-      <recent name="C:\xampp\htdocs\EC2020\public\images\country_flags" />
-      <recent name="C:\xampp\htdocs\EC2020\public\js" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\xampp\htdocs\EC2020\public\images" />
       <recent name="C:\xampp\htdocs\EC2020\public\images\country_flags" />
       <recent name="C:\xampp\htdocs\EC2020\public\js" />
       <recent name="C:\xampp\htdocs\EC2020\resources\views\layouts" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\EC2020\resources\js\components" />
+      <recent name="C:\xampp\htdocs\EC2020\public\images" />
+      <recent name="C:\xampp\htdocs\EC2020\public\images\country_flags" />
+      <recent name="C:\xampp\htdocs\EC2020\public\js" />
     </key>
   </component>
   <component name="RunManager">
@@ -336,6 +337,10 @@
       <workItem from="1627216788103" duration="4763000" />
       <workItem from="1627313036792" duration="1962000" />
       <workItem from="1627396959007" duration="3727000" />
+      <workItem from="1627401509798" duration="263000" />
+      <workItem from="1627401815218" duration="53000" />
+      <workItem from="1627402005966" duration="1404000" />
+      <workItem from="1627484507315" duration="4279000" />
     </task>
     <servers />
   </component>

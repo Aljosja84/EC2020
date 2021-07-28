@@ -4,13 +4,16 @@
             <img class="header_flag" :src="flag">
             <span>{{details}}</span>
         </div>
-        <h1>Form:
-            <span v-for="result in lastTenForm" :key="result">
-                <a href="#" v-if="result === 'W'" class="form_button button_win">{{ result }}</a>
-                <a href="#" v-else-if="result === 'L'" class="form_button button_lose">{{ result }}</a>
-                <a href="#" v-else-if="result === 'D'" class="form_button button_draw">{{ result }}</a>
-            </span>
-        </h1>
+        <div id="separator_bar"></div>
+        <div class="form_container">
+            <span id="form_title">Form:</span>
+                <span v-for="result in lastTenForm" :key="result">
+                    <a href="#" v-if="result === 'W'" class="form_button button_win">{{ result }}</a>
+                    <a href="#" v-else-if="result === 'L'" class="form_button button_lose">{{ result }}</a>
+                    <a href="#" v-else-if="result === 'D'" class="form_button button_draw">{{ result }}</a>
+                </span>
+
+        </div>
     </div>
 </template>
 
@@ -31,8 +34,8 @@
             callData() {
                 axios.get("https://v3.football.api-sports.io/teams/statistics?league=4&season=2020&team=" + this.teamid, {
                     headers: {
-                        "X-RapidAPI-Host": "api-football-v1.p.rapidapi.com",
-                        "X-RapidAPI-Key": "b1ae4a3fca89630148dadaa295a0b5b7"
+                        "X-RapidAPI-Host": process.env.MIX_API_URL,
+                        "X-RapidAPI-Key": process.env.MIX_API_KEY
                     }
                 }).then((response) => {
                     //this.data = response.data.api.fixtures[0];
@@ -52,7 +55,8 @@
 
         mounted() {
             console.log('Component mounted.');
-            this.callData();
+            //this.callData();
+            this.form = ["W", "L", "D", "D", "L", "W", "W", "L", "D", "W"];
         }
     }
 
@@ -67,20 +71,33 @@
     }
 
     .team_header {
-        line-height: 20px;
+        display: inline-flex;
+        width: 100%;
         font-family: 'Oswald', sans-serif;
         font-size: 24px;
         color: #515151;
         text-transform: uppercase;
-        background-color: lightblue;
-        padding: 12px 0 8px 15px;
-        vertical-align: middle;
+        background-image: url("light_wool.png");
+        padding: 10px 0 8px 15px;
     }
 
     .header_flag {
         height: 45px;
         width: 45px;
-        margin-right: 23px;
+        margin-right: 17px;
+    }
+
+    .form_container {
+        padding: 8px 0 0 5px;
+        height: 40px;
+        font-family: 'Oswald', sans-serif;
+        font-size: 18px;
+        text-transform: uppercase;
+        color: #515151;
+    }
+
+    #form_title {
+        vertical-align: middle;
     }
 
     .form_button {
@@ -98,9 +115,15 @@
         text-decoration: none;
         display: inline-block;
         margin: 4px 2px;
+        box-shadow: rgba(0, 0, 0, 0.18) 0px 5px 15px;
     }
 
-    .button_win {border-radius: 100%; background-color: green;}
-    .button_lose {border-radius: 100%; background-color: red;}
-    .button_draw {border-radius: 100%; background-color: grey;}
+    .button_win {border-radius: 100%; background-color: #6bab4f;}
+    .button_lose {border-radius: 100%; background-color: #e83434;}
+    .button_draw {border-radius: 100%; background-color: lightgray;}
+
+    #separator_bar {
+        height: 2px;
+        background-image: linear-gradient(to right, transparent, #b5b5b5, transparent);
+    }
 </style>

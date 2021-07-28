@@ -2300,6 +2300,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Teamform",
   props: ['details', 'flag', 'teamid'],
@@ -2333,8 +2336,9 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   mounted: function mounted() {
-    console.log('Component mounted.');
-    this.callData();
+    console.log('Component mounted.'); //this.callData();
+
+    this.form = ["W", "L", "D", "D", "L", "W", "W", "L", "D", "W"];
   }
 });
 
@@ -7284,12 +7288,13 @@ exports.push([module.i, "\n.twit-enter-active[data-v-1d58e44f] {\n    transition
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
+var escape = __webpack_require__(/*! ../../../node_modules/css-loader/lib/url/escape.js */ "./node_modules/css-loader/lib/url/escape.js");
 exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
 // imports
 
 
 // module
-exports.push([module.i, "\n.container[data-v-221bb58c] {\n    width: 335px;\n    height: 610px;\n    background-color: white;\n}\n.team_header[data-v-221bb58c] {\n    line-height: 20px;\n    font-family: 'Oswald', sans-serif;\n    font-size: 24px;\n    color: #515151;\n    height: auto;\n    background-color: lightblue;\n    padding: 12px 0 8px 15px;\n    vertical-align: middle;\n}\n.header_flag[data-v-221bb58c] {\n    height: 45px;\n    width: 45px;\n    margin-right: 23px;\n}\n.form_button[data-v-221bb58c] {\n    min-width: 23px;\n    min-height: 23px;\n    max-width: 23px;\n    max-height: 23px;\n    font-family: \"Roboto\", sans-serif;\n    font-size: 11px;\n    background-color: #04AA6D;\n    border: none;\n    color: white;\n    padding: 6px;\n    text-align: center;\n    text-decoration: none;\n    display: inline-block;\n    margin: 4px 2px;\n}\n.button_win[data-v-221bb58c] {border-radius: 100%; background-color: green;}\n.button_lose[data-v-221bb58c] {border-radius: 100%; background-color: red;}\n.button_draw[data-v-221bb58c] {border-radius: 100%; background-color: grey;}\n", ""]);
+exports.push([module.i, "\n.container[data-v-221bb58c] {\n    width: 335px;\n    height: 610px;\n    background-color: white;\n    padding: 0;\n}\n.team_header[data-v-221bb58c] {\n    display: inline-flex;\n    width: 100%;\n    font-family: 'Oswald', sans-serif;\n    font-size: 24px;\n    color: #515151;\n    text-transform: uppercase;\n    background-image: url(" + escape(__webpack_require__(/*! ./light_wool.png */ "./resources/js/components/light_wool.png")) + ");\n    padding: 10px 0 8px 15px;\n}\n.header_flag[data-v-221bb58c] {\n    height: 45px;\n    width: 45px;\n    margin-right: 17px;\n}\n.form_container[data-v-221bb58c] {\n    padding: 8px 0 0 5px;\n    height: 40px;\n    font-family: 'Oswald', sans-serif;\n    font-size: 18px;\n    text-transform: uppercase;\n    color: #515151;\n}\n#form_title[data-v-221bb58c] {\n    vertical-align: middle;\n}\n.form_button[data-v-221bb58c] {\n    min-width: 23px;\n    min-height: 23px;\n    max-width: 23px;\n    max-height: 23px;\n    font-family: \"Roboto\", sans-serif;\n    font-size: 11px;\n    background-color: #04AA6D;\n    border: none;\n    color: white;\n    padding: 6px;\n    text-align: center;\n    text-decoration: none;\n    display: inline-block;\n    margin: 4px 2px;\n    box-shadow: rgba(0, 0, 0, 0.18) 0px 5px 15px;\n}\n.button_win[data-v-221bb58c] {border-radius: 100%; background-color: #6bab4f;}\n.button_lose[data-v-221bb58c] {border-radius: 100%; background-color: #e83434;}\n.button_draw[data-v-221bb58c] {border-radius: 100%; background-color: lightgray;}\n#separator_bar[data-v-221bb58c] {\n    height: 2px;\n    background-image: linear-gradient(to right, transparent, #b5b5b5, transparent);\n}\n", ""]);
 
 // exports
 
@@ -7454,6 +7459,33 @@ function toComment(sourceMap) {
 	var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
 
 	return '/*# ' + data + ' */';
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/lib/url/escape.js":
+/*!***************************************************!*\
+  !*** ./node_modules/css-loader/lib/url/escape.js ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = function escape(url) {
+    if (typeof url !== 'string') {
+        return url
+    }
+    // If url is already wrapped in quotes, remove them
+    if (/^['"].*['"]$/.test(url)) {
+        url = url.slice(1, -1);
+    }
+    // Should url be wrapped?
+    // See https://drafts.csswg.org/css-values-3/#urls
+    if (/["'() \t\n]/.test(url)) {
+        return '"' + url.replace(/"/g, '\\"').replace(/\n/g, '\\n') + '"'
+    }
+
+    return url
 }
 
 
@@ -39621,10 +39653,14 @@ var render = function() {
       _c("span", [_vm._v(_vm._s(_vm.details))])
     ]),
     _vm._v(" "),
+    _c("div", { attrs: { id: "separator_bar" } }),
+    _vm._v(" "),
     _c(
-      "h1",
+      "div",
+      { staticClass: "form_container" },
       [
-        _vm._v("Form:\n        "),
+        _c("span", { attrs: { id: "form_title" } }, [_vm._v("Form:")]),
+        _vm._v(" "),
         _vm._l(_vm.lastTenForm, function(result) {
           return _c("span", { key: result }, [
             result === "W"
@@ -52784,6 +52820,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Teamform_vue_vue_type_template_id_221bb58c_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
+
+/***/ }),
+
+/***/ "./resources/js/components/light_wool.png":
+/*!************************************************!*\
+  !*** ./resources/js/components/light_wool.png ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/light_wool.png?30b87f688d085159b92f8adbf29c4fad";
 
 /***/ }),
 
