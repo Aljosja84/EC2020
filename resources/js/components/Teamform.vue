@@ -12,7 +12,9 @@
                     <a href="#" v-else-if="result === 'L'" class="form_button button_lose">{{ result }}</a>
                     <a href="#" v-else-if="result === 'D'" class="form_button button_draw">{{ result }}</a>
                 </span>
-
+        </div>
+        <div class="last_ten_matches_container">
+            {{ lastTenMatches }}
         </div>
     </div>
 </template>
@@ -27,19 +29,30 @@
                 formArr: [],
                 data: Object,
                 form: '',
+                lastTenMatches: []
             }
         },
 
         methods: {
             callData() {
+                // get the form info
                 axios.get("https://v3.football.api-sports.io/teams/statistics?league=4&season=2020&team=" + this.teamid, {
                     headers: {
                         "X-RapidAPI-Host": process.env.MIX_API_URL,
                         "X-RapidAPI-Key": process.env.MIX_API_KEY
                     }
                 }).then((response) => {
-                    //this.data = response.data.api.fixtures[0];
                     this.form = response.data.response.form;
+                });
+
+                // get the 10 last matches that correspondents with the form
+                axios.get("https://v3.football.api-sports.io/fixtures?team=" + this.teamid + "&last=10", {
+                    headers: {
+                        "X-RapidAPI-Host": process.env.MIX_API_URL,
+                        "X-RapidAPI-Key": process.env.MIX_API_KEY
+                    }
+                }).then((response) => {
+                    this.lastTenMatches = response.data.response;
                 });
             },
         },
@@ -55,8 +68,8 @@
 
         mounted() {
             console.log('Component mounted.');
-            //this.callData();
-            this.form = ["W", "L", "D", "D", "L", "W", "W", "L", "D", "W"];
+            this.callData();
+            //this.form = ["W", "L", "D", "D", "L", "W", "W", "L", "D", "W"];
         }
     }
 

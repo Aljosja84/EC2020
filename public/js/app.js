@@ -2303,6 +2303,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Teamform",
   props: ['details', 'flag', 'teamid'],
@@ -2310,13 +2312,15 @@ __webpack_require__.r(__webpack_exports__);
     return {
       formArr: [],
       data: Object,
-      form: ''
+      form: '',
+      lastTenMatches: []
     };
   },
   methods: {
     callData: function callData() {
       var _this = this;
 
+      // get the form info
       axios.get("https://v3.football.api-sports.io/teams/statistics?league=4&season=2020&team=" + this.teamid, {
         headers: {
           "X-RapidAPI-Host": "api-football-v1.p.rapidapi.com",
@@ -2325,6 +2329,16 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (response) {
         //this.data = response.data.api.fixtures[0];
         _this.form = response.data.response.form;
+      }); // get the 10 last matches that correspondents with the form
+
+      axios.get("https://v3.football.api-sports.io/fixtures?team=" + this.teamid + "&last=10", {
+        headers: {
+          "X-RapidAPI-Host": "api-football-v1.p.rapidapi.com",
+          "X-RapidAPI-Key": "b1ae4a3fca89630148dadaa295a0b5b7"
+        }
+      }).then(function (response) {
+        //this.data = response.data.api.fixtures[0];
+        _this.lastTenMatches = response.data.response;
       });
     }
   },
@@ -2336,9 +2350,8 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   mounted: function mounted() {
-    console.log('Component mounted.'); //this.callData();
-
-    this.form = ["W", "L", "D", "D", "L", "W", "W", "L", "D", "W"];
+    console.log('Component mounted.');
+    this.callData(); //this.form = ["W", "L", "D", "D", "L", "W", "W", "L", "D", "W"];
   }
 });
 
@@ -39695,7 +39708,11 @@ var render = function() {
         })
       ],
       2
-    )
+    ),
+    _vm._v(" "),
+    _c("div", { staticClass: "last_ten_matches_container" }, [
+      _vm._v("\n        " + _vm._s(_vm.lastTenMatches) + "\n    ")
+    ])
   ])
 }
 var staticRenderFns = []
