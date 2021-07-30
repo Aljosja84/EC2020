@@ -14,7 +14,7 @@
                 </span>
         </div>
         <div class="last_ten_matches_container">
-            {{ lastTenMatches }}
+
         </div>
     </div>
 </template>
@@ -28,50 +28,57 @@
             return {
                 formArr: [],
                 data: Object,
-                form: '',
-                lastTenMatches: []
+                lastTenMatches: [],
+                lastTenForm: [],
             }
         },
 
         methods: {
-            callData() {
-                // get the form info
-                axios.get("https://v3.football.api-sports.io/teams/statistics?league=4&season=2020&team=" + this.teamid, {
-                    headers: {
-                        "X-RapidAPI-Host": process.env.MIX_API_URL,
-                        "X-RapidAPI-Key": process.env.MIX_API_KEY
-                    }
-                }).then((response) => {
-                    this.form = response.data.response.form;
-                });
-
-                // get the 10 last matches that correspondents with the form
-                axios.get("https://v3.football.api-sports.io/fixtures?team=" + this.teamid + "&last=10", {
-                    headers: {
-                        "X-RapidAPI-Host": process.env.MIX_API_URL,
-                        "X-RapidAPI-Key": process.env.MIX_API_KEY
-                    }
-                }).then((response) => {
-                    this.lastTenMatches = response.data.response;
-                });
+            convertResult(e) {
+                let result;
+                switch(e) {
+                    case true:
+                        result = "W";
+                        break;
+                    case false:
+                        result = "L";
+                        break;
+                    case null:
+                        result = "D";
+                        break;
+                }
+                return result;
             },
+
+            sayHello() {
+                alert('Hello')
+            },
+
+            whichTeam(e) {
+               if(Number(e.teams.home.id) === Number(this.teamid)) {
+                   return this.convertResult(e.teams.home.winner);
+               }
+               return this.convertResult(e.teams.away.winner);
+            }
         },
 
         computed: {
-            // get the last ten games of the country/team
-            // and put them in an array so they each can be converted to buttons
-            lastTenForm: function() {
-                return Array.from(this.form.slice(this.form.length - 10));
-            }
+
         },
 
 
         mounted() {
-            console.log('Component mounted.');
-            this.callData();
-            //this.form = ["W", "L", "D", "D", "L", "W", "W", "L", "D", "W"];
-        }
+                // get the 10 last matches that correspondents with the form
+        axios.get("https://v3.football.api-sports.io/fixtures?team=" + this.teamid + "&last=10", {
+            headers: {
+                "X-RapidAPI-Host": process.env.MIX_API_URL,
+                "X-RapidAPI-Key": process.env.MIX_API_KEY
+            }
+        }).then((response) => {
+            response.data.response.forEach(element => this.lastTenForm.push(this.whichTeam(element)));
+        });
     }
+}
 
 </script>
 

@@ -21,8 +21,8 @@
   <component name="ChangeListManager">
     <list default="true" id="cf82d037-ce69-45df-857e-a29fb7732fae" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/Teamform.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Teamform.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/navi.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/navi.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -340,7 +340,8 @@
       <workItem from="1627401815218" duration="53000" />
       <workItem from="1627402005966" duration="1404000" />
       <workItem from="1627484507315" duration="4517000" />
-      <workItem from="1627569897387" duration="2066000" />
+      <workItem from="1627569897387" duration="4014000" />
+      <workItem from="1627657858862" duration="8664000" />
     </task>
     <servers />
   </component>

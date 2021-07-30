@@ -2312,46 +2312,56 @@ __webpack_require__.r(__webpack_exports__);
     return {
       formArr: [],
       data: Object,
-      form: '',
-      lastTenMatches: []
+      lastTenMatches: [],
+      lastTenForm: []
     };
   },
   methods: {
-    callData: function callData() {
-      var _this = this;
+    convertResult: function convertResult(e) {
+      var result;
 
-      // get the form info
-      axios.get("https://v3.football.api-sports.io/teams/statistics?league=4&season=2020&team=" + this.teamid, {
-        headers: {
-          "X-RapidAPI-Host": "api-football-v1.p.rapidapi.com",
-          "X-RapidAPI-Key": "b1ae4a3fca89630148dadaa295a0b5b7"
-        }
-      }).then(function (response) {
-        //this.data = response.data.api.fixtures[0];
-        _this.form = response.data.response.form;
-      }); // get the 10 last matches that correspondents with the form
+      switch (e) {
+        case true:
+          result = "W";
+          break;
 
-      axios.get("https://v3.football.api-sports.io/fixtures?team=" + this.teamid + "&last=10", {
-        headers: {
-          "X-RapidAPI-Host": "api-football-v1.p.rapidapi.com",
-          "X-RapidAPI-Key": "b1ae4a3fca89630148dadaa295a0b5b7"
-        }
-      }).then(function (response) {
-        //this.data = response.data.api.fixtures[0];
-        _this.lastTenMatches = response.data.response;
-      });
+        case false:
+          result = "L";
+          break;
+
+        case null:
+          result = "D";
+          break;
+      }
+
+      return result;
+    },
+    sayHello: function sayHello() {
+      alert('Hello');
+    },
+    whichTeam: function whichTeam(e) {
+      if (Number(e.teams.home.id) === Number(this.teamid)) {
+        return this.convertResult(e.teams.home.winner);
+      }
+
+      return this.convertResult(e.teams.away.winner);
     }
   },
-  computed: {
-    // get the last ten games of the country/team
-    // and put them in an array so they each can be converted to buttons
-    lastTenForm: function lastTenForm() {
-      return Array.from(this.form.slice(this.form.length - 10));
-    }
-  },
+  computed: {},
   mounted: function mounted() {
-    console.log('Component mounted.');
-    this.callData(); //this.form = ["W", "L", "D", "D", "L", "W", "W", "L", "D", "W"];
+    var _this = this;
+
+    // get the 10 last matches that correspondents with the form
+    axios.get("https://v3.football.api-sports.io/fixtures?team=" + this.teamid + "&last=10", {
+      headers: {
+        "X-RapidAPI-Host": "api-football-v1.p.rapidapi.com",
+        "X-RapidAPI-Key": "b1ae4a3fca89630148dadaa295a0b5b7"
+      }
+    }).then(function (response) {
+      response.data.response.forEach(function (element) {
+        return _this.lastTenForm.push(_this.whichTeam(element));
+      });
+    });
   }
 });
 
@@ -39710,9 +39720,7 @@ var render = function() {
       2
     ),
     _vm._v(" "),
-    _c("div", { staticClass: "last_ten_matches_container" }, [
-      _vm._v("\n        " + _vm._s(_vm.lastTenMatches) + "\n    ")
-    ])
+    _c("div", { staticClass: "last_ten_matches_container" })
   ])
 }
 var staticRenderFns = []
