@@ -2305,6 +2305,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Teamform",
   props: ['details', 'flag', 'teamid'],
@@ -2349,19 +2357,17 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {},
   mounted: function mounted() {
-    var _this = this;
-
+    /*
     // get the 10 last matches that correspondents with the form
     axios.get("https://v3.football.api-sports.io/fixtures?team=" + this.teamid + "&last=10", {
-      headers: {
-        "X-RapidAPI-Host": "api-football-v1.p.rapidapi.com",
-        "X-RapidAPI-Key": "b1ae4a3fca89630148dadaa295a0b5b7"
-      }
-    }).then(function (response) {
-      response.data.response.forEach(function (element) {
-        return _this.lastTenForm.push(_this.whichTeam(element));
-      });
+        headers: {
+            "X-RapidAPI-Host": process.env.MIX_API_URL,
+            "X-RapidAPI-Key": process.env.MIX_API_KEY
+        }
+    }).then((response) => {
+        response.data.response.forEach(element => this.lastTenForm.push(this.whichTeam(element)));
     });
+       */
   }
 });
 
@@ -7317,7 +7323,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.container[data-v-221bb58c] {\n    width: 335px;\n    height: 610px;\n    background-color: white;\n    padding: 0;\n}\n.team_header[data-v-221bb58c] {\n    display: inline-flex;\n    width: 100%;\n    font-family: 'Oswald', sans-serif;\n    font-size: 24px;\n    color: #515151;\n    text-transform: uppercase;\n    background-image: url(" + escape(__webpack_require__(/*! ./light_wool.png */ "./resources/js/components/light_wool.png")) + ");\n    padding: 10px 0 8px 15px;\n}\n.header_flag[data-v-221bb58c] {\n    height: 45px;\n    width: 45px;\n    margin-right: 17px;\n}\n.form_container[data-v-221bb58c] {\n    padding: 8px 0 0 5px;\n    height: 40px;\n    font-family: 'Oswald', sans-serif;\n    font-size: 18px;\n    text-transform: uppercase;\n    color: #515151;\n}\n#form_title[data-v-221bb58c] {\n    vertical-align: middle;\n}\n.form_button[data-v-221bb58c] {\n    min-width: 23px;\n    min-height: 23px;\n    max-width: 23px;\n    max-height: 23px;\n    font-family: \"Roboto\", sans-serif;\n    font-size: 11px;\n    background-color: #04AA6D;\n    border: none;\n    color: white;\n    padding: 6px;\n    text-align: center;\n    text-decoration: none;\n    display: inline-block;\n    margin: 4px 2px;\n    box-shadow: rgba(0, 0, 0, 0.18) 0px 5px 15px;\n}\n.button_win[data-v-221bb58c] {border-radius: 100%; background-color: #6bab4f;}\n.button_lose[data-v-221bb58c] {border-radius: 100%; background-color: #e83434;}\n.button_draw[data-v-221bb58c] {border-radius: 100%; background-color: lightgray;}\n#separator_bar[data-v-221bb58c] {\n    height: 2px;\n    background-image: linear-gradient(to right, transparent, #b5b5b5, transparent);\n}\n", ""]);
+exports.push([module.i, "\n.container[data-v-221bb58c] {\n    width: 335px;\n    height: 610px;\n    background-color: white;\n    padding: 0;\n}\n.team_header[data-v-221bb58c] {\n    display: inline-flex;\n    width: 100%;\n    font-family: 'Oswald', sans-serif;\n    font-size: 24px;\n    color: #515151;\n    text-transform: uppercase;\n    background-image: url(" + escape(__webpack_require__(/*! ./images/light_wool.png */ "./resources/js/components/images/light_wool.png")) + ");\n    padding: 10px 0 8px 15px;\n}\n.header_flag[data-v-221bb58c] {\n    height: 45px;\n    width: 45px;\n    margin-right: 17px;\n}\n.form_container[data-v-221bb58c] {\n    padding: 4px 0 0 5px;\n    height: 40px;\n    border-bottom: 1px solid #ccc;\n    font-family: 'Oswald', sans-serif;\n    font-size: 18px;\n    text-transform: uppercase;\n    color: #515151;\n}\n#form_title[data-v-221bb58c] {\n    vertical-align: middle;\n}\n.form_button[data-v-221bb58c] {\n    min-width: 23px;\n    min-height: 23px;\n    max-width: 23px;\n    max-height: 23px;\n    font-family: \"Roboto\", sans-serif;\n    font-size: 11px;\n    background-color: #04AA6D;\n    border: none;\n    color: white;\n    padding: 6px;\n    text-align: center;\n    text-decoration: none;\n    display: inline-block;\n    margin: 4px 2px;\n    box-shadow: rgba(0, 0, 0, 0.18) 0px 5px 15px;\n}\n.button_win[data-v-221bb58c] {border-radius: 100%; background-color: #6bab4f;}\n.button_lose[data-v-221bb58c] {border-radius: 100%; background-color: #e83434;}\n.button_draw[data-v-221bb58c] {border-radius: 100%; background-color: lightgray;}\n#separator_bar[data-v-221bb58c] {\n    height: 2px;\n    background-image: linear-gradient(to right, transparent, #b5b5b5, transparent);\n}\n.last_ten_matches_container[data-v-221bb58c] {\n    width: 100%;\n    height: inherit;\n}\n.scoreboard_header[data-v-221bb58c] {\n    position: relative;\n    z-index: 10;\n    background-image: url(" + escape(__webpack_require__(/*! ./images/light_wool.png */ "./resources/js/components/images/light_wool.png")) + ");\n    padding: 6px 0 4px 16px;\n    border-bottom: 1px solid #ccc;\n    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;\n}\n#scoreboard_icon[data-v-221bb58c] {\n}\n#scoreboard_title[data-v-221bb58c] {\n    padding-left: 20%;\n    font-family: 'Oswald', sans-serif;\n    font-size: 25px;\n    font-weight: inherit;\n    line-height: 24px;\n    vertical-align: top;\n    color: #c9d466;\n}\n#form_bg_gradient[data-v-221bb58c] {\n    z-index: 9;\n    height: 464px;\n    background: rgb(255,255,255);\n    background: linear-gradient(180deg, rgba(255,255,255,1) 16%, rgba(187,236,239,1) 100%);\n}\n", ""]);
 
 // exports
 
@@ -39720,10 +39726,36 @@ var render = function() {
       2
     ),
     _vm._v(" "),
-    _c("div", { staticClass: "last_ten_matches_container" })
+    _vm._m(0)
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "last_ten_matches_container" }, [
+      _c("div", { staticClass: "form_game_container" }, [
+        _c("div", { staticClass: "scoreboard_header" }, [
+          _c("img", {
+            attrs: {
+              id: "scoreboard_icon",
+              src: "/images/icons/scoreboard_icon.png"
+            }
+          }),
+          _vm._v(" "),
+          _c("span", { attrs: { id: "scoreboard_title" } }, [
+            _vm._v("SCOREBOARD")
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { attrs: { id: "form_bg_gradient" } }, [
+          _vm._v("\n                inhoud\n            ")
+        ])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -52848,10 +52880,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/light_wool.png":
-/*!************************************************!*\
-  !*** ./resources/js/components/light_wool.png ***!
-  \************************************************/
+/***/ "./resources/js/components/images/light_wool.png":
+/*!*******************************************************!*\
+  !*** ./resources/js/components/images/light_wool.png ***!
+  \*******************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 

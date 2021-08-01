@@ -14,7 +14,15 @@
                 </span>
         </div>
         <div class="last_ten_matches_container">
-
+            <div class="form_game_container">
+                <div class="scoreboard_header">
+                    <img id="scoreboard_icon" src="/images/icons/scoreboard_icon.png">
+                    <span id="scoreboard_title">SCOREBOARD</span>
+                </div>
+                <div id="form_bg_gradient">
+                    inhoud
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -68,18 +76,22 @@
 
 
         mounted() {
-                // get the 10 last matches that correspondents with the form
-        axios.get("https://v3.football.api-sports.io/fixtures?team=" + this.teamid + "&last=10", {
-            headers: {
-                "X-RapidAPI-Host": process.env.MIX_API_URL,
-                "X-RapidAPI-Key": process.env.MIX_API_KEY
-            }
-        }).then((response) => {
-            response.data.response.forEach(element => this.lastTenForm.push(this.whichTeam(element)));
-        });
-    }
-}
+            /*
+            // get the 10 last matches that correspondents with the form
+            axios.get("https://v3.football.api-sports.io/fixtures?team=" + this.teamid + "&last=10", {
+                headers: {
+                    "X-RapidAPI-Host": process.env.MIX_API_URL,
+                    "X-RapidAPI-Key": process.env.MIX_API_KEY
+                }
+            }).then((response) => {
+                response.data.response.forEach(element => this.lastTenForm.push(this.whichTeam(element)));
+            });
 
+
+             */
+
+        }
+    }
 </script>
 
 <style scoped>
@@ -97,7 +109,7 @@
         font-size: 24px;
         color: #515151;
         text-transform: uppercase;
-        background-image: url("light_wool.png");
+        background-image: url("images/light_wool.png");
         padding: 10px 0 8px 15px;
     }
 
@@ -108,8 +120,9 @@
     }
 
     .form_container {
-        padding: 8px 0 0 5px;
+        padding: 4px 0 0 5px;
         height: 40px;
+        border-bottom: 1px solid #ccc;
         font-family: 'Oswald', sans-serif;
         font-size: 18px;
         text-transform: uppercase;
@@ -145,5 +158,40 @@
     #separator_bar {
         height: 2px;
         background-image: linear-gradient(to right, transparent, #b5b5b5, transparent);
+    }
+
+    .last_ten_matches_container {
+        width: 100%;
+        height: inherit;
+    }
+
+    .scoreboard_header {
+        position: relative;
+        z-index: 10;
+        background-image: url("images/light_wool.png");
+        padding: 6px 0 4px 16px;
+        border-bottom: 1px solid #ccc;
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+    }
+
+    #scoreboard_icon {
+
+    }
+
+    #scoreboard_title {
+        padding-left: 20%;
+        font-family: 'Oswald', sans-serif;
+        font-size: 25px;
+        font-weight: inherit;
+        line-height: 24px;
+        vertical-align: top;
+        color: #c9d466;
+    }
+
+    #form_bg_gradient {
+        z-index: 9;
+        height: 464px;
+        background: rgb(255,255,255);
+        background: linear-gradient(180deg, rgba(255,255,255,1) 16%, rgba(187,236,239,1) 100%);
     }
 </style>
