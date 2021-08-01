@@ -6,7 +6,7 @@
         </div>
         <div id="separator_bar"></div>
         <div class="form_container">
-            <span id="form_title">Form:</span>
+            <span id="form_title">Form</span>
                 <span v-for="result in lastTenForm" :key="result">
                     <a href="#" v-if="result === 'W'" class="form_button button_win">{{ result }}</a>
                     <a href="#" v-else-if="result === 'L'" class="form_button button_lose">{{ result }}</a>
@@ -20,7 +20,32 @@
                     <span id="scoreboard_title">SCOREBOARD</span>
                 </div>
                 <div id="form_bg_gradient">
-                    inhoud
+                    <div class="scoreboard_content">
+                        <table class="form_table">
+                            <tr>
+                                <td><img id="form_home_flag" src="/images/finland_api.png"></td>
+                                <td>{{ sayHello() }}</td>
+                                <td style="width: 35px; text-align: center; font-size: 16px">2 - 4</td>
+                                <td style="text-align: right">Spain</td>
+                                <td style="text-align: right"><img id="form_away_flag" src="/images/belgium_api.png"></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td class="form_goals" style="vertical-align: top">
+                                    21’ Onni Valakari<br>
+                                    66’ J. Pohjanpalo
+                                </td>
+                                <td></td>
+                                <td class="form_goals" style="text-align: right; vertical-align: top">
+                                    Ferran Torres ‘7<br>
+                                    Ferran Torres’ 14<br>
+                                    Gerard Moreno ‘51<br>
+                                    Fabián Ruiz ’88
+                                </td>
+                                <td></td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -59,7 +84,7 @@
             },
 
             sayHello() {
-                alert('Hello')
+                return 'Hello';
             },
 
             whichTeam(e) {
@@ -87,9 +112,7 @@
                 response.data.response.forEach(element => this.lastTenForm.push(this.whichTeam(element)));
             });
 
-
              */
-
         }
     }
 </script>
@@ -120,8 +143,8 @@
     }
 
     .form_container {
-        padding: 4px 0 0 5px;
-        height: 40px;
+        padding: 4px 0 0 16px;
+        height: 38px;
         border-bottom: 1px solid #ccc;
         font-family: 'Oswald', sans-serif;
         font-size: 18px;
@@ -170,6 +193,7 @@
         z-index: 10;
         background-image: url("images/light_wool.png");
         padding: 6px 0 4px 16px;
+        border-top: 1px solid whitesmoke;
         border-bottom: 1px solid #ccc;
         box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
     }
@@ -190,8 +214,44 @@
 
     #form_bg_gradient {
         z-index: 9;
-        height: 464px;
+        height: 466px;
         background: rgb(255,255,255);
         background: linear-gradient(180deg, rgba(255,255,255,1) 16%, rgba(187,236,239,1) 100%);
+    }
+
+    .scoreboard_content {
+        padding: 12px 16px 6px 16px;
+    }
+
+    .scoreboard_content table{
+        width: 100%;
+        border: none;
+    }
+
+    .scoreboard_content td {
+        border: none;
+    }
+
+    .form_table {
+        font-family: "Roboto", sans-serif;
+        font-size: 14px;
+        color: #515151;
+    }
+    #form_home_flag {
+        width: 22px;
+        height: 22px;
+        border-radius: 100%;
+    }
+
+    #form_away_flag {
+        width: 22px;
+        height: 22px;
+        border-radius: 100%;
+    }
+
+    .form_goals {
+        font-family: "Roboto", sans-serif;
+        font-size: 11px;
+        color: #c6c4c4;
     }
 </style>
