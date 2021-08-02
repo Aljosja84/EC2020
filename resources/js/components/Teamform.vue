@@ -20,6 +20,7 @@
                     <span id="scoreboard_title">SCOREBOARD</span>
                 </div>
                 <div id="form_bg_gradient">
+                    <!-- scoreboard content ------------------------------------------------------------------------------>
                     <div class="scoreboard_content">
                         <table class="form_table">
                             <tr>
@@ -45,6 +46,46 @@
                                 <td></td>
                             </tr>
                         </table>
+                    </div>
+                    <!-- time & date content ----------------------------------------------------------------------------->
+                    <div class="timedate_header">
+                        <img src="/images/icons/timedate_icon.png" style="margin-top: 4px">
+                        <span id="timedate_title">DATE AND TIME</span>
+                    </div>
+                    <div class="timedate_content">
+                        Saturday June 29 - 16:00
+                    </div>
+                    <!-- venue content ----------------------------------------------------------------------------------->
+                    <div class="timedate_header">
+                        <img src="/images/icons/venue_icon.png" style="margin-top: 4px">
+                        <span id="venue_title">VENUE</span>
+                    </div>
+                    <div class="timedate_content">
+                        Ferenc Puskas, Budapest
+                    </div>
+                    <!-- referee content --------------------------------------------------------------------------------->
+                    <div class="timedate_header">
+                        <img src="/images/icons/ref_icon.png" style="margin-top: 4px">
+                        <span id="ref_title">REFEREE</span>
+                    </div>
+                    <div class="timedate_content">
+                        Sergei Karasev, Russia
+                    </div>
+                    <!-- league content ---------------------------------------------------------------------------------->
+                    <div class="timedate_header">
+                        <img src="/images/icons/league_icon.png" style="margin-top: 4px">
+                        <span id="league_title">LEAGUE</span>
+                    </div>
+                    <div class="timedate_content">
+                        Euro Championship
+                    </div>
+                    <!-- formations content ------------------------------------------------------------------------------>
+                    <div class="timedate_header">
+                        <img src="/images/icons/formations_icon.png" style="margin-top: 4px">
+                        <span id="formation_title">FORMATIONS</span>
+                    </div>
+                    <div class="timedate_content">
+                        <div id="formation_content"><div style="float: left">4-3-3</div><div style="float: right">3-5-2</div></div>
                     </div>
                 </div>
             </div>
@@ -212,6 +253,11 @@
         color: #c9d466;
     }
 
+    .scoreboard_content {
+        padding: 12px 16px 6px 16px;
+        border-bottom: 1px solid #ccc
+    }
+
     #form_bg_gradient {
         z-index: 9;
         height: 466px;
@@ -219,9 +265,7 @@
         background: linear-gradient(180deg, rgba(255,255,255,1) 16%, rgba(187,236,239,1) 100%);
     }
 
-    .scoreboard_content {
-        padding: 12px 16px 6px 16px;
-    }
+
 
     .scoreboard_content table{
         width: 100%;
@@ -253,5 +297,65 @@
         font-family: "Roboto", sans-serif;
         font-size: 11px;
         color: #c6c4c4;
+    }
+
+    .timedate_header {
+        padding: 0 16px 6px 16px;
+        line-height: 1px;
+        height: 35px;
+        border-bottom: 1px solid #ccc;
+        vertical-align: middle;
+    }
+
+    #timedate_title {
+         padding-left: 20%;
+         font-family: 'Oswald', sans-serif;
+         font-size: 24px;
+         font-weight: inherit;
+         color: #ba7fb1;
+     }
+    #venue_title {
+        padding-left: 30%;
+        vertical-align: top;
+        font-family: 'Oswald', sans-serif;
+        font-size: 24px;
+        font-weight: inherit;
+        color: #67bee9;
+        line-height: 32px;
+    }
+    #ref_title {
+        padding-left: 25%;
+        vertical-align: top;
+        font-family: 'Oswald', sans-serif;
+        font-size: 24px;
+        font-weight: inherit;
+        color: #e58d37;
+        line-height: 32px;
+    }
+    #league_title {
+        padding-left: 30%;
+        vertical-align: text-top;
+        font-family: 'Oswald', sans-serif;
+        font-size: 24px;
+        font-weight: inherit;
+        color: #c34c26;
+    }
+    #formation_title {
+        padding-left: 20%;
+        vertical-align: text-top;
+        font-family: 'Oswald', sans-serif;
+        font-size: 24px;
+        font-weight: inherit;
+        color: #297c9b;
+    }
+
+    .timedate_content {
+        padding: 8px 16px 4px 16px;
+        border-bottom: 1px solid #ccc;
+        text-align: center;
+        font-family: "Roboto", sans-serif;
+        font-size: 14px;
+        color: #515151;
+        height: 38px;
     }
 </style>

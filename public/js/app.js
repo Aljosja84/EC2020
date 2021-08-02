@@ -2338,6 +2338,47 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Teamform",
   props: ['details', 'flag', 'teamid'],
@@ -7348,7 +7389,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.container[data-v-221bb58c] {\n    width: 335px;\n    height: 610px;\n    background-color: white;\n    padding: 0;\n}\n.team_header[data-v-221bb58c] {\n    display: inline-flex;\n    width: 100%;\n    font-family: 'Oswald', sans-serif;\n    font-size: 24px;\n    color: #515151;\n    text-transform: uppercase;\n    background-image: url(" + escape(__webpack_require__(/*! ./images/light_wool.png */ "./resources/js/components/images/light_wool.png")) + ");\n    padding: 10px 0 8px 15px;\n}\n.header_flag[data-v-221bb58c] {\n    height: 45px;\n    width: 45px;\n    margin-right: 17px;\n}\n.form_container[data-v-221bb58c] {\n    padding: 4px 0 0 16px;\n    height: 38px;\n    border-bottom: 1px solid #ccc;\n    font-family: 'Oswald', sans-serif;\n    font-size: 18px;\n    text-transform: uppercase;\n    color: #515151;\n}\n#form_title[data-v-221bb58c] {\n    vertical-align: middle;\n}\n.form_button[data-v-221bb58c] {\n    min-width: 23px;\n    min-height: 23px;\n    max-width: 23px;\n    max-height: 23px;\n    font-family: \"Roboto\", sans-serif;\n    font-size: 11px;\n    background-color: #04AA6D;\n    border: none;\n    color: white;\n    padding: 6px;\n    text-align: center;\n    text-decoration: none;\n    display: inline-block;\n    margin: 4px 2px;\n    box-shadow: rgba(0, 0, 0, 0.18) 0px 5px 15px;\n}\n.button_win[data-v-221bb58c] {border-radius: 100%; background-color: #6bab4f;}\n.button_lose[data-v-221bb58c] {border-radius: 100%; background-color: #e83434;}\n.button_draw[data-v-221bb58c] {border-radius: 100%; background-color: lightgray;}\n#separator_bar[data-v-221bb58c] {\n    height: 2px;\n    background-image: linear-gradient(to right, transparent, #b5b5b5, transparent);\n}\n.last_ten_matches_container[data-v-221bb58c] {\n    width: 100%;\n    height: inherit;\n}\n.scoreboard_header[data-v-221bb58c] {\n    position: relative;\n    z-index: 10;\n    background-image: url(" + escape(__webpack_require__(/*! ./images/light_wool.png */ "./resources/js/components/images/light_wool.png")) + ");\n    padding: 6px 0 4px 16px;\n    border-top: 1px solid whitesmoke;\n    border-bottom: 1px solid #ccc;\n    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;\n}\n#scoreboard_icon[data-v-221bb58c] {\n}\n#scoreboard_title[data-v-221bb58c] {\n    padding-left: 20%;\n    font-family: 'Oswald', sans-serif;\n    font-size: 25px;\n    font-weight: inherit;\n    line-height: 24px;\n    vertical-align: top;\n    color: #c9d466;\n}\n#form_bg_gradient[data-v-221bb58c] {\n    z-index: 9;\n    height: 466px;\n    background: rgb(255,255,255);\n    background: linear-gradient(180deg, rgba(255,255,255,1) 16%, rgba(187,236,239,1) 100%);\n}\n.scoreboard_content[data-v-221bb58c] {\n    padding: 12px 16px 6px 16px;\n}\n.scoreboard_content table[data-v-221bb58c]{\n    width: 100%;\n    border: none;\n}\n.scoreboard_content td[data-v-221bb58c] {\n    border: none;\n}\n.form_table[data-v-221bb58c] {\n    font-family: \"Roboto\", sans-serif;\n    font-size: 14px;\n    color: #515151;\n}\n#form_home_flag[data-v-221bb58c] {\n    width: 22px;\n    height: 22px;\n    border-radius: 100%;\n}\n#form_away_flag[data-v-221bb58c] {\n    width: 22px;\n    height: 22px;\n    border-radius: 100%;\n}\n.form_goals[data-v-221bb58c] {\n    font-family: \"Roboto\", sans-serif;\n    font-size: 11px;\n    color: #c6c4c4;\n}\n", ""]);
+exports.push([module.i, "\n.container[data-v-221bb58c] {\n    width: 335px;\n    height: 610px;\n    background-color: white;\n    padding: 0;\n}\n.team_header[data-v-221bb58c] {\n    display: inline-flex;\n    width: 100%;\n    font-family: 'Oswald', sans-serif;\n    font-size: 24px;\n    color: #515151;\n    text-transform: uppercase;\n    background-image: url(" + escape(__webpack_require__(/*! ./images/light_wool.png */ "./resources/js/components/images/light_wool.png")) + ");\n    padding: 10px 0 8px 15px;\n}\n.header_flag[data-v-221bb58c] {\n    height: 45px;\n    width: 45px;\n    margin-right: 17px;\n}\n.form_container[data-v-221bb58c] {\n    padding: 4px 0 0 16px;\n    height: 38px;\n    border-bottom: 1px solid #ccc;\n    font-family: 'Oswald', sans-serif;\n    font-size: 18px;\n    text-transform: uppercase;\n    color: #515151;\n}\n#form_title[data-v-221bb58c] {\n    vertical-align: middle;\n}\n.form_button[data-v-221bb58c] {\n    min-width: 23px;\n    min-height: 23px;\n    max-width: 23px;\n    max-height: 23px;\n    font-family: \"Roboto\", sans-serif;\n    font-size: 11px;\n    background-color: #04AA6D;\n    border: none;\n    color: white;\n    padding: 6px;\n    text-align: center;\n    text-decoration: none;\n    display: inline-block;\n    margin: 4px 2px;\n    box-shadow: rgba(0, 0, 0, 0.18) 0px 5px 15px;\n}\n.button_win[data-v-221bb58c] {border-radius: 100%; background-color: #6bab4f;}\n.button_lose[data-v-221bb58c] {border-radius: 100%; background-color: #e83434;}\n.button_draw[data-v-221bb58c] {border-radius: 100%; background-color: lightgray;}\n#separator_bar[data-v-221bb58c] {\n    height: 2px;\n    background-image: linear-gradient(to right, transparent, #b5b5b5, transparent);\n}\n.last_ten_matches_container[data-v-221bb58c] {\n    width: 100%;\n    height: inherit;\n}\n.scoreboard_header[data-v-221bb58c] {\n    position: relative;\n    z-index: 10;\n    background-image: url(" + escape(__webpack_require__(/*! ./images/light_wool.png */ "./resources/js/components/images/light_wool.png")) + ");\n    padding: 6px 0 4px 16px;\n    border-top: 1px solid whitesmoke;\n    border-bottom: 1px solid #ccc;\n    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;\n}\n#scoreboard_icon[data-v-221bb58c] {\n}\n#scoreboard_title[data-v-221bb58c] {\n    padding-left: 20%;\n    font-family: 'Oswald', sans-serif;\n    font-size: 25px;\n    font-weight: inherit;\n    line-height: 24px;\n    vertical-align: top;\n    color: #c9d466;\n}\n.scoreboard_content[data-v-221bb58c] {\n    padding: 12px 16px 6px 16px;\n    border-bottom: 1px solid #ccc\n}\n#form_bg_gradient[data-v-221bb58c] {\n    z-index: 9;\n    height: 466px;\n    background: rgb(255,255,255);\n    background: linear-gradient(180deg, rgba(255,255,255,1) 16%, rgba(187,236,239,1) 100%);\n}\n.scoreboard_content table[data-v-221bb58c]{\n    width: 100%;\n    border: none;\n}\n.scoreboard_content td[data-v-221bb58c] {\n    border: none;\n}\n.form_table[data-v-221bb58c] {\n    font-family: \"Roboto\", sans-serif;\n    font-size: 14px;\n    color: #515151;\n}\n#form_home_flag[data-v-221bb58c] {\n    width: 22px;\n    height: 22px;\n    border-radius: 100%;\n}\n#form_away_flag[data-v-221bb58c] {\n    width: 22px;\n    height: 22px;\n    border-radius: 100%;\n}\n.form_goals[data-v-221bb58c] {\n    font-family: \"Roboto\", sans-serif;\n    font-size: 11px;\n    color: #c6c4c4;\n}\n.timedate_header[data-v-221bb58c] {\n    padding: 0 16px 6px 16px;\n    line-height: 1px;\n    height: 35px;\n    border-bottom: 1px solid #ccc;\n    vertical-align: middle;\n}\n#timedate_title[data-v-221bb58c] {\n     padding-left: 20%;\n     font-family: 'Oswald', sans-serif;\n     font-size: 24px;\n     font-weight: inherit;\n     color: #ba7fb1;\n}\n#venue_title[data-v-221bb58c] {\n    padding-left: 30%;\n    vertical-align: top;\n    font-family: 'Oswald', sans-serif;\n    font-size: 24px;\n    font-weight: inherit;\n    color: #67bee9;\n    line-height: 32px;\n}\n#ref_title[data-v-221bb58c] {\n    padding-left: 25%;\n    vertical-align: top;\n    font-family: 'Oswald', sans-serif;\n    font-size: 24px;\n    font-weight: inherit;\n    color: #e58d37;\n    line-height: 32px;\n}\n#league_title[data-v-221bb58c] {\n    padding-left: 30%;\n    vertical-align: text-top;\n    font-family: 'Oswald', sans-serif;\n    font-size: 24px;\n    font-weight: inherit;\n    color: #c34c26;\n}\n#formation_title[data-v-221bb58c] {\n    padding-left: 20%;\n    vertical-align: text-top;\n    font-family: 'Oswald', sans-serif;\n    font-size: 24px;\n    font-weight: inherit;\n    color: #297c9b;\n}\n.timedate_content[data-v-221bb58c] {\n    padding: 8px 16px 4px 16px;\n    border-bottom: 1px solid #ccc;\n    text-align: center;\n    font-family: \"Roboto\", sans-serif;\n    font-size: 14px;\n    color: #515151;\n    height: 38px;\n}\n", ""]);
 
 // exports
 
@@ -39784,7 +39825,41 @@ var render = function() {
               _vm._v(" "),
               _vm._m(3)
             ])
-          ])
+          ]),
+          _vm._v(" "),
+          _vm._m(4),
+          _vm._v(" "),
+          _c("div", { staticClass: "timedate_content" }, [
+            _vm._v(
+              "\n                    Saturday June 29 - 16:00\n                "
+            )
+          ]),
+          _vm._v(" "),
+          _vm._m(5),
+          _vm._v(" "),
+          _c("div", { staticClass: "timedate_content" }, [
+            _vm._v(
+              "\n                    Ferenc Puskas, Budapest\n                "
+            )
+          ]),
+          _vm._v(" "),
+          _vm._m(6),
+          _vm._v(" "),
+          _c("div", { staticClass: "timedate_content" }, [
+            _vm._v(
+              "\n                    Sergei Karasev, Russia\n                "
+            )
+          ]),
+          _vm._v(" "),
+          _vm._m(7),
+          _vm._v(" "),
+          _c("div", { staticClass: "timedate_content" }, [
+            _vm._v("\n                    Euro Championship\n                ")
+          ]),
+          _vm._v(" "),
+          _vm._m(8),
+          _vm._v(" "),
+          _vm._m(9)
         ])
       ])
     ])
@@ -39867,6 +39942,82 @@ var staticRenderFns = [
       ),
       _vm._v(" "),
       _c("td")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "timedate_header" }, [
+      _c("img", {
+        staticStyle: { "margin-top": "4px" },
+        attrs: { src: "/images/icons/timedate_icon.png" }
+      }),
+      _vm._v(" "),
+      _c("span", { attrs: { id: "timedate_title" } }, [_vm._v("DATE AND TIME")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "timedate_header" }, [
+      _c("img", {
+        staticStyle: { "margin-top": "4px" },
+        attrs: { src: "/images/icons/venue_icon.png" }
+      }),
+      _vm._v(" "),
+      _c("span", { attrs: { id: "venue_title" } }, [_vm._v("VENUE")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "timedate_header" }, [
+      _c("img", {
+        staticStyle: { "margin-top": "4px" },
+        attrs: { src: "/images/icons/ref_icon.png" }
+      }),
+      _vm._v(" "),
+      _c("span", { attrs: { id: "ref_title" } }, [_vm._v("REFEREE")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "timedate_header" }, [
+      _c("img", {
+        staticStyle: { "margin-top": "4px" },
+        attrs: { src: "/images/icons/league_icon.png" }
+      }),
+      _vm._v(" "),
+      _c("span", { attrs: { id: "league_title" } }, [_vm._v("LEAGUE")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "timedate_header" }, [
+      _c("img", {
+        staticStyle: { "margin-top": "4px" },
+        attrs: { src: "/images/icons/formations_icon.png" }
+      }),
+      _vm._v(" "),
+      _c("span", { attrs: { id: "formation_title" } }, [_vm._v("FORMATIONS")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "timedate_content" }, [
+      _c("div", { attrs: { id: "formation_content" } }, [
+        _c("div", { staticStyle: { float: "left" } }, [_vm._v("4-3-3")]),
+        _c("div", { staticStyle: { float: "right" } }, [_vm._v("3-5-2")])
+      ])
     ])
   }
 ]

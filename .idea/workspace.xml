@@ -182,17 +182,17 @@
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\EC2020\public\images\icons" />
+      <recent name="C:\xampp\htdocs\EC2020\resources\js\components\images" />
+      <recent name="C:\xampp\htdocs\EC2020\public\images" />
+      <recent name="C:\xampp\htdocs\EC2020\public\images\country_flags" />
+      <recent name="C:\xampp\htdocs\EC2020\public\js" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\xampp\htdocs\EC2020\public\images" />
       <recent name="C:\xampp\htdocs\EC2020\resources\js\components\images" />
       <recent name="C:\xampp\htdocs\EC2020\resources\js\components" />
-      <recent name="C:\xampp\htdocs\EC2020\public\images\country_flags" />
-      <recent name="C:\xampp\htdocs\EC2020\public\js" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\xampp\htdocs\EC2020\resources\js\components\images" />
-      <recent name="C:\xampp\htdocs\EC2020\public\images\icons" />
-      <recent name="C:\xampp\htdocs\EC2020\public\images" />
       <recent name="C:\xampp\htdocs\EC2020\public\images\country_flags" />
       <recent name="C:\xampp\htdocs\EC2020\public\js" />
     </key>
@@ -346,7 +346,9 @@
       <workItem from="1627657858862" duration="9275000" />
       <workItem from="1627674442053" duration="89000" />
       <workItem from="1627674847127" duration="403000" />
-      <workItem from="1627825426830" duration="9892000" />
+      <workItem from="1627825426830" duration="10188000" />
+      <workItem from="1627894722400" duration="86000" />
+      <workItem from="1627899321092" duration="5950000" />
     </task>
     <servers />
   </component>
@@ -378,9 +380,9 @@
       <screen x="0" y="0" width="3840" height="1570" />
     </state>
     <state x="594" y="708" key="NewPhpFileDialog/0.0.3840.1570@0.0.3840.1570" timestamp="1621949533182" />
-    <state x="277" y="361" width="672" height="678" key="search.everywhere.popup" timestamp="1627847456135">
+    <state x="277" y="361" width="672" height="678" key="search.everywhere.popup" timestamp="1627899672667">
       <screen x="0" y="0" width="3840" height="1570" />
     </state>
-    <state x="277" y="361" width="672" height="678" key="search.everywhere.popup/0.0.3840.1570@0.0.3840.1570" timestamp="1627847456135" />
+    <state x="277" y="361" width="672" height="678" key="search.everywhere.popup/0.0.3840.1570@0.0.3840.1570" timestamp="1627899672667" />
   </component>
 </project>
