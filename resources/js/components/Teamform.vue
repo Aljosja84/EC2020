@@ -24,11 +24,11 @@
                     <div class="scoreboard_content">
                         <table class="form_table">
                             <tr>
-                                <td><img id="form_home_flag" src="/images/finland_api.png"></td>
-                                <td>{{ sayHello() }}</td>
-                                <td style="width: 35px; text-align: center; font-size: 16px">2 - 4</td>
-                                <td style="text-align: right">Spain</td>
-                                <td style="text-align: right"><img id="form_away_flag" src="/images/belgium_api.png"></td>
+                                <td><img id="form_home_flag" :src=lastTenMatches.teams.home.logo></td>
+                                <td>{{ lastTenMatches.teams.home.name }}</td>
+                                <td style="width: 35px; text-align: center; font-size: 16px"><span>{{ lastTenMatches.goals.home}}</span> - <span>{{ lastTenMatches.goals.away }}</span></td>
+                                <td style="text-align: right">{{ lastTenMatches.teams.away.name }}</td>
+                                <td style="text-align: right"><img id="form_away_flag" :src=lastTenMatches.teams.away.logo></td>
                             </tr>
                             <tr>
                                 <td></td>
@@ -53,7 +53,7 @@
                         <span id="timedate_title">DATE AND TIME</span>
                     </div>
                     <div class="timedate_content">
-                        Saturday June 29 - 16:00
+                        {{ convertdatetime(lastTenMatches.fixture.timestamp) }}
                     </div>
                     <!-- venue content ----------------------------------------------------------------------------------->
                     <div class="timedate_header">
@@ -61,7 +61,7 @@
                         <span id="venue_title">VENUE</span>
                     </div>
                     <div class="timedate_content">
-                        Ferenc Puskas, Budapest
+                        {{ lastTenMatches.fixture.venue.name + ', ' + lastTenMatches.fixture.venue.city }}
                     </div>
                     <!-- referee content --------------------------------------------------------------------------------->
                     <div class="timedate_header">
@@ -69,7 +69,7 @@
                         <span id="ref_title">REFEREE</span>
                     </div>
                     <div class="timedate_content">
-                        Sergei Karasev, Russia
+                        {{ lastTenMatches.fixture.referee }}
                     </div>
                     <!-- league content ---------------------------------------------------------------------------------->
                     <div class="timedate_header">
@@ -77,7 +77,7 @@
                         <span id="league_title">LEAGUE</span>
                     </div>
                     <div class="timedate_content">
-                        Euro Championship
+                        {{ lastTenMatches.league.name }}<span v-if="lastTenMatches.league.round">, {{ lastTenMatches.league.round }}</span>
                     </div>
                     <!-- formations content ------------------------------------------------------------------------------>
                     <div class="timedate_header">
@@ -104,6 +104,7 @@
                 data: Object,
                 lastTenMatches: [],
                 lastTenForm: [],
+                timestamp: null
             }
         },
 
@@ -128,6 +129,29 @@
                 return 'Hello';
             },
 
+            convertdatetime(e) {
+                // Months array
+                var months_arr = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+                // Day array
+                var days_arr = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+                // Convert timestamp to milliseconds
+                var date = new Date(e*1000);
+                // Year
+                var year = date.getFullYear();
+                // Month
+                var month = months_arr[date.getMonth()];
+                // Day
+                var day = date.getDate();
+                // Name of day
+                var dayOfWeek = days_arr[date.getDay()];
+                // Hours
+                var hours = date.getHours();
+                // Minutes
+                var minutes = "0" + date.getMinutes();
+                // final date
+                return dayOfWeek + ' ' + month + ' ' + day + ' ' + year + ' - ' + hours + ':' + minutes
+            },
+
             whichTeam(e) {
                if(Number(e.teams.home.id) === Number(this.teamid)) {
                    return this.convertResult(e.teams.home.winner);
@@ -142,7 +166,6 @@
 
 
         mounted() {
-            /*
             // get the 10 last matches that correspondents with the form
             axios.get("https://v3.football.api-sports.io/fixtures?team=" + this.teamid + "&last=10", {
                 headers: {
@@ -151,9 +174,10 @@
                 }
             }).then((response) => {
                 response.data.response.forEach(element => this.lastTenForm.push(this.whichTeam(element)));
+                this.lastTenMatches = response.data.response[0]
+                console.log(this.lastTenMatches);
             });
 
-             */
         }
     }
 </script>
@@ -163,7 +187,8 @@
         width: 335px;
         height: 610px;
         background-color: white;
-        padding: 0;
+        float: left;
+        margin-left: -9px;
     }
 
     .team_header {
