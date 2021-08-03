@@ -2379,6 +2379,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Teamform",
   props: ['details', 'flag', 'teamid'],
@@ -2388,11 +2395,44 @@ __webpack_require__.r(__webpack_exports__);
       data: Object,
       lastTenMatches: [],
       lastTenForm: [],
-      timestamp: null
+      timestamp: null,
+      imagesource: null,
+      whoscored: {}
     };
   },
   methods: {
+    // get an array of goals scored in a particular match for the home or away team.
+    whoScored: function whoScored(e) {
+      var _this = this;
+
+      // get the 10 last matches that correspondents with the form
+      axios.get("https://v3.football.api-sports.io/fixtures/events?fixture=" + e + "&type=Goal", {
+        headers: {
+          "X-RapidAPI-Host": "api-football-v1.p.rapidapi.com",
+          "X-RapidAPI-Key": "b1ae4a3fca89630148dadaa295a0b5b7"
+        }
+      }).then(function (response) {
+        _this.whoscored[e] = response.data.response;
+      });
+    },
+    flagloc: function flagloc(e) {
+      // return the proper format of the file path
+      return "/images/country_flags/" + e + ".png";
+    },
+    flagfile: function flagfile(e) {
+      // check if the flag .png exists, if not -> use the lesser quality api png
+      var xhr = new XMLHttpRequest();
+      xhr.open('HEAD', "/images/country_flags/" + e + ".png", false);
+      xhr.send();
+
+      if (xhr.status == "404") {
+        return false;
+      } else {
+        return true;
+      }
+    },
     convertResult: function convertResult(e) {
+      // we convert a boolean value on the 'winner' field to a W L D value
       var result;
 
       switch (e) {
@@ -2412,6 +2452,7 @@ __webpack_require__.r(__webpack_exports__);
       return result;
     },
     sayHello: function sayHello() {
+      // Say cheeeeeese :D
       return 'Hello';
     },
     convertdatetime: function convertdatetime(e) {
@@ -2446,7 +2487,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {},
   mounted: function mounted() {
-    var _this = this;
+    var _this2 = this;
 
     // get the 10 last matches that correspondents with the form
     axios.get("https://v3.football.api-sports.io/fixtures?team=" + this.teamid + "&last=10", {
@@ -2456,10 +2497,11 @@ __webpack_require__.r(__webpack_exports__);
       }
     }).then(function (response) {
       response.data.response.forEach(function (element) {
-        return _this.lastTenForm.push(_this.whichTeam(element));
+        return _this2.lastTenForm.push(_this2.whichTeam(element));
       });
-      _this.lastTenMatches = response.data.response[0];
-      console.log(_this.lastTenMatches);
+      _this2.lastTenMatches = response.data.response[0];
+
+      _this2.whoScored(response.data.response[0].fixture.id);
     });
   }
 });
@@ -39828,12 +39870,21 @@ var render = function() {
             _c("table", { staticClass: "form_table" }, [
               _c("tr", [
                 _c("td", [
-                  _c("img", {
-                    attrs: {
-                      id: "form_home_flag",
-                      src: _vm.lastTenMatches.teams.home.logo
-                    }
-                  })
+                  _vm.flagfile(_vm.lastTenMatches.teams.home.id)
+                    ? _c("img", {
+                        attrs: {
+                          id: "form_home_flag",
+                          src: _vm.flagloc(_vm.lastTenMatches.teams.home.id)
+                        }
+                      })
+                    : !_vm.flagfile()
+                    ? _c("img", {
+                        attrs: {
+                          id: "form_home_flag",
+                          src: _vm.lastTenMatches.teams.home.logo
+                        }
+                      })
+                    : _vm._e()
                 ]),
                 _vm._v(" "),
                 _c("td", [_vm._v(_vm._s(_vm.lastTenMatches.teams.home.name))]),
@@ -39859,12 +39910,21 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("td", { staticStyle: { "text-align": "right" } }, [
-                  _c("img", {
-                    attrs: {
-                      id: "form_away_flag",
-                      src: _vm.lastTenMatches.teams.away.logo
-                    }
-                  })
+                  _vm.flagfile(_vm.lastTenMatches.teams.away.id)
+                    ? _c("img", {
+                        attrs: {
+                          id: "form_away_flag",
+                          src: _vm.flagloc(_vm.lastTenMatches.teams.away.id)
+                        }
+                      })
+                    : !_vm.flagfile()
+                    ? _c("img", {
+                        attrs: {
+                          id: "form_away_flag",
+                          src: _vm.lastTenMatches.teams.away.logo
+                        }
+                      })
+                    : _vm._e()
                 ])
               ]),
               _vm._v(" "),
@@ -39912,18 +39972,24 @@ var render = function() {
           _vm._v(" "),
           _c("div", { staticClass: "timedate_content" }, [
             _vm._v(
-              "\n                    " + _vm._s(_vm.lastTenMatches.league.name)
-            ),
-            _vm.lastTenMatches.league.round
-              ? _c("span", [
-                  _vm._v(", " + _vm._s(_vm.lastTenMatches.league.round))
-                ])
-              : _vm._e()
+              "\n                    " +
+                _vm._s(_vm.whoscored) +
+                "\n                "
+            )
           ]),
           _vm._v(" "),
           _vm._m(6),
           _vm._v(" "),
-          _vm._m(7)
+          _c("div", { staticClass: "timedate_content" }, [
+            _c("div", { attrs: { id: "formation_content" } }, [
+              _c("div", { staticStyle: { float: "left" } }, [_vm._v("4-3-3")]),
+              _c("div", { staticStyle: { float: "right" } }, [
+                _vm._v(
+                  "\n                        " + _vm._s(_vm.whoscored[718242])
+                )
+              ])
+            ])
+          ])
         ])
       ])
     ])
@@ -40051,17 +40117,6 @@ var staticRenderFns = [
       }),
       _vm._v(" "),
       _c("span", { attrs: { id: "formation_title" } }, [_vm._v("FORMATIONS")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "timedate_content" }, [
-      _c("div", { attrs: { id: "formation_content" } }, [
-        _c("div", { staticStyle: { float: "left" } }, [_vm._v("4-3-3")]),
-        _c("div", { staticStyle: { float: "right" } }, [_vm._v("3-5-2")])
-      ])
     ])
   }
 ]

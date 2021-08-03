@@ -24,11 +24,17 @@
                     <div class="scoreboard_content">
                         <table class="form_table">
                             <tr>
-                                <td><img id="form_home_flag" :src=lastTenMatches.teams.home.logo></td>
+                                <td>
+                                    <img id="form_home_flag" v-if="flagfile(lastTenMatches.teams.home.id)" :src=flagloc(lastTenMatches.teams.home.id)>
+                                    <img id="form_home_flag" v-else-if="!flagfile()" :src=lastTenMatches.teams.home.logo>
+                                </td>
                                 <td>{{ lastTenMatches.teams.home.name }}</td>
                                 <td style="width: 35px; text-align: center; font-size: 16px"><span>{{ lastTenMatches.goals.home}}</span> - <span>{{ lastTenMatches.goals.away }}</span></td>
                                 <td style="text-align: right">{{ lastTenMatches.teams.away.name }}</td>
-                                <td style="text-align: right"><img id="form_away_flag" :src=lastTenMatches.teams.away.logo></td>
+                                <td style="text-align: right">
+                                    <img id="form_away_flag" v-if="flagfile(lastTenMatches.teams.away.id)" :src=flagloc(lastTenMatches.teams.away.id)>
+                                    <img id="form_away_flag" v-else-if="!flagfile()" :src=lastTenMatches.teams.away.logo>
+                                </td>
                             </tr>
                             <tr>
                                 <td></td>
@@ -77,7 +83,7 @@
                         <span id="league_title">LEAGUE</span>
                     </div>
                     <div class="timedate_content">
-                        {{ lastTenMatches.league.name }}<span v-if="lastTenMatches.league.round">, {{ lastTenMatches.league.round }}</span>
+                        {{ whoscored }}
                     </div>
                     <!-- formations content ------------------------------------------------------------------------------>
                     <div class="timedate_header">
@@ -85,7 +91,8 @@
                         <span id="formation_title">FORMATIONS</span>
                     </div>
                     <div class="timedate_content">
-                        <div id="formation_content"><div style="float: left">4-3-3</div><div style="float: right">3-5-2</div></div>
+                        <div id="formation_content"><div style="float: left">4-3-3</div><div style="float: right">
+                            {{ whoscored[718242] }}</div></div>
                     </div>
                 </div>
             </div>
@@ -104,12 +111,46 @@
                 data: Object,
                 lastTenMatches: [],
                 lastTenForm: [],
-                timestamp: null
+                timestamp: null,
+                imagesource: null,
+                whoscored: {}
             }
         },
 
         methods: {
+            // get an array of goals scored in a particular match for the home or away team.
+            whoScored(e) {
+                // get the 10 last matches that correspondents with the form
+                axios.get("https://v3.football.api-sports.io/fixtures/events?fixture=" + e + "&type=Goal", {
+                    headers: {
+                        "X-RapidAPI-Host": process.env.MIX_API_URL,
+                        "X-RapidAPI-Key": process.env.MIX_API_KEY
+                    }
+                }).then((response) => {
+                    this.whoscored[e] = response.data.response;
+                });
+            },
+
+            flagloc(e) {
+                // return the proper format of the file path
+                return "/images/country_flags/" + e + ".png";
+            },
+
+            flagfile(e) {
+                // check if the flag .png exists, if not -> use the lesser quality api png
+                var xhr = new XMLHttpRequest();
+                xhr.open('HEAD', "/images/country_flags/" + e + ".png", false);
+                xhr.send();
+
+                if(xhr.status == "404") {
+                    return false;
+                }   else {
+                    return true
+                }
+            },
+
             convertResult(e) {
+                // we convert a boolean value on the 'winner' field to a W L D value
                 let result;
                 switch(e) {
                     case true:
@@ -126,6 +167,7 @@
             },
 
             sayHello() {
+                // Say cheeeeeese :D
                 return 'Hello';
             },
 
@@ -157,7 +199,9 @@
                    return this.convertResult(e.teams.home.winner);
                }
                return this.convertResult(e.teams.away.winner);
-            }
+            },
+
+
         },
 
         computed: {
@@ -174,8 +218,8 @@
                 }
             }).then((response) => {
                 response.data.response.forEach(element => this.lastTenForm.push(this.whichTeam(element)));
-                this.lastTenMatches = response.data.response[0]
-                console.log(this.lastTenMatches);
+                this.lastTenMatches = response.data.response[0];
+                this.whoScored(response.data.response[0].fixture.id);
             });
 
         }
