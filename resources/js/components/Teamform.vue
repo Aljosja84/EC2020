@@ -36,21 +36,7 @@
                                     <img id="form_away_flag" v-else-if="!flagfile()" :src=lastTenMatches.teams.away.logo>
                                 </td>
                             </tr>
-                            <tr>
-                                <td></td>
-                                <td class="form_goals" style="vertical-align: top">
-                                    21’ Onni Valakari<br>
-                                    66’ J. Pohjanpalo
-                                </td>
-                                <td></td>
-                                <td class="form_goals" style="text-align: right; vertical-align: top">
-                                    Ferran Torres ‘7<br>
-                                    Ferran Torres’ 14<br>
-                                    Gerard Moreno ‘51<br>
-                                    Fabián Ruiz ’88
-                                </td>
-                                <td></td>
-                            </tr>
+                            <goalscorers></goalscorers>
                         </table>
                     </div>
                     <!-- time & date content ----------------------------------------------------------------------------->
@@ -75,7 +61,7 @@
                         <span id="ref_title">REFEREE</span>
                     </div>
                     <div class="timedate_content">
-
+                        {{ lastTenMatches.fixture.referee }}
                     </div>
                     <!-- league content ---------------------------------------------------------------------------------->
                     <div class="timedate_header">
@@ -91,8 +77,8 @@
                         <span id="formation_title">FORMATIONS</span>
                     </div>
                     <div class="timedate_content">
-                        <div id="formation_content"><div style="float: left">4-3-3</div><div v-show="whoscored[713471]" style="float: right">
-                            {{ whoscored[713471][0].type }}</div></div>
+                        <div id="formation_content"><div style="float: left">4-3-3</div><div style="float: right">
+                            5-3-2</div></div>
                     </div>
                 </div>
             </div>
@@ -113,37 +99,10 @@
                 lastTenForm: [],
                 timestamp: null,
                 imagesource: null,
-                whoscored: {}
             }
         },
 
         methods: {
-            // get an array of goals scored in a particular match for the home or away team.
-            whoScored: async function(e) {
-                self = this;
-                // get the 10 last matches that correspondents with the form
-                axios.get("https://v3.football.api-sports.io/fixtures/events?fixture=" + e + "&type=Goal", {
-                    headers: {
-                        "X-RapidAPI-Host": process.env.MIX_API_URL,
-                        "X-RapidAPI-Key": process.env.MIX_API_KEY
-                    }
-                }).then((response) => {
-                    self.whoscored[e] = response.data.response[0];
-
-                }).bind(this);
-                await this.$nextTick();
-            },
-
-            returnwhoscored(e) {
-                axios.get("https://v3.football.api-sports.io/fixtures/events?fixture=" + e + "&type=Goal", {
-                    headers: {
-                        "X-RapidAPI-Host": process.env.MIX_API_URL,
-                        "X-RapidAPI-Key": process.env.MIX_API_KEY
-                    }
-                }).then((response) => {
-                    return response.data.response[0];
-                })
-            },
 
             flagloc(e) {
                 // return the proper format of the file path
@@ -215,6 +174,20 @@
                return this.convertResult(e.teams.away.winner);
             },
 
+            loadLatestGames(e) {
+                // get the 10 last matches that correspondents with the form
+                axios.get("https://v3.football.api-sports.io/fixtures?team=" + e + "&last=10", {
+                    headers: {
+                        "X-RapidAPI-Host": process.env.MIX_API_URL,
+                        "X-RapidAPI-Key": process.env.MIX_API_KEY
+                    }
+                }).then((response) => {
+                    response.data.response.forEach(element => this.lastTenForm.push(this.whichTeam(element)));
+                    this.lastTenMatches = response.data.response[0];
+                }).catch((error) => {
+                    console.log(error);
+                });
+            },
 
         },
 
@@ -222,24 +195,8 @@
 
         },
 
-
         created() {
-            // get the 10 last matches that correspondents with the form
-           axios.get("https://v3.football.api-sports.io/fixtures?team=" + this.teamid + "&last=10", {
-                headers: {
-                    "X-RapidAPI-Host": process.env.MIX_API_URL,
-                    "X-RapidAPI-Key": process.env.MIX_API_KEY
-                }
-            }).then((response) => {
-                response.data.response.forEach(element => this.lastTenForm.push(this.whichTeam(element)));
-                let matchid = response.data.response[0];
-                this.lastTenMatches = matchid;
-                this.whoscored[matchid] = this.returnwhoscored(matchid)
-                //this.whoScored(response.data.response[0].fixture.id);
-            }).catch((error) => {
-                console.log(error);
-            });
-
+            this.loadLatestGames(this.teamid);
         }
     }
 </script>
@@ -352,8 +309,6 @@
         background: linear-gradient(180deg, rgba(255,255,255,1) 16%, rgba(187,236,239,1) 100%);
     }
 
-
-
     .scoreboard_content table{
         width: 100%;
         border: none;
@@ -378,12 +333,6 @@
         width: 22px;
         height: 22px;
         border-radius: 100%;
-    }
-
-    .form_goals {
-        font-family: "Roboto", sans-serif;
-        font-size: 11px;
-        color: #c6c4c4;
     }
 
     .timedate_header {
