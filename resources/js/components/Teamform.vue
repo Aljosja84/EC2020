@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container" :style="{height: 640 + 'px'}">
         <div class="team_header">
             <img class="header_flag" :src="flag">
             <span>{{details}}</span>
@@ -95,7 +95,6 @@
 <style scoped>
     .container {
         width: 335px;
-        height: 610px;
         background-color: white;
         float: left;
         margin-left: -9px;
@@ -161,7 +160,7 @@
 
     .last_ten_matches_container {
         width: 100%;
-        height: inherit;
+        height: 640px;
     }
 
 

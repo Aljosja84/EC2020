@@ -24,15 +24,15 @@
                     <tr>
                         <td></td>
                         <td class="form_goals" style="vertical-align: top">
-                            21’ Onni Valakari<br>
-                            66’ J. Pohjanpalo
+                            <span v-for="goals in ht_goals">
+                                {{ goals.time }}' {{ goals.player }} <br>
+                            </span>
                         </td>
                         <td></td>
                         <td class="form_goals" style="text-align: right; vertical-align: top">
-                            Ferran Torres ‘7<br>
-                            Ferran Torres’ 14<br>
-                            Gerard Moreno ‘51<br>
-                            Fabián Ruiz ’88
+                            <span v-for="goals in at_goals">
+                                {{ goals.player }} {{ goals.time }} <br>
+                            </span>
                         </td>
                         <td></td>
                     </tr>
@@ -76,8 +76,8 @@
                 <span id="formation_title">FORMATIONS</span>
             </div>
             <div class="timedate_content">
-                <div id="formation_content"><div style="float: left">4-3-3</div><div style="float: right">
-                    5-3-2</div></div>
+                <div id="formation_content"><div style="float: left">{{ matchData.lineups[0].formation }}</div><div style="float: right">
+                    {{ matchData.lineups[1].formation }}</div></div>
             </div>
         </div>
     </div>
@@ -90,7 +90,10 @@
 
         data() {
             return {
-                matchData: {}
+                matchData: {},
+                goalsArr: [],
+                ht_goals: [],
+                at_goals: []
             }
         },
 
@@ -136,6 +139,19 @@
                 }
             },
 
+            getGoals() {
+                this.matchData.events.forEach((ele) => {
+                    if(ele.type == "Goal") {
+                        // check which team scored, hometeam or awayteam?
+                        if(ele.team.id === this.matchData.teams.home.id) {
+                            this.ht_goals.push({"time": ele.time.elapsed, "player": ele.player.name});
+                        }   else {
+                            this.at_goals.push({"time": ele.time.elapsed, "player": ele.player.name});
+                        }
+                    }
+                });
+            },
+
             loadGame(e) {
                 // get the 10 last matches that correspondents with the form
                 axios.get("https://v3.football.api-sports.io/fixtures?id=" + e, {
@@ -145,10 +161,13 @@
                     }
                 }).then((response) => {
                     this.matchData = response.data.response[0];
+                    this.getGoals();
                 }).catch((error) => {
                     console.log(error);
                 });
             },
+
+
         },
 
         created() {
@@ -190,12 +209,13 @@
 
     .scoreboard_content {
         padding: 12px 16px 6px 16px;
-        border-bottom: 1px solid #ccc
+        border-bottom: 1px solid #ccc;
+        height: 150px
     }
 
     #form_bg_gradient {
         z-index: 9;
-        height: 466px;
+        height: inherit;
         background: rgb(255,255,255);
         background: linear-gradient(180deg, rgba(255,255,255,1) 16%, rgba(187,236,239,1) 100%);
     }
@@ -211,7 +231,7 @@
 
     .form_table {
         font-family: "Roboto", sans-serif;
-        font-size: 14px;
+        font-size: 16px;
         color: #515151;
     }
     #form_home_flag {
