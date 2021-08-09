@@ -176,10 +176,10 @@
         </div>
     </nav>
 </header>
-<script src={{ asset('js/topmenu.js') }}></script>
+
 @yield('content')
 
 
 </body>
-
+<script src={{ asset('js/topmenu.js') }}></script>
 </html>

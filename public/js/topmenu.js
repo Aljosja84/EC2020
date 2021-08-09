@@ -1,4 +1,5 @@
 var lekker = document.getElementById('games_container');
+var formScroll = document.getElementsByClassName('last_ten_matches_container');
 // Define the offset of the calendar
 var offsetX = 190;
 // Define all x positions of playdate divs
@@ -30,6 +31,7 @@ var july11 = document.getElementById('july11').getBoundingClientRect().x;
 function scrollWin(waarheen) {
     lekker.scroll(waarheen-offsetX, 0);
 }
+
 
 (function() {
     function scrollHorizontally(e) {

@@ -1,5 +1,5 @@
 <template>
-    <div class="form_game_container">
+    <div class="form_game_container" :id="matchid">
         <div class="scoreboard_header">
             <img id="scoreboard_icon" src="/images/icons/scoreboard_icon.png">
             <span id="scoreboard_title">SCOREBOARD</span>
@@ -139,7 +139,7 @@
                 }
             },
 
-            getGoals() {
+            getGoals(e) {
                 this.matchData.events.forEach((ele) => {
                     if(ele.type == "Goal") {
                         // check which team scored, hometeam or awayteam?
@@ -178,6 +178,10 @@
 </script>
 
 <style scoped>
+
+    .form_game_container {
+        width: 335px;
+    }
 
     .form_goals {
         font-size: 10px;
@@ -260,6 +264,7 @@
         font-size: 24px;
         font-weight: inherit;
         color: #ba7fb1;
+        line-height: 4px;
     }
     #venue_title {
         padding-left: 30%;
@@ -286,6 +291,7 @@
         font-size: 24px;
         font-weight: inherit;
         color: #c34c26;
+        line-height: 4px;
     }
     #formation_title {
         padding-left: 20%;
@@ -305,5 +311,6 @@
         color: #515151;
         height: 38px;
     }
+
 </style>
 

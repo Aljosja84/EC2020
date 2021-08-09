@@ -7,20 +7,21 @@
         <div id="separator_bar"></div>
         <div class="form_container">
             <span id="form_title">Form</span>
-                <span v-for="result in lastTenForm" :key="result">
-                    <a href="#" v-if="result === 'W'" class="form_button button_win">{{ result }}</a>
-                    <a href="#" v-else-if="result === 'L'" class="form_button button_lose">{{ result }}</a>
-                    <a href="#" v-else-if="result === 'D'" class="form_button button_draw">{{ result }}</a>
+                <span v-for="result in lastTenForm" :key="result.gameid">
+                    <a onclick="document.getElementById('match3').scrollIntoView({block: 'center'})" href="#" v-if="result.res === 'W'" class="form_button button_win">{{ result.res }}</a>
+                    <a onclick="document.getElementById('match1').scrollIntoView({block: 'center'})" href="#" v-else-if="result.res === 'L'" class="form_button button_lose">{{ result.res }}</a>
+                    <a onclick="document.getElementById('match2').scrollIntoView({block: 'center'})" href="#" v-else-if="result.res === 'D'" class="form_button button_draw">{{ result.res }}</a>
                 </span>
         </div>
         <div class="last_ten_matches_container">
-            <goalscorers :matchid="lastTenMatchesIds.fixture.id"></goalscorers>
+            <goalscorers v-for="games in lastTenMatchesIds" :matchid="games.match.fixture.id" :key="games.match.fixture.id" :id="games.scrolldiv"></goalscorers>
         </div>
     </div>
 </template>
 
 <script>
     export default {
+
         name: "Teamform",
         props: ['details', 'flag', 'teamid'],
 
@@ -67,14 +68,20 @@
 
             loadLatestGames(e) {
                 // get the 10 last matches that correspondents with the form
-                axios.get("https://v3.football.api-sports.io/fixtures?team=" + e + "&last=10", {
+                axios.get("https://v3.football.api-sports.io/fixtures?team=" + e + "&last=3", {
                     headers: {
                         "X-RapidAPI-Host": process.env.MIX_API_URL,
                         "X-RapidAPI-Key": process.env.MIX_API_KEY
                     }
                 }).then((response) => {
-                    response.data.response.forEach(element => this.lastTenForm.push(this.whichTeam(element)));
-                    this.lastTenMatchesIds = response.data.response[0];
+                    let i = 1;
+                    response.data.response.forEach((element) => {
+                        this.lastTenForm.push({'gameid': element.fixture.id, 'res': this.whichTeam(element), 'scrolldiv':'match'+i});
+                        this.lastTenMatchesIds.push({'match':element, 'scrolldiv':'match'+i});
+                        i++;
+                    });
+
+
                 }).catch((error) => {
                     console.log(error);
                 });
@@ -90,6 +97,7 @@
             this.loadLatestGames(this.teamid);
         }
     }
+
 </script>
 
 <style scoped>
@@ -160,7 +168,9 @@
 
     .last_ten_matches_container {
         width: 100%;
-        height: 640px;
+        height: 557px;
+        overflow-y: hidden;
+        scroll-behavior: smooth;
     }
 
 
