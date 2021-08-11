@@ -8,12 +8,12 @@
         <div class="form_container">
             <span id="form_title">Form</span>
                 <span v-for="result in lastTenForm" :key="result.gameid">
-                    <a onclick="document.getElementById('match3').scrollIntoView({block: 'center'})" href="#" v-if="result.res === 'W'" class="form_button button_win">{{ result.res }}</a>
-                    <a onclick="document.getElementById('match1').scrollIntoView({block: 'center'})" href="#" v-else-if="result.res === 'L'" class="form_button button_lose">{{ result.res }}</a>
-                    <a onclick="document.getElementById('match2').scrollIntoView({block: 'center'})" href="#" v-else-if="result.res === 'D'" class="form_button button_draw">{{ result.res }}</a>
+                    <a @click="scrollFormWin(result.scrolldiv)" href="#" v-if="result.res === 'W'" class="form_button button_win">{{ result.res }}</a>
+                    <a @click="scrollFormWin(result.scrolldiv)" href="#" v-else-if="result.res === 'L'" class="form_button button_lose">{{ result.res }}</a>
+                    <a @click="scrollFormWin(result.scrolldiv)" href="#" v-else-if="result.res === 'D'" class="form_button button_draw">{{ result.res }}</a>
                 </span>
         </div>
-        <div class="last_ten_matches_container">
+        <div class="last_ten_matches_container" id="form_container">
             <goalscorers v-for="games in lastTenMatchesIds" :matchid="games.match.fixture.id" :key="games.match.fixture.id" :id="games.scrolldiv"></goalscorers>
         </div>
     </div>
@@ -37,6 +37,22 @@
         },
 
         methods: {
+
+            scrollFormWin(e) {
+                let y = document.getElementById(e).offsetTop;
+                document.getElementById('form_container').scroll({top: y})
+            },
+
+            findPos(obj) {
+                    var curtop = 0;
+                    if (obj.offsetParent) {
+                        do {
+                            curtop += obj.offsetTop;
+                        } while (obj = obj.offsetParent);
+                        return [curtop];
+                    }
+            },
+
             convertResult(e) {
                 // we convert a boolean value on the 'winner' field to a W L D value
                 let result;
@@ -167,12 +183,12 @@
     }
 
     .last_ten_matches_container {
+        position: relative;
         width: 100%;
         height: 557px;
         overflow-y: hidden;
         scroll-behavior: smooth;
     }
-
 
     .scoreboard_content table{
         width: 100%;

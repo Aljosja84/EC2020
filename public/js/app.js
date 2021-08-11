@@ -2319,6 +2319,23 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
+    scrollFormWin: function scrollFormWin(e) {
+      var y = document.getElementById(e).offsetTop;
+      document.getElementById('form_container').scroll({
+        top: y
+      });
+    },
+    findPos: function findPos(obj) {
+      var curtop = 0;
+
+      if (obj.offsetParent) {
+        do {
+          curtop += obj.offsetTop;
+        } while (obj = obj.offsetParent);
+
+        return [curtop];
+      }
+    },
     convertResult: function convertResult(e) {
       // we convert a boolean value on the 'winner' field to a W L D value
       var result;
@@ -7527,7 +7544,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.container[data-v-221bb58c] {\n    width: 335px;\n    background-color: white;\n    float: left;\n    margin-left: -9px;\n}\n.team_header[data-v-221bb58c] {\n    display: inline-flex;\n    width: 100%;\n    font-family: 'Oswald', sans-serif;\n    font-size: 24px;\n    color: #515151;\n    text-transform: uppercase;\n    background-image: url(" + escape(__webpack_require__(/*! ./images/light_wool.png */ "./resources/js/components/images/light_wool.png")) + ");\n    padding: 10px 0 8px 15px;\n}\n.header_flag[data-v-221bb58c] {\n    height: 45px;\n    width: 45px;\n    margin-right: 17px;\n}\n.form_container[data-v-221bb58c] {\n    padding: 4px 0 0 16px;\n    height: 38px;\n    border-bottom: 1px solid #ccc;\n    font-family: 'Oswald', sans-serif;\n    font-size: 18px;\n    text-transform: uppercase;\n    color: #515151;\n}\n#form_title[data-v-221bb58c] {\n    vertical-align: middle;\n}\n.form_button[data-v-221bb58c] {\n    min-width: 23px;\n    min-height: 23px;\n    max-width: 23px;\n    max-height: 23px;\n    font-family: \"Roboto\", sans-serif;\n    font-size: 11px;\n    background-color: #04AA6D;\n    border: none;\n    color: white;\n    padding: 6px;\n    text-align: center;\n    text-decoration: none;\n    display: inline-block;\n    margin: 4px 2px;\n    box-shadow: rgba(0, 0, 0, 0.18) 0px 5px 15px;\n}\n.button_win[data-v-221bb58c] {border-radius: 100%; background-color: #6bab4f;}\n.button_lose[data-v-221bb58c] {border-radius: 100%; background-color: #e83434;}\n.button_draw[data-v-221bb58c] {border-radius: 100%; background-color: lightgray;}\n#separator_bar[data-v-221bb58c] {\n    height: 2px;\n    background-image: linear-gradient(to right, transparent, #b5b5b5, transparent);\n}\n.last_ten_matches_container[data-v-221bb58c] {\n    width: 100%;\n    height: 557px;\n    overflow-y: hidden;\n    scroll-behavior: smooth;\n}\n.scoreboard_content table[data-v-221bb58c]{\n    width: 100%;\n    border: none;\n}\n.scoreboard_content td[data-v-221bb58c] {\n    border: none;\n}\n\n", ""]);
+exports.push([module.i, "\n.container[data-v-221bb58c] {\n    width: 335px;\n    background-color: white;\n    float: left;\n    margin-left: -9px;\n}\n.team_header[data-v-221bb58c] {\n    display: inline-flex;\n    width: 100%;\n    font-family: 'Oswald', sans-serif;\n    font-size: 24px;\n    color: #515151;\n    text-transform: uppercase;\n    background-image: url(" + escape(__webpack_require__(/*! ./images/light_wool.png */ "./resources/js/components/images/light_wool.png")) + ");\n    padding: 10px 0 8px 15px;\n}\n.header_flag[data-v-221bb58c] {\n    height: 45px;\n    width: 45px;\n    margin-right: 17px;\n}\n.form_container[data-v-221bb58c] {\n    padding: 4px 0 0 16px;\n    height: 38px;\n    border-bottom: 1px solid #ccc;\n    font-family: 'Oswald', sans-serif;\n    font-size: 18px;\n    text-transform: uppercase;\n    color: #515151;\n}\n#form_title[data-v-221bb58c] {\n    vertical-align: middle;\n}\n.form_button[data-v-221bb58c] {\n    min-width: 23px;\n    min-height: 23px;\n    max-width: 23px;\n    max-height: 23px;\n    font-family: \"Roboto\", sans-serif;\n    font-size: 11px;\n    background-color: #04AA6D;\n    border: none;\n    color: white;\n    padding: 6px;\n    text-align: center;\n    text-decoration: none;\n    display: inline-block;\n    margin: 4px 2px;\n    box-shadow: rgba(0, 0, 0, 0.18) 0px 5px 15px;\n}\n.button_win[data-v-221bb58c] {border-radius: 100%; background-color: #6bab4f;}\n.button_lose[data-v-221bb58c] {border-radius: 100%; background-color: #e83434;}\n.button_draw[data-v-221bb58c] {border-radius: 100%; background-color: lightgray;}\n#separator_bar[data-v-221bb58c] {\n    height: 2px;\n    background-image: linear-gradient(to right, transparent, #b5b5b5, transparent);\n}\n.last_ten_matches_container[data-v-221bb58c] {\n    position: relative;\n    width: 100%;\n    height: 557px;\n    overflow-y: hidden;\n    scroll-behavior: smooth;\n}\n.scoreboard_content table[data-v-221bb58c]{\n    width: 100%;\n    border: none;\n}\n.scoreboard_content td[data-v-221bb58c] {\n    border: none;\n}\n\n", ""]);
 
 // exports
 
@@ -39954,10 +39971,11 @@ var render = function() {
                     "a",
                     {
                       staticClass: "form_button button_win",
-                      attrs: {
-                        onclick:
-                          "document.getElementById('match3').scrollIntoView({block: 'center'})",
-                        href: "#"
+                      attrs: { href: "#" },
+                      on: {
+                        click: function($event) {
+                          return _vm.scrollFormWin(result.scrolldiv)
+                        }
                       }
                     },
                     [_vm._v(_vm._s(result.res))]
@@ -39967,10 +39985,11 @@ var render = function() {
                     "a",
                     {
                       staticClass: "form_button button_lose",
-                      attrs: {
-                        onclick:
-                          "document.getElementById('match1').scrollIntoView({block: 'center'})",
-                        href: "#"
+                      attrs: { href: "#" },
+                      on: {
+                        click: function($event) {
+                          return _vm.scrollFormWin(result.scrolldiv)
+                        }
                       }
                     },
                     [_vm._v(_vm._s(result.res))]
@@ -39980,10 +39999,11 @@ var render = function() {
                     "a",
                     {
                       staticClass: "form_button button_draw",
-                      attrs: {
-                        onclick:
-                          "document.getElementById('match2').scrollIntoView({block: 'center'})",
-                        href: "#"
+                      attrs: { href: "#" },
+                      on: {
+                        click: function($event) {
+                          return _vm.scrollFormWin(result.scrolldiv)
+                        }
                       }
                     },
                     [_vm._v(_vm._s(result.res))]
@@ -39997,7 +40017,10 @@ var render = function() {
       _vm._v(" "),
       _c(
         "div",
-        { staticClass: "last_ten_matches_container" },
+        {
+          staticClass: "last_ten_matches_container",
+          attrs: { id: "form_container" }
+        },
         _vm._l(_vm.lastTenMatchesIds, function(games) {
           return _c("goalscorers", {
             key: games.match.fixture.id,

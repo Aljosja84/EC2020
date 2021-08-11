@@ -22,10 +22,7 @@
     <list default="true" id="cf82d037-ce69-45df-857e-a29fb7732fae" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/topmenu.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/topmenu.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/Teamform.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Teamform.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/goalscorers.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/goalscorers.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/navi.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/navi.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -360,6 +357,7 @@
       <workItem from="1628333819462" duration="13654000" />
       <workItem from="1628425510032" duration="7014000" />
       <workItem from="1628514320442" duration="19164000" />
+      <workItem from="1628689831882" duration="3340000" />
     </task>
     <servers />
   </component>
