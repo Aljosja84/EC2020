@@ -39,18 +39,10 @@
         methods: {
 
             scrollFormWin(e) {
+                // find the top coordinates of the match div by looking at the offset from the top
                 let y = document.getElementById(e).offsetTop;
+                // scroll to that offset to bring the div into view.
                 document.getElementById('form_container').scroll({top: y})
-            },
-
-            findPos(obj) {
-                    var curtop = 0;
-                    if (obj.offsetParent) {
-                        do {
-                            curtop += obj.offsetTop;
-                        } while (obj = obj.offsetParent);
-                        return [curtop];
-                    }
             },
 
             convertResult(e) {
