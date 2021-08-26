@@ -46,7 +46,7 @@
             },
 
             convertResult(e) {
-                // we convert a boolean value on the 'winner' field to a W L D value
+                // we convert a boolean value on the 'winner' field to a W(in) L(ose) D(raw) value
                 let result;
                 switch(e) {
                     case true:
@@ -67,6 +67,8 @@
                 return 'Hello';
             },
 
+            // check if the home team is the team we're requesting
+            // if not, it must be the away team, right?
             whichTeam(e) {
                if(Number(e.teams.home.id) === Number(this.teamid)) {
                    return this.convertResult(e.teams.home.winner);
@@ -76,7 +78,7 @@
 
             loadLatestGames(e) {
                 // get the 10 last matches that correspondents with the form
-                axios.get("https://v3.football.api-sports.io/fixtures?team=" + e + "&last=3", {
+                axios.get("https://v3.football.api-sports.io/fixtures?team=" + e + "&last=1", {
                     headers: {
                         "X-RapidAPI-Host": process.env.MIX_API_URL,
                         "X-RapidAPI-Key": process.env.MIX_API_KEY

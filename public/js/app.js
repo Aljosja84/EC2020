@@ -2328,7 +2328,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     convertResult: function convertResult(e) {
-      // we convert a boolean value on the 'winner' field to a W L D value
+      // we convert a boolean value on the 'winner' field to a W(in) L(ose) D(raw) value
       var result;
 
       switch (e) {
@@ -2351,6 +2351,8 @@ __webpack_require__.r(__webpack_exports__);
       // Say cheeeeeese :D
       return 'Hello';
     },
+    // check if the home team is the team we're requesting
+    // if not, it must be the away team, right?
     whichTeam: function whichTeam(e) {
       if (Number(e.teams.home.id) === Number(this.teamid)) {
         return this.convertResult(e.teams.home.winner);
@@ -2362,7 +2364,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       // get the 10 last matches that correspondents with the form
-      axios.get("https://v3.football.api-sports.io/fixtures?team=" + e + "&last=3", {
+      axios.get("https://v3.football.api-sports.io/fixtures?team=" + e + "&last=1", {
         headers: {
           "X-RapidAPI-Host": "api-football-v1.p.rapidapi.com",
           "X-RapidAPI-Key": "b1ae4a3fca89630148dadaa295a0b5b7"
@@ -3048,6 +3050,11 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
 //
 //
 //
@@ -7697,7 +7704,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.teamplayers_container[data-v-7b03258c] {\n    margin-left: -9px;\n    background-color: white;\n    width: 975px;\n    height: 557px\n}\n.teamplayer_header[data-v-7b03258c] {\n    width: 100%;\n    font-family: 'Oswald', sans-serif;\n    font-size: 24px;\n    color: #515151;\n    text-transform: uppercase;\n    text-align: center;\n    background-image: url(" + escape(__webpack_require__(/*! ./images/light_wool.png */ "./resources/js/components/images/light_wool.png")) + ");\n    padding: 10px 0 8px 15px;\n}\n#separator_bar[data-v-7b03258c] {\n    height: 2px;\n    background-image: linear-gradient(to right, transparent, #b5b5b5, transparent);\n}\n.players_list-item img[data-v-7b03258c] {\n    width: 75px;\n    height: 75px;\n    border-radius: 100%;\n    box-shadow: rgba(17, 17, 26, 0.35) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;\n}\n#midfield_div[data-v-7b03258c] {\n    padding: 10px 5px 0 14px;\n    width: 100%;\n}\n.players_list-item[data-v-7b03258c] {\n    transition: all .5s;\n    display: inline-block;\n    padding: 5px;\n    margin-right: 10px;\n}\n", ""]);
+exports.push([module.i, "\n.teamplayers_container[data-v-7b03258c] {\n    position: relative;\n    margin-left: -9px;\n    background-color: white;\n    width: 975px;\n    height: 659px\n}\n.teamplayer_header[data-v-7b03258c] {\n    width: 100%;\n    font-family: 'Oswald', sans-serif;\n    font-size: 24px;\n    color: #515151;\n    text-transform: uppercase;\n    text-align: center;\n    background-image: url(" + escape(__webpack_require__(/*! ./images/light_wool.png */ "./resources/js/components/images/light_wool.png")) + ");\n    padding: 10px 0 8px 15px;\n}\n.player_stats_header[data-v-7b03258c] {\n    position: relative;\n    z-index: 15;\n    width: 100%;\n    height: 35px;\n    font-family: 'Oswald', sans-serif;\n    font-size: 24px;\n    color: #515151;\n    text-transform: uppercase;\n    text-align: center;\n    line-height: 30px;\n    background-image: url(" + escape(__webpack_require__(/*! ./images/light_wool.png */ "./resources/js/components/images/light_wool.png")) + ");\n    padding: 0 0 10px 15px;\n    border-top: 1px solid #dcdcdc;\n    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;\n}\n.separator_bar[data-v-7b03258c] {\n    height: 2px;\n    background-image: linear-gradient(to right, transparent, #b5b5b5, transparent);\n}\n.players_list-item img[data-v-7b03258c] {\n    width: 75px;\n    height: 75px;\n    border-radius: 100%;\n    box-shadow: rgba(17, 17, 26, 0.35) 0 4px 16px, rgba(17, 17, 26, 0.05) 0 8px 32px;\n}\n#midfield_div[data-v-7b03258c] {\n    height: 188px;\n    padding: 10px 5px 0 14px;\n    width: 100%;\n}\n.players_list-item[data-v-7b03258c] {\n    transition: all .5s;\n    display: inline-block;\n    padding: 5px;\n    margin-right: 10px;\n}\n.player_stats_container[data-v-7b03258c] {\n    z-index: 14;\n    width: 100%;\n    height: 380px;\n    background: linear-gradient(180deg, rgba(255,255,255,1) 16%, rgba(255,210,164,1) 100%);\n    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=\"#ffffff\",endColorstr=\"#ffd2a4\",GradientType=1);\n}\n", ""]);
 
 // exports
 
@@ -40903,7 +40910,7 @@ var render = function() {
       _c("button", { on: { click: _vm.shuffle } }, [_vm._v("Shuffle")])
     ]),
     _vm._v(" "),
-    _c("div", { attrs: { id: "separator_bar" } }),
+    _c("div", { staticClass: "separator_bar" }),
     _vm._v(" "),
     _c(
       "div",
@@ -40923,10 +40930,25 @@ var render = function() {
         )
       ],
       1
-    )
+    ),
+    _vm._v(" "),
+    _vm._m(0),
+    _vm._v(" "),
+    _c("div", { staticClass: "player_stats_container" }, [
+      _vm._v("\n        content\n    ")
+    ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "player_stats_header" }, [
+      _c("span", [_vm._v("player statistics")])
+    ])
+  }
+]
 render._withStripped = true
 
 

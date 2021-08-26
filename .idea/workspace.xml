@@ -22,8 +22,8 @@
     <list default="true" id="cf82d037-ce69-45df-857e-a29fb7732fae" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/Teamform.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Teamform.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/teamplayers.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/teamplayers.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/team.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/team.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -361,7 +361,12 @@
       <workItem from="1628514320442" duration="19164000" />
       <workItem from="1628689831882" duration="4336000" />
       <workItem from="1628782330886" duration="1702000" />
-      <workItem from="1628857807471" duration="5389000" />
+      <workItem from="1628857807471" duration="7075000" />
+      <workItem from="1628885654081" duration="2047000" />
+      <workItem from="1629055485411" duration="7000" />
+      <workItem from="1629071003460" duration="11000" />
+      <workItem from="1629464265915" duration="900000" />
+      <workItem from="1629985474761" duration="3943000" />
     </task>
     <servers />
   </component>
