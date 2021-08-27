@@ -1,5 +1,5 @@
 <template>
-    <div class="container" :style="{height: 640 + 'px'}">
+    <div class="container">
         <div class="team_header">
             <img class="header_flag" :src="flag">
             <span>{{details}}</span>
@@ -78,7 +78,7 @@
 
             loadLatestGames(e) {
                 // get the 10 last matches that correspondents with the form
-                axios.get("https://v3.football.api-sports.io/fixtures?team=" + e + "&last=1", {
+                axios.get("https://v3.football.api-sports.io/fixtures?team=" + e + "&last=10", {
                     headers: {
                         "X-RapidAPI-Host": process.env.MIX_API_URL,
                         "X-RapidAPI-Key": process.env.MIX_API_KEY
@@ -113,9 +113,11 @@
 <style scoped>
     .container {
         width: 335px;
+        height: 659px;
         background-color: white;
         float: left;
         margin-left: -9px;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
     }
 
     .team_header {

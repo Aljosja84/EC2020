@@ -17,7 +17,9 @@
         <div class="player_stats_header"><span>player statistics</span></div>
 
         <div class="player_stats_container">
-            content
+            <div class="player_passport">
+                passport
+            </div>
         </div>
     </div>
 </template>
@@ -29,11 +31,21 @@
 
         data() {
             return {
-                playersArr: []
+                playersArr: [],
+                playersAgeArr: []
             }
         },
 
         methods: {
+             DatetoTimestamp(strDate){
+                var datum = Date.parse(strDate);
+                return datum/1000;
+            },
+
+            rankedAge(playerid) {
+                 return this.ageSortedArr.findIndex(i => i.playerid === playerid)
+            },
+
             loadPlayers(e) {
                 // get the players (including qualifiers) from a particular team (e)
                 axios.get("https://v3.football.api-sports.io/players?league=4&season=2020&team=" + e, {
@@ -44,6 +56,8 @@
                 }).then((response) => {
                     response.data.response.forEach((element) => {
                         this.playersArr.push(element);
+                        // push the player and his birth date to the age array
+                        this.playersAgeArr.push({'playerid': element.player.id, 'bdayTimestamp': this.DatetoTimestamp(element.player.birth.date)})
                     });
                 }).catch((error) => {
                     console.log(error);
@@ -52,12 +66,21 @@
 
             shuffle() {
                 this.playersArr = _.shuffle(this.playersArr);
+                console.log(this.ageSortedArr.findIndex(i => i.playerid === 26240))
             }
         },
 
         created() {
             this.loadPlayers(this.teamid);
-        }
+        },
+
+        computed:
+            {
+                ageSortedArr: function () {
+                    // sort the ages from young to old
+                    return this.playersAgeArr = _.sortBy(this.playersAgeArr, 'bdayTimestamp')
+                }
+            }
     }
 </script>
 
@@ -67,7 +90,8 @@
         margin-left: -9px;
         background-color: white;
         width: 975px;
-        height: 659px
+        height: 659px;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
     }
 
     .teamplayer_header {
@@ -131,5 +155,12 @@
         background: -webkit-linear-gradient(180deg, rgba(255,255,255,1) 16%, rgba(255,210,164,1) 100%);
         background: linear-gradient(180deg, rgba(255,255,255,1) 16%, rgba(255,210,164,1) 100%);
         filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffff",endColorstr="#ffd2a4",GradientType=1);
+        padding: 5px;
+    }
+
+    .player_passport {
+        width: 255px;
+        height: 370px;
+        border: solid 1px #ff7800;
     }
 </style>

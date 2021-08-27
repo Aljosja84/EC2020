@@ -2364,7 +2364,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       // get the 10 last matches that correspondents with the form
-      axios.get("https://v3.football.api-sports.io/fixtures?team=" + e + "&last=1", {
+      axios.get("https://v3.football.api-sports.io/fixtures?team=" + e + "&last=10", {
         headers: {
           "X-RapidAPI-Host": "api-football-v1.p.rapidapi.com",
           "X-RapidAPI-Key": "b1ae4a3fca89630148dadaa295a0b5b7"
@@ -3074,15 +3074,27 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "teamplayers",
   props: ['teamid'],
   data: function data() {
     return {
-      playersArr: []
+      playersArr: [],
+      playersAgeArr: []
     };
   },
   methods: {
+    DatetoTimestamp: function DatetoTimestamp(strDate) {
+      var datum = Date.parse(strDate);
+      return datum / 1000;
+    },
+    rankedAge: function rankedAge(playerid) {
+      return this.ageSortedArr.findIndex(function (i) {
+        return i.playerid === playerid;
+      });
+    },
     loadPlayers: function loadPlayers(e) {
       var _this = this;
 
@@ -3094,7 +3106,13 @@ __webpack_require__.r(__webpack_exports__);
         }
       }).then(function (response) {
         response.data.response.forEach(function (element) {
-          _this.playersArr.push(element);
+          _this.playersArr.push(element); // push the player and his birth date to the age array
+
+
+          _this.playersAgeArr.push({
+            'playerid': element.player.id,
+            'bdayTimestamp': _this.DatetoTimestamp(element.player.birth.date)
+          });
         });
       })["catch"](function (error) {
         console.log(error);
@@ -3102,10 +3120,19 @@ __webpack_require__.r(__webpack_exports__);
     },
     shuffle: function shuffle() {
       this.playersArr = _.shuffle(this.playersArr);
+      console.log(this.ageSortedArr.findIndex(function (i) {
+        return i.playerid === 26240;
+      }));
     }
   },
   created: function created() {
     this.loadPlayers(this.teamid);
+  },
+  computed: {
+    ageSortedArr: function ageSortedArr() {
+      // sort the ages from young to old
+      return this.playersAgeArr = _.sortBy(this.playersAgeArr, 'bdayTimestamp');
+    }
   }
 });
 
@@ -7607,7 +7634,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.container[data-v-221bb58c] {\n    width: 335px;\n    background-color: white;\n    float: left;\n    margin-left: -9px;\n}\n.team_header[data-v-221bb58c] {\n    display: inline-flex;\n    width: 100%;\n    font-family: 'Oswald', sans-serif;\n    font-size: 24px;\n    color: #515151;\n    text-transform: uppercase;\n    background-image: url(" + escape(__webpack_require__(/*! ./images/light_wool.png */ "./resources/js/components/images/light_wool.png")) + ");\n    padding: 10px 0 8px 15px;\n}\n.header_flag[data-v-221bb58c] {\n    height: 45px;\n    width: 45px;\n    margin-right: 17px;\n}\n.form_container[data-v-221bb58c] {\n    padding: 4px 0 0 16px;\n    height: 38px;\n    border-bottom: 1px solid #ccc;\n    font-family: 'Oswald', sans-serif;\n    font-size: 18px;\n    text-transform: uppercase;\n    color: #515151;\n}\n#form_title[data-v-221bb58c] {\n    vertical-align: middle;\n}\n.form_button[data-v-221bb58c] {\n    min-width: 23px;\n    min-height: 23px;\n    max-width: 23px;\n    max-height: 23px;\n    font-family: \"Roboto\", sans-serif;\n    font-size: 11px;\n    background-color: #04AA6D;\n    border: none;\n    color: white;\n    padding: 6px;\n    text-align: center;\n    text-decoration: none;\n    display: inline-block;\n    margin: 4px 2px;\n    box-shadow: rgba(0, 0, 0, 0.18) 0px 5px 15px;\n}\n.button_win[data-v-221bb58c] {border-radius: 100%; background-color: #6bab4f;}\n.button_lose[data-v-221bb58c] {border-radius: 100%; background-color: #e83434;}\n.button_draw[data-v-221bb58c] {border-radius: 100%; background-color: lightgray;}\n#separator_bar[data-v-221bb58c] {\n    height: 2px;\n    background-image: linear-gradient(to right, transparent, #b5b5b5, transparent);\n}\n.last_ten_matches_container[data-v-221bb58c] {\n    position: relative;\n    width: 100%;\n    height: 557px;\n    overflow-y: hidden;\n    scroll-behavior: smooth;\n}\n.scoreboard_content table[data-v-221bb58c]{\n    width: 100%;\n    border: none;\n}\n.scoreboard_content td[data-v-221bb58c] {\n    border: none;\n}\n\n", ""]);
+exports.push([module.i, "\n.container[data-v-221bb58c] {\n    width: 335px;\n    height: 659px;\n    background-color: white;\n    float: left;\n    margin-left: -9px;\n    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;\n}\n.team_header[data-v-221bb58c] {\n    display: inline-flex;\n    width: 100%;\n    font-family: 'Oswald', sans-serif;\n    font-size: 24px;\n    color: #515151;\n    text-transform: uppercase;\n    background-image: url(" + escape(__webpack_require__(/*! ./images/light_wool.png */ "./resources/js/components/images/light_wool.png")) + ");\n    padding: 10px 0 8px 15px;\n}\n.header_flag[data-v-221bb58c] {\n    height: 45px;\n    width: 45px;\n    margin-right: 17px;\n}\n.form_container[data-v-221bb58c] {\n    padding: 4px 0 0 16px;\n    height: 38px;\n    border-bottom: 1px solid #ccc;\n    font-family: 'Oswald', sans-serif;\n    font-size: 18px;\n    text-transform: uppercase;\n    color: #515151;\n}\n#form_title[data-v-221bb58c] {\n    vertical-align: middle;\n}\n.form_button[data-v-221bb58c] {\n    min-width: 23px;\n    min-height: 23px;\n    max-width: 23px;\n    max-height: 23px;\n    font-family: \"Roboto\", sans-serif;\n    font-size: 11px;\n    background-color: #04AA6D;\n    border: none;\n    color: white;\n    padding: 6px;\n    text-align: center;\n    text-decoration: none;\n    display: inline-block;\n    margin: 4px 2px;\n    box-shadow: rgba(0, 0, 0, 0.18) 0px 5px 15px;\n}\n.button_win[data-v-221bb58c] {border-radius: 100%; background-color: #6bab4f;}\n.button_lose[data-v-221bb58c] {border-radius: 100%; background-color: #e83434;}\n.button_draw[data-v-221bb58c] {border-radius: 100%; background-color: lightgray;}\n#separator_bar[data-v-221bb58c] {\n    height: 2px;\n    background-image: linear-gradient(to right, transparent, #b5b5b5, transparent);\n}\n.last_ten_matches_container[data-v-221bb58c] {\n    position: relative;\n    width: 100%;\n    height: 557px;\n    overflow-y: hidden;\n    scroll-behavior: smooth;\n}\n.scoreboard_content table[data-v-221bb58c]{\n    width: 100%;\n    border: none;\n}\n.scoreboard_content td[data-v-221bb58c] {\n    border: none;\n}\n\n", ""]);
 
 // exports
 
@@ -7704,7 +7731,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.teamplayers_container[data-v-7b03258c] {\n    position: relative;\n    margin-left: -9px;\n    background-color: white;\n    width: 975px;\n    height: 659px\n}\n.teamplayer_header[data-v-7b03258c] {\n    width: 100%;\n    font-family: 'Oswald', sans-serif;\n    font-size: 24px;\n    color: #515151;\n    text-transform: uppercase;\n    text-align: center;\n    background-image: url(" + escape(__webpack_require__(/*! ./images/light_wool.png */ "./resources/js/components/images/light_wool.png")) + ");\n    padding: 10px 0 8px 15px;\n}\n.player_stats_header[data-v-7b03258c] {\n    position: relative;\n    z-index: 15;\n    width: 100%;\n    height: 35px;\n    font-family: 'Oswald', sans-serif;\n    font-size: 24px;\n    color: #515151;\n    text-transform: uppercase;\n    text-align: center;\n    line-height: 30px;\n    background-image: url(" + escape(__webpack_require__(/*! ./images/light_wool.png */ "./resources/js/components/images/light_wool.png")) + ");\n    padding: 0 0 10px 15px;\n    border-top: 1px solid #dcdcdc;\n    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;\n}\n.separator_bar[data-v-7b03258c] {\n    height: 2px;\n    background-image: linear-gradient(to right, transparent, #b5b5b5, transparent);\n}\n.players_list-item img[data-v-7b03258c] {\n    width: 75px;\n    height: 75px;\n    border-radius: 100%;\n    box-shadow: rgba(17, 17, 26, 0.35) 0 4px 16px, rgba(17, 17, 26, 0.05) 0 8px 32px;\n}\n#midfield_div[data-v-7b03258c] {\n    height: 188px;\n    padding: 10px 5px 0 14px;\n    width: 100%;\n}\n.players_list-item[data-v-7b03258c] {\n    transition: all .5s;\n    display: inline-block;\n    padding: 5px;\n    margin-right: 10px;\n}\n.player_stats_container[data-v-7b03258c] {\n    z-index: 14;\n    width: 100%;\n    height: 380px;\n    background: linear-gradient(180deg, rgba(255,255,255,1) 16%, rgba(255,210,164,1) 100%);\n    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=\"#ffffff\",endColorstr=\"#ffd2a4\",GradientType=1);\n}\n", ""]);
+exports.push([module.i, "\n.teamplayers_container[data-v-7b03258c] {\n    position: relative;\n    margin-left: -9px;\n    background-color: white;\n    width: 975px;\n    height: 659px;\n    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;\n}\n.teamplayer_header[data-v-7b03258c] {\n    width: 100%;\n    font-family: 'Oswald', sans-serif;\n    font-size: 24px;\n    color: #515151;\n    text-transform: uppercase;\n    text-align: center;\n    background-image: url(" + escape(__webpack_require__(/*! ./images/light_wool.png */ "./resources/js/components/images/light_wool.png")) + ");\n    padding: 10px 0 8px 15px;\n}\n.player_stats_header[data-v-7b03258c] {\n    position: relative;\n    z-index: 15;\n    width: 100%;\n    height: 35px;\n    font-family: 'Oswald', sans-serif;\n    font-size: 24px;\n    color: #515151;\n    text-transform: uppercase;\n    text-align: center;\n    line-height: 30px;\n    background-image: url(" + escape(__webpack_require__(/*! ./images/light_wool.png */ "./resources/js/components/images/light_wool.png")) + ");\n    padding: 0 0 10px 15px;\n    border-top: 1px solid #dcdcdc;\n    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;\n}\n.separator_bar[data-v-7b03258c] {\n    height: 2px;\n    background-image: linear-gradient(to right, transparent, #b5b5b5, transparent);\n}\n.players_list-item img[data-v-7b03258c] {\n    width: 75px;\n    height: 75px;\n    border-radius: 100%;\n    box-shadow: rgba(17, 17, 26, 0.35) 0 4px 16px, rgba(17, 17, 26, 0.05) 0 8px 32px;\n}\n#midfield_div[data-v-7b03258c] {\n    height: 188px;\n    padding: 10px 5px 0 14px;\n    width: 100%;\n}\n.players_list-item[data-v-7b03258c] {\n    transition: all .5s;\n    display: inline-block;\n    padding: 5px;\n    margin-right: 10px;\n}\n.player_stats_container[data-v-7b03258c] {\n    z-index: 14;\n    width: 100%;\n    height: 380px;\n    background: linear-gradient(180deg, rgba(255,255,255,1) 16%, rgba(255,210,164,1) 100%);\n    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=\"#ffffff\",endColorstr=\"#ffd2a4\",GradientType=1);\n    padding: 5px;\n}\n.player_passport[data-v-7b03258c] {\n    width: 255px;\n    height: 370px;\n    border: solid 1px #ff7800;\n}\n", ""]);
 
 // exports
 
@@ -40059,91 +40086,87 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "container", style: { height: 640 + "px" } },
-    [
-      _c("div", { staticClass: "team_header" }, [
-        _c("img", { staticClass: "header_flag", attrs: { src: _vm.flag } }),
+  return _c("div", { staticClass: "container" }, [
+    _c("div", { staticClass: "team_header" }, [
+      _c("img", { staticClass: "header_flag", attrs: { src: _vm.flag } }),
+      _vm._v(" "),
+      _c("span", [_vm._v(_vm._s(_vm.details))])
+    ]),
+    _vm._v(" "),
+    _c("div", { attrs: { id: "separator_bar" } }),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "form_container" },
+      [
+        _c("span", { attrs: { id: "form_title" } }, [_vm._v("Form")]),
         _vm._v(" "),
-        _c("span", [_vm._v(_vm._s(_vm.details))])
-      ]),
-      _vm._v(" "),
-      _c("div", { attrs: { id: "separator_bar" } }),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "form_container" },
-        [
-          _c("span", { attrs: { id: "form_title" } }, [_vm._v("Form")]),
-          _vm._v(" "),
-          _vm._l(_vm.lastTenForm, function(result) {
-            return _c("span", { key: result.gameid }, [
-              result.res === "W"
-                ? _c(
-                    "a",
-                    {
-                      staticClass: "form_button button_win",
-                      attrs: { href: "#" },
-                      on: {
-                        click: function($event) {
-                          return _vm.scrollFormWin(result.scrolldiv)
-                        }
+        _vm._l(_vm.lastTenForm, function(result) {
+          return _c("span", { key: result.gameid }, [
+            result.res === "W"
+              ? _c(
+                  "a",
+                  {
+                    staticClass: "form_button button_win",
+                    attrs: { href: "#" },
+                    on: {
+                      click: function($event) {
+                        return _vm.scrollFormWin(result.scrolldiv)
                       }
-                    },
-                    [_vm._v(_vm._s(result.res))]
-                  )
-                : result.res === "L"
-                ? _c(
-                    "a",
-                    {
-                      staticClass: "form_button button_lose",
-                      attrs: { href: "#" },
-                      on: {
-                        click: function($event) {
-                          return _vm.scrollFormWin(result.scrolldiv)
-                        }
+                    }
+                  },
+                  [_vm._v(_vm._s(result.res))]
+                )
+              : result.res === "L"
+              ? _c(
+                  "a",
+                  {
+                    staticClass: "form_button button_lose",
+                    attrs: { href: "#" },
+                    on: {
+                      click: function($event) {
+                        return _vm.scrollFormWin(result.scrolldiv)
                       }
-                    },
-                    [_vm._v(_vm._s(result.res))]
-                  )
-                : result.res === "D"
-                ? _c(
-                    "a",
-                    {
-                      staticClass: "form_button button_draw",
-                      attrs: { href: "#" },
-                      on: {
-                        click: function($event) {
-                          return _vm.scrollFormWin(result.scrolldiv)
-                        }
+                    }
+                  },
+                  [_vm._v(_vm._s(result.res))]
+                )
+              : result.res === "D"
+              ? _c(
+                  "a",
+                  {
+                    staticClass: "form_button button_draw",
+                    attrs: { href: "#" },
+                    on: {
+                      click: function($event) {
+                        return _vm.scrollFormWin(result.scrolldiv)
                       }
-                    },
-                    [_vm._v(_vm._s(result.res))]
-                  )
-                : _vm._e()
-            ])
-          })
-        ],
-        2
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        {
-          staticClass: "last_ten_matches_container",
-          attrs: { id: "form_container" }
-        },
-        _vm._l(_vm.lastTenMatchesIds, function(games) {
-          return _c("goalscorers", {
-            key: games.match.fixture.id,
-            attrs: { matchid: games.match.fixture.id, id: games.scrolldiv }
-          })
-        }),
-        1
-      )
-    ]
-  )
+                    }
+                  },
+                  [_vm._v(_vm._s(result.res))]
+                )
+              : _vm._e()
+          ])
+        })
+      ],
+      2
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "last_ten_matches_container",
+        attrs: { id: "form_container" }
+      },
+      _vm._l(_vm.lastTenMatchesIds, function(games) {
+        return _c("goalscorers", {
+          key: games.match.fixture.id,
+          attrs: { matchid: games.match.fixture.id, id: games.scrolldiv }
+        })
+      }),
+      1
+    )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -40934,9 +40957,7 @@ var render = function() {
     _vm._v(" "),
     _vm._m(0),
     _vm._v(" "),
-    _c("div", { staticClass: "player_stats_container" }, [
-      _vm._v("\n        content\n    ")
-    ])
+    _vm._m(1)
   ])
 }
 var staticRenderFns = [
@@ -40946,6 +40967,16 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "player_stats_header" }, [
       _c("span", [_vm._v("player statistics")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "player_stats_container" }, [
+      _c("div", { staticClass: "player_passport" }, [
+        _vm._v("\n            passport\n        ")
+      ])
     ])
   }
 ]

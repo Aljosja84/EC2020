@@ -21,6 +21,7 @@
   <component name="ChangeListManager">
     <list default="true" id="cf82d037-ce69-45df-857e-a29fb7732fae" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/ec2020.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/ec2020.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/Teamform.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Teamform.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/teamplayers.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/teamplayers.vue" afterDir="false" />
@@ -179,23 +180,23 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="ignore.virus.scanning.warn.message" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/images/country_flags" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/images" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\xampp\htdocs\EC2020\public\images\country_flags" />
-      <recent name="C:\xampp\htdocs\EC2020\public\images" />
-      <recent name="C:\xampp\htdocs\EC2020\resources\js\components\images" />
-      <recent name="C:\xampp\htdocs\EC2020\resources\js\components" />
-      <recent name="C:\xampp\htdocs\EC2020\public\js" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\xampp\htdocs\EC2020\public\images\country_flags" />
       <recent name="C:\xampp\htdocs\EC2020\public\images\icons" />
       <recent name="C:\xampp\htdocs\EC2020\resources\js\components\images" />
       <recent name="C:\xampp\htdocs\EC2020\public\images" />
+      <recent name="C:\xampp\htdocs\EC2020\public\js" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\EC2020\public\images" />
+      <recent name="C:\xampp\htdocs\EC2020\public\images\country_flags" />
+      <recent name="C:\xampp\htdocs\EC2020\resources\js\components\images" />
+      <recent name="C:\xampp\htdocs\EC2020\resources\js\components" />
       <recent name="C:\xampp\htdocs\EC2020\public\js" />
     </key>
   </component>
@@ -366,7 +367,8 @@
       <workItem from="1629055485411" duration="7000" />
       <workItem from="1629071003460" duration="11000" />
       <workItem from="1629464265915" duration="900000" />
-      <workItem from="1629985474761" duration="3943000" />
+      <workItem from="1629985474761" duration="8401000" />
+      <workItem from="1630070266982" duration="5754000" />
     </task>
     <servers />
   </component>

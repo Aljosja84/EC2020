@@ -7,4 +7,5 @@
             <team-players teamid="{{ $country->api_country_code }}" style="float: left;"></team-players>
         </div>
     </div>
+    <div class="footer_teampage"></div>
 @endsection

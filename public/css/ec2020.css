@@ -92,3 +92,12 @@
     background-color: #ffffff;
 }
 
+.footer_teampage {
+    background-image: url("../images/footer_abouteuro.svg");
+    position: absolute;
+    width: 300px;
+    height: 403px;
+    bottom: 0;
+    right: 0;
+}
+
