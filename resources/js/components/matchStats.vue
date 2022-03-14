@@ -318,15 +318,6 @@
         margin-top: 5px;
     }
 
-    .progress_right {
-        float: right;
-        width: 505px;
-        position: relative;
-        animation: all 0.4s ease;
-        background-color: #ebf0f6;
-        margin-top: 5px;
-    }
-
     .bar_left {
         border-radius: 3px 0 0 3px;
         float:right;
@@ -335,6 +326,16 @@
         width: 30%;
         transition: all 0.5s ease-out;
     }
+
+    .progress_right {
+         float: right;
+         width: 505px;
+         position: relative;
+         animation: all 0.4s ease;
+         background-color: #ebf0f6;
+         margin-top: 5px;
+     }
+
     .bar_right {
         border-radius: 0 3px 3px 0;
         float:left;

@@ -31,6 +31,7 @@ Vue.component('tweets', require('./components/RTTweets').default);
 Vue.component('team-form', require('./components/Teamform').default);
 Vue.component('goalscorers', require('./components/goalscorers').default);
 Vue.component('team-players', require('./components/teamplayers').default);
+Vue.component('team-stats', require('./components/teamstats').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

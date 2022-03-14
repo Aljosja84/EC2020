@@ -18,7 +18,69 @@
 
         <div class="player_stats_container">
             <div class="player_passport">
-                passport
+                <div class="card">
+                    <div class="header" id="header-blur">Denzel Justus Morris Dumfries</div>
+                    <div class="avatar">
+                        <img src="/images/player_example.png" alt="" />
+                    </div>
+                    <div class="content">
+                        <div class="content_header">AGE</div>
+                        <table style="margin-top: 8px">
+                            <tr>
+                                <td style="width: 80px; height: 20px; padding-left: 6px">born</td><td>16-07-1984 (37)</td>
+                            </tr>
+                            <tr>
+                                <td style="width: 80px; height: 20px; padding-left: 6px">birthplace</td><td>Rotterdam, The Netherlands</td>
+                            </tr>
+                            <tr>
+                                <td style="width: 80px; height: 20px; padding-left: 6px">squad rank</td>
+                                <td style="vertical-align: top; width: 155px">
+                                    <!-- loading bar disguised as a rank bar -->
+                                    <div class="progress_left">
+                                        <div class="bar_left" :style="{width: bar_per_1+'%'}"></div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                        <div class="content_header">PHYSICAL</div>
+                        <table style="margin-top: 8px">
+                            <tr>
+                                <td style="width: 80px; height: 20px; padding-left: 6px">height</td><td>188cm</td>
+                            </tr>
+                            <tr>
+                                <td style="width: 80px; height: 20px; padding-left: 6px">squad rank</td>
+                                <td style="vertical-align: top; width: 155px">
+                                    <!-- loading bar disguised as a rank bar -->
+                                    <div class="progress_left">
+                                        <div class="bar_left" :style="{width: bar_per_2+'%'}"></div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 80px; height: 20px; padding-left: 6px">weight</td><td>89kg</td>
+                            </tr>
+                            <tr>
+                                <td style="width: 80px; height: 20px; padding-left: 6px">squad rank</td>
+                                <td style="vertical-align: top; width: 155px">
+                                    <!-- loading bar disguised as a rank bar -->
+                                    <div class="progress_left">
+                                        <div class="bar_left" :style="{width: bar_per_3+'%'}"></div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="player_stats_left">
+                player stats
+            </div>
+
+            <div class="player_stats_right_top">
+                graphs
+            </div>
+            <div class="player_stats_right_bottom">
+                more stats
             </div>
         </div>
     </div>
@@ -32,7 +94,10 @@
         data() {
             return {
                 playersArr: [],
-                playersAgeArr: []
+                playersAgeArr: [],
+                bar_per_1: 30,
+                bar_per_2: 45,
+                bar_per_3: 60
             }
         },
 
@@ -65,13 +130,16 @@
             },
 
             shuffle() {
-                this.playersArr = _.shuffle(this.playersArr);
-                console.log(this.ageSortedArr.findIndex(i => i.playerid === 26240))
+                 this.bar_per_1 = _.random(0, 100);
+                 this.bar_per_2 = _.random(0, 100);
+                 this.bar_per_3 = _.random(0, 100);
+                //this.playersArr = _.shuffle(this.playersArr);
+                //console.log(this.ageSortedArr.findIndex(i => i.playerid === 26240))
             }
         },
 
         created() {
-            this.loadPlayers(this.teamid);
+            //this.loadPlayers(this.teamid);
         },
 
         computed:
@@ -161,6 +229,110 @@
     .player_passport {
         width: 255px;
         height: 370px;
-        border: solid 1px #ff7800;
+        /*border: solid 1px #ff7800;*/
+        float: left;
+        margin-right: 5px;
     }
+
+    .player_stats_left {
+        width: 218px;
+        height: 370px;
+        border: solid 1px #ff7800;
+        float: left;
+        margin-right: 5px;
+    }
+
+    .player_stats_right_top {
+        width: 480px;
+        height: 210px;
+        border: solid 1px #ff7800;
+        float: left;
+        margin-bottom: 5px;
+    }
+
+    .player_stats_right_bottom {
+        width: 480px;
+        height: 155px;
+        border: solid 1px #ff7800;
+        float: left;
+    }
+
+    .card {
+        float: left;
+        overflow: hidden;
+        position: relative;
+        width: 100%;
+        height: 100%;
+        border: 1px solid #ff7800;
+        border-radius: 5px;
+        text-align: center;
+    }
+    .card .header {
+        font-family: 'Oswald', sans-serif;
+        color: #515151;
+        font-size: 18px;
+        line-height: 18px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 55px;
+        z-index: 1;
+        background: #e58d36;
+        padding-top: 4px;
+    }
+    .avatar {
+        position: relative;
+        margin-top: 25px;
+        z-index: 100;
+    }
+    .avatar img {
+        width: 75px;
+        height: 75px;
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+        border-radius: 50%;
+        border: 5px solid rgba(0,0,30,0.8);
+        box-shadow: rgba(0, 0, 0, 0.45) 0 25px 20px -20px;
+    }
+
+    .content {
+        padding : 0;
+        font-family: "Roboto", sans-serif;
+        font-size: 12px;
+        color: #515151;
+    }
+
+    .content td {
+        text-align: left;
+    }
+
+    .content_header {
+        width: 100%;
+        background-color: transparent;
+        font-family: 'Oswald', sans-serif;
+        font-size: 24px;
+        color: #515151;
+        line-height: 21px;
+        margin-top: 10px;
+    }
+
+    .progress_left {
+        float: left;
+        width: 100%;
+        position: relative;
+        animation: all 0.4s ease;
+        margin-top: 5px;
+        border: solid 1px #515151;
+    }
+
+    .bar_left {
+        border-radius: 0 1px 1px 0;
+        float:left;
+        height: 9px;
+        background-color: #ff7800;
+        width: 30%;
+        transition: all 0.5s ease-out;
+    }
+
 </style>

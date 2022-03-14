@@ -21,11 +21,13 @@
   <component name="ChangeListManager">
     <list default="true" id="cf82d037-ce69-45df-857e-a29fb7732fae" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/ec2020.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/ec2020.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Teamform.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Teamform.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/matchStats.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/matchStats.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/teamplayers.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/teamplayers.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/team.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/team.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -180,7 +182,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="ignore.virus.scanning.warn.message" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/images" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../calendar" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
@@ -368,7 +370,22 @@
       <workItem from="1629071003460" duration="11000" />
       <workItem from="1629464265915" duration="900000" />
       <workItem from="1629985474761" duration="8401000" />
-      <workItem from="1630070266982" duration="5754000" />
+      <workItem from="1630070266982" duration="6343000" />
+      <workItem from="1643472065086" duration="122000" />
+      <workItem from="1643472594428" duration="332000" />
+      <workItem from="1643473900980" duration="44000" />
+      <workItem from="1644333139380" duration="2118000" />
+      <workItem from="1644419663082" duration="137000" />
+      <workItem from="1644765656093" duration="218000" />
+      <workItem from="1644849912465" duration="12000" />
+      <workItem from="1645280575858" duration="3618000" />
+      <workItem from="1645288752815" duration="929000" />
+      <workItem from="1646227093719" duration="24000" />
+      <workItem from="1646488678894" duration="3131000" />
+      <workItem from="1646918313957" duration="6386000" />
+      <workItem from="1647010468567" duration="939000" />
+      <workItem from="1647178319611" duration="4310000" />
+      <workItem from="1647264191381" duration="7312000" />
     </task>
     <servers />
   </component>
@@ -388,21 +405,9 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="977" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1626796875568">
+    <state x="810" y="539" key="FileChooserDialogImpl" timestamp="1644419799396">
       <screen x="0" y="0" width="3840" height="1570" />
     </state>
-    <state x="977" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.3840.1570@0.0.3840.1570" timestamp="1626796875568" />
-    <state x="1115" y="551" key="FileChooserDialogImpl" timestamp="1622640446321">
-      <screen x="0" y="0" width="3840" height="1570" />
-    </state>
-    <state x="1115" y="551" key="FileChooserDialogImpl/0.0.3840.1570@0.0.3840.1570" timestamp="1622640446321" />
-    <state x="594" y="708" key="NewPhpFileDialog" timestamp="1621949533182">
-      <screen x="0" y="0" width="3840" height="1570" />
-    </state>
-    <state x="594" y="708" key="NewPhpFileDialog/0.0.3840.1570@0.0.3840.1570" timestamp="1621949533182" />
-    <state x="277" y="361" width="672" height="678" key="search.everywhere.popup" timestamp="1628782340826">
-      <screen x="0" y="0" width="3840" height="1570" />
-    </state>
-    <state x="277" y="361" width="672" height="678" key="search.everywhere.popup/0.0.3840.1570@0.0.3840.1570" timestamp="1628782340826" />
+    <state x="810" y="539" key="FileChooserDialogImpl/0.0.3840.1570@0.0.3840.1570" timestamp="1644419799396" />
   </component>
 </project>
