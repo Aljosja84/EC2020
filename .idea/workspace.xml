@@ -21,13 +21,15 @@
   <component name="ChangeListManager">
     <list default="true" id="cf82d037-ce69-45df-857e-a29fb7732fae" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/matchStats.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/matchStats.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/teamplayers.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/teamplayers.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/team.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/team.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/navi.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/navi.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webpack.mix.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.mix.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,8 +43,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="JavaScript File" />
         <option value="CSS File" />
+        <option value="JavaScript File" />
         <option value="Vue Single File Component" />
       </list>
     </option>
@@ -185,6 +187,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../calendar" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\PhpStorm 2020.1\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -385,7 +388,12 @@
       <workItem from="1646918313957" duration="6386000" />
       <workItem from="1647010468567" duration="939000" />
       <workItem from="1647178319611" duration="4310000" />
-      <workItem from="1647264191381" duration="7312000" />
+      <workItem from="1647264191381" duration="7686000" />
+      <workItem from="1647345990823" duration="6991000" />
+      <workItem from="1647355842144" duration="4130000" />
+      <workItem from="1647360015118" duration="3037000" />
+      <workItem from="1647445392320" duration="3696000" />
+      <workItem from="1647521094289" duration="35867000" />
     </task>
     <servers />
   </component>
@@ -405,9 +413,33 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="926" y="532" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1647523350209">
+      <screen x="0" y="0" width="3840" height="1570" />
+    </state>
+    <state x="926" y="532" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.3840.1570@0.0.3840.1570" timestamp="1647523350209" />
     <state x="810" y="539" key="FileChooserDialogImpl" timestamp="1644419799396">
       <screen x="0" y="0" width="3840" height="1570" />
     </state>
     <state x="810" y="539" key="FileChooserDialogImpl/0.0.3840.1570@0.0.3840.1570" timestamp="1644419799396" />
+    <state width="2332" height="453" key="GridCell.Tab.0.bottom" timestamp="1647360006385">
+      <screen x="0" y="0" width="3840" height="1570" />
+    </state>
+    <state width="2332" height="453" key="GridCell.Tab.0.bottom/0.0.3840.1570@0.0.3840.1570" timestamp="1647360006385" />
+    <state width="2332" height="453" key="GridCell.Tab.0.center" timestamp="1647360006385">
+      <screen x="0" y="0" width="3840" height="1570" />
+    </state>
+    <state width="2332" height="453" key="GridCell.Tab.0.center/0.0.3840.1570@0.0.3840.1570" timestamp="1647360006385" />
+    <state width="2332" height="453" key="GridCell.Tab.0.left" timestamp="1647360006385">
+      <screen x="0" y="0" width="3840" height="1570" />
+    </state>
+    <state width="2332" height="453" key="GridCell.Tab.0.left/0.0.3840.1570@0.0.3840.1570" timestamp="1647360006385" />
+    <state width="2332" height="453" key="GridCell.Tab.0.right" timestamp="1647360006385">
+      <screen x="0" y="0" width="3840" height="1570" />
+    </state>
+    <state width="2332" height="453" key="GridCell.Tab.0.right/0.0.3840.1570@0.0.3840.1570" timestamp="1647360006385" />
+    <state x="859" y="361" width="672" height="678" key="search.everywhere.popup" timestamp="1647533700338">
+      <screen x="0" y="0" width="3840" height="1570" />
+    </state>
+    <state x="859" y="361" width="672" height="678" key="search.everywhere.popup/0.0.3840.1570@0.0.3840.1570" timestamp="1647533700338" />
   </component>
 </project>

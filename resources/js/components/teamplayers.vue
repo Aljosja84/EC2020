@@ -17,87 +17,271 @@
         <div class="player_stats_header"><span>player statistics</span></div>
 
         <div class="player_stats_container">
-            <div class="player_passport">
-                <div class="card">
-                    <div class="header" id="header-blur">Denzel Justus Morris Dumfries</div>
-                    <div class="avatar">
-                        <img src="/images/player_example.png" alt="" />
-                    </div>
-                    <div class="content">
-                        <div class="content_header">AGE</div>
-                        <table style="margin-top: 8px">
-                            <tr>
-                                <td style="width: 80px; height: 20px; padding-left: 6px">born</td><td>16-07-1984 (37)</td>
-                            </tr>
-                            <tr>
-                                <td style="width: 80px; height: 20px; padding-left: 6px">birthplace</td><td>Rotterdam, The Netherlands</td>
-                            </tr>
-                            <tr>
-                                <td style="width: 80px; height: 20px; padding-left: 6px">squad rank</td>
-                                <td style="vertical-align: top; width: 155px">
-                                    <!-- loading bar disguised as a rank bar -->
-                                    <div class="progress_left">
-                                        <div class="bar_left" :style="{width: bar_per_1+'%'}"></div>
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
-                        <div class="content_header">PHYSICAL</div>
-                        <table style="margin-top: 8px">
-                            <tr>
-                                <td style="width: 80px; height: 20px; padding-left: 6px">height</td><td>188cm</td>
-                            </tr>
-                            <tr>
-                                <td style="width: 80px; height: 20px; padding-left: 6px">squad rank</td>
-                                <td style="vertical-align: top; width: 155px">
-                                    <!-- loading bar disguised as a rank bar -->
-                                    <div class="progress_left">
-                                        <div class="bar_left" :style="{width: bar_per_2+'%'}"></div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="width: 80px; height: 20px; padding-left: 6px">weight</td><td>89kg</td>
-                            </tr>
-                            <tr>
-                                <td style="width: 80px; height: 20px; padding-left: 6px">squad rank</td>
-                                <td style="vertical-align: top; width: 155px">
-                                    <!-- loading bar disguised as a rank bar -->
-                                    <div class="progress_left">
-                                        <div class="bar_left" :style="{width: bar_per_3+'%'}"></div>
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
+            <div class="player_container">
+                <div class="player_passport">
+                    <div class="card">
+                        <div class="header" id="header-blur">Denzel Justus Morris Dumfries</div>
+                        <div class="avatar">
+                            <img src="/images/player_example.png" alt="" />
+                        </div>
+                        <div class="content">
+                            <div class="content_header">AGE</div>
+                            <table style="margin-top: 8px">
+                                <tr>
+                                    <td style="width: 80px; height: 20px; padding-left: 6px">born</td><td>16-07-1984 (37)</td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 80px; height: 20px; padding-left: 6px">birthplace</td><td>Rotterdam, The Netherlands</td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 80px; height: 20px; padding-left: 6px">squad rank</td>
+                                    <td style="vertical-align: top; width: 155px">
+                                        <!-- loading bar disguised as a rank bar -->
+                                        <div class="progress_left">
+                                            <div class="bar_left" :style="{width: bar_per_1+'%'}"></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                            <div class="content_header">PHYSICAL</div>
+                            <table style="margin-top: 8px">
+                                <tr>
+                                    <td style="width: 80px; height: 20px; padding-left: 6px">height</td><td>188cm</td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 80px; height: 20px; padding-left: 6px">squad rank</td>
+                                    <td style="vertical-align: top; width: 155px">
+                                        <!-- loading bar disguised as a rank bar -->
+                                        <div class="progress_left">
+                                            <div class="bar_left" :style="{width: bar_per_2+'%'}"></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 80px; height: 20px; padding-left: 6px">weight</td><td>89kg</td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 80px; height: 20px; padding-left: 6px">squad rank</td>
+                                    <td style="vertical-align: top; width: 155px">
+                                        <!-- loading bar disguised as a rank bar -->
+                                        <div class="progress_left">
+                                            <div class="bar_left" :style="{width: bar_per_3+'%'}"></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="player_stats_left">
-                player stats
-            </div>
 
-            <div class="player_stats_right_top">
-                graphs
-            </div>
-            <div class="player_stats_right_bottom">
-                more stats
+                <div class="player_stats_left">
+                    <div class="left_stats_header">
+                        games this ec
+                    </div>
+                    <div class="left_stats_data">
+                        4
+                    </div>
+                    <div class="left_stats_header">
+                        starting XI
+                    </div>
+                    <div class="left_stats_data">
+                        4
+                    </div>
+                    <div class="left_stats_header">
+                        minutes
+                    </div>
+                    <div class="left_stats_data">
+                        316
+                    </div>
+                    <div class="left_stats_header">
+                        position
+                    </div>
+                    <div class="left_stats_data">
+                        defender
+                    </div>
+                    <div class="left_stats_header">
+                        rating
+                    </div>
+                    <div class="left_stats_data">
+                        6.542857
+                    </div>
+                </div>
+
+                <div class="player_stats_right_top">
+                    <div class="player_stats_right_top_sub">
+                        <div class="left_stats_header">
+                            passes
+                        </div>
+                        <div style="background-color: transparent; margin-left: 10px; margin-top: 10px">
+                            <donut-test v-bind:centertext="156" v-bind:chart-data="chartData[0]" :canvas_id="122"/>
+                        </div>
+                    </div>
+                    <div class="player_stats_right_top_sub">
+                        <div class="left_stats_header">
+                            duels
+                        </div>
+                        <div style="background-color: transparent; margin-left: 10px; margin-top: 10px">
+                            <donut-test v-bind:centertext="17" v-bind:chart-data="chartData[1]" :canvas_id="123"/>
+                        </div>
+                    </div>
+                    <div class="player_stats_right_top_sub">
+                        <div class="left_stats_header">
+                            dribbles
+                        </div>
+                        <div style="background-color: transparent; margin-left: 10px; margin-top: 10px">
+                            <donut-test v-bind:centertext="156" v-bind:chart-data="chartData[0]" :canvas_id="124"/>
+                        </div>
+                    </div>
+                    <!--
+
+                    -->
+                </div>
+                <div class="player_stats_right_bottom">
+                    <div class="player_stats_right_bottom_sub" style="height: inherit">
+                        <div class="player_stats_right_bottom_container">
+                            <div class="player_stats_right_bottom_header">
+                                shots
+                            </div>
+                            <div class="player_stats_right_bottom_data">
+                                12
+                            </div>
+                        </div>
+
+                        <div class="player_stats_right_bottom_container">
+                            <div class="player_stats_right_bottom_header">
+                                goals
+                            </div>
+                            <div class="player_stats_right_bottom_data">
+                                2
+                            </div>
+                        </div>
+
+                        <div class="player_stats_right_bottom_container">
+                            <div class="player_stats_right_bottom_header">
+                                cards
+                            </div>
+                            <div class="player_stats_right_bottom_data">
+                                1
+                            </div>
+                        </div>
+
+                        <div class="player_stats_right_bottom_container">
+                            <div class="player_stats_right_bottom_header">
+                                tackles
+                            </div>
+                            <div class="player_stats_right_bottom_data">
+                                4
+                            </div>
+                        </div>
+
+                        <div class="player_stats_right_bottom_container">
+                            <div class="player_stats_right_bottom_header">
+                                fouls
+                            </div>
+                            <div class="player_stats_right_bottom_data">
+                                9
+                            </div>
+                        </div>
+
+                        <div class="player_stats_right_bottom_container">
+                            <div class="player_stats_right_bottom_header">
+                                subs
+                            </div>
+                            <div class="player_stats_right_bottom_data">
+                                0
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+    import donutTest from "./donutTest";
     export default {
         name: "teamplayers",
         props: ['teamid'],
+        components: { donutTest },
 
         data() {
             return {
                 playersArr: [],
-                playersAgeArr: [],
+                playersAgeArr: ['122','133','143'],
                 bar_per_1: 30,
                 bar_per_2: 45,
-                bar_per_3: 60
+                bar_per_3: 60,
+                // donut chart data
+                chartData: [{
+                    type: 'doughnut',
+                    data: {
+                        labels: ['accurate', 'not-accurate'],
+                        datasets: [
+                            {
+                                data: [73,156-73],
+                                backgroundColor: [
+                                    '#68b451',
+                                    '#c22d2d'
+                                ]
+                            },
+                        ],
+
+                    },
+                    options: {
+                        plugins: {
+                            legend: {
+                                display: false,
+                            },
+                            tooltips: {
+                                enabled: false,
+                            }
+                        },
+                        layout: {
+                            padding: 10
+                        },
+                        cutout: '50%',
+                        hoverOffset: 10,
+                        responsive: true,
+                        maintainAspectRatio: true,
+                        borderWidth: 0,
+                    },
+                },
+                    {
+                        type: 'doughnut',
+                        data: {
+                            labels: ['won', 'lost'],
+                            datasets: [
+                                {
+                                    data: [8,17-8],
+                                    backgroundColor: [
+                                        '#68b451',
+                                        '#c22d2d'
+                                    ]
+                                },
+                            ],
+
+                        },
+                        options: {
+                            plugins: {
+                                legend: {
+                                    display: false,
+                                },
+                                tooltips: {
+                                    enabled: false,
+                                }
+                            },
+                            layout: {
+                                padding: 10
+                            },
+                            cutout: '50%',
+                            hoverOffset: 10,
+                            responsive: true,
+                            maintainAspectRatio: true,
+                            borderWidth: 0,
+                        },
+                    },
+                ],
             }
         },
 
@@ -139,7 +323,7 @@
         },
 
         created() {
-            //this.loadPlayers(this.teamid);
+            this.loadPlayers(this.teamid);
         },
 
         computed:
@@ -244,16 +428,14 @@
 
     .player_stats_right_top {
         width: 480px;
-        height: 210px;
-        border: solid 1px #ff7800;
+        height: 218px;
         float: left;
         margin-bottom: 5px;
     }
 
     .player_stats_right_bottom {
         width: 480px;
-        height: 155px;
-        border: solid 1px #ff7800;
+        height: 147px;
         float: left;
     }
 
@@ -312,7 +494,7 @@
         background-color: transparent;
         font-family: 'Oswald', sans-serif;
         font-size: 24px;
-        color: #515151;
+        color: #616161;
         line-height: 21px;
         margin-top: 10px;
     }
@@ -335,4 +517,62 @@
         transition: all 0.5s ease-out;
     }
 
+    .left_stats_header {
+        padding-top: 2px;
+        background-image: url("images/light_wool.png");
+        height: 30px;
+        width: 100%;
+        text-transform: uppercase;
+        font-family: 'Oswald', sans-serif;
+        font-size: 24px;
+        color: #616161;
+        text-align: center;
+        line-height: 24px;
+    }
+
+    .left_stats_data {
+        margin-top: 8px;
+        margin-bottom: 6px;
+        height: 30px;
+        width: 100%;
+        text-transform: uppercase;
+        font-family: 'Oswald', sans-serif;
+        font-size: 26px;
+        color: #ff7800;
+        text-align: center;
+        line-height: 26px;
+    }
+
+    .player_stats_right_top_sub {
+        width: 33%;
+        float: left;
+        height: 100%;
+    }
+
+    .player_stats_right_bottom_header {
+        padding-top: 2px;
+        background-image: url("images/light_wool.png");
+        height: 30px;
+        width: 100%;
+        text-transform: lowercase;
+        font-family: 'Oswald', sans-serif;
+        font-size: 24px;
+        color: #616161;
+        text-align: center;
+        line-height: 24px;
+    }
+
+    .player_stats_right_bottom_data {
+        font-family: 'Oswald', sans-serif;
+        font-size: 50px;
+        color: #ff7800;
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .player_stats_right_bottom_container {
+        float: left;
+        width: 79px;
+        height: 100%
+    }
 </style>

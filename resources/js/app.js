@@ -6,7 +6,7 @@
 
 require('./bootstrap');
 
-window.Vue = require('vue');
+import Vue from 'vue'
 
 /**
  * The following block of code may be used to automatically register your
@@ -19,7 +19,7 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('example-component', require('./components/ExampleComponent').default);
 Vue.component('stats-win', require('./components/matchStats').default);
 Vue.component('events-window', require('./components/EventsWindow').default);
 Vue.component('possession', require('./components/possessionStats').default);
@@ -31,7 +31,24 @@ Vue.component('tweets', require('./components/RTTweets').default);
 Vue.component('team-form', require('./components/Teamform').default);
 Vue.component('goalscorers', require('./components/goalscorers').default);
 Vue.component('team-players', require('./components/teamplayers').default);
-Vue.component('team-stats', require('./components/teamstats').default);
+Vue.component('team-stats', require('./components/teamstats.vue').default);
+Vue.component('line-chart', {
+    extends: VueChartJs.Doughnut,
+    mounted () {
+        this.renderChart({
+            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+            datasets: [
+                {
+                    label: 'Data One',
+                    backgroundColor: '#f87979',
+                    data: [40, 39, 10, 40, 39, 80, 40],
+                    hoverRadius: 30
+                },
+
+            ]
+        }, {responsive: true, maintainAspectRatio: false})
+    }
+})
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
