@@ -26,53 +26,53 @@
                         </div>
                         <div class="content">
                             <div class="content_header">AGE</div>
-                            <table style="margin-top: 8px">
-                                <tr>
-                                    <td style="width: 80px; height: 20px; padding-left: 6px">born</td><td>16-07-1984 (37)</td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 80px; height: 20px; padding-left: 6px">birthplace</td><td>Rotterdam, The Netherlands</td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 80px; height: 20px; padding-left: 6px">squad rank</td>
-                                    <td style="vertical-align: top; width: 155px">
-                                        <!-- loading bar disguised as a rank bar -->
-                                        <div class="progress_left">
-                                            <div class="bar_left" :style="{width: bar_per_1+'%'}"></div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </table>
+                                <table style="margin-top: 8px">
+                                    <tr>
+                                        <td style="width: 80px; height: 20px; padding-left: 6px">born</td><td>16-07-1984 (37)</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 80px; height: 20px; padding-left: 6px">birthplace</td><td>Rotterdam, The Netherlands</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 80px; height: 20px; padding-left: 6px">squad rank</td>
+                                        <td style="vertical-align: top; width: 155px">
+                                            <!-- loading bar disguised as a rank bar -->
+                                            <div class="progress_left">
+                                                <div class="bar_left" :style="{width: bar_per_1+'%'}"></div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
                             <div class="content_header">PHYSICAL</div>
-                            <table style="margin-top: 8px">
-                                <tr>
-                                    <td style="width: 80px; height: 20px; padding-left: 6px">height</td><td>188cm</td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 80px; height: 20px; padding-left: 6px">squad rank</td>
-                                    <td style="vertical-align: top; width: 155px">
-                                        <!-- loading bar disguised as a rank bar -->
-                                        <div class="progress_left">
-                                            <div class="bar_left" :style="{width: bar_per_2+'%'}"></div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 80px; height: 20px; padding-left: 6px">weight</td><td>89kg</td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 80px; height: 20px; padding-left: 6px">squad rank</td>
-                                    <td style="vertical-align: top; width: 155px">
-                                        <!-- loading bar disguised as a rank bar -->
-                                        <div class="progress_left">
-                                            <div class="bar_left" :style="{width: bar_per_3+'%'}"></div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </table>
+                                <table style="margin-top: 8px">
+                                    <tr>
+                                        <td style="width: 80px; height: 20px; padding-left: 6px">height</td><td>188cm</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 80px; height: 20px; padding-left: 6px">squad rank</td>
+                                        <td style="vertical-align: top; width: 155px">
+                                            <!-- loading bar disguised as a rank bar -->
+                                            <div class="progress_left">
+                                                <div class="bar_left" :style="{width: bar_per_2+'%'}"></div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 80px; height: 20px; padding-left: 6px">weight</td><td>89kg</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 80px; height: 20px; padding-left: 6px">squad rank</td>
+                                        <td style="vertical-align: top; width: 155px">
+                                            <!-- loading bar disguised as a rank bar -->
+                                            <div class="progress_left">
+                                                <div class="bar_left" :style="{width: bar_per_3+'%'}"></div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
                         </div>
                     </div>
-                </div>
 
                 <div class="player_stats_left">
                     <div class="left_stats_header">
@@ -246,42 +246,7 @@
                         maintainAspectRatio: true,
                         borderWidth: 0,
                     },
-                },
-                    {
-                        type: 'doughnut',
-                        data: {
-                            labels: ['won', 'lost'],
-                            datasets: [
-                                {
-                                    data: [8,17-8],
-                                    backgroundColor: [
-                                        '#68b451',
-                                        '#c22d2d'
-                                    ]
-                                },
-                            ],
-
-                        },
-                        options: {
-                            plugins: {
-                                legend: {
-                                    display: false,
-                                },
-                                tooltips: {
-                                    enabled: false,
-                                }
-                            },
-                            layout: {
-                                padding: 10
-                            },
-                            cutout: '50%',
-                            hoverOffset: 10,
-                            responsive: true,
-                            maintainAspectRatio: true,
-                            borderWidth: 0,
-                        },
-                    },
-                ],
+                }],
             }
         },
 
