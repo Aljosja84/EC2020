@@ -16,8 +16,8 @@
 
         mounted() {
             const ctx = document.getElementById(this.canvas_id);
-            new Chart(ctx, this.chartData);
-        }
+            const jelle = new Chart(ctx, this.chartData);
+        },
     }
 </script>
 

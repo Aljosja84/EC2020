@@ -17,7 +17,7 @@
         <div class="player_stats_header"><span>player statistics</span></div>
 
         <div class="player_stats_container">
-            <div class="player_container">
+            <div v-for="player in playersArr.slice(0,2)" class="player_container">
                 <div class="player_passport">
                     <div class="card">
                         <div class="header" id="header-blur">Denzel Justus Morris Dumfries</div>
@@ -113,7 +113,7 @@
                             passes
                         </div>
                         <div style="background-color: transparent; margin-left: 10px; margin-top: 10px">
-                            <donut-test v-bind:centertext="156" v-bind:chart-data="chartData[0]" :canvas_id="122"/>
+                            <donut-test v-if="loaded" v-bind:centertext="player.player.id" v-bind:chart-data="playerDoughnutStatsPasses[whichChartIndex(player.player.id)]" :canvas_id="player.player.id"/>
                         </div>
                     </div>
                     <div class="player_stats_right_top_sub">
@@ -121,7 +121,7 @@
                             duels
                         </div>
                         <div style="background-color: transparent; margin-left: 10px; margin-top: 10px">
-                            <donut-test v-bind:centertext="17" v-bind:chart-data="chartData[1]" :canvas_id="123"/>
+                            <donut-test v-if="loaded" v-bind:centertext="player.player.id" v-bind:chart-data="playerDoughnutStatsPasses[whichChartIndex(player.player.id)]" :canvas_id="player.player.id+999"/>
                         </div>
                     </div>
                     <div class="player_stats_right_top_sub">
@@ -129,7 +129,7 @@
                             dribbles
                         </div>
                         <div style="background-color: transparent; margin-left: 10px; margin-top: 10px">
-                            <donut-test v-bind:centertext="156" v-bind:chart-data="chartData[0]" :canvas_id="124"/>
+                            <donut-test v-if="loaded" v-bind:centertext="156" v-bind:chart-data="playerDoughnutStatsPasses[whichChartIndex(player.player.id)]" :canvas_id="player.player.id+1099"/>
                         </div>
                     </div>
                     <!--
@@ -207,46 +207,13 @@
 
         data() {
             return {
+                loaded: false,
                 playersArr: [],
                 playersAgeArr: ['122','133','143'],
+                playerDoughnutStatsPasses: [],
                 bar_per_1: 30,
                 bar_per_2: 45,
-                bar_per_3: 60,
-                // donut chart data
-                chartData: [{
-                    type: 'doughnut',
-                    data: {
-                        labels: ['accurate', 'not-accurate'],
-                        datasets: [
-                            {
-                                data: [73,156-73],
-                                backgroundColor: [
-                                    '#68b451',
-                                    '#c22d2d'
-                                ]
-                            },
-                        ],
-
-                    },
-                    options: {
-                        plugins: {
-                            legend: {
-                                display: false,
-                            },
-                            tooltips: {
-                                enabled: false,
-                            }
-                        },
-                        layout: {
-                            padding: 10
-                        },
-                        cutout: '50%',
-                        hoverOffset: 10,
-                        responsive: true,
-                        maintainAspectRatio: true,
-                        borderWidth: 0,
-                    },
-                }],
+                bar_per_3: 60
             }
         },
 
@@ -260,6 +227,11 @@
                  return this.ageSortedArr.findIndex(i => i.playerid === playerid)
             },
 
+            // this function returns the index of the array where playerid is found
+            whichChartIndex(playerid) {
+                 return this.playerDoughnutStatsPasses.findIndex((item) => item.playerid === playerid);
+            },
+
             loadPlayers(e) {
                 // get the players (including qualifiers) from a particular team (e)
                 axios.get("https://v3.football.api-sports.io/players?league=4&season=2020&team=" + e, {
@@ -271,8 +243,46 @@
                     response.data.response.forEach((element) => {
                         this.playersArr.push(element);
                         // push the player and his birth date to the age array
-                        this.playersAgeArr.push({'playerid': element.player.id, 'bdayTimestamp': this.DatetoTimestamp(element.player.birth.date)})
+                        this.playersAgeArr.push({'playerid': element.player.id, 'bdayTimestamp': this.DatetoTimestamp(element.player.birth.date)});
+                        // push some stats for the dougnut charts
+                        this.playerDoughnutStatsPasses.push({
+                            'playerid': element.player.id,
+                            'type': 'doughnut',
+                            'data': {
+                                'labels': ['accurate', 'not-accurate'],
+                                'datasets': [
+                                    {
+                                        'data': [73,156-73],
+                                        'backgroundColor': [
+                                            // green
+                                            '#68b451',
+                                            // red
+                                            '#c22d2d'
+                                        ]
+                                    },
+                                ],
+
+                            },
+                            'options': {
+                                'plugins': {
+                                    'legend': {
+                                        'display': false,
+                                    }
+                                },
+                                'layout': {
+                                    'padding': 10
+                                },
+                                'cutout': '50%',
+                                'hoverOffset': 10,
+                                'responsive': true,
+                                'maintainAspectRatio': true,
+                                'borderWidth': 0
+                            }
+                        });
+
                     });
+                    console.log(this.whichChartIndex(18845));
+                    this.loaded = true;
                 }).catch((error) => {
                     console.log(error);
                 });

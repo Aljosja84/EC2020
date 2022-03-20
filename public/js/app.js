@@ -2700,7 +2700,7 @@ __webpack_require__.r(__webpack_exports__);
   props: ['chartData', 'options', 'centertext', 'canvas_id'],
   mounted: function mounted() {
     var ctx = document.getElementById(this.canvas_id);
-    new chart_js_auto__WEBPACK_IMPORTED_MODULE_0__["default"](ctx, this.chartData);
+    var jelle = new chart_js_auto__WEBPACK_IMPORTED_MODULE_0__["default"](ctx, this.chartData);
   }
 });
 
@@ -3580,67 +3580,13 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      loaded: false,
       playersArr: [],
       playersAgeArr: ['122', '133', '143'],
+      playerDoughnutStatsPasses: [],
       bar_per_1: 30,
       bar_per_2: 45,
-      bar_per_3: 60,
-      // donut chart data
-      chartData: [{
-        type: 'doughnut',
-        data: {
-          labels: ['accurate', 'not-accurate'],
-          datasets: [{
-            data: [73, 156 - 73],
-            backgroundColor: ['#68b451', '#c22d2d']
-          }]
-        },
-        options: {
-          plugins: {
-            legend: {
-              display: false
-            },
-            tooltips: {
-              enabled: false
-            }
-          },
-          layout: {
-            padding: 10
-          },
-          cutout: '50%',
-          hoverOffset: 10,
-          responsive: true,
-          maintainAspectRatio: true,
-          borderWidth: 0
-        }
-      }, {
-        type: 'doughnut',
-        data: {
-          labels: ['won', 'lost'],
-          datasets: [{
-            data: [8, 17 - 8],
-            backgroundColor: ['#68b451', '#c22d2d']
-          }]
-        },
-        options: {
-          plugins: {
-            legend: {
-              display: false
-            },
-            tooltips: {
-              enabled: false
-            }
-          },
-          layout: {
-            padding: 10
-          },
-          cutout: '50%',
-          hoverOffset: 10,
-          responsive: true,
-          maintainAspectRatio: true,
-          borderWidth: 0
-        }
-      }]
+      bar_per_3: 60
     };
   },
   methods: {
@@ -3651,6 +3597,12 @@ __webpack_require__.r(__webpack_exports__);
     rankedAge: function rankedAge(playerid) {
       return this.ageSortedArr.findIndex(function (i) {
         return i.playerid === playerid;
+      });
+    },
+    // this function returns the index of the array where playerid is found
+    whichChartIndex: function whichChartIndex(playerid) {
+      return this.playerDoughnutStatsPasses.findIndex(function (item) {
+        return item.playerid === playerid;
       });
     },
     loadPlayers: function loadPlayers(e) {
@@ -3670,8 +3622,40 @@ __webpack_require__.r(__webpack_exports__);
           _this.playersAgeArr.push({
             'playerid': element.player.id,
             'bdayTimestamp': _this.DatetoTimestamp(element.player.birth.date)
+          }); // push some stats for the dougnut charts
+
+
+          _this.playerDoughnutStatsPasses.push({
+            'playerid': element.player.id,
+            'type': 'doughnut',
+            'data': {
+              'labels': ['accurate', 'not-accurate'],
+              'datasets': [{
+                'data': [73, 156 - 73],
+                'backgroundColor': [// green
+                '#68b451', // red
+                '#c22d2d']
+              }]
+            },
+            'options': {
+              'plugins': {
+                'legend': {
+                  'display': false
+                }
+              },
+              'layout': {
+                'padding': 10
+              },
+              'cutout': '50%',
+              'hoverOffset': 10,
+              'responsive': true,
+              'maintainAspectRatio': true,
+              'borderWidth': 0
+            }
           });
         });
+        console.log(_this.whichChartIndex(18845));
+        _this.loaded = true;
       })["catch"](function (error) {
         console.log(error);
       });
@@ -55970,215 +55954,248 @@ var render = function () {
     _vm._v(" "),
     _vm._m(0),
     _vm._v(" "),
-    _c("div", { staticClass: "player_stats_container" }, [
-      _c("div", { staticClass: "player_container" }, [
-        _c("div", { staticClass: "player_passport" }, [
-          _c("div", { staticClass: "card" }, [
-            _c("div", { staticClass: "header", attrs: { id: "header-blur" } }, [
-              _vm._v("Denzel Justus Morris Dumfries"),
-            ]),
-            _vm._v(" "),
-            _vm._m(1),
-            _vm._v(" "),
-            _c("div", { staticClass: "content" }, [
-              _c("div", { staticClass: "content_header" }, [_vm._v("AGE")]),
+    _c(
+      "div",
+      { staticClass: "player_stats_container" },
+      _vm._l(_vm.playersArr.slice(0, 2), function (player) {
+        return _c("div", { staticClass: "player_container" }, [
+          _c("div", { staticClass: "player_passport" }, [
+            _c("div", { staticClass: "card" }, [
+              _c(
+                "div",
+                { staticClass: "header", attrs: { id: "header-blur" } },
+                [_vm._v("Denzel Justus Morris Dumfries")]
+              ),
               _vm._v(" "),
-              _c("table", { staticStyle: { "margin-top": "8px" } }, [
-                _vm._m(2),
+              _vm._m(1, true),
+              _vm._v(" "),
+              _c("div", { staticClass: "content" }, [
+                _c("div", { staticClass: "content_header" }, [_vm._v("AGE")]),
                 _vm._v(" "),
-                _vm._m(3),
-                _vm._v(" "),
-                _c("tr", [
-                  _c(
-                    "td",
-                    {
-                      staticStyle: {
-                        width: "80px",
-                        height: "20px",
-                        "padding-left": "6px",
-                      },
-                    },
-                    [_vm._v("squad rank")]
-                  ),
+                _c("table", { staticStyle: { "margin-top": "8px" } }, [
+                  _vm._m(2, true),
                   _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticStyle: { "vertical-align": "top", width: "155px" },
-                    },
-                    [
-                      _c("div", { staticClass: "progress_left" }, [
-                        _c("div", {
-                          staticClass: "bar_left",
-                          style: { width: _vm.bar_per_1 + "%" },
-                        }),
-                      ]),
-                    ]
-                  ),
-                ]),
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "content_header" }, [
-                _vm._v("PHYSICAL"),
-              ]),
-              _vm._v(" "),
-              _c("table", { staticStyle: { "margin-top": "8px" } }, [
-                _vm._m(4),
-                _vm._v(" "),
-                _c("tr", [
-                  _c(
-                    "td",
-                    {
-                      staticStyle: {
-                        width: "80px",
-                        height: "20px",
-                        "padding-left": "6px",
-                      },
-                    },
-                    [_vm._v("squad rank")]
-                  ),
+                  _vm._m(3, true),
                   _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticStyle: { "vertical-align": "top", width: "155px" },
-                    },
-                    [
-                      _c("div", { staticClass: "progress_left" }, [
-                        _c("div", {
-                          staticClass: "bar_left",
-                          style: { width: _vm.bar_per_2 + "%" },
-                        }),
-                      ]),
-                    ]
-                  ),
+                  _c("tr", [
+                    _c(
+                      "td",
+                      {
+                        staticStyle: {
+                          width: "80px",
+                          height: "20px",
+                          "padding-left": "6px",
+                        },
+                      },
+                      [_vm._v("squad rank")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "td",
+                      {
+                        staticStyle: {
+                          "vertical-align": "top",
+                          width: "155px",
+                        },
+                      },
+                      [
+                        _c("div", { staticClass: "progress_left" }, [
+                          _c("div", {
+                            staticClass: "bar_left",
+                            style: { width: _vm.bar_per_1 + "%" },
+                          }),
+                        ]),
+                      ]
+                    ),
+                  ]),
                 ]),
                 _vm._v(" "),
-                _vm._m(5),
+                _c("div", { staticClass: "content_header" }, [
+                  _vm._v("PHYSICAL"),
+                ]),
                 _vm._v(" "),
-                _c("tr", [
-                  _c(
-                    "td",
-                    {
-                      staticStyle: {
-                        width: "80px",
-                        height: "20px",
-                        "padding-left": "6px",
-                      },
-                    },
-                    [_vm._v("squad rank")]
-                  ),
+                _c("table", { staticStyle: { "margin-top": "8px" } }, [
+                  _vm._m(4, true),
                   _vm._v(" "),
-                  _c(
-                    "td",
-                    {
-                      staticStyle: { "vertical-align": "top", width: "155px" },
-                    },
-                    [
-                      _c("div", { staticClass: "progress_left" }, [
-                        _c("div", {
-                          staticClass: "bar_left",
-                          style: { width: _vm.bar_per_3 + "%" },
-                        }),
-                      ]),
-                    ]
-                  ),
+                  _c("tr", [
+                    _c(
+                      "td",
+                      {
+                        staticStyle: {
+                          width: "80px",
+                          height: "20px",
+                          "padding-left": "6px",
+                        },
+                      },
+                      [_vm._v("squad rank")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "td",
+                      {
+                        staticStyle: {
+                          "vertical-align": "top",
+                          width: "155px",
+                        },
+                      },
+                      [
+                        _c("div", { staticClass: "progress_left" }, [
+                          _c("div", {
+                            staticClass: "bar_left",
+                            style: { width: _vm.bar_per_2 + "%" },
+                          }),
+                        ]),
+                      ]
+                    ),
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(5, true),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _c(
+                      "td",
+                      {
+                        staticStyle: {
+                          width: "80px",
+                          height: "20px",
+                          "padding-left": "6px",
+                        },
+                      },
+                      [_vm._v("squad rank")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "td",
+                      {
+                        staticStyle: {
+                          "vertical-align": "top",
+                          width: "155px",
+                        },
+                      },
+                      [
+                        _c("div", { staticClass: "progress_left" }, [
+                          _c("div", {
+                            staticClass: "bar_left",
+                            style: { width: _vm.bar_per_3 + "%" },
+                          }),
+                        ]),
+                      ]
+                    ),
+                  ]),
                 ]),
               ]),
             ]),
-          ]),
-        ]),
-        _vm._v(" "),
-        _vm._m(6),
-        _vm._v(" "),
-        _c("div", { staticClass: "player_stats_right_top" }, [
-          _c("div", { staticClass: "player_stats_right_top_sub" }, [
-            _c("div", { staticClass: "left_stats_header" }, [
-              _vm._v("\n                        passes\n                    "),
-            ]),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticStyle: {
-                  "background-color": "transparent",
-                  "margin-left": "10px",
-                  "margin-top": "10px",
-                },
-              },
-              [
-                _c("donut-test", {
-                  attrs: {
-                    centertext: 156,
-                    "chart-data": _vm.chartData[0],
-                    canvas_id: 122,
-                  },
-                }),
-              ],
-              1
-            ),
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "player_stats_right_top_sub" }, [
-            _c("div", { staticClass: "left_stats_header" }, [
-              _vm._v("\n                        duels\n                    "),
-            ]),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticStyle: {
-                  "background-color": "transparent",
-                  "margin-left": "10px",
-                  "margin-top": "10px",
-                },
-              },
-              [
-                _c("donut-test", {
-                  attrs: {
-                    centertext: 17,
-                    "chart-data": _vm.chartData[1],
-                    canvas_id: 123,
-                  },
-                }),
-              ],
-              1
-            ),
-          ]),
+          _vm._m(6, true),
           _vm._v(" "),
-          _c("div", { staticClass: "player_stats_right_top_sub" }, [
-            _c("div", { staticClass: "left_stats_header" }, [
-              _vm._v(
-                "\n                        dribbles\n                    "
+          _c("div", { staticClass: "player_stats_right_top" }, [
+            _c("div", { staticClass: "player_stats_right_top_sub" }, [
+              _c("div", { staticClass: "left_stats_header" }, [
+                _vm._v(
+                  "\n                        passes\n                    "
+                ),
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticStyle: {
+                    "background-color": "transparent",
+                    "margin-left": "10px",
+                    "margin-top": "10px",
+                  },
+                },
+                [
+                  _vm.loaded
+                    ? _c("donut-test", {
+                        attrs: {
+                          centertext: player.player.id,
+                          "chart-data":
+                            _vm.playerDoughnutStatsPasses[
+                              _vm.whichChartIndex(player.player.id)
+                            ],
+                          canvas_id: player.player.id,
+                        },
+                      })
+                    : _vm._e(),
+                ],
+                1
               ),
             ]),
             _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticStyle: {
-                  "background-color": "transparent",
-                  "margin-left": "10px",
-                  "margin-top": "10px",
-                },
-              },
-              [
-                _c("donut-test", {
-                  attrs: {
-                    centertext: 156,
-                    "chart-data": _vm.chartData[0],
-                    canvas_id: 124,
+            _c("div", { staticClass: "player_stats_right_top_sub" }, [
+              _c("div", { staticClass: "left_stats_header" }, [
+                _vm._v("\n                        duels\n                    "),
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticStyle: {
+                    "background-color": "transparent",
+                    "margin-left": "10px",
+                    "margin-top": "10px",
                   },
-                }),
-              ],
-              1
-            ),
+                },
+                [
+                  _vm.loaded
+                    ? _c("donut-test", {
+                        attrs: {
+                          centertext: player.player.id,
+                          "chart-data":
+                            _vm.playerDoughnutStatsPasses[
+                              _vm.whichChartIndex(player.player.id)
+                            ],
+                          canvas_id: player.player.id + 999,
+                        },
+                      })
+                    : _vm._e(),
+                ],
+                1
+              ),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "player_stats_right_top_sub" }, [
+              _c("div", { staticClass: "left_stats_header" }, [
+                _vm._v(
+                  "\n                        dribbles\n                    "
+                ),
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticStyle: {
+                    "background-color": "transparent",
+                    "margin-left": "10px",
+                    "margin-top": "10px",
+                  },
+                },
+                [
+                  _vm.loaded
+                    ? _c("donut-test", {
+                        attrs: {
+                          centertext: 156,
+                          "chart-data":
+                            _vm.playerDoughnutStatsPasses[
+                              _vm.whichChartIndex(player.player.id)
+                            ],
+                          canvas_id: player.player.id + 1099,
+                        },
+                      })
+                    : _vm._e(),
+                ],
+                1
+              ),
+            ]),
           ]),
-        ]),
-        _vm._v(" "),
-        _vm._m(7),
-      ]),
-    ]),
+          _vm._v(" "),
+          _vm._m(7, true),
+        ])
+      }),
+      0
+    ),
   ])
 }
 var staticRenderFns = [
