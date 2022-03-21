@@ -17,12 +17,12 @@
         <div class="player_stats_header"><span>player statistics</span></div>
 
         <div class="player_stats_container">
-            <div v-for="player in playersArr.slice(0,2)" class="player_container">
+            <div v-for="player in playersArr.slice(0,1)" class="player_container">
                 <div class="player_passport">
                     <div class="card">
-                        <div class="header" id="header-blur">Denzel Justus Morris Dumfries</div>
+                        <div class="header" id="header-blur">{{player.player.firstname}} {{player.player.lastname}}</div>
                         <div class="avatar">
-                            <img src="/images/player_example.png" alt="" />
+                            <img :src=player.player.photo alt="" />
                         </div>
                         <div class="content">
                             <div class="content_header">AGE</div>
@@ -317,7 +317,7 @@
         margin-left: -9px;
         background-color: white;
         width: 975px;
-        height: 659px;
+        height: 654px;
         box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
     }
 
@@ -377,12 +377,13 @@
     .player_stats_container {
         z-index: 14;
         width: 100%;
-        height: 380px;
+        height: 375px;
         background: -moz-linear-gradient(180deg, rgba(255,255,255,1) 16%, rgba(255,210,164,1) 100%);
         background: -webkit-linear-gradient(180deg, rgba(255,255,255,1) 16%, rgba(255,210,164,1) 100%);
         background: linear-gradient(180deg, rgba(255,255,255,1) 16%, rgba(255,210,164,1) 100%);
         filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffff",endColorstr="#ffd2a4",GradientType=1);
-        padding: 5px;
+        padding: 5px 0 0 5px;
+        overflow: hidden;
     }
 
     .player_passport {
@@ -516,6 +517,9 @@
         color: #ff7800;
         text-align: center;
         line-height: 26px;
+    }
+
+    .player_container {
     }
 
     .player_stats_right_top_sub {

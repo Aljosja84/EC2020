@@ -21835,7 +21835,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 var ___CSS_LOADER_URL_REPLACEMENT_0___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default()(_images_light_wool_png__WEBPACK_IMPORTED_MODULE_2__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.teamplayers_container[data-v-7b03258c] {\n    position: relative;\n    margin-left: -9px;\n    background-color: white;\n    width: 975px;\n    height: 659px;\n    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;\n}\n.teamplayer_header[data-v-7b03258c] {\n    width: 100%;\n    font-family: 'Oswald', sans-serif;\n    font-size: 24px;\n    color: #515151;\n    text-transform: uppercase;\n    text-align: center;\n    background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ");\n    padding: 10px 0 8px 15px;\n}\n.player_stats_header[data-v-7b03258c] {\n    position: relative;\n    z-index: 15;\n    width: 100%;\n    height: 35px;\n    font-family: 'Oswald', sans-serif;\n    font-size: 24px;\n    color: #515151;\n    text-transform: uppercase;\n    text-align: center;\n    line-height: 30px;\n    background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ");\n    padding: 0 0 10px 15px;\n    border-top: 1px solid #dcdcdc;\n    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;\n}\n.separator_bar[data-v-7b03258c] {\n    height: 2px;\n    background-image: linear-gradient(to right, transparent, #b5b5b5, transparent);\n}\n.players_list-item img[data-v-7b03258c] {\n    width: 75px;\n    height: 75px;\n    border-radius: 100%;\n    box-shadow: rgba(17, 17, 26, 0.35) 0 4px 16px, rgba(17, 17, 26, 0.05) 0 8px 32px;\n}\n#midfield_div[data-v-7b03258c] {\n    height: 188px;\n    padding: 10px 5px 0 14px;\n    width: 100%;\n}\n.players_list-item[data-v-7b03258c] {\n    transition: all .5s;\n    display: inline-block;\n    padding: 5px;\n    margin-right: 10px;\n}\n.player_stats_container[data-v-7b03258c] {\n    z-index: 14;\n    width: 100%;\n    height: 380px;\n    background: linear-gradient(180deg, rgba(255,255,255,1) 16%, rgba(255,210,164,1) 100%);\n    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=\"#ffffff\",endColorstr=\"#ffd2a4\",GradientType=1);\n    padding: 5px;\n}\n.player_passport[data-v-7b03258c] {\n    width: 255px;\n    height: 370px;\n    /*border: solid 1px #ff7800;*/\n    float: left;\n    margin-right: 5px;\n}\n.player_stats_left[data-v-7b03258c] {\n    width: 218px;\n    height: 370px;\n    border: solid 1px #ff7800;\n    float: left;\n    margin-right: 5px;\n}\n.player_stats_right_top[data-v-7b03258c] {\n    width: 480px;\n    height: 218px;\n    float: left;\n    margin-bottom: 5px;\n}\n.player_stats_right_bottom[data-v-7b03258c] {\n    width: 480px;\n    height: 147px;\n    float: left;\n}\n.card[data-v-7b03258c] {\n    float: left;\n    overflow: hidden;\n    position: relative;\n    width: 100%;\n    height: 100%;\n    border: 1px solid #ff7800;\n    border-radius: 5px;\n    text-align: center;\n}\n.card .header[data-v-7b03258c] {\n    font-family: 'Oswald', sans-serif;\n    color: #515151;\n    font-size: 18px;\n    line-height: 18px;\n    position: absolute;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 55px;\n    z-index: 1;\n    background: #e58d36;\n    padding-top: 4px;\n}\n.avatar[data-v-7b03258c] {\n    position: relative;\n    margin-top: 25px;\n    z-index: 100;\n}\n.avatar img[data-v-7b03258c] {\n    width: 75px;\n    height: 75px;\n    border-radius: 50%;\n    border: 5px solid rgba(0,0,30,0.8);\n    box-shadow: rgba(0, 0, 0, 0.45) 0 25px 20px -20px;\n}\n.content[data-v-7b03258c] {\n    padding : 0;\n    font-family: \"Roboto\", sans-serif;\n    font-size: 12px;\n    color: #515151;\n}\n.content td[data-v-7b03258c] {\n    text-align: left;\n}\n.content_header[data-v-7b03258c] {\n    width: 100%;\n    background-color: transparent;\n    font-family: 'Oswald', sans-serif;\n    font-size: 24px;\n    color: #616161;\n    line-height: 21px;\n    margin-top: 10px;\n}\n.progress_left[data-v-7b03258c] {\n    float: left;\n    width: 100%;\n    position: relative;\n    -webkit-animation: all 0.4s ease;\n            animation: all 0.4s ease;\n    margin-top: 5px;\n    border: solid 1px #515151;\n}\n.bar_left[data-v-7b03258c] {\n    border-radius: 0 1px 1px 0;\n    float:left;\n    height: 9px;\n    background-color: #ff7800;\n    width: 30%;\n    transition: all 0.5s ease-out;\n}\n.left_stats_header[data-v-7b03258c] {\n    padding-top: 2px;\n    background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ");\n    height: 30px;\n    width: 100%;\n    text-transform: uppercase;\n    font-family: 'Oswald', sans-serif;\n    font-size: 24px;\n    color: #616161;\n    text-align: center;\n    line-height: 24px;\n}\n.left_stats_data[data-v-7b03258c] {\n    margin-top: 8px;\n    margin-bottom: 6px;\n    height: 30px;\n    width: 100%;\n    text-transform: uppercase;\n    font-family: 'Oswald', sans-serif;\n    font-size: 26px;\n    color: #ff7800;\n    text-align: center;\n    line-height: 26px;\n}\n.player_stats_right_top_sub[data-v-7b03258c] {\n    width: 33%;\n    float: left;\n    height: 100%;\n}\n.player_stats_right_bottom_header[data-v-7b03258c] {\n    padding-top: 2px;\n    background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ");\n    height: 30px;\n    width: 100%;\n    text-transform: lowercase;\n    font-family: 'Oswald', sans-serif;\n    font-size: 24px;\n    color: #616161;\n    text-align: center;\n    line-height: 24px;\n}\n.player_stats_right_bottom_data[data-v-7b03258c] {\n    font-family: 'Oswald', sans-serif;\n    font-size: 50px;\n    color: #ff7800;\n    text-align: center;\n    margin-top: 20px;\n}\n.player_stats_right_bottom_container[data-v-7b03258c] {\n    float: left;\n    width: 79px;\n    height: 100%\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.teamplayers_container[data-v-7b03258c] {\n    position: relative;\n    margin-left: -9px;\n    background-color: white;\n    width: 975px;\n    height: 654px;\n    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;\n}\n.teamplayer_header[data-v-7b03258c] {\n    width: 100%;\n    font-family: 'Oswald', sans-serif;\n    font-size: 24px;\n    color: #515151;\n    text-transform: uppercase;\n    text-align: center;\n    background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ");\n    padding: 10px 0 8px 15px;\n}\n.player_stats_header[data-v-7b03258c] {\n    position: relative;\n    z-index: 15;\n    width: 100%;\n    height: 35px;\n    font-family: 'Oswald', sans-serif;\n    font-size: 24px;\n    color: #515151;\n    text-transform: uppercase;\n    text-align: center;\n    line-height: 30px;\n    background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ");\n    padding: 0 0 10px 15px;\n    border-top: 1px solid #dcdcdc;\n    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;\n}\n.separator_bar[data-v-7b03258c] {\n    height: 2px;\n    background-image: linear-gradient(to right, transparent, #b5b5b5, transparent);\n}\n.players_list-item img[data-v-7b03258c] {\n    width: 75px;\n    height: 75px;\n    border-radius: 100%;\n    box-shadow: rgba(17, 17, 26, 0.35) 0 4px 16px, rgba(17, 17, 26, 0.05) 0 8px 32px;\n}\n#midfield_div[data-v-7b03258c] {\n    height: 188px;\n    padding: 10px 5px 0 14px;\n    width: 100%;\n}\n.players_list-item[data-v-7b03258c] {\n    transition: all .5s;\n    display: inline-block;\n    padding: 5px;\n    margin-right: 10px;\n}\n.player_stats_container[data-v-7b03258c] {\n    z-index: 14;\n    width: 100%;\n    height: 375px;\n    background: linear-gradient(180deg, rgba(255,255,255,1) 16%, rgba(255,210,164,1) 100%);\n    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=\"#ffffff\",endColorstr=\"#ffd2a4\",GradientType=1);\n    padding: 5px 0 0 5px;\n    overflow: hidden;\n}\n.player_passport[data-v-7b03258c] {\n    width: 255px;\n    height: 370px;\n    /*border: solid 1px #ff7800;*/\n    float: left;\n    margin-right: 5px;\n}\n.player_stats_left[data-v-7b03258c] {\n    width: 218px;\n    height: 370px;\n    border: solid 1px #ff7800;\n    float: left;\n    margin-right: 5px;\n}\n.player_stats_right_top[data-v-7b03258c] {\n    width: 480px;\n    height: 218px;\n    float: left;\n    margin-bottom: 5px;\n}\n.player_stats_right_bottom[data-v-7b03258c] {\n    width: 480px;\n    height: 147px;\n    float: left;\n}\n.card[data-v-7b03258c] {\n    float: left;\n    overflow: hidden;\n    position: relative;\n    width: 100%;\n    height: 100%;\n    border: 1px solid #ff7800;\n    border-radius: 5px;\n    text-align: center;\n}\n.card .header[data-v-7b03258c] {\n    font-family: 'Oswald', sans-serif;\n    color: #515151;\n    font-size: 18px;\n    line-height: 18px;\n    position: absolute;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 55px;\n    z-index: 1;\n    background: #e58d36;\n    padding-top: 4px;\n}\n.avatar[data-v-7b03258c] {\n    position: relative;\n    margin-top: 25px;\n    z-index: 100;\n}\n.avatar img[data-v-7b03258c] {\n    width: 75px;\n    height: 75px;\n    border-radius: 50%;\n    border: 5px solid rgba(0,0,30,0.8);\n    box-shadow: rgba(0, 0, 0, 0.45) 0 25px 20px -20px;\n}\n.content[data-v-7b03258c] {\n    padding : 0;\n    font-family: \"Roboto\", sans-serif;\n    font-size: 12px;\n    color: #515151;\n}\n.content td[data-v-7b03258c] {\n    text-align: left;\n}\n.content_header[data-v-7b03258c] {\n    width: 100%;\n    background-color: transparent;\n    font-family: 'Oswald', sans-serif;\n    font-size: 24px;\n    color: #616161;\n    line-height: 21px;\n    margin-top: 10px;\n}\n.progress_left[data-v-7b03258c] {\n    float: left;\n    width: 100%;\n    position: relative;\n    -webkit-animation: all 0.4s ease;\n            animation: all 0.4s ease;\n    margin-top: 5px;\n    border: solid 1px #515151;\n}\n.bar_left[data-v-7b03258c] {\n    border-radius: 0 1px 1px 0;\n    float:left;\n    height: 9px;\n    background-color: #ff7800;\n    width: 30%;\n    transition: all 0.5s ease-out;\n}\n.left_stats_header[data-v-7b03258c] {\n    padding-top: 2px;\n    background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ");\n    height: 30px;\n    width: 100%;\n    text-transform: uppercase;\n    font-family: 'Oswald', sans-serif;\n    font-size: 24px;\n    color: #616161;\n    text-align: center;\n    line-height: 24px;\n}\n.left_stats_data[data-v-7b03258c] {\n    margin-top: 8px;\n    margin-bottom: 6px;\n    height: 30px;\n    width: 100%;\n    text-transform: uppercase;\n    font-family: 'Oswald', sans-serif;\n    font-size: 26px;\n    color: #ff7800;\n    text-align: center;\n    line-height: 26px;\n}\n.player_container[data-v-7b03258c] {\n}\n.player_stats_right_top_sub[data-v-7b03258c] {\n    width: 33%;\n    float: left;\n    height: 100%;\n}\n.player_stats_right_bottom_header[data-v-7b03258c] {\n    padding-top: 2px;\n    background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ");\n    height: 30px;\n    width: 100%;\n    text-transform: lowercase;\n    font-family: 'Oswald', sans-serif;\n    font-size: 24px;\n    color: #616161;\n    text-align: center;\n    line-height: 24px;\n}\n.player_stats_right_bottom_data[data-v-7b03258c] {\n    font-family: 'Oswald', sans-serif;\n    font-size: 50px;\n    color: #ff7800;\n    text-align: center;\n    margin-top: 20px;\n}\n.player_stats_right_bottom_container[data-v-7b03258c] {\n    float: left;\n    width: 79px;\n    height: 100%\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -55957,25 +55957,33 @@ var render = function () {
     _c(
       "div",
       { staticClass: "player_stats_container" },
-      _vm._l(_vm.playersArr.slice(0, 2), function (player) {
+      _vm._l(_vm.playersArr.slice(0, 1), function (player) {
         return _c("div", { staticClass: "player_container" }, [
           _c("div", { staticClass: "player_passport" }, [
             _c("div", { staticClass: "card" }, [
               _c(
                 "div",
                 { staticClass: "header", attrs: { id: "header-blur" } },
-                [_vm._v("Denzel Justus Morris Dumfries")]
+                [
+                  _vm._v(
+                    _vm._s(player.player.firstname) +
+                      " " +
+                      _vm._s(player.player.lastname)
+                  ),
+                ]
               ),
               _vm._v(" "),
-              _vm._m(1, true),
+              _c("div", { staticClass: "avatar" }, [
+                _c("img", { attrs: { src: player.player.photo, alt: "" } }),
+              ]),
               _vm._v(" "),
               _c("div", { staticClass: "content" }, [
                 _c("div", { staticClass: "content_header" }, [_vm._v("AGE")]),
                 _vm._v(" "),
                 _c("table", { staticStyle: { "margin-top": "8px" } }, [
-                  _vm._m(2, true),
+                  _vm._m(1, true),
                   _vm._v(" "),
-                  _vm._m(3, true),
+                  _vm._m(2, true),
                   _vm._v(" "),
                   _c("tr", [
                     _c(
@@ -56015,7 +56023,7 @@ var render = function () {
                 ]),
                 _vm._v(" "),
                 _c("table", { staticStyle: { "margin-top": "8px" } }, [
-                  _vm._m(4, true),
+                  _vm._m(3, true),
                   _vm._v(" "),
                   _c("tr", [
                     _c(
@@ -56049,7 +56057,7 @@ var render = function () {
                     ),
                   ]),
                   _vm._v(" "),
-                  _vm._m(5, true),
+                  _vm._m(4, true),
                   _vm._v(" "),
                   _c("tr", [
                     _c(
@@ -56087,7 +56095,7 @@ var render = function () {
             ]),
           ]),
           _vm._v(" "),
-          _vm._m(6, true),
+          _vm._m(5, true),
           _vm._v(" "),
           _c("div", { staticClass: "player_stats_right_top" }, [
             _c("div", { staticClass: "player_stats_right_top_sub" }, [
@@ -56191,7 +56199,7 @@ var render = function () {
             ]),
           ]),
           _vm._v(" "),
-          _vm._m(7, true),
+          _vm._m(6, true),
         ])
       }),
       0
@@ -56205,14 +56213,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "player_stats_header" }, [
       _c("span", [_vm._v("player statistics")]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "avatar" }, [
-      _c("img", { attrs: { src: "/images/player_example.png", alt: "" } }),
     ])
   },
   function () {
