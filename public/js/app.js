@@ -3582,7 +3582,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       loaded: false,
       playersArr: [],
-      playersAgeArr: ['122', '133', '143'],
+      playersAgeArr: [],
       playerDoughnutStatsPasses: [],
       bar_per_1: 30,
       bar_per_2: 45,
@@ -3594,9 +3594,27 @@ __webpack_require__.r(__webpack_exports__);
       var datum = Date.parse(strDate);
       return datum / 1000;
     },
+    // this function returns the rank of the player, agewise, from oldest to youngest
     rankedAge: function rankedAge(playerid) {
-      return this.ageSortedArr.findIndex(function (i) {
+      return _.sortBy(this.playersAgeArr, 'bdayTimestamp', 'desc').findIndex(function (i) {
         return i.playerid === playerid;
+      });
+    },
+    // this function will return the bar percentage, agewise, where bar is fully filled
+    // for the oldest player and almost empty for the youngest
+    rankedAgeBarPct: function rankedAgeBarPct(playerid) {
+      return 100 - this.rankedAge(playerid) / this.playersArr.length * 100;
+    },
+    // this function will return the players rank, height wise
+    rankedHeight: function rankedHeight(playerid) {
+      return _.orderBy(this.playersArr, 'players.height', 'asc').findIndex(function (item) {
+        return item.player.id === playerid;
+      });
+    },
+    //this function will return the players rank, weight wise
+    rankedWeight: function rankedWeight(playerid) {
+      return _.orderBy(this.playersArr, 'players.weight', 'asc').findIndex(function (item) {
+        return item.player.id === playerid;
       });
     },
     // this function returns the index of the array where playerid is found
@@ -3661,20 +3679,13 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     shuffle: function shuffle() {
-      this.bar_per_1 = _.random(0, 100);
-      this.bar_per_2 = _.random(0, 100);
-      this.bar_per_3 = _.random(0, 100); //this.playersArr = _.shuffle(this.playersArr);
+      // sort the players, oldest to youngest
+      this.playersArr = _.shuffle(this.playersArr); //this.playersArr = _.orderBy(this.playersArr, 'player.age', 'asc');
       //console.log(this.ageSortedArr.findIndex(i => i.playerid === 26240))
     }
   },
   created: function created() {
     this.loadPlayers(this.teamid);
-  },
-  computed: {
-    ageSortedArr: function ageSortedArr() {
-      // sort the ages from young to old
-      return this.playersAgeArr = _.sortBy(this.playersAgeArr, 'bdayTimestamp');
-    }
   }
 });
 
@@ -55981,9 +55992,42 @@ var render = function () {
                 _c("div", { staticClass: "content_header" }, [_vm._v("AGE")]),
                 _vm._v(" "),
                 _c("table", { staticStyle: { "margin-top": "8px" } }, [
-                  _vm._m(1, true),
+                  _c("tr", [
+                    _c(
+                      "td",
+                      {
+                        staticStyle: {
+                          width: "80px",
+                          height: "20px",
+                          "padding-left": "6px",
+                        },
+                      },
+                      [_vm._v("born")]
+                    ),
+                    _c("td", [
+                      _vm._v(
+                        _vm._s(player.player.birth.date) +
+                          " (" +
+                          _vm._s(player.player.age) +
+                          ")"
+                      ),
+                    ]),
+                  ]),
                   _vm._v(" "),
-                  _vm._m(2, true),
+                  _c("tr", [
+                    _c(
+                      "td",
+                      {
+                        staticStyle: {
+                          width: "80px",
+                          height: "20px",
+                          "padding-left": "6px",
+                        },
+                      },
+                      [_vm._v("birthplace")]
+                    ),
+                    _c("td", [_vm._v(_vm._s(player.player.birth.place))]),
+                  ]),
                   _vm._v(" "),
                   _c("tr", [
                     _c(
@@ -56010,7 +56054,10 @@ var render = function () {
                         _c("div", { staticClass: "progress_left" }, [
                           _c("div", {
                             staticClass: "bar_left",
-                            style: { width: _vm.bar_per_1 + "%" },
+                            style: {
+                              width:
+                                _vm.rankedAgeBarPct(player.player.id) + "%",
+                            },
                           }),
                         ]),
                       ]
@@ -56023,7 +56070,7 @@ var render = function () {
                 ]),
                 _vm._v(" "),
                 _c("table", { staticStyle: { "margin-top": "8px" } }, [
-                  _vm._m(3, true),
+                  _vm._m(1, true),
                   _vm._v(" "),
                   _c("tr", [
                     _c(
@@ -56057,7 +56104,7 @@ var render = function () {
                     ),
                   ]),
                   _vm._v(" "),
-                  _vm._m(4, true),
+                  _vm._m(2, true),
                   _vm._v(" "),
                   _c("tr", [
                     _c(
@@ -56095,7 +56142,51 @@ var render = function () {
             ]),
           ]),
           _vm._v(" "),
-          _vm._m(5, true),
+          _c("div", { staticClass: "player_stats_left" }, [
+            _c("div", { staticClass: "left_stats_header" }, [
+              _vm._v("\n                    games this ec\n                "),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "left_stats_data" }, [
+              _vm._v("\n                    4\n                "),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "left_stats_header" }, [
+              _vm._v("\n                    starting XI\n                "),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "left_stats_data" }, [
+              _vm._v("\n                    4\n                "),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "left_stats_header" }, [
+              _vm._v("\n                    minutes\n                "),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "left_stats_data" }, [
+              _vm._v("\n                    316\n                "),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "left_stats_header" }, [
+              _vm._v("\n                    position\n                "),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "left_stats_data" }, [
+              _vm._v("\n                    defender\n                "),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "left_stats_header" }, [
+              _vm._v("\n                    rating\n                "),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "left_stats_data" }, [
+              _vm._v(
+                "\n                    " +
+                  _vm._s(player.statistics[0].games.rating) +
+                  "\n                "
+              ),
+            ]),
+          ]),
           _vm._v(" "),
           _c("div", { staticClass: "player_stats_right_top" }, [
             _c("div", { staticClass: "player_stats_right_top_sub" }, [
@@ -56199,7 +56290,7 @@ var render = function () {
             ]),
           ]),
           _vm._v(" "),
-          _vm._m(6, true),
+          _vm._m(3, true),
         ])
       }),
       0
@@ -56213,36 +56304,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "player_stats_header" }, [
       _c("span", [_vm._v("player statistics")]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("tr", [
-      _c(
-        "td",
-        {
-          staticStyle: { width: "80px", height: "20px", "padding-left": "6px" },
-        },
-        [_vm._v("born")]
-      ),
-      _c("td", [_vm._v("16-07-1984 (37)")]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("tr", [
-      _c(
-        "td",
-        {
-          staticStyle: { width: "80px", height: "20px", "padding-left": "6px" },
-        },
-        [_vm._v("birthplace")]
-      ),
-      _c("td", [_vm._v("Rotterdam, The Netherlands")]),
     ])
   },
   function () {
@@ -56273,52 +56334,6 @@ var staticRenderFns = [
         [_vm._v("weight")]
       ),
       _c("td", [_vm._v("89kg")]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "player_stats_left" }, [
-      _c("div", { staticClass: "left_stats_header" }, [
-        _vm._v("\n                    games this ec\n                "),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "left_stats_data" }, [
-        _vm._v("\n                    4\n                "),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "left_stats_header" }, [
-        _vm._v("\n                    starting XI\n                "),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "left_stats_data" }, [
-        _vm._v("\n                    4\n                "),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "left_stats_header" }, [
-        _vm._v("\n                    minutes\n                "),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "left_stats_data" }, [
-        _vm._v("\n                    316\n                "),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "left_stats_header" }, [
-        _vm._v("\n                    position\n                "),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "left_stats_data" }, [
-        _vm._v("\n                    defender\n                "),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "left_stats_header" }, [
-        _vm._v("\n                    rating\n                "),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "left_stats_data" }, [
-        _vm._v("\n                    6.542857\n                "),
-      ]),
     ])
   },
   function () {

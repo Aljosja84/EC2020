@@ -28,17 +28,17 @@
                             <div class="content_header">AGE</div>
                                 <table style="margin-top: 8px">
                                     <tr>
-                                        <td style="width: 80px; height: 20px; padding-left: 6px">born</td><td>16-07-1984 (37)</td>
+                                        <td style="width: 80px; height: 20px; padding-left: 6px">born</td><td>{{player.player.birth.date}} ({{player.player.age}})</td>
                                     </tr>
                                     <tr>
-                                        <td style="width: 80px; height: 20px; padding-left: 6px">birthplace</td><td>Rotterdam, The Netherlands</td>
+                                        <td style="width: 80px; height: 20px; padding-left: 6px">birthplace</td><td>{{player.player.birth.place}}</td>
                                     </tr>
                                     <tr>
                                         <td style="width: 80px; height: 20px; padding-left: 6px">squad rank</td>
                                         <td style="vertical-align: top; width: 155px">
                                             <!-- loading bar disguised as a rank bar -->
                                             <div class="progress_left">
-                                                <div class="bar_left" :style="{width: bar_per_1+'%'}"></div>
+                                                <div class="bar_left" :style="{width: rankedAgeBarPct(player.player.id)+'%'}"></div>
                                             </div>
                                         </td>
                                     </tr>
@@ -103,7 +103,7 @@
                         rating
                     </div>
                     <div class="left_stats_data">
-                        6.542857
+                        {{player.statistics[0].games.rating}}
                     </div>
                 </div>
 
@@ -209,7 +209,7 @@
             return {
                 loaded: false,
                 playersArr: [],
-                playersAgeArr: ['122','133','143'],
+                playersAgeArr: [],
                 playerDoughnutStatsPasses: [],
                 bar_per_1: 30,
                 bar_per_2: 45,
@@ -223,8 +223,25 @@
                 return datum/1000;
             },
 
+            // this function returns the rank of the player, agewise, from oldest to youngest
             rankedAge(playerid) {
-                 return this.ageSortedArr.findIndex(i => i.playerid === playerid)
+                 return _.sortBy(this.playersAgeArr, 'bdayTimestamp', 'desc').findIndex(i => i.playerid === playerid)
+            },
+
+            // this function will return the bar percentage, agewise, where bar is fully filled
+            // for the oldest player and almost empty for the youngest
+            rankedAgeBarPct(playerid) {
+                 return 100 - (this.rankedAge(playerid)/this.playersArr.length)*100
+            },
+
+            // this function will return the players rank, height wise
+            rankedHeight(playerid) {
+                 return _.orderBy(this.playersArr, 'players.height', 'asc').findIndex((item) => item.player.id === playerid)
+            },
+
+            //this function will return the players rank, weight wise
+            rankedWeight(playerid) {
+                 return _.orderBy(this.playersArr, 'players.weight', 'asc').findIndex((item) => item.player.id === playerid)
             },
 
             // this function returns the index of the array where playerid is found
@@ -289,25 +306,16 @@
             },
 
             shuffle() {
-                 this.bar_per_1 = _.random(0, 100);
-                 this.bar_per_2 = _.random(0, 100);
-                 this.bar_per_3 = _.random(0, 100);
-                //this.playersArr = _.shuffle(this.playersArr);
+                 // sort the players, oldest to youngest
+                 this.playersArr = _.shuffle(this.playersArr);
+                 //this.playersArr = _.orderBy(this.playersArr, 'player.age', 'asc');
                 //console.log(this.ageSortedArr.findIndex(i => i.playerid === 26240))
             }
         },
 
         created() {
             this.loadPlayers(this.teamid);
-        },
-
-        computed:
-            {
-                ageSortedArr: function () {
-                    // sort the ages from young to old
-                    return this.playersAgeArr = _.sortBy(this.playersAgeArr, 'bdayTimestamp')
-                }
-            }
+        }
     }
 </script>
 
