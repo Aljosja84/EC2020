@@ -11,10 +11,12 @@
     <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
     <script src="https://unpkg.com/vue-chartjs/dist/vue-chartjs.min.js"></script>
+    <script src={{ asset('js/drooltip.js') }}></script>
 
     <!-- Styles -->
     <link href={{ asset('css/topmenu.css') }} rel="stylesheet">
     <link href={{ asset('css/ec2020.css') }} rel="stylesheet">
+    <link href={{ asset('css/drooltip.css') }} rel="stylesheet">
     <title>Euro 2020</title>
 
     <!-- Fonts -->
@@ -34,12 +36,12 @@
 <header>
     <nav>
         <div class="topmenu">
+
             <!-- EURO 2020 LOGO -->
             <div style="float: left">
-                <img class="logo" src={{ asset('images/logo_euro2020.png') }}>
+                <img title="hello there" class="logo" src={{ asset('images/logo_euro2020.png') }}>
             </div>
             <!-------------------->
-
             <div class="container">
                 <ul class="menu-main">
 

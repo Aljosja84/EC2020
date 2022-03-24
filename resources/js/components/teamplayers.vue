@@ -43,7 +43,7 @@
                                         </td>
                                     </tr>
                                 </table>
-                            <div class="content_header">PHYSICAL</div>
+                            <div title="jelle" class="content_header">PHYSICAL</div>
                                 <table style="margin-top: 8px">
                                     <tr>
                                         <td style="width: 80px; height: 20px; padding-left: 6px">height</td><td>188cm</td>
@@ -103,7 +103,7 @@
                         rating
                     </div>
                     <div class="left_stats_data">
-                        {{player.statistics[0].games.rating}}
+                        {{player.statistics[0].games.rating ? player.statistics[0].games.rating : '-'}}
                     </div>
                 </div>
 
@@ -315,11 +315,12 @@
 
         created() {
             this.loadPlayers(this.teamid);
-        }
+        },
+
     }
 </script>
 
-<style scoped>
+<style>
     .teamplayers_container {
         position: relative;
         margin-left: -9px;
