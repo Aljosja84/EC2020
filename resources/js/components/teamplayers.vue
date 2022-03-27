@@ -9,7 +9,7 @@
         <div id="midfield_div">
             <transition-group name="players_list" tag="ul">
                 <span v-for="person in playersArr" :key="person.player.id" class="players_list-item">
-                    <img :src=person.player.photo>
+                    <img :content="person.player.lastname" v-tippy="{arrow : true, arrowType : 'round', animation : 'scale', animateFill: true, followCursor: 'horizontal', theme: 'honeybee'}" :src=person.player.photo>
                 </span>
             </transition-group>
         </div>
@@ -103,7 +103,7 @@
                         rating
                     </div>
                     <div class="left_stats_data">
-                        {{player.statistics[0].games.rating ? player.statistics[0].games.rating : '-'}}
+                        {{player.statistics[0].games.rating ? Number(player.statistics[0].games.rating).toFixed(2) : '-'}}
                     </div>
                 </div>
 
@@ -321,6 +321,13 @@
 </script>
 
 <style>
+    .tippy-tooltip.honeybee-theme {
+        background-color: #313131;
+        color: #ff7800;
+    }
+    .tippy-tooltip.honeybee-theme .tippy-roundarrow{
+        fill: #313131;
+    }
     .teamplayers_container {
         position: relative;
         margin-left: -9px;
