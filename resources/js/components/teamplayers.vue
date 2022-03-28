@@ -43,29 +43,29 @@
                                         </td>
                                     </tr>
                                 </table>
-                            <div title="jelle" class="content_header">PHYSICAL</div>
+                            <div class="content_header">PHYSICAL</div>
                                 <table style="margin-top: 8px">
                                     <tr>
-                                        <td style="width: 80px; height: 20px; padding-left: 6px">height</td><td>188cm</td>
+                                        <td style="width: 80px; height: 20px; padding-left: 6px">height</td><td>{{ player.player.height }}</td>
                                     </tr>
                                     <tr>
                                         <td style="width: 80px; height: 20px; padding-left: 6px">squad rank</td>
                                         <td style="vertical-align: top; width: 155px">
                                             <!-- loading bar disguised as a rank bar -->
                                             <div class="progress_left">
-                                                <div class="bar_left" :style="{width: bar_per_2+'%'}"></div>
+                                                <div class="bar_left" :style="{width: rankedHeightBarPct(player.player.id)+'%'}"></div>
                                             </div>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td style="width: 80px; height: 20px; padding-left: 6px">weight</td><td>89kg</td>
+                                        <td style="width: 80px; height: 20px; padding-left: 6px">weight</td><td>{{ player.player.weight }}</td>
                                     </tr>
                                     <tr>
                                         <td style="width: 80px; height: 20px; padding-left: 6px">squad rank</td>
                                         <td style="vertical-align: top; width: 155px">
                                             <!-- loading bar disguised as a rank bar -->
                                             <div class="progress_left">
-                                                <div class="bar_left" :style="{width: bar_per_3+'%'}"></div>
+                                                <div class="bar_left" :style="{width: rankedWeightBarPct(player.player.id)+'%'}"></div>
                                             </div>
                                         </td>
                                     </tr>
@@ -79,25 +79,25 @@
                         games this ec
                     </div>
                     <div class="left_stats_data">
-                        4
+                        {{player.statistics[0].games.appearences ? Number(player.statistics[0].games.appearences) : '-'}}
                     </div>
                     <div class="left_stats_header">
                         starting XI
                     </div>
                     <div class="left_stats_data">
-                        4
+                        {{player.statistics[0].games.lineups ? Number(player.statistics[0].games.lineups) : '-'}}
                     </div>
                     <div class="left_stats_header">
                         minutes
                     </div>
                     <div class="left_stats_data">
-                        316
+                        {{player.statistics[0].games.minutes ? Number(player.statistics[0].games.minutes) : '-'}}
                     </div>
                     <div class="left_stats_header">
                         position
                     </div>
                     <div class="left_stats_data">
-                        defender
+                        {{player.statistics[0].games.position ? player.statistics[0].games.position : '-'}}
                     </div>
                     <div class="left_stats_header">
                         rating
@@ -113,7 +113,7 @@
                             passes
                         </div>
                         <div style="background-color: transparent; margin-left: 10px; margin-top: 10px">
-                            <donut-test v-if="loaded" v-bind:centertext="player.player.id" v-bind:chart-data="playerDoughnutStatsPasses[whichChartIndex(player.player.id)]" :canvas_id="player.player.id"/>
+                            <donut-test v-show="loaded" v-if="player.statistics[0].passes.total != null" v-bind:centertext="player.statistics[0].passes.total" v-bind:chart-data="playerDoughnutStatsPasses[whichChartIndex(player.player.id)]" :canvas_id="player.player.id"/>
                         </div>
                     </div>
                     <div class="player_stats_right_top_sub">
@@ -121,7 +121,7 @@
                             duels
                         </div>
                         <div style="background-color: transparent; margin-left: 10px; margin-top: 10px">
-                            <donut-test v-if="loaded" v-bind:centertext="player.player.id" v-bind:chart-data="playerDoughnutStatsPasses[whichChartIndex(player.player.id)]" :canvas_id="player.player.id+999"/>
+                            <donut-test v-show="loaded" v-if="player.statistics[0].duels.total != null" v-bind:centertext="player.statistics[0].duels.total" v-bind:chart-data="playerDoughnutStatsPasses[whichChartIndex(player.player.id)]" :canvas_id="player.player.id+999"/>
                         </div>
                     </div>
                     <div class="player_stats_right_top_sub">
@@ -129,7 +129,7 @@
                             dribbles
                         </div>
                         <div style="background-color: transparent; margin-left: 10px; margin-top: 10px">
-                            <donut-test v-if="loaded" v-bind:centertext="156" v-bind:chart-data="playerDoughnutStatsPasses[whichChartIndex(player.player.id)]" :canvas_id="player.player.id+1099"/>
+                            <donut-test v-if="loaded" v-bind:centertext="player.statistics[0].dribbles.attempts" v-bind:chart-data="playerDoughnutStatsPasses[whichChartIndex(player.player.id)]" :canvas_id="player.player.id+1099"/>
                         </div>
                     </div>
                     <!--
@@ -143,7 +143,7 @@
                                 shots
                             </div>
                             <div class="player_stats_right_bottom_data">
-                                12
+                                {{player.statistics[0].shots.total ? Number(player.statistics[0].shots.total) : '-'}}
                             </div>
                         </div>
 
@@ -152,7 +152,7 @@
                                 goals
                             </div>
                             <div class="player_stats_right_bottom_data">
-                                2
+                                {{player.statistics[0].goals.total ? Number(player.statistics[0].goals.total) : '-'}}
                             </div>
                         </div>
 
@@ -161,7 +161,7 @@
                                 cards
                             </div>
                             <div class="player_stats_right_bottom_data">
-                                1
+                                {{player.statistics[0].cards.red + player.statistics[0].cards.yellow}}
                             </div>
                         </div>
 
@@ -170,7 +170,7 @@
                                 tackles
                             </div>
                             <div class="player_stats_right_bottom_data">
-                                4
+                                {{player.statistics[0].tackles.total ? Number(player.statistics[0].tackles.total) : '-'}}
                             </div>
                         </div>
 
@@ -179,7 +179,7 @@
                                 fouls
                             </div>
                             <div class="player_stats_right_bottom_data">
-                                9
+                                {{player.statistics[0].fouls.committed ? Number(player.statistics[0].fouls.committed) : '-'}}
                             </div>
                         </div>
 
@@ -188,7 +188,7 @@
                                 subs
                             </div>
                             <div class="player_stats_right_bottom_data">
-                                0
+                                {{player.statistics[0].substitutes.in + player.statistics[0].substitutes.out}}
                             </div>
                         </div>
                     </div>
@@ -236,17 +236,33 @@
 
             // this function will return the players rank, height wise
             rankedHeight(playerid) {
-                 return _.orderBy(this.playersArr, 'players.height', 'asc').findIndex((item) => item.player.id === playerid)
+                 return _.orderBy(this.playersArr, 'player.height', 'desc').findIndex((item) => item.player.id === playerid)
+            },
+
+            // this function will return the bar percentage, heightwise.
+            rankedHeightBarPct(playerid) {
+                 return 100 - (this.rankedHeight(playerid)/this.playersArr.length)*100
             },
 
             //this function will return the players rank, weight wise
             rankedWeight(playerid) {
-                 return _.orderBy(this.playersArr, 'players.weight', 'asc').findIndex((item) => item.player.id === playerid)
+                 return _.orderBy(this.playersArr, 'player.weight', 'desc').findIndex((item) => item.player.id === playerid)
+            },
+
+            // this function will return the bar percentage, heightwise.
+            rankedWeightBarPct(playerid) {
+                return 100 - (this.rankedWeight(playerid)/this.playersArr.length)*100
             },
 
             // this function returns the index of the array where playerid is found
             whichChartIndex(playerid) {
                  return this.playerDoughnutStatsPasses.findIndex((item) => item.playerid === playerid);
+            },
+
+            // this function will convery a string like "90 kg" into the number 90 so we can sort the players by weight
+            convertHeightString(string) {
+                 let res = string.substring(0,3);
+                 return Number(res);
             },
 
             loadPlayers(e) {
@@ -261,7 +277,7 @@
                         this.playersArr.push(element);
                         // push the player and his birth date to the age array
                         this.playersAgeArr.push({'playerid': element.player.id, 'bdayTimestamp': this.DatetoTimestamp(element.player.birth.date)});
-                        // push some stats for the dougnut charts
+                        // push passes in array for the doughtnut chart
                         this.playerDoughnutStatsPasses.push({
                             'playerid': element.player.id,
                             'type': 'doughnut',
@@ -269,7 +285,10 @@
                                 'labels': ['accurate', 'not-accurate'],
                                 'datasets': [
                                     {
-                                        'data': [73,156-73],
+                                        'data': [
+                                            Math.floor(element.statistics[0].passes.total*(element.statistics[0].passes.accuracy/100)),
+                                            Math.floor(element.statistics[0].passes.total - element.statistics[0].passes.total*(element.statistics[0].passes.accuracy/100))
+                                        ],
                                         'backgroundColor': [
                                             // green
                                             '#68b451',
@@ -298,7 +317,6 @@
                         });
 
                     });
-                    console.log(this.whichChartIndex(18845));
                     this.loaded = true;
                 }).catch((error) => {
                     console.log(error);
@@ -308,13 +326,15 @@
             shuffle() {
                  // sort the players, oldest to youngest
                  this.playersArr = _.shuffle(this.playersArr);
-                 //this.playersArr = _.orderBy(this.playersArr, 'player.age', 'asc');
+                 //console.log(this.rankedHeight(537));
+                 //this.playersArr = _.orderBy(this.playersArr, 'player.height', 'asc');
                 //console.log(this.ageSortedArr.findIndex(i => i.playerid === 26240))
+                //console.log(_.orderBy(this.playersArr, 'player.height', 'asc').findIndex((item) => item.player.id === 537));
             }
         },
 
         created() {
-            this.loadPlayers(this.teamid);
+            console.log(this.loadPlayers(this.teamid));
         },
 
     }

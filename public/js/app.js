@@ -3607,21 +3607,34 @@ __webpack_require__.r(__webpack_exports__);
     },
     // this function will return the players rank, height wise
     rankedHeight: function rankedHeight(playerid) {
-      return _.orderBy(this.playersArr, 'players.height', 'asc').findIndex(function (item) {
+      return _.orderBy(this.playersArr, 'player.height', 'desc').findIndex(function (item) {
         return item.player.id === playerid;
       });
     },
+    // this function will return the bar percentage, heightwise.
+    rankedHeightBarPct: function rankedHeightBarPct(playerid) {
+      return 100 - this.rankedHeight(playerid) / this.playersArr.length * 100;
+    },
     //this function will return the players rank, weight wise
     rankedWeight: function rankedWeight(playerid) {
-      return _.orderBy(this.playersArr, 'players.weight', 'asc').findIndex(function (item) {
+      return _.orderBy(this.playersArr, 'player.weight', 'desc').findIndex(function (item) {
         return item.player.id === playerid;
       });
+    },
+    // this function will return the bar percentage, heightwise.
+    rankedWeightBarPct: function rankedWeightBarPct(playerid) {
+      return 100 - this.rankedWeight(playerid) / this.playersArr.length * 100;
     },
     // this function returns the index of the array where playerid is found
     whichChartIndex: function whichChartIndex(playerid) {
       return this.playerDoughnutStatsPasses.findIndex(function (item) {
         return item.playerid === playerid;
       });
+    },
+    // this function will convery a string like "90 kg" into the number 90 so we can sort the players by weight
+    convertHeightString: function convertHeightString(string) {
+      var res = string.substring(0, 3);
+      return Number(res);
     },
     loadPlayers: function loadPlayers(e) {
       var _this = this;
@@ -3640,7 +3653,7 @@ __webpack_require__.r(__webpack_exports__);
           _this.playersAgeArr.push({
             'playerid': element.player.id,
             'bdayTimestamp': _this.DatetoTimestamp(element.player.birth.date)
-          }); // push some stats for the dougnut charts
+          }); // push passes in array for the doughtnut chart
 
 
           _this.playerDoughnutStatsPasses.push({
@@ -3649,7 +3662,7 @@ __webpack_require__.r(__webpack_exports__);
             'data': {
               'labels': ['accurate', 'not-accurate'],
               'datasets': [{
-                'data': [73, 156 - 73],
+                'data': [Math.floor(element.statistics[0].passes.total * (element.statistics[0].passes.accuracy / 100)), Math.floor(element.statistics[0].passes.total - element.statistics[0].passes.total * (element.statistics[0].passes.accuracy / 100))],
                 'backgroundColor': [// green
                 '#68b451', // red
                 '#c22d2d']
@@ -3672,7 +3685,6 @@ __webpack_require__.r(__webpack_exports__);
             }
           });
         });
-        console.log(_this.whichChartIndex(18845));
         _this.loaded = true;
       })["catch"](function (error) {
         console.log(error);
@@ -3680,12 +3692,14 @@ __webpack_require__.r(__webpack_exports__);
     },
     shuffle: function shuffle() {
       // sort the players, oldest to youngest
-      this.playersArr = _.shuffle(this.playersArr); //this.playersArr = _.orderBy(this.playersArr, 'player.age', 'asc');
+      this.playersArr = _.shuffle(this.playersArr); //console.log(this.rankedHeight(537));
+      //this.playersArr = _.orderBy(this.playersArr, 'player.height', 'asc');
       //console.log(this.ageSortedArr.findIndex(i => i.playerid === 26240))
+      //console.log(_.orderBy(this.playersArr, 'player.height', 'asc').findIndex((item) => item.player.id === 537));
     }
   },
   created: function created() {
-    this.loadPlayers(this.teamid);
+    console.log(this.loadPlayers(this.teamid));
   }
 });
 
@@ -56075,14 +56089,25 @@ var render = function () {
                   ]),
                 ]),
                 _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "content_header", attrs: { title: "jelle" } },
-                  [_vm._v("PHYSICAL")]
-                ),
+                _c("div", { staticClass: "content_header" }, [
+                  _vm._v("PHYSICAL"),
+                ]),
                 _vm._v(" "),
                 _c("table", { staticStyle: { "margin-top": "8px" } }, [
-                  _vm._m(1, true),
+                  _c("tr", [
+                    _c(
+                      "td",
+                      {
+                        staticStyle: {
+                          width: "80px",
+                          height: "20px",
+                          "padding-left": "6px",
+                        },
+                      },
+                      [_vm._v("height")]
+                    ),
+                    _c("td", [_vm._v(_vm._s(player.player.height))]),
+                  ]),
                   _vm._v(" "),
                   _c("tr", [
                     _c(
@@ -56109,14 +56134,30 @@ var render = function () {
                         _c("div", { staticClass: "progress_left" }, [
                           _c("div", {
                             staticClass: "bar_left",
-                            style: { width: _vm.bar_per_2 + "%" },
+                            style: {
+                              width:
+                                _vm.rankedHeightBarPct(player.player.id) + "%",
+                            },
                           }),
                         ]),
                       ]
                     ),
                   ]),
                   _vm._v(" "),
-                  _vm._m(2, true),
+                  _c("tr", [
+                    _c(
+                      "td",
+                      {
+                        staticStyle: {
+                          width: "80px",
+                          height: "20px",
+                          "padding-left": "6px",
+                        },
+                      },
+                      [_vm._v("weight")]
+                    ),
+                    _c("td", [_vm._v(_vm._s(player.player.weight))]),
+                  ]),
                   _vm._v(" "),
                   _c("tr", [
                     _c(
@@ -56143,7 +56184,10 @@ var render = function () {
                         _c("div", { staticClass: "progress_left" }, [
                           _c("div", {
                             staticClass: "bar_left",
-                            style: { width: _vm.bar_per_3 + "%" },
+                            style: {
+                              width:
+                                _vm.rankedWeightBarPct(player.player.id) + "%",
+                            },
                           }),
                         ]),
                       ]
@@ -56160,7 +56204,15 @@ var render = function () {
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "left_stats_data" }, [
-              _vm._v("\n                    4\n                "),
+              _vm._v(
+                "\n                    " +
+                  _vm._s(
+                    player.statistics[0].games.appearences
+                      ? Number(player.statistics[0].games.appearences)
+                      : "-"
+                  ) +
+                  "\n                "
+              ),
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "left_stats_header" }, [
@@ -56168,7 +56220,15 @@ var render = function () {
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "left_stats_data" }, [
-              _vm._v("\n                    4\n                "),
+              _vm._v(
+                "\n                    " +
+                  _vm._s(
+                    player.statistics[0].games.lineups
+                      ? Number(player.statistics[0].games.lineups)
+                      : "-"
+                  ) +
+                  "\n                "
+              ),
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "left_stats_header" }, [
@@ -56176,7 +56236,15 @@ var render = function () {
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "left_stats_data" }, [
-              _vm._v("\n                    316\n                "),
+              _vm._v(
+                "\n                    " +
+                  _vm._s(
+                    player.statistics[0].games.minutes
+                      ? Number(player.statistics[0].games.minutes)
+                      : "-"
+                  ) +
+                  "\n                "
+              ),
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "left_stats_header" }, [
@@ -56184,7 +56252,15 @@ var render = function () {
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "left_stats_data" }, [
-              _vm._v("\n                    defender\n                "),
+              _vm._v(
+                "\n                    " +
+                  _vm._s(
+                    player.statistics[0].games.position
+                      ? player.statistics[0].games.position
+                      : "-"
+                  ) +
+                  "\n                "
+              ),
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "left_stats_header" }, [
@@ -56222,10 +56298,18 @@ var render = function () {
                   },
                 },
                 [
-                  _vm.loaded
+                  player.statistics[0].passes.total != null
                     ? _c("donut-test", {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: _vm.loaded,
+                            expression: "loaded",
+                          },
+                        ],
                         attrs: {
-                          centertext: player.player.id,
+                          centertext: player.statistics[0].passes.total,
                           "chart-data":
                             _vm.playerDoughnutStatsPasses[
                               _vm.whichChartIndex(player.player.id)
@@ -56254,10 +56338,18 @@ var render = function () {
                   },
                 },
                 [
-                  _vm.loaded
+                  player.statistics[0].duels.total != null
                     ? _c("donut-test", {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: _vm.loaded,
+                            expression: "loaded",
+                          },
+                        ],
                         attrs: {
-                          centertext: player.player.id,
+                          centertext: player.statistics[0].duels.total,
                           "chart-data":
                             _vm.playerDoughnutStatsPasses[
                               _vm.whichChartIndex(player.player.id)
@@ -56291,7 +56383,7 @@ var render = function () {
                   _vm.loaded
                     ? _c("donut-test", {
                         attrs: {
-                          centertext: 156,
+                          centertext: player.statistics[0].dribbles.attempts,
                           "chart-data":
                             _vm.playerDoughnutStatsPasses[
                               _vm.whichChartIndex(player.player.id)
@@ -56306,7 +56398,206 @@ var render = function () {
             ]),
           ]),
           _vm._v(" "),
-          _vm._m(3, true),
+          _c("div", { staticClass: "player_stats_right_bottom" }, [
+            _c(
+              "div",
+              {
+                staticClass: "player_stats_right_bottom_sub",
+                staticStyle: { height: "inherit" },
+              },
+              [
+                _c(
+                  "div",
+                  { staticClass: "player_stats_right_bottom_container" },
+                  [
+                    _c(
+                      "div",
+                      { staticClass: "player_stats_right_bottom_header" },
+                      [
+                        _vm._v(
+                          "\n                            shots\n                        "
+                        ),
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "player_stats_right_bottom_data" },
+                      [
+                        _vm._v(
+                          "\n                            " +
+                            _vm._s(
+                              player.statistics[0].shots.total
+                                ? Number(player.statistics[0].shots.total)
+                                : "-"
+                            ) +
+                            "\n                        "
+                        ),
+                      ]
+                    ),
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "player_stats_right_bottom_container" },
+                  [
+                    _c(
+                      "div",
+                      { staticClass: "player_stats_right_bottom_header" },
+                      [
+                        _vm._v(
+                          "\n                            goals\n                        "
+                        ),
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "player_stats_right_bottom_data" },
+                      [
+                        _vm._v(
+                          "\n                            " +
+                            _vm._s(
+                              player.statistics[0].goals.total
+                                ? Number(player.statistics[0].goals.total)
+                                : "-"
+                            ) +
+                            "\n                        "
+                        ),
+                      ]
+                    ),
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "player_stats_right_bottom_container" },
+                  [
+                    _c(
+                      "div",
+                      { staticClass: "player_stats_right_bottom_header" },
+                      [
+                        _vm._v(
+                          "\n                            cards\n                        "
+                        ),
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "player_stats_right_bottom_data" },
+                      [
+                        _vm._v(
+                          "\n                            " +
+                            _vm._s(
+                              player.statistics[0].cards.red +
+                                player.statistics[0].cards.yellow
+                            ) +
+                            "\n                        "
+                        ),
+                      ]
+                    ),
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "player_stats_right_bottom_container" },
+                  [
+                    _c(
+                      "div",
+                      { staticClass: "player_stats_right_bottom_header" },
+                      [
+                        _vm._v(
+                          "\n                            tackles\n                        "
+                        ),
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "player_stats_right_bottom_data" },
+                      [
+                        _vm._v(
+                          "\n                            " +
+                            _vm._s(
+                              player.statistics[0].tackles.total
+                                ? Number(player.statistics[0].tackles.total)
+                                : "-"
+                            ) +
+                            "\n                        "
+                        ),
+                      ]
+                    ),
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "player_stats_right_bottom_container" },
+                  [
+                    _c(
+                      "div",
+                      { staticClass: "player_stats_right_bottom_header" },
+                      [
+                        _vm._v(
+                          "\n                            fouls\n                        "
+                        ),
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "player_stats_right_bottom_data" },
+                      [
+                        _vm._v(
+                          "\n                            " +
+                            _vm._s(
+                              player.statistics[0].fouls.committed
+                                ? Number(player.statistics[0].fouls.committed)
+                                : "-"
+                            ) +
+                            "\n                        "
+                        ),
+                      ]
+                    ),
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "player_stats_right_bottom_container" },
+                  [
+                    _c(
+                      "div",
+                      { staticClass: "player_stats_right_bottom_header" },
+                      [
+                        _vm._v(
+                          "\n                            subs\n                        "
+                        ),
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "player_stats_right_bottom_data" },
+                      [
+                        _vm._v(
+                          "\n                            " +
+                            _vm._s(
+                              player.statistics[0].substitutes.in +
+                                player.statistics[0].substitutes.out
+                            ) +
+                            "\n                        "
+                        ),
+                      ]
+                    ),
+                  ]
+                ),
+              ]
+            ),
+          ]),
         ])
       }),
       0
@@ -56320,135 +56611,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "player_stats_header" }, [
       _c("span", [_vm._v("player statistics")]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("tr", [
-      _c(
-        "td",
-        {
-          staticStyle: { width: "80px", height: "20px", "padding-left": "6px" },
-        },
-        [_vm._v("height")]
-      ),
-      _c("td", [_vm._v("188cm")]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("tr", [
-      _c(
-        "td",
-        {
-          staticStyle: { width: "80px", height: "20px", "padding-left": "6px" },
-        },
-        [_vm._v("weight")]
-      ),
-      _c("td", [_vm._v("89kg")]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "player_stats_right_bottom" }, [
-      _c(
-        "div",
-        {
-          staticClass: "player_stats_right_bottom_sub",
-          staticStyle: { height: "inherit" },
-        },
-        [
-          _c("div", { staticClass: "player_stats_right_bottom_container" }, [
-            _c("div", { staticClass: "player_stats_right_bottom_header" }, [
-              _vm._v(
-                "\n                            shots\n                        "
-              ),
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "player_stats_right_bottom_data" }, [
-              _vm._v(
-                "\n                            12\n                        "
-              ),
-            ]),
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "player_stats_right_bottom_container" }, [
-            _c("div", { staticClass: "player_stats_right_bottom_header" }, [
-              _vm._v(
-                "\n                            goals\n                        "
-              ),
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "player_stats_right_bottom_data" }, [
-              _vm._v(
-                "\n                            2\n                        "
-              ),
-            ]),
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "player_stats_right_bottom_container" }, [
-            _c("div", { staticClass: "player_stats_right_bottom_header" }, [
-              _vm._v(
-                "\n                            cards\n                        "
-              ),
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "player_stats_right_bottom_data" }, [
-              _vm._v(
-                "\n                            1\n                        "
-              ),
-            ]),
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "player_stats_right_bottom_container" }, [
-            _c("div", { staticClass: "player_stats_right_bottom_header" }, [
-              _vm._v(
-                "\n                            tackles\n                        "
-              ),
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "player_stats_right_bottom_data" }, [
-              _vm._v(
-                "\n                            4\n                        "
-              ),
-            ]),
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "player_stats_right_bottom_container" }, [
-            _c("div", { staticClass: "player_stats_right_bottom_header" }, [
-              _vm._v(
-                "\n                            fouls\n                        "
-              ),
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "player_stats_right_bottom_data" }, [
-              _vm._v(
-                "\n                            9\n                        "
-              ),
-            ]),
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "player_stats_right_bottom_container" }, [
-            _c("div", { staticClass: "player_stats_right_bottom_header" }, [
-              _vm._v(
-                "\n                            subs\n                        "
-              ),
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "player_stats_right_bottom_data" }, [
-              _vm._v(
-                "\n                            0\n                        "
-              ),
-            ]),
-          ]),
-        ]
-      ),
     ])
   },
 ]

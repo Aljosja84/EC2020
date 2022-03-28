@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<!-- saved from url=(0058)http://greyby.github.io/vue-spinner/?ref=madewithvuejs.com -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>vue-spinner</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="./vue-spinner_files/app.css">
+  <link rel="stylesheet" href="blob:http://greyby.github.io/7596f690-89b3-458c-bed0-abbe4236c1ef"><link rel="stylesheet" href="blob:http://greyby.github.io/0f909cad-920c-48b7-8f2d-76bc11a1211b"><link rel="stylesheet" href="blob:http://greyby.github.io/28bd66c9-3f79-42a0-969b-ed9b5f89647c"><link rel="stylesheet" href="blob:http://greyby.github.io/73b5c39c-1c4f-4129-b164-06c0a5444a57"><link rel="stylesheet" href="blob:http://greyby.github.io/b707ccb0-ff5b-46d2-9f8a-6932a8acdd3e"><link rel="stylesheet" href="blob:http://greyby.github.io/3186e671-c2ab-4e6d-a8f9-77f924af6e90"><link rel="stylesheet" href="blob:http://greyby.github.io/2673f8c9-9115-461b-a882-711e49193e64"><link rel="stylesheet" href="blob:http://greyby.github.io/9b743462-b5d7-474f-aaf8-c9b4ba76fcf0"><link rel="stylesheet" href="blob:http://greyby.github.io/923dc4e0-e380-40b7-9095-23dbc5f292ba"><link rel="stylesheet" href="blob:http://greyby.github.io/012d9577-8237-449c-a281-285c45411480"><link rel="stylesheet" href="blob:http://greyby.github.io/bb1c1431-a7de-4da2-b6d1-c3ab3ae1e33c"><link rel="stylesheet" href="blob:http://greyby.github.io/1d1feb76-76f5-43bb-9523-bf572f5f280d"><link rel="stylesheet" href="blob:http://greyby.github.io/c6f73d95-2a20-4ccd-8e7c-a11e5a5038f6"><link rel="stylesheet" href="blob:http://greyby.github.io/fc617f86-2cab-4228-a780-c2fe9a2ec285"><link rel="stylesheet" href="blob:http://greyby.github.io/415bcfd2-d82a-4813-b07f-ccc8de036a6d"><link rel="stylesheet" href="blob:http://greyby.github.io/0b5b6426-2030-4f3d-a628-db27202fbeb0"></head>
+  <body>
+    <div id="app">
+      <div id="wrapper">
+        <h1>vue-spinner</h1>
+        <h4>vue-spinner</h4>
+
+        <p class="buttons">
+          <a href="https://github.com/greyby/vue-spinner" class="button">Source on GitHub</a>
+        </p>
+        <div id="social">
+          <!-- <li><a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="https://github.com/greyby/vue-spinner" data-via="greyby" data-related="vuejs" data-hashtags="vuejs">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script></li> -->
+          <li><iframe src="./vue-spinner_files/github-btn.html" allowtransparency="true" frameborder="0" scrolling="0" width="100" height="20"></iframe></li>
+        </div>
+        <ul class="list-container">
+          <li class="spinner-list" title="pulse loader">
+            <div class="v-spinner">
+    <div class="v-pulse v-pulse1" style="animation-fill-mode: both; animation-timing-function: cubic-bezier(0.2, 0.68, 0.18, 1.08); animation-iteration-count: infinite; animation-duration: 0.75s; animation-name: v-pulseStretchDelay; display: inline-block; border-radius: 100%; margin: 2px; height: 15px; width: 15px; background-color: rgb(58, 185, 130); animation-delay: 0.12s;">
+    </div><div class="v-pulse v-pulse2" style="animation-fill-mode: both; animation-timing-function: cubic-bezier(0.2, 0.68, 0.18, 1.08); animation-iteration-count: infinite; animation-duration: 0.75s; animation-name: v-pulseStretchDelay; display: inline-block; border-radius: 100%; margin: 2px; height: 15px; width: 15px; background-color: rgb(58, 185, 130); animation-delay: 0.24s;">
+    </div><div class="v-pulse v-pulse3" style="animation-fill-mode: both; animation-timing-function: cubic-bezier(0.2, 0.68, 0.18, 1.08); animation-iteration-count: infinite; animation-duration: 0.75s; animation-name: v-pulseStretchDelay; display: inline-block; border-radius: 100%; margin: 2px; height: 15px; width: 15px; background-color: rgb(58, 185, 130); animation-delay: 0.36s;">
+    </div>
+  </div><!--v-component-->
+          </li>
+          <li class="spinner-list" title="grid loader">
+            <div class="v-spinner" style="width: 57px; font-size: 0px;">
+    <div class="v-grid v-grid1" style="border-radius: 100%; margin: 2px; height: 15px; width: 15px; background-color: rgb(93, 197, 150); display: inline-block; animation-fill-mode: both; animation-timing-function: ease; animation-iteration-count: infinite; animation-name: v-gridStretchDelay; animation-duration: 0.823276s; animation-delay: 0.00712552s;">
+    </div><div class="v-grid v-grid2" style="border-radius: 100%; margin: 2px; height: 15px; width: 15px; background-color: rgb(93, 197, 150); display: inline-block; animation-fill-mode: both; animation-timing-function: ease; animation-iteration-count: infinite; animation-name: v-gridStretchDelay; animation-duration: 1.2843s; animation-delay: -0.171767s;">
+    </div><div class="v-grid v-grid3" style="border-radius: 100%; margin: 2px; height: 15px; width: 15px; background-color: rgb(93, 197, 150); display: inline-block; animation-fill-mode: both; animation-timing-function: ease; animation-iteration-count: infinite; animation-name: v-gridStretchDelay; animation-duration: 0.62641s; animation-delay: 0.295635s;">
+    </div><div class="v-grid v-grid4" style="border-radius: 100%; margin: 2px; height: 15px; width: 15px; background-color: rgb(93, 197, 150); display: inline-block; animation-fill-mode: both; animation-timing-function: ease; animation-iteration-count: infinite; animation-name: v-gridStretchDelay; animation-duration: 0.703524s; animation-delay: 0.315548s;">
+    </div><div class="v-grid v-grid5" style="border-radius: 100%; margin: 2px; height: 15px; width: 15px; background-color: rgb(93, 197, 150); display: inline-block; animation-fill-mode: both; animation-timing-function: ease; animation-iteration-count: infinite; animation-name: v-gridStretchDelay; animation-duration: 1.25342s; animation-delay: 0.560847s;">
+    </div><div class="v-grid v-grid6" style="border-radius: 100%; margin: 2px; height: 15px; width: 15px; background-color: rgb(93, 197, 150); display: inline-block; animation-fill-mode: both; animation-timing-function: ease; animation-iteration-count: infinite; animation-name: v-gridStretchDelay; animation-duration: 1.42941s; animation-delay: 0.140117s;">
+    </div><div class="v-grid v-grid7" style="border-radius: 100%; margin: 2px; height: 15px; width: 15px; background-color: rgb(93, 197, 150); display: inline-block; animation-fill-mode: both; animation-timing-function: ease; animation-iteration-count: infinite; animation-name: v-gridStretchDelay; animation-duration: 1.19277s; animation-delay: 0.367416s;">
+    </div><div class="v-grid v-grid8" style="border-radius: 100%; margin: 2px; height: 15px; width: 15px; background-color: rgb(93, 197, 150); display: inline-block; animation-fill-mode: both; animation-timing-function: ease; animation-iteration-count: infinite; animation-name: v-gridStretchDelay; animation-duration: 1.13559s; animation-delay: 0.278914s;">
+    </div><div class="v-grid v-grid9" style="border-radius: 100%; margin: 2px; height: 15px; width: 15px; background-color: rgb(93, 197, 150); display: inline-block; animation-fill-mode: both; animation-timing-function: ease; animation-iteration-count: infinite; animation-name: v-gridStretchDelay; animation-duration: 1.57551s; animation-delay: -0.126845s;">
+    </div>
+  </div><!--v-component-->
+          </li>
+          <li class="spinner-list" title="clip loader">
+            <div class="v-spinner">
+    <div class="v-clip" style="height: 35px; width: 35px; border-width: 2px; border-style: solid; border-color: rgb(93, 197, 150) rgb(93, 197, 150) transparent; border-radius: 100%; background: transparent;">
+    </div>
+  </div><!--v-component-->
+          </li>
+          <li class="spinner-list" title="rise loader">
+            <div class="v-spinner">
+    <div class="v-rise v-rise-odd" style="background-color: rgb(93, 197, 150); height: 15px; width: 15px; margin: 2px; border-radius: 100%;">
+    </div><div class="v-rise v-rise-even" style="background-color: rgb(93, 197, 150); height: 15px; width: 15px; margin: 2px; border-radius: 100%;">
+    </div><div class="v-rise v-rise-odd" style="background-color: rgb(93, 197, 150); height: 15px; width: 15px; margin: 2px; border-radius: 100%;">
+    </div><div class="v-rise v-rise-even" style="background-color: rgb(93, 197, 150); height: 15px; width: 15px; margin: 2px; border-radius: 100%;">
+    </div><div class="v-rise v-rise-odd" style="background-color: rgb(93, 197, 150); height: 15px; width: 15px; margin: 2px; border-radius: 100%;">
+    </div>
+  </div><!--v-component-->
+          </li>
+          <li class="spinner-list" title="beat loader">
+            <div class="v-spinner">
+    <div class="v-beat v-beat-odd" style="background-color: rgb(93, 197, 150); height: 15px; width: 15px; margin: 2px; border-radius: 100%;">
+    </div><div class="v-beat v-beat-even" style="background-color: rgb(93, 197, 150); height: 15px; width: 15px; margin: 2px; border-radius: 100%;">
+    </div><div class="v-beat v-beat-odd" style="background-color: rgb(93, 197, 150); height: 15px; width: 15px; margin: 2px; border-radius: 100%;">
+    </div>
+  </div><!--v-component-->
+          </li>
+          <li class="spinner-list" title="sync loader">
+            <div class="v-spinner">
+    <div class="v-sync v-sync1" style="animation-fill-mode: both; animation-timing-function: ease-in-out; animation-iteration-count: infinite; animation-duration: 0.6s; animation-name: v-syncStretchDelay; display: inline-block; border-radius: 100%; margin: 2px; width: 15px; height: 15px; background-color: rgb(93, 197, 150); animation-delay: 0.07s;">
+    </div><div class="v-sync v-sync2" style="animation-fill-mode: both; animation-timing-function: ease-in-out; animation-iteration-count: infinite; animation-duration: 0.6s; animation-name: v-syncStretchDelay; display: inline-block; border-radius: 100%; margin: 2px; width: 15px; height: 15px; background-color: rgb(93, 197, 150); animation-delay: 0.14s;">
+    </div><div class="v-sync v-sync3" style="animation-fill-mode: both; animation-timing-function: ease-in-out; animation-iteration-count: infinite; animation-duration: 0.6s; animation-name: v-syncStretchDelay; display: inline-block; border-radius: 100%; margin: 2px; width: 15px; height: 15px; background-color: rgb(93, 197, 150); animation-delay: 0.21s;">
+    </div>
+  </div><!--v-component-->
+          </li>
+          <li class="spinner-list" title="rotate loader">
+            <div class="v-spinner">
+    <div class="v-rotate v-rotate1" style="background-color: rgb(93, 197, 150); height: 15px; width: 15px; margin: 2px; border-radius: 100%;">
+    <div class="v-rotate v-rotate2" style="background-color: rgb(93, 197, 150); height: 15px; width: 15px; margin: 2px; border-radius: 100%;">
+    </div><div class="v-rotate v-rotate3" style="background-color: rgb(93, 197, 150); height: 15px; width: 15px; margin: 2px; border-radius: 100%;">
+    </div></div>
+  </div><!--v-component-->
+          </li>
+          <li class="spinner-list" title="fade loader">
+            <div class="v-spinner" style="position: relative; font-size: 0px;">
+  <!-- <div class="v-spinner" v-bind:style="containerStyle"> -->
+    <div class="v-fade v-fade1" style="border-radius: 20px; margin: 2px; width: 5px; height: 15px; background-color: rgb(93, 197, 150); animation-delay: 0.12s; left: 0px; top: 20px;">
+    </div><div class="v-fade v-fade2" style="border-radius: 20px; margin: 2px; width: 5px; height: 15px; background-color: rgb(93, 197, 150); transform: rotate(-45deg); animation-delay: 0.24s; left: 13.6364px; top: 13.6364px;">
+    </div><div class="v-fade v-fade3" style="border-radius: 20px; margin: 2px; width: 5px; height: 15px; background-color: rgb(93, 197, 150); transform: rotate(90deg); animation-delay: 0.36s; left: 20px; top: 0px;">
+    </div><div class="v-fade v-fade4" style="border-radius: 20px; margin: 2px; width: 5px; height: 15px; background-color: rgb(93, 197, 150); transform: rotate(45deg); animation-delay: 0.48s; left: 13.6364px; top: -13.6364px;">
+    </div><div class="v-fade v-fade5" style="border-radius: 20px; margin: 2px; width: 5px; height: 15px; background-color: rgb(93, 197, 150); animation-delay: 0.6s; left: 0px; top: -20px;">
+    </div><div class="v-fade v-fade6" style="border-radius: 20px; margin: 2px; width: 5px; height: 15px; background-color: rgb(93, 197, 150); transform: rotate(-45deg); animation-delay: 0.72s; left: -13.6364px; top: -13.6364px;">
+    </div><div class="v-fade v-fade7" style="border-radius: 20px; margin: 2px; width: 5px; height: 15px; background-color: rgb(93, 197, 150); transform: rotate(90deg); animation-delay: 0.84s; left: -20px; top: 0px;">
+    </div><div class="v-fade v-fade8" style="border-radius: 20px; margin: 2px; width: 5px; height: 15px; background-color: rgb(93, 197, 150); transform: rotate(45deg); animation-delay: 0.96s; left: -13.6364px; top: 13.6364px;">
+    </div>
+  </div><!--v-component-->
+          </li>
+          <li class="spinner-list" title="paceman loader">
+            <div class="v-spinner" style="position: relative; font-size: 0px;">
+    <div class="v-pacman v-pacman1" style="width: 0px; height: 0px; border-width: 25px; border-style: solid; border-color: rgb(93, 197, 150) transparent rgb(93, 197, 150) rgb(93, 197, 150); border-radius: 25px;">
+    </div><div class="v-pacman v-pacman2" style="border-radius: 100%; margin: 2px; height: 10px; width: 10px; background-color: rgb(93, 197, 150); animation-fill-mode: both; animation-timing-function: linear; animation-iteration-count: infinite; animation-duration: 1s; animation-name: v-pacmanStretchDelay; left: 100px; top: 25px; position: absolute; transform: translate(0px, -6.25px); animation-delay: 0.25s;">
+    </div><div class="v-pacman v-pacman3" style="border-radius: 100%; margin: 2px; height: 10px; width: 10px; background-color: rgb(93, 197, 150); animation-fill-mode: both; animation-timing-function: linear; animation-iteration-count: infinite; animation-duration: 1s; animation-name: v-pacmanStretchDelay; left: 100px; top: 25px; position: absolute; transform: translate(0px, -6.25px); animation-delay: 0.5s;">
+    </div><div class="v-pacman v-pacman4" style="border-radius: 100%; margin: 2px; height: 10px; width: 10px; background-color: rgb(93, 197, 150); animation-fill-mode: both; animation-timing-function: linear; animation-iteration-count: infinite; animation-duration: 1s; animation-name: v-pacmanStretchDelay; left: 100px; top: 25px; position: absolute; transform: translate(0px, -6.25px); animation-delay: 0.75s;">
+    </div><div class="v-pacman v-pacman5" style="border-radius: 100%; margin: 2px; height: 10px; width: 10px; background-color: rgb(93, 197, 150); animation-fill-mode: both; animation-timing-function: linear; animation-iteration-count: infinite; animation-duration: 1s; animation-name: v-pacmanStretchDelay; left: 100px; top: 25px; position: absolute; transform: translate(0px, -6.25px); animation-delay: 1s;">
+    </div>
+</div><!--v-component-->
+          </li>
+          <li class="spinner-list" title="square loader">
+            <div class="v-spinner">
+    <div class="v-square" style="background-color: rgb(93, 197, 150); height: 50px; width: 50px;">
+    </div>
+  </div><!--v-component-->
+          </li>
+          <li class="spinner-list" title="scale loader">
+            <div class="v-spinner">
+    <div class="v-scale v-scale1" style="animation-fill-mode: both; animation-timing-function: cubic-bezier(0.2, 0.68, 0.18, 1.08); animation-iteration-count: infinite; animation-duration: 1s; animation-name: v-scaleStretchDelay; display: inline-block; border-radius: 2px; margin: 2px; width: 4px; height: 35px; background-color: rgb(93, 197, 150); animation-delay: 0.1s;">
+    </div><div class="v-scale v-scale2" style="animation-fill-mode: both; animation-timing-function: cubic-bezier(0.2, 0.68, 0.18, 1.08); animation-iteration-count: infinite; animation-duration: 1s; animation-name: v-scaleStretchDelay; display: inline-block; border-radius: 2px; margin: 2px; width: 4px; height: 35px; background-color: rgb(93, 197, 150); animation-delay: 0.2s;">
+    </div><div class="v-scale v-scale3" style="animation-fill-mode: both; animation-timing-function: cubic-bezier(0.2, 0.68, 0.18, 1.08); animation-iteration-count: infinite; animation-duration: 1s; animation-name: v-scaleStretchDelay; display: inline-block; border-radius: 2px; margin: 2px; width: 4px; height: 35px; background-color: rgb(93, 197, 150); animation-delay: 0.3s;">
+    </div><div class="v-scale v-scale4" style="animation-fill-mode: both; animation-timing-function: cubic-bezier(0.2, 0.68, 0.18, 1.08); animation-iteration-count: infinite; animation-duration: 1s; animation-name: v-scaleStretchDelay; display: inline-block; border-radius: 2px; margin: 2px; width: 4px; height: 35px; background-color: rgb(93, 197, 150); animation-delay: 0.4s;">
+    </div><div class="v-scale v-scale5" style="animation-fill-mode: both; animation-timing-function: cubic-bezier(0.2, 0.68, 0.18, 1.08); animation-iteration-count: infinite; animation-duration: 1s; animation-name: v-scaleStretchDelay; display: inline-block; border-radius: 2px; margin: 2px; width: 4px; height: 35px; background-color: rgb(93, 197, 150); animation-delay: 0.5s;">
+    </div>
+  </div><!--v-component-->
+          </li>
+          <li class="spinner-list" title="skew loader">
+            <div class="v-spinner">
+    <div class="v-skew" style="height: 0px; width: 0px; border-left: 20px solid transparent; border-right: 20px solid transparent; border-bottom: 20px solid rgb(93, 197, 150);">
+    </div>
+  </div><!--v-component-->
+          </li>
+          <li class="spinner-list" title="moon loader">
+            <div class="v-spinner">
+    <div class="v-moon v-moon1" style="height: 60px; width: 60px; border-radius: 100%;">
+    <div class="v-moon v-moon2" style="border-radius: 100%; width: 8.57143px; height: 8.57143px; background-color: rgb(93, 197, 150); top: 25.7143px;">
+    </div><div class="v-moon v-moon3" style="border-radius: 100%; width: 60px; height: 60px; border: 8.57143px solid rgb(93, 197, 150);">
+    </div></div>
+  </div><!--v-component-->
+          </li>
+          <li class="spinner-list" title="ring loader">
+            <div class="v-spinner">
+    <div class="v-ring v-ring1" style="height: 60px; width: 60px; position: relative;">
+    <div class="v-ring v-ring2" style="height: 60px; width: 60px; border: 6px solid rgb(93, 197, 150); opacity: 0.4; border-radius: 100%;">
+    </div><div class="v-ring v-ring3" style="height: 60px; width: 60px; border: 6px solid rgb(93, 197, 150); opacity: 0.4; border-radius: 100%;">
+    </div></div>
+  </div><!--v-component-->
+          </li>
+          <li class="spinner-list" title="bounce loader">
+            <div class="v-spinner">
+    <div class="v-bounce v-bounce1" style="height: 60px; width: 60px; position: relative;">
+    <div class="v-bounce v-bounce2" style="background-color: rgb(93, 197, 150); height: 60px; width: 60px; border-radius: 100%; opacity: 0.6; position: absolute; top: 0px; left: 0px;">
+    </div><div class="v-bounce v-bounce3" style="background-color: rgb(93, 197, 150); height: 60px; width: 60px; border-radius: 100%; opacity: 0.6; position: absolute; top: 0px; left: 0px;">
+    </div></div>
+  </div><!--v-component-->
+          </li>
+          <li class="spinner-list" title="dot loader">
+            <div class="v-spinner">
+    <div class="v-dot v-dot1" style="height: 60px; width: 60px; position: relative;">
+    <div class="v-dot v-dot2" style="background-color: rgb(93, 197, 150); height: 30px; width: 30px; border-radius: 100%;">
+    </div><div class="v-dot v-dot3" style="background-color: rgb(93, 197, 150); height: 30px; width: 30px; border-radius: 100%;">
+    </div></div>
+  </div><!--v-component-->
+          </li>
+        </ul>
+      </div>
+    </div>
+    <script src="./vue-spinner_files/vue.min.js.download"></script>
+    <script src="./vue-spinner_files/vue-spinner.js.download"></script>
+    <script src="./vue-spinner_files/app.js.download"></script>
+  
+</body></html>
