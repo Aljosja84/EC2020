@@ -1,23 +1,34 @@
 <template>
     <div class="teamplayers_container">
         <div class="teamplayer_header">
-            players<button v-on:click="shuffle">Shuffle</button>
+            players
+            <div style="float: right; padding-right: 10px; ; height: 100%; line-height: 1">
+                <select name="orderPlayers" @change="orderPlayers($event)" v-model="key">
+                    <option value="default">Order players by...</option>
+                    <option value="age">Age</option>
+                    <option value="height">Height</option>
+                    <option value="weight">Weight</option>
+                    <option value="rating">Rating</option>
+                    <option value="passes">Passes</option>
+                    <option value="minutes">Minutes</option>
+                </select>
+            </div>
         </div>
         <!-- seperator -->
         <div class="separator_bar"></div>
         <!-- player photos ----------->
         <div id="midfield_div">
             <transition-group name="players_list" tag="ul">
-                <span v-for="person in playersArr" :key="person.player.id" class="players_list-item">
-                    <img :content="person.player.lastname" v-tippy="{arrow : true, arrowType : 'round', animation : 'scale', animateFill: true, followCursor: 'horizontal', theme: 'honeybee'}" :src=person.player.photo>
+                <span v-for="person in playersArrPortraits" :key="person.player.id" class="players_list-item">
+                    <img @click="scrollPlayerWin('player'+person.player.id)" :content="person.player.lastname" v-tippy="{arrow : true, arrowType : 'round', animation : 'scale', animateFill: true, followCursor: 'horizontal', theme: 'honeybee'}" :src=person.player.photo>
                 </span>
             </transition-group>
         </div>
         <!-------------------------->
         <div class="player_stats_header"><span>player statistics</span></div>
 
-        <div class="player_stats_container">
-            <div v-for="player in playersArr.slice(0,1)" class="player_container">
+        <div class="player_stats_container" id="allPlayerWindows">
+            <div v-for="player in playersArr" class="player_container" :id="'player'+player.player.id">
                 <div class="player_passport">
                     <div class="card">
                         <div class="header" id="header-blur">{{player.player.firstname}} {{player.player.lastname}}</div>
@@ -113,7 +124,7 @@
                             passes
                         </div>
                         <div style="background-color: transparent; margin-left: 10px; margin-top: 10px">
-                            <donut-test v-show="loaded" v-if="player.statistics[0].passes.total != null" v-bind:centertext="player.statistics[0].passes.total" v-bind:chart-data="playerDoughnutStatsPasses[whichChartIndex(player.player.id)]" :canvas_id="player.player.id"/>
+                            <donut-test v-show="loaded" v-if="player.statistics[0].passes.total != null" v-bind:centertext="player.statistics[0].passes.total" v-bind:chart-data="playerDoughnutStatsPasses[whichIndexPasses(player.player.id)]" :canvas_id="player.player.id"/>
                         </div>
                     </div>
                     <div class="player_stats_right_top_sub">
@@ -121,7 +132,7 @@
                             duels
                         </div>
                         <div style="background-color: transparent; margin-left: 10px; margin-top: 10px">
-                            <donut-test v-show="loaded" v-if="player.statistics[0].duels.total != null" v-bind:centertext="player.statistics[0].duels.total" v-bind:chart-data="playerDoughnutStatsPasses[whichChartIndex(player.player.id)]" :canvas_id="player.player.id+999"/>
+                            <donut-test v-show="loaded" v-if="player.statistics[0].duels.total != null" v-bind:centertext="player.statistics[0].duels.total" v-bind:chart-data="playerDoughnutStatsDuels[whichIndexDuels(player.player.id)]" :canvas_id="player.player.id+999"/>
                         </div>
                     </div>
                     <div class="player_stats_right_top_sub">
@@ -129,7 +140,7 @@
                             dribbles
                         </div>
                         <div style="background-color: transparent; margin-left: 10px; margin-top: 10px">
-                            <donut-test v-if="loaded" v-bind:centertext="player.statistics[0].dribbles.attempts" v-bind:chart-data="playerDoughnutStatsPasses[whichChartIndex(player.player.id)]" :canvas_id="player.player.id+1099"/>
+                            <donut-test v-show="loaded" v-if="player.statistics[0].dribbles.attempts != null && player.statistics[0].dribbles.attempts > 0" v-bind:centertext="player.statistics[0].dribbles.attempts" v-bind:chart-data="playerDoughnutStatsDribbles[whichIndexDribbles(player.player.id)]" :canvas_id="player.player.id+1099"/>
                         </div>
                     </div>
                     <!--
@@ -200,6 +211,7 @@
 
 <script>
     import donutTest from "./donutTest";
+
     export default {
         name: "teamplayers",
         props: ['teamid'],
@@ -207,10 +219,14 @@
 
         data() {
             return {
+                key: "default",
                 loaded: false,
                 playersArr: [],
+                playersArrPortraits: [],
                 playersAgeArr: [],
                 playerDoughnutStatsPasses: [],
+                playerDoughnutStatsDuels: [],
+                playerDoughnutStatsDribbles: [],
                 bar_per_1: 30,
                 bar_per_2: 45,
                 bar_per_3: 60
@@ -218,6 +234,13 @@
         },
 
         methods: {
+            scrollPlayerWin(e) {
+                // scroll to that offset to bring the div into view.
+                // note the -5, which is to account for the padding of the inner div
+                let y = document.getElementById(e).offsetTop-5;
+                document.getElementById('allPlayerWindows').scroll({top: y})
+            },
+
              DatetoTimestamp(strDate){
                 var datum = Date.parse(strDate);
                 return datum/1000;
@@ -254,17 +277,39 @@
                 return 100 - (this.rankedWeight(playerid)/this.playersArr.length)*100
             },
 
-            // this function returns the index of the array where playerid is found
-            whichChartIndex(playerid) {
+            // this function returns the index of the passes array where playerid is found
+            whichIndexPasses(playerid) {
                  return this.playerDoughnutStatsPasses.findIndex((item) => item.playerid === playerid);
             },
-
-            // this function will convery a string like "90 kg" into the number 90 so we can sort the players by weight
-            convertHeightString(string) {
-                 let res = string.substring(0,3);
-                 return Number(res);
+            // this function returns the index of the passes array where playerid is found
+            whichIndexDuels(playerid) {
+                return this.playerDoughnutStatsDuels.findIndex((item) => item.playerid === playerid);
             },
-
+            // this function returns the index of the passes array where playerid is found
+            whichIndexDribbles(playerid) {
+                return this.playerDoughnutStatsDribbles.findIndex((item) => item.playerid === playerid);
+            },
+            // the select dropdown will change how players are ordered and displayed on the page.
+            orderPlayers(event) {
+                let value = event.target.value;
+                switch (value) {
+                    /* physical attributes */
+                    case "age":
+                        return this.playersArrPortraits = _.orderBy(this.playersArrPortraits, 'player.birth.date', 'asc');
+                    case "height":
+                        return this.playersArrPortraits = _.orderBy(this.playersArrPortraits, 'player.height', 'desc');
+                    case "weight":
+                        return this.playersArrPortraits = _.orderBy(this.playersArrPortraits, 'player.weight', 'desc');
+                    /* statistical attributes */
+                    case "rating":
+                        return this.playersArrPortraits = _.orderBy(this.playersArrPortraits, 'statistics[0].games.rating', 'desc');
+                    case "passes":
+                        return this.playersArrPortraits = _.orderBy(this.playersArrPortraits, 'statistics[0].passes.total', 'desc');
+                    case "minutes":
+                        return this.playersArrPortraits = _.orderBy(this.playersArrPortraits, 'statistics[0].games.minutes', 'desc');
+                }
+            },
+            // external API call and set most vars
             loadPlayers(e) {
                 // get the players (including qualifiers) from a particular team (e)
                 axios.get("https://v3.football.api-sports.io/players?league=4&season=2020&team=" + e, {
@@ -274,7 +319,10 @@
                     }
                 }).then((response) => {
                     response.data.response.forEach((element) => {
+                        // this is the main array with all players data in it
                         this.playersArr.push(element);
+                        // this is the faux array, will only be used for the portraits on top of the page.
+                        this.playersArrPortraits.push(element);
                         // push the player and his birth date to the age array
                         this.playersAgeArr.push({'playerid': element.player.id, 'bdayTimestamp': this.DatetoTimestamp(element.player.birth.date)});
                         // push passes in array for the doughtnut chart
@@ -287,7 +335,83 @@
                                     {
                                         'data': [
                                             Math.floor(element.statistics[0].passes.total*(element.statistics[0].passes.accuracy/100)),
-                                            Math.floor(element.statistics[0].passes.total - element.statistics[0].passes.total*(element.statistics[0].passes.accuracy/100))
+                                            Math.ceil(element.statistics[0].passes.total - element.statistics[0].passes.total*(element.statistics[0].passes.accuracy/100))
+                                        ],
+                                        'backgroundColor': [
+                                            // green
+                                            '#68b451',
+                                            // red
+                                            '#c22d2d'
+                                        ]
+                                    },
+                                ],
+
+                            },
+                            'options': {
+                                'plugins': {
+                                    'legend': {
+                                        'display': false,
+                                    }
+                                },
+                                'layout': {
+                                    'padding': 10
+                                },
+                                'cutout': '50%',
+                                'hoverOffset': 10,
+                                'responsive': true,
+                                'maintainAspectRatio': true,
+                                'borderWidth': 0
+                            }
+                        });
+                        // push duels in array for a doughnut chart
+                        this.playerDoughnutStatsDuels.push({
+                            'playerid': element.player.id,
+                            'type': 'doughnut',
+                            'data': {
+                                'labels': ['won', 'lost'],
+                                'datasets': [
+                                    {
+                                        'data': [
+                                            element.statistics[0].duels.won,
+                                            element.statistics[0].duels.total - element.statistics[0].duels.won
+                                        ],
+                                        'backgroundColor': [
+                                            // green
+                                            '#68b451',
+                                            // red
+                                            '#c22d2d'
+                                        ]
+                                    },
+                                ],
+
+                            },
+                            'options': {
+                                'plugins': {
+                                    'legend': {
+                                        'display': false,
+                                    }
+                                },
+                                'layout': {
+                                    'padding': 10
+                                },
+                                'cutout': '50%',
+                                'hoverOffset': 10,
+                                'responsive': true,
+                                'maintainAspectRatio': true,
+                                'borderWidth': 0
+                            }
+                        });
+                        // push duels in array for a doughnut chart
+                        this.playerDoughnutStatsDribbles.push({
+                            'playerid': element.player.id,
+                            'type': 'doughnut',
+                            'data': {
+                                'labels': ['success', 'fail'],
+                                'datasets': [
+                                    {
+                                        'data': [
+                                            element.statistics[0].dribbles.success,
+                                            element.statistics[0].dribbles.attempts - element.statistics[0].dribbles.success
                                         ],
                                         'backgroundColor': [
                                             // green
@@ -325,7 +449,10 @@
 
             shuffle() {
                  // sort the players, oldest to youngest
-                 this.playersArr = _.shuffle(this.playersArr);
+                 //this.playersArr = _.shuffle(this.playersArr);
+                this.playersArr.forEach((element) => {
+                    console.log( document.getElementById('player'+element.player.id).offsetTop);
+                })
                  //console.log(this.rankedHeight(537));
                  //this.playersArr = _.orderBy(this.playersArr, 'player.height', 'asc');
                 //console.log(this.ageSortedArr.findIndex(i => i.playerid === 26240))
@@ -408,9 +535,11 @@
         display: inline-block;
         padding: 5px;
         margin-right: 10px;
+        cursor: pointer;
     }
 
     .player_stats_container {
+        position: relative;
         z-index: 14;
         width: 100%;
         height: 375px;
@@ -419,7 +548,8 @@
         background: linear-gradient(180deg, rgba(255,255,255,1) 16%, rgba(255,210,164,1) 100%);
         filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffff",endColorstr="#ffd2a4",GradientType=1);
         padding: 5px 0 0 5px;
-        overflow: hidden;
+        overflow-y: hidden;
+        scroll-behavior: auto;
     }
 
     .player_passport {
@@ -486,7 +616,7 @@
         -webkit-border-radius: 50%;
         -moz-border-radius: 50%;
         border-radius: 50%;
-        border: 5px solid rgba(0,0,30,0.8);
+        border: 3px solid rgba(0,0,30,0.7);
         box-shadow: rgba(0, 0, 0, 0.45) 0 25px 20px -20px;
     }
 
@@ -556,6 +686,7 @@
     }
 
     .player_container {
+        height: 375px;
     }
 
     .player_stats_right_top_sub {
@@ -589,5 +720,50 @@
         float: left;
         width: 79px;
         height: 100%
+    }
+
+    :root {
+        --radius: 2px;
+        --baseFg: white;
+        --baseBg: #919191;
+        --accentFg: #ff7800;
+        --accentBg: #919191;
+    }
+
+    select {
+        font: 400 12px/1.3 "Roboto";
+        -webkit-appearance: none;
+        appearance: none;
+        color: var(--baseFg);
+        border: 1px solid var(--baseFg);
+        line-height: 1;
+        outline: 0;
+        padding: 0.65em 2.5em 0.55em 0.75em;
+        border-radius: var(--radius);
+        background-color: var(--baseBg);
+        background-image: linear-gradient(var(--baseFg), var(--baseFg)),
+        linear-gradient(-135deg, transparent 50%, var(--accentBg) 50%),
+        linear-gradient(-225deg, transparent 50%, var(--accentBg) 50%),
+        linear-gradient(var(--accentBg) 42%, var(--accentFg) 42%);
+        background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;
+        background-size: 1px 100%, 20px 22px, 20px 22px, 20px 100%;
+        background-position: right 20px center, right bottom, right bottom, right bottom;
+    }
+
+    select:hover {
+        background-image: linear-gradient(var(--accentFg), var(--accentFg)),
+        linear-gradient(-135deg, transparent 50%, var(--accentFg) 50%),
+        linear-gradient(-225deg, transparent 50%, var(--accentFg) 50%),
+        linear-gradient(var(--accentFg) 42%, var(--accentBg) 42%);
+    }
+
+    select:active {
+        background-image: linear-gradient(var(--accentFg), var(--accentFg)),
+        linear-gradient(-135deg, transparent 50%, var(--accentFg) 50%),
+        linear-gradient(-225deg, transparent 50%, var(--accentFg) 50%),
+        linear-gradient(var(--accentFg) 42%, var(--accentBg) 42%);
+        color: var(--accentBg);
+        border-color: var(--accentFg);
+        background-color: var(--accentFg);
     }
 </style>
