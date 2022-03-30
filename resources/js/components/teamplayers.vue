@@ -20,8 +20,8 @@
         <!-- player photos ----------->
         <div id="midfield_div">
             <transition-group name="players_list" tag="ul">
-                <span v-for="person in playersArrPortraits" :key="person.player.id" class="players_list-item">
-                    <img @click="scrollPlayerWin('player'+person.player.id)" :content="person.player.lastname" v-tippy="{arrow : true, arrowType : 'round', animation : 'scale', animateFill: true, followCursor: 'horizontal', theme: 'honeybee'}" :src=person.player.photo>
+                <span v-for="(person, index, key) in playersArrPortraits" :key="person.player.id" class="players_list-item">
+                    <img :class="{'active': activeIndex === person.player.id}" @click="setActive(person.player.id);scrollPlayerWin('player'+person.player.id)" :content="person.player.lastname" v-tippy="{arrow : true, arrowType : 'round', animation : 'scale', animateFill: true, followCursor: 'horizontal', theme: 'honeybee'}" :src=person.player.photo>
                 </span>
             </transition-group>
         </div>
@@ -220,6 +220,7 @@
 
         data() {
             return {
+                activeIndex: undefined,
                 loading: true,
                 key: "default",
                 loaded: false,
@@ -236,6 +237,8 @@
         },
 
         methods: {
+            setActive(index) { this.activeIndex = index },
+
             scrollPlayerWin(e) {
                 // scroll to that offset to bring the div into view.
                 // note the -5, which is to account for the padding of the inner div
@@ -443,8 +446,14 @@
                         });
 
                     });
+                    /*
+                    *
+                    * All data has been loaded
+                    *
+                    */
+                    this.activeIndex = this.playersArrPortraits[0].player.id;
                     this.loaded = true;
-                    //this.loading = false;
+                    this.loading = false;
                 }).catch((error) => {
                     console.log(error);
                 });
@@ -464,7 +473,8 @@
         },
 
         created() {
-            console.log(this.loadPlayers(this.teamid));
+            this.loadPlayers(this.teamid);
+            //console.log(this.loadPlayers(this.teamid));
         },
 
     }
@@ -477,18 +487,18 @@
         height: 100%;
         z-index: 999;
         opacity: 100%;
-        background-color: #ffd2a7;
+        background-color: whitesmoke;
     }
 
     #pulseloader {
         z-index: 1000;
-        background-image: url("images/finland_api.png");
+        background-image: url("images/pulseloader_2.gif");
         width: 111px;
         height: 111px;
         position: absolute;
-        top: 40%;
-        left: 50%;
-    },
+        top: 39%;
+        left: 45%;
+    }
 
     .tippy-tooltip.honeybee-theme {
         background-color: #313131;
@@ -541,10 +551,15 @@
     }
 
     .players_list-item img {
+        transition: all .4s;
         width: 75px;
         height: 75px;
         border-radius: 100%;
         box-shadow: rgba(17, 17, 26, 0.35) 0 4px 16px, rgba(17, 17, 26, 0.05) 0 8px 32px;
+    }
+
+    .active {
+        border: 4px solid #ff7800;
     }
 
     #midfield_div {
@@ -754,7 +769,7 @@
     }
 
     select {
-        font: 400 12px/1.3 "Roboto";
+        font: 400 14px/1.3 "Roboto Light";
         -webkit-appearance: none;
         appearance: none;
         color: var(--baseFg);

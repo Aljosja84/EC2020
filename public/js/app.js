@@ -3592,6 +3592,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      activeIndex: undefined,
       loading: true,
       key: "default",
       loaded: false,
@@ -3607,6 +3608,9 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
+    setActive: function setActive(index) {
+      this.activeIndex = index;
+    },
     scrollPlayerWin: function scrollPlayerWin(e) {
       // scroll to that offset to bring the div into view.
       // note the -5, which is to account for the padding of the inner div
@@ -3809,7 +3813,15 @@ __webpack_require__.r(__webpack_exports__);
             }
           });
         });
-        _this.loaded = true; //this.loading = false;
+        /*
+        *
+        * All data has been loaded
+        *
+        */
+
+        _this.activeIndex = _this.playersArrPortraits[0].player.id;
+        _this.loaded = true;
+        _this.loading = false;
       })["catch"](function (error) {
         console.log(error);
       });
@@ -3826,7 +3838,7 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   created: function created() {
-    console.log(this.loadPlayers(this.teamid));
+    this.loadPlayers(this.teamid); //console.log(this.loadPlayers(this.teamid));
   }
 });
 
@@ -21920,7 +21932,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.bar_container[data-v-c5ce9d36] {\n    padding-bottom: 10px;\n    background-color: white;\n}\n.stats_num_left[data-v-c5ce9d36] {\n    float:left;\n    color: #a3a7ab;\n    font-family: 'Roboto', sans-serif;\n    font-size: 13px;\n    width: 35px;\n    text-align: center;\n    padding: 0 15px 0 0;\n    margin-left: 10px\n}\n.stats_num_right[data-v-c5ce9d36] {\n    float: right;\n    color: #a3a7ab;\n    font-family: 'Roboto', sans-serif;\n    font-size: 13px;\n    width: 35px;\n    text-align: center;\n    padding: 0 0 0 15px;\n    margin-right: 10px;\n}\n.stats_title[data-v-c5ce9d36] {\n    font-family: 'Oswald', sans-serif;\n    font-size: 13px;\n    text-align: center;\n    margin: 10px 0 2px 0;\n}\n#title[data-v-c5ce9d36] {\n    font-family: 'Oswald', sans-serif;\n    font-size: 24px;\n    text-transform: uppercase;\n    text-align: center;\n    color: #515151;\n    border-bottom: 1px solid #CCC;\n}\n.stats_container[data-v-c5ce9d36] {\n    width: 1100px;\n    height: 475px;\n    background-color: #ffffff;\n}\n.progress_left[data-v-c5ce9d36] {\n    float: left;\n    width: 505px;\n    position: relative;\n    -webkit-animation: all 0.4s ease;\n            animation: all 0.4s ease;\n    background-color: #ebf0f6;\n    margin-top: 5px;\n}\n.bar_left[data-v-c5ce9d36] {\n    border-radius: 3px 0 0 3px;\n    float:right;\n    height: 6px;\n    background-color: #00acff;\n    width: 30%;\n    transition: all 0.5s ease-out;\n}\n.progress_right[data-v-c5ce9d36] {\n     float: right;\n     width: 505px;\n     position: relative;\n     -webkit-animation: all 0.4s ease;\n             animation: all 0.4s ease;\n     background-color: #ebf0f6;\n     margin-top: 5px;\n}\n.bar_right[data-v-c5ce9d36] {\n    border-radius: 0 3px 3px 0;\n    float:left;\n    height: 6px;\n    background-color: #8bed00;\n    width: 30%;\n    transition: all 0.5s ease-out;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.bar_container[data-v-c5ce9d36] {\n    padding-bottom: 10px;\n    background-color: white;\n}\n.stats_num_left[data-v-c5ce9d36] {\n    float:left;\n    color: #a3a7ab;\n    font-family: 'Roboto', sans-serif;\n    font-size: 13px;\n    width: 35px;\n    text-align: center;\n    padding: 0 15px 0 0;\n    margin-left: 10px\n}\n.stats_num_right[data-v-c5ce9d36] {\n    float: right;\n    color: #a3a7ab;\n    font-family: 'Roboto', sans-serif;\n    font-size: 13px;\n    width: 35px;\n    text-align: center;\n    padding: 0 0 0 15px;\n    margin-right: 10px;\n}\n.stats_title[data-v-c5ce9d36] {\n    font-family: 'Oswald', sans-serif;\n    font-size: 13px;\n    text-align: center;\n    margin: 10px 0 2px 0;\n}\n#title[data-v-c5ce9d36] {\n    font-family: 'Oswald', sans-serif;\n    font-size: 24px;\n    text-transform: uppercase;\n    text-align: center;\n    color: #515151;\n    border-bottom: 1px solid #CCC;\n}\n.stats_container[data-v-c5ce9d36] {\n    width: 1100px;\n    height: 475px;\n    background-color: #ffffff;\n}\n.progress_left[data-v-c5ce9d36] {\n    float: left;\n    width: 505px;\n    position: relative;\n    -webkit-animation: all 0.4s ease;\n            animation: all 0.4s ease;\n    background-color: #ebf0f6;\n    margin-top: 5px;\n    border: none;\n}\n.bar_left[data-v-c5ce9d36] {\n    border-radius: 3px 0 0 3px;\n    float:right;\n    height: 6px;\n    background-color: #00acff;\n    width: 30%;\n    transition: all 0.5s ease-out;\n}\n.progress_right[data-v-c5ce9d36] {\n     float: right;\n     width: 505px;\n     position: relative;\n     -webkit-animation: all 0.4s ease;\n             animation: all 0.4s ease;\n     background-color: #ebf0f6;\n     margin-top: 5px;\n}\n.bar_right[data-v-c5ce9d36] {\n    border-radius: 0 3px 3px 0;\n    float:left;\n    height: 6px;\n    background-color: #8bed00;\n    width: 30%;\n    transition: all 0.5s ease-out;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -21966,7 +21978,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/getUrl.js */ "./node_modules/css-loader/dist/runtime/getUrl.js");
 /* harmony import */ var _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _images_finland_api_png__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./images/finland_api.png */ "./resources/js/components/images/finland_api.png");
+/* harmony import */ var _images_pulseloader_2_gif__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./images/pulseloader_2.gif */ "./resources/js/components/images/pulseloader_2.gif");
 /* harmony import */ var _images_light_wool_png__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./images/light_wool.png */ "./resources/js/components/images/light_wool.png");
 // Imports
 
@@ -21974,10 +21986,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
-var ___CSS_LOADER_URL_REPLACEMENT_0___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default()(_images_finland_api_png__WEBPACK_IMPORTED_MODULE_2__["default"]);
+var ___CSS_LOADER_URL_REPLACEMENT_0___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default()(_images_pulseloader_2_gif__WEBPACK_IMPORTED_MODULE_2__["default"]);
 var ___CSS_LOADER_URL_REPLACEMENT_1___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default()(_images_light_wool_png__WEBPACK_IMPORTED_MODULE_3__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.loading_div {\n    width: 100%;\n    position: absolute;\n    height: 100%;\n    z-index: 999;\n    opacity: 100%;\n    background-color: #ffd2a7;\n}\n#pulseloader {\n    z-index: 1000;\n    background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ");\n    width: 111px;\n    height: 111px;\n    position: absolute;\n    top: 40%;\n    left: 50%;\n},\n\n.tippy-tooltip.honeybee-theme {\n    background-color: #313131;\n    color: #ff7800;\n}\n.tippy-tooltip.honeybee-theme .tippy-roundarrow{\n    fill: #313131;\n}\n.teamplayers_container {\n    position: relative;\n    margin-left: -9px;\n    background-color: white;\n    width: 975px;\n    height: 654px;\n    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;\n}\n.teamplayer_header {\n    width: 100%;\n    font-family: 'Oswald', sans-serif;\n    font-size: 24px;\n    color: #515151;\n    text-transform: uppercase;\n    text-align: center;\n    background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_1___ + ");\n    padding: 10px 0 8px 15px;\n}\n.player_stats_header {\n    position: relative;\n    z-index: 15;\n    width: 100%;\n    height: 35px;\n    font-family: 'Oswald', sans-serif;\n    font-size: 24px;\n    color: #515151;\n    text-transform: uppercase;\n    text-align: center;\n    line-height: 30px;\n    background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_1___ + ");\n    padding: 0 0 10px 15px;\n    border-top: 1px solid #dcdcdc;\n    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;\n}\n.separator_bar {\n    height: 2px;\n    background-image: linear-gradient(to right, transparent, #b5b5b5, transparent);\n}\n.players_list-item img {\n    width: 75px;\n    height: 75px;\n    border-radius: 100%;\n    box-shadow: rgba(17, 17, 26, 0.35) 0 4px 16px, rgba(17, 17, 26, 0.05) 0 8px 32px;\n}\n#midfield_div {\n    height: 188px;\n    padding: 10px 5px 0 14px;\n    width: 100%;\n}\n.players_list-item {\n    transition: all .5s;\n    display: inline-block;\n    padding: 5px;\n    margin-right: 10px;\n    cursor: pointer;\n}\n.player_stats_container {\n    position: relative;\n    z-index: 14;\n    width: 100%;\n    height: 375px;\n    background: linear-gradient(180deg, rgba(255,255,255,1) 16%, rgba(255,210,164,1) 100%);\n    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=\"#ffffff\",endColorstr=\"#ffd2a4\",GradientType=1);\n    padding: 5px 0 0 5px;\n    overflow-y: hidden;\n    scroll-behavior: auto;\n}\n.player_passport {\n    width: 255px;\n    height: 370px;\n    /*border: solid 1px #ff7800;*/\n    float: left;\n    margin-right: 5px;\n}\n.player_stats_left {\n    width: 218px;\n    height: 370px;\n    border: solid 1px #ff7800;\n    float: left;\n    margin-right: 5px;\n}\n.player_stats_right_top {\n    width: 480px;\n    height: 218px;\n    float: left;\n    margin-bottom: 5px;\n}\n.player_stats_right_bottom {\n    width: 480px;\n    height: 147px;\n    float: left;\n}\n.card {\n    float: left;\n    overflow: hidden;\n    position: relative;\n    width: 100%;\n    height: 100%;\n    border: 1px solid #ff7800;\n    border-radius: 5px;\n    text-align: center;\n}\n.card .header {\n    font-family: 'Oswald', sans-serif;\n    color: #515151;\n    font-size: 18px;\n    line-height: 18px;\n    position: absolute;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 55px;\n    z-index: 1;\n    background: #e58d36;\n    padding-top: 4px;\n}\n.avatar {\n    position: relative;\n    margin-top: 25px;\n    z-index: 100;\n}\n.avatar img {\n    width: 75px;\n    height: 75px;\n    border-radius: 50%;\n    border: 3px solid rgba(0,0,30,0.7);\n    box-shadow: rgba(0, 0, 0, 0.45) 0 25px 20px -20px;\n}\n.content {\n    padding : 0;\n    font-family: \"Roboto\", sans-serif;\n    font-size: 12px;\n    color: #515151;\n}\n.content td {\n    text-align: left;\n}\n.content_header {\n    width: 100%;\n    background-color: transparent;\n    font-family: 'Oswald', sans-serif;\n    font-size: 24px;\n    color: #616161;\n    line-height: 21px;\n    margin-top: 10px;\n}\n.progress_left {\n    float: left;\n    width: 100%;\n    position: relative;\n    -webkit-animation: all 0.4s ease;\n            animation: all 0.4s ease;\n    margin-top: 5px;\n    border: solid 1px #515151;\n}\n.bar_left {\n    border-radius: 0 1px 1px 0;\n    float:left;\n    height: 9px;\n    background-color: #ff7800;\n    width: 30%;\n    transition: all 0.5s ease-out;\n}\n.left_stats_header {\n    padding-top: 2px;\n    background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_1___ + ");\n    height: 30px;\n    width: 100%;\n    text-transform: uppercase;\n    font-family: 'Oswald', sans-serif;\n    font-size: 24px;\n    color: #616161;\n    text-align: center;\n    line-height: 24px;\n}\n.left_stats_data {\n    margin-top: 8px;\n    margin-bottom: 6px;\n    height: 30px;\n    width: 100%;\n    text-transform: uppercase;\n    font-family: 'Oswald', sans-serif;\n    font-size: 26px;\n    color: #ff7800;\n    text-align: center;\n    line-height: 26px;\n}\n.player_container {\n    height: 375px;\n}\n.player_stats_right_top_sub {\n    width: 33%;\n    float: left;\n    height: 100%;\n}\n.player_stats_right_bottom_header {\n    padding-top: 2px;\n    background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_1___ + ");\n    height: 30px;\n    width: 100%;\n    text-transform: lowercase;\n    font-family: 'Oswald', sans-serif;\n    font-size: 24px;\n    color: #616161;\n    text-align: center;\n    line-height: 24px;\n}\n.player_stats_right_bottom_data {\n    font-family: 'Oswald', sans-serif;\n    font-size: 50px;\n    color: #ff7800;\n    text-align: center;\n    margin-top: 20px;\n}\n.player_stats_right_bottom_container {\n    float: left;\n    width: 79px;\n    height: 100%\n}\n:root {\n    --radius: 2px;\n    --baseFg: white;\n    --baseBg: #919191;\n    --accentFg: #ff7800;\n    --accentBg: #919191;\n}\nselect {\n    font: 400 12px/1.3 \"Roboto\";\n    -webkit-appearance: none;\n    -moz-appearance: none;\n         appearance: none;\n    color: var(--baseFg);\n    border: 1px solid var(--baseFg);\n    line-height: 1;\n    outline: 0;\n    padding: 0.65em 2.5em 0.55em 0.75em;\n    border-radius: var(--radius);\n    background-color: var(--baseBg);\n    background-image: linear-gradient(var(--baseFg), var(--baseFg)),\n    linear-gradient(-135deg, transparent 50%, var(--accentBg) 50%),\n    linear-gradient(-225deg, transparent 50%, var(--accentBg) 50%),\n    linear-gradient(var(--accentBg) 42%, var(--accentFg) 42%);\n    background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;\n    background-size: 1px 100%, 20px 22px, 20px 22px, 20px 100%;\n    background-position: right 20px center, right bottom, right bottom, right bottom;\n}\nselect:hover {\n    background-image: linear-gradient(var(--accentFg), var(--accentFg)),\n    linear-gradient(-135deg, transparent 50%, var(--accentFg) 50%),\n    linear-gradient(-225deg, transparent 50%, var(--accentFg) 50%),\n    linear-gradient(var(--accentFg) 42%, var(--accentBg) 42%);\n}\nselect:active {\n    background-image: linear-gradient(var(--accentFg), var(--accentFg)),\n    linear-gradient(-135deg, transparent 50%, var(--accentFg) 50%),\n    linear-gradient(-225deg, transparent 50%, var(--accentFg) 50%),\n    linear-gradient(var(--accentFg) 42%, var(--accentBg) 42%);\n    color: var(--accentBg);\n    border-color: var(--accentFg);\n    background-color: var(--accentFg);\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.loading_div {\n    width: 100%;\n    position: absolute;\n    height: 100%;\n    z-index: 999;\n    opacity: 100%;\n    background-color: whitesmoke;\n}\n#pulseloader {\n    z-index: 1000;\n    background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ");\n    width: 111px;\n    height: 111px;\n    position: absolute;\n    top: 39%;\n    left: 45%;\n}\n.tippy-tooltip.honeybee-theme {\n    background-color: #313131;\n    color: #ff7800;\n}\n.tippy-tooltip.honeybee-theme .tippy-roundarrow{\n    fill: #313131;\n}\n.teamplayers_container {\n    position: relative;\n    margin-left: -9px;\n    background-color: white;\n    width: 975px;\n    height: 654px;\n    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;\n}\n.teamplayer_header {\n    width: 100%;\n    font-family: 'Oswald', sans-serif;\n    font-size: 24px;\n    color: #515151;\n    text-transform: uppercase;\n    text-align: center;\n    background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_1___ + ");\n    padding: 10px 0 8px 15px;\n}\n.player_stats_header {\n    position: relative;\n    z-index: 15;\n    width: 100%;\n    height: 35px;\n    font-family: 'Oswald', sans-serif;\n    font-size: 24px;\n    color: #515151;\n    text-transform: uppercase;\n    text-align: center;\n    line-height: 30px;\n    background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_1___ + ");\n    padding: 0 0 10px 15px;\n    border-top: 1px solid #dcdcdc;\n    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;\n}\n.separator_bar {\n    height: 2px;\n    background-image: linear-gradient(to right, transparent, #b5b5b5, transparent);\n}\n.players_list-item img {\n    transition: all .4s;\n    width: 75px;\n    height: 75px;\n    border-radius: 100%;\n    box-shadow: rgba(17, 17, 26, 0.35) 0 4px 16px, rgba(17, 17, 26, 0.05) 0 8px 32px;\n}\n.active {\n    border: 4px solid #ff7800;\n}\n#midfield_div {\n    height: 188px;\n    padding: 10px 5px 0 14px;\n    width: 100%;\n}\n.players_list-item {\n    transition: all .5s;\n    display: inline-block;\n    padding: 5px;\n    margin-right: 10px;\n    cursor: pointer;\n}\n.player_stats_container {\n    position: relative;\n    z-index: 14;\n    width: 100%;\n    height: 375px;\n    background: linear-gradient(180deg, rgba(255,255,255,1) 16%, rgba(255,210,164,1) 100%);\n    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=\"#ffffff\",endColorstr=\"#ffd2a4\",GradientType=1);\n    padding: 5px 0 0 5px;\n    overflow-y: hidden;\n    scroll-behavior: auto;\n}\n.player_passport {\n    width: 255px;\n    height: 370px;\n    /*border: solid 1px #ff7800;*/\n    float: left;\n    margin-right: 5px;\n}\n.player_stats_left {\n    width: 218px;\n    height: 370px;\n    border: solid 1px #ff7800;\n    float: left;\n    margin-right: 5px;\n}\n.player_stats_right_top {\n    width: 480px;\n    height: 218px;\n    float: left;\n    margin-bottom: 5px;\n}\n.player_stats_right_bottom {\n    width: 480px;\n    height: 147px;\n    float: left;\n}\n.card {\n    float: left;\n    overflow: hidden;\n    position: relative;\n    width: 100%;\n    height: 100%;\n    border: 1px solid #ff7800;\n    border-radius: 5px;\n    text-align: center;\n}\n.card .header {\n    font-family: 'Oswald', sans-serif;\n    color: #515151;\n    font-size: 18px;\n    line-height: 18px;\n    position: absolute;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 55px;\n    z-index: 1;\n    background: #e58d36;\n    padding-top: 4px;\n}\n.avatar {\n    position: relative;\n    margin-top: 25px;\n    z-index: 100;\n}\n.avatar img {\n    width: 75px;\n    height: 75px;\n    border-radius: 50%;\n    border: 3px solid rgba(0,0,30,0.7);\n    box-shadow: rgba(0, 0, 0, 0.45) 0 25px 20px -20px;\n}\n.content {\n    padding : 0;\n    font-family: \"Roboto\", sans-serif;\n    font-size: 12px;\n    color: #515151;\n}\n.content td {\n    text-align: left;\n}\n.content_header {\n    width: 100%;\n    background-color: transparent;\n    font-family: 'Oswald', sans-serif;\n    font-size: 24px;\n    color: #616161;\n    line-height: 21px;\n    margin-top: 10px;\n}\n.progress_left {\n    float: left;\n    width: 100%;\n    position: relative;\n    -webkit-animation: all 0.4s ease;\n            animation: all 0.4s ease;\n    margin-top: 5px;\n    border: solid 1px #515151;\n}\n.bar_left {\n    border-radius: 0 1px 1px 0;\n    float:left;\n    height: 9px;\n    background-color: #ff7800;\n    width: 30%;\n    transition: all 0.5s ease-out;\n}\n.left_stats_header {\n    padding-top: 2px;\n    background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_1___ + ");\n    height: 30px;\n    width: 100%;\n    text-transform: uppercase;\n    font-family: 'Oswald', sans-serif;\n    font-size: 24px;\n    color: #616161;\n    text-align: center;\n    line-height: 24px;\n}\n.left_stats_data {\n    margin-top: 8px;\n    margin-bottom: 6px;\n    height: 30px;\n    width: 100%;\n    text-transform: uppercase;\n    font-family: 'Oswald', sans-serif;\n    font-size: 26px;\n    color: #ff7800;\n    text-align: center;\n    line-height: 26px;\n}\n.player_container {\n    height: 375px;\n}\n.player_stats_right_top_sub {\n    width: 33%;\n    float: left;\n    height: 100%;\n}\n.player_stats_right_bottom_header {\n    padding-top: 2px;\n    background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_1___ + ");\n    height: 30px;\n    width: 100%;\n    text-transform: lowercase;\n    font-family: 'Oswald', sans-serif;\n    font-size: 24px;\n    color: #616161;\n    text-align: center;\n    line-height: 24px;\n}\n.player_stats_right_bottom_data {\n    font-family: 'Oswald', sans-serif;\n    font-size: 50px;\n    color: #ff7800;\n    text-align: center;\n    margin-top: 20px;\n}\n.player_stats_right_bottom_container {\n    float: left;\n    width: 79px;\n    height: 100%\n}\n:root {\n    --radius: 2px;\n    --baseFg: white;\n    --baseBg: #919191;\n    --accentFg: #ff7800;\n    --accentBg: #919191;\n}\nselect {\n    font: 400 14px/1.3 \"Roboto Light\";\n    -webkit-appearance: none;\n    -moz-appearance: none;\n         appearance: none;\n    color: var(--baseFg);\n    border: 1px solid var(--baseFg);\n    line-height: 1;\n    outline: 0;\n    padding: 0.65em 2.5em 0.55em 0.75em;\n    border-radius: var(--radius);\n    background-color: var(--baseBg);\n    background-image: linear-gradient(var(--baseFg), var(--baseFg)),\n    linear-gradient(-135deg, transparent 50%, var(--accentBg) 50%),\n    linear-gradient(-225deg, transparent 50%, var(--accentBg) 50%),\n    linear-gradient(var(--accentBg) 42%, var(--accentFg) 42%);\n    background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;\n    background-size: 1px 100%, 20px 22px, 20px 22px, 20px 100%;\n    background-position: right 20px center, right bottom, right bottom, right bottom;\n}\nselect:hover {\n    background-image: linear-gradient(var(--accentFg), var(--accentFg)),\n    linear-gradient(-135deg, transparent 50%, var(--accentFg) 50%),\n    linear-gradient(-225deg, transparent 50%, var(--accentFg) 50%),\n    linear-gradient(var(--accentFg) 42%, var(--accentBg) 42%);\n}\nselect:active {\n    background-image: linear-gradient(var(--accentFg), var(--accentFg)),\n    linear-gradient(-135deg, transparent 50%, var(--accentFg) 50%),\n    linear-gradient(-225deg, transparent 50%, var(--accentFg) 50%),\n    linear-gradient(var(--accentFg) 42%, var(--accentBg) 42%);\n    color: var(--accentBg);\n    border-color: var(--accentFg);\n    background-color: var(--accentFg);\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -22158,21 +22170,6 @@ module.exports = function (url, options) {
 
 /***/ }),
 
-/***/ "./resources/js/components/images/finland_api.png":
-/*!********************************************************!*\
-  !*** ./resources/js/components/images/finland_api.png ***!
-  \********************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/finland_api.png?eaa7b63d45965507dc7b95841e8ef012");
-
-/***/ }),
-
 /***/ "./resources/js/components/images/light_wool.png":
 /*!*******************************************************!*\
   !*** ./resources/js/components/images/light_wool.png ***!
@@ -22185,6 +22182,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/light_wool.png?35114032db4e9898cd936606c0ce3726");
+
+/***/ }),
+
+/***/ "./resources/js/components/images/pulseloader_2.gif":
+/*!**********************************************************!*\
+  !*** ./resources/js/components/images/pulseloader_2.gif ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/pulseloader_2.gif?181c1228d1224041e0dccc2236d69df3");
 
 /***/ }),
 
@@ -56177,7 +56189,7 @@ var render = function () {
         _c(
           "transition-group",
           { attrs: { name: "players_list", tag: "ul" } },
-          _vm._l(_vm.playersArrPortraits, function (person) {
+          _vm._l(_vm.playersArrPortraits, function (person, index, key) {
             return _c(
               "span",
               { key: person.player.id, staticClass: "players_list-item" },
@@ -56199,13 +56211,15 @@ var render = function () {
                         "{arrow : true, arrowType : 'round', animation : 'scale', animateFill: true, followCursor: 'horizontal', theme: 'honeybee'}",
                     },
                   ],
+                  class: { active: _vm.activeIndex === person.player.id },
                   attrs: {
                     content: person.player.lastname,
                     src: person.player.photo,
                   },
                   on: {
                     click: function ($event) {
-                      return _vm.scrollPlayerWin("player" + person.player.id)
+                      _vm.setActive(person.player.id)
+                      _vm.scrollPlayerWin("player" + person.player.id)
                     },
                   },
                 }),

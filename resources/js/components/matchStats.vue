@@ -316,6 +316,7 @@
         animation: all 0.4s ease;
         background-color: #ebf0f6;
         margin-top: 5px;
+        border: none;
     }
 
     .bar_left {
