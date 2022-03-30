@@ -1,5 +1,6 @@
 <template>
     <div class="teamplayers_container">
+        <div v-show="loading" class="loading_div"><div id="pulseloader"/></div>
         <div class="teamplayer_header">
             players
             <div style="float: right; padding-right: 10px; ; height: 100%; line-height: 1">
@@ -219,6 +220,7 @@
 
         data() {
             return {
+                loading: true,
                 key: "default",
                 loaded: false,
                 playersArr: [],
@@ -442,6 +444,7 @@
 
                     });
                     this.loaded = true;
+                    //this.loading = false;
                 }).catch((error) => {
                     console.log(error);
                 });
@@ -468,6 +471,25 @@
 </script>
 
 <style>
+    .loading_div {
+        width: 100%;
+        position: absolute;
+        height: 100%;
+        z-index: 999;
+        opacity: 100%;
+        background-color: #ffd2a7;
+    }
+
+    #pulseloader {
+        z-index: 1000;
+        background-image: url("images/finland_api.png");
+        width: 111px;
+        height: 111px;
+        position: absolute;
+        top: 40%;
+        left: 50%;
+    },
+
     .tippy-tooltip.honeybee-theme {
         background-color: #313131;
         color: #ff7800;
@@ -475,6 +497,7 @@
     .tippy-tooltip.honeybee-theme .tippy-roundarrow{
         fill: #313131;
     }
+
     .teamplayers_container {
         position: relative;
         margin-left: -9px;
