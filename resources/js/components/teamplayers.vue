@@ -225,6 +225,7 @@
                 key: "default",
                 loaded: false,
                 playersArr: [],
+                playerImages: [],
                 playersArrPortraits: [],
                 playersAgeArr: [],
                 playerDoughnutStatsPasses: [],
@@ -314,6 +315,27 @@
                         return this.playersArrPortraits = _.orderBy(this.playersArrPortraits, 'statistics[0].games.minutes', 'desc');
                 }
             },
+            /*
+            *
+            * Here we'll check for the images to be done loading and remove the loading screen
+            *
+            */
+            imageLoadedCheck() {
+                let imageLoaded = 0;
+                for (const imageSrc of this.playerImages) {
+                    const img = new Image();
+                    img.src = imageSrc;
+
+                    img.onload = () => {
+                        imageLoaded++;
+
+                        if(imageLoaded === this.playerImages.length) {
+                            console.log("all player portraits have loaded");
+                            this.loading = false;
+                        }
+                    }
+                }
+            },
             // external API call and set most vars
             loadPlayers(e) {
                 // get the players (including qualifiers) from a particular team (e)
@@ -326,6 +348,13 @@
                     response.data.response.forEach((element) => {
                         // this is the main array with all players data in it
                         this.playersArr.push(element);
+                        /*
+                        *
+                        * Put all images in an array to preload, and only if they're all loaded
+                        * remove the loading screen together with a check if the charts have loaded
+                        *
+                        */
+                        this.playerImages.push(element.player.photo);
                         // this is the faux array, will only be used for the portraits on top of the page.
                         this.playersArrPortraits.push(element);
                         // push the player and his birth date to the age array
@@ -448,33 +477,21 @@
                     });
                     /*
                     *
-                    * All data has been loaded
+                    * All data has been loaded and imageload check will be initiated
                     *
                     */
                     this.activeIndex = this.playersArrPortraits[0].player.id;
                     this.loaded = true;
-                    this.loading = false;
+                    this.imageLoadedCheck();
+
                 }).catch((error) => {
                     console.log(error);
                 });
             },
-
-            shuffle() {
-                 // sort the players, oldest to youngest
-                 //this.playersArr = _.shuffle(this.playersArr);
-                this.playersArr.forEach((element) => {
-                    console.log( document.getElementById('player'+element.player.id).offsetTop);
-                })
-                 //console.log(this.rankedHeight(537));
-                 //this.playersArr = _.orderBy(this.playersArr, 'player.height', 'asc');
-                //console.log(this.ageSortedArr.findIndex(i => i.playerid === 26240))
-                //console.log(_.orderBy(this.playersArr, 'player.height', 'asc').findIndex((item) => item.player.id === 537));
-            }
         },
 
         created() {
-            this.loadPlayers(this.teamid);
-            //console.log(this.loadPlayers(this.teamid));
+            //this.loadPlayers(this.teamid);
         },
 
     }
@@ -492,9 +509,9 @@
 
     #pulseloader {
         z-index: 1000;
-        background-image: url("images/pulseloader_2.gif");
-        width: 111px;
-        height: 111px;
+        background-image: url("images/pulseloader_3.gif");
+        width: 84px;
+        height: 84px;
         position: absolute;
         top: 39%;
         left: 45%;
@@ -551,7 +568,7 @@
     }
 
     .players_list-item img {
-        transition: all .4s;
+        transition: all .1s;
         width: 75px;
         height: 75px;
         border-radius: 100%;

@@ -17,4 +17,9 @@ class Country extends Model
     {
         return "images/country_flags/{$this->flag_url}";
     }
+
+    public function group()
+    {
+        return $this->belongsTo('App\Models\Group');
+    }
 }

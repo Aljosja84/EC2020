@@ -3371,6 +3371,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _donutTest__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./donutTest */ "./resources/js/components/donutTest.vue");
+function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 //
 //
 //
@@ -3597,6 +3603,7 @@ __webpack_require__.r(__webpack_exports__);
       key: "default",
       loaded: false,
       playersArr: [],
+      playerImages: [],
       playersArrPortraits: [],
       playersAgeArr: [],
       playerDoughnutStatsPasses: [],
@@ -3699,9 +3706,44 @@ __webpack_require__.r(__webpack_exports__);
           return this.playersArrPortraits = _.orderBy(this.playersArrPortraits, 'statistics[0].games.minutes', 'desc');
       }
     },
+
+    /*
+    *
+    * Here we'll check for the images to be done loading and remove the loading screen
+    *
+    */
+    imageLoadedCheck: function imageLoadedCheck() {
+      var _this = this;
+
+      var imageLoaded = 0;
+
+      var _iterator = _createForOfIteratorHelper(this.playerImages),
+          _step;
+
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var imageSrc = _step.value;
+          var img = new Image();
+          img.src = imageSrc;
+
+          img.onload = function () {
+            imageLoaded++;
+
+            if (imageLoaded === _this.playerImages.length) {
+              console.log("all player portraits have loaded");
+              _this.loading = false;
+            }
+          };
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+    },
     // external API call and set most vars
     loadPlayers: function loadPlayers(e) {
-      var _this = this;
+      var _this2 = this;
 
       // get the players (including qualifiers) from a particular team (e)
       axios.get("https://v3.football.api-sports.io/players?league=4&season=2020&team=" + e, {
@@ -3712,19 +3754,28 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (response) {
         response.data.response.forEach(function (element) {
           // this is the main array with all players data in it
-          _this.playersArr.push(element); // this is the faux array, will only be used for the portraits on top of the page.
+          _this2.playersArr.push(element);
+          /*
+          *
+          * Put all images in an array to preload, and only if they're all loaded
+          * remove the loading screen together with a check if the charts have loaded
+          *
+          */
 
 
-          _this.playersArrPortraits.push(element); // push the player and his birth date to the age array
+          _this2.playerImages.push(element.player.photo); // this is the faux array, will only be used for the portraits on top of the page.
 
 
-          _this.playersAgeArr.push({
+          _this2.playersArrPortraits.push(element); // push the player and his birth date to the age array
+
+
+          _this2.playersAgeArr.push({
             'playerid': element.player.id,
-            'bdayTimestamp': _this.DatetoTimestamp(element.player.birth.date)
+            'bdayTimestamp': _this2.DatetoTimestamp(element.player.birth.date)
           }); // push passes in array for the doughtnut chart
 
 
-          _this.playerDoughnutStatsPasses.push({
+          _this2.playerDoughnutStatsPasses.push({
             'playerid': element.player.id,
             'type': 'doughnut',
             'data': {
@@ -3754,7 +3805,7 @@ __webpack_require__.r(__webpack_exports__);
           }); // push duels in array for a doughnut chart
 
 
-          _this.playerDoughnutStatsDuels.push({
+          _this2.playerDoughnutStatsDuels.push({
             'playerid': element.player.id,
             'type': 'doughnut',
             'data': {
@@ -3784,7 +3835,7 @@ __webpack_require__.r(__webpack_exports__);
           }); // push duels in array for a doughnut chart
 
 
-          _this.playerDoughnutStatsDribbles.push({
+          _this2.playerDoughnutStatsDribbles.push({
             'playerid': element.player.id,
             'type': 'doughnut',
             'data': {
@@ -3815,30 +3866,20 @@ __webpack_require__.r(__webpack_exports__);
         });
         /*
         *
-        * All data has been loaded
+        * All data has been loaded and imageload check will be initiated
         *
         */
 
-        _this.activeIndex = _this.playersArrPortraits[0].player.id;
-        _this.loaded = true;
-        _this.loading = false;
+        _this2.activeIndex = _this2.playersArrPortraits[0].player.id;
+        _this2.loaded = true;
+
+        _this2.imageLoadedCheck();
       })["catch"](function (error) {
         console.log(error);
       });
-    },
-    shuffle: function shuffle() {
-      // sort the players, oldest to youngest
-      //this.playersArr = _.shuffle(this.playersArr);
-      this.playersArr.forEach(function (element) {
-        console.log(document.getElementById('player' + element.player.id).offsetTop);
-      }); //console.log(this.rankedHeight(537));
-      //this.playersArr = _.orderBy(this.playersArr, 'player.height', 'asc');
-      //console.log(this.ageSortedArr.findIndex(i => i.playerid === 26240))
-      //console.log(_.orderBy(this.playersArr, 'player.height', 'asc').findIndex((item) => item.player.id === 537));
     }
   },
-  created: function created() {
-    this.loadPlayers(this.teamid); //console.log(this.loadPlayers(this.teamid));
+  created: function created() {//this.loadPlayers(this.teamid);
   }
 });
 
@@ -21978,7 +22019,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/getUrl.js */ "./node_modules/css-loader/dist/runtime/getUrl.js");
 /* harmony import */ var _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _images_pulseloader_2_gif__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./images/pulseloader_2.gif */ "./resources/js/components/images/pulseloader_2.gif");
+/* harmony import */ var _images_pulseloader_3_gif__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./images/pulseloader_3.gif */ "./resources/js/components/images/pulseloader_3.gif");
 /* harmony import */ var _images_light_wool_png__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./images/light_wool.png */ "./resources/js/components/images/light_wool.png");
 // Imports
 
@@ -21986,10 +22027,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
-var ___CSS_LOADER_URL_REPLACEMENT_0___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default()(_images_pulseloader_2_gif__WEBPACK_IMPORTED_MODULE_2__["default"]);
+var ___CSS_LOADER_URL_REPLACEMENT_0___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default()(_images_pulseloader_3_gif__WEBPACK_IMPORTED_MODULE_2__["default"]);
 var ___CSS_LOADER_URL_REPLACEMENT_1___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default()(_images_light_wool_png__WEBPACK_IMPORTED_MODULE_3__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.loading_div {\n    width: 100%;\n    position: absolute;\n    height: 100%;\n    z-index: 999;\n    opacity: 100%;\n    background-color: whitesmoke;\n}\n#pulseloader {\n    z-index: 1000;\n    background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ");\n    width: 111px;\n    height: 111px;\n    position: absolute;\n    top: 39%;\n    left: 45%;\n}\n.tippy-tooltip.honeybee-theme {\n    background-color: #313131;\n    color: #ff7800;\n}\n.tippy-tooltip.honeybee-theme .tippy-roundarrow{\n    fill: #313131;\n}\n.teamplayers_container {\n    position: relative;\n    margin-left: -9px;\n    background-color: white;\n    width: 975px;\n    height: 654px;\n    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;\n}\n.teamplayer_header {\n    width: 100%;\n    font-family: 'Oswald', sans-serif;\n    font-size: 24px;\n    color: #515151;\n    text-transform: uppercase;\n    text-align: center;\n    background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_1___ + ");\n    padding: 10px 0 8px 15px;\n}\n.player_stats_header {\n    position: relative;\n    z-index: 15;\n    width: 100%;\n    height: 35px;\n    font-family: 'Oswald', sans-serif;\n    font-size: 24px;\n    color: #515151;\n    text-transform: uppercase;\n    text-align: center;\n    line-height: 30px;\n    background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_1___ + ");\n    padding: 0 0 10px 15px;\n    border-top: 1px solid #dcdcdc;\n    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;\n}\n.separator_bar {\n    height: 2px;\n    background-image: linear-gradient(to right, transparent, #b5b5b5, transparent);\n}\n.players_list-item img {\n    transition: all .4s;\n    width: 75px;\n    height: 75px;\n    border-radius: 100%;\n    box-shadow: rgba(17, 17, 26, 0.35) 0 4px 16px, rgba(17, 17, 26, 0.05) 0 8px 32px;\n}\n.active {\n    border: 4px solid #ff7800;\n}\n#midfield_div {\n    height: 188px;\n    padding: 10px 5px 0 14px;\n    width: 100%;\n}\n.players_list-item {\n    transition: all .5s;\n    display: inline-block;\n    padding: 5px;\n    margin-right: 10px;\n    cursor: pointer;\n}\n.player_stats_container {\n    position: relative;\n    z-index: 14;\n    width: 100%;\n    height: 375px;\n    background: linear-gradient(180deg, rgba(255,255,255,1) 16%, rgba(255,210,164,1) 100%);\n    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=\"#ffffff\",endColorstr=\"#ffd2a4\",GradientType=1);\n    padding: 5px 0 0 5px;\n    overflow-y: hidden;\n    scroll-behavior: auto;\n}\n.player_passport {\n    width: 255px;\n    height: 370px;\n    /*border: solid 1px #ff7800;*/\n    float: left;\n    margin-right: 5px;\n}\n.player_stats_left {\n    width: 218px;\n    height: 370px;\n    border: solid 1px #ff7800;\n    float: left;\n    margin-right: 5px;\n}\n.player_stats_right_top {\n    width: 480px;\n    height: 218px;\n    float: left;\n    margin-bottom: 5px;\n}\n.player_stats_right_bottom {\n    width: 480px;\n    height: 147px;\n    float: left;\n}\n.card {\n    float: left;\n    overflow: hidden;\n    position: relative;\n    width: 100%;\n    height: 100%;\n    border: 1px solid #ff7800;\n    border-radius: 5px;\n    text-align: center;\n}\n.card .header {\n    font-family: 'Oswald', sans-serif;\n    color: #515151;\n    font-size: 18px;\n    line-height: 18px;\n    position: absolute;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 55px;\n    z-index: 1;\n    background: #e58d36;\n    padding-top: 4px;\n}\n.avatar {\n    position: relative;\n    margin-top: 25px;\n    z-index: 100;\n}\n.avatar img {\n    width: 75px;\n    height: 75px;\n    border-radius: 50%;\n    border: 3px solid rgba(0,0,30,0.7);\n    box-shadow: rgba(0, 0, 0, 0.45) 0 25px 20px -20px;\n}\n.content {\n    padding : 0;\n    font-family: \"Roboto\", sans-serif;\n    font-size: 12px;\n    color: #515151;\n}\n.content td {\n    text-align: left;\n}\n.content_header {\n    width: 100%;\n    background-color: transparent;\n    font-family: 'Oswald', sans-serif;\n    font-size: 24px;\n    color: #616161;\n    line-height: 21px;\n    margin-top: 10px;\n}\n.progress_left {\n    float: left;\n    width: 100%;\n    position: relative;\n    -webkit-animation: all 0.4s ease;\n            animation: all 0.4s ease;\n    margin-top: 5px;\n    border: solid 1px #515151;\n}\n.bar_left {\n    border-radius: 0 1px 1px 0;\n    float:left;\n    height: 9px;\n    background-color: #ff7800;\n    width: 30%;\n    transition: all 0.5s ease-out;\n}\n.left_stats_header {\n    padding-top: 2px;\n    background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_1___ + ");\n    height: 30px;\n    width: 100%;\n    text-transform: uppercase;\n    font-family: 'Oswald', sans-serif;\n    font-size: 24px;\n    color: #616161;\n    text-align: center;\n    line-height: 24px;\n}\n.left_stats_data {\n    margin-top: 8px;\n    margin-bottom: 6px;\n    height: 30px;\n    width: 100%;\n    text-transform: uppercase;\n    font-family: 'Oswald', sans-serif;\n    font-size: 26px;\n    color: #ff7800;\n    text-align: center;\n    line-height: 26px;\n}\n.player_container {\n    height: 375px;\n}\n.player_stats_right_top_sub {\n    width: 33%;\n    float: left;\n    height: 100%;\n}\n.player_stats_right_bottom_header {\n    padding-top: 2px;\n    background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_1___ + ");\n    height: 30px;\n    width: 100%;\n    text-transform: lowercase;\n    font-family: 'Oswald', sans-serif;\n    font-size: 24px;\n    color: #616161;\n    text-align: center;\n    line-height: 24px;\n}\n.player_stats_right_bottom_data {\n    font-family: 'Oswald', sans-serif;\n    font-size: 50px;\n    color: #ff7800;\n    text-align: center;\n    margin-top: 20px;\n}\n.player_stats_right_bottom_container {\n    float: left;\n    width: 79px;\n    height: 100%\n}\n:root {\n    --radius: 2px;\n    --baseFg: white;\n    --baseBg: #919191;\n    --accentFg: #ff7800;\n    --accentBg: #919191;\n}\nselect {\n    font: 400 14px/1.3 \"Roboto Light\";\n    -webkit-appearance: none;\n    -moz-appearance: none;\n         appearance: none;\n    color: var(--baseFg);\n    border: 1px solid var(--baseFg);\n    line-height: 1;\n    outline: 0;\n    padding: 0.65em 2.5em 0.55em 0.75em;\n    border-radius: var(--radius);\n    background-color: var(--baseBg);\n    background-image: linear-gradient(var(--baseFg), var(--baseFg)),\n    linear-gradient(-135deg, transparent 50%, var(--accentBg) 50%),\n    linear-gradient(-225deg, transparent 50%, var(--accentBg) 50%),\n    linear-gradient(var(--accentBg) 42%, var(--accentFg) 42%);\n    background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;\n    background-size: 1px 100%, 20px 22px, 20px 22px, 20px 100%;\n    background-position: right 20px center, right bottom, right bottom, right bottom;\n}\nselect:hover {\n    background-image: linear-gradient(var(--accentFg), var(--accentFg)),\n    linear-gradient(-135deg, transparent 50%, var(--accentFg) 50%),\n    linear-gradient(-225deg, transparent 50%, var(--accentFg) 50%),\n    linear-gradient(var(--accentFg) 42%, var(--accentBg) 42%);\n}\nselect:active {\n    background-image: linear-gradient(var(--accentFg), var(--accentFg)),\n    linear-gradient(-135deg, transparent 50%, var(--accentFg) 50%),\n    linear-gradient(-225deg, transparent 50%, var(--accentFg) 50%),\n    linear-gradient(var(--accentFg) 42%, var(--accentBg) 42%);\n    color: var(--accentBg);\n    border-color: var(--accentFg);\n    background-color: var(--accentFg);\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.loading_div {\n    width: 100%;\n    position: absolute;\n    height: 100%;\n    z-index: 999;\n    opacity: 100%;\n    background-color: whitesmoke;\n}\n#pulseloader {\n    z-index: 1000;\n    background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ");\n    width: 84px;\n    height: 84px;\n    position: absolute;\n    top: 39%;\n    left: 45%;\n}\n.tippy-tooltip.honeybee-theme {\n    background-color: #313131;\n    color: #ff7800;\n}\n.tippy-tooltip.honeybee-theme .tippy-roundarrow{\n    fill: #313131;\n}\n.teamplayers_container {\n    position: relative;\n    margin-left: -9px;\n    background-color: white;\n    width: 975px;\n    height: 654px;\n    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;\n}\n.teamplayer_header {\n    width: 100%;\n    font-family: 'Oswald', sans-serif;\n    font-size: 24px;\n    color: #515151;\n    text-transform: uppercase;\n    text-align: center;\n    background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_1___ + ");\n    padding: 10px 0 8px 15px;\n}\n.player_stats_header {\n    position: relative;\n    z-index: 15;\n    width: 100%;\n    height: 35px;\n    font-family: 'Oswald', sans-serif;\n    font-size: 24px;\n    color: #515151;\n    text-transform: uppercase;\n    text-align: center;\n    line-height: 30px;\n    background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_1___ + ");\n    padding: 0 0 10px 15px;\n    border-top: 1px solid #dcdcdc;\n    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;\n}\n.separator_bar {\n    height: 2px;\n    background-image: linear-gradient(to right, transparent, #b5b5b5, transparent);\n}\n.players_list-item img {\n    transition: all .1s;\n    width: 75px;\n    height: 75px;\n    border-radius: 100%;\n    box-shadow: rgba(17, 17, 26, 0.35) 0 4px 16px, rgba(17, 17, 26, 0.05) 0 8px 32px;\n}\n.active {\n    border: 4px solid #ff7800;\n}\n#midfield_div {\n    height: 188px;\n    padding: 10px 5px 0 14px;\n    width: 100%;\n}\n.players_list-item {\n    transition: all .5s;\n    display: inline-block;\n    padding: 5px;\n    margin-right: 10px;\n    cursor: pointer;\n}\n.player_stats_container {\n    position: relative;\n    z-index: 14;\n    width: 100%;\n    height: 375px;\n    background: linear-gradient(180deg, rgba(255,255,255,1) 16%, rgba(255,210,164,1) 100%);\n    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=\"#ffffff\",endColorstr=\"#ffd2a4\",GradientType=1);\n    padding: 5px 0 0 5px;\n    overflow-y: hidden;\n    scroll-behavior: auto;\n}\n.player_passport {\n    width: 255px;\n    height: 370px;\n    /*border: solid 1px #ff7800;*/\n    float: left;\n    margin-right: 5px;\n}\n.player_stats_left {\n    width: 218px;\n    height: 370px;\n    border: solid 1px #ff7800;\n    float: left;\n    margin-right: 5px;\n}\n.player_stats_right_top {\n    width: 480px;\n    height: 218px;\n    float: left;\n    margin-bottom: 5px;\n}\n.player_stats_right_bottom {\n    width: 480px;\n    height: 147px;\n    float: left;\n}\n.card {\n    float: left;\n    overflow: hidden;\n    position: relative;\n    width: 100%;\n    height: 100%;\n    border: 1px solid #ff7800;\n    border-radius: 5px;\n    text-align: center;\n}\n.card .header {\n    font-family: 'Oswald', sans-serif;\n    color: #515151;\n    font-size: 18px;\n    line-height: 18px;\n    position: absolute;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 55px;\n    z-index: 1;\n    background: #e58d36;\n    padding-top: 4px;\n}\n.avatar {\n    position: relative;\n    margin-top: 25px;\n    z-index: 100;\n}\n.avatar img {\n    width: 75px;\n    height: 75px;\n    border-radius: 50%;\n    border: 3px solid rgba(0,0,30,0.7);\n    box-shadow: rgba(0, 0, 0, 0.45) 0 25px 20px -20px;\n}\n.content {\n    padding : 0;\n    font-family: \"Roboto\", sans-serif;\n    font-size: 12px;\n    color: #515151;\n}\n.content td {\n    text-align: left;\n}\n.content_header {\n    width: 100%;\n    background-color: transparent;\n    font-family: 'Oswald', sans-serif;\n    font-size: 24px;\n    color: #616161;\n    line-height: 21px;\n    margin-top: 10px;\n}\n.progress_left {\n    float: left;\n    width: 100%;\n    position: relative;\n    -webkit-animation: all 0.4s ease;\n            animation: all 0.4s ease;\n    margin-top: 5px;\n    border: solid 1px #515151;\n}\n.bar_left {\n    border-radius: 0 1px 1px 0;\n    float:left;\n    height: 9px;\n    background-color: #ff7800;\n    width: 30%;\n    transition: all 0.5s ease-out;\n}\n.left_stats_header {\n    padding-top: 2px;\n    background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_1___ + ");\n    height: 30px;\n    width: 100%;\n    text-transform: uppercase;\n    font-family: 'Oswald', sans-serif;\n    font-size: 24px;\n    color: #616161;\n    text-align: center;\n    line-height: 24px;\n}\n.left_stats_data {\n    margin-top: 8px;\n    margin-bottom: 6px;\n    height: 30px;\n    width: 100%;\n    text-transform: uppercase;\n    font-family: 'Oswald', sans-serif;\n    font-size: 26px;\n    color: #ff7800;\n    text-align: center;\n    line-height: 26px;\n}\n.player_container {\n    height: 375px;\n}\n.player_stats_right_top_sub {\n    width: 33%;\n    float: left;\n    height: 100%;\n}\n.player_stats_right_bottom_header {\n    padding-top: 2px;\n    background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_1___ + ");\n    height: 30px;\n    width: 100%;\n    text-transform: lowercase;\n    font-family: 'Oswald', sans-serif;\n    font-size: 24px;\n    color: #616161;\n    text-align: center;\n    line-height: 24px;\n}\n.player_stats_right_bottom_data {\n    font-family: 'Oswald', sans-serif;\n    font-size: 50px;\n    color: #ff7800;\n    text-align: center;\n    margin-top: 20px;\n}\n.player_stats_right_bottom_container {\n    float: left;\n    width: 79px;\n    height: 100%\n}\n:root {\n    --radius: 2px;\n    --baseFg: white;\n    --baseBg: #919191;\n    --accentFg: #ff7800;\n    --accentBg: #919191;\n}\nselect {\n    font: 400 14px/1.3 \"Roboto Light\";\n    -webkit-appearance: none;\n    -moz-appearance: none;\n         appearance: none;\n    color: var(--baseFg);\n    border: 1px solid var(--baseFg);\n    line-height: 1;\n    outline: 0;\n    padding: 0.65em 2.5em 0.55em 0.75em;\n    border-radius: var(--radius);\n    background-color: var(--baseBg);\n    background-image: linear-gradient(var(--baseFg), var(--baseFg)),\n    linear-gradient(-135deg, transparent 50%, var(--accentBg) 50%),\n    linear-gradient(-225deg, transparent 50%, var(--accentBg) 50%),\n    linear-gradient(var(--accentBg) 42%, var(--accentFg) 42%);\n    background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;\n    background-size: 1px 100%, 20px 22px, 20px 22px, 20px 100%;\n    background-position: right 20px center, right bottom, right bottom, right bottom;\n}\nselect:hover {\n    background-image: linear-gradient(var(--accentFg), var(--accentFg)),\n    linear-gradient(-135deg, transparent 50%, var(--accentFg) 50%),\n    linear-gradient(-225deg, transparent 50%, var(--accentFg) 50%),\n    linear-gradient(var(--accentFg) 42%, var(--accentBg) 42%);\n}\nselect:active {\n    background-image: linear-gradient(var(--accentFg), var(--accentFg)),\n    linear-gradient(-135deg, transparent 50%, var(--accentFg) 50%),\n    linear-gradient(-225deg, transparent 50%, var(--accentFg) 50%),\n    linear-gradient(var(--accentFg) 42%, var(--accentBg) 42%);\n    color: var(--accentBg);\n    border-color: var(--accentFg);\n    background-color: var(--accentFg);\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -22185,9 +22226,9 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/images/pulseloader_2.gif":
+/***/ "./resources/js/components/images/pulseloader_3.gif":
 /*!**********************************************************!*\
-  !*** ./resources/js/components/images/pulseloader_2.gif ***!
+  !*** ./resources/js/components/images/pulseloader_3.gif ***!
   \**********************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -22196,7 +22237,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/pulseloader_2.gif?181c1228d1224041e0dccc2236d69df3");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/pulseloader_3.gif?dd7ff3d29f4d700d4a70a2bf0f92e35a");
 
 /***/ }),
 

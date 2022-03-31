@@ -10,6 +10,11 @@ class Group extends Model
 {
     use HasFactory;
 
+    public function countriesRank()
+    {
+        return $this->hasMany('App\Models\Country')->orderBy('rank', 'asc');
+    }
+
     public function countries()
     {
         return $this->hasMany('App\Models\Country');
