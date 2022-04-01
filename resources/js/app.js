@@ -36,6 +36,7 @@ Vue.component('team-form', require('./components/Teamform').default);
 Vue.component('goalscorers', require('./components/goalscorers').default);
 Vue.component('team-players', require('./components/teamplayers').default);
 Vue.component('team-stats', require('./components/teamstats.vue').default);
+Vue.component('next-game', require('./components/nextgame').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

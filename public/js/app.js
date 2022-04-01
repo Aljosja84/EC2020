@@ -3242,6 +3242,78 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/nextgame.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/nextgame.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: "nextgame",
+  props: ['teamid'],
+  data: function data() {
+    return {
+      time_days: null,
+      time_hours: null,
+      time_mins: null,
+      time_secs: null
+    };
+  },
+  methods: {
+    /*
+    *
+    * this function will compare current time with a given date and parse it for us to read
+    *
+    */
+    startCountdown: function startCountdown(timestamp) {
+      // current time
+      var date1 = new Date(); // time for next match
+
+      var date2 = new Date("2022-06-03T18:45:00+00:00"); // difference between the two, with milliseconds removed
+
+      var diff = (date2 - date1) / 1000;
+      var diff = Math.abs(Math.floor(diff)); // how many days
+
+      var days = Math.floor(diff / (24 * 60 * 60));
+      var leftSec = diff - days * 24 * 60 * 60; // how many hours
+
+      var hrs = Math.floor(leftSec / (60 * 60));
+      var leftSec = leftSec - hrs * 60 * 60; // how many seconds
+
+      var min = Math.floor(leftSec / 60);
+      var leftSec = leftSec - min * 60; // make up the time you'll see in the app
+
+      this.time_days = days;
+      this.time_hours = hrs;
+      this.time_mins = min;
+      this.time_secs = leftSec;
+    }
+  },
+  created: function created() {
+    //setTimeout(this.startCountdown, 1000);
+    //this.startCountdown();
+    setInterval(this.startCountdown, 1000);
+  },
+  computed: {}
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/possessionStats.vue?vue&type=script&lang=js&":
 /*!**********************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/possessionStats.vue?vue&type=script&lang=js& ***!
@@ -3982,6 +4054,7 @@ vue__WEBPACK_IMPORTED_MODULE_1__["default"].component('team-form', (__webpack_re
 vue__WEBPACK_IMPORTED_MODULE_1__["default"].component('goalscorers', (__webpack_require__(/*! ./components/goalscorers */ "./resources/js/components/goalscorers.vue")["default"]));
 vue__WEBPACK_IMPORTED_MODULE_1__["default"].component('team-players', (__webpack_require__(/*! ./components/teamplayers */ "./resources/js/components/teamplayers.vue")["default"]));
 vue__WEBPACK_IMPORTED_MODULE_1__["default"].component('team-stats', (__webpack_require__(/*! ./components/teamstats.vue */ "./resources/js/components/teamstats.vue")["default"]));
+vue__WEBPACK_IMPORTED_MODULE_1__["default"].component('next-game', (__webpack_require__(/*! ./components/nextgame */ "./resources/js/components/nextgame.vue")["default"]));
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -21974,6 +22047,36 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
 ___CSS_LOADER_EXPORT___.push([module.id, "\n.bar_container[data-v-c5ce9d36] {\n    padding-bottom: 10px;\n    background-color: white;\n}\n.stats_num_left[data-v-c5ce9d36] {\n    float:left;\n    color: #a3a7ab;\n    font-family: 'Roboto', sans-serif;\n    font-size: 13px;\n    width: 35px;\n    text-align: center;\n    padding: 0 15px 0 0;\n    margin-left: 10px\n}\n.stats_num_right[data-v-c5ce9d36] {\n    float: right;\n    color: #a3a7ab;\n    font-family: 'Roboto', sans-serif;\n    font-size: 13px;\n    width: 35px;\n    text-align: center;\n    padding: 0 0 0 15px;\n    margin-right: 10px;\n}\n.stats_title[data-v-c5ce9d36] {\n    font-family: 'Oswald', sans-serif;\n    font-size: 13px;\n    text-align: center;\n    margin: 10px 0 2px 0;\n}\n#title[data-v-c5ce9d36] {\n    font-family: 'Oswald', sans-serif;\n    font-size: 24px;\n    text-transform: uppercase;\n    text-align: center;\n    color: #515151;\n    border-bottom: 1px solid #CCC;\n}\n.stats_container[data-v-c5ce9d36] {\n    width: 1100px;\n    height: 475px;\n    background-color: #ffffff;\n}\n.progress_left[data-v-c5ce9d36] {\n    float: left;\n    width: 505px;\n    position: relative;\n    -webkit-animation: all 0.4s ease;\n            animation: all 0.4s ease;\n    background-color: #ebf0f6;\n    margin-top: 5px;\n    border: none;\n}\n.bar_left[data-v-c5ce9d36] {\n    border-radius: 3px 0 0 3px;\n    float:right;\n    height: 6px;\n    background-color: #00acff;\n    width: 30%;\n    transition: all 0.5s ease-out;\n}\n.progress_right[data-v-c5ce9d36] {\n     float: right;\n     width: 505px;\n     position: relative;\n     -webkit-animation: all 0.4s ease;\n             animation: all 0.4s ease;\n     background-color: #ebf0f6;\n     margin-top: 5px;\n}\n.bar_right[data-v-c5ce9d36] {\n    border-radius: 0 3px 3px 0;\n    float:left;\n    height: 6px;\n    background-color: #8bed00;\n    width: 30%;\n    transition: all 0.5s ease-out;\n}\n", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/nextgame.vue?vue&type=style&index=0&id=64efac30&scoped=true&lang=css&":
+/*!***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/nextgame.vue?vue&type=style&index=0&id=64efac30&scoped=true&lang=css& ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/getUrl.js */ "./node_modules/css-loader/dist/runtime/getUrl.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _images_light_wool_png__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./images/light_wool.png */ "./resources/js/components/images/light_wool.png");
+// Imports
+
+
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+var ___CSS_LOADER_URL_REPLACEMENT_0___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default()(_images_light_wool_png__WEBPACK_IMPORTED_MODULE_2__["default"]);
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, "\n.timer_header[data-v-64efac30] {\n    width: 100%;\n    height: 55px;\n    font-family: 'Oswald', sans-serif;\n    font-size: 24px;\n    color: #515151;\n    text-align: center;\n    background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ");\n    padding: 9px 0 8px 0;\n}\n.separator_bar[data-v-64efac30] {\n    height: 2px;\n    background-image: linear-gradient(to right, transparent, #b5b5b5, transparent);\n}\n#days[data-v-64efac30] {\n    color: #e58d37;\n}\n#hours[data-v-64efac30] {\n    color: #c9d466;\n}\n#minutes[data-v-64efac30] {\n    color: #c34c26;\n}\n#seconds[data-v-64efac30] {\n    color: #4cb4e7;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -53384,6 +53487,36 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/nextgame.vue?vue&type=style&index=0&id=64efac30&scoped=true&lang=css&":
+/*!***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/nextgame.vue?vue&type=style&index=0&id=64efac30&scoped=true&lang=css& ***!
+  \***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_nextgame_vue_vue_type_style_index_0_id_64efac30_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./nextgame.vue?vue&type=style&index=0&id=64efac30&scoped=true&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/nextgame.vue?vue&type=style&index=0&id=64efac30&scoped=true&lang=css&");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_nextgame_vue_vue_type_style_index_0_id_64efac30_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"], options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_nextgame_vue_vue_type_style_index_0_id_64efac30_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/scoreboard.vue?vue&type=style&index=0&id=1fc2f21f&scoped=true&lang=css&":
 /*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/scoreboard.vue?vue&type=style&index=0&id=1fc2f21f&scoped=true&lang=css& ***!
@@ -54148,6 +54281,47 @@ component.options.__file = "resources/js/components/matchStats.vue"
 
 /***/ }),
 
+/***/ "./resources/js/components/nextgame.vue":
+/*!**********************************************!*\
+  !*** ./resources/js/components/nextgame.vue ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _nextgame_vue_vue_type_template_id_64efac30_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./nextgame.vue?vue&type=template&id=64efac30&scoped=true& */ "./resources/js/components/nextgame.vue?vue&type=template&id=64efac30&scoped=true&");
+/* harmony import */ var _nextgame_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./nextgame.vue?vue&type=script&lang=js& */ "./resources/js/components/nextgame.vue?vue&type=script&lang=js&");
+/* harmony import */ var _nextgame_vue_vue_type_style_index_0_id_64efac30_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./nextgame.vue?vue&type=style&index=0&id=64efac30&scoped=true&lang=css& */ "./resources/js/components/nextgame.vue?vue&type=style&index=0&id=64efac30&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+;
+
+
+/* normalize component */
+
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _nextgame_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _nextgame_vue_vue_type_template_id_64efac30_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _nextgame_vue_vue_type_template_id_64efac30_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  "64efac30",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/nextgame.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/possessionStats.vue":
 /*!*****************************************************!*\
   !*** ./resources/js/components/possessionStats.vue ***!
@@ -54495,6 +54669,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/nextgame.vue?vue&type=script&lang=js&":
+/*!***********************************************************************!*\
+  !*** ./resources/js/components/nextgame.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_nextgame_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./nextgame.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/nextgame.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_nextgame_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/components/possessionStats.vue?vue&type=script&lang=js&":
 /*!******************************************************************************!*\
   !*** ./resources/js/components/possessionStats.vue?vue&type=script&lang=js& ***!
@@ -54662,6 +54852,19 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_matchStats_vue_vue_type_style_index_0_id_c5ce9d36_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader/dist/cjs.js!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./matchStats.vue?vue&type=style&index=0&id=c5ce9d36&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/matchStats.vue?vue&type=style&index=0&id=c5ce9d36&scoped=true&lang=css&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/nextgame.vue?vue&type=style&index=0&id=64efac30&scoped=true&lang=css&":
+/*!*******************************************************************************************************!*\
+  !*** ./resources/js/components/nextgame.vue?vue&type=style&index=0&id=64efac30&scoped=true&lang=css& ***!
+  \*******************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_nextgame_vue_vue_type_style_index_0_id_64efac30_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader/dist/cjs.js!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./nextgame.vue?vue&type=style&index=0&id=64efac30&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/nextgame.vue?vue&type=style&index=0&id=64efac30&scoped=true&lang=css&");
 
 
 /***/ }),
@@ -54867,6 +55070,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_matchStats_vue_vue_type_template_id_c5ce9d36_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_matchStats_vue_vue_type_template_id_c5ce9d36_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./matchStats.vue?vue&type=template&id=c5ce9d36&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/matchStats.vue?vue&type=template&id=c5ce9d36&scoped=true&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/nextgame.vue?vue&type=template&id=64efac30&scoped=true&":
+/*!*****************************************************************************************!*\
+  !*** ./resources/js/components/nextgame.vue?vue&type=template&id=64efac30&scoped=true& ***!
+  \*****************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_nextgame_vue_vue_type_template_id_64efac30_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_nextgame_vue_vue_type_template_id_64efac30_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_nextgame_vue_vue_type_template_id_64efac30_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./nextgame.vue?vue&type=template&id=64efac30&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/nextgame.vue?vue&type=template&id=64efac30&scoped=true&");
 
 
 /***/ }),
@@ -56003,6 +56223,52 @@ var render = function () {
         }),
       ]),
     ]),
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/nextgame.vue?vue&type=template&id=64efac30&scoped=true&":
+/*!********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/nextgame.vue?vue&type=template&id=64efac30&scoped=true& ***!
+  \********************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { attrs: { id: "container" } }, [
+    _c("div", { staticClass: "timer_header" }, [
+      _vm._v("\n        NEXT MATCH in\n        "),
+      _c("span", { attrs: { id: "days" } }, [
+        _vm._v(_vm._s(_vm.time_days) + "d"),
+      ]),
+      _vm._v(":"),
+      _c("span", { attrs: { id: "hours" } }, [
+        _vm._v(_vm._s(_vm.time_hours) + "h"),
+      ]),
+      _vm._v(":"),
+      _c("span", { attrs: { id: "minutes" } }, [
+        _vm._v(_vm._s(_vm.time_mins) + "m"),
+      ]),
+      _vm._v(":"),
+      _c("span", { attrs: { id: "seconds" } }, [
+        _vm._v(_vm._s(_vm.time_secs) + "s"),
+      ]),
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "separator_bar" }),
   ])
 }
 var staticRenderFns = []
