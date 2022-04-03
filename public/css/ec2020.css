@@ -10,9 +10,11 @@
 }
 
 #app {
+    position: fixed;
     float: left;
     padding: 0 0 0 9px;
     width: 100%;
+    z-index:1;
 }
 .scoreboard_comp {
     padding: 0 0 8px 0;
@@ -100,6 +102,7 @@
     height: 403px;
     bottom: 0;
     right: 0;
+    z-index:-1;
 }
 
 /* ---------------------------- group standings window (teampage)-------------------------------------- */
@@ -108,13 +111,13 @@
     height: 470px;
     background-color: transparent;
     float: right;
+    z-index:600;
 }
 .group_standings_container {
     width: 510px;
     height: 308px;
     background-color: whitesmoke;
     margin-bottom: 20px;
-    margin-top: -10px;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
 .content_header {
@@ -173,6 +176,8 @@
 
 /* ---------------------------- next game window (teampage)-------------------------------------- */
 .next_game_container {
+    position: absolute;
+    z-index:600;
     width: 510px;
     height: 138px;
     background-color: whitesmoke;

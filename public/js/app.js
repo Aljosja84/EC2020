@@ -3253,6 +3253,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3268,23 +3280,30 @@ __webpack_require__.r(__webpack_exports__);
   props: ['teamid'],
   data: function data() {
     return {
+      timeloading: false,
+      logoloading: false,
       time_days: null,
       time_hours: null,
       time_mins: null,
-      time_secs: null
+      time_secs: null,
+      timetowait: null,
+      hometeam: null,
+      awayteam: null,
+      countryLogos: []
     };
   },
   methods: {
     /*
     *
     * this function will compare current time with a given date and parse it for us to read
+    * we'll also append an extra 0 if the hours, minutes or seconds get below 10
     *
     */
     startCountdown: function startCountdown(timestamp) {
       // current time
       var date1 = new Date(); // time for next match
 
-      var date2 = new Date("2022-06-03T18:45:00+00:00"); // difference between the two, with milliseconds removed
+      var date2 = new Date(timestamp); // difference between the two, with milliseconds removed
 
       var diff = (date2 - date1) / 1000;
       var diff = Math.abs(Math.floor(diff)); // how many days
@@ -3293,23 +3312,131 @@ __webpack_require__.r(__webpack_exports__);
       var leftSec = diff - days * 24 * 60 * 60; // how many hours
 
       var hrs = Math.floor(leftSec / (60 * 60));
+
+      if (hrs < 10) {
+        hrs = '0' + hrs;
+      }
+
+      ;
       var leftSec = leftSec - hrs * 60 * 60; // how many seconds
 
       var min = Math.floor(leftSec / 60);
-      var leftSec = leftSec - min * 60; // make up the time you'll see in the app
+
+      if (min < 10) {
+        min = '0' + min;
+      }
+
+      ;
+      var leftSec = leftSec - min * 60;
+
+      if (leftSec < 10 > 0) {
+        leftSec = '0' + leftSec;
+      }
+
+      ; // make up the time you'll see in the app
 
       this.time_days = days;
       this.time_hours = hrs;
       this.time_mins = min;
-      this.time_secs = leftSec;
+      this.time_secs = leftSec; // done setting time
+
+      this.timeloading = true;
+    },
+
+    /*
+    *
+    * Here we'll check for the images to be done loading and remove the loading screen
+    *
+    */
+    imageLoadedCheck: function imageLoadedCheck() {
+      var _this = this;
+
+      console.log('loading');
+      var imageLoaded = 0;
+
+      var _iterator = _createForOfIteratorHelper(this.countryLogos),
+          _step;
+
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var imageSrc = _step.value;
+          var img = new Image();
+          img.src = imageSrc;
+
+          img.onload = function () {
+            imageLoaded++;
+
+            if (imageLoaded === _this.countryLogos.length) {
+              console.log("all country logos have loaded");
+              _this.logoloading = true;
+            }
+          };
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+    },
+
+    /*
+    *
+    * Limit the number of characters a teamname can have, so it can properly
+    * fit in the box, to reduce ugliness of having long names
+    */
+    limitTeamName: function limitTeamName(name) {
+      var string = name;
+      var length = 14;
+      return string.length > length ? string.substring(0, length - 3) + "..." : string.substring(0, length);
+    },
+
+    /*
+    *
+    * We'll make a call to the API and ask when the next game is
+    * then we'll set the loading icon to off when it's done loading
+    *
+    */
+    loadNextGame: function loadNextGame(e) {
+      var _this2 = this;
+
+      // external API call and
+      axios.get("https://v3.football.api-sports.io/fixtures?team=" + e + "&next=1", {
+        headers: {
+          "X-RapidAPI-Host": "api-football-v1.p.rapidapi.com",
+          "X-RapidAPI-Key": "b1ae4a3fca89630148dadaa295a0b5b7"
+        }
+      }).then(function (response) {
+        _this2.timetowait = response.data.response[0].fixture.date;
+        _this2.hometeam = _this2.limitTeamName(response.data.response[0].teams.home.name);
+        _this2.awayteam = _this2.limitTeamName(response.data.response[0].teams.away.name);
+
+        _this2.countryLogos.push(response.data.response[0].teams.home.logo);
+
+        _this2.countryLogos.push(response.data.response[0].teams.away.logo);
+
+        _this2.imageLoadedCheck();
+      })["catch"](function (error) {
+        console.log(error);
+      });
     }
   },
   created: function created() {
-    //setTimeout(this.startCountdown, 1000);
-    //this.startCountdown();
-    setInterval(this.startCountdown, 1000);
+    var _this3 = this;
+
+    //this.loadNextGame(this.teamid);
+    setInterval(function () {
+      return _this3.startCountdown(_this3.timetowait);
+    }, 1000);
   },
-  computed: {}
+  computed: {
+    doneloading: function doneloading() {
+      if (this.timeloading !== false && this.logoloading !== false) {
+        return {
+          opacity: 0
+        };
+      }
+    }
+  }
 });
 
 /***/ }),
@@ -3449,6 +3576,8 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
+//
+//
 //
 //
 //
@@ -3952,6 +4081,16 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     }
   },
   created: function created() {//this.loadPlayers(this.teamid);
+  },
+  computed: {
+    doneloading: function doneloading() {
+      if (!this.loading) {
+        return {
+          opacity: 0,
+          visibility: 'hidden'
+        };
+      }
+    }
   }
 });
 
@@ -3976,9 +4115,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "teamstats",
-  props: ['teamid']
+  props: ['teamid'],
+  data: function data() {
+    return {
+      loading: false
+    };
+  },
+  computed: {
+    doneloading: function doneloading() {
+      if (!this.loading) {
+        return {
+          opacity: 0,
+          visibility: 'hidden'
+        };
+      }
+    }
+  }
 });
 
 /***/ }),
@@ -22068,15 +22223,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/getUrl.js */ "./node_modules/css-loader/dist/runtime/getUrl.js");
 /* harmony import */ var _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _images_light_wool_png__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./images/light_wool.png */ "./resources/js/components/images/light_wool.png");
+/* harmony import */ var _images_pulseloader_3_gif__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./images/pulseloader_3.gif */ "./resources/js/components/images/pulseloader_3.gif");
+/* harmony import */ var _images_light_wool_png__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./images/light_wool.png */ "./resources/js/components/images/light_wool.png");
 // Imports
 
 
 
+
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
-var ___CSS_LOADER_URL_REPLACEMENT_0___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default()(_images_light_wool_png__WEBPACK_IMPORTED_MODULE_2__["default"]);
+var ___CSS_LOADER_URL_REPLACEMENT_0___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default()(_images_pulseloader_3_gif__WEBPACK_IMPORTED_MODULE_2__["default"]);
+var ___CSS_LOADER_URL_REPLACEMENT_1___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default()(_images_light_wool_png__WEBPACK_IMPORTED_MODULE_3__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.timer_header[data-v-64efac30] {\n    width: 100%;\n    height: 55px;\n    font-family: 'Oswald', sans-serif;\n    font-size: 24px;\n    color: #515151;\n    text-align: center;\n    background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ");\n    padding: 9px 0 8px 0;\n}\n.separator_bar[data-v-64efac30] {\n    height: 2px;\n    background-image: linear-gradient(to right, transparent, #b5b5b5, transparent);\n}\n#days[data-v-64efac30] {\n    color: #e58d37;\n}\n#hours[data-v-64efac30] {\n    color: #c9d466;\n}\n#minutes[data-v-64efac30] {\n    color: #c34c26;\n}\n#seconds[data-v-64efac30] {\n    color: #4cb4e7;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#container[data-v-64efac30] {\n    position: relative;\n    z-index:1\n}\n.loading_div_nextgame[data-v-64efac30] {\n    position: absolute;\n    width: 100%;\n    height: 138px;\n    background-color: whitesmoke;\n    z-index: 999;\n    opacity: 100%;\n    transition: all .2s ease-in;\n}\n#pulseloader[data-v-64efac30] {\n    z-index: 1000;\n    background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ");\n    width: 84px;\n    height: 84px;\n    position: absolute;\n    top: 18%;\n    left: 45%;\n}\n.timer_header[data-v-64efac30] {\n    width: 100%;\n    height: 55px;\n    font-family: 'Oswald', sans-serif;\n    font-size: 24px;\n    color: #515151;\n    text-align: center;\n    background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_1___ + ");\n    padding: 9px 0 8px 0;\n}\n.separator_bar[data-v-64efac30] {\n    height: 2px;\n    background-image: linear-gradient(to right, transparent, #b5b5b5, transparent);\n}\n#days[data-v-64efac30] {\n    color: #e58d37;\n}\n#hours[data-v-64efac30] {\n    color: #c9d466;\n}\n#minutes[data-v-64efac30] {\n    color: #c34c26;\n}\n#seconds[data-v-64efac30] {\n    color: #4cb4e7;\n}\n#flag_hometeam[data-v-64efac30] {\n    float: left;\n    width: 75px;\n    height: 100%;\n    padding-left: 10px;\n    padding-top: 5px;\n}\n#flag_hometeam img[data-v-64efac30] {\n    height: 65px;\n}\n#hometeam_name[data-v-64efac30] {\n    float: left;\n    font-family: 'Oswald', sans-serif;\n    font-size: 1vw;\n    color: #515151;\n    width: 160px;\n    line-height: 75px;\n}\n#versus[data-v-64efac30] {\n    float: left;\n    font-family: 'Oswald', sans-serif;\n    text-transform: uppercase;\n    font-size: 31px;\n    line-height: 75px;\n}\n#awayteam_name[data-v-64efac30] {\n    float: left;\n    text-align: right;\n    font-family: 'Oswald', sans-serif;\n    font-size: 1vw;\n    color: #515151;\n    width: 160px;\n    line-height: 75px;\n}\n#flag_awayteam[data-v-64efac30] {\n    float: right;\n    width: 75px;\n    height: 100%;\n    padding-right: 10px;\n    padding-top: 5px;\n}\n#flag_awayteam img[data-v-64efac30] {\n    height: 65px;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -22133,7 +22291,7 @@ var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBP
 var ___CSS_LOADER_URL_REPLACEMENT_0___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default()(_images_pulseloader_3_gif__WEBPACK_IMPORTED_MODULE_2__["default"]);
 var ___CSS_LOADER_URL_REPLACEMENT_1___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default()(_images_light_wool_png__WEBPACK_IMPORTED_MODULE_3__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.loading_div {\n    width: 100%;\n    position: absolute;\n    height: 100%;\n    z-index: 999;\n    opacity: 100%;\n    background-color: whitesmoke;\n}\n#pulseloader {\n    z-index: 1000;\n    background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ");\n    width: 84px;\n    height: 84px;\n    position: absolute;\n    top: 39%;\n    left: 45%;\n}\n.tippy-tooltip.honeybee-theme {\n    background-color: #313131;\n    color: #ff7800;\n}\n.tippy-tooltip.honeybee-theme .tippy-roundarrow{\n    fill: #313131;\n}\n.teamplayers_container {\n    position: relative;\n    margin-left: -9px;\n    background-color: white;\n    width: 975px;\n    height: 654px;\n    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;\n}\n.teamplayer_header {\n    width: 100%;\n    font-family: 'Oswald', sans-serif;\n    font-size: 24px;\n    color: #515151;\n    text-transform: uppercase;\n    text-align: center;\n    background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_1___ + ");\n    padding: 10px 0 8px 15px;\n}\n.player_stats_header {\n    position: relative;\n    z-index: 15;\n    width: 100%;\n    height: 35px;\n    font-family: 'Oswald', sans-serif;\n    font-size: 24px;\n    color: #515151;\n    text-transform: uppercase;\n    text-align: center;\n    line-height: 30px;\n    background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_1___ + ");\n    padding: 0 0 10px 15px;\n    border-top: 1px solid #dcdcdc;\n    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;\n}\n.separator_bar {\n    height: 2px;\n    background-image: linear-gradient(to right, transparent, #b5b5b5, transparent);\n}\n.players_list-item img {\n    transition: all .1s;\n    width: 75px;\n    height: 75px;\n    border-radius: 100%;\n    box-shadow: rgba(17, 17, 26, 0.35) 0 4px 16px, rgba(17, 17, 26, 0.05) 0 8px 32px;\n}\n.active {\n    border: 4px solid #ff7800;\n}\n#midfield_div {\n    height: 188px;\n    padding: 10px 5px 0 14px;\n    width: 100%;\n}\n.players_list-item {\n    transition: all .5s;\n    display: inline-block;\n    padding: 5px;\n    margin-right: 10px;\n    cursor: pointer;\n}\n.player_stats_container {\n    position: relative;\n    z-index: 14;\n    width: 100%;\n    height: 375px;\n    background: linear-gradient(180deg, rgba(255,255,255,1) 16%, rgba(255,210,164,1) 100%);\n    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=\"#ffffff\",endColorstr=\"#ffd2a4\",GradientType=1);\n    padding: 5px 0 0 5px;\n    overflow-y: hidden;\n    scroll-behavior: auto;\n}\n.player_passport {\n    width: 255px;\n    height: 370px;\n    /*border: solid 1px #ff7800;*/\n    float: left;\n    margin-right: 5px;\n}\n.player_stats_left {\n    width: 218px;\n    height: 370px;\n    border: solid 1px #ff7800;\n    float: left;\n    margin-right: 5px;\n}\n.player_stats_right_top {\n    width: 480px;\n    height: 218px;\n    float: left;\n    margin-bottom: 5px;\n}\n.player_stats_right_bottom {\n    width: 480px;\n    height: 147px;\n    float: left;\n}\n.card {\n    float: left;\n    overflow: hidden;\n    position: relative;\n    width: 100%;\n    height: 100%;\n    border: 1px solid #ff7800;\n    border-radius: 5px;\n    text-align: center;\n}\n.card .header {\n    font-family: 'Oswald', sans-serif;\n    color: #515151;\n    font-size: 18px;\n    line-height: 18px;\n    position: absolute;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 55px;\n    z-index: 1;\n    background: #e58d36;\n    padding-top: 4px;\n}\n.avatar {\n    position: relative;\n    margin-top: 25px;\n    z-index: 100;\n}\n.avatar img {\n    width: 75px;\n    height: 75px;\n    border-radius: 50%;\n    border: 3px solid rgba(0,0,30,0.7);\n    box-shadow: rgba(0, 0, 0, 0.45) 0 25px 20px -20px;\n}\n.content {\n    padding : 0;\n    font-family: \"Roboto\", sans-serif;\n    font-size: 12px;\n    color: #515151;\n}\n.content td {\n    text-align: left;\n}\n.content_header {\n    width: 100%;\n    background-color: transparent;\n    font-family: 'Oswald', sans-serif;\n    font-size: 24px;\n    color: #616161;\n    line-height: 21px;\n    margin-top: 10px;\n}\n.progress_left {\n    float: left;\n    width: 100%;\n    position: relative;\n    -webkit-animation: all 0.4s ease;\n            animation: all 0.4s ease;\n    margin-top: 5px;\n    border: solid 1px #515151;\n}\n.bar_left {\n    border-radius: 0 1px 1px 0;\n    float:left;\n    height: 9px;\n    background-color: #ff7800;\n    width: 30%;\n    transition: all 0.5s ease-out;\n}\n.left_stats_header {\n    padding-top: 2px;\n    background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_1___ + ");\n    height: 30px;\n    width: 100%;\n    text-transform: uppercase;\n    font-family: 'Oswald', sans-serif;\n    font-size: 24px;\n    color: #616161;\n    text-align: center;\n    line-height: 24px;\n}\n.left_stats_data {\n    margin-top: 8px;\n    margin-bottom: 6px;\n    height: 30px;\n    width: 100%;\n    text-transform: uppercase;\n    font-family: 'Oswald', sans-serif;\n    font-size: 26px;\n    color: #ff7800;\n    text-align: center;\n    line-height: 26px;\n}\n.player_container {\n    height: 375px;\n}\n.player_stats_right_top_sub {\n    width: 33%;\n    float: left;\n    height: 100%;\n}\n.player_stats_right_bottom_header {\n    padding-top: 2px;\n    background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_1___ + ");\n    height: 30px;\n    width: 100%;\n    text-transform: lowercase;\n    font-family: 'Oswald', sans-serif;\n    font-size: 24px;\n    color: #616161;\n    text-align: center;\n    line-height: 24px;\n}\n.player_stats_right_bottom_data {\n    font-family: 'Oswald', sans-serif;\n    font-size: 50px;\n    color: #ff7800;\n    text-align: center;\n    margin-top: 20px;\n}\n.player_stats_right_bottom_container {\n    float: left;\n    width: 79px;\n    height: 100%\n}\n:root {\n    --radius: 2px;\n    --baseFg: white;\n    --baseBg: #919191;\n    --accentFg: #ff7800;\n    --accentBg: #919191;\n}\nselect {\n    font: 400 14px/1.3 \"Roboto Light\";\n    -webkit-appearance: none;\n    -moz-appearance: none;\n         appearance: none;\n    color: var(--baseFg);\n    border: 1px solid var(--baseFg);\n    line-height: 1;\n    outline: 0;\n    padding: 0.65em 2.5em 0.55em 0.75em;\n    border-radius: var(--radius);\n    background-color: var(--baseBg);\n    background-image: linear-gradient(var(--baseFg), var(--baseFg)),\n    linear-gradient(-135deg, transparent 50%, var(--accentBg) 50%),\n    linear-gradient(-225deg, transparent 50%, var(--accentBg) 50%),\n    linear-gradient(var(--accentBg) 42%, var(--accentFg) 42%);\n    background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;\n    background-size: 1px 100%, 20px 22px, 20px 22px, 20px 100%;\n    background-position: right 20px center, right bottom, right bottom, right bottom;\n}\nselect:hover {\n    background-image: linear-gradient(var(--accentFg), var(--accentFg)),\n    linear-gradient(-135deg, transparent 50%, var(--accentFg) 50%),\n    linear-gradient(-225deg, transparent 50%, var(--accentFg) 50%),\n    linear-gradient(var(--accentFg) 42%, var(--accentBg) 42%);\n}\nselect:active {\n    background-image: linear-gradient(var(--accentFg), var(--accentFg)),\n    linear-gradient(-135deg, transparent 50%, var(--accentFg) 50%),\n    linear-gradient(-225deg, transparent 50%, var(--accentFg) 50%),\n    linear-gradient(var(--accentFg) 42%, var(--accentBg) 42%);\n    color: var(--accentBg);\n    border-color: var(--accentFg);\n    background-color: var(--accentFg);\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.loading_div {\n    width: 100%;\n    position: absolute;\n    height: 100%;\n    z-index: 999;\n    opacity: 100%;\n    background-color: whitesmoke;\n    transition: all 0.2s ease-in-out 0s;\n    visibility: visible;\n}\n#pulseloader {\n    z-index: 1000;\n    background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ");\n    width: 84px;\n    height: 84px;\n    position: absolute;\n    top: 39%;\n    left: 45%;\n}\n.tippy-tooltip.honeybee-theme {\n    background-color: #313131;\n    color: #ff7800;\n}\n.tippy-tooltip.honeybee-theme .tippy-roundarrow{\n    fill: #313131;\n}\n.teamplayers_container {\n    position: relative;\n    margin-left: -9px;\n    background-color: white;\n    width: 975px;\n    height: 654px;\n    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0 3px 6px;\n}\n.teamplayer_header {\n    width: 100%;\n    font-family: 'Oswald', sans-serif;\n    font-size: 24px;\n    color: #515151;\n    text-transform: uppercase;\n    text-align: center;\n    background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_1___ + ");\n    padding: 10px 0 8px 15px;\n}\n.player_stats_header {\n    position: relative;\n    z-index: 15;\n    width: 100%;\n    height: 35px;\n    font-family: 'Oswald', sans-serif;\n    font-size: 24px;\n    color: #515151;\n    text-transform: uppercase;\n    text-align: center;\n    line-height: 30px;\n    background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_1___ + ");\n    padding: 0 0 10px 15px;\n    border-top: 1px solid #dcdcdc;\n    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;\n}\n.separator_bar {\n    height: 2px;\n    background-image: linear-gradient(to right, transparent, #b5b5b5, transparent);\n}\n.players_list-item img {\n    transition: all .1s;\n    width: 75px;\n    height: 75px;\n    border-radius: 100%;\n    box-shadow: rgba(17, 17, 26, 0.35) 0 4px 16px, rgba(17, 17, 26, 0.05) 0 8px 32px;\n}\n.active {\n    border: 4px solid #ff7800;\n}\n#midfield_div {\n    height: 188px;\n    padding: 10px 5px 0 14px;\n    width: 100%;\n}\n.players_list-item {\n    transition: all .5s;\n    display: inline-block;\n    padding: 5px;\n    margin-right: 10px;\n    cursor: pointer;\n}\n.player_stats_container {\n    position: relative;\n    z-index: 14;\n    width: 100%;\n    height: 375px;\n    background: linear-gradient(180deg, rgba(255,255,255,1) 16%, rgba(255,210,164,1) 100%);\n    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=\"#ffffff\",endColorstr=\"#ffd2a4\",GradientType=1);\n    padding: 5px 0 0 5px;\n    overflow-y: hidden;\n    scroll-behavior: auto;\n}\n.player_passport {\n    width: 255px;\n    height: 370px;\n    /*border: solid 1px #ff7800;*/\n    float: left;\n    margin-right: 5px;\n}\n.player_stats_left {\n    width: 218px;\n    height: 370px;\n    border: solid 1px #ff7800;\n    float: left;\n    margin-right: 5px;\n}\n.player_stats_right_top {\n    width: 480px;\n    height: 218px;\n    float: left;\n    margin-bottom: 5px;\n}\n.player_stats_right_bottom {\n    width: 480px;\n    height: 147px;\n    float: left;\n}\n.card {\n    float: left;\n    overflow: hidden;\n    position: relative;\n    width: 100%;\n    height: 100%;\n    border: 1px solid #ff7800;\n    border-radius: 5px;\n    text-align: center;\n}\n.card .header {\n    font-family: 'Oswald', sans-serif;\n    color: #515151;\n    font-size: 18px;\n    line-height: 18px;\n    position: absolute;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 55px;\n    z-index: 1;\n    background: #e58d36;\n    padding-top: 4px;\n}\n.avatar {\n    position: relative;\n    margin-top: 25px;\n    z-index: 100;\n}\n.avatar img {\n    width: 75px;\n    height: 75px;\n    border-radius: 50%;\n    border: 3px solid rgba(0,0,30,0.7);\n    box-shadow: rgba(0, 0, 0, 0.45) 0 25px 20px -20px;\n}\n.content {\n    padding : 0;\n    font-family: \"Roboto\", sans-serif;\n    font-size: 12px;\n    color: #515151;\n}\n.content td {\n    text-align: left;\n}\n.content_header_pass {\n    width: 100%;\n    background-color: transparent;\n    font-family: 'Oswald', sans-serif;\n    font-size: 24px;\n    color: #616161;\n    line-height: 21px;\n    margin-top: 10px;\n}\n.progress_left {\n    float: left;\n    width: 100%;\n    position: relative;\n    -webkit-animation: all 0.4s ease;\n            animation: all 0.4s ease;\n    margin-top: 5px;\n    border: solid 1px #515151;\n}\n.bar_left {\n    border-radius: 0 1px 1px 0;\n    float:left;\n    height: 9px;\n    background-color: #ff7800;\n    width: 30%;\n    transition: all 0.5s ease-out;\n}\n.left_stats_header {\n    padding-top: 2px;\n    background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_1___ + ");\n    height: 30px;\n    width: 100%;\n    text-transform: uppercase;\n    font-family: 'Oswald', sans-serif;\n    font-size: 24px;\n    color: #616161;\n    text-align: center;\n    line-height: 24px;\n}\n.left_stats_data {\n    margin-top: 8px;\n    margin-bottom: 6px;\n    height: 30px;\n    width: 100%;\n    text-transform: uppercase;\n    font-family: 'Oswald', sans-serif;\n    font-size: 26px;\n    color: #ff7800;\n    text-align: center;\n    line-height: 26px;\n}\n.player_container {\n    height: 375px;\n}\n.player_stats_right_top_sub {\n    width: 33%;\n    float: left;\n    height: 100%;\n}\n.player_stats_right_bottom_header {\n    padding-top: 2px;\n    background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_1___ + ");\n    height: 30px;\n    width: 100%;\n    text-transform: lowercase;\n    font-family: 'Oswald', sans-serif;\n    font-size: 24px;\n    color: #616161;\n    text-align: center;\n    line-height: 24px;\n}\n.player_stats_right_bottom_data {\n    font-family: 'Oswald', sans-serif;\n    font-size: 50px;\n    color: #ff7800;\n    text-align: center;\n    margin-top: 20px;\n}\n.player_stats_right_bottom_container {\n    float: left;\n    width: 79px;\n    height: 100%\n}\n:root {\n    --radius: 2px;\n    --baseFg: white;\n    --baseBg: #919191;\n    --accentFg: #ff7800;\n    --accentBg: #919191;\n}\nselect {\n    font: 400 14px/1.3 \"Roboto Light\";\n    -webkit-appearance: none;\n    -moz-appearance: none;\n         appearance: none;\n    color: var(--baseFg);\n    border: 1px solid var(--baseFg);\n    line-height: 1;\n    outline: 0;\n    padding: 0.65em 2.5em 0.55em 0.75em;\n    border-radius: var(--radius);\n    background-color: var(--baseBg);\n    background-image: linear-gradient(var(--baseFg), var(--baseFg)),\n    linear-gradient(-135deg, transparent 50%, var(--accentBg) 50%),\n    linear-gradient(-225deg, transparent 50%, var(--accentBg) 50%),\n    linear-gradient(var(--accentBg) 42%, var(--accentFg) 42%);\n    background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;\n    background-size: 1px 100%, 20px 22px, 20px 22px, 20px 100%;\n    background-position: right 20px center, right bottom, right bottom, right bottom;\n}\nselect:hover {\n    background-image: linear-gradient(var(--accentFg), var(--accentFg)),\n    linear-gradient(-135deg, transparent 50%, var(--accentFg) 50%),\n    linear-gradient(-225deg, transparent 50%, var(--accentFg) 50%),\n    linear-gradient(var(--accentFg) 42%, var(--accentBg) 42%);\n}\nselect:active {\n    background-image: linear-gradient(var(--accentFg), var(--accentFg)),\n    linear-gradient(-135deg, transparent 50%, var(--accentFg) 50%),\n    linear-gradient(-225deg, transparent 50%, var(--accentFg) 50%),\n    linear-gradient(var(--accentFg) 42%, var(--accentBg) 42%);\n    color: var(--accentBg);\n    border-color: var(--accentFg);\n    background-color: var(--accentFg);\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -22155,15 +22313,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/getUrl.js */ "./node_modules/css-loader/dist/runtime/getUrl.js");
 /* harmony import */ var _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _images_light_wool_png__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./images/light_wool.png */ "./resources/js/components/images/light_wool.png");
+/* harmony import */ var _images_pulseloader_3_gif__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./images/pulseloader_3.gif */ "./resources/js/components/images/pulseloader_3.gif");
+/* harmony import */ var _images_light_wool_png__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./images/light_wool.png */ "./resources/js/components/images/light_wool.png");
 // Imports
 
 
 
+
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
-var ___CSS_LOADER_URL_REPLACEMENT_0___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default()(_images_light_wool_png__WEBPACK_IMPORTED_MODULE_2__["default"]);
+var ___CSS_LOADER_URL_REPLACEMENT_0___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default()(_images_pulseloader_3_gif__WEBPACK_IMPORTED_MODULE_2__["default"]);
+var ___CSS_LOADER_URL_REPLACEMENT_1___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default()(_images_light_wool_png__WEBPACK_IMPORTED_MODULE_3__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.teamstats_container[data-v-0ceeeda7] {\n    position: relative;\n    margin-left: -9px;\n    background: rgb(63,94,251);\n    background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);\n    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=\"#3f5efb\",endColorstr=\"#fc466b\",GradientType=1);\n    width: 975px;\n    height: 435px;\n    box-shadow: rgba(0, 0, 0, 0.16) 0 3px 6px, rgba(0, 0, 0, 0.23) 0 3px 6px;\n}\n.teamstats_header[data-v-0ceeeda7] {\n    width: 100%;\n    font-family: 'Oswald', sans-serif;\n    font-size: 24px;\n    color: #515151;\n    text-transform: uppercase;\n    text-align: center;\n    background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ");\n    padding: 5px 0 5px 8px;\n    line-height: 24px;\n    height: 35px;\n}\n.separator_bar[data-v-0ceeeda7] {\n    height: 2px;\n    background-image: linear-gradient(to right, transparent, #b5b5b5, transparent);\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.loading_div_teamstats[data-v-0ceeeda7] {\n    position: absolute;\n    width: 100%;\n    height: 435px;\n    background-color: whitesmoke;\n    z-index: 999;\n    opacity: 100%;\n    transition: all .2s ease-in;\n}\n#pulseloader[data-v-0ceeeda7] {\n    z-index: 1000;\n    background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ");\n    width: 84px;\n    height: 84px;\n    position: absolute;\n    top: 41%;\n    left: 45%;\n}\n.teamstats_container[data-v-0ceeeda7] {\n    position: relative;\n    margin-top: 10px;\n    background: rgb(255,255,255);\n    background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(203,211,113,1) 100%);\n    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=\"#ffffff\",endColorstr=\"#cbd371\",GradientType=1);\n    width: 975px;\n    height: 435px;\n    box-shadow: rgba(0, 0, 0, 0.16) 0 3px 6px, rgba(0, 0, 0, 0.23) 0 3px 6px;\n}\n.teamstats_header[data-v-0ceeeda7] {\n    width: 100%;\n    font-family: 'Oswald', sans-serif;\n    font-size: 24px;\n    color: #515151;\n    text-transform: uppercase;\n    text-align: center;\n    background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_1___ + ");\n    padding: 5px 0 5px 8px;\n    line-height: 24px;\n    height: 35px;\n}\n.separator_bar[data-v-0ceeeda7] {\n    height: 2px;\n    background-image: linear-gradient(to right, transparent, #b5b5b5, transparent);\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -56249,6 +56410,10 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { attrs: { id: "container" } }, [
+    _c("div", { staticClass: "loading_div_nextgame", style: _vm.doneloading }, [
+      _c("div", { attrs: { id: "pulseloader" } }),
+    ]),
+    _vm._v(" "),
     _c("div", { staticClass: "timer_header" }, [
       _vm._v("\n        NEXT MATCH in\n        "),
       _c("span", { attrs: { id: "days" } }, [
@@ -56269,6 +56434,24 @@ var render = function () {
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "separator_bar" }),
+    _vm._v(" "),
+    _c("div", { attrs: { id: "flag_hometeam" } }, [
+      _c("img", { attrs: { src: _vm.countryLogos[0] } }),
+    ]),
+    _vm._v(" "),
+    _c("div", { attrs: { id: "hometeam_name" } }, [
+      _vm._v(_vm._s(_vm.hometeam)),
+    ]),
+    _vm._v(" "),
+    _c("div", { attrs: { id: "versus" } }, [_vm._v("vs")]),
+    _vm._v(" "),
+    _c("div", { attrs: { id: "awayteam_name" } }, [
+      _vm._v(_vm._s(_vm.awayteam)),
+    ]),
+    _vm._v(" "),
+    _c("div", { attrs: { id: "flag_awayteam" } }, [
+      _c("img", { attrs: { src: _vm.countryLogos[1] } }),
+    ]),
   ])
 }
 var staticRenderFns = []
@@ -56400,784 +56583,794 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "teamplayers_container" }, [
-    _c(
-      "div",
-      {
-        directives: [
+  return _c(
+    "div",
+    { staticClass: "teamplayers_container" },
+    [
+      _c("div", { staticClass: "loading_div", style: _vm.doneloading }, [
+        _c("div", { attrs: { id: "pulseloader" } }),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "teamplayer_header" }, [
+        _vm._v("\n        players\n        "),
+        _c(
+          "div",
           {
-            name: "show",
-            rawName: "v-show",
-            value: _vm.loading,
-            expression: "loading",
+            staticStyle: {
+              float: "right",
+              "padding-right": "10px",
+              height: "100%",
+              "line-height": "1",
+            },
           },
+          [
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.key,
+                    expression: "key",
+                  },
+                ],
+                attrs: { name: "orderPlayers" },
+                on: {
+                  change: [
+                    function ($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function (o) {
+                          return o.selected
+                        })
+                        .map(function (o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.key = $event.target.multiple
+                        ? $$selectedVal
+                        : $$selectedVal[0]
+                    },
+                    function ($event) {
+                      return _vm.orderPlayers($event)
+                    },
+                  ],
+                },
+              },
+              [
+                _c("option", { attrs: { value: "default" } }, [
+                  _vm._v("Order players by..."),
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "age" } }, [_vm._v("Age")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "height" } }, [
+                  _vm._v("Height"),
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "weight" } }, [
+                  _vm._v("Weight"),
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "rating" } }, [
+                  _vm._v("Rating"),
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "passes" } }, [
+                  _vm._v("Passes"),
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "minutes" } }, [
+                  _vm._v("Minutes"),
+                ]),
+              ]
+            ),
+          ]
+        ),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "separator_bar" }),
+      _vm._v(" "),
+      _c(
+        "div",
+        { attrs: { id: "midfield_div" } },
+        [
+          _c(
+            "transition-group",
+            { attrs: { name: "players_list", tag: "ul" } },
+            _vm._l(_vm.playersArrPortraits, function (person, index, key) {
+              return _c(
+                "span",
+                { key: person.player.id, staticClass: "players_list-item" },
+                [
+                  _c("img", {
+                    directives: [
+                      {
+                        name: "tippy",
+                        rawName: "v-tippy",
+                        value: {
+                          arrow: true,
+                          arrowType: "round",
+                          animation: "scale",
+                          animateFill: true,
+                          followCursor: "horizontal",
+                          theme: "honeybee",
+                        },
+                        expression:
+                          "{arrow : true, arrowType : 'round', animation : 'scale', animateFill: true, followCursor: 'horizontal', theme: 'honeybee'}",
+                      },
+                    ],
+                    class: { active: _vm.activeIndex === person.player.id },
+                    attrs: {
+                      content: person.player.lastname,
+                      src: person.player.photo,
+                    },
+                    on: {
+                      click: function ($event) {
+                        _vm.setActive(person.player.id)
+                        _vm.scrollPlayerWin("player" + person.player.id)
+                      },
+                    },
+                  }),
+                ]
+              )
+            }),
+            0
+          ),
         ],
-        staticClass: "loading_div",
-      },
-      [_c("div", { attrs: { id: "pulseloader" } })]
-    ),
-    _vm._v(" "),
-    _c("div", { staticClass: "teamplayer_header" }, [
-      _vm._v("\n        players\n        "),
+        1
+      ),
+      _vm._v(" "),
+      _vm._m(0),
+      _vm._v(" "),
       _c(
         "div",
         {
-          staticStyle: {
-            float: "right",
-            "padding-right": "10px",
-            height: "100%",
-            "line-height": "1",
-          },
+          staticClass: "player_stats_container",
+          attrs: { id: "allPlayerWindows" },
         },
-        [
-          _c(
-            "select",
+        _vm._l(_vm.playersArr, function (player) {
+          return _c(
+            "div",
             {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.key,
-                  expression: "key",
-                },
-              ],
-              attrs: { name: "orderPlayers" },
-              on: {
-                change: [
-                  function ($event) {
-                    var $$selectedVal = Array.prototype.filter
-                      .call($event.target.options, function (o) {
-                        return o.selected
-                      })
-                      .map(function (o) {
-                        var val = "_value" in o ? o._value : o.value
-                        return val
-                      })
-                    _vm.key = $event.target.multiple
-                      ? $$selectedVal
-                      : $$selectedVal[0]
-                  },
-                  function ($event) {
-                    return _vm.orderPlayers($event)
-                  },
-                ],
-              },
+              staticClass: "player_container",
+              attrs: { id: "player" + player.player.id },
             },
             [
-              _c("option", { attrs: { value: "default" } }, [
-                _vm._v("Order players by..."),
-              ]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "age" } }, [_vm._v("Age")]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "height" } }, [_vm._v("Height")]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "weight" } }, [_vm._v("Weight")]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "rating" } }, [_vm._v("Rating")]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "passes" } }, [_vm._v("Passes")]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "minutes" } }, [
-                _vm._v("Minutes"),
-              ]),
-            ]
-          ),
-        ]
-      ),
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "separator_bar" }),
-    _vm._v(" "),
-    _c(
-      "div",
-      { attrs: { id: "midfield_div" } },
-      [
-        _c(
-          "transition-group",
-          { attrs: { name: "players_list", tag: "ul" } },
-          _vm._l(_vm.playersArrPortraits, function (person, index, key) {
-            return _c(
-              "span",
-              { key: person.player.id, staticClass: "players_list-item" },
-              [
-                _c("img", {
-                  directives: [
-                    {
-                      name: "tippy",
-                      rawName: "v-tippy",
-                      value: {
-                        arrow: true,
-                        arrowType: "round",
-                        animation: "scale",
-                        animateFill: true,
-                        followCursor: "horizontal",
-                        theme: "honeybee",
-                      },
-                      expression:
-                        "{arrow : true, arrowType : 'round', animation : 'scale', animateFill: true, followCursor: 'horizontal', theme: 'honeybee'}",
-                    },
-                  ],
-                  class: { active: _vm.activeIndex === person.player.id },
-                  attrs: {
-                    content: person.player.lastname,
-                    src: person.player.photo,
-                  },
-                  on: {
-                    click: function ($event) {
-                      _vm.setActive(person.player.id)
-                      _vm.scrollPlayerWin("player" + person.player.id)
-                    },
-                  },
-                }),
-              ]
-            )
-          }),
-          0
-        ),
-      ],
-      1
-    ),
-    _vm._v(" "),
-    _vm._m(0),
-    _vm._v(" "),
-    _c(
-      "div",
-      {
-        staticClass: "player_stats_container",
-        attrs: { id: "allPlayerWindows" },
-      },
-      _vm._l(_vm.playersArr, function (player) {
-        return _c(
-          "div",
-          {
-            staticClass: "player_container",
-            attrs: { id: "player" + player.player.id },
-          },
-          [
-            _c("div", { staticClass: "player_passport" }, [
-              _c("div", { staticClass: "card" }, [
-                _c(
-                  "div",
-                  { staticClass: "header", attrs: { id: "header-blur" } },
-                  [
-                    _vm._v(
-                      _vm._s(player.player.firstname) +
-                        " " +
-                        _vm._s(player.player.lastname)
-                    ),
-                  ]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "avatar" }, [
-                  _c("img", { attrs: { src: player.player.photo, alt: "" } }),
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "content" }, [
-                  _c("div", { staticClass: "content_header" }, [_vm._v("AGE")]),
-                  _vm._v(" "),
-                  _c("table", { staticStyle: { "margin-top": "8px" } }, [
-                    _c("tr", [
-                      _c(
-                        "td",
-                        {
-                          staticStyle: {
-                            width: "80px",
-                            height: "20px",
-                            "padding-left": "6px",
-                          },
-                        },
-                        [_vm._v("born")]
+              _c("div", { staticClass: "player_passport" }, [
+                _c("div", { staticClass: "card" }, [
+                  _c(
+                    "div",
+                    { staticClass: "header", attrs: { id: "header-blur" } },
+                    [
+                      _vm._v(
+                        _vm._s(player.player.firstname) +
+                          " " +
+                          _vm._s(player.player.lastname)
                       ),
-                      _c("td", [
-                        _vm._v(
-                          _vm._s(player.player.birth.date) +
-                            " (" +
-                            _vm._s(player.player.age) +
-                            ")"
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "avatar" }, [
+                    _c("img", { attrs: { src: player.player.photo, alt: "" } }),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "content" }, [
+                    _c("div", { staticClass: "content_header_pass" }, [
+                      _vm._v("AGE"),
+                    ]),
+                    _vm._v(" "),
+                    _c("table", { staticStyle: { "margin-top": "8px" } }, [
+                      _c("tr", [
+                        _c(
+                          "td",
+                          {
+                            staticStyle: {
+                              width: "80px",
+                              height: "20px",
+                              "padding-left": "6px",
+                            },
+                          },
+                          [_vm._v("born")]
+                        ),
+                        _c("td", [
+                          _vm._v(
+                            _vm._s(player.player.birth.date) +
+                              " (" +
+                              _vm._s(player.player.age) +
+                              ")"
+                          ),
+                        ]),
+                      ]),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c(
+                          "td",
+                          {
+                            staticStyle: {
+                              width: "80px",
+                              height: "20px",
+                              "padding-left": "6px",
+                            },
+                          },
+                          [_vm._v("birthplace")]
+                        ),
+                        _c("td", [_vm._v(_vm._s(player.player.birth.place))]),
+                      ]),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c(
+                          "td",
+                          {
+                            staticStyle: {
+                              width: "80px",
+                              height: "20px",
+                              "padding-left": "6px",
+                            },
+                          },
+                          [_vm._v("squad rank")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          {
+                            staticStyle: {
+                              "vertical-align": "top",
+                              width: "155px",
+                            },
+                          },
+                          [
+                            _c("div", { staticClass: "progress_left" }, [
+                              _c("div", {
+                                staticClass: "bar_left",
+                                style: {
+                                  width:
+                                    _vm.rankedAgeBarPct(player.player.id) + "%",
+                                },
+                              }),
+                            ]),
+                          ]
                         ),
                       ]),
                     ]),
                     _vm._v(" "),
-                    _c("tr", [
-                      _c(
-                        "td",
-                        {
-                          staticStyle: {
-                            width: "80px",
-                            height: "20px",
-                            "padding-left": "6px",
-                          },
-                        },
-                        [_vm._v("birthplace")]
-                      ),
-                      _c("td", [_vm._v(_vm._s(player.player.birth.place))]),
+                    _c("div", { staticClass: "content_header_pass" }, [
+                      _vm._v("PHYSICAL"),
                     ]),
                     _vm._v(" "),
-                    _c("tr", [
-                      _c(
-                        "td",
-                        {
-                          staticStyle: {
-                            width: "80px",
-                            height: "20px",
-                            "padding-left": "6px",
+                    _c("table", { staticStyle: { "margin-top": "8px" } }, [
+                      _c("tr", [
+                        _c(
+                          "td",
+                          {
+                            staticStyle: {
+                              width: "80px",
+                              height: "20px",
+                              "padding-left": "6px",
+                            },
                           },
-                        },
-                        [_vm._v("squad rank")]
-                      ),
+                          [_vm._v("height")]
+                        ),
+                        _c("td", [_vm._v(_vm._s(player.player.height))]),
+                      ]),
                       _vm._v(" "),
-                      _c(
-                        "td",
-                        {
-                          staticStyle: {
-                            "vertical-align": "top",
-                            width: "155px",
+                      _c("tr", [
+                        _c(
+                          "td",
+                          {
+                            staticStyle: {
+                              width: "80px",
+                              height: "20px",
+                              "padding-left": "6px",
+                            },
                           },
-                        },
-                        [
-                          _c("div", { staticClass: "progress_left" }, [
-                            _c("div", {
-                              staticClass: "bar_left",
-                              style: {
-                                width:
-                                  _vm.rankedAgeBarPct(player.player.id) + "%",
-                              },
-                            }),
-                          ]),
-                        ]
-                      ),
-                    ]),
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "content_header" }, [
-                    _vm._v("PHYSICAL"),
-                  ]),
-                  _vm._v(" "),
-                  _c("table", { staticStyle: { "margin-top": "8px" } }, [
-                    _c("tr", [
-                      _c(
-                        "td",
-                        {
-                          staticStyle: {
-                            width: "80px",
-                            height: "20px",
-                            "padding-left": "6px",
+                          [_vm._v("squad rank")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          {
+                            staticStyle: {
+                              "vertical-align": "top",
+                              width: "155px",
+                            },
                           },
-                        },
-                        [_vm._v("height")]
-                      ),
-                      _c("td", [_vm._v(_vm._s(player.player.height))]),
-                    ]),
-                    _vm._v(" "),
-                    _c("tr", [
-                      _c(
-                        "td",
-                        {
-                          staticStyle: {
-                            width: "80px",
-                            height: "20px",
-                            "padding-left": "6px",
-                          },
-                        },
-                        [_vm._v("squad rank")]
-                      ),
+                          [
+                            _c("div", { staticClass: "progress_left" }, [
+                              _c("div", {
+                                staticClass: "bar_left",
+                                style: {
+                                  width:
+                                    _vm.rankedHeightBarPct(player.player.id) +
+                                    "%",
+                                },
+                              }),
+                            ]),
+                          ]
+                        ),
+                      ]),
                       _vm._v(" "),
-                      _c(
-                        "td",
-                        {
-                          staticStyle: {
-                            "vertical-align": "top",
-                            width: "155px",
+                      _c("tr", [
+                        _c(
+                          "td",
+                          {
+                            staticStyle: {
+                              width: "80px",
+                              height: "20px",
+                              "padding-left": "6px",
+                            },
                           },
-                        },
-                        [
-                          _c("div", { staticClass: "progress_left" }, [
-                            _c("div", {
-                              staticClass: "bar_left",
-                              style: {
-                                width:
-                                  _vm.rankedHeightBarPct(player.player.id) +
-                                  "%",
-                              },
-                            }),
-                          ]),
-                        ]
-                      ),
-                    ]),
-                    _vm._v(" "),
-                    _c("tr", [
-                      _c(
-                        "td",
-                        {
-                          staticStyle: {
-                            width: "80px",
-                            height: "20px",
-                            "padding-left": "6px",
-                          },
-                        },
-                        [_vm._v("weight")]
-                      ),
-                      _c("td", [_vm._v(_vm._s(player.player.weight))]),
-                    ]),
-                    _vm._v(" "),
-                    _c("tr", [
-                      _c(
-                        "td",
-                        {
-                          staticStyle: {
-                            width: "80px",
-                            height: "20px",
-                            "padding-left": "6px",
-                          },
-                        },
-                        [_vm._v("squad rank")]
-                      ),
+                          [_vm._v("weight")]
+                        ),
+                        _c("td", [_vm._v(_vm._s(player.player.weight))]),
+                      ]),
                       _vm._v(" "),
-                      _c(
-                        "td",
-                        {
-                          staticStyle: {
-                            "vertical-align": "top",
-                            width: "155px",
+                      _c("tr", [
+                        _c(
+                          "td",
+                          {
+                            staticStyle: {
+                              width: "80px",
+                              height: "20px",
+                              "padding-left": "6px",
+                            },
                           },
-                        },
-                        [
-                          _c("div", { staticClass: "progress_left" }, [
-                            _c("div", {
-                              staticClass: "bar_left",
-                              style: {
-                                width:
-                                  _vm.rankedWeightBarPct(player.player.id) +
-                                  "%",
-                              },
-                            }),
-                          ]),
-                        ]
-                      ),
+                          [_vm._v("squad rank")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          {
+                            staticStyle: {
+                              "vertical-align": "top",
+                              width: "155px",
+                            },
+                          },
+                          [
+                            _c("div", { staticClass: "progress_left" }, [
+                              _c("div", {
+                                staticClass: "bar_left",
+                                style: {
+                                  width:
+                                    _vm.rankedWeightBarPct(player.player.id) +
+                                    "%",
+                                },
+                              }),
+                            ]),
+                          ]
+                        ),
+                      ]),
                     ]),
                   ]),
                 ]),
               ]),
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "player_stats_left" }, [
-              _c("div", { staticClass: "left_stats_header" }, [
-                _vm._v("\n                    games this ec\n                "),
-              ]),
               _vm._v(" "),
-              _c("div", { staticClass: "left_stats_data" }, [
-                _vm._v(
-                  "\n                    " +
-                    _vm._s(
-                      player.statistics[0].games.appearences
-                        ? Number(player.statistics[0].games.appearences)
-                        : "-"
-                    ) +
-                    "\n                "
-                ),
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "left_stats_header" }, [
-                _vm._v("\n                    starting XI\n                "),
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "left_stats_data" }, [
-                _vm._v(
-                  "\n                    " +
-                    _vm._s(
-                      player.statistics[0].games.lineups
-                        ? Number(player.statistics[0].games.lineups)
-                        : "-"
-                    ) +
-                    "\n                "
-                ),
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "left_stats_header" }, [
-                _vm._v("\n                    minutes\n                "),
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "left_stats_data" }, [
-                _vm._v(
-                  "\n                    " +
-                    _vm._s(
-                      player.statistics[0].games.minutes
-                        ? Number(player.statistics[0].games.minutes)
-                        : "-"
-                    ) +
-                    "\n                "
-                ),
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "left_stats_header" }, [
-                _vm._v("\n                    position\n                "),
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "left_stats_data" }, [
-                _vm._v(
-                  "\n                    " +
-                    _vm._s(
-                      player.statistics[0].games.position
-                        ? player.statistics[0].games.position
-                        : "-"
-                    ) +
-                    "\n                "
-                ),
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "left_stats_header" }, [
-                _vm._v("\n                    rating\n                "),
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "left_stats_data" }, [
-                _vm._v(
-                  "\n                    " +
-                    _vm._s(
-                      player.statistics[0].games.rating
-                        ? Number(player.statistics[0].games.rating).toFixed(2)
-                        : "-"
-                    ) +
-                    "\n                "
-                ),
-              ]),
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "player_stats_right_top" }, [
-              _c("div", { staticClass: "player_stats_right_top_sub" }, [
+              _c("div", { staticClass: "player_stats_left" }, [
                 _c("div", { staticClass: "left_stats_header" }, [
                   _vm._v(
-                    "\n                        passes\n                    "
+                    "\n                    games this ec\n                "
                   ),
                 ]),
                 _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    staticStyle: {
-                      "background-color": "transparent",
-                      "margin-left": "10px",
-                      "margin-top": "10px",
-                    },
-                  },
-                  [
-                    player.statistics[0].passes.total != null
-                      ? _c("donut-test", {
-                          directives: [
-                            {
-                              name: "show",
-                              rawName: "v-show",
-                              value: _vm.loaded,
-                              expression: "loaded",
-                            },
-                          ],
-                          attrs: {
-                            centertext: player.statistics[0].passes.total,
-                            "chart-data":
-                              _vm.playerDoughnutStatsPasses[
-                                _vm.whichIndexPasses(player.player.id)
-                              ],
-                            canvas_id: player.player.id,
-                          },
-                        })
-                      : _vm._e(),
-                  ],
-                  1
-                ),
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "player_stats_right_top_sub" }, [
-                _c("div", { staticClass: "left_stats_header" }, [
+                _c("div", { staticClass: "left_stats_data" }, [
                   _vm._v(
-                    "\n                        duels\n                    "
+                    "\n                    " +
+                      _vm._s(
+                        player.statistics[0].games.appearences
+                          ? Number(player.statistics[0].games.appearences)
+                          : "-"
+                      ) +
+                      "\n                "
                   ),
                 ]),
                 _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    staticStyle: {
-                      "background-color": "transparent",
-                      "margin-left": "10px",
-                      "margin-top": "10px",
-                    },
-                  },
-                  [
-                    player.statistics[0].duels.total != null
-                      ? _c("donut-test", {
-                          directives: [
-                            {
-                              name: "show",
-                              rawName: "v-show",
-                              value: _vm.loaded,
-                              expression: "loaded",
-                            },
-                          ],
-                          attrs: {
-                            centertext: player.statistics[0].duels.total,
-                            "chart-data":
-                              _vm.playerDoughnutStatsDuels[
-                                _vm.whichIndexDuels(player.player.id)
-                              ],
-                            canvas_id: player.player.id + 999,
-                          },
-                        })
-                      : _vm._e(),
-                  ],
-                  1
-                ),
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "player_stats_right_top_sub" }, [
                 _c("div", { staticClass: "left_stats_header" }, [
+                  _vm._v("\n                    starting XI\n                "),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "left_stats_data" }, [
                   _vm._v(
-                    "\n                        dribbles\n                    "
+                    "\n                    " +
+                      _vm._s(
+                        player.statistics[0].games.lineups
+                          ? Number(player.statistics[0].games.lineups)
+                          : "-"
+                      ) +
+                      "\n                "
                   ),
                 ]),
                 _vm._v(" "),
+                _c("div", { staticClass: "left_stats_header" }, [
+                  _vm._v("\n                    minutes\n                "),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "left_stats_data" }, [
+                  _vm._v(
+                    "\n                    " +
+                      _vm._s(
+                        player.statistics[0].games.minutes
+                          ? Number(player.statistics[0].games.minutes)
+                          : "-"
+                      ) +
+                      "\n                "
+                  ),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "left_stats_header" }, [
+                  _vm._v("\n                    position\n                "),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "left_stats_data" }, [
+                  _vm._v(
+                    "\n                    " +
+                      _vm._s(
+                        player.statistics[0].games.position
+                          ? player.statistics[0].games.position
+                          : "-"
+                      ) +
+                      "\n                "
+                  ),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "left_stats_header" }, [
+                  _vm._v("\n                    rating\n                "),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "left_stats_data" }, [
+                  _vm._v(
+                    "\n                    " +
+                      _vm._s(
+                        player.statistics[0].games.rating
+                          ? Number(player.statistics[0].games.rating).toFixed(2)
+                          : "-"
+                      ) +
+                      "\n                "
+                  ),
+                ]),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "player_stats_right_top" }, [
+                _c("div", { staticClass: "player_stats_right_top_sub" }, [
+                  _c("div", { staticClass: "left_stats_header" }, [
+                    _vm._v(
+                      "\n                        passes\n                    "
+                    ),
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticStyle: {
+                        "background-color": "transparent",
+                        "margin-left": "10px",
+                        "margin-top": "10px",
+                      },
+                    },
+                    [
+                      player.statistics[0].passes.total != null
+                        ? _c("donut-test", {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value: _vm.loaded,
+                                expression: "loaded",
+                              },
+                            ],
+                            attrs: {
+                              centertext: player.statistics[0].passes.total,
+                              "chart-data":
+                                _vm.playerDoughnutStatsPasses[
+                                  _vm.whichIndexPasses(player.player.id)
+                                ],
+                              canvas_id: player.player.id,
+                            },
+                          })
+                        : _vm._e(),
+                    ],
+                    1
+                  ),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "player_stats_right_top_sub" }, [
+                  _c("div", { staticClass: "left_stats_header" }, [
+                    _vm._v(
+                      "\n                        duels\n                    "
+                    ),
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticStyle: {
+                        "background-color": "transparent",
+                        "margin-left": "10px",
+                        "margin-top": "10px",
+                      },
+                    },
+                    [
+                      player.statistics[0].duels.total != null
+                        ? _c("donut-test", {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value: _vm.loaded,
+                                expression: "loaded",
+                              },
+                            ],
+                            attrs: {
+                              centertext: player.statistics[0].duels.total,
+                              "chart-data":
+                                _vm.playerDoughnutStatsDuels[
+                                  _vm.whichIndexDuels(player.player.id)
+                                ],
+                              canvas_id: player.player.id + 999,
+                            },
+                          })
+                        : _vm._e(),
+                    ],
+                    1
+                  ),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "player_stats_right_top_sub" }, [
+                  _c("div", { staticClass: "left_stats_header" }, [
+                    _vm._v(
+                      "\n                        dribbles\n                    "
+                    ),
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticStyle: {
+                        "background-color": "transparent",
+                        "margin-left": "10px",
+                        "margin-top": "10px",
+                      },
+                    },
+                    [
+                      player.statistics[0].dribbles.attempts != null &&
+                      player.statistics[0].dribbles.attempts > 0
+                        ? _c("donut-test", {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value: _vm.loaded,
+                                expression: "loaded",
+                              },
+                            ],
+                            attrs: {
+                              centertext:
+                                player.statistics[0].dribbles.attempts,
+                              "chart-data":
+                                _vm.playerDoughnutStatsDribbles[
+                                  _vm.whichIndexDribbles(player.player.id)
+                                ],
+                              canvas_id: player.player.id + 1099,
+                            },
+                          })
+                        : _vm._e(),
+                    ],
+                    1
+                  ),
+                ]),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "player_stats_right_bottom" }, [
                 _c(
                   "div",
                   {
-                    staticStyle: {
-                      "background-color": "transparent",
-                      "margin-left": "10px",
-                      "margin-top": "10px",
-                    },
+                    staticClass: "player_stats_right_bottom_sub",
+                    staticStyle: { height: "inherit" },
                   },
                   [
-                    player.statistics[0].dribbles.attempts != null &&
-                    player.statistics[0].dribbles.attempts > 0
-                      ? _c("donut-test", {
-                          directives: [
-                            {
-                              name: "show",
-                              rawName: "v-show",
-                              value: _vm.loaded,
-                              expression: "loaded",
-                            },
-                          ],
-                          attrs: {
-                            centertext: player.statistics[0].dribbles.attempts,
-                            "chart-data":
-                              _vm.playerDoughnutStatsDribbles[
-                                _vm.whichIndexDribbles(player.player.id)
-                              ],
-                            canvas_id: player.player.id + 1099,
-                          },
-                        })
-                      : _vm._e(),
-                  ],
-                  1
+                    _c(
+                      "div",
+                      { staticClass: "player_stats_right_bottom_container" },
+                      [
+                        _c(
+                          "div",
+                          { staticClass: "player_stats_right_bottom_header" },
+                          [
+                            _vm._v(
+                              "\n                            shots\n                        "
+                            ),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "player_stats_right_bottom_data" },
+                          [
+                            _vm._v(
+                              "\n                            " +
+                                _vm._s(
+                                  player.statistics[0].shots.total
+                                    ? Number(player.statistics[0].shots.total)
+                                    : "-"
+                                ) +
+                                "\n                        "
+                            ),
+                          ]
+                        ),
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "player_stats_right_bottom_container" },
+                      [
+                        _c(
+                          "div",
+                          { staticClass: "player_stats_right_bottom_header" },
+                          [
+                            _vm._v(
+                              "\n                            goals\n                        "
+                            ),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "player_stats_right_bottom_data" },
+                          [
+                            _vm._v(
+                              "\n                            " +
+                                _vm._s(
+                                  player.statistics[0].goals.total
+                                    ? Number(player.statistics[0].goals.total)
+                                    : "-"
+                                ) +
+                                "\n                        "
+                            ),
+                          ]
+                        ),
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "player_stats_right_bottom_container" },
+                      [
+                        _c(
+                          "div",
+                          { staticClass: "player_stats_right_bottom_header" },
+                          [
+                            _vm._v(
+                              "\n                            cards\n                        "
+                            ),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "player_stats_right_bottom_data" },
+                          [
+                            _vm._v(
+                              "\n                            " +
+                                _vm._s(
+                                  player.statistics[0].cards.red +
+                                    player.statistics[0].cards.yellow
+                                ) +
+                                "\n                        "
+                            ),
+                          ]
+                        ),
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "player_stats_right_bottom_container" },
+                      [
+                        _c(
+                          "div",
+                          { staticClass: "player_stats_right_bottom_header" },
+                          [
+                            _vm._v(
+                              "\n                            tackles\n                        "
+                            ),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "player_stats_right_bottom_data" },
+                          [
+                            _vm._v(
+                              "\n                            " +
+                                _vm._s(
+                                  player.statistics[0].tackles.total
+                                    ? Number(player.statistics[0].tackles.total)
+                                    : "-"
+                                ) +
+                                "\n                        "
+                            ),
+                          ]
+                        ),
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "player_stats_right_bottom_container" },
+                      [
+                        _c(
+                          "div",
+                          { staticClass: "player_stats_right_bottom_header" },
+                          [
+                            _vm._v(
+                              "\n                            fouls\n                        "
+                            ),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "player_stats_right_bottom_data" },
+                          [
+                            _vm._v(
+                              "\n                            " +
+                                _vm._s(
+                                  player.statistics[0].fouls.committed
+                                    ? Number(
+                                        player.statistics[0].fouls.committed
+                                      )
+                                    : "-"
+                                ) +
+                                "\n                        "
+                            ),
+                          ]
+                        ),
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "player_stats_right_bottom_container" },
+                      [
+                        _c(
+                          "div",
+                          { staticClass: "player_stats_right_bottom_header" },
+                          [
+                            _vm._v(
+                              "\n                            subs\n                        "
+                            ),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "player_stats_right_bottom_data" },
+                          [
+                            _vm._v(
+                              "\n                            " +
+                                _vm._s(
+                                  player.statistics[0].substitutes.in +
+                                    player.statistics[0].substitutes.out
+                                ) +
+                                "\n                        "
+                            ),
+                          ]
+                        ),
+                      ]
+                    ),
+                  ]
                 ),
               ]),
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "player_stats_right_bottom" }, [
-              _c(
-                "div",
-                {
-                  staticClass: "player_stats_right_bottom_sub",
-                  staticStyle: { height: "inherit" },
-                },
-                [
-                  _c(
-                    "div",
-                    { staticClass: "player_stats_right_bottom_container" },
-                    [
-                      _c(
-                        "div",
-                        { staticClass: "player_stats_right_bottom_header" },
-                        [
-                          _vm._v(
-                            "\n                            shots\n                        "
-                          ),
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "player_stats_right_bottom_data" },
-                        [
-                          _vm._v(
-                            "\n                            " +
-                              _vm._s(
-                                player.statistics[0].shots.total
-                                  ? Number(player.statistics[0].shots.total)
-                                  : "-"
-                              ) +
-                              "\n                        "
-                          ),
-                        ]
-                      ),
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "player_stats_right_bottom_container" },
-                    [
-                      _c(
-                        "div",
-                        { staticClass: "player_stats_right_bottom_header" },
-                        [
-                          _vm._v(
-                            "\n                            goals\n                        "
-                          ),
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "player_stats_right_bottom_data" },
-                        [
-                          _vm._v(
-                            "\n                            " +
-                              _vm._s(
-                                player.statistics[0].goals.total
-                                  ? Number(player.statistics[0].goals.total)
-                                  : "-"
-                              ) +
-                              "\n                        "
-                          ),
-                        ]
-                      ),
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "player_stats_right_bottom_container" },
-                    [
-                      _c(
-                        "div",
-                        { staticClass: "player_stats_right_bottom_header" },
-                        [
-                          _vm._v(
-                            "\n                            cards\n                        "
-                          ),
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "player_stats_right_bottom_data" },
-                        [
-                          _vm._v(
-                            "\n                            " +
-                              _vm._s(
-                                player.statistics[0].cards.red +
-                                  player.statistics[0].cards.yellow
-                              ) +
-                              "\n                        "
-                          ),
-                        ]
-                      ),
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "player_stats_right_bottom_container" },
-                    [
-                      _c(
-                        "div",
-                        { staticClass: "player_stats_right_bottom_header" },
-                        [
-                          _vm._v(
-                            "\n                            tackles\n                        "
-                          ),
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "player_stats_right_bottom_data" },
-                        [
-                          _vm._v(
-                            "\n                            " +
-                              _vm._s(
-                                player.statistics[0].tackles.total
-                                  ? Number(player.statistics[0].tackles.total)
-                                  : "-"
-                              ) +
-                              "\n                        "
-                          ),
-                        ]
-                      ),
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "player_stats_right_bottom_container" },
-                    [
-                      _c(
-                        "div",
-                        { staticClass: "player_stats_right_bottom_header" },
-                        [
-                          _vm._v(
-                            "\n                            fouls\n                        "
-                          ),
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "player_stats_right_bottom_data" },
-                        [
-                          _vm._v(
-                            "\n                            " +
-                              _vm._s(
-                                player.statistics[0].fouls.committed
-                                  ? Number(player.statistics[0].fouls.committed)
-                                  : "-"
-                              ) +
-                              "\n                        "
-                          ),
-                        ]
-                      ),
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "player_stats_right_bottom_container" },
-                    [
-                      _c(
-                        "div",
-                        { staticClass: "player_stats_right_bottom_header" },
-                        [
-                          _vm._v(
-                            "\n                            subs\n                        "
-                          ),
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "player_stats_right_bottom_data" },
-                        [
-                          _vm._v(
-                            "\n                            " +
-                              _vm._s(
-                                player.statistics[0].substitutes.in +
-                                  player.statistics[0].substitutes.out
-                              ) +
-                              "\n                        "
-                          ),
-                        ]
-                      ),
-                    ]
-                  ),
-                ]
-              ),
-            ]),
-          ]
-        )
-      }),
-      0
-    ),
-  ])
+            ]
+          )
+        }),
+        0
+      ),
+      _vm._v(" "),
+      _c("team-stats", { attrs: { teamid: _vm.teamid } }),
+    ],
+    1
+  )
 }
 var staticRenderFns = [
   function () {
@@ -57211,22 +57404,19 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "teamstats_container" }, [
+    _c(
+      "div",
+      { staticClass: "loading_div_teamstats", style: _vm.doneloading },
+      [_c("div", { attrs: { id: "pulseloader" } })]
+    ),
+    _vm._v(" "),
+    _c("div", { staticClass: "teamstats_header" }, [_vm._v("team statistics")]),
+    _vm._v(" "),
+    _c("div", { staticClass: "separator_bar" }),
+  ])
 }
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "teamstats_container" }, [
-      _c("div", { staticClass: "teamstats_header" }, [
-        _vm._v("team statistics"),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "separator_bar" }),
-    ])
-  },
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

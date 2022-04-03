@@ -54,7 +54,7 @@
                     <next-game teamid="{{ $country->api_country_code }}"></next-game>
                 </div>
             </div>
-        </div>
+        </div><div class="footer_teampage"></div>
     </div>
-    <div class="footer_teampage"></div>
+
 @endsection

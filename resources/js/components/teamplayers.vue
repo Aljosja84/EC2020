@@ -1,6 +1,6 @@
 <template>
     <div class="teamplayers_container">
-        <div v-show="loading" class="loading_div"><div id="pulseloader"/></div>
+        <div v-bind:style="doneloading" class="loading_div"><div id="pulseloader"/></div>
         <div class="teamplayer_header">
             players
             <div style="float: right; padding-right: 10px; ; height: 100%; line-height: 1">
@@ -37,7 +37,7 @@
                             <img :src=player.player.photo alt="" />
                         </div>
                         <div class="content">
-                            <div class="content_header">AGE</div>
+                            <div class="content_header_pass">AGE</div>
                                 <table style="margin-top: 8px">
                                     <tr>
                                         <td style="width: 80px; height: 20px; padding-left: 6px">born</td><td>{{player.player.birth.date}} ({{player.player.age}})</td>
@@ -55,7 +55,7 @@
                                         </td>
                                     </tr>
                                 </table>
-                            <div class="content_header">PHYSICAL</div>
+                            <div class="content_header_pass">PHYSICAL</div>
                                 <table style="margin-top: 8px">
                                     <tr>
                                         <td style="width: 80px; height: 20px; padding-left: 6px">height</td><td>{{ player.player.height }}</td>
@@ -207,7 +207,9 @@
                 </div>
             </div>
         </div>
+        <team-stats :teamid="teamid"></team-stats>
     </div>
+
 </template>
 
 <script>
@@ -493,6 +495,13 @@
         created() {
             //this.loadPlayers(this.teamid);
         },
+        computed: {
+            doneloading() {
+                if(!this.loading) {
+                    return {opacity: 0, visibility: 'hidden'};
+                }
+            }
+        }
 
     }
 </script>
@@ -505,6 +514,11 @@
         z-index: 999;
         opacity: 100%;
         background-color: whitesmoke;
+        -webkit-transition: all 0.2s ease-in-out 0s;
+        -moz-transition: all 0.2s ease-in-out 0s;
+        -ms-transition: all 0.2s ease-in-out 0s;
+        transition: all 0.2s ease-in-out 0s;
+        visibility: visible;
     }
 
     #pulseloader {
@@ -531,7 +545,7 @@
         background-color: white;
         width: 975px;
         height: 654px;
-        box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0 3px 6px;
     }
 
     .teamplayer_header {
@@ -686,7 +700,7 @@
         text-align: left;
     }
 
-    .content_header {
+    .content_header_pass {
         width: 100%;
         background-color: transparent;
         font-family: 'Oswald', sans-serif;

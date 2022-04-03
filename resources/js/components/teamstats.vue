@@ -1,5 +1,6 @@
 <template>
     <div class="teamstats_container">
+        <div class="loading_div_teamstats" v-bind:style="doneloading"><div id="pulseloader"/></div>
         <div class="teamstats_header">team statistics</div>
         <!-- seperator -->
         <div class="separator_bar"></div>
@@ -9,19 +10,51 @@
 <script>
     export default {
         name: "teamstats",
-        props: ['teamid']
+        props: ['teamid'],
+
+        data() {
+            return {
+                loading: false
+            }
+        },
+        computed: {
+            doneloading() {
+                if(!this.loading) {
+                    return {opacity: 0, visibility: 'hidden'};
+                }
+            }
+        }
     }
 </script>
 
 <style scoped>
+    .loading_div_teamstats {
+        position: absolute;
+        width: 100%;
+        height: 435px;
+        background-color: whitesmoke;
+        z-index: 999;
+        opacity: 100%;
+        transition: all .2s ease-in;
+    }
+
+    #pulseloader {
+        z-index: 1000;
+        background-image: url("images/pulseloader_3.gif");
+        width: 84px;
+        height: 84px;
+        position: absolute;
+        top: 41%;
+        left: 45%;
+    }
     .teamstats_container {
         position: relative;
-        margin-left: -9px;
-        background: rgb(63,94,251);
-        background: -moz-radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
-        background: -webkit-radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
-        background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#3f5efb",endColorstr="#fc466b",GradientType=1);
+        margin-top: 10px;
+        background: rgb(255,255,255);
+        background: -moz-linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(203,211,113,1) 100%);
+        background: -webkit-linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(203,211,113,1) 100%);
+        background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(203,211,113,1) 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffff",endColorstr="#cbd371",GradientType=1);
         width: 975px;
         height: 435px;
         box-shadow: rgba(0, 0, 0, 0.16) 0 3px 6px, rgba(0, 0, 0, 0.23) 0 3px 6px;
