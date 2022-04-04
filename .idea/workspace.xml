@@ -23,10 +23,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/css/ec2020.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/ec2020.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/nextgame.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/nextgame.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/teamplayers.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/teamplayers.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/teamstats.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/teamstats.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/team.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/team.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -409,6 +406,7 @@
       <workItem from="1648718767066" duration="17268000" />
       <workItem from="1648806754408" duration="17408000" />
       <workItem from="1648894276077" duration="19481000" />
+      <workItem from="1649075146494" duration="5314000" />
     </task>
     <servers />
   </component>

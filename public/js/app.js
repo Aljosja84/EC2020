@@ -4116,6 +4116,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "teamstats",
   props: ['teamid'],
@@ -22324,7 +22336,7 @@ var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBP
 var ___CSS_LOADER_URL_REPLACEMENT_0___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default()(_images_pulseloader_3_gif__WEBPACK_IMPORTED_MODULE_2__["default"]);
 var ___CSS_LOADER_URL_REPLACEMENT_1___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default()(_images_light_wool_png__WEBPACK_IMPORTED_MODULE_3__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.loading_div_teamstats[data-v-0ceeeda7] {\n    position: absolute;\n    width: 100%;\n    height: 435px;\n    background-color: whitesmoke;\n    z-index: 999;\n    opacity: 100%;\n    transition: all .2s ease-in;\n}\n#pulseloader[data-v-0ceeeda7] {\n    z-index: 1000;\n    background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ");\n    width: 84px;\n    height: 84px;\n    position: absolute;\n    top: 41%;\n    left: 45%;\n}\n.teamstats_container[data-v-0ceeeda7] {\n    position: relative;\n    margin-top: 10px;\n    background: rgb(255,255,255);\n    background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(203,211,113,1) 100%);\n    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=\"#ffffff\",endColorstr=\"#cbd371\",GradientType=1);\n    width: 975px;\n    height: 435px;\n    box-shadow: rgba(0, 0, 0, 0.16) 0 3px 6px, rgba(0, 0, 0, 0.23) 0 3px 6px;\n}\n.teamstats_header[data-v-0ceeeda7] {\n    width: 100%;\n    font-family: 'Oswald', sans-serif;\n    font-size: 24px;\n    color: #515151;\n    text-transform: uppercase;\n    text-align: center;\n    background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_1___ + ");\n    padding: 5px 0 5px 8px;\n    line-height: 24px;\n    height: 35px;\n}\n.separator_bar[data-v-0ceeeda7] {\n    height: 2px;\n    background-image: linear-gradient(to right, transparent, #b5b5b5, transparent);\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.loading_div_teamstats[data-v-0ceeeda7] {\n    position: absolute;\n    width: 100%;\n    height: 435px;\n    background-color: whitesmoke;\n    z-index: 999;\n    opacity: 100%;\n    transition: all .2s ease-in;\n}\n#pulseloader[data-v-0ceeeda7] {\n    z-index: 1000;\n    background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ");\n    width: 84px;\n    height: 84px;\n    position: absolute;\n    top: 41%;\n    left: 45%;\n}\n.teamstats_container[data-v-0ceeeda7] {\n    position: relative;\n    margin-top: 10px;\n    width: 975px;\n    height: 435px;\n    box-shadow: rgba(0, 0, 0, 0.16) 0 3px 6px, rgba(0, 0, 0, 0.23) 0 3px 6px;\n    background-color: white;\n}\n.teamstats_header[data-v-0ceeeda7] {\n    position: relative;\n    width: 100%;\n    font-family: 'Oswald', sans-serif;\n    font-size: 24px;\n    color: #515151;\n    text-transform: uppercase;\n    text-align: center;\n    background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_1___ + ");\n    padding: 5px 0 5px 8px;\n    line-height: 24px;\n    height: 35px;\n    box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;\n    z-index: 999;\n}\n.separator_bar[data-v-0ceeeda7] {\n    height: 2px;\n    background-image: linear-gradient(to right, transparent, #b5b5b5, transparent);\n}\n#header_bar_container[data-v-0ceeeda7] {\n    position: relative;\n    width: 100%;\n    height: 40px;\n    font-family: 'Oswald', sans-serif;\n    font-size: 24px;\n    color: #515151;\n    text-transform: uppercase;\n    line-height: 40px;\n    text-align: center;\n    border-bottom: 1px solid #d0d0d0;\n    background-color: whitesmoke;\n    z-index: 0;\n}\n#games_header[data-v-0ceeeda7] {\n    float: left;\n    text-align: inherit;\n    width: 230px;\n}\n#goals_header[data-v-0ceeeda7] {\n    float: left;\n    text-align: inherit;\n    width: 488px;\n}\n#extra_header[data-v-0ceeeda7] {\n    float: left;\n    text-align: inherit;\n    width: 257px;\n}\n#stats_container[data-v-0ceeeda7] {\n    width: 100%;\n    height: 358px;\n    background: rgb(255,255,255);\n    background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(203,211,113,1) 100%);\n    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=\"#ffffff\",endColorstr=\"#cbd371\",GradientType=1);\n}\n.separator_div[data-v-0ceeeda7] {\n    width: 1px;\n    height: 100%;\n    background-image: linear-gradient(to top, transparent, #b5b5b5, transparent);\n}\n#games_container[data-v-0ceeeda7] {\n    float: left;\n    width: 230px;\n    height: 100%;\n    background-color: transparent;\n}\n#goals_container[data-v-0ceeeda7] {\n    -o-border-image: linear-gradient(to top, transparent, whitesmoke, transparent) 1;\n       border-image: linear-gradient(to top, transparent, whitesmoke, transparent) 1;\n    border-width: 1px;\n    border-style: solid;\n    border-right: none;\n    border-bottom: none;\n    border-top: none;\n    float: left;\n    width: 486px;\n    height: 100%;\n    background-color: transparent;\n}\n#extra_container[data-v-0ceeeda7] {\n    -o-border-image: linear-gradient(to top, transparent, whitesmoke, transparent) 1;\n       border-image: linear-gradient(to top, transparent, whitesmoke, transparent) 1;\n    border-width: 1px;\n    border-style: solid;\n    border-right: none;\n    border-bottom: none;\n    border-top: none;\n    float: left;\n    width: 257px;\n    height: 100%;\n    background-color: transparent;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -57411,12 +57423,53 @@ var render = function () {
       [_c("div", { attrs: { id: "pulseloader" } })]
     ),
     _vm._v(" "),
-    _c("div", { staticClass: "teamstats_header" }, [_vm._v("team statistics")]),
+    _c("div", { staticClass: "teamstats_header" }, [
+      _vm._v("team statistics (including qualifiers)"),
+    ]),
     _vm._v(" "),
     _c("div", { staticClass: "separator_bar" }),
+    _vm._v(" "),
+    _vm._m(0),
+    _vm._v(" "),
+    _vm._m(1),
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { attrs: { id: "header_bar_container" } }, [
+      _c("div", { attrs: { id: "games_header" } }, [_vm._v("games")]),
+      _vm._v(" "),
+      _c("div", { attrs: { id: "goals_header" } }, [_vm._v("goals")]),
+      _vm._v(" "),
+      _c("div", { attrs: { id: "extra_header" } }, [_vm._v("extra")]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { attrs: { id: "stats_container" } }, [
+      _c("div", { attrs: { id: "games_container" } }, [_vm._v("games")]),
+      _vm._v(" "),
+      _c("div", {
+        staticClass: "separator_div",
+        staticStyle: { float: "left" },
+      }),
+      _vm._v(" "),
+      _c("div", { attrs: { id: "goals_container" } }, [_vm._v("goals")]),
+      _vm._v(" "),
+      _c("div", {
+        staticClass: "separator_div",
+        staticStyle: { float: "left" },
+      }),
+      _vm._v(" "),
+      _c("div", { attrs: { id: "extra_container" } }, [_vm._v("extra")]),
+    ])
+  },
+]
 render._withStripped = true
 
 

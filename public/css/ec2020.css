@@ -129,7 +129,8 @@
     text-transform: uppercase;
     text-align: center;
     background-image: url("../images/light_wool.png");
-    padding: 18px 0 8px 0;
+    padding: 10px 0 8px 0;
+    box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
 }
 .separator_bar {
     height: 2px;
