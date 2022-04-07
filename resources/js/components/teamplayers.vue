@@ -125,7 +125,7 @@
                             passes
                         </div>
                         <div style="background-color: transparent; margin-left: 10px; margin-top: 10px">
-                            <donut-test v-show="loaded" v-if="player.statistics[0].passes.total != null" v-bind:centertext="player.statistics[0].passes.total" v-bind:chart-data="playerDoughnutStatsPasses[whichIndexPasses(player.player.id)]" :canvas_id="player.player.id"/>
+                            <donut-test v-show="loaded" v-if="player.statistics[0].passes.total != null" v-bind:fontsize="28" v-bind:centertext="player.statistics[0].passes.total" v-bind:chart-data="playerDoughnutStatsPasses[whichIndexPasses(player.player.id)]" :canvas_id="player.player.id"/>
                         </div>
                     </div>
                     <div class="player_stats_right_top_sub">
@@ -133,7 +133,7 @@
                             duels
                         </div>
                         <div style="background-color: transparent; margin-left: 10px; margin-top: 10px">
-                            <donut-test v-show="loaded" v-if="player.statistics[0].duels.total != null" v-bind:centertext="player.statistics[0].duels.total" v-bind:chart-data="playerDoughnutStatsDuels[whichIndexDuels(player.player.id)]" :canvas_id="player.player.id+999"/>
+                            <donut-test v-show="loaded" v-if="player.statistics[0].duels.total != null" v-bind:fontsize="28" v-bind:centertext="player.statistics[0].duels.total" v-bind:chart-data="playerDoughnutStatsDuels[whichIndexDuels(player.player.id)]" :canvas_id="player.player.id+999"/>
                         </div>
                     </div>
                     <div class="player_stats_right_top_sub">
@@ -141,7 +141,7 @@
                             dribbles
                         </div>
                         <div style="background-color: transparent; margin-left: 10px; margin-top: 10px">
-                            <donut-test v-show="loaded" v-if="player.statistics[0].dribbles.attempts != null && player.statistics[0].dribbles.attempts > 0" v-bind:centertext="player.statistics[0].dribbles.attempts" v-bind:chart-data="playerDoughnutStatsDribbles[whichIndexDribbles(player.player.id)]" :canvas_id="player.player.id+1099"/>
+                            <donut-test v-show="loaded" v-if="player.statistics[0].dribbles.attempts != null && player.statistics[0].dribbles.attempts > 0" v-bind:fontsize="28" v-bind:centertext="player.statistics[0].dribbles.attempts" v-bind:chart-data="playerDoughnutStatsDribbles[whichIndexDribbles(player.player.id)]" :canvas_id="player.player.id+1099"/>
                         </div>
                     </div>
                     <!--

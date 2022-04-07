@@ -10,9 +10,45 @@
             <div id="extra_header">extra</div>
         </div>
         <div id="stats_container">
-            <div id="games_container">games</div>
+            <div id="games_container">
+                <div class="games_chart_div">
+                    <div class="games_title">played</div>
+                    <div class="games_chart">
+                        <donut-test v-show="loaded" v-bind:centertext="12" v-bind:fontsize="24" v-bind:chart-data="playedChart[0]" :canvas_id="'played'+teamid"/>
+                    </div>
+                </div>
+                <div class="games_chart_div">
+                    <div class="games_title">wins</div>
+                    <div class="games_chart">
+                        <donut-test v-show="loaded" v-bind:centertext="12" v-bind:fontsize="24" v-bind:chart-data="playedChart[0]" :canvas_id="'wins'+teamid"/>
+                    </div>
+                </div>
+                <div class="games_chart_div">
+                    <div class="games_title">draws</div>
+                    <div class="games_chart">
+                        <donut-test v-show="loaded" v-bind:centertext="12" v-bind:fontsize="24" v-bind:chart-data="playedChart[0]" :canvas_id="'draws'+teamid"/>
+                    </div>
+                </div>
+                <div class="games_chart_div">
+                    <div class="games_title">loses</div>
+                    <div class="games_chart">
+                        <donut-test v-show="loaded" v-bind:centertext="12" v-bind:fontsize="24" v-bind:chart-data="playedChart[0]" :canvas_id="'loses'+teamid"/>
+                    </div>
+                </div>
+            </div>
             <div class="separator_div" style="float: left"></div>
-            <div id="goals_container">goals</div>
+            <div id="goals_container">
+                <div id="for_container">
+                    for
+                    <div class="for_title_bar"><span>home</span><span>away</span><span>total</span></div>
+                    <div class="for_data_bar"><span>16</span><span>7</span><span>23</span></div>
+                </div>
+                <div id="against_container">
+                    against
+                    <div class="for_title_bar"><span>home</span><span>away</span><span>total</span></div>
+                    <div class="for_data_bar"><span>16</span><span>7</span><span>23</span></div>
+                </div>
+            </div>
             <div class="separator_div" style="float: left"></div>
             <div id="extra_container">extra</div>
         </div>
@@ -20,13 +56,52 @@
 </template>
 
 <script>
+    import donutTest from "./donutTest";
+
     export default {
         name: "teamstats",
         props: ['teamid'],
+        components: { donutTest },
 
         data() {
             return {
-                loading: false
+                loading: false,
+                loaded: true,
+                playedChart: [{
+                    'playerid': 12,
+                    'type': 'doughnut',
+                    'data': {
+                        'labels': ['home', 'away'],
+                        'datasets': [
+                            {
+                                'data': [8, 4],
+                                'backgroundColor': [
+                                    // green
+                                    '#74c89b',
+                                    // red
+                                    '#2b6c41'
+                                ]
+                            },
+                        ],
+
+                    },
+                    'options': {
+                        'plugins': {
+                            'legend': {
+                                'display': false,
+                            }
+                        },
+                        'layout': {
+                            'padding': 10
+                        },
+                        'cutout': '50%',
+                        'hoverOffset': 7,
+                        'responsive': true,
+                        'maintainAspectRatio': true,
+                        'borderWidth': 0
+                    }
+                }],
+
             }
         },
         computed: {
@@ -137,6 +212,7 @@
     }
 
     #games_container {
+        padding-top: 5px;
         float: left;
         width: 230px;
         height: 100%;
@@ -153,6 +229,7 @@
         width: 486px;
         height: 100%;
         background-color: transparent;
+        padding: 5px 15px 0 15px;
     }
     #extra_container {
         border-image: linear-gradient(to top, transparent, whitesmoke, transparent) 1;
@@ -165,5 +242,69 @@
         width: 257px;
         height: 100%;
         background-color: transparent;
+    }
+
+    .games_chart_div {
+        padding-left: 10px;
+        width: 100%;
+        height: 85px;
+        font-family: 'Oswald', sans-serif;
+        font-size: 24px;
+        color: #515151;
+        text-transform: lowercase;
+        line-height: 85px;
+    }
+    .games_title {
+        width: 30%;
+        float: left;
+    }
+    .games_chart {
+        padding-left: 30px;
+        width: 129px;
+        height: 85px;
+        float: left;
+    }
+
+    #for_container, #against_container {
+        font-family: 'Oswald', sans-serif;
+        font-size: 25px;
+        color: #515151;
+        float: left;
+        width: 226px;
+        height: 100%;
+    }
+
+    #against_container {
+        text-align: right;
+    }
+    .for_title_bar {
+        margin-top: 6px;
+        font-family: "Roboto Light", sans-serif;
+        font-size: 16px;
+        width: 224px;
+        height: 35px;
+        border-top: 1px solid #336026;
+        display: flex;
+        justify-content: space-between;
+        line-height: 35px;
+        background: rgb(189, 232, 177);
+        background: -moz-linear-gradient(180deg, rgba(189, 232, 177, 1) 0%, rgba(98, 176, 75, 1) 5%, rgba(169, 226, 153, 1) 100%);
+        background: -webkit-linear-gradient(180deg, rgba(189, 232, 177, 1) 0%, rgba(98, 176, 75, 1) 5%, rgba(169, 226, 153, 1) 100%);
+        background: linear-gradient(180deg, rgba(189, 232, 177, 1) 0%, rgba(98, 176, 75, 1) 5%, rgba(169, 226, 153, 1) 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#bde8b1", endColorstr="#a9e299", GradientType=1);
+        padding: 0 6px 0 6px;
+    }
+   .for_data_bar {
+        font-family: "Roboto Light", sans-serif;
+        font-size: 16px;
+        margin-top: 2px;
+        width: 224px;
+        height: 35px;
+        border-top: 1px solid #336026;
+        display: flex;
+        justify-content: space-between;
+        background-color: #c1e4b6;
+        padding: 0 6px 0 6px;
+        line-height: 35px;
     }
 </style>

@@ -2,7 +2,7 @@
     <div class="relative" id="canvas_div">
         <canvas :id=this.canvas_id></canvas>
         <div class="absolute-center text-center">
-            <p>{{ centertext }}</p>
+            <p :style="style">{{ centertext }}</p>
         </div>
     </div>
 </template>
@@ -12,12 +12,18 @@
     export default {
         name: "donutTest",
 
-        props: ['chartData', 'options', 'centertext','canvas_id'],
+        props: ['chartData', 'options', 'centertext','canvas_id', 'fontsize'],
 
         mounted() {
             const ctx = document.getElementById(this.canvas_id);
             const jelle = new Chart(ctx, this.chartData);
         },
+
+        computed: {
+            style() {
+                return "font-family:'Oswald', sans-serif; color: #515151; font-size: " + this.fontsize +'px';
+            }
+        }
     }
 </script>
 
@@ -28,8 +34,8 @@
 
     .absolute-center {
         position:absolute;
-        top: 50%;
-        left: 50%;
+        top: 53%;
+        left: 49%;
         transform: translate(-50%, -55%);
     }
 
@@ -38,11 +44,6 @@
         z-index: 0;
     }
 
-    p {
-        font-family: 'Oswald', sans-serif;
-        font-size: 34px;
-        color: #515151;
-    }
     canvas {
         position: relative;
         z-index: 1;

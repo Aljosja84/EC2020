@@ -2697,10 +2697,15 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "donutTest",
-  props: ['chartData', 'options', 'centertext', 'canvas_id'],
+  props: ['chartData', 'options', 'centertext', 'canvas_id', 'fontsize'],
   mounted: function mounted() {
     var ctx = document.getElementById(this.canvas_id);
     var jelle = new chart_js_auto__WEBPACK_IMPORTED_MODULE_0__["default"](ctx, this.chartData);
+  },
+  computed: {
+    style: function style() {
+      return "font-family:'Oswald', sans-serif; color: #515151; font-size: " + this.fontsize + 'px';
+    }
   }
 });
 
@@ -4107,6 +4112,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _donutTest__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./donutTest */ "./resources/js/components/donutTest.vue");
 //
 //
 //
@@ -4128,12 +4134,81 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "teamstats",
   props: ['teamid'],
+  components: {
+    donutTest: _donutTest__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
   data: function data() {
     return {
-      loading: false
+      loading: false,
+      loaded: true,
+      playedChart: [{
+        'playerid': 12,
+        'type': 'doughnut',
+        'data': {
+          'labels': ['home', 'away'],
+          'datasets': [{
+            'data': [8, 4],
+            'backgroundColor': [// green
+            '#74c89b', // red
+            '#2b6c41']
+          }]
+        },
+        'options': {
+          'plugins': {
+            'legend': {
+              'display': false
+            }
+          },
+          'layout': {
+            'padding': 10
+          },
+          'cutout': '50%',
+          'hoverOffset': 7,
+          'responsive': true,
+          'maintainAspectRatio': true,
+          'borderWidth': 0
+        }
+      }]
     };
   },
   computed: {
@@ -22135,7 +22210,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.relative[data-v-0da89719] {\n    position: relative;\n}\n.absolute-center[data-v-0da89719] {\n    position:absolute;\n    top: 50%;\n    left: 50%;\n    transform: translate(-50%, -55%);\n}\n.text-center[data-v-0da89719]{\n    text-align: center;\n    z-index: 0;\n}\np[data-v-0da89719] {\n    font-family: 'Oswald', sans-serif;\n    font-size: 34px;\n    color: #515151;\n}\ncanvas[data-v-0da89719] {\n    position: relative;\n    z-index: 1;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.relative[data-v-0da89719] {\n    position: relative;\n}\n.absolute-center[data-v-0da89719] {\n    position:absolute;\n    top: 53%;\n    left: 49%;\n    transform: translate(-50%, -55%);\n}\n.text-center[data-v-0da89719]{\n    text-align: center;\n    z-index: 0;\n}\ncanvas[data-v-0da89719] {\n    position: relative;\n    z-index: 1;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -22336,7 +22411,7 @@ var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBP
 var ___CSS_LOADER_URL_REPLACEMENT_0___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default()(_images_pulseloader_3_gif__WEBPACK_IMPORTED_MODULE_2__["default"]);
 var ___CSS_LOADER_URL_REPLACEMENT_1___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default()(_images_light_wool_png__WEBPACK_IMPORTED_MODULE_3__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.loading_div_teamstats[data-v-0ceeeda7] {\n    position: absolute;\n    width: 100%;\n    height: 435px;\n    background-color: whitesmoke;\n    z-index: 999;\n    opacity: 100%;\n    transition: all .2s ease-in;\n}\n#pulseloader[data-v-0ceeeda7] {\n    z-index: 1000;\n    background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ");\n    width: 84px;\n    height: 84px;\n    position: absolute;\n    top: 41%;\n    left: 45%;\n}\n.teamstats_container[data-v-0ceeeda7] {\n    position: relative;\n    margin-top: 10px;\n    width: 975px;\n    height: 435px;\n    box-shadow: rgba(0, 0, 0, 0.16) 0 3px 6px, rgba(0, 0, 0, 0.23) 0 3px 6px;\n    background-color: white;\n}\n.teamstats_header[data-v-0ceeeda7] {\n    position: relative;\n    width: 100%;\n    font-family: 'Oswald', sans-serif;\n    font-size: 24px;\n    color: #515151;\n    text-transform: uppercase;\n    text-align: center;\n    background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_1___ + ");\n    padding: 5px 0 5px 8px;\n    line-height: 24px;\n    height: 35px;\n    box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;\n    z-index: 999;\n}\n.separator_bar[data-v-0ceeeda7] {\n    height: 2px;\n    background-image: linear-gradient(to right, transparent, #b5b5b5, transparent);\n}\n#header_bar_container[data-v-0ceeeda7] {\n    position: relative;\n    width: 100%;\n    height: 40px;\n    font-family: 'Oswald', sans-serif;\n    font-size: 24px;\n    color: #515151;\n    text-transform: uppercase;\n    line-height: 40px;\n    text-align: center;\n    border-bottom: 1px solid #d0d0d0;\n    background-color: whitesmoke;\n    z-index: 0;\n}\n#games_header[data-v-0ceeeda7] {\n    float: left;\n    text-align: inherit;\n    width: 230px;\n}\n#goals_header[data-v-0ceeeda7] {\n    float: left;\n    text-align: inherit;\n    width: 488px;\n}\n#extra_header[data-v-0ceeeda7] {\n    float: left;\n    text-align: inherit;\n    width: 257px;\n}\n#stats_container[data-v-0ceeeda7] {\n    width: 100%;\n    height: 358px;\n    background: rgb(255,255,255);\n    background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(203,211,113,1) 100%);\n    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=\"#ffffff\",endColorstr=\"#cbd371\",GradientType=1);\n}\n.separator_div[data-v-0ceeeda7] {\n    width: 1px;\n    height: 100%;\n    background-image: linear-gradient(to top, transparent, #b5b5b5, transparent);\n}\n#games_container[data-v-0ceeeda7] {\n    float: left;\n    width: 230px;\n    height: 100%;\n    background-color: transparent;\n}\n#goals_container[data-v-0ceeeda7] {\n    -o-border-image: linear-gradient(to top, transparent, whitesmoke, transparent) 1;\n       border-image: linear-gradient(to top, transparent, whitesmoke, transparent) 1;\n    border-width: 1px;\n    border-style: solid;\n    border-right: none;\n    border-bottom: none;\n    border-top: none;\n    float: left;\n    width: 486px;\n    height: 100%;\n    background-color: transparent;\n}\n#extra_container[data-v-0ceeeda7] {\n    -o-border-image: linear-gradient(to top, transparent, whitesmoke, transparent) 1;\n       border-image: linear-gradient(to top, transparent, whitesmoke, transparent) 1;\n    border-width: 1px;\n    border-style: solid;\n    border-right: none;\n    border-bottom: none;\n    border-top: none;\n    float: left;\n    width: 257px;\n    height: 100%;\n    background-color: transparent;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.loading_div_teamstats[data-v-0ceeeda7] {\n     position: absolute;\n     width: 100%;\n     height: 435px;\n     background-color: whitesmoke;\n     z-index: 999;\n     opacity: 100%;\n     transition: all .2s ease-in;\n}\n#pulseloader[data-v-0ceeeda7] {\n     z-index: 1000;\n     background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ");\n     width: 84px;\n     height: 84px;\n     position: absolute;\n     top: 41%;\n     left: 45%;\n}\n.teamstats_container[data-v-0ceeeda7] {\n     position: relative;\n     margin-top: 10px;\n     width: 975px;\n     height: 435px;\n     box-shadow: rgba(0, 0, 0, 0.16) 0 3px 6px, rgba(0, 0, 0, 0.23) 0 3px 6px;\n     background-color: white;\n}\n.teamstats_header[data-v-0ceeeda7] {\n     position: relative;\n     width: 100%;\n     font-family: 'Oswald', sans-serif;\n     font-size: 24px;\n     color: #515151;\n     text-transform: uppercase;\n     text-align: center;\n     background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_1___ + ");\n     padding: 5px 0 5px 8px;\n     line-height: 24px;\n     height: 35px;\n     box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;\n     z-index: 999;\n}\n.separator_bar[data-v-0ceeeda7] {\n     height: 2px;\n     background-image: linear-gradient(to right, transparent, #b5b5b5, transparent);\n}\n#header_bar_container[data-v-0ceeeda7] {\n     position: relative;\n     width: 100%;\n     height: 40px;\n     font-family: 'Oswald', sans-serif;\n     font-size: 24px;\n     color: #515151;\n     text-transform: uppercase;\n     line-height: 40px;\n     text-align: center;\n     border-bottom: 1px solid #d0d0d0;\n     background-color: whitesmoke;\n     z-index: 0;\n}\n#games_header[data-v-0ceeeda7] {\n     float: left;\n     text-align: inherit;\n     width: 230px;\n}\n#goals_header[data-v-0ceeeda7] {\n     float: left;\n     text-align: inherit;\n     width: 488px;\n}\n#extra_header[data-v-0ceeeda7] {\n     float: left;\n     text-align: inherit;\n     width: 257px;\n}\n#stats_container[data-v-0ceeeda7] {\n     width: 100%;\n     height: 358px;\n     background: rgb(255,255,255);\n     background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(203,211,113,1) 100%);\n     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=\"#ffffff\",endColorstr=\"#cbd371\",GradientType=1);\n}\n.separator_div[data-v-0ceeeda7] {\n     width: 1px;\n     height: 100%;\n     background-image: linear-gradient(to top, transparent, #b5b5b5, transparent);\n}\n#games_container[data-v-0ceeeda7] {\n     padding-top: 5px;\n     float: left;\n     width: 230px;\n     height: 100%;\n     background-color: transparent;\n}\n#goals_container[data-v-0ceeeda7] {\n     -o-border-image: linear-gradient(to top, transparent, whitesmoke, transparent) 1;\n        border-image: linear-gradient(to top, transparent, whitesmoke, transparent) 1;\n     border-width: 1px;\n     border-style: solid;\n     border-right: none;\n     border-bottom: none;\n     border-top: none;\n     float: left;\n     width: 486px;\n     height: 100%;\n     background-color: transparent;\n     padding: 5px 15px 0 15px;\n}\n#extra_container[data-v-0ceeeda7] {\n     -o-border-image: linear-gradient(to top, transparent, whitesmoke, transparent) 1;\n        border-image: linear-gradient(to top, transparent, whitesmoke, transparent) 1;\n     border-width: 1px;\n     border-style: solid;\n     border-right: none;\n     border-bottom: none;\n     border-top: none;\n     float: left;\n     width: 257px;\n     height: 100%;\n     background-color: transparent;\n}\n.games_chart_div[data-v-0ceeeda7] {\n     padding-left: 10px;\n     width: 100%;\n     height: 85px;\n     font-family: 'Oswald', sans-serif;\n     font-size: 24px;\n     color: #515151;\n     text-transform: lowercase;\n     line-height: 85px;\n}\n.games_title[data-v-0ceeeda7] {\n     width: 30%;\n     float: left;\n}\n.games_chart[data-v-0ceeeda7] {\n     padding-left: 30px;\n     width: 129px;\n     height: 85px;\n     float: left;\n}\n#for_container[data-v-0ceeeda7], #against_container[data-v-0ceeeda7] {\n     font-family: 'Oswald', sans-serif;\n     font-size: 25px;\n     color: #515151;\n     float: left;\n     width: 226px;\n     height: 100%;\n}\n#against_container[data-v-0ceeeda7] {\n     text-align: right;\n}\n.for_title_bar[data-v-0ceeeda7] {\n     margin-top: 6px;\n     font-family: \"Roboto Light\", sans-serif;\n     font-size: 16px;\n     width: 224px;\n     height: 35px;\n     border-top: 1px solid #336026;\n     display: flex;\n     justify-content: space-between;\n     line-height: 35px;\n     background: rgb(189, 232, 177);\n     background: linear-gradient(180deg, rgba(189, 232, 177, 1) 0%, rgba(98, 176, 75, 1) 5%, rgba(169, 226, 153, 1) 100%);\n     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=\"#bde8b1\", endColorstr=\"#a9e299\", GradientType=1);\n     padding: 0 6px 0 6px;\n}\n.for_data_bar[data-v-0ceeeda7] {\n     font-family: \"Roboto Light\", sans-serif;\n     font-size: 16px;\n     margin-top: 2px;\n     width: 224px;\n     height: 35px;\n     border-top: 1px solid #336026;\n     display: flex;\n     justify-content: space-between;\n     background-color: #c1e4b6;\n     padding: 0 6px 0 6px;\n     line-height: 35px;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -55752,7 +55827,7 @@ var render = function () {
     _c("canvas", { attrs: { id: this.canvas_id } }),
     _vm._v(" "),
     _c("div", { staticClass: "absolute-center text-center" }, [
-      _c("p", [_vm._v(_vm._s(_vm.centertext))]),
+      _c("p", { style: _vm.style }, [_vm._v(_vm._s(_vm.centertext))]),
     ]),
   ])
 }
@@ -57070,6 +57145,7 @@ var render = function () {
                               },
                             ],
                             attrs: {
+                              fontsize: 28,
                               centertext: player.statistics[0].passes.total,
                               "chart-data":
                                 _vm.playerDoughnutStatsPasses[
@@ -57112,6 +57188,7 @@ var render = function () {
                               },
                             ],
                             attrs: {
+                              fontsize: 28,
                               centertext: player.statistics[0].duels.total,
                               "chart-data":
                                 _vm.playerDoughnutStatsDuels[
@@ -57155,6 +57232,7 @@ var render = function () {
                               },
                             ],
                             attrs: {
+                              fontsize: 28,
                               centertext:
                                 player.statistics[0].dribbles.attempts,
                               "chart-data":
@@ -57431,7 +57509,135 @@ var render = function () {
     _vm._v(" "),
     _vm._m(0),
     _vm._v(" "),
-    _vm._m(1),
+    _c("div", { attrs: { id: "stats_container" } }, [
+      _c("div", { attrs: { id: "games_container" } }, [
+        _c("div", { staticClass: "games_chart_div" }, [
+          _c("div", { staticClass: "games_title" }, [_vm._v("played")]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "games_chart" },
+            [
+              _c("donut-test", {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.loaded,
+                    expression: "loaded",
+                  },
+                ],
+                attrs: {
+                  centertext: 12,
+                  fontsize: 24,
+                  "chart-data": _vm.playedChart[0],
+                  canvas_id: "played" + _vm.teamid,
+                },
+              }),
+            ],
+            1
+          ),
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "games_chart_div" }, [
+          _c("div", { staticClass: "games_title" }, [_vm._v("wins")]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "games_chart" },
+            [
+              _c("donut-test", {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.loaded,
+                    expression: "loaded",
+                  },
+                ],
+                attrs: {
+                  centertext: 12,
+                  fontsize: 24,
+                  "chart-data": _vm.playedChart[0],
+                  canvas_id: "wins" + _vm.teamid,
+                },
+              }),
+            ],
+            1
+          ),
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "games_chart_div" }, [
+          _c("div", { staticClass: "games_title" }, [_vm._v("draws")]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "games_chart" },
+            [
+              _c("donut-test", {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.loaded,
+                    expression: "loaded",
+                  },
+                ],
+                attrs: {
+                  centertext: 12,
+                  fontsize: 24,
+                  "chart-data": _vm.playedChart[0],
+                  canvas_id: "draws" + _vm.teamid,
+                },
+              }),
+            ],
+            1
+          ),
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "games_chart_div" }, [
+          _c("div", { staticClass: "games_title" }, [_vm._v("loses")]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "games_chart" },
+            [
+              _c("donut-test", {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.loaded,
+                    expression: "loaded",
+                  },
+                ],
+                attrs: {
+                  centertext: 12,
+                  fontsize: 24,
+                  "chart-data": _vm.playedChart[0],
+                  canvas_id: "loses" + _vm.teamid,
+                },
+              }),
+            ],
+            1
+          ),
+        ]),
+      ]),
+      _vm._v(" "),
+      _c("div", {
+        staticClass: "separator_div",
+        staticStyle: { float: "left" },
+      }),
+      _vm._v(" "),
+      _vm._m(1),
+      _vm._v(" "),
+      _c("div", {
+        staticClass: "separator_div",
+        staticStyle: { float: "left" },
+      }),
+      _vm._v(" "),
+      _c("div", { attrs: { id: "extra_container" } }, [_vm._v("extra")]),
+    ]),
   ])
 }
 var staticRenderFns = [
@@ -57451,22 +57657,36 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { attrs: { id: "stats_container" } }, [
-      _c("div", { attrs: { id: "games_container" } }, [_vm._v("games")]),
+    return _c("div", { attrs: { id: "goals_container" } }, [
+      _c("div", { attrs: { id: "for_container" } }, [
+        _vm._v("\n                for\n                "),
+        _c("div", { staticClass: "for_title_bar" }, [
+          _c("span", [_vm._v("home")]),
+          _c("span", [_vm._v("away")]),
+          _c("span", [_vm._v("total")]),
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "for_data_bar" }, [
+          _c("span", [_vm._v("16")]),
+          _c("span", [_vm._v("7")]),
+          _c("span", [_vm._v("23")]),
+        ]),
+      ]),
       _vm._v(" "),
-      _c("div", {
-        staticClass: "separator_div",
-        staticStyle: { float: "left" },
-      }),
-      _vm._v(" "),
-      _c("div", { attrs: { id: "goals_container" } }, [_vm._v("goals")]),
-      _vm._v(" "),
-      _c("div", {
-        staticClass: "separator_div",
-        staticStyle: { float: "left" },
-      }),
-      _vm._v(" "),
-      _c("div", { attrs: { id: "extra_container" } }, [_vm._v("extra")]),
+      _c("div", { attrs: { id: "against_container" } }, [
+        _vm._v("\n                against\n                "),
+        _c("div", { staticClass: "for_title_bar" }, [
+          _c("span", [_vm._v("home")]),
+          _c("span", [_vm._v("away")]),
+          _c("span", [_vm._v("total")]),
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "for_data_bar" }, [
+          _c("span", [_vm._v("16")]),
+          _c("span", [_vm._v("7")]),
+          _c("span", [_vm._v("23")]),
+        ]),
+      ]),
     ])
   },
 ]
