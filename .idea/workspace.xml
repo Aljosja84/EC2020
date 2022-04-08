@@ -21,9 +21,9 @@
   <component name="ChangeListManager">
     <list default="true" id="cf82d037-ce69-45df-857e-a29fb7732fae" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/donutTest.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/donutTest.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/teamplayers.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/teamplayers.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/teamstats.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/teamstats.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -410,7 +410,8 @@
       <workItem from="1649075146494" duration="5988000" />
       <workItem from="1649113681556" duration="554000" />
       <workItem from="1649151848109" duration="4259000" />
-      <workItem from="1649333928511" duration="8774000" />
+      <workItem from="1649333928511" duration="9372000" />
+      <workItem from="1649415118858" duration="10202000" />
     </task>
     <servers />
   </component>

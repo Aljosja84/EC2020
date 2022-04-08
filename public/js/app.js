@@ -2673,6 +2673,42 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/barchart.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/barchart.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var chart_js_auto__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! chart.js/auto */ "./node_modules/chart.js/auto/auto.esm.js");
+//
+//
+//
+//
+//
+//
+
+chart_js_auto__WEBPACK_IMPORTED_MODULE_0__["default"].defaults.scale.grid.display = false;
+chart_js_auto__WEBPACK_IMPORTED_MODULE_0__["default"].defaults.plugins.decimation.enabled = false;
+chart_js_auto__WEBPACK_IMPORTED_MODULE_0__["default"].defaults.scale.ticks.precision = 0;
+chart_js_auto__WEBPACK_IMPORTED_MODULE_0__["default"].defaults.plugins.legend.display = false;
+chart_js_auto__WEBPACK_IMPORTED_MODULE_0__["default"].defaults.font.size = 10;
+chart_js_auto__WEBPACK_IMPORTED_MODULE_0__["default"].defaults.color = "#000";
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: "barchart",
+  props: ['chartData', 'options', 'centertext', 'canvas_id', 'fontsize'],
+  mounted: function mounted() {
+    var ctx = document.getElementById(this.canvas_id);
+    var jelle = new chart_js_auto__WEBPACK_IMPORTED_MODULE_0__["default"](ctx, this.chartData);
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/donutTest.vue?vue&type=script&lang=js&":
 /*!****************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/donutTest.vue?vue&type=script&lang=js& ***!
@@ -4113,6 +4149,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _donutTest__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./donutTest */ "./resources/js/components/donutTest.vue");
+/* harmony import */ var _barchart__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./barchart */ "./resources/js/components/barchart.vue");
+//
+//
+//
+//
 //
 //
 //
@@ -4171,11 +4212,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "teamstats",
   props: ['teamid'],
   components: {
-    donutTest: _donutTest__WEBPACK_IMPORTED_MODULE_0__["default"]
+    donutTest: _donutTest__WEBPACK_IMPORTED_MODULE_0__["default"],
+    BarChart: _barchart__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   data: function data() {
     return {
@@ -4207,6 +4250,27 @@ __webpack_require__.r(__webpack_exports__);
           'responsive': true,
           'maintainAspectRatio': true,
           'borderWidth': 0
+        }
+      }],
+      forChart: [{
+        type: 'bar',
+        data: {
+          labels: ["0-15", "15-30", "30-45", "45-60", "60-75", "75-90", "90+"],
+          datasets: [{
+            indexAxis: 'x',
+            label: "Goals",
+            backgroundColor: ["#8ba752"],
+            hoverBackgroundColor: ["#6b883b"],
+            data: [1, 2, 1, 4, 3, 2, 3]
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              display: false,
+              beginAtZero: true
+            }
+          }
         }
       }]
     };
@@ -22193,6 +22257,30 @@ ___CSS_LOADER_EXPORT___.push([module.id, "\n.container[data-v-221bb58c] {\n    w
 
 /***/ }),
 
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/barchart.vue?vue&type=style&index=0&id=d7fc3914&scoped=true&lang=css&":
+/*!***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/barchart.vue?vue&type=style&index=0&id=d7fc3914&scoped=true&lang=css& ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, "\n.relative[data-v-d7fc3914] {\n    margin-top: 3px;\n    position: relative;\n}\ncanvas[data-v-d7fc3914] {\n    position: relative;\n    z-index: 1;\n}\n", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/donutTest.vue?vue&type=style&index=0&id=0da89719&scoped=true&lang=css&":
 /*!************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/donutTest.vue?vue&type=style&index=0&id=0da89719&scoped=true&lang=css& ***!
@@ -22411,7 +22499,7 @@ var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBP
 var ___CSS_LOADER_URL_REPLACEMENT_0___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default()(_images_pulseloader_3_gif__WEBPACK_IMPORTED_MODULE_2__["default"]);
 var ___CSS_LOADER_URL_REPLACEMENT_1___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default()(_images_light_wool_png__WEBPACK_IMPORTED_MODULE_3__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.loading_div_teamstats[data-v-0ceeeda7] {\n     position: absolute;\n     width: 100%;\n     height: 435px;\n     background-color: whitesmoke;\n     z-index: 999;\n     opacity: 100%;\n     transition: all .2s ease-in;\n}\n#pulseloader[data-v-0ceeeda7] {\n     z-index: 1000;\n     background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ");\n     width: 84px;\n     height: 84px;\n     position: absolute;\n     top: 41%;\n     left: 45%;\n}\n.teamstats_container[data-v-0ceeeda7] {\n     position: relative;\n     margin-top: 10px;\n     width: 975px;\n     height: 435px;\n     box-shadow: rgba(0, 0, 0, 0.16) 0 3px 6px, rgba(0, 0, 0, 0.23) 0 3px 6px;\n     background-color: white;\n}\n.teamstats_header[data-v-0ceeeda7] {\n     position: relative;\n     width: 100%;\n     font-family: 'Oswald', sans-serif;\n     font-size: 24px;\n     color: #515151;\n     text-transform: uppercase;\n     text-align: center;\n     background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_1___ + ");\n     padding: 5px 0 5px 8px;\n     line-height: 24px;\n     height: 35px;\n     box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;\n     z-index: 999;\n}\n.separator_bar[data-v-0ceeeda7] {\n     height: 2px;\n     background-image: linear-gradient(to right, transparent, #b5b5b5, transparent);\n}\n#header_bar_container[data-v-0ceeeda7] {\n     position: relative;\n     width: 100%;\n     height: 40px;\n     font-family: 'Oswald', sans-serif;\n     font-size: 24px;\n     color: #515151;\n     text-transform: uppercase;\n     line-height: 40px;\n     text-align: center;\n     border-bottom: 1px solid #d0d0d0;\n     background-color: whitesmoke;\n     z-index: 0;\n}\n#games_header[data-v-0ceeeda7] {\n     float: left;\n     text-align: inherit;\n     width: 230px;\n}\n#goals_header[data-v-0ceeeda7] {\n     float: left;\n     text-align: inherit;\n     width: 488px;\n}\n#extra_header[data-v-0ceeeda7] {\n     float: left;\n     text-align: inherit;\n     width: 257px;\n}\n#stats_container[data-v-0ceeeda7] {\n     width: 100%;\n     height: 358px;\n     background: rgb(255,255,255);\n     background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(203,211,113,1) 100%);\n     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=\"#ffffff\",endColorstr=\"#cbd371\",GradientType=1);\n}\n.separator_div[data-v-0ceeeda7] {\n     width: 1px;\n     height: 100%;\n     background-image: linear-gradient(to top, transparent, #b5b5b5, transparent);\n}\n#games_container[data-v-0ceeeda7] {\n     padding-top: 5px;\n     float: left;\n     width: 230px;\n     height: 100%;\n     background-color: transparent;\n}\n#goals_container[data-v-0ceeeda7] {\n     -o-border-image: linear-gradient(to top, transparent, whitesmoke, transparent) 1;\n        border-image: linear-gradient(to top, transparent, whitesmoke, transparent) 1;\n     border-width: 1px;\n     border-style: solid;\n     border-right: none;\n     border-bottom: none;\n     border-top: none;\n     float: left;\n     width: 486px;\n     height: 100%;\n     background-color: transparent;\n     padding: 5px 15px 0 15px;\n}\n#extra_container[data-v-0ceeeda7] {\n     -o-border-image: linear-gradient(to top, transparent, whitesmoke, transparent) 1;\n        border-image: linear-gradient(to top, transparent, whitesmoke, transparent) 1;\n     border-width: 1px;\n     border-style: solid;\n     border-right: none;\n     border-bottom: none;\n     border-top: none;\n     float: left;\n     width: 257px;\n     height: 100%;\n     background-color: transparent;\n}\n.games_chart_div[data-v-0ceeeda7] {\n     padding-left: 10px;\n     width: 100%;\n     height: 85px;\n     font-family: 'Oswald', sans-serif;\n     font-size: 24px;\n     color: #515151;\n     text-transform: lowercase;\n     line-height: 85px;\n}\n.games_title[data-v-0ceeeda7] {\n     width: 30%;\n     float: left;\n}\n.games_chart[data-v-0ceeeda7] {\n     padding-left: 30px;\n     width: 129px;\n     height: 85px;\n     float: left;\n}\n#for_container[data-v-0ceeeda7], #against_container[data-v-0ceeeda7] {\n     font-family: 'Oswald', sans-serif;\n     font-size: 25px;\n     color: #515151;\n     float: left;\n     width: 226px;\n     height: 100%;\n}\n#against_container[data-v-0ceeeda7] {\n     text-align: right;\n}\n.for_title_bar[data-v-0ceeeda7] {\n     margin-top: 6px;\n     font-family: \"Roboto Light\", sans-serif;\n     font-size: 16px;\n     width: 224px;\n     height: 35px;\n     border-top: 1px solid #336026;\n     display: flex;\n     justify-content: space-between;\n     line-height: 35px;\n     background: rgb(189, 232, 177);\n     background: linear-gradient(180deg, rgba(189, 232, 177, 1) 0%, rgba(98, 176, 75, 1) 5%, rgba(169, 226, 153, 1) 100%);\n     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=\"#bde8b1\", endColorstr=\"#a9e299\", GradientType=1);\n     padding: 0 6px 0 6px;\n}\n.for_data_bar[data-v-0ceeeda7] {\n     font-family: \"Roboto Light\", sans-serif;\n     font-size: 16px;\n     margin-top: 2px;\n     width: 224px;\n     height: 35px;\n     border-top: 1px solid #336026;\n     display: flex;\n     justify-content: space-between;\n     background-color: #c1e4b6;\n     padding: 0 6px 0 6px;\n     line-height: 35px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.loading_div_teamstats[data-v-0ceeeda7] {\n     position: absolute;\n     width: 100%;\n     height: 435px;\n     background-color: whitesmoke;\n     z-index: 999;\n     opacity: 100%;\n     transition: all .2s ease-in;\n}\n#pulseloader[data-v-0ceeeda7] {\n     z-index: 1000;\n     background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ");\n     width: 84px;\n     height: 84px;\n     position: absolute;\n     top: 41%;\n     left: 45%;\n}\n.teamstats_container[data-v-0ceeeda7] {\n     position: relative;\n     margin-top: 10px;\n     width: 975px;\n     height: 435px;\n     box-shadow: rgba(0, 0, 0, 0.16) 0 3px 6px, rgba(0, 0, 0, 0.23) 0 3px 6px;\n     background-color: white;\n}\n.teamstats_header[data-v-0ceeeda7] {\n     position: relative;\n     width: 100%;\n     font-family: 'Oswald', sans-serif;\n     font-size: 24px;\n     color: #515151;\n     text-transform: uppercase;\n     text-align: center;\n     background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_1___ + ");\n     padding: 5px 0 5px 8px;\n     line-height: 24px;\n     height: 35px;\n     box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;\n     z-index: 999;\n}\n.separator_bar[data-v-0ceeeda7] {\n     height: 2px;\n     background-image: linear-gradient(to right, transparent, #b5b5b5, transparent);\n}\n#header_bar_container[data-v-0ceeeda7] {\n     position: relative;\n     width: 100%;\n     height: 40px;\n     font-family: 'Oswald', sans-serif;\n     font-size: 24px;\n     color: #515151;\n     text-transform: uppercase;\n     line-height: 40px;\n     text-align: center;\n     border-bottom: 1px solid #d0d0d0;\n     background-color: whitesmoke;\n     z-index: 0;\n}\n#games_header[data-v-0ceeeda7] {\n     float: left;\n     text-align: inherit;\n     width: 230px;\n}\n#goals_header[data-v-0ceeeda7] {\n     float: left;\n     text-align: inherit;\n     width: 488px;\n}\n#extra_header[data-v-0ceeeda7] {\n     float: left;\n     text-align: inherit;\n     width: 257px;\n}\n#stats_container[data-v-0ceeeda7] {\n     width: 100%;\n     height: 358px;\n     background: rgb(255,255,255);\n     background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(203,211,113,1) 100%);\n     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=\"#ffffff\",endColorstr=\"#cbd371\",GradientType=1);\n}\n.separator_div[data-v-0ceeeda7] {\n     width: 1px;\n     height: 100%;\n     background-image: linear-gradient(to top, transparent, #b5b5b5, transparent);\n}\n#games_container[data-v-0ceeeda7] {\n     padding-top: 5px;\n     float: left;\n     width: 230px;\n     height: 100%;\n     background-color: transparent;\n}\n#goals_container[data-v-0ceeeda7] {\n     -o-border-image: linear-gradient(to top, transparent, whitesmoke, transparent) 1;\n        border-image: linear-gradient(to top, transparent, whitesmoke, transparent) 1;\n     border-width: 1px;\n     border-style: solid;\n     border-right: none;\n     border-bottom: none;\n     border-top: none;\n     float: left;\n     width: 486px;\n     height: 100%;\n     background-color: transparent;\n     padding: 5px 15px 0 15px;\n}\n#extra_container[data-v-0ceeeda7] {\n     -o-border-image: linear-gradient(to top, transparent, whitesmoke, transparent) 1;\n        border-image: linear-gradient(to top, transparent, whitesmoke, transparent) 1;\n     border-width: 1px;\n     border-style: solid;\n     border-right: none;\n     border-bottom: none;\n     border-top: none;\n     float: left;\n     width: 257px;\n     height: 100%;\n     background-color: transparent;\n}\n.games_chart_div[data-v-0ceeeda7] {\n     padding-left: 10px;\n     width: 100%;\n     height: 85px;\n     font-family: 'Oswald', sans-serif;\n     font-size: 24px;\n     color: #515151;\n     text-transform: lowercase;\n     line-height: 85px;\n}\n.games_title[data-v-0ceeeda7] {\n     width: 30%;\n     float: left;\n}\n.games_chart[data-v-0ceeeda7] {\n     padding-left: 30px;\n     width: 129px;\n     height: 85px;\n     float: left;\n}\n#for_container[data-v-0ceeeda7], #against_container[data-v-0ceeeda7] {\n     font-family: 'Oswald', sans-serif;\n     font-size: 25px;\n     color: #515151;\n     float: left;\n     width: 226px;\n     height: 100%;\n}\n#against_container[data-v-0ceeeda7] {\n     text-align: right;\n}\n.for_title_bar[data-v-0ceeeda7] {\n     margin-top: 6px;\n     font-family: \"Roboto Light\", sans-serif;\n     font-size: 16px;\n     width: 224px;\n     height: 35px;\n     border-top: 1px solid #336026;\n     display: flex;\n     justify-content: space-between;\n     line-height: 35px;\n     background: rgb(189, 232, 177);\n     background: linear-gradient(180deg, rgba(189, 232, 177, 1) 0%, rgba(98, 176, 75, 1) 5%, rgba(169, 226, 153, 1) 100%);\n     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=\"#bde8b1\", endColorstr=\"#a9e299\", GradientType=1);\n     padding: 0 6px 0 6px;\n}\n.for_data_bar[data-v-0ceeeda7] {\n     font-family: \"Roboto Light\", sans-serif;\n     font-size: 16px;\n     margin-top: 2px;\n     width: 224px;\n     height: 35px;\n     border-top: 1px solid #336026;\n     display: flex;\n     justify-content: space-between;\n     background-color: #c1e4b6;\n     padding: 0 6px 0 6px;\n     line-height: 35px;\n}\n.for_data_bar span[data-v-0ceeeda7] {\n    font-weight: bold;\n}\n#for_chart_container[data-v-0ceeeda7] {\n     float: left;\n     width: 224px;\n     height: 224px;\n     margin-top: 5px;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -53615,6 +53703,36 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/barchart.vue?vue&type=style&index=0&id=d7fc3914&scoped=true&lang=css&":
+/*!***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/barchart.vue?vue&type=style&index=0&id=d7fc3914&scoped=true&lang=css& ***!
+  \***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_barchart_vue_vue_type_style_index_0_id_d7fc3914_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./barchart.vue?vue&type=style&index=0&id=d7fc3914&scoped=true&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/barchart.vue?vue&type=style&index=0&id=d7fc3914&scoped=true&lang=css&");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_barchart_vue_vue_type_style_index_0_id_d7fc3914_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"], options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_barchart_vue_vue_type_style_index_0_id_d7fc3914_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/donutTest.vue?vue&type=style&index=0&id=0da89719&scoped=true&lang=css&":
 /*!****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/donutTest.vue?vue&type=style&index=0&id=0da89719&scoped=true&lang=css& ***!
@@ -54365,6 +54483,47 @@ component.options.__file = "resources/js/components/Teamform.vue"
 
 /***/ }),
 
+/***/ "./resources/js/components/barchart.vue":
+/*!**********************************************!*\
+  !*** ./resources/js/components/barchart.vue ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _barchart_vue_vue_type_template_id_d7fc3914_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./barchart.vue?vue&type=template&id=d7fc3914&scoped=true& */ "./resources/js/components/barchart.vue?vue&type=template&id=d7fc3914&scoped=true&");
+/* harmony import */ var _barchart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./barchart.vue?vue&type=script&lang=js& */ "./resources/js/components/barchart.vue?vue&type=script&lang=js&");
+/* harmony import */ var _barchart_vue_vue_type_style_index_0_id_d7fc3914_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./barchart.vue?vue&type=style&index=0&id=d7fc3914&scoped=true&lang=css& */ "./resources/js/components/barchart.vue?vue&type=style&index=0&id=d7fc3914&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+;
+
+
+/* normalize component */
+
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _barchart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _barchart_vue_vue_type_template_id_d7fc3914_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _barchart_vue_vue_type_template_id_d7fc3914_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  "d7fc3914",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/barchart.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/donutTest.vue":
 /*!***********************************************!*\
   !*** ./resources/js/components/donutTest.vue ***!
@@ -54853,6 +55012,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/barchart.vue?vue&type=script&lang=js&":
+/*!***********************************************************************!*\
+  !*** ./resources/js/components/barchart.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_barchart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./barchart.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/barchart.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_barchart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/components/donutTest.vue?vue&type=script&lang=js&":
 /*!************************************************************************!*\
   !*** ./resources/js/components/donutTest.vue?vue&type=script&lang=js& ***!
@@ -55048,6 +55223,19 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Teamform_vue_vue_type_style_index_0_id_221bb58c_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader/dist/cjs.js!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Teamform.vue?vue&type=style&index=0&id=221bb58c&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Teamform.vue?vue&type=style&index=0&id=221bb58c&scoped=true&lang=css&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/barchart.vue?vue&type=style&index=0&id=d7fc3914&scoped=true&lang=css&":
+/*!*******************************************************************************************************!*\
+  !*** ./resources/js/components/barchart.vue?vue&type=style&index=0&id=d7fc3914&scoped=true&lang=css& ***!
+  \*******************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_barchart_vue_vue_type_style_index_0_id_d7fc3914_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader/dist/cjs.js!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./barchart.vue?vue&type=style&index=0&id=d7fc3914&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/barchart.vue?vue&type=style&index=0&id=d7fc3914&scoped=true&lang=css&");
 
 
 /***/ }),
@@ -55250,6 +55438,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Teamform_vue_vue_type_template_id_221bb58c_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Teamform_vue_vue_type_template_id_221bb58c_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Teamform.vue?vue&type=template&id=221bb58c&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Teamform.vue?vue&type=template&id=221bb58c&scoped=true&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/barchart.vue?vue&type=template&id=d7fc3914&scoped=true&":
+/*!*****************************************************************************************!*\
+  !*** ./resources/js/components/barchart.vue?vue&type=template&id=d7fc3914&scoped=true& ***!
+  \*****************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_barchart_vue_vue_type_template_id_d7fc3914_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_barchart_vue_vue_type_template_id_d7fc3914_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_barchart_vue_vue_type_template_id_d7fc3914_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./barchart.vue?vue&type=template&id=d7fc3914&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/barchart.vue?vue&type=template&id=d7fc3914&scoped=true&");
 
 
 /***/ }),
@@ -55798,6 +56003,33 @@ var render = function () {
       }),
       1
     ),
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/barchart.vue?vue&type=template&id=d7fc3914&scoped=true&":
+/*!********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/barchart.vue?vue&type=template&id=d7fc3914&scoped=true& ***!
+  \********************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "relative", attrs: { id: "canvas_div" } }, [
+    _c("canvas", { attrs: { height: "305", id: this.canvas_id } }),
   ])
 }
 var staticRenderFns = []
@@ -57629,7 +57861,30 @@ var render = function () {
         staticStyle: { float: "left" },
       }),
       _vm._v(" "),
-      _vm._m(1),
+      _c("div", { attrs: { id: "goals_container" } }, [
+        _c("div", { attrs: { id: "for_container" } }, [
+          _vm._v("\n                for\n                "),
+          _vm._m(1),
+          _vm._v(" "),
+          _vm._m(2),
+          _vm._v(" "),
+          _c(
+            "div",
+            { attrs: { id: "for_chart_container" } },
+            [
+              _c("bar-chart", {
+                attrs: {
+                  "chart-data": _vm.forChart[0],
+                  canvas_id: "for_bar" + _vm.teamid,
+                },
+              }),
+            ],
+            1
+          ),
+        ]),
+        _vm._v(" "),
+        _vm._m(3),
+      ]),
       _vm._v(" "),
       _c("div", {
         staticClass: "separator_div",
@@ -57657,35 +57912,38 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { attrs: { id: "goals_container" } }, [
-      _c("div", { attrs: { id: "for_container" } }, [
-        _vm._v("\n                for\n                "),
-        _c("div", { staticClass: "for_title_bar" }, [
-          _c("span", [_vm._v("home")]),
-          _c("span", [_vm._v("away")]),
-          _c("span", [_vm._v("total")]),
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "for_data_bar" }, [
-          _c("span", [_vm._v("16")]),
-          _c("span", [_vm._v("7")]),
-          _c("span", [_vm._v("23")]),
-        ]),
+    return _c("div", { staticClass: "for_title_bar" }, [
+      _c("span", [_vm._v("home")]),
+      _c("span", [_vm._v("away")]),
+      _c("span", [_vm._v("total")]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "for_data_bar" }, [
+      _c("span", [_vm._v("16")]),
+      _c("span", [_vm._v("7")]),
+      _c("span", [_vm._v("23")]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { attrs: { id: "against_container" } }, [
+      _vm._v("\n                against\n                "),
+      _c("div", { staticClass: "for_title_bar" }, [
+        _c("span", [_vm._v("home")]),
+        _c("span", [_vm._v("away")]),
+        _c("span", [_vm._v("total")]),
       ]),
       _vm._v(" "),
-      _c("div", { attrs: { id: "against_container" } }, [
-        _vm._v("\n                against\n                "),
-        _c("div", { staticClass: "for_title_bar" }, [
-          _c("span", [_vm._v("home")]),
-          _c("span", [_vm._v("away")]),
-          _c("span", [_vm._v("total")]),
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "for_data_bar" }, [
-          _c("span", [_vm._v("16")]),
-          _c("span", [_vm._v("7")]),
-          _c("span", [_vm._v("23")]),
-        ]),
+      _c("div", { staticClass: "for_data_bar" }, [
+        _c("span", [_vm._v("16")]),
+        _c("span", [_vm._v("7")]),
+        _c("span", [_vm._v("23")]),
       ]),
     ])
   },

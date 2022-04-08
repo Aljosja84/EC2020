@@ -42,12 +42,16 @@
                     for
                     <div class="for_title_bar"><span>home</span><span>away</span><span>total</span></div>
                     <div class="for_data_bar"><span>16</span><span>7</span><span>23</span></div>
+                    <div id="for_chart_container">
+                        <bar-chart v-bind:chart-data="forChart[0]" :canvas_id="'for_bar'+teamid"></bar-chart>
+                    </div>
                 </div>
                 <div id="against_container">
                     against
                     <div class="for_title_bar"><span>home</span><span>away</span><span>total</span></div>
                     <div class="for_data_bar"><span>16</span><span>7</span><span>23</span></div>
                 </div>
+
             </div>
             <div class="separator_div" style="float: left"></div>
             <div id="extra_container">extra</div>
@@ -57,11 +61,12 @@
 
 <script>
     import donutTest from "./donutTest";
+    import BarChart from "./barchart";
 
     export default {
         name: "teamstats",
         props: ['teamid'],
-        components: { donutTest },
+        components: { donutTest, BarChart },
 
         data() {
             return {
@@ -101,7 +106,29 @@
                         'borderWidth': 0
                     }
                 }],
-
+                forChart: [{
+                    type: 'bar',
+                    data: {
+                        labels: ["0-15", "15-30", "30-45", "45-60", "60-75", "75-90", "90+"],
+                        datasets: [
+                            {
+                                indexAxis: 'x',
+                                label: "Goals",
+                                backgroundColor: ["#8ba752"],
+                                hoverBackgroundColor: ["#6b883b"],
+                                data: [1, 2, 1, 4, 3, 2, 3]
+                            }
+                        ],
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                display: false,
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                }],
             }
         },
         computed: {
@@ -306,5 +333,15 @@
         background-color: #c1e4b6;
         padding: 0 6px 0 6px;
         line-height: 35px;
+    }
+   .for_data_bar span {
+       font-weight: bold;
+   }
+
+    #for_chart_container {
+        float: left;
+        width: 224px;
+        height: 224px;
+        margin-top: 5px;
     }
 </style>
