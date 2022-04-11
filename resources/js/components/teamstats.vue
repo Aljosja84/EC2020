@@ -50,11 +50,18 @@
                     against
                     <div class="for_title_bar"><span>home</span><span>away</span><span>total</span></div>
                     <div class="for_data_bar"><span>16</span><span>7</span><span>23</span></div>
+                    <div id="against_chart_container">
+                        <bar-chart v-bind:chart-data="forChart[0]" :canvas_id="'against_bar'+teamid"></bar-chart>
+                    </div>
                 </div>
 
             </div>
             <div class="separator_div" style="float: left"></div>
-            <div id="extra_container">extra</div>
+            <div id="extra_container">
+                <div id="biggest_container">
+                    biggest
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -72,6 +79,11 @@
             return {
                 loading: false,
                 loaded: true,
+                /*
+                *
+                * doughnut chart
+                *
+                */
                 playedChart: [{
                     'playerid': 12,
                     'type': 'doughnut',
@@ -106,6 +118,11 @@
                         'borderWidth': 0
                     }
                 }],
+                /*
+                *
+                * Bar chart
+                *
+                */
                 forChart: [{
                     type: 'bar',
                     data: {
@@ -304,6 +321,7 @@
     #against_container {
         text-align: right;
     }
+
     .for_title_bar {
         margin-top: 6px;
         font-family: "Roboto Light", sans-serif;
@@ -343,5 +361,22 @@
         width: 224px;
         height: 224px;
         margin-top: 5px;
+    }
+    #against_chart_container {
+        float: left;
+        width: 224px;
+        height: 224px;
+        margin-top: 5px;
+    }
+
+    #biggest_container {
+        font-family: 'Oswald', sans-serif;
+        font-size: 25px;
+        color: #515151;
+        text-align: center;
+        width: 100%;
+        height: 100%;
+        background-color: #95c5ed;
+        padding: 5px 15px 5px 15px;
     }
 </style>

@@ -6,12 +6,15 @@
 
 <script>
     import Chart from 'chart.js/auto'
-    Chart.defaults.scale.grid.display = false;
+
+    // setting some default options for the bar chart
+    Chart.defaults.scale.grid.display = true;
     Chart.defaults.plugins.decimation.enabled = false;
     Chart.defaults.scale.ticks.precision = 0;
     Chart.defaults.plugins.legend.display = false;
     Chart.defaults.font.size = 10;
     Chart.defaults.color = "#000";
+
     export default {
         name: "barchart",
 

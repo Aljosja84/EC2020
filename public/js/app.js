@@ -2449,14 +2449,14 @@ __webpack_require__.r(__webpack_exports__);
       alert('hello!');
     }
   },
-  mounted: function mounted() {
-    var _this2 = this;
+  mounted: function mounted() {//this.callData();
+    // now refresh every one and a half minute
 
-    this.callData(); // now refresh every one and a half minute
-
-    setInterval(function () {
-      _this2.callData();
+    /*
+    setInterval(() => {
+        this.callData();
     }, 90000);
+    */
   }
 });
 
@@ -2691,8 +2691,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+ // setting some default options for the bar chart
 
-chart_js_auto__WEBPACK_IMPORTED_MODULE_0__["default"].defaults.scale.grid.display = false;
+chart_js_auto__WEBPACK_IMPORTED_MODULE_0__["default"].defaults.scale.grid.display = true;
 chart_js_auto__WEBPACK_IMPORTED_MODULE_0__["default"].defaults.plugins.decimation.enabled = false;
 chart_js_auto__WEBPACK_IMPORTED_MODULE_0__["default"].defaults.scale.ticks.precision = 0;
 chart_js_auto__WEBPACK_IMPORTED_MODULE_0__["default"].defaults.plugins.legend.display = false;
@@ -4211,6 +4212,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -4224,6 +4232,12 @@ __webpack_require__.r(__webpack_exports__);
     return {
       loading: false,
       loaded: true,
+
+      /*
+      *
+      * doughnut chart
+      *
+      */
       playedChart: [{
         'playerid': 12,
         'type': 'doughnut',
@@ -4252,6 +4266,12 @@ __webpack_require__.r(__webpack_exports__);
           'borderWidth': 0
         }
       }],
+
+      /*
+      *
+      * Bar chart
+      *
+      */
       forChart: [{
         type: 'bar',
         data: {
@@ -22499,7 +22519,7 @@ var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBP
 var ___CSS_LOADER_URL_REPLACEMENT_0___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default()(_images_pulseloader_3_gif__WEBPACK_IMPORTED_MODULE_2__["default"]);
 var ___CSS_LOADER_URL_REPLACEMENT_1___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default()(_images_light_wool_png__WEBPACK_IMPORTED_MODULE_3__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.loading_div_teamstats[data-v-0ceeeda7] {\n     position: absolute;\n     width: 100%;\n     height: 435px;\n     background-color: whitesmoke;\n     z-index: 999;\n     opacity: 100%;\n     transition: all .2s ease-in;\n}\n#pulseloader[data-v-0ceeeda7] {\n     z-index: 1000;\n     background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ");\n     width: 84px;\n     height: 84px;\n     position: absolute;\n     top: 41%;\n     left: 45%;\n}\n.teamstats_container[data-v-0ceeeda7] {\n     position: relative;\n     margin-top: 10px;\n     width: 975px;\n     height: 435px;\n     box-shadow: rgba(0, 0, 0, 0.16) 0 3px 6px, rgba(0, 0, 0, 0.23) 0 3px 6px;\n     background-color: white;\n}\n.teamstats_header[data-v-0ceeeda7] {\n     position: relative;\n     width: 100%;\n     font-family: 'Oswald', sans-serif;\n     font-size: 24px;\n     color: #515151;\n     text-transform: uppercase;\n     text-align: center;\n     background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_1___ + ");\n     padding: 5px 0 5px 8px;\n     line-height: 24px;\n     height: 35px;\n     box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;\n     z-index: 999;\n}\n.separator_bar[data-v-0ceeeda7] {\n     height: 2px;\n     background-image: linear-gradient(to right, transparent, #b5b5b5, transparent);\n}\n#header_bar_container[data-v-0ceeeda7] {\n     position: relative;\n     width: 100%;\n     height: 40px;\n     font-family: 'Oswald', sans-serif;\n     font-size: 24px;\n     color: #515151;\n     text-transform: uppercase;\n     line-height: 40px;\n     text-align: center;\n     border-bottom: 1px solid #d0d0d0;\n     background-color: whitesmoke;\n     z-index: 0;\n}\n#games_header[data-v-0ceeeda7] {\n     float: left;\n     text-align: inherit;\n     width: 230px;\n}\n#goals_header[data-v-0ceeeda7] {\n     float: left;\n     text-align: inherit;\n     width: 488px;\n}\n#extra_header[data-v-0ceeeda7] {\n     float: left;\n     text-align: inherit;\n     width: 257px;\n}\n#stats_container[data-v-0ceeeda7] {\n     width: 100%;\n     height: 358px;\n     background: rgb(255,255,255);\n     background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(203,211,113,1) 100%);\n     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=\"#ffffff\",endColorstr=\"#cbd371\",GradientType=1);\n}\n.separator_div[data-v-0ceeeda7] {\n     width: 1px;\n     height: 100%;\n     background-image: linear-gradient(to top, transparent, #b5b5b5, transparent);\n}\n#games_container[data-v-0ceeeda7] {\n     padding-top: 5px;\n     float: left;\n     width: 230px;\n     height: 100%;\n     background-color: transparent;\n}\n#goals_container[data-v-0ceeeda7] {\n     -o-border-image: linear-gradient(to top, transparent, whitesmoke, transparent) 1;\n        border-image: linear-gradient(to top, transparent, whitesmoke, transparent) 1;\n     border-width: 1px;\n     border-style: solid;\n     border-right: none;\n     border-bottom: none;\n     border-top: none;\n     float: left;\n     width: 486px;\n     height: 100%;\n     background-color: transparent;\n     padding: 5px 15px 0 15px;\n}\n#extra_container[data-v-0ceeeda7] {\n     -o-border-image: linear-gradient(to top, transparent, whitesmoke, transparent) 1;\n        border-image: linear-gradient(to top, transparent, whitesmoke, transparent) 1;\n     border-width: 1px;\n     border-style: solid;\n     border-right: none;\n     border-bottom: none;\n     border-top: none;\n     float: left;\n     width: 257px;\n     height: 100%;\n     background-color: transparent;\n}\n.games_chart_div[data-v-0ceeeda7] {\n     padding-left: 10px;\n     width: 100%;\n     height: 85px;\n     font-family: 'Oswald', sans-serif;\n     font-size: 24px;\n     color: #515151;\n     text-transform: lowercase;\n     line-height: 85px;\n}\n.games_title[data-v-0ceeeda7] {\n     width: 30%;\n     float: left;\n}\n.games_chart[data-v-0ceeeda7] {\n     padding-left: 30px;\n     width: 129px;\n     height: 85px;\n     float: left;\n}\n#for_container[data-v-0ceeeda7], #against_container[data-v-0ceeeda7] {\n     font-family: 'Oswald', sans-serif;\n     font-size: 25px;\n     color: #515151;\n     float: left;\n     width: 226px;\n     height: 100%;\n}\n#against_container[data-v-0ceeeda7] {\n     text-align: right;\n}\n.for_title_bar[data-v-0ceeeda7] {\n     margin-top: 6px;\n     font-family: \"Roboto Light\", sans-serif;\n     font-size: 16px;\n     width: 224px;\n     height: 35px;\n     border-top: 1px solid #336026;\n     display: flex;\n     justify-content: space-between;\n     line-height: 35px;\n     background: rgb(189, 232, 177);\n     background: linear-gradient(180deg, rgba(189, 232, 177, 1) 0%, rgba(98, 176, 75, 1) 5%, rgba(169, 226, 153, 1) 100%);\n     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=\"#bde8b1\", endColorstr=\"#a9e299\", GradientType=1);\n     padding: 0 6px 0 6px;\n}\n.for_data_bar[data-v-0ceeeda7] {\n     font-family: \"Roboto Light\", sans-serif;\n     font-size: 16px;\n     margin-top: 2px;\n     width: 224px;\n     height: 35px;\n     border-top: 1px solid #336026;\n     display: flex;\n     justify-content: space-between;\n     background-color: #c1e4b6;\n     padding: 0 6px 0 6px;\n     line-height: 35px;\n}\n.for_data_bar span[data-v-0ceeeda7] {\n    font-weight: bold;\n}\n#for_chart_container[data-v-0ceeeda7] {\n     float: left;\n     width: 224px;\n     height: 224px;\n     margin-top: 5px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.loading_div_teamstats[data-v-0ceeeda7] {\n     position: absolute;\n     width: 100%;\n     height: 435px;\n     background-color: whitesmoke;\n     z-index: 999;\n     opacity: 100%;\n     transition: all .2s ease-in;\n}\n#pulseloader[data-v-0ceeeda7] {\n     z-index: 1000;\n     background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ");\n     width: 84px;\n     height: 84px;\n     position: absolute;\n     top: 41%;\n     left: 45%;\n}\n.teamstats_container[data-v-0ceeeda7] {\n     position: relative;\n     margin-top: 10px;\n     width: 975px;\n     height: 435px;\n     box-shadow: rgba(0, 0, 0, 0.16) 0 3px 6px, rgba(0, 0, 0, 0.23) 0 3px 6px;\n     background-color: white;\n}\n.teamstats_header[data-v-0ceeeda7] {\n     position: relative;\n     width: 100%;\n     font-family: 'Oswald', sans-serif;\n     font-size: 24px;\n     color: #515151;\n     text-transform: uppercase;\n     text-align: center;\n     background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_1___ + ");\n     padding: 5px 0 5px 8px;\n     line-height: 24px;\n     height: 35px;\n     box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;\n     z-index: 999;\n}\n.separator_bar[data-v-0ceeeda7] {\n     height: 2px;\n     background-image: linear-gradient(to right, transparent, #b5b5b5, transparent);\n}\n#header_bar_container[data-v-0ceeeda7] {\n     position: relative;\n     width: 100%;\n     height: 40px;\n     font-family: 'Oswald', sans-serif;\n     font-size: 24px;\n     color: #515151;\n     text-transform: uppercase;\n     line-height: 40px;\n     text-align: center;\n     border-bottom: 1px solid #d0d0d0;\n     background-color: whitesmoke;\n     z-index: 0;\n}\n#games_header[data-v-0ceeeda7] {\n     float: left;\n     text-align: inherit;\n     width: 230px;\n}\n#goals_header[data-v-0ceeeda7] {\n     float: left;\n     text-align: inherit;\n     width: 488px;\n}\n#extra_header[data-v-0ceeeda7] {\n     float: left;\n     text-align: inherit;\n     width: 257px;\n}\n#stats_container[data-v-0ceeeda7] {\n     width: 100%;\n     height: 358px;\n     background: rgb(255,255,255);\n     background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(203,211,113,1) 100%);\n     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=\"#ffffff\",endColorstr=\"#cbd371\",GradientType=1);\n}\n.separator_div[data-v-0ceeeda7] {\n     width: 1px;\n     height: 100%;\n     background-image: linear-gradient(to top, transparent, #b5b5b5, transparent);\n}\n#games_container[data-v-0ceeeda7] {\n     padding-top: 5px;\n     float: left;\n     width: 230px;\n     height: 100%;\n     background-color: transparent;\n}\n#goals_container[data-v-0ceeeda7] {\n     -o-border-image: linear-gradient(to top, transparent, whitesmoke, transparent) 1;\n        border-image: linear-gradient(to top, transparent, whitesmoke, transparent) 1;\n     border-width: 1px;\n     border-style: solid;\n     border-right: none;\n     border-bottom: none;\n     border-top: none;\n     float: left;\n     width: 486px;\n     height: 100%;\n     background-color: transparent;\n     padding: 5px 15px 0 15px;\n}\n#extra_container[data-v-0ceeeda7] {\n     -o-border-image: linear-gradient(to top, transparent, whitesmoke, transparent) 1;\n        border-image: linear-gradient(to top, transparent, whitesmoke, transparent) 1;\n     border-width: 1px;\n     border-style: solid;\n     border-right: none;\n     border-bottom: none;\n     border-top: none;\n     float: left;\n     width: 257px;\n     height: 100%;\n     background-color: transparent;\n}\n.games_chart_div[data-v-0ceeeda7] {\n     padding-left: 10px;\n     width: 100%;\n     height: 85px;\n     font-family: 'Oswald', sans-serif;\n     font-size: 24px;\n     color: #515151;\n     text-transform: lowercase;\n     line-height: 85px;\n}\n.games_title[data-v-0ceeeda7] {\n     width: 30%;\n     float: left;\n}\n.games_chart[data-v-0ceeeda7] {\n     padding-left: 30px;\n     width: 129px;\n     height: 85px;\n     float: left;\n}\n#for_container[data-v-0ceeeda7], #against_container[data-v-0ceeeda7] {\n     font-family: 'Oswald', sans-serif;\n     font-size: 25px;\n     color: #515151;\n     float: left;\n     width: 226px;\n     height: 100%;\n}\n#against_container[data-v-0ceeeda7] {\n     text-align: right;\n}\n.for_title_bar[data-v-0ceeeda7] {\n     margin-top: 6px;\n     font-family: \"Roboto Light\", sans-serif;\n     font-size: 16px;\n     width: 224px;\n     height: 35px;\n     border-top: 1px solid #336026;\n     display: flex;\n     justify-content: space-between;\n     line-height: 35px;\n     background: rgb(189, 232, 177);\n     background: linear-gradient(180deg, rgba(189, 232, 177, 1) 0%, rgba(98, 176, 75, 1) 5%, rgba(169, 226, 153, 1) 100%);\n     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=\"#bde8b1\", endColorstr=\"#a9e299\", GradientType=1);\n     padding: 0 6px 0 6px;\n}\n.for_data_bar[data-v-0ceeeda7] {\n     font-family: \"Roboto Light\", sans-serif;\n     font-size: 16px;\n     margin-top: 2px;\n     width: 224px;\n     height: 35px;\n     border-top: 1px solid #336026;\n     display: flex;\n     justify-content: space-between;\n     background-color: #c1e4b6;\n     padding: 0 6px 0 6px;\n     line-height: 35px;\n}\n.for_data_bar span[data-v-0ceeeda7] {\n    font-weight: bold;\n}\n#for_chart_container[data-v-0ceeeda7] {\n     float: left;\n     width: 224px;\n     height: 224px;\n     margin-top: 5px;\n}\n#against_chart_container[data-v-0ceeeda7] {\n     float: left;\n     width: 224px;\n     height: 224px;\n     margin-top: 5px;\n}\n#biggest_container[data-v-0ceeeda7] {\n     font-family: 'Oswald', sans-serif;\n     font-size: 25px;\n     color: #515151;\n     text-align: center;\n     width: 100%;\n     height: 100%;\n     background-color: #95c5ed;\n     padding: 5px 15px 5px 15px;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -57883,7 +57903,26 @@ var render = function () {
           ),
         ]),
         _vm._v(" "),
-        _vm._m(3),
+        _c("div", { attrs: { id: "against_container" } }, [
+          _vm._v("\n                against\n                "),
+          _vm._m(3),
+          _vm._v(" "),
+          _vm._m(4),
+          _vm._v(" "),
+          _c(
+            "div",
+            { attrs: { id: "against_chart_container" } },
+            [
+              _c("bar-chart", {
+                attrs: {
+                  "chart-data": _vm.forChart[0],
+                  canvas_id: "against_bar" + _vm.teamid,
+                },
+              }),
+            ],
+            1
+          ),
+        ]),
       ]),
       _vm._v(" "),
       _c("div", {
@@ -57891,7 +57930,7 @@ var render = function () {
         staticStyle: { float: "left" },
       }),
       _vm._v(" "),
-      _c("div", { attrs: { id: "extra_container" } }, [_vm._v("extra")]),
+      _vm._m(5),
     ]),
   ])
 }
@@ -57932,18 +57971,29 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { attrs: { id: "against_container" } }, [
-      _vm._v("\n                against\n                "),
-      _c("div", { staticClass: "for_title_bar" }, [
-        _c("span", [_vm._v("home")]),
-        _c("span", [_vm._v("away")]),
-        _c("span", [_vm._v("total")]),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "for_data_bar" }, [
-        _c("span", [_vm._v("16")]),
-        _c("span", [_vm._v("7")]),
-        _c("span", [_vm._v("23")]),
+    return _c("div", { staticClass: "for_title_bar" }, [
+      _c("span", [_vm._v("home")]),
+      _c("span", [_vm._v("away")]),
+      _c("span", [_vm._v("total")]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "for_data_bar" }, [
+      _c("span", [_vm._v("16")]),
+      _c("span", [_vm._v("7")]),
+      _c("span", [_vm._v("23")]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { attrs: { id: "extra_container" } }, [
+      _c("div", { attrs: { id: "biggest_container" } }, [
+        _vm._v("\n                biggest\n            "),
       ]),
     ])
   },

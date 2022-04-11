@@ -51,7 +51,7 @@ class TweetsStream extends Command
     {
         TwitterStreamingApi::publicStream()
             ->setLocale('en')
-            ->whenHears('#covid19', function(array $tweet) {
+            ->whenHears('Le Pen', function(array $tweet) {
                 // exclude tweets with an url in it
                 if(!$this->hasUrl($tweet['text'])) {
                     // exclude all annoying retweets that are just clogging up the stream

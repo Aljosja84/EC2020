@@ -4,17 +4,16 @@
     z-index: -3;
     position: absolute;
     padding: 10px 0 0 10px;
-
+    float: left;
     background: rgb(91,169,241);
     background: linear-gradient(180deg, rgba(91,169,241,1) 72%, rgba(255,255,255,1) 100%);
 }
 
 #app {
-    position: fixed;
-    float: left;
+    display: inline-block;
     padding: 0 0 0 9px;
-    width: 100%;
     z-index:1;
+    float: left;
 }
 .scoreboard_comp {
     padding: 0 0 8px 0;
@@ -56,7 +55,6 @@
     min-height: 530px;
     height: auto;
     background-color: white;
-    display: inline-block;
     float: left;
     font-family: 'Roboto', sans-serif;
     color: #515151;
@@ -110,6 +108,10 @@
     width: 510px;
     height: 470px;
     background-color: transparent;
+    position: absolute;
+    right: 0;
+    top: 10px;
+    display: inline-block;
     float: right;
     z-index:600;
 }
