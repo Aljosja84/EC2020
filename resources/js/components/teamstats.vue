@@ -39,7 +39,7 @@
             <div class="separator_div" style="float: left"></div>
             <div id="goals_container">
                 <div id="for_container">
-                    for
+                    <span style="color: #8ba752">for</span>
                     <div class="for_title_bar"><span>home</span><span>away</span><span>total</span></div>
                     <div class="for_data_bar"><span>16</span><span>7</span><span>23</span></div>
                     <div id="for_chart_container">
@@ -47,11 +47,11 @@
                     </div>
                 </div>
                 <div id="against_container">
-                    against
+                    <span style="color: #db2e29">against</span>
                     <div class="for_title_bar"><span>home</span><span>away</span><span>total</span></div>
                     <div class="for_data_bar"><span>16</span><span>7</span><span>23</span></div>
                     <div id="against_chart_container">
-                        <bar-chart v-bind:chart-data="forChart[0]" :canvas_id="'against_bar'+teamid"></bar-chart>
+                        <bar-chart v-bind:chart-data="againstChart[0]" :canvas_id="'against_bar'+teamid"></bar-chart>
                     </div>
                 </div>
 
@@ -59,7 +59,11 @@
             <div class="separator_div" style="float: left"></div>
             <div id="extra_container">
                 <div id="biggest_container">
-                    biggest
+                    <div style="margin-bottom: 6px">biggest</div>
+                    <div id="streak_header">streak</div>
+                    <div id="streak_content"><span>win: 3 | draw: 3 | loss: 5</span></div>
+                    <div id="wins_header">wins</div>
+                    <div id="wins_content"><span>home: 4-0 | away: 0-6</span></div>
                 </div>
             </div>
         </div>
@@ -142,6 +146,34 @@
                             y: {
                                 display: false,
                                 beginAtZero: true
+                            }
+                        }
+                    }
+                }],
+                /*
+                *
+                * Bar chart
+                *
+                */
+                againstChart: [{
+                    type: 'bar',
+                    data: {
+                        labels: ["0-15", "15-30", "30-45", "45-60", "60-75", "75-90", "90+"],
+                        datasets: [
+                            {
+                                indexAxis: 'x',
+                                label: "Goals",
+                                backgroundColor: ["#db2e29"],
+                                hoverBackgroundColor: ["#7f1815"],
+                                data: [2, 1, 1, 2, 5, 2, 1]
+                            }
+                        ],
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                display: false,
+                                    beginAtZero: true
                             }
                         }
                     }
@@ -376,7 +408,40 @@
         text-align: center;
         width: 100%;
         height: 100%;
-        background-color: #95c5ed;
-        padding: 5px 15px 5px 15px;
+        background-color: transparent;
+        padding: 5px 1px 5px 10px;
+    }
+    #streak_header, #wins_header {
+        float: left;
+        font-family: "Roboto Light", sans-serif;
+        font-size: 16px;
+        width: 61px;
+        height: 35px;
+        border-top: 1px solid #336026;
+        text-align: center;
+        line-height: 35px;
+        background: rgb(189, 232, 177);
+        background: -moz-linear-gradient(180deg, rgba(189, 232, 177, 1) 0%, rgba(98, 176, 75, 1) 5%, rgba(169, 226, 153, 1) 100%);
+        background: -webkit-linear-gradient(180deg, rgba(189, 232, 177, 1) 0%, rgba(98, 176, 75, 1) 5%, rgba(169, 226, 153, 1) 100%);
+        background: linear-gradient(180deg, rgba(189, 232, 177, 1) 0%, rgba(98, 176, 75, 1) 5%, rgba(169, 226, 153, 1) 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#bde8b1", endColorstr="#a9e299", GradientType=1);
+        margin-right: 2px;
+    }
+    #streak_content, #wins_content {
+        float: left;
+        width: 175px;
+        font-family: "Roboto Light", sans-serif;
+        font-size: 16px;
+        height: 35px;
+        border-top: 1px solid #336026;
+        background-color: #c1e4b6;
+        padding: 0 6px 0 6px;
+        line-height: 35px;
+        text-align: left;
+        margin-bottom: 2px;
+    }
+    #streak_content, #wins_content span {
+        font-weight: normal;
+
     }
 </style>
