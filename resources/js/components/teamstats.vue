@@ -442,6 +442,5 @@
     }
     #streak_content, #wins_content span {
         font-weight: normal;
-
     }
 </style>

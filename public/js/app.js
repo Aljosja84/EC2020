@@ -2228,6 +2228,10 @@ __webpack_require__.r(__webpack_exports__);
             var answer = e.player + card;
             break;
 
+          case "Var":
+            var answer = '<span style="color: #CCC">(' + e.detail + ')</span>' + e.player + '&nbsp;<img src=' + assetBaseUrl + 'images/var.png />';
+            break;
+
           case "subst":
             var answer = this.whichPlayerHome(e);
             break;
@@ -2241,6 +2245,10 @@ __webpack_require__.r(__webpack_exports__);
           case "Card":
             var card = e.detail === 'Yellow Card' ? '<img src=' + assetBaseUrl + 'images/yellowcard.png /> ' : '<img src=' + assetBaseUrl + 'images/redcard.png /> ';
             var answer = card + e.player;
+            break;
+
+          case "Var":
+            var answer = '<img src=' + assetBaseUrl + 'images/var.png />&nbsp;' + e.player + ' <span style="color: #CCC">(' + e.detail + ')</span>';
             break;
 
           case "subst":
@@ -2449,14 +2457,14 @@ __webpack_require__.r(__webpack_exports__);
       alert('hello!');
     }
   },
-  mounted: function mounted() {//this.callData();
-    // now refresh every one and a half minute
+  mounted: function mounted() {
+    var _this2 = this;
 
-    /*
-    setInterval(() => {
-        this.callData();
+    this.callData(); // now refresh every one and a half minute
+
+    setInterval(function () {
+      _this2.callData();
     }, 90000);
-    */
   }
 });
 

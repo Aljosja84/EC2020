@@ -55,13 +55,13 @@
         },
 
         mounted() {
-            //this.callData();
+            this.callData();
             // now refresh every one and a half minute
-            /*
+
             setInterval(() => {
                 this.callData();
             }, 90000);
-            */
+
 
         }
     }

@@ -54,6 +54,9 @@
                             var card = e.detail === 'Yellow Card' ? ' <img src=' + assetBaseUrl + 'images/yellowcard.png />' : ' <img src=' + assetBaseUrl + 'images/redcard.png />';
                             var answer = e.player + card;
                             break;
+                        case "Var":
+                            var answer ='<span style="color: #CCC">(' + e.detail + ')</span>' + e.player + '&nbsp;<img src=' + assetBaseUrl + 'images/var.png />';
+                            break;
                         case "subst":
                             var answer = this.whichPlayerHome(e);
                             break;
@@ -66,6 +69,9 @@
                         case "Card":
                             var card = e.detail === 'Yellow Card' ? '<img src=' + assetBaseUrl + 'images/yellowcard.png /> ' : '<img src=' + assetBaseUrl + 'images/redcard.png /> ';
                             var answer = card + e.player;
+                            break;
+                        case "Var":
+                            var answer = '<img src=' + assetBaseUrl + 'images/var.png />&nbsp;' + e.player + ' <span style="color: #CCC">(' + e.detail + ')</span>';
                             break;
                         case "subst":
                             var answer = this.whichPlayerAway(e);
