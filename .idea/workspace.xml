@@ -20,8 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cf82d037-ce69-45df-857e-a29fb7732fae" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/app/Console/Commands/TweetsStream.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Console/Commands/TweetsStream.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/game.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/game.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -415,6 +414,8 @@
       <workItem from="1649794462192" duration="2480000" />
       <workItem from="1649797341842" duration="1904000" />
       <workItem from="1649882288458" duration="764000" />
+      <workItem from="1649941806550" duration="1216000" />
+      <workItem from="1650118667814" duration="1236000" />
     </task>
     <servers />
   </component>

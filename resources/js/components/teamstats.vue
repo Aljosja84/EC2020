@@ -47,7 +47,7 @@
                     </div>
                 </div>
                 <div id="against_container">
-                    <span style="color: #db2e29">against</span>
+                    <span style="color: #d4530d">against</span>
                     <div class="for_title_bar"><span>home</span><span>away</span><span>total</span></div>
                     <div class="for_data_bar"><span>16</span><span>7</span><span>23</span></div>
                     <div id="against_chart_container">
@@ -163,8 +163,8 @@
                             {
                                 indexAxis: 'x',
                                 label: "Goals",
-                                backgroundColor: ["#db2e29"],
-                                hoverBackgroundColor: ["#7f1815"],
+                                backgroundColor: ["#d4530d"],
+                                hoverBackgroundColor: ["#b43f06"],
                                 data: [2, 1, 1, 2, 5, 2, 1]
                             }
                         ],
