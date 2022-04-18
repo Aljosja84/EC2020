@@ -60,10 +60,32 @@
             <div id="extra_container">
                 <div id="biggest_container">
                     <div style="margin-bottom: 6px">biggest</div>
-                    <div id="streak_header">streak</div>
-                    <div id="streak_content"><span>win: 3 | draw: 3 | loss: 5</span></div>
+                    <div class="streak_header">streak</div>
+                    <div class="streak_content"><span>win: 3 | draw: 3 | loss: 5</span></div>
                     <div id="wins_header">wins</div>
                     <div id="wins_content"><span>home: 4-0 | away: 0-6</span></div>
+                    <!-- penalty data -->
+                    <div style="margin-bottom: 6px">penalty</div>
+                    <div class="streak_header">scored</div>
+                    <div class="streak_content" style="width: 40px; text-align: center">1</div>
+                    <div class="streak_content" style="width: 133px; text-align: center">100%</div>
+                    <div class="streak_header">missed</div>
+                    <div class="streak_content" style="width: 40px; text-align: center">0</div>
+                    <div class="streak_content" style="width: 133px; text-align: center">0%</div>
+                    <!-- miscellaneous -->
+                    <div id="misc_header">
+                        <div id="misc_home">home</div>
+                        <div id="misc_away">away</div>
+                        <div id="misc_total">total</div>
+                    </div>
+                    <div class="failed_to_score_header">failed to score</div>
+                    <div class="fts_home">2</div>
+                    <div class="fts_away">3</div>
+                    <div class="fts_total">5</div>
+                    <div class="failed_to_score_header">clean sheet</div>
+                    <div class="fts_home">2</div>
+                    <div class="fts_away">3</div>
+                    <div class="fts_total">5</div>
                 </div>
             </div>
         </div>
@@ -411,7 +433,7 @@
         background-color: transparent;
         padding: 5px 1px 5px 10px;
     }
-    #streak_header, #wins_header {
+    .streak_header, #wins_header {
         float: left;
         font-family: "Roboto Light", sans-serif;
         font-size: 16px;
@@ -427,7 +449,7 @@
         filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#bde8b1", endColorstr="#a9e299", GradientType=1);
         margin-right: 2px;
     }
-    #streak_content, #wins_content {
+    .streak_content, #wins_content {
         float: left;
         width: 175px;
         font-family: "Roboto Light", sans-serif;
@@ -439,8 +461,55 @@
         line-height: 35px;
         text-align: left;
         margin-bottom: 2px;
+        margin-right: 2px;
     }
     #streak_content, #wins_content span {
         font-weight: normal;
+    }
+
+    #misc_header {
+        margin-right: 6px;
+        margin-top: 6px;
+        float: right;
+        font-family: "Roboto Light", sans-serif;
+        font-size: 16px;
+        height: 35px;
+        line-height: 35px;
+    }
+    #misc_home, #misc_away, #misc_total {
+        float: left;
+        margin-right: 2px;
+        background-color: #c1e4b6;
+        padding: 0 3px 0 4px;
+    }
+
+    .failed_to_score_header {
+        width: 103px;
+        float: left;
+        clear: both;
+        font-family: "Roboto Light", sans-serif;
+        font-size: 16px;
+        height: 35px;
+        border-top: 1px solid #336026;
+        text-align: center;
+        line-height: 35px;
+        background: rgb(189, 232, 177);
+        background: -moz-linear-gradient(180deg, rgba(189, 232, 177, 1) 0%, rgba(98, 176, 75, 1) 5%, rgba(169, 226, 153, 1) 100%);
+        background: -webkit-linear-gradient(180deg, rgba(189, 232, 177, 1) 0%, rgba(98, 176, 75, 1) 5%, rgba(169, 226, 153, 1) 100%);
+        background: linear-gradient(180deg, rgba(189, 232, 177, 1) 0%, rgba(98, 176, 75, 1) 5%, rgba(169, 226, 153, 1) 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#bde8b1", endColorstr="#a9e299", GradientType=1);
+        margin-right: 2px;
+    }
+    .fts_home, .fts_away, .fts_total {
+        float: left;
+        margin-right: 2px;
+        background-color: transparent;
+        text-align: center;
+        font-family: "Roboto Light", sans-serif;
+        font-size: 16px;
+        height: 35px;
+        line-height: 35px;
+        width: 43px;
+        font-weight: bold;
     }
 </style>
