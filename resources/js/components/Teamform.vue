@@ -78,7 +78,7 @@
 
             loadLatestGames(e) {
                 // get the 10 last matches that correspondents with the form
-                axios.get("https://v3.football.api-sports.io/fixtures?team=" + e + "&last=10", {
+                axios.get("https://v3.football.api-sports.io/fixtures?team=" + e + "&last=1", {
                     headers: {
                         "X-RapidAPI-Host": process.env.MIX_API_URL,
                         "X-RapidAPI-Key": process.env.MIX_API_KEY

@@ -214,11 +214,12 @@
 
 <script>
     import donutTest from "./donutTest";
+    import teamstats from "./teamstats";
 
     export default {
         name: "teamplayers",
         props: ['teamid'],
-        components: { donutTest },
+        components: { donutTest, teamstats },
 
         data() {
             return {

@@ -2647,7 +2647,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       // get the 10 last matches that correspondents with the form
-      axios.get("https://v3.football.api-sports.io/fixtures?team=" + e + "&last=10", {
+      axios.get("https://v3.football.api-sports.io/fixtures?team=" + e + "&last=1", {
         headers: {
           "X-RapidAPI-Host": "api-football-v1.p.rapidapi.com",
           "X-RapidAPI-Key": "b1ae4a3fca89630148dadaa295a0b5b7"
@@ -3620,6 +3620,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _donutTest__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./donutTest */ "./resources/js/components/donutTest.vue");
+/* harmony import */ var _teamstats__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./teamstats */ "./resources/js/components/teamstats.vue");
 function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
@@ -3841,11 +3842,13 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "teamplayers",
   props: ['teamid'],
   components: {
-    donutTest: _donutTest__WEBPACK_IMPORTED_MODULE_0__["default"]
+    donutTest: _donutTest__WEBPACK_IMPORTED_MODULE_0__["default"],
+    teamstats: _teamstats__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   data: function data() {
     return {
@@ -4146,10 +4149,10 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/teamstats.vue?vue&type=script&lang=js&":
-/*!****************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/teamstats.vue?vue&type=script&lang=js& ***!
-  \****************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/teamstats.vue?vue&type=script&defer=true&lang=js&":
+/*!***************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/teamstats.vue?vue&type=script&defer=true&lang=js& ***!
+  \***************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -4264,97 +4267,220 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      loading: false,
-      loaded: true,
-
-      /*
-      *
-      * doughnut chart
-      *
-      */
-      playedChart: [{
-        'playerid': 12,
-        'type': 'doughnut',
-        'data': {
-          'labels': ['home', 'away'],
-          'datasets': [{
-            'data': [8, 4],
-            'backgroundColor': [// green
-            '#74c89b', // red
-            '#2b6c41']
-          }]
-        },
-        'options': {
-          'plugins': {
-            'legend': {
-              'display': false
-            }
-          },
-          'layout': {
-            'padding': 10
-          },
-          'cutout': '50%',
-          'hoverOffset': 7,
-          'responsive': true,
-          'maintainAspectRatio': true,
-          'borderWidth': 0
-        }
-      }],
-
-      /*
-      *
-      * Bar chart
-      *
-      */
-      forChart: [{
-        type: 'bar',
-        data: {
-          labels: ["0-15", "15-30", "30-45", "45-60", "60-75", "75-90", "90+"],
-          datasets: [{
-            indexAxis: 'x',
-            label: "Goals",
-            backgroundColor: ["#8ba752"],
-            hoverBackgroundColor: ["#6b883b"],
-            data: [1, 2, 1, 4, 3, 2, 3]
-          }]
-        },
-        options: {
-          scales: {
-            y: {
-              display: false,
-              beginAtZero: true
-            }
-          }
-        }
-      }],
-
-      /*
-      *
-      * Bar chart
-      *
-      */
-      againstChart: [{
-        type: 'bar',
-        data: {
-          labels: ["0-15", "15-30", "30-45", "45-60", "60-75", "75-90", "90+"],
-          datasets: [{
-            indexAxis: 'x',
-            label: "Goals",
-            backgroundColor: ["#d4530d"],
-            hoverBackgroundColor: ["#b43f06"],
-            data: [2, 1, 1, 2, 5, 2, 1]
-          }]
-        },
-        options: {
-          scales: {
-            y: {
-              display: false,
-              beginAtZero: true
-            }
-          }
-        }
-      }]
+      loading: true,
+      loaded: false,
+      gamesCharts: [],
+      teamStats: [],
+      goalsCharts: [],
+      forGoalsArr: [],
+      againstGoalsArr: []
     };
+  },
+  methods: {
+    /*
+    *
+    * Call external api with team id
+    *
+    */
+    loadTeamStats: function loadTeamStats(e) {
+      var _this = this;
+
+      axios.get("https://v3.football.api-sports.io/teams/statistics?league=4&season=2020&team=" + e, {
+        headers: {
+          "X-RapidAPI-Host": "api-football-v1.p.rapidapi.com",
+          "X-RapidAPI-Key": "b1ae4a3fca89630148dadaa295a0b5b7"
+        }
+      }).then(function (response) {
+        e = response.data.response;
+        /*
+        *
+        * doughnut charts
+        *
+        */
+
+        _this.gamesCharts.push({
+          'total': e.fixtures.played.total,
+          'type': 'doughnut',
+          'data': {
+            'labels': ['home', 'away'],
+            'datasets': [{
+              'data': [e.fixtures.played.home, e.fixtures.played.away],
+              'backgroundColor': [// green
+              '#74c89b', // red
+              '#2b6c41']
+            }]
+          },
+          'options': {
+            'plugins': {
+              'legend': {
+                'display': false
+              }
+            },
+            'layout': {
+              'padding': 10
+            },
+            'cutout': '50%',
+            'hoverOffset': 7,
+            'responsive': true,
+            'maintainAspectRatio': true,
+            'borderWidth': 0
+          }
+        }, {
+          'total': e.fixtures.wins.total,
+          'type': 'doughnut',
+          'data': {
+            'labels': ['home', 'away'],
+            'datasets': [{
+              'data': [e.fixtures.wins.home, e.fixtures.wins.away],
+              'backgroundColor': [// green
+              '#74c89b', // red
+              '#2b6c41']
+            }]
+          },
+          'options': {
+            'plugins': {
+              'legend': {
+                'display': false
+              }
+            },
+            'layout': {
+              'padding': 10
+            },
+            'cutout': '50%',
+            'hoverOffset': 7,
+            'responsive': true,
+            'maintainAspectRatio': true,
+            'borderWidth': 0
+          }
+        }, {
+          'total': e.fixtures.draws.total,
+          'type': 'doughnut',
+          'data': {
+            'labels': ['home', 'away'],
+            'datasets': [{
+              'data': [e.fixtures.draws.home, e.fixtures.draws.away],
+              'backgroundColor': [// green
+              '#74c89b', // red
+              '#2b6c41']
+            }]
+          },
+          'options': {
+            'plugins': {
+              'legend': {
+                'display': false
+              }
+            },
+            'layout': {
+              'padding': 10
+            },
+            'cutout': '50%',
+            'hoverOffset': 7,
+            'responsive': true,
+            'maintainAspectRatio': true,
+            'borderWidth': 0
+          }
+        }, {
+          'total': e.fixtures.loses.total,
+          'type': 'doughnut',
+          'data': {
+            'labels': ['home', 'away'],
+            'datasets': [{
+              'data': [e.fixtures.loses.home, e.fixtures.loses.away],
+              'backgroundColor': [// green
+              '#74c89b', // red
+              '#2b6c41']
+            }]
+          },
+          'options': {
+            'plugins': {
+              'legend': {
+                'display': false
+              }
+            },
+            'layout': {
+              'padding': 10
+            },
+            'cutout': '50%',
+            'hoverOffset': 7,
+            'responsive': true,
+            'maintainAspectRatio': true,
+            'borderWidth': 0
+          }
+        });
+
+        _this.loaded = true;
+        /*
+        *
+        * bar charts
+        *
+        */
+
+        var forGoals = e.goals["for"].minute;
+        var againstGoals = e.goals.against.minute; // since api shows keys as numbers, which JS cannot parse we use a slight detour
+
+        for (var key in forGoals) {
+          _this.forGoalsArr.push(forGoals[key]);
+        }
+
+        ;
+
+        for (var _key in againstGoals) {
+          _this.againstGoalsArr.push(againstGoals[_key]);
+        }
+
+        ; // push the goals in the array
+
+        _this.goalsCharts.push({
+          type: 'bar',
+          data: {
+            labels: ["0-15", "16-30", "31-45", "46-60", "61-75", "76-90", "90+"],
+            datasets: [{
+              indexAxis: 'x',
+              label: "Goals",
+              backgroundColor: ["#8ba752"],
+              hoverBackgroundColor: ["#6b883b"],
+              data: [_this.forGoalsArr[0].total, _this.forGoalsArr[1].total, _this.forGoalsArr[2].total, _this.forGoalsArr[3].total, _this.forGoalsArr[4].total, _this.forGoalsArr[5].total, _this.forGoalsArr[6].total + _this.againstGoalsArr[7].total]
+            }]
+          },
+          options: {
+            scales: {
+              y: {
+                display: true,
+                beginAtZero: true
+              }
+            }
+          }
+        }, {
+          type: 'bar',
+          data: {
+            labels: ["0-15", "16-30", "31-45", "46-60", "61-75", "76-90", "90+"],
+            datasets: [{
+              indexAxis: 'x',
+              label: "Goals",
+              backgroundColor: ["#d4530d"],
+              hoverBackgroundColor: ["#b43f06"],
+              data: [_this.againstGoalsArr[0].total, _this.againstGoalsArr[1].total, _this.againstGoalsArr[2].total, _this.againstGoalsArr[3].total, _this.againstGoalsArr[4].total, _this.againstGoalsArr[5].total, _this.againstGoalsArr[6].total + _this.againstGoalsArr[7].total]
+            }]
+          },
+          options: {
+            scales: {
+              y: {
+                display: true,
+                beginAtZero: true
+              }
+            }
+          }
+        });
+
+        _this.teamStats.push(e);
+
+        _this.loading = false;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    }
+  },
+  created: function created() {//this.loadTeamStats(this.teamid)
   },
   computed: {
     doneloading: function doneloading() {
@@ -22580,7 +22706,7 @@ var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBP
 var ___CSS_LOADER_URL_REPLACEMENT_0___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default()(_images_pulseloader_3_gif__WEBPACK_IMPORTED_MODULE_2__["default"]);
 var ___CSS_LOADER_URL_REPLACEMENT_1___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default()(_images_light_wool_png__WEBPACK_IMPORTED_MODULE_3__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.loading_div_teamstats[data-v-0ceeeda7] {\n     position: absolute;\n     width: 100%;\n     height: 435px;\n     background-color: whitesmoke;\n     z-index: 999;\n     opacity: 100%;\n     transition: all .2s ease-in;\n}\n#pulseloader[data-v-0ceeeda7] {\n     z-index: 1000;\n     background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ");\n     width: 84px;\n     height: 84px;\n     position: absolute;\n     top: 41%;\n     left: 45%;\n}\n.teamstats_container[data-v-0ceeeda7] {\n     position: relative;\n     margin-top: 10px;\n     width: 975px;\n     height: 435px;\n     box-shadow: rgba(0, 0, 0, 0.16) 0 3px 6px, rgba(0, 0, 0, 0.23) 0 3px 6px;\n     background-color: white;\n}\n.teamstats_header[data-v-0ceeeda7] {\n     position: relative;\n     width: 100%;\n     font-family: 'Oswald', sans-serif;\n     font-size: 24px;\n     color: #515151;\n     text-transform: uppercase;\n     text-align: center;\n     background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_1___ + ");\n     padding: 5px 0 5px 8px;\n     line-height: 24px;\n     height: 35px;\n     box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;\n     z-index: 999;\n}\n.separator_bar[data-v-0ceeeda7] {\n     height: 2px;\n     background-image: linear-gradient(to right, transparent, #b5b5b5, transparent);\n}\n#header_bar_container[data-v-0ceeeda7] {\n     position: relative;\n     width: 100%;\n     height: 40px;\n     font-family: 'Oswald', sans-serif;\n     font-size: 24px;\n     color: #515151;\n     text-transform: uppercase;\n     line-height: 40px;\n     text-align: center;\n     border-bottom: 1px solid #d0d0d0;\n     background-color: whitesmoke;\n     z-index: 0;\n}\n#games_header[data-v-0ceeeda7] {\n     float: left;\n     text-align: inherit;\n     width: 230px;\n}\n#goals_header[data-v-0ceeeda7] {\n     float: left;\n     text-align: inherit;\n     width: 488px;\n}\n#extra_header[data-v-0ceeeda7] {\n     float: left;\n     text-align: inherit;\n     width: 257px;\n}\n#stats_container[data-v-0ceeeda7] {\n     width: 100%;\n     height: 358px;\n     background: rgb(255,255,255);\n     background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(203,211,113,1) 100%);\n     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=\"#ffffff\",endColorstr=\"#cbd371\",GradientType=1);\n}\n.separator_div[data-v-0ceeeda7] {\n     width: 1px;\n     height: 100%;\n     background-image: linear-gradient(to top, transparent, #b5b5b5, transparent);\n}\n#games_container[data-v-0ceeeda7] {\n     padding-top: 5px;\n     float: left;\n     width: 230px;\n     height: 100%;\n     background-color: transparent;\n}\n#goals_container[data-v-0ceeeda7] {\n     -o-border-image: linear-gradient(to top, transparent, whitesmoke, transparent) 1;\n        border-image: linear-gradient(to top, transparent, whitesmoke, transparent) 1;\n     border-width: 1px;\n     border-style: solid;\n     border-right: none;\n     border-bottom: none;\n     border-top: none;\n     float: left;\n     width: 486px;\n     height: 100%;\n     background-color: transparent;\n     padding: 5px 15px 0 15px;\n}\n#extra_container[data-v-0ceeeda7] {\n     -o-border-image: linear-gradient(to top, transparent, whitesmoke, transparent) 1;\n        border-image: linear-gradient(to top, transparent, whitesmoke, transparent) 1;\n     border-width: 1px;\n     border-style: solid;\n     border-right: none;\n     border-bottom: none;\n     border-top: none;\n     float: left;\n     width: 257px;\n     height: 100%;\n     background-color: transparent;\n}\n.games_chart_div[data-v-0ceeeda7] {\n     padding-left: 10px;\n     width: 100%;\n     height: 85px;\n     font-family: 'Oswald', sans-serif;\n     font-size: 24px;\n     color: #515151;\n     text-transform: lowercase;\n     line-height: 85px;\n}\n.games_title[data-v-0ceeeda7] {\n     width: 30%;\n     float: left;\n}\n.games_chart[data-v-0ceeeda7] {\n     padding-left: 30px;\n     width: 129px;\n     height: 85px;\n     float: left;\n}\n#for_container[data-v-0ceeeda7], #against_container[data-v-0ceeeda7] {\n     font-family: 'Oswald', sans-serif;\n     font-size: 25px;\n     color: #515151;\n     float: left;\n     width: 226px;\n     height: 100%;\n}\n#against_container[data-v-0ceeeda7] {\n     text-align: right;\n}\n.for_title_bar[data-v-0ceeeda7] {\n     margin-top: 6px;\n     font-family: \"Roboto Light\", sans-serif;\n     font-size: 16px;\n     width: 224px;\n     height: 35px;\n     border-top: 1px solid #336026;\n     display: flex;\n     justify-content: space-between;\n     line-height: 35px;\n     background: rgb(189, 232, 177);\n     background: linear-gradient(180deg, rgba(189, 232, 177, 1) 0%, rgba(98, 176, 75, 1) 5%, rgba(169, 226, 153, 1) 100%);\n     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=\"#bde8b1\", endColorstr=\"#a9e299\", GradientType=1);\n     padding: 0 6px 0 6px;\n}\n.for_data_bar[data-v-0ceeeda7] {\n     font-family: \"Roboto Light\", sans-serif;\n     font-size: 16px;\n     margin-top: 2px;\n     width: 224px;\n     height: 35px;\n     border-top: 1px solid #336026;\n     display: flex;\n     justify-content: space-between;\n     background-color: #c1e4b6;\n     padding: 0 6px 0 6px;\n     line-height: 35px;\n}\n.for_data_bar span[data-v-0ceeeda7] {\n    font-weight: bold;\n}\n#for_chart_container[data-v-0ceeeda7] {\n     float: left;\n     width: 224px;\n     height: 224px;\n     margin-top: 5px;\n}\n#against_chart_container[data-v-0ceeeda7] {\n     float: left;\n     width: 224px;\n     height: 224px;\n     margin-top: 5px;\n}\n#biggest_container[data-v-0ceeeda7] {\n     font-family: 'Oswald', sans-serif;\n     font-size: 25px;\n     color: #515151;\n     text-align: center;\n     width: 100%;\n     height: 100%;\n     background-color: transparent;\n     padding: 5px 1px 5px 10px;\n}\n.streak_header[data-v-0ceeeda7], #wins_header[data-v-0ceeeda7] {\n     float: left;\n     font-family: \"Roboto Light\", sans-serif;\n     font-size: 16px;\n     width: 61px;\n     height: 35px;\n     border-top: 1px solid #336026;\n     text-align: center;\n     line-height: 35px;\n     background: rgb(189, 232, 177);\n     background: linear-gradient(180deg, rgba(189, 232, 177, 1) 0%, rgba(98, 176, 75, 1) 5%, rgba(169, 226, 153, 1) 100%);\n     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=\"#bde8b1\", endColorstr=\"#a9e299\", GradientType=1);\n     margin-right: 2px;\n}\n.streak_content[data-v-0ceeeda7], #wins_content[data-v-0ceeeda7] {\n     float: left;\n     width: 175px;\n     font-family: \"Roboto Light\", sans-serif;\n     font-size: 16px;\n     height: 35px;\n     border-top: 1px solid #336026;\n     background-color: #c1e4b6;\n     padding: 0 6px 0 6px;\n     line-height: 35px;\n     text-align: left;\n     margin-bottom: 2px;\n     margin-right: 2px;\n}\n#streak_content[data-v-0ceeeda7], #wins_content span[data-v-0ceeeda7] {\n     font-weight: normal;\n}\n#misc_header[data-v-0ceeeda7] {\n     margin-right: 6px;\n     margin-top: 6px;\n     float: right;\n     font-family: \"Roboto Light\", sans-serif;\n     font-size: 16px;\n     height: 35px;\n     line-height: 35px;\n}\n#misc_home[data-v-0ceeeda7], #misc_away[data-v-0ceeeda7], #misc_total[data-v-0ceeeda7] {\n     float: left;\n     margin-right: 2px;\n     background-color: #c1e4b6;\n     padding: 0 3px 0 4px;\n}\n.failed_to_score_header[data-v-0ceeeda7] {\n     width: 103px;\n     float: left;\n     clear: both;\n     font-family: \"Roboto Light\", sans-serif;\n     font-size: 16px;\n     height: 35px;\n     border-top: 1px solid #336026;\n     text-align: center;\n     line-height: 35px;\n     background: rgb(189, 232, 177);\n     background: linear-gradient(180deg, rgba(189, 232, 177, 1) 0%, rgba(98, 176, 75, 1) 5%, rgba(169, 226, 153, 1) 100%);\n     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=\"#bde8b1\", endColorstr=\"#a9e299\", GradientType=1);\n     margin-right: 2px;\n}\n.fts_home[data-v-0ceeeda7], .fts_away[data-v-0ceeeda7], .fts_total[data-v-0ceeeda7] {\n     float: left;\n     margin-right: 2px;\n     background-color: transparent;\n     text-align: center;\n     font-family: \"Roboto Light\", sans-serif;\n     font-size: 16px;\n     height: 35px;\n     line-height: 35px;\n     width: 43px;\n     font-weight: bold;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.loading_div_teamstats[data-v-0ceeeda7] {\n     position: absolute;\n     width: 100%;\n     height: 435px;\n     background-color: whitesmoke;\n     z-index: 1111;\n     opacity: 100%;\n     transition: all 0.6s ease-in-out 0.1s;\n     visibility: visible;\n}\n#pulseloader[data-v-0ceeeda7] {\n     z-index: 1000;\n     background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ");\n     width: 84px;\n     height: 84px;\n     position: absolute;\n     top: 41%;\n     left: 45%;\n}\n.teamstats_container[data-v-0ceeeda7] {\n     position: relative;\n     margin-top: 10px;\n     width: 975px;\n     height: 435px;\n     box-shadow: rgba(0, 0, 0, 0.16) 0 3px 6px, rgba(0, 0, 0, 0.23) 0 3px 6px;\n     background-color: white;\n}\n.teamstats_header[data-v-0ceeeda7] {\n     position: relative;\n     width: 100%;\n     font-family: 'Oswald', sans-serif;\n     font-size: 24px;\n     color: #515151;\n     text-transform: uppercase;\n     text-align: center;\n     background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_1___ + ");\n     padding: 5px 0 5px 8px;\n     line-height: 24px;\n     height: 35px;\n     box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;\n     z-index: 999;\n}\n.separator_bar[data-v-0ceeeda7] {\n     height: 2px;\n     background-image: linear-gradient(to right, transparent, #b5b5b5, transparent);\n}\n#header_bar_container[data-v-0ceeeda7] {\n     position: relative;\n     width: 100%;\n     height: 40px;\n     font-family: 'Oswald', sans-serif;\n     font-size: 24px;\n     color: #515151;\n     text-transform: uppercase;\n     line-height: 40px;\n     text-align: center;\n     border-bottom: 1px solid #d0d0d0;\n     background-color: whitesmoke;\n     z-index: 0;\n}\n#games_header[data-v-0ceeeda7] {\n     float: left;\n     text-align: inherit;\n     width: 230px;\n}\n#goals_header[data-v-0ceeeda7] {\n     float: left;\n     text-align: inherit;\n     width: 488px;\n}\n#extra_header[data-v-0ceeeda7] {\n     float: left;\n     text-align: inherit;\n     width: 257px;\n}\n#stats_container[data-v-0ceeeda7] {\n     width: 100%;\n     height: 358px;\n     background: rgb(255,255,255);\n     background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(203,211,113,1) 100%);\n     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=\"#ffffff\",endColorstr=\"#cbd371\",GradientType=1);\n}\n.separator_div[data-v-0ceeeda7] {\n     width: 1px;\n     height: 100%;\n     background-image: linear-gradient(to top, transparent, #b5b5b5, transparent);\n}\n#games_container[data-v-0ceeeda7] {\n     padding-top: 5px;\n     float: left;\n     width: 230px;\n     height: 100%;\n     background-color: transparent;\n}\n#goals_container[data-v-0ceeeda7] {\n     -o-border-image: linear-gradient(to top, transparent, whitesmoke, transparent) 1;\n        border-image: linear-gradient(to top, transparent, whitesmoke, transparent) 1;\n     border-width: 1px;\n     border-style: solid;\n     border-right: none;\n     border-bottom: none;\n     border-top: none;\n     float: left;\n     width: 486px;\n     height: 100%;\n     background-color: transparent;\n     padding: 5px 15px 0 15px;\n}\n#extra_container[data-v-0ceeeda7] {\n     -o-border-image: linear-gradient(to top, transparent, whitesmoke, transparent) 1;\n        border-image: linear-gradient(to top, transparent, whitesmoke, transparent) 1;\n     border-width: 1px;\n     border-style: solid;\n     border-right: none;\n     border-bottom: none;\n     border-top: none;\n     float: left;\n     width: 257px;\n     height: 100%;\n     background-color: transparent;\n}\n.games_chart_div[data-v-0ceeeda7] {\n     padding-left: 10px;\n     width: 100%;\n     height: 85px;\n     font-family: 'Oswald', sans-serif;\n     font-size: 24px;\n     color: #515151;\n     text-transform: lowercase;\n     line-height: 85px;\n}\n.games_title[data-v-0ceeeda7] {\n     width: 30%;\n     float: left;\n}\n.games_chart[data-v-0ceeeda7] {\n     padding-left: 30px;\n     width: 129px;\n     height: 85px;\n     float: left;\n}\n#for_container[data-v-0ceeeda7], #against_container[data-v-0ceeeda7] {\n     font-family: 'Oswald', sans-serif;\n     font-size: 25px;\n     color: #515151;\n     float: left;\n     width: 226px;\n     height: 100%;\n}\n#against_container[data-v-0ceeeda7] {\n     text-align: right;\n}\n.for_title_bar[data-v-0ceeeda7] {\n     margin-top: 6px;\n     font-family: \"Roboto Light\", sans-serif;\n     font-size: 16px;\n     width: 224px;\n     height: 35px;\n     border-top: 1px solid #336026;\n     display: flex;\n     justify-content: space-between;\n     line-height: 35px;\n     background: rgb(189, 232, 177);\n     background: linear-gradient(180deg, rgba(189, 232, 177, 1) 0%, rgba(98, 176, 75, 1) 5%, rgba(169, 226, 153, 1) 100%);\n     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=\"#bde8b1\", endColorstr=\"#a9e299\", GradientType=1);\n     padding: 0 6px 0 6px;\n}\n.for_data_bar[data-v-0ceeeda7] {\n     font-family: \"Roboto Light\", sans-serif;\n     font-size: 16px;\n     margin-top: 2px;\n     width: 224px;\n     height: 35px;\n     border-top: 1px solid #336026;\n     display: flex;\n     justify-content: space-between;\n     background-color: #c1e4b6;\n     padding: 0 6px 0 6px;\n     line-height: 35px;\n}\n.for_data_bar span[data-v-0ceeeda7] {\n    font-weight: bold;\n}\n#for_chart_container[data-v-0ceeeda7] {\n     float: left;\n     width: 224px;\n     height: 224px;\n     margin-top: 5px;\n}\n#against_chart_container[data-v-0ceeeda7] {\n     float: left;\n     width: 224px;\n     height: 224px;\n     margin-top: 5px;\n}\n#biggest_container[data-v-0ceeeda7] {\n     font-family: 'Oswald', sans-serif;\n     font-size: 25px;\n     color: #515151;\n     text-align: center;\n     width: 100%;\n     height: 100%;\n     background-color: transparent;\n     padding: 5px 1px 5px 10px;\n}\n.streak_header[data-v-0ceeeda7], #wins_header[data-v-0ceeeda7] {\n     float: left;\n     font-family: \"Roboto Light\", sans-serif;\n     font-size: 16px;\n     width: 61px;\n     height: 35px;\n     border-top: 1px solid #336026;\n     text-align: center;\n     line-height: 35px;\n     background: rgb(189, 232, 177);\n     background: linear-gradient(180deg, rgba(189, 232, 177, 1) 0%, rgba(98, 176, 75, 1) 5%, rgba(169, 226, 153, 1) 100%);\n     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=\"#bde8b1\", endColorstr=\"#a9e299\", GradientType=1);\n     margin-right: 2px;\n}\n.streak_content[data-v-0ceeeda7], #wins_content[data-v-0ceeeda7] {\n     float: left;\n     width: 175px;\n     font-family: \"Roboto Light\", sans-serif;\n     font-size: 16px;\n     height: 35px;\n     border-top: 1px solid #336026;\n     background-color: #c1e4b6;\n     padding: 0 6px 0 6px;\n     line-height: 35px;\n     text-align: left;\n     margin-bottom: 2px;\n     margin-right: 2px;\n}\n#streak_content[data-v-0ceeeda7], #wins_content span[data-v-0ceeeda7] {\n     font-weight: normal;\n}\n#misc_header[data-v-0ceeeda7] {\n     margin-right: 6px;\n     margin-top: 6px;\n     float: right;\n     font-family: \"Roboto Light\", sans-serif;\n     font-size: 16px;\n     height: 35px;\n     line-height: 35px;\n}\n#misc_home[data-v-0ceeeda7], #misc_away[data-v-0ceeeda7], #misc_total[data-v-0ceeeda7] {\n     float: left;\n     margin-right: 2px;\n     background-color: #c1e4b6;\n     padding: 0 3px 0 4px;\n}\n.failed_to_score_header[data-v-0ceeeda7] {\n     width: 103px;\n     float: left;\n     clear: both;\n     font-family: \"Roboto Light\", sans-serif;\n     font-size: 16px;\n     height: 35px;\n     border-top: 1px solid #336026;\n     text-align: center;\n     line-height: 35px;\n     background: rgb(189, 232, 177);\n     background: linear-gradient(180deg, rgba(189, 232, 177, 1) 0%, rgba(98, 176, 75, 1) 5%, rgba(169, 226, 153, 1) 100%);\n     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=\"#bde8b1\", endColorstr=\"#a9e299\", GradientType=1);\n     margin-right: 2px;\n}\n.fts_home[data-v-0ceeeda7], .fts_away[data-v-0ceeeda7], .fts_total[data-v-0ceeeda7] {\n     float: left;\n     margin-right: 2px;\n     background-color: transparent;\n     text-align: center;\n     font-family: \"Roboto Light\", sans-serif;\n     font-size: 16px;\n     height: 35px;\n     line-height: 35px;\n     width: 43px;\n     font-weight: bold;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -54943,7 +55069,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _teamstats_vue_vue_type_template_id_0ceeeda7_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./teamstats.vue?vue&type=template&id=0ceeeda7&scoped=true& */ "./resources/js/components/teamstats.vue?vue&type=template&id=0ceeeda7&scoped=true&");
-/* harmony import */ var _teamstats_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./teamstats.vue?vue&type=script&lang=js& */ "./resources/js/components/teamstats.vue?vue&type=script&lang=js&");
+/* harmony import */ var _teamstats_vue_vue_type_script_defer_true_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./teamstats.vue?vue&type=script&defer=true&lang=js& */ "./resources/js/components/teamstats.vue?vue&type=script&defer=true&lang=js&");
 /* harmony import */ var _teamstats_vue_vue_type_style_index_0_id_0ceeeda7_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./teamstats.vue?vue&type=style&index=0&id=0ceeeda7&scoped=true&lang=css& */ "./resources/js/components/teamstats.vue?vue&type=style&index=0&id=0ceeeda7&scoped=true&lang=css&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
@@ -54955,7 +55081,7 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
-  _teamstats_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _teamstats_vue_vue_type_script_defer_true_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _teamstats_vue_vue_type_template_id_0ceeeda7_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
   _teamstats_vue_vue_type_template_id_0ceeeda7_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
   false,
@@ -55237,10 +55363,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/teamstats.vue?vue&type=script&lang=js&":
-/*!************************************************************************!*\
-  !*** ./resources/js/components/teamstats.vue?vue&type=script&lang=js& ***!
-  \************************************************************************/
+/***/ "./resources/js/components/teamstats.vue?vue&type=script&defer=true&lang=js&":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/components/teamstats.vue?vue&type=script&defer=true&lang=js& ***!
+  \***********************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -55248,8 +55374,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_teamstats_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./teamstats.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/teamstats.vue?vue&type=script&lang=js&");
- /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_teamstats_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_teamstats_vue_vue_type_script_defer_true_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./teamstats.vue?vue&type=script&defer=true&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/teamstats.vue?vue&type=script&defer=true&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_teamstats_vue_vue_type_script_defer_true_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
@@ -57831,22 +57957,16 @@ var render = function () {
             "div",
             { staticClass: "games_chart" },
             [
-              _c("donut-test", {
-                directives: [
-                  {
-                    name: "show",
-                    rawName: "v-show",
-                    value: _vm.loaded,
-                    expression: "loaded",
-                  },
-                ],
-                attrs: {
-                  centertext: 12,
-                  fontsize: 24,
-                  "chart-data": _vm.playedChart[0],
-                  canvas_id: "played" + _vm.teamid,
-                },
-              }),
+              !_vm.loading
+                ? _c("donut-test", {
+                    attrs: {
+                      centertext: _vm.gamesCharts[0].total,
+                      fontsize: 24,
+                      "chart-data": this.gamesCharts[0],
+                      canvas_id: "played" + _vm.teamid,
+                    },
+                  })
+                : _vm._e(),
             ],
             1
           ),
@@ -57859,22 +57979,16 @@ var render = function () {
             "div",
             { staticClass: "games_chart" },
             [
-              _c("donut-test", {
-                directives: [
-                  {
-                    name: "show",
-                    rawName: "v-show",
-                    value: _vm.loaded,
-                    expression: "loaded",
-                  },
-                ],
-                attrs: {
-                  centertext: 12,
-                  fontsize: 24,
-                  "chart-data": _vm.playedChart[0],
-                  canvas_id: "wins" + _vm.teamid,
-                },
-              }),
+              !_vm.loading
+                ? _c("donut-test", {
+                    attrs: {
+                      centertext: _vm.gamesCharts[1].total,
+                      fontsize: 24,
+                      "chart-data": this.gamesCharts[1],
+                      canvas_id: "wins" + _vm.teamid,
+                    },
+                  })
+                : _vm._e(),
             ],
             1
           ),
@@ -57887,22 +58001,16 @@ var render = function () {
             "div",
             { staticClass: "games_chart" },
             [
-              _c("donut-test", {
-                directives: [
-                  {
-                    name: "show",
-                    rawName: "v-show",
-                    value: _vm.loaded,
-                    expression: "loaded",
-                  },
-                ],
-                attrs: {
-                  centertext: 12,
-                  fontsize: 24,
-                  "chart-data": _vm.playedChart[0],
-                  canvas_id: "draws" + _vm.teamid,
-                },
-              }),
+              !_vm.loading
+                ? _c("donut-test", {
+                    attrs: {
+                      centertext: _vm.gamesCharts[2].total,
+                      fontsize: 24,
+                      "chart-data": this.gamesCharts[2],
+                      canvas_id: "draws" + _vm.teamid,
+                    },
+                  })
+                : _vm._e(),
             ],
             1
           ),
@@ -57915,22 +58023,16 @@ var render = function () {
             "div",
             { staticClass: "games_chart" },
             [
-              _c("donut-test", {
-                directives: [
-                  {
-                    name: "show",
-                    rawName: "v-show",
-                    value: _vm.loaded,
-                    expression: "loaded",
-                  },
-                ],
-                attrs: {
-                  centertext: 12,
-                  fontsize: 24,
-                  "chart-data": _vm.playedChart[0],
-                  canvas_id: "loses" + _vm.teamid,
-                },
-              }),
+              !_vm.loading
+                ? _c("donut-test", {
+                    attrs: {
+                      centertext: _vm.gamesCharts[3].total,
+                      fontsize: 24,
+                      "chart-data": this.gamesCharts[3],
+                      canvas_id: "loses" + _vm.teamid,
+                    },
+                  })
+                : _vm._e(),
             ],
             1
           ),
@@ -57948,18 +58050,32 @@ var render = function () {
           _vm._v(" "),
           _vm._m(1),
           _vm._v(" "),
-          _vm._m(2),
+          !_vm.loading
+            ? _c("div", { staticClass: "for_data_bar" }, [
+                _c("span", [
+                  _vm._v(_vm._s(_vm.teamStats[0]["goals"].for.total.home)),
+                ]),
+                _c("span", [
+                  _vm._v(_vm._s(_vm.teamStats[0]["goals"].for.total.away)),
+                ]),
+                _c("span", [
+                  _vm._v(_vm._s(_vm.teamStats[0]["goals"].for.total.total)),
+                ]),
+              ])
+            : _vm._e(),
           _vm._v(" "),
           _c(
             "div",
             { attrs: { id: "for_chart_container" } },
             [
-              _c("bar-chart", {
-                attrs: {
-                  "chart-data": _vm.forChart[0],
-                  canvas_id: "for_bar" + _vm.teamid,
-                },
-              }),
+              !_vm.loading
+                ? _c("bar-chart", {
+                    attrs: {
+                      "chart-data": _vm.goalsCharts[0],
+                      canvas_id: "for_bar" + _vm.teamid,
+                    },
+                  })
+                : _vm._e(),
             ],
             1
           ),
@@ -57970,20 +58086,34 @@ var render = function () {
             _vm._v("against"),
           ]),
           _vm._v(" "),
-          _vm._m(3),
+          _vm._m(2),
           _vm._v(" "),
-          _vm._m(4),
+          !_vm.loading
+            ? _c("div", { staticClass: "for_data_bar" }, [
+                _c("span", [
+                  _vm._v(_vm._s(_vm.teamStats[0]["goals"].against.total.home)),
+                ]),
+                _c("span", [
+                  _vm._v(_vm._s(_vm.teamStats[0]["goals"].against.total.away)),
+                ]),
+                _c("span", [
+                  _vm._v(_vm._s(_vm.teamStats[0]["goals"].against.total.total)),
+                ]),
+              ])
+            : _vm._e(),
           _vm._v(" "),
           _c(
             "div",
             { attrs: { id: "against_chart_container" } },
             [
-              _c("bar-chart", {
-                attrs: {
-                  "chart-data": _vm.againstChart[0],
-                  canvas_id: "against_bar" + _vm.teamid,
-                },
-              }),
+              !_vm.loading
+                ? _c("bar-chart", {
+                    attrs: {
+                      "chart-data": _vm.goalsCharts[1],
+                      canvas_id: "against_bar" + _vm.teamid,
+                    },
+                  })
+                : _vm._e(),
             ],
             1
           ),
@@ -57995,7 +58125,121 @@ var render = function () {
         staticStyle: { float: "left" },
       }),
       _vm._v(" "),
-      _vm._m(5),
+      !_vm.loading
+        ? _c("div", { attrs: { id: "extra_container" } }, [
+            _c("div", { attrs: { id: "biggest_container" } }, [
+              _c("div", { staticStyle: { "margin-bottom": "6px" } }, [
+                _vm._v("biggest"),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "streak_header" }, [_vm._v("streak")]),
+              _vm._v(" "),
+              _c("div", { staticClass: "streak_content" }, [
+                _c("span", [
+                  _vm._v(
+                    "win: " +
+                      _vm._s(_vm.teamStats[0]["biggest"].streak.wins) +
+                      " | draw: " +
+                      _vm._s(_vm.teamStats[0]["biggest"].streak.draws) +
+                      " | loss: " +
+                      _vm._s(_vm.teamStats[0]["biggest"].streak.loses)
+                  ),
+                ]),
+              ]),
+              _vm._v(" "),
+              _c("div", { attrs: { id: "wins_header" } }, [_vm._v("wins")]),
+              _vm._v(" "),
+              _c("div", { attrs: { id: "wins_content" } }, [
+                _c("span", [
+                  _vm._v(
+                    "home: " +
+                      _vm._s(_vm.teamStats[0]["biggest"].wins.home) +
+                      " | away: " +
+                      _vm._s(_vm.teamStats[0]["biggest"].wins.away)
+                  ),
+                ]),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticStyle: { "margin-bottom": "6px" } }, [
+                _vm._v("penalty"),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "streak_header" }, [_vm._v("scored")]),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "streak_content",
+                  staticStyle: { width: "40px", "text-align": "center" },
+                },
+                [_vm._v(_vm._s(_vm.teamStats[0]["penalty"].scored.total))]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "streak_content",
+                  staticStyle: { width: "133px", "text-align": "center" },
+                },
+                [_vm._v(_vm._s(_vm.teamStats[0]["penalty"].scored.percentage))]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "streak_header" }, [_vm._v("missed")]),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "streak_content",
+                  staticStyle: { width: "40px", "text-align": "center" },
+                },
+                [_vm._v(_vm._s(_vm.teamStats[0]["penalty"].missed.total))]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "streak_content",
+                  staticStyle: { width: "133px", "text-align": "center" },
+                },
+                [_vm._v(_vm._s(_vm.teamStats[0]["penalty"].missed.percentage))]
+              ),
+              _vm._v(" "),
+              _vm._m(3),
+              _vm._v(" "),
+              _c("div", { staticClass: "failed_to_score_header" }, [
+                _vm._v("failed to score"),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "fts_home" }, [
+                _vm._v(_vm._s(_vm.teamStats[0]["failed_to_score"].home)),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "fts_away" }, [
+                _vm._v(_vm._s(_vm.teamStats[0]["failed_to_score"].away)),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "fts_total" }, [
+                _vm._v(_vm._s(_vm.teamStats[0]["failed_to_score"].total)),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "failed_to_score_header" }, [
+                _vm._v("clean sheet"),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "fts_home" }, [
+                _vm._v(_vm._s(_vm.teamStats[0]["clean_sheet"].home)),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "fts_away" }, [
+                _vm._v(_vm._s(_vm.teamStats[0]["clean_sheet"].away)),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "fts_total" }, [
+                _vm._v(_vm._s(_vm.teamStats[0]["clean_sheet"].total)),
+              ]),
+            ]),
+          ])
+        : _vm._e(),
     ]),
   ])
 }
@@ -58026,16 +58270,6 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "for_data_bar" }, [
-      _c("span", [_vm._v("16")]),
-      _c("span", [_vm._v("7")]),
-      _c("span", [_vm._v("23")]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "for_title_bar" }, [
       _c("span", [_vm._v("home")]),
       _c("span", [_vm._v("away")]),
@@ -58046,106 +58280,12 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "for_data_bar" }, [
-      _c("span", [_vm._v("16")]),
-      _c("span", [_vm._v("7")]),
-      _c("span", [_vm._v("23")]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { attrs: { id: "extra_container" } }, [
-      _c("div", { attrs: { id: "biggest_container" } }, [
-        _c("div", { staticStyle: { "margin-bottom": "6px" } }, [
-          _vm._v("biggest"),
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "streak_header" }, [_vm._v("streak")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "streak_content" }, [
-          _c("span", [_vm._v("win: 3 | draw: 3 | loss: 5")]),
-        ]),
-        _vm._v(" "),
-        _c("div", { attrs: { id: "wins_header" } }, [_vm._v("wins")]),
-        _vm._v(" "),
-        _c("div", { attrs: { id: "wins_content" } }, [
-          _c("span", [_vm._v("home: 4-0 | away: 0-6")]),
-        ]),
-        _vm._v(" "),
-        _c("div", { staticStyle: { "margin-bottom": "6px" } }, [
-          _vm._v("penalty"),
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "streak_header" }, [_vm._v("scored")]),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "streak_content",
-            staticStyle: { width: "40px", "text-align": "center" },
-          },
-          [_vm._v("1")]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "streak_content",
-            staticStyle: { width: "133px", "text-align": "center" },
-          },
-          [_vm._v("100%")]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "streak_header" }, [_vm._v("missed")]),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "streak_content",
-            staticStyle: { width: "40px", "text-align": "center" },
-          },
-          [_vm._v("0")]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "streak_content",
-            staticStyle: { width: "133px", "text-align": "center" },
-          },
-          [_vm._v("0%")]
-        ),
-        _vm._v(" "),
-        _c("div", { attrs: { id: "misc_header" } }, [
-          _c("div", { attrs: { id: "misc_home" } }, [_vm._v("home")]),
-          _vm._v(" "),
-          _c("div", { attrs: { id: "misc_away" } }, [_vm._v("away")]),
-          _vm._v(" "),
-          _c("div", { attrs: { id: "misc_total" } }, [_vm._v("total")]),
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "failed_to_score_header" }, [
-          _vm._v("failed to score"),
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "fts_home" }, [_vm._v("2")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "fts_away" }, [_vm._v("3")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "fts_total" }, [_vm._v("5")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "failed_to_score_header" }, [
-          _vm._v("clean sheet"),
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "fts_home" }, [_vm._v("2")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "fts_away" }, [_vm._v("3")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "fts_total" }, [_vm._v("5")]),
-      ]),
+    return _c("div", { attrs: { id: "misc_header" } }, [
+      _c("div", { attrs: { id: "misc_home" } }, [_vm._v("home")]),
+      _vm._v(" "),
+      _c("div", { attrs: { id: "misc_away" } }, [_vm._v("away")]),
+      _vm._v(" "),
+      _c("div", { attrs: { id: "misc_total" } }, [_vm._v("total")]),
     ])
   },
 ]

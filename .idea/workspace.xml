@@ -22,8 +22,9 @@
     <list default="true" id="cf82d037-ce69-45df-857e-a29fb7732fae" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/teamplayers.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/teamplayers.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/teamstats.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/teamstats.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/game.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/game.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/team.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/team.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -420,7 +421,8 @@
       <workItem from="1649941806550" duration="1216000" />
       <workItem from="1650118667814" duration="1236000" />
       <workItem from="1650145996643" duration="690000" />
-      <workItem from="1650290839556" duration="3335000" />
+      <workItem from="1650290839556" duration="6507000" />
+      <workItem from="1650370100297" duration="13322000" />
     </task>
     <servers />
   </component>
@@ -472,10 +474,11 @@
       <screen x="2560" y="-255" width="1050" height="1650" />
     </state>
     <state x="2601" y="215" key="SettingsEditor/2560.-255.1050.1650/0.0.2560.1410@2560.-255.1050.1650" timestamp="1647952405100" />
-    <state x="2741" y="265" key="run.anything.popup" timestamp="1648732612340">
-      <screen x="2560" y="-255" width="1050" height="1650" />
+    <state x="2741" y="520" key="run.anything.popup" timestamp="1650381336083">
+      <screen x="2560" y="0" width="1050" height="1650" />
     </state>
     <state x="2741" y="265" key="run.anything.popup/2560.-255.1050.1650/0.0.2560.1410@2560.-255.1050.1650" timestamp="1648732612340" />
+    <state x="2741" y="520" key="run.anything.popup/2560.0.1050.1650/0.0.2560.1410@2560.0.1050.1650" timestamp="1650381336083" />
     <state x="2795" y="124" width="672" height="713" key="search.everywhere.popup" timestamp="1649335821219">
       <screen x="2560" y="-255" width="1050" height="1650" />
     </state>

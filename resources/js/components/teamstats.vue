@@ -1,6 +1,6 @@
 <template>
     <div class="teamstats_container">
-        <div class="loading_div_teamstats" v-bind:style="doneloading"><div id="pulseloader"/></div>
+        <div v-bind:style="doneloading" class="loading_div_teamstats"><div id="pulseloader"/></div>
         <div class="teamstats_header">team statistics (including qualifiers)</div>
         <!-- seperator -->
         <div class="separator_bar"></div>
@@ -14,25 +14,25 @@
                 <div class="games_chart_div">
                     <div class="games_title">played</div>
                     <div class="games_chart">
-                        <donut-test v-show="loaded" v-bind:centertext="12" v-bind:fontsize="24" v-bind:chart-data="playedChart[0]" :canvas_id="'played'+teamid"/>
+                        <donut-test v-if="!loading" v-bind:centertext="gamesCharts[0].total" v-bind:fontsize="24" v-bind:chart-data="this.gamesCharts[0]" :canvas_id="'played'+teamid"/>
                     </div>
                 </div>
                 <div class="games_chart_div">
                     <div class="games_title">wins</div>
                     <div class="games_chart">
-                        <donut-test v-show="loaded" v-bind:centertext="12" v-bind:fontsize="24" v-bind:chart-data="playedChart[0]" :canvas_id="'wins'+teamid"/>
+                        <donut-test v-if="!loading" v-bind:centertext="gamesCharts[1].total" v-bind:fontsize="24" v-bind:chart-data="this.gamesCharts[1]" :canvas_id="'wins'+teamid"/>
                     </div>
                 </div>
                 <div class="games_chart_div">
                     <div class="games_title">draws</div>
                     <div class="games_chart">
-                        <donut-test v-show="loaded" v-bind:centertext="12" v-bind:fontsize="24" v-bind:chart-data="playedChart[0]" :canvas_id="'draws'+teamid"/>
+                        <donut-test v-if="!loading" v-bind:centertext="gamesCharts[2].total" v-bind:fontsize="24" v-bind:chart-data="this.gamesCharts[2]" :canvas_id="'draws'+teamid"/>
                     </div>
                 </div>
                 <div class="games_chart_div">
                     <div class="games_title">loses</div>
                     <div class="games_chart">
-                        <donut-test v-show="loaded" v-bind:centertext="12" v-bind:fontsize="24" v-bind:chart-data="playedChart[0]" :canvas_id="'loses'+teamid"/>
+                        <donut-test v-if="!loading" v-bind:centertext="gamesCharts[3].total" v-bind:fontsize="24" v-bind:chart-data="this.gamesCharts[3]" :canvas_id="'loses'+teamid"/>
                     </div>
                 </div>
             </div>
@@ -41,37 +41,37 @@
                 <div id="for_container">
                     <span style="color: #8ba752">for</span>
                     <div class="for_title_bar"><span>home</span><span>away</span><span>total</span></div>
-                    <div class="for_data_bar"><span>16</span><span>7</span><span>23</span></div>
+                    <div class="for_data_bar" v-if="!loading"><span>{{ teamStats[0]["goals"].for.total.home }}</span><span>{{ teamStats[0]["goals"].for.total.away }}</span><span>{{ teamStats[0]["goals"].for.total.total }}</span></div>
                     <div id="for_chart_container">
-                        <bar-chart v-bind:chart-data="forChart[0]" :canvas_id="'for_bar'+teamid"></bar-chart>
+                        <bar-chart v-if="!loading" v-bind:chart-data="goalsCharts[0]" :canvas_id="'for_bar'+teamid"></bar-chart>
                     </div>
                 </div>
                 <div id="against_container">
                     <span style="color: #d4530d">against</span>
                     <div class="for_title_bar"><span>home</span><span>away</span><span>total</span></div>
-                    <div class="for_data_bar"><span>16</span><span>7</span><span>23</span></div>
+                    <div class="for_data_bar" v-if="!loading"><span>{{ teamStats[0]["goals"].against.total.home }}</span><span>{{ teamStats[0]["goals"].against.total.away }}</span><span>{{ teamStats[0]["goals"].against.total.total }}</span></div>
                     <div id="against_chart_container">
-                        <bar-chart v-bind:chart-data="againstChart[0]" :canvas_id="'against_bar'+teamid"></bar-chart>
+                        <bar-chart v-if="!loading" v-bind:chart-data="goalsCharts[1]" :canvas_id="'against_bar'+teamid"></bar-chart>
                     </div>
                 </div>
 
             </div>
             <div class="separator_div" style="float: left"></div>
-            <div id="extra_container">
+            <div id="extra_container" v-if="!loading">
                 <div id="biggest_container">
                     <div style="margin-bottom: 6px">biggest</div>
                     <div class="streak_header">streak</div>
-                    <div class="streak_content"><span>win: 3 | draw: 3 | loss: 5</span></div>
+                    <div class="streak_content"><span>win: {{ teamStats[0]["biggest"].streak.wins }} | draw: {{ teamStats[0]["biggest"].streak.draws }} | loss: {{ teamStats[0]["biggest"].streak.loses }}</span></div>
                     <div id="wins_header">wins</div>
-                    <div id="wins_content"><span>home: 4-0 | away: 0-6</span></div>
+                    <div id="wins_content"><span>home: {{ teamStats[0]["biggest"].wins.home }} | away: {{ teamStats[0]["biggest"].wins.away }}</span></div>
                     <!-- penalty data -->
                     <div style="margin-bottom: 6px">penalty</div>
                     <div class="streak_header">scored</div>
-                    <div class="streak_content" style="width: 40px; text-align: center">1</div>
-                    <div class="streak_content" style="width: 133px; text-align: center">100%</div>
+                    <div class="streak_content" style="width: 40px; text-align: center">{{ teamStats[0]["penalty"].scored.total }}</div>
+                    <div class="streak_content" style="width: 133px; text-align: center">{{ teamStats[0]["penalty"].scored.percentage }}</div>
                     <div class="streak_header">missed</div>
-                    <div class="streak_content" style="width: 40px; text-align: center">0</div>
-                    <div class="streak_content" style="width: 133px; text-align: center">0%</div>
+                    <div class="streak_content" style="width: 40px; text-align: center">{{ teamStats[0]["penalty"].missed.total }}</div>
+                    <div class="streak_content" style="width: 133px; text-align: center">{{ teamStats[0]["penalty"].missed.percentage }}</div>
                     <!-- miscellaneous -->
                     <div id="misc_header">
                         <div id="misc_home">home</div>
@@ -79,20 +79,20 @@
                         <div id="misc_total">total</div>
                     </div>
                     <div class="failed_to_score_header">failed to score</div>
-                    <div class="fts_home">2</div>
-                    <div class="fts_away">3</div>
-                    <div class="fts_total">5</div>
+                    <div class="fts_home">{{ teamStats[0]["failed_to_score"].home }}</div>
+                    <div class="fts_away">{{ teamStats[0]["failed_to_score"].away }}</div>
+                    <div class="fts_total">{{ teamStats[0]["failed_to_score"].total }}</div>
                     <div class="failed_to_score_header">clean sheet</div>
-                    <div class="fts_home">2</div>
-                    <div class="fts_away">3</div>
-                    <div class="fts_total">5</div>
+                    <div class="fts_home">{{ teamStats[0]["clean_sheet"].home }}</div>
+                    <div class="fts_away">{{ teamStats[0]["clean_sheet"].away }}</div>
+                    <div class="fts_total">{{ teamStats[0]["clean_sheet"].total }}</div>
                 </div>
             </div>
         </div>
     </div>
 </template>
 
-<script>
+<script defer>
     import donutTest from "./donutTest";
     import BarChart from "./barchart";
 
@@ -103,105 +103,271 @@
 
         data() {
             return {
-                loading: false,
-                loaded: true,
-                /*
-                *
-                * doughnut chart
-                *
-                */
-                playedChart: [{
-                    'playerid': 12,
-                    'type': 'doughnut',
-                    'data': {
-                        'labels': ['home', 'away'],
-                        'datasets': [
-                            {
-                                'data': [8, 4],
-                                'backgroundColor': [
-                                    // green
-                                    '#74c89b',
-                                    // red
-                                    '#2b6c41'
-                                ]
-                            },
-                        ],
-
-                    },
-                    'options': {
-                        'plugins': {
-                            'legend': {
-                                'display': false,
-                            }
-                        },
-                        'layout': {
-                            'padding': 10
-                        },
-                        'cutout': '50%',
-                        'hoverOffset': 7,
-                        'responsive': true,
-                        'maintainAspectRatio': true,
-                        'borderWidth': 0
-                    }
-                }],
-                /*
-                *
-                * Bar chart
-                *
-                */
-                forChart: [{
-                    type: 'bar',
-                    data: {
-                        labels: ["0-15", "15-30", "30-45", "45-60", "60-75", "75-90", "90+"],
-                        datasets: [
-                            {
-                                indexAxis: 'x',
-                                label: "Goals",
-                                backgroundColor: ["#8ba752"],
-                                hoverBackgroundColor: ["#6b883b"],
-                                data: [1, 2, 1, 4, 3, 2, 3]
-                            }
-                        ],
-                    },
-                    options: {
-                        scales: {
-                            y: {
-                                display: false,
-                                beginAtZero: true
-                            }
-                        }
-                    }
-                }],
-                /*
-                *
-                * Bar chart
-                *
-                */
-                againstChart: [{
-                    type: 'bar',
-                    data: {
-                        labels: ["0-15", "15-30", "30-45", "45-60", "60-75", "75-90", "90+"],
-                        datasets: [
-                            {
-                                indexAxis: 'x',
-                                label: "Goals",
-                                backgroundColor: ["#d4530d"],
-                                hoverBackgroundColor: ["#b43f06"],
-                                data: [2, 1, 1, 2, 5, 2, 1]
-                            }
-                        ],
-                    },
-                    options: {
-                        scales: {
-                            y: {
-                                display: false,
-                                    beginAtZero: true
-                            }
-                        }
-                    }
-                }],
+                loading: true,
+                loaded: false,
+                gamesCharts: [],
+                teamStats: [],
+                goalsCharts: [],
+                forGoalsArr: [],
+                againstGoalsArr: []
             }
         },
+        methods: {
+            /*
+            *
+            * Call external api with team id
+            *
+            */
+            loadTeamStats(e) {
+                axios.get("https://v3.football.api-sports.io/teams/statistics?league=4&season=2020&team=" + e, {
+                    headers: {
+                        "X-RapidAPI-Host": process.env.MIX_API_URL,
+                        "X-RapidAPI-Key": process.env.MIX_API_KEY
+                    }
+                }).then((response) => {
+                    e = response.data.response;
+                    /*
+                    *
+                    * doughnut charts
+                    *
+                    */
+                    this.gamesCharts.push(
+                        {
+                        'total': e.fixtures.played.total,
+                        'type': 'doughnut',
+                        'data': {
+                            'labels': ['home', 'away'],
+                            'datasets': [
+                                {
+                                    'data': [e.fixtures.played.home, e.fixtures.played.away],
+                                    'backgroundColor': [
+                                        // green
+                                        '#74c89b',
+                                        // red
+                                        '#2b6c41'
+                                    ]
+                                },
+                            ],
+
+                        },
+                        'options': {
+                            'plugins': {
+                                'legend': {
+                                    'display': false,
+                                }
+                            },
+                            'layout': {
+                                'padding': 10
+                            },
+                            'cutout': '50%',
+                            'hoverOffset': 7,
+                            'responsive': true,
+                            'maintainAspectRatio': true,
+                            'borderWidth': 0
+                        }
+                    },
+
+                        {
+                            'total': e.fixtures.wins.total,
+                            'type': 'doughnut',
+                            'data': {
+                                'labels': ['home', 'away'],
+                                'datasets': [
+                                    {
+                                        'data': [e.fixtures.wins.home, e.fixtures.wins.away],
+                                        'backgroundColor': [
+                                            // green
+                                            '#74c89b',
+                                            // red
+                                            '#2b6c41'
+                                        ]
+                                    },
+                                ],
+
+                            },
+                            'options': {
+                                'plugins': {
+                                    'legend': {
+                                        'display': false,
+                                    }
+                                },
+                                'layout': {
+                                    'padding': 10
+                                },
+                                'cutout': '50%',
+                                'hoverOffset': 7,
+                                'responsive': true,
+                                'maintainAspectRatio': true,
+                                'borderWidth': 0
+                            }
+                        },
+
+                        {
+                            'total': e.fixtures.draws.total,
+                            'type': 'doughnut',
+                            'data': {
+                                'labels': ['home', 'away'],
+                                'datasets': [
+                                    {
+                                        'data': [e.fixtures.draws.home, e.fixtures.draws.away],
+                                        'backgroundColor': [
+                                            // green
+                                            '#74c89b',
+                                            // red
+                                            '#2b6c41'
+                                        ]
+                                    },
+                                ],
+
+                            },
+                            'options': {
+                                'plugins': {
+                                    'legend': {
+                                        'display': false,
+                                    }
+                                },
+                                'layout': {
+                                    'padding': 10
+                                },
+                                'cutout': '50%',
+                                'hoverOffset': 7,
+                                'responsive': true,
+                                'maintainAspectRatio': true,
+                                'borderWidth': 0
+                            }
+                        },
+
+                        {
+                            'total': e.fixtures.loses.total,
+                            'type': 'doughnut',
+                            'data': {
+                                'labels': ['home', 'away'],
+                                'datasets': [
+                                    {
+                                        'data': [e.fixtures.loses.home, e.fixtures.loses.away],
+                                        'backgroundColor': [
+                                            // green
+                                            '#74c89b',
+                                            // red
+                                            '#2b6c41'
+                                        ]
+                                    },
+                                ],
+
+                            },
+                            'options': {
+                                'plugins': {
+                                    'legend': {
+                                        'display': false,
+                                    }
+                                },
+                                'layout': {
+                                    'padding': 10
+                                },
+                                'cutout': '50%',
+                                'hoverOffset': 7,
+                                'responsive': true,
+                                'maintainAspectRatio': true,
+                                'borderWidth': 0
+                            }
+                        }
+                    );
+                    this.loaded = true;
+
+                    /*
+                    *
+                    * bar charts
+                    *
+                    */
+                    var forGoals = e.goals.for.minute;
+                    var againstGoals = e.goals.against.minute;
+
+                    // since api shows keys as numbers, which JS cannot parse we use a slight detour
+                    for(const key in forGoals) { this.forGoalsArr.push(forGoals[key]) };
+                    for(const key in againstGoals) { this.againstGoalsArr.push(againstGoals[key]) };
+                    // push the goals in the array
+                    this.goalsCharts.push(
+                        {
+                            type: 'bar',
+                            data: {
+                                labels: ["0-15", "16-30", "31-45", "46-60", "61-75", "76-90", "90+"],
+                                datasets: [
+                                    {
+                                        indexAxis: 'x',
+                                        label: "Goals",
+                                        backgroundColor: ["#8ba752"],
+                                        hoverBackgroundColor: ["#6b883b"],
+                                        data:
+                                        [
+                                            this.forGoalsArr[0].total,
+                                            this.forGoalsArr[1].total,
+                                            this.forGoalsArr[2].total,
+                                            this.forGoalsArr[3].total,
+                                            this.forGoalsArr[4].total,
+                                            this.forGoalsArr[5].total,
+                                            this.forGoalsArr[6].total + this.againstGoalsArr[7].total
+                                        ]
+                                    }
+                                ],
+                            },
+                            options: {
+                                scales: {
+                                    y: {
+                                        display: true,
+                                        beginAtZero: true
+                                    }
+                                }
+                            }
+                        },
+
+                        {
+                            type: 'bar',
+                            data: {
+                                labels: ["0-15", "16-30", "31-45", "46-60", "61-75", "76-90", "90+"],
+                                datasets: [
+                                    {
+                                        indexAxis: 'x',
+                                        label: "Goals",
+                                        backgroundColor: ["#d4530d"],
+                                        hoverBackgroundColor: ["#b43f06"],
+                                        data:
+                                            [
+                                                this.againstGoalsArr[0].total,
+                                                this.againstGoalsArr[1].total,
+                                                this.againstGoalsArr[2].total,
+                                                this.againstGoalsArr[3].total,
+                                                this.againstGoalsArr[4].total,
+                                                this.againstGoalsArr[5].total,
+                                                this.againstGoalsArr[6].total + this.againstGoalsArr[7].total
+                                            ]
+                                    }
+                                ],
+                            },
+                            options: {
+                                scales: {
+                                    y: {
+                                        display: true,
+                                        beginAtZero: true
+                                    }
+                                }
+                            }
+                        }
+                    );
+
+                    this.teamStats.push(e);
+                    this.loading = false;
+
+                }).catch((error) => {
+                    console.log(error);
+                });
+
+            }
+        },
+
+        created() {
+            //this.loadTeamStats(this.teamid)
+        },
+
         computed: {
             doneloading() {
                 if(!this.loading) {
@@ -218,9 +384,13 @@
         width: 100%;
         height: 435px;
         background-color: whitesmoke;
-        z-index: 999;
+        z-index: 1111;
         opacity: 100%;
-        transition: all .2s ease-in;
+        -webkit-transition: all 0.6s ease-in-out 0.1s;
+        -moz-transition: all 0.6s ease-in-out 0.1s;
+        -ms-transition: all 0.6s ease-in-out 0.1s;
+        transition: all 0.6s ease-in-out 0.1s;
+        visibility: visible;
     }
 
     #pulseloader {
