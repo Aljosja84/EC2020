@@ -6,19 +6,17 @@
         </div>
         <div id="form_bg_gradient">
             <!-- scoreboard content ------------------------------------------------------------------------------>
-            <div class="scoreboard_content">
+            <div class="scoreboard_content" v-if="loaded">
                 <table class="form_table">
                     <tr>
                         <td>
-                            <img id="form_home_flag" v-if="flagfile(matchData.teams.home.id)" :src=flagloc(matchData.teams.home.id)>
-                            <img id="form_home_flag" v-else-if="!flagfile()" :src=matchData.teams.home.logo>
+                            <img id="form_home_flag" :src=matchData.teams.home.logo>
                         </td>
                         <td>{{ matchData.teams.home.name }}</td>
                         <td style="width: 35px; text-align: center; font-size: 16px"><span>{{ matchData.goals.home}}</span> - <span>{{ matchData.goals.away }}</span></td>
                         <td style="text-align: right">{{ matchData.teams.away.name }}</td>
                         <td style="text-align: right">
-                            <img id="form_away_flag" v-if="flagfile(matchData.teams.away.id)" :src=flagloc(matchData.teams.away.id)>
-                            <img id="form_away_flag" v-else-if="!flagfile()" :src=matchData.teams.away.logo>
+                            <img id="form_away_flag" :src=matchData.teams.away.logo>
                         </td>
                     </tr>
                     <tr>
@@ -40,43 +38,44 @@
             </div>
             <!-- time & date content ----------------------------------------------------------------------------->
             <div class="timedate_header">
-                <img src="/images/icons/timedate_icon.png" style="margin-top: 4px">
-                <span id="timedate_title">DATE AND TIME</span>
+                <img src="/images/icons/timedate_icon.png">
+                <span id="timedate_title">date and time</span>
             </div>
-            <div class="timedate_content">
+            <div class="timedate_content" v-if="loaded">
                 {{ convertdatetime(matchData.fixture.timestamp) }}
             </div>
             <!-- venue content ----------------------------------------------------------------------------------->
             <div class="timedate_header">
                 <img src="/images/icons/venue_icon.png" style="margin-top: 4px">
-                <span id="venue_title">VENUE</span>
+                <span id="venue_title">venue</span>
             </div>
-            <div class="timedate_content">
+            <div class="timedate_content" v-if="loaded">
                 {{ matchData.fixture.venue.name + ', ' + matchData.fixture.venue.city }}
             </div>
             <!-- referee content --------------------------------------------------------------------------------->
             <div class="timedate_header">
                 <img src="/images/icons/ref_icon.png" style="margin-top: 4px">
-                <span id="ref_title">REFEREE</span>
+                <span id="ref_title">referee</span>
             </div>
-            <div class="timedate_content">
+            <div class="timedate_content" v-if="loaded">
                 {{ matchData.fixture.referee }}
             </div>
             <!-- league content ---------------------------------------------------------------------------------->
             <div class="timedate_header">
                 <img src="/images/icons/league_icon.png" style="margin-top: 4px">
-                <span id="league_title">LEAGUE</span>
+                <span id="league_title">league</span>
             </div>
-            <div class="timedate_content">
+            <div class="timedate_content" v-if="loaded">
                 {{ matchData.league.name }}{{ matchData.league.round ? ', ' + matchData.league.round : ''}}
             </div>
             <!-- formations content ------------------------------------------------------------------------------>
             <div class="timedate_header">
                 <img src="/images/icons/formations_icon.png" style="margin-top: 4px">
-                <span id="formation_title">FORMATIONS</span>
+                <span id="formation_title">formations</span>
             </div>
             <div class="timedate_content">
-                <div id="formation_content"><div style="float: left">{{ matchData.lineups[0].formation }}</div><div style="float: right">
+                <div id="formation_content" v-if="loaded">
+                    <div style="float: left">{{ matchData.lineups[0].formation }}</div><div style="float: right">
                     {{ matchData.lineups[1].formation }}</div></div>
             </div>
         </div>
@@ -86,14 +85,15 @@
 <script>
     export default {
         name: "goalscorers",
-        props: ['matchid'],
+        props: ['matchid', 'match', 'id'],
 
         data() {
             return {
                 matchData: {},
                 goalsArr: [],
                 ht_goals: [],
-                at_goals: []
+                at_goals: [],
+                loaded: false
             }
         },
 
@@ -116,32 +116,16 @@
                 // Hours
                 var hours = date.getHours();
                 // Minutes
-                var minutes = "0" + date.getMinutes();
+                var minutes = date.getMinutes();
+                // if less than 2 digits remain, add a zero
+                if(minutes < 10) { minutes = '0' + minutes }
                 // final date
                 return dayOfWeek + ' ' + month + ' ' + day + ' ' + year + ' - ' + hours + ':' + minutes
             },
 
-            flagloc(e) {
-                // return the proper format of the file path
-                return "/images/country_flags/" + e + ".png";
-            },
-
-            flagfile(e) {
-                // check if the flag .png exists, if not -> use the lesser quality api png
-                var xhr = new XMLHttpRequest();
-                xhr.open('HEAD', "/images/country_flags/" + e + ".png", false);
-                xhr.send();
-
-                if(xhr.status == "404") {
-                    return false;
-                }   else {
-                    return true
-                }
-            },
-
             getGoals(e) {
                 this.matchData.events.forEach((ele) => {
-                    if(ele.type == "Goal") {
+                    if(ele.type === "Goal") {
                         // check which team scored, hometeam or awayteam?
                         if(ele.team.id === this.matchData.teams.home.id) {
                             this.ht_goals.push({"time": ele.time.elapsed, "player": ele.player.name});
@@ -160,8 +144,14 @@
                         "X-RapidAPI-Key": process.env.MIX_API_KEY
                     }
                 }).then((response) => {
+                    // set all match data
                     this.matchData = response.data.response[0];
+                    // see who scored and when
                     this.getGoals();
+                    // all data has been loaded
+                    this.loaded = true;
+                    // tell parent window to scroll to right location
+                    this.$parent.scrollFormWin(this.matchid);
                 }).catch((error) => {
                     console.log(error);
                 });
@@ -171,7 +161,9 @@
         },
 
         created() {
-            this.loadGame(this.matchid);
+            if(this.match === 1) {
+                this.loadGame(this.matchid);
+            }
         }
 
     }
@@ -214,7 +206,7 @@
     .scoreboard_content {
         padding: 12px 16px 6px 16px;
         border-bottom: 1px solid #ccc;
-        height: 150px
+        height: 154px
     }
 
     #form_bg_gradient {
@@ -251,11 +243,10 @@
     }
 
     .timedate_header {
-        padding: 0 16px 6px 16px;
-        line-height: 1px;
-        height: 35px;
+        padding: 0 16px 0 16px;
+        line-height: 35px;
+        height: 36px;
         border-bottom: 1px solid #ccc;
-        vertical-align: middle;
     }
 
     #timedate_title {
@@ -264,7 +255,7 @@
         font-size: 24px;
         font-weight: inherit;
         color: #ba7fb1;
-        line-height: 4px;
+        text-transform: uppercase;
     }
     #venue_title {
         padding-left: 30%;
@@ -274,6 +265,7 @@
         font-weight: inherit;
         color: #67bee9;
         line-height: 32px;
+        text-transform: uppercase;
     }
     #ref_title {
         padding-left: 25%;
@@ -283,6 +275,7 @@
         font-weight: inherit;
         color: #e58d37;
         line-height: 32px;
+        text-transform: uppercase;
     }
     #league_title {
         padding-left: 30%;
@@ -292,24 +285,27 @@
         font-weight: inherit;
         color: #c34c26;
         line-height: 4px;
+        text-transform: uppercase;
     }
     #formation_title {
         padding-left: 20%;
-        vertical-align: text-top;
+        vertical-align: text-bottom;
         font-family: 'Oswald', sans-serif;
         font-size: 24px;
         font-weight: inherit;
         color: #297c9b;
+        text-transform: uppercase;
     }
 
     .timedate_content {
-        padding: 8px 16px 4px 16px;
+        padding: 0 16px 0 16px;
         border-bottom: 1px solid #ccc;
         text-align: center;
         font-family: "Roboto", sans-serif;
         font-size: 14px;
         color: #515151;
-        height: 38px;
+        height: 35px;
+        line-height: 35px;
     }
 
 </style>

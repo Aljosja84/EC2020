@@ -8,13 +8,13 @@
         <div class="form_container">
             <span id="form_title">Form</span>
                 <span v-for="result in lastTenForm" :key="result.gameid">
-                    <a @click="scrollFormWin(result.scrolldiv)" href="#" v-if="result.res === 'W'" class="form_button button_win">{{ result.res }}</a>
-                    <a @click="scrollFormWin(result.scrolldiv)" href="#" v-else-if="result.res === 'L'" class="form_button button_lose">{{ result.res }}</a>
-                    <a @click="scrollFormWin(result.scrolldiv)" href="#" v-else-if="result.res === 'D'" class="form_button button_draw">{{ result.res }}</a>
+                    <a @click="loadContent(result.matchnum, result.gameid)" href="#" v-if="result.res === 'W'" class="form_button button_win">{{ result.res }}</a>
+                    <a @click="loadContent(result.matchnum, result.gameid)" href="#" v-else-if="result.res === 'L'" class="form_button button_lose">{{ result.res }}</a>
+                    <a @click="loadContent(result.matchnum, result.gameid)" href="#" v-else-if="result.res === 'D'" class="form_button button_draw">{{ result.res }}</a>
                 </span>
         </div>
         <div class="last_ten_matches_container" id="form_container">
-            <goalscorers v-for="games in lastTenMatchesIds" :matchid="games.match.fixture.id" :key="games.match.fixture.id" :id="games.scrolldiv"></goalscorers>
+            <goalscorers v-for="games in lastTenMatchesIds" :matchid="games.match.fixture.id" :key="games.match.fixture.id" :id="games.scrolldiv" :ref="'match'+games.matchnum" :match="games.matchnum"></goalscorers>
         </div>
     </div>
 </template>
@@ -33,16 +33,28 @@
                 lastTenForm: [],
                 timestamp: null,
                 imagesource: null,
+                matchLoaded: []
             }
         },
 
         methods: {
+            loadContent(matchnum, matchid) {
+                // check if the match has already been loaded
+                if(!this.matchLoaded.includes(matchid)) {
+                    this.$refs['match' + matchnum][0].loadGame(matchid);
+                }
+                // add this match to the loaded array, so when we click it again it won't have to load again.
+                if(!this.matchLoaded.includes(matchid)) {
+                    this.matchLoaded.push(matchid);
+                }
+            },
 
             scrollFormWin(e) {
+                console.log(e);
                 // find the top coordinates of the match div by looking at the offset from the top
                 let y = document.getElementById(e).offsetTop;
                 // scroll to that offset to bring the div into view.
-                document.getElementById('form_container').scroll({top: y})
+                document.getElementById('form_container').scroll({top: y});
             },
 
             convertResult(e) {
@@ -62,11 +74,6 @@
                 return result;
             },
 
-            sayHello() {
-                // Say cheeeeeese :D
-                return 'Hello';
-            },
-
             // check if the home team is the team we're requesting
             // if not, it must be the away team, right?
             whichTeam(e) {
@@ -78,7 +85,7 @@
 
             loadLatestGames(e) {
                 // get the 10 last matches that correspondents with the form
-                axios.get("https://v3.football.api-sports.io/fixtures?team=" + e + "&last=1", {
+                axios.get("https://v3.football.api-sports.io/fixtures?team=" + e + "&last=10", {
                     headers: {
                         "X-RapidAPI-Host": process.env.MIX_API_URL,
                         "X-RapidAPI-Key": process.env.MIX_API_KEY
@@ -86,10 +93,12 @@
                 }).then((response) => {
                     let i = 1;
                     response.data.response.forEach((element) => {
-                        this.lastTenForm.push({'gameid': element.fixture.id, 'res': this.whichTeam(element), 'scrolldiv':'match'+i});
-                        this.lastTenMatchesIds.push({'match':element, 'scrolldiv':'match'+i});
+                        this.lastTenForm.push({'gameid': element.fixture.id, 'res': this.whichTeam(element), 'scrolldiv':'match'+i, 'matchnum':i});
+                        this.lastTenMatchesIds.push({'match':element, 'scrolldiv':'match'+i, 'matchnum':i});
                         i++;
                     });
+                    // add the first match to the already loaded array
+                    this.matchLoaded.push(this.lastTenMatchesIds[0].match.fixture.id);
 
 
                 }).catch((error) => {
@@ -113,11 +122,12 @@
 <style scoped>
     .container {
         width: 335px;
-        height: 659px;
+        height: 654px;
         background-color: white;
         float: left;
         margin-left: -9px;
         box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+        overflow: hidden;
     }
 
     .team_header {
