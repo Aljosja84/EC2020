@@ -66,7 +66,9 @@
                 <span id="league_title">league</span>
             </div>
             <div class="timedate_content" v-if="loaded">
-                {{ matchData.league.name }}{{ matchData.league.round ? ', ' + matchData.league.round : ''}}
+                <div id="formation_content" v-if="loaded">
+                    <div>{{ matchData.league.name }}{{ matchData.league.round ? ', ' + matchData.league.round : ''}}</div>
+                </div>
             </div>
             <!-- formations content ------------------------------------------------------------------------------>
             <div class="timedate_header">
@@ -75,8 +77,9 @@
             </div>
             <div class="timedate_content">
                 <div id="formation_content" v-if="loaded">
-                    <div style="float: left">{{ matchData.lineups[0].formation }}</div><div style="float: right">
-                    {{ matchData.lineups[1].formation }}</div></div>
+                    <div style="float: left">{{ matchData.lineups[0].formation }}</div>
+                    <div style="float: right">{{ matchData.lineups[1].formation }}</div>
+                </div>
             </div>
         </div>
     </div>
@@ -173,6 +176,7 @@
 
     .form_game_container {
         width: 335px;
+        min-height: 557px;
     }
 
     .form_goals {

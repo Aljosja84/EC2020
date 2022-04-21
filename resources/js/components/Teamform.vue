@@ -1,5 +1,6 @@
 <template>
     <div class="container">
+        <div v-bind:style="doneloading" class="loading_div"><div id="pulseloader"/></div>
         <div class="team_header">
             <img class="header_flag" :src="flag">
             <span>{{details}}</span>
@@ -27,6 +28,7 @@
 
         data() {
             return {
+                loading: true,
                 formArr: [],
                 data: Object,
                 lastTenMatchesIds: [],
@@ -40,12 +42,14 @@
         methods: {
             loadContent(matchnum, matchid) {
                 // check if the match has already been loaded
-                if(!this.matchLoaded.includes(matchid)) {
-                    this.$refs['match' + matchnum][0].loadGame(matchid);
-                }
-                // add this match to the loaded array, so when we click it again it won't have to load again.
+                // if so, add the match to the already loaded array so we don't have to make a call to the api
                 if(!this.matchLoaded.includes(matchid)) {
                     this.matchLoaded.push(matchid);
+                    this.$refs['match' + matchnum][0].loadGame(matchid);
+                }
+                // if it's loaded, don't make a call, but do scroll to it.
+                else {
+                    this.scrollFormWin(matchid);
                 }
             },
 
@@ -99,6 +103,8 @@
                     });
                     // add the first match to the already loaded array
                     this.matchLoaded.push(this.lastTenMatchesIds[0].match.fixture.id);
+                    // done loading
+                    this.loading = false;
 
 
                 }).catch((error) => {
@@ -109,7 +115,11 @@
         },
 
         computed: {
-
+            doneloading() {
+                if(!this.loading) {
+                    return {opacity: 0, visibility: 'hidden'};
+                }
+            }
         },
 
         created() {
@@ -128,6 +138,31 @@
         margin-left: -9px;
         box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
         overflow: hidden;
+        position: relative;
+    }
+
+    .loading_div {
+        width: 335px;
+        position: absolute;
+        height: 100%;
+        z-index: 999;
+        opacity: 100%;
+        background-color: whitesmoke;
+        -webkit-transition: all 0.3s ease-in-out 0.2s;
+        -moz-transition: all 0.3s ease-in-out 0.2s;
+        -ms-transition: all 0.3s ease-in-out 0.2s;
+        transition: all 0.3s ease-in-out 0.2s;
+        visibility: visible;
+    }
+
+    #pulseloader {
+        z-index: 1000;
+        background-image: url("images/pulseloader_3.gif");
+        width: 84px;
+        height: 84px;
+        position: absolute;
+        top: 39%;
+        left: 39%;
     }
 
     .team_header {

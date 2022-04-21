@@ -76,8 +76,9 @@ html, body {
 }
 
 .container {
-    background-color: #ffffff;
-    height: 100%
+    background-color: whitesmoke;
+    height: 100%;
+    width: 100%;
 }
 
 * {

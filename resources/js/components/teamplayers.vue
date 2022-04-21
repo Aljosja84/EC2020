@@ -494,7 +494,7 @@
         },
 
         created() {
-            //this.loadPlayers(this.teamid);
+            this.loadPlayers(this.teamid);
         },
         computed: {
             doneloading() {
@@ -619,6 +619,7 @@
         filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffff",endColorstr="#ffd2a4",GradientType=1);
         padding: 5px 0 0 5px;
         overflow-y: hidden;
+        overflow-x: hidden;
         scroll-behavior: auto;
     }
 

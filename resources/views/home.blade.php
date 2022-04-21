@@ -1,6 +1,6 @@
-@extends('layouts.navi')
+$user = Auth::user();
 
-@section('content')
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -14,10 +14,10 @@
                         </div>
                     @endif
 
-                    {{ __('You are logged in!') }}
+                    {{ __('You are logged in!') }} {{ $user->name }}
                 </div>
             </div>
         </div>
     </div>
 </div>
-@endsection
+

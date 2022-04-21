@@ -128,7 +128,7 @@
         },
 
         created() {
-            //this.loadNextGame(this.teamid);
+            this.loadNextGame(this.teamid);
             setInterval(() => this.startCountdown(this.timetowait), 1000);
         },
 

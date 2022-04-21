@@ -32,7 +32,9 @@ Route::get('/navi', function() {
 Route::get('/main', function() {
     return view('main');
 });
-
+Route::get('/welcome', function() {
+    return view('welcome');
+});
 
 
 Route::get('/game', [App\Http\Controllers\HomeController::class, 'game'])->name('game');

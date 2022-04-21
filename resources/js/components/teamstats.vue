@@ -365,7 +365,7 @@
         },
 
         created() {
-            //this.loadTeamStats(this.teamid)
+            this.loadTeamStats(this.teamid)
         },
 
         computed: {
@@ -404,7 +404,7 @@
     }
     .teamstats_container {
         position: relative;
-        margin-top: 10px;
+        margin-top: 7px;
         width: 975px;
         height: 435px;
         box-shadow: rgba(0, 0, 0, 0.16) 0 3px 6px, rgba(0, 0, 0, 0.23) 0 3px 6px;

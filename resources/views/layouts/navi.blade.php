@@ -35,7 +35,6 @@
 <header>
     <nav>
         <div class="topmenu">
-
             <!-- EURO 2020 LOGO -->
             <div style="float: left">
                 <img title="hello there" class="logo" src={{ asset('images/logo_euro2020.png') }}>
@@ -43,7 +42,6 @@
             <!-------------------->
             <div class="container">
                 <ul class="menu-main">
-
                     <li id="sub_item_stadium"><a id="main_link" href="#">Stadiums</a><img src={{ asset('images/arrow-drop-down.svg') }}>
                         <div class="menu_sub_stadium">
                             <ul>
@@ -67,7 +65,7 @@
                                 @foreach(App\Models\Group::orderBy('name', 'asc')->get() as $group)
                                 <li id="group">
                                     <div class="group_link">
-                                        <a href="#">group {{ $group->name }}</a><img src={{ asset('images/arrow-drop-down.svg') }} style="float: right">
+                                        <a href="#">group {{ $group->name }}</a><img src={{ asset('images/arrow-drop-down.svg') }}>
                                     </div>
                                     <div class="group_sub">
                                         <div class="group_sub_wrapper">
@@ -176,6 +174,7 @@
                     </li>
                 </ul>
             </div>
+            <div style="position: absolute; top: 20px; right: 10px">Welcome, {{ \Illuminate\Support\Facades\Auth::user()->name }}</div>
         </div>
     </nav>
 </header>
