@@ -21,13 +21,17 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/ec2020.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div id="app">
-        @include('layouts.nav')
-        <main class="py-4">
-            @yield('content')
-        </main>
+<div class="top_bar">
+    <!-- EURO 2020 LOGO -->
+    <div style="float: left">
+        <img class="logo" src={{ asset('images/logo_euro2020.png') }} style="margin-left: 5px">
     </div>
+    <div id="login_area">
+        @yield('content')
+    </div>
+</div>
 </body>
 </html>

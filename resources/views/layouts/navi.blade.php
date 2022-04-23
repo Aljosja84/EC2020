@@ -174,7 +174,7 @@
                     </li>
                 </ul>
             </div>
-            <div style="position: absolute; top: 20px; right: 10px">Welcome, {{ \Illuminate\Support\Facades\Auth::user()->name }}</div>
+            <div style="position: absolute; top: 20px; right: 10px">Welcome, {{ \Illuminate\Support\Facades\Auth::user()->name ?? 'Jelle'  }}</div>
         </div>
     </nav>
 </header>

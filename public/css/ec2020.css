@@ -1,3 +1,36 @@
+/* ----------------------------------------- LOGIN PAGE ---------------------------------------*/
+.top_bar {
+    -webkit-box-shadow: 0 3px 13px -2px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0 3px 13px -2px rgba(0,0,0,0.75);
+    box-shadow: 0 3px 13px -2px rgba(0,0,0,0.75);
+    height: 65px;
+    width: 100%;
+    background: #fff;
+    z-index: 1;
+    padding-top: 5px;
+}
+
+#login_area {
+    width: 100%;
+    height: 99%;
+    z-index: -3;
+    position: absolute;
+    padding: 10px 0 0 10px;
+    float: left;
+    background: rgb(91,169,241);
+    background: linear-gradient(180deg, rgba(91,169,241,1) 72%, rgba(255,255,255,1) 100%);
+}
+
+#login_window {
+    background-color: white;
+    position: relative;
+    top: 25%;
+    left: 25%;
+    width: 925px;
+    height: 585px;
+}
+
+/* ----------------------------------------- END LOGIN PAGE -----------------------------------*/
 .games_div_container {
     width: 100%;
     height: calc(100% - 65px);
