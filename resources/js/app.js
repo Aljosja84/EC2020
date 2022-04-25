@@ -37,6 +37,7 @@ Vue.component('goalscorers', require('./components/goalscorers').default);
 Vue.component('team-players', require('./components/teamplayers').default);
 Vue.component('team-stats', require('./components/teamstats.vue').default);
 Vue.component('next-game', require('./components/nextgame').default);
+Vue.component('login', require('./components/login').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -46,4 +47,8 @@ Vue.component('next-game', require('./components/nextgame').default);
 
 const app = new Vue({
     el: '#app',
+});
+
+const login = new Vue({
+    el: '#login',
 });

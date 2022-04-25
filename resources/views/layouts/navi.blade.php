@@ -174,7 +174,9 @@
                     </li>
                 </ul>
             </div>
-            <div style="position: absolute; top: 20px; right: 10px">Welcome, <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ \Illuminate\Support\Facades\Auth::user()->name ?? 'Jelle'  }}</a></div>
+            <div id="login">
+            <login :unread="3" username={{ \Illuminate\Support\Facades\Auth::user()->name }}></login>
+            </div>
         </div>
     </nav>
 </header>
@@ -183,8 +185,6 @@
 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
     {{ csrf_field() }}
 </form>
-
-
 </body>
 <script src={{ asset('js/topmenu.js') }}></script>
 </html>

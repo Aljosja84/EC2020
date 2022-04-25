@@ -65,3 +65,4 @@
         </div>
     </div>
 </div>
+<div id="login_icons">Welcome, <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ \Illuminate\Support\Facades\Auth::user()->name ?? 'Jelle'  }}</a></div>

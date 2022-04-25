@@ -36,34 +36,42 @@
                 <div id="login_ava"></div>
                 <div id="sign_in">Sign in</div>
             <!-- form -->
-                <form method="POST" action="{{ route('login') }}" autocomplete="off">
+                <form method="POST" action="{{ route('login') }}" autocomplete="off" style="height: 270px;">
                     @csrf
                     <div id="form_body">
                         <div id="input_email_container">
-                            <input id="email" type="email" name="email" placeholder="email" value="{{ old('email') }}" required autocomplete="false">
+                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" placeholder="email" value="{{ old('email') }}" required autocomplete="false">
 
 
+                            @error('email')
                             <span class="invalid-feedback" role="alert">
-                                @error('email')<strong>{{ $message }}</strong> @enderror
+                                <strong>{{ $message }}</strong>
                             </span>
+                            @enderror
                         </div>
 
                         <div id="input_pass_container">
-                            <input id="password" type="password" placeholder="password" name="password" required autocomplete="chrome-off">
+                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" placeholder="password" name="password" required autocomplete="chrome-off">
 
+                            @error('password')
                             <span class="invalid-feedback" role="alert">
-                                 @error('password')<strong>{{ $message }}</strong>@enderror
+                                <strong>{{ $message }}</strong>
                             </span>
+                            @enderror
                         </div>
 
                         <div><button type="submit" id="submit">sign in</button></div>
-                        <div id="remember">
-                            <span><input type="checkbox" id="scales" name="scales" style="margin-right: .4rem; vertical-align: middle"><label for="scales">Remember me</label></span>
-                            <span>Forgot password?</span>
-
+                        <div id="remember_me">
+                            <span><input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }} style="margin-right: .3rem; vertical-align: middle" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}><label for="remember">Remember me</label></span>
+                            <span><a href="{{ route('password.request') }}">Forgot password?</a></span>
                         </div>
                     </div>
                 </form>
+                <div id="or_sign_in">------- or sign in with -------</div>
+                <div id="login__socials">
+                    <a href="#"><img style="margin-right: 10px" src="{{ asset('images/login__google.png') }}" alt="sign in with Google"></a>
+                    <a href="#"><img src="{{ asset('images/login__fb.png') }}" alt="sign in with Facebook"></a>
+                </div>
             </div>
             <!-- background pic -->
             <div id="bg_log_win"></div>
