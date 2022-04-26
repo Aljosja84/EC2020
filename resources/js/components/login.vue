@@ -10,11 +10,27 @@
                 <div id="username">Hello, {{ username }}</div>
                 <div id="view_profile">View my profile</div>
             </div>
-            <div id="my_bets">My bets</div>
-            <div id="spoiler">Spoiler Alert</div>
-            <div id="groups">Groups</div>
-            <div id="followed">Followed Games</div>
-            <div id="sign_out">Sign out</div>
+            <div id="options" :style="optionsStyle">
+                <div id="my_bets">My bets</div>
+                <div id="spoiler" @click="toggleSpoiler">
+                    <span>Spoiler Alert</span>
+                    <span style="padding-top:10px; padding-right: 5px">
+                        <label class="switch">
+                            <input id="spoilerCheck" type="checkbox">
+                            <span class="slider round"></span>
+                        </label>
+                    </span>
+                </div>
+                <div id="groups" @click="accessGroups">
+                    <span>Groups</span>
+                    <span id="more_arrow"></span>
+                </div>
+                <div id="subgroups">
+                    poep
+                </div>
+                <div id="followed">Followed Games</div>
+                <a onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><div id="sign_out">Sign out</div></a>
+            </div>
         </div>
     </div>
 </template>
@@ -23,19 +39,60 @@
     export default {
         name: "login",
 
-        props: ['unread', 'username'],
+        data() {
+            return {
+                optionsStyle: ''
+            }
+        },
+
+        props: ['unread',
+                'username',
+                'spoiler'
+                ],
 
         methods: {
+            /*
+            *
+            * toggle all notifications as read
+            *
+            */
             readMessages() {
                 this.unread = false;
+            },
+            /*
+            *
+            * menu will animate to groups
+            *
+            */
+            accessGroups() {
+                this.optionsStyle =
+                    "opacity: 0; " +
+                    "transform: translateX(195px);"
+            },
+            /*
+            *
+            * toggle slider for spoiler alert
+            *
+            */
+            toggleSpoiler() {
+                this.spoiler = !this.spoiler;
+                document.getElementById('spoilerCheck').checked = this.spoiler;
             }
+
+        },
+        mounted() {
+            document.getElementById('spoilerCheck').checked = this.spoiler;
+        },
+        computed : {
+
         }
+
     }
 </script>
 
 <style scoped>
     /* ----------------------------- user login ------------------------------------------------------- */
-    #login_icons {
+       #login_icons {
         height: 65px;
         width: 115px;
         position: absolute;
@@ -74,8 +131,10 @@
     }
 
     #dropdown_container {
+        /* set var */
+        --login_hover: #f7f9fa;
         width: 195px;
-        height: 259px;
+        height: auto;
         background-color: white;
         position: absolute;
         right: 15px;
@@ -101,7 +160,7 @@
     #profile {
         width: 100%;
         height: 67px;
-        background-color: #fafcfe;
+        background-color: #f7f9fa;
     }
 
     #username {
@@ -124,6 +183,12 @@
         padding-top: 5px;
     }
 
+    #options {
+        white-space: nowrap;
+        position: relative;
+        transition: 1.3s ease-in-out all;
+    }
+
     #my_bets {
         font-family: 'Oswald', sans-serif;
         font-size: 15px;
@@ -139,10 +204,13 @@
         transition: ease 0.2s;
     }
     #my_bets:hover {
-        background-color: #fafcfe;
+        background-color: var(--login_hover);
         padding-left: 42px;
+        color: #c9d466;
     }
     #spoiler {
+        display: flex;
+        justify-content: space-between;
         font-family: 'Oswald', sans-serif;
         font-size: 15px;
         color: #69788a;
@@ -156,10 +224,13 @@
         transition: ease 0.2s;
     }
     #spoiler:hover {
-        background-color: #fafcfe;
+        background-color:  var(--login_hover);
         padding-left: 42px;
+        color: darkorange;
     }
     #groups {
+        display: flex;
+        justify-content: space-between;
         font-family: 'Oswald', sans-serif;
         font-size: 15px;
         color: #69788a;
@@ -173,8 +244,23 @@
         transition: ease 0.2s;
     }
     #groups:hover {
-        background-color: #fafcfe;
+        background-color:  var(--login_hover);
         padding-left: 42px;
+        color: red;
+    }
+
+    #subgroups {
+        height: 200px;
+        width: 100%;
+        background-color: #95c5ed;
+    }
+    #more_arrow {
+        position: relative;
+        right: 7px;
+        top: 15px;
+        background: url("images/login__arrow.png") no-repeat;
+        width: 5px;
+        height: 8px;
     }
     #followed {
         font-family: 'Oswald', sans-serif;
@@ -192,8 +278,9 @@
         transition: ease 0.2s;
     }
     #followed:hover {
-        background-color: #fafcfe;
+        background-color:  var(--login_hover);
         padding-left: 42px;
+        color: mediumpurple;
     }
 
     #sign_out {
@@ -210,7 +297,69 @@
         transition: ease 0.2s;
     }
     #sign_out:hover {
-        background-color: #fafcfe;
+        background-color:  var(--login_hover);
         padding-left: 42px;
+        color: #5ba9f1;
+    }
+
+    /* switch button for spoiler alert menu item */
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 30px;
+        height: 17px;
+    }
+
+    .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 13px;
+        width: 13px;
+        left: 2px;
+        bottom: 2px;
+        background-color: white;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+    input:checked + .slider {
+        background-color: #4cda63;
+    }
+
+    input:focus + .slider {
+        box-shadow: 0 0 1px #4cda63;
+    }
+
+    input:checked + .slider:before {
+        -webkit-transform: translateX(13px);
+        -ms-transform: translateX(13px);
+        transform: translateX(13px);
+    }
+
+    /* Rounded sliders */
+    .slider.round {
+        border-radius: 34px;
+    }
+
+    .slider.round:before {
+        border-radius: 50%;
     }
 </style>

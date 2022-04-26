@@ -3062,14 +3062,63 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "login",
-  props: ['unread', 'username'],
+  data: function data() {
+    return {
+      optionsStyle: ''
+    };
+  },
+  props: ['unread', 'username', 'spoiler'],
   methods: {
+    /*
+    *
+    * toggle all notifications as read
+    *
+    */
     readMessages: function readMessages() {
       this.unread = false;
+    },
+
+    /*
+    *
+    * menu will animate to groups
+    *
+    */
+    accessGroups: function accessGroups() {
+      this.optionsStyle = "opacity: 0; " + "transform: translateX(195px);";
+    },
+
+    /*
+    *
+    * toggle slider for spoiler alert
+    *
+    */
+    toggleSpoiler: function toggleSpoiler() {
+      this.spoiler = !this.spoiler;
+      document.getElementById('spoilerCheck').checked = this.spoiler;
     }
-  }
+  },
+  mounted: function mounted() {
+    document.getElementById('spoilerCheck').checked = this.spoiler;
+  },
+  computed: {}
 });
 
 /***/ }),
@@ -22666,9 +22715,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _images_login_bets_png__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./images/login__bets.png */ "./resources/js/components/images/login__bets.png");
 /* harmony import */ var _images_login_spoiler_png__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./images/login__spoiler.png */ "./resources/js/components/images/login__spoiler.png");
 /* harmony import */ var _images_login_groups_png__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./images/login__groups.png */ "./resources/js/components/images/login__groups.png");
-/* harmony import */ var _images_login_followed_png__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./images/login__followed.png */ "./resources/js/components/images/login__followed.png");
-/* harmony import */ var _images_login_signout_png__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./images/login__signout.png */ "./resources/js/components/images/login__signout.png");
+/* harmony import */ var _images_login_arrow_png__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./images/login__arrow.png */ "./resources/js/components/images/login__arrow.png");
+/* harmony import */ var _images_login_followed_png__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./images/login__followed.png */ "./resources/js/components/images/login__followed.png");
+/* harmony import */ var _images_login_signout_png__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./images/login__signout.png */ "./resources/js/components/images/login__signout.png");
 // Imports
+
 
 
 
@@ -22684,10 +22735,11 @@ var ___CSS_LOADER_URL_REPLACEMENT_1___ = _node_modules_css_loader_dist_runtime_g
 var ___CSS_LOADER_URL_REPLACEMENT_2___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default()(_images_login_bets_png__WEBPACK_IMPORTED_MODULE_4__["default"]);
 var ___CSS_LOADER_URL_REPLACEMENT_3___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default()(_images_login_spoiler_png__WEBPACK_IMPORTED_MODULE_5__["default"]);
 var ___CSS_LOADER_URL_REPLACEMENT_4___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default()(_images_login_groups_png__WEBPACK_IMPORTED_MODULE_6__["default"]);
-var ___CSS_LOADER_URL_REPLACEMENT_5___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default()(_images_login_followed_png__WEBPACK_IMPORTED_MODULE_7__["default"]);
-var ___CSS_LOADER_URL_REPLACEMENT_6___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default()(_images_login_signout_png__WEBPACK_IMPORTED_MODULE_8__["default"]);
+var ___CSS_LOADER_URL_REPLACEMENT_5___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default()(_images_login_arrow_png__WEBPACK_IMPORTED_MODULE_7__["default"]);
+var ___CSS_LOADER_URL_REPLACEMENT_6___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default()(_images_login_followed_png__WEBPACK_IMPORTED_MODULE_8__["default"]);
+var ___CSS_LOADER_URL_REPLACEMENT_7___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default()(_images_login_signout_png__WEBPACK_IMPORTED_MODULE_9__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* ----------------------------- user login ------------------------------------------------------- */\n#login_icons[data-v-172b28a4] {\n    height: 65px;\n    width: 115px;\n    position: absolute;\n    background-color: transparent;\n    right: 85px;\n    top: 0;\n    z-index: 5;\n    display: flex;\n    justify-content: space-between;\n    padding-top: 10px;\n}\n#icon_notification[data-v-172b28a4] {\n    background: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ") no-repeat;\n    filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.5));\n    background-size: contain;\n    width: 46px;\n    cursor: pointer;\n}\n.notify-bubble[data-v-172b28a4] {\n    position: absolute;\n    top: -2px;\n    right: -5px;\n    padding: 2px 5px 2px 5px;\n    background-color: red;\n    color: white;\n    font-size: 0.65em;\n    border-radius: 50%;\n}\n#icon_user[data-v-172b28a4] {\n    background: url(" + ___CSS_LOADER_URL_REPLACEMENT_1___ + ") no-repeat;\n    filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.5));\n    background-size: contain;\n    width: 46px;\n    cursor: pointer;\n}\n#dropdown_container[data-v-172b28a4] {\n    width: 195px;\n    height: 259px;\n    background-color: white;\n    position: absolute;\n    right: 15px;\n    top: 85px;\n    border-radius: 5px;\n    /* shadow */\n    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;\n    border-bottom: solid 5px #c9d466;\n}\n#dropdown_container[data-v-172b28a4]::after {\n    content: \"\";\n    position: absolute;\n    top: -22px; /* At the top of the menu */\n    left: 50%;\n    margin-left: -5px;\n    border-width: 11px;\n    border-style: solid;\n    border-color: transparent transparent #fafcfe transparent;\n    border-radius: 1px;\n}\n#profile[data-v-172b28a4] {\n    width: 100%;\n    height: 67px;\n    background-color: #fafcfe;\n}\n#username[data-v-172b28a4] {\n    font-family: 'Roboto Light', sans-serif;\n    font-size: 18px;\n    width: 100%;\n    height: 40px;\n    color: #c9d466;\n    padding-left: 15px;\n    padding-top: 5px;\n    line-height: 40px;\n}\n#view_profile[data-v-172b28a4] {\n    color: #a7acb7;\n    font-family: 'Helvetica', sans-serif;\n    font-size: 12px;\n    width: 100%;\n    padding-left: 15px;\n    line-height: 11px;\n    padding-top: 5px;\n}\n#my_bets[data-v-172b28a4] {\n    font-family: 'Oswald', sans-serif;\n    font-size: 15px;\n    color: #69788a;\n    width: 100%;\n    height: 38px;\n    background: url(" + ___CSS_LOADER_URL_REPLACEMENT_2___ + ") no-repeat 15px;\n    padding-left: 40px;\n    line-height: 36px;\n    border-bottom: 1px solid #f3f2f3;\n    cursor: pointer;\n    /* animation */\n    transition: ease 0.2s;\n}\n#my_bets[data-v-172b28a4]:hover {\n    background-color: #fafcfe;\n    padding-left: 42px;\n}\n#spoiler[data-v-172b28a4] {\n    font-family: 'Oswald', sans-serif;\n    font-size: 15px;\n    color: #69788a;\n    width: 100%;\n    height: 37px;\n    background: url(" + ___CSS_LOADER_URL_REPLACEMENT_3___ + ") no-repeat 15px;\n    padding-left: 40px;\n    line-height: 36px;\n    cursor: pointer;\n    /* animation */\n    transition: ease 0.2s;\n}\n#spoiler[data-v-172b28a4]:hover {\n    background-color: #fafcfe;\n    padding-left: 42px;\n}\n#groups[data-v-172b28a4] {\n    font-family: 'Oswald', sans-serif;\n    font-size: 15px;\n    color: #69788a;\n    width: 100%;\n    height: 37px;\n    background: url(" + ___CSS_LOADER_URL_REPLACEMENT_4___ + ") no-repeat 14px;\n    padding-left: 40px;\n    line-height: 36px;\n    cursor: pointer;\n    /* animation */\n    transition: ease 0.2s;\n}\n#groups[data-v-172b28a4]:hover {\n    background-color: #fafcfe;\n    padding-left: 42px;\n}\n#followed[data-v-172b28a4] {\n    font-family: 'Oswald', sans-serif;\n    font-size: 15px;\n    color: #69788a;\n    width: 100%;\n    height: 37px;\n    background: url(" + ___CSS_LOADER_URL_REPLACEMENT_5___ + ") no-repeat 15px;\n    padding-left: 40px;\n    line-height: 36px;\n    border-bottom: 1px solid #f3f2f3;\n    padding-bottom: 10px;\n    cursor: pointer;\n    /* animation */\n    transition: ease 0.2s;\n}\n#followed[data-v-172b28a4]:hover {\n    background-color: #fafcfe;\n    padding-left: 42px;\n}\n#sign_out[data-v-172b28a4] {\n    font-family: 'Oswald', sans-serif;\n    font-size: 15px;\n    color: #69788a;\n    width: 100%;\n    height: 38px;\n    background: url(" + ___CSS_LOADER_URL_REPLACEMENT_6___ + ") no-repeat 15px;\n    padding-left: 40px;\n    line-height: 36px;\n    cursor: pointer;\n    /* animation */\n    transition: ease 0.2s;\n}\n#sign_out[data-v-172b28a4]:hover {\n    background-color: #fafcfe;\n    padding-left: 42px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* ----------------------------- user login ------------------------------------------------------- */\n#login_icons[data-v-172b28a4] {\n    height: 65px;\n    width: 115px;\n    position: absolute;\n    background-color: transparent;\n    right: 85px;\n    top: 0;\n    z-index: 5;\n    display: flex;\n    justify-content: space-between;\n    padding-top: 10px;\n}\n#icon_notification[data-v-172b28a4] {\n    background: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ") no-repeat;\n    filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.5));\n    background-size: contain;\n    width: 46px;\n    cursor: pointer;\n}\n.notify-bubble[data-v-172b28a4] {\n    position: absolute;\n    top: -2px;\n    right: -5px;\n    padding: 2px 5px 2px 5px;\n    background-color: red;\n    color: white;\n    font-size: 0.65em;\n    border-radius: 50%;\n}\n#icon_user[data-v-172b28a4] {\n    background: url(" + ___CSS_LOADER_URL_REPLACEMENT_1___ + ") no-repeat;\n    filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.5));\n    background-size: contain;\n    width: 46px;\n    cursor: pointer;\n}\n#dropdown_container[data-v-172b28a4] {\n    /* set var */\n    --login_hover: #f7f9fa;\n    width: 195px;\n    height: auto;\n    background-color: white;\n    position: absolute;\n    right: 15px;\n    top: 85px;\n    border-radius: 5px;\n    /* shadow */\n    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;\n    border-bottom: solid 5px #c9d466;\n}\n#dropdown_container[data-v-172b28a4]::after {\n    content: \"\";\n    position: absolute;\n    top: -22px; /* At the top of the menu */\n    left: 50%;\n    margin-left: -5px;\n    border-width: 11px;\n    border-style: solid;\n    border-color: transparent transparent #fafcfe transparent;\n    border-radius: 1px;\n}\n#profile[data-v-172b28a4] {\n    width: 100%;\n    height: 67px;\n    background-color: #f7f9fa;\n}\n#username[data-v-172b28a4] {\n    font-family: 'Roboto Light', sans-serif;\n    font-size: 18px;\n    width: 100%;\n    height: 40px;\n    color: #c9d466;\n    padding-left: 15px;\n    padding-top: 5px;\n    line-height: 40px;\n}\n#view_profile[data-v-172b28a4] {\n    color: #a7acb7;\n    font-family: 'Helvetica', sans-serif;\n    font-size: 12px;\n    width: 100%;\n    padding-left: 15px;\n    line-height: 11px;\n    padding-top: 5px;\n}\n#options[data-v-172b28a4] {\n    white-space: nowrap;\n    position: relative;\n    transition: 1.3s ease-in-out all;\n}\n#my_bets[data-v-172b28a4] {\n    font-family: 'Oswald', sans-serif;\n    font-size: 15px;\n    color: #69788a;\n    width: 100%;\n    height: 38px;\n    background: url(" + ___CSS_LOADER_URL_REPLACEMENT_2___ + ") no-repeat 15px;\n    padding-left: 40px;\n    line-height: 36px;\n    border-bottom: 1px solid #f3f2f3;\n    cursor: pointer;\n    /* animation */\n    transition: ease 0.2s;\n}\n#my_bets[data-v-172b28a4]:hover {\n    background-color: var(--login_hover);\n    padding-left: 42px;\n    color: #c9d466;\n}\n#spoiler[data-v-172b28a4] {\n    display: flex;\n    justify-content: space-between;\n    font-family: 'Oswald', sans-serif;\n    font-size: 15px;\n    color: #69788a;\n    width: 100%;\n    height: 37px;\n    background: url(" + ___CSS_LOADER_URL_REPLACEMENT_3___ + ") no-repeat 15px;\n    padding-left: 40px;\n    line-height: 36px;\n    cursor: pointer;\n    /* animation */\n    transition: ease 0.2s;\n}\n#spoiler[data-v-172b28a4]:hover {\n    background-color:  var(--login_hover);\n    padding-left: 42px;\n    color: darkorange;\n}\n#groups[data-v-172b28a4] {\n    display: flex;\n    justify-content: space-between;\n    font-family: 'Oswald', sans-serif;\n    font-size: 15px;\n    color: #69788a;\n    width: 100%;\n    height: 37px;\n    background: url(" + ___CSS_LOADER_URL_REPLACEMENT_4___ + ") no-repeat 14px;\n    padding-left: 40px;\n    line-height: 36px;\n    cursor: pointer;\n    /* animation */\n    transition: ease 0.2s;\n}\n#groups[data-v-172b28a4]:hover {\n    background-color:  var(--login_hover);\n    padding-left: 42px;\n    color: red;\n}\n#subgroups[data-v-172b28a4] {\n    height: 200px;\n    width: 100%;\n    background-color: #95c5ed;\n}\n#more_arrow[data-v-172b28a4] {\n    position: relative;\n    right: 7px;\n    top: 15px;\n    background: url(" + ___CSS_LOADER_URL_REPLACEMENT_5___ + ") no-repeat;\n    width: 5px;\n    height: 8px;\n}\n#followed[data-v-172b28a4] {\n    font-family: 'Oswald', sans-serif;\n    font-size: 15px;\n    color: #69788a;\n    width: 100%;\n    height: 37px;\n    background: url(" + ___CSS_LOADER_URL_REPLACEMENT_6___ + ") no-repeat 15px;\n    padding-left: 40px;\n    line-height: 36px;\n    border-bottom: 1px solid #f3f2f3;\n    padding-bottom: 10px;\n    cursor: pointer;\n    /* animation */\n    transition: ease 0.2s;\n}\n#followed[data-v-172b28a4]:hover {\n    background-color:  var(--login_hover);\n    padding-left: 42px;\n    color: mediumpurple;\n}\n#sign_out[data-v-172b28a4] {\n    font-family: 'Oswald', sans-serif;\n    font-size: 15px;\n    color: #69788a;\n    width: 100%;\n    height: 38px;\n    background: url(" + ___CSS_LOADER_URL_REPLACEMENT_7___ + ") no-repeat 15px;\n    padding-left: 40px;\n    line-height: 36px;\n    cursor: pointer;\n    /* animation */\n    transition: ease 0.2s;\n}\n#sign_out[data-v-172b28a4]:hover {\n    background-color:  var(--login_hover);\n    padding-left: 42px;\n    color: #5ba9f1;\n}\n\n/* switch button for spoiler alert menu item */\n.switch[data-v-172b28a4] {\n    position: relative;\n    display: inline-block;\n    width: 30px;\n    height: 17px;\n}\n.switch input[data-v-172b28a4] {\n    opacity: 0;\n    width: 0;\n    height: 0;\n}\n.slider[data-v-172b28a4] {\n    position: absolute;\n    cursor: pointer;\n    top: 0;\n    left: 0;\n    right: 0;\n    bottom: 0;\n    background-color: #ccc;\n    transition: .4s;\n}\n.slider[data-v-172b28a4]:before {\n    position: absolute;\n    content: \"\";\n    height: 13px;\n    width: 13px;\n    left: 2px;\n    bottom: 2px;\n    background-color: white;\n    transition: .4s;\n}\ninput:checked + .slider[data-v-172b28a4] {\n    background-color: #4cda63;\n}\ninput:focus + .slider[data-v-172b28a4] {\n    box-shadow: 0 0 1px #4cda63;\n}\ninput:checked + .slider[data-v-172b28a4]:before {\n    transform: translateX(13px);\n}\n\n/* Rounded sliders */\n.slider.round[data-v-172b28a4] {\n    border-radius: 34px;\n}\n.slider.round[data-v-172b28a4]:before {\n    border-radius: 50%;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -22997,6 +23049,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/light_wool.png?35114032db4e9898cd936606c0ce3726");
+
+/***/ }),
+
+/***/ "./resources/js/components/images/login__arrow.png":
+/*!*********************************************************!*\
+  !*** ./resources/js/components/images/login__arrow.png ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/login__arrow.png?ccef06977c9000bd09878f2204f248d0");
 
 /***/ }),
 
@@ -57029,19 +57096,69 @@ var render = function () {
         ]),
       ]),
       _vm._v(" "),
-      _c("div", { attrs: { id: "my_bets" } }, [_vm._v("My bets")]),
-      _vm._v(" "),
-      _c("div", { attrs: { id: "spoiler" } }, [_vm._v("Spoiler Alert")]),
-      _vm._v(" "),
-      _c("div", { attrs: { id: "groups" } }, [_vm._v("Groups")]),
-      _vm._v(" "),
-      _c("div", { attrs: { id: "followed" } }, [_vm._v("Followed Games")]),
-      _vm._v(" "),
-      _c("div", { attrs: { id: "sign_out" } }, [_vm._v("Sign out")]),
+      _c("div", { style: _vm.optionsStyle, attrs: { id: "options" } }, [
+        _c("div", { attrs: { id: "my_bets" } }, [_vm._v("My bets")]),
+        _vm._v(" "),
+        _c(
+          "div",
+          { attrs: { id: "spoiler" }, on: { click: _vm.toggleSpoiler } },
+          [_c("span", [_vm._v("Spoiler Alert")]), _vm._v(" "), _vm._m(0)]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { attrs: { id: "groups" }, on: { click: _vm.accessGroups } },
+          [
+            _c("span", [_vm._v("Groups")]),
+            _vm._v(" "),
+            _c("span", { attrs: { id: "more_arrow" } }),
+          ]
+        ),
+        _vm._v(" "),
+        _c("div", { attrs: { id: "subgroups" } }, [
+          _vm._v("\n                poep\n            "),
+        ]),
+        _vm._v(" "),
+        _c("div", { attrs: { id: "followed" } }, [_vm._v("Followed Games")]),
+        _vm._v(" "),
+        _vm._m(1),
+      ]),
     ]),
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "span",
+      { staticStyle: { "padding-top": "10px", "padding-right": "5px" } },
+      [
+        _c("label", { staticClass: "switch" }, [
+          _c("input", { attrs: { id: "spoilerCheck", type: "checkbox" } }),
+          _vm._v(" "),
+          _c("span", { staticClass: "slider round" }),
+        ]),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "a",
+      {
+        attrs: {
+          onclick:
+            "event.preventDefault(); document.getElementById('logout-form').submit();",
+        },
+      },
+      [_c("div", { attrs: { id: "sign_out" } }, [_vm._v("Sign out")])]
+    )
+  },
+]
 render._withStripped = true
 
 

@@ -175,7 +175,13 @@
                 </ul>
             </div>
             <div id="login">
-            <login :unread="3" username={{ \Illuminate\Support\Facades\Auth::user()->name }}></login>
+                @auth
+                    <login :unread="3" username={{ \Illuminate\Support\Facades\Auth::user()->name }} :spoiler="true"></login>
+                @endauth
+                @guest
+                    <a href="{{ route('login') }}" class="login_button">Log in</a>
+                    <a href="{{ route('register') }}" class="register_button">Sign up</a>
+                @endguest
             </div>
         </div>
     </nav>
