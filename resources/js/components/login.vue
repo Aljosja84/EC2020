@@ -2,15 +2,15 @@
     <div>
         <div id="login_icons">
             <div id="icon_notification" @click="readMessages"><span v-if="unread" class="notify-bubble">{{ unread }}</span></div>
-            <div id="icon_user"></div>
+            <div id="icon_user" @click="toggleMenu"></div>
         </div>
         <!-- dropdown menu -->
-        <div id="dropdown_container">
+        <div id="dropdown_container" :style="menuStyle">
             <div id="profile">
                 <div id="username">Hello, {{ username }}</div>
-                <div id="view_profile">View my profile</div>
+                <div id="view_profile"><a href="#">View my profile</a></div>
             </div>
-            <div id="options" :style="optionsStyle">
+            <div id="options">
                 <div id="my_bets">My bets</div>
                 <div id="spoiler" @click="toggleSpoiler">
                     <span>Spoiler Alert</span>
@@ -25,8 +25,8 @@
                     <span>Groups</span>
                     <span id="more_arrow"></span>
                 </div>
-                <div id="subgroups">
-                    poep
+                <div id="subgroups" :style="subGroupStyle">
+                    <div v-for="group in groups" class="subgroup_option">{{group}}</div>
                 </div>
                 <div id="followed">Followed Games</div>
                 <a onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><div id="sign_out">Sign out</div></a>
@@ -41,13 +41,17 @@
 
         data() {
             return {
-                optionsStyle: ''
+                menuStyle: '',
+                subGroupStyle: '',
+                subGroupActive: true,
+                menuActive: true
             }
         },
 
         props: ['unread',
                 'username',
-                'spoiler'
+                'spoiler',
+                'groups'
                 ],
 
         methods: {
@@ -61,13 +65,36 @@
             },
             /*
             *
+            *
+            *
+            */
+            toggleMenu() {
+                // check if groups menu is open and close it if it is
+                !this.subGroupActive ? this.accessGroups() : '';
+                // toggle the main menu
+                this.menuActive = !this.menuActive;
+                this.menuActive ?
+                    this.menuStyle = "top: 70px;" +
+                        "opacity: 0%;" +
+                        "visibility: hidden"
+                    :
+                    this.menuStyle = "top: 85px;" +
+                        "opacity: 100%;" +
+                        "visibility: visible"
+            },
+            /*
+            *
             * menu will animate to groups
             *
             */
             accessGroups() {
-                this.optionsStyle =
-                    "opacity: 0; " +
-                    "transform: translateX(195px);"
+                console.log(this.subGroupActive);
+                this.subGroupActive = !this.subGroupActive;
+                this.subGroupActive ?
+                    this.subGroupStyle = "height: 0px;"
+                    :
+                    this.subGroupStyle = "height: " +this.maxHeight
+
             },
             /*
             *
@@ -77,14 +104,16 @@
             toggleSpoiler() {
                 this.spoiler = !this.spoiler;
                 document.getElementById('spoilerCheck').checked = this.spoiler;
-            }
+            },
 
         },
         mounted() {
             document.getElementById('spoilerCheck').checked = this.spoiler;
         },
         computed : {
-
+            maxHeight() {
+                return this.groups.length * 37 + 'px';
+            }
         }
 
     }
@@ -133,16 +162,20 @@
     #dropdown_container {
         /* set var */
         --login_hover: #f7f9fa;
+        --login_subgroup_hover: white;
         width: 195px;
         height: auto;
         background-color: white;
         position: absolute;
         right: 15px;
-        top: 85px;
+        top: 70px;
         border-radius: 5px;
         /* shadow */
         box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
         border-bottom: solid 5px #c9d466;
+        visibility: hidden;
+        opacity: 0;
+        transition: all 0.2s ease-out;
     }
 
     #dropdown_container::after {
@@ -182,11 +215,17 @@
         line-height: 11px;
         padding-top: 5px;
     }
+    #view_profile a {
+        color: inherit;
+        text-decoration: none;
+    }
+    #view_profile a:hover {
+        color: #c9d466;
+        text-decoration: underline;
+    }
 
     #options {
-        white-space: nowrap;
         position: relative;
-        transition: 1.3s ease-in-out all;
     }
 
     #my_bets {
@@ -250,19 +289,48 @@
     }
 
     #subgroups {
-        height: 200px;
+        z-index: 30;
+        height: 0;
+        visibility: visible;
+        overflow: hidden;
+        opacity: 100%;
         width: 100%;
-        background-color: #95c5ed;
+        background-color: #f7f9fa;
+        /* create a nice dropdown effect for the subgroup menu */
+        transition: all 500ms cubic-bezier(0.680, -0.550, 0.265, 1.550); /* easeInOutBack */
+
+        transition-timing-function: cubic-bezier(0.680, -0.550, 0.265, 1.550); /* easeInOutBack */
     }
+
+    .subgroup_option {
+        font-family: "Roboto", sans-serif;
+        font-size: 12px;
+        color: #69788a;
+        width: 100%;
+        height: 37px;
+        cursor: pointer;
+        padding-left: 40px;
+        line-height: 36px;
+        /* animation */
+        transition: 0.2s linear;
+    }
+
+    .subgroup_option:hover {
+        background-color: var(--login_subgroup_hover);
+        padding-left: 42px;
+        color: #515151;
+    }
+
     #more_arrow {
         position: relative;
         right: 7px;
         top: 15px;
         background: url("images/login__arrow.png") no-repeat;
-        width: 5px;
-        height: 8px;
+        width: 8px;
+        height: 5px;
     }
     #followed {
+        z-index: 40;
         font-family: 'Oswald', sans-serif;
         font-size: 15px;
         color: #69788a;
@@ -341,11 +409,11 @@
     }
 
     input:checked + .slider {
-        background-color: #4cda63;
+        background-color: darkorange;
     }
 
     input:focus + .slider {
-        box-shadow: 0 0 1px #4cda63;
+        box-shadow: 0 0 1px darkorange;
     }
 
     input:checked + .slider:before {
