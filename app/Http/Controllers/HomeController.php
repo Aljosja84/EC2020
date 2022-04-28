@@ -2,11 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Country;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
+    /**
+     * @var Country[]|\Illuminate\Database\Eloquent\Collection
+     */
+    private $countries;
+
     /**
      * Create a new controller instance.
      *
@@ -15,6 +21,7 @@ class HomeController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->countries = Country::all();
     }
 
     /**
@@ -24,7 +31,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('main', compact($user = Auth::user()));
+        $countries = Country::all();
+        return view('main', compact($countries));
     }
 
     public function game()

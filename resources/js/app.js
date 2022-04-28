@@ -38,6 +38,7 @@ Vue.component('team-players', require('./components/teamplayers').default);
 Vue.component('team-stats', require('./components/teamstats.vue').default);
 Vue.component('next-game', require('./components/nextgame').default);
 Vue.component('login', require('./components/login').default);
+Vue.component('countryList', require('./components/countryList').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
