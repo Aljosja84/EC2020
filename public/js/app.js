@@ -2764,9 +2764,80 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "countryList",
-  props: ['countries', 'avatars']
+  props: ['countries', 'avatars'],
+  data: function data() {
+    return {
+      flaglist: false,
+      avatarlist: false,
+      flaglistStyle: '',
+      avatarslistStyle: ''
+    };
+  },
+  methods: {
+    getImgUrl: function getImgUrl(src) {
+      return __webpack_require__("./public/images/country_flags sync recursive ^\\.\\/.*$")("./" + src);
+    },
+    toggleFlagList: function toggleFlagList() {
+      document.getElementById('country_flags').scrollTop = 0;
+      this.flaglist = !this.flaglist;
+      this.flaglist ? this.flaglistStyle = "height: 80px; width: 80px; overflow-y:hidden; padding: 0" : this.flaglistStyle = "height: 335px; width: 200px; overflow-y: scroll";
+      /*
+      return this.countries = _.shuffle(this.countries);
+      */
+    },
+    toggleAvaList: function toggleAvaList() {
+      document.getElementById('avatars').scrollTop = 0;
+      this.avatarlist = !this.avatarlist;
+      this.avatarlist ? this.avatarslistStyle = "height: 80px; width: 80px; overflow-y:hidden; padding: 0" : this.avatarslistStyle = "height: 335px; width: 200px; overflow-y: scroll";
+      /*
+      return this.countries = _.shuffle(this.countries);
+      */
+    },
+    chooseFlagItem: function chooseFlagItem(self) {
+      // what index does the item have?
+      if (!this.flaglist) {
+        var index = this.countries.findIndex(function (i) {
+          return i.id === self.id;
+        });
+        this.countries.splice(index, 1);
+        this.countries.unshift(self);
+      } // collapse menu
+
+
+      this.toggleFlagList();
+    },
+    chooseAvaItem: function chooseAvaItem(self) {
+      // what index does the item have?
+      if (!this.avatarlist) {
+        var index = this.avatars.findIndex(function (i) {
+          return i.id === self.id;
+        });
+        this.avatars.splice(index, 1);
+        this.avatars.unshift(self);
+      } // collapse menu
+
+
+      this.toggleAvaList();
+    }
+  }
 });
 
 /***/ }),
@@ -22683,7 +22754,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#container[data-v-63fd8b4e] {\n    text-align: center;\n    padding: 20px 0 0 0;\n    font-family: \"Roboto\", sans-serif;\n    font-size: 14px;\n    color: #3382a0;\n    width: 793px;\n    height: 885px;\n    background-color: whitesmoke;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#container[data-v-63fd8b4e] {\n    text-align: center;\n    padding: 20px 0 0 0;\n    font-family: \"Roboto\", sans-serif;\n    font-size: 14px;\n    color: #3382a0;\n    width: 793px;\n    height: 885px;\n    background-color: lightblue;\n}\n#country_flags[data-v-63fd8b4e], #avatars[data-v-63fd8b4e] {\n    border-radius: 8px;\n    float: left;\n    margin-right: 25px;\n    padding: 10px 0 10px 15px;\n    text-align: left;\n    width: 200px;\n    height: 335px;\n    background-color:lightskyblue;\n    overflow-y: scroll;\n    overflow-x: hidden;\n    transition: all 500ms cubic-bezier(1.000, 0.000, 0.000, 1.000); /* easeInOutExpo */\n    transition-timing-function: cubic-bezier(1.000, 0.000, 0.000, 1.000); /* easeInOutExpo */\n    /* scrollbar vars */\n    --scrollbarBG: lightskyblue;\n    --thumbBG: #90A4AE;\n    scrollbar-width: thin;\n    scrollbar-color: var(--thumbBG) var(--scrollbarBG);\n    scroll-behavior: smooth;\n}\n#country_list-item[data-v-63fd8b4e], #avatar_list-item[data-v-63fd8b4e] {\n    border: 1px solid #ccc;\n    border-radius: 6px;\n    padding: 6px;\n    transition: all 0.3s ease-out;\n    display: inline-block;\n    margin: 3px;\n    cursor: pointer;\n}\n#country_flags[data-v-63fd8b4e]::-webkit-scrollbar, #avatars[data-v-63fd8b4e]::-webkit-scrollbar {\n    width: 11px;\n}\n#country_flags[data-v-63fd8b4e]::-webkit-scrollbar-track, #avatars[data-v-63fd8b4e]::-webkit-scrollbar-track {\n    background: var(--scrollbarBG);\n}\n#country_flags[data-v-63fd8b4e]::-webkit-scrollbar-thumb, #avatars[data-v-63fd8b4e]::-webkit-scrollbar-thumb {\n    background-color: var(--thumbBG) ;\n    border-radius: 6px;\n    border: 3px solid var(--scrollbarBG);\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -23107,6 +23178,741 @@ module.exports = function (url, options) {
 
   return url;
 };
+
+/***/ }),
+
+/***/ "./public/images/country_flags/1.png":
+/*!*******************************************!*\
+  !*** ./public/images/country_flags/1.png ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/1.png?7283bd169b5ea317efebebbf7ac2d13d");
+
+/***/ }),
+
+/***/ "./public/images/country_flags/10.png":
+/*!********************************************!*\
+  !*** ./public/images/country_flags/10.png ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/10.png?968ad2629fe193da72846349e4789b90");
+
+/***/ }),
+
+/***/ "./public/images/country_flags/1099.png":
+/*!**********************************************!*\
+  !*** ./public/images/country_flags/1099.png ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/1099.png?79ad2f29cc18508801995d8464e1b628");
+
+/***/ }),
+
+/***/ "./public/images/country_flags/1105.png":
+/*!**********************************************!*\
+  !*** ./public/images/country_flags/1105.png ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/1105.png?3428236dae8fb8a70b05ea2893050759");
+
+/***/ }),
+
+/***/ "./public/images/country_flags/1108.png":
+/*!**********************************************!*\
+  !*** ./public/images/country_flags/1108.png ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/1108.png?5bfbef73fd136666d894ee84917b09e9");
+
+/***/ }),
+
+/***/ "./public/images/country_flags/1118.png":
+/*!**********************************************!*\
+  !*** ./public/images/country_flags/1118.png ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/1118.png?4f203c59052de6ff2d1aed6e958fbef5");
+
+/***/ }),
+
+/***/ "./public/images/country_flags/15.png":
+/*!********************************************!*\
+  !*** ./public/images/country_flags/15.png ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/15.png?e85b62b872be6d967bc125730786f049");
+
+/***/ }),
+
+/***/ "./public/images/country_flags/2.png":
+/*!*******************************************!*\
+  !*** ./public/images/country_flags/2.png ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/2.png?dc45071a56e7b0083e3966eb594393b0");
+
+/***/ }),
+
+/***/ "./public/images/country_flags/21.png":
+/*!********************************************!*\
+  !*** ./public/images/country_flags/21.png ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/21.png?5fac618e8fbb69c400d72cf98cc011ed");
+
+/***/ }),
+
+/***/ "./public/images/country_flags/24.png":
+/*!********************************************!*\
+  !*** ./public/images/country_flags/24.png ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/24.png?a56c9f0bded3abd7992c3b7c0efc06bc");
+
+/***/ }),
+
+/***/ "./public/images/country_flags/25.png":
+/*!********************************************!*\
+  !*** ./public/images/country_flags/25.png ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/25.png?9f0113cb79b0dbca182dc91c209e2fe7");
+
+/***/ }),
+
+/***/ "./public/images/country_flags/27.png":
+/*!********************************************!*\
+  !*** ./public/images/country_flags/27.png ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/27.png?b840cbd2d633232a6ef71e7a54e16d9c");
+
+/***/ }),
+
+/***/ "./public/images/country_flags/3.png":
+/*!*******************************************!*\
+  !*** ./public/images/country_flags/3.png ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/3.png?8bfbb023f9fff40d87c6bf67f7a38016");
+
+/***/ }),
+
+/***/ "./public/images/country_flags/4.png":
+/*!*******************************************!*\
+  !*** ./public/images/country_flags/4.png ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/4.png?c7e89229d822725dd9802cfe896b5bfa");
+
+/***/ }),
+
+/***/ "./public/images/country_flags/5.png":
+/*!*******************************************!*\
+  !*** ./public/images/country_flags/5.png ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/5.png?5df016821818a1840b6ee48f99e4d179");
+
+/***/ }),
+
+/***/ "./public/images/country_flags/767.png":
+/*!*********************************************!*\
+  !*** ./public/images/country_flags/767.png ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/767.png?27b64e3d22835e88142a0d8f4cc264d7");
+
+/***/ }),
+
+/***/ "./public/images/country_flags/768.png":
+/*!*********************************************!*\
+  !*** ./public/images/country_flags/768.png ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/768.png?c0e7a06145c5d0a338cbbb733d885a04");
+
+/***/ }),
+
+/***/ "./public/images/country_flags/769.png":
+/*!*********************************************!*\
+  !*** ./public/images/country_flags/769.png ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/769.png?937199a2df2ec783607c8f5cf2dc960a");
+
+/***/ }),
+
+/***/ "./public/images/country_flags/770.png":
+/*!*********************************************!*\
+  !*** ./public/images/country_flags/770.png ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/770.png?31690042b62286a06b18b31841c98325");
+
+/***/ }),
+
+/***/ "./public/images/country_flags/772.png":
+/*!*********************************************!*\
+  !*** ./public/images/country_flags/772.png ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/772.png?47f8ef37ad8c04552107b9436f4f6843");
+
+/***/ }),
+
+/***/ "./public/images/country_flags/773.png":
+/*!*********************************************!*\
+  !*** ./public/images/country_flags/773.png ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/773.png?02401cacfe639fabc83be2ba11fe6694");
+
+/***/ }),
+
+/***/ "./public/images/country_flags/775.png":
+/*!*********************************************!*\
+  !*** ./public/images/country_flags/775.png ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/775.png?3ad41bc613293cc09ee06da128f0014c");
+
+/***/ }),
+
+/***/ "./public/images/country_flags/777.png":
+/*!*********************************************!*\
+  !*** ./public/images/country_flags/777.png ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/777.png?6ca3a0fe0b12ed0cdfc7b0d03cd76c69");
+
+/***/ }),
+
+/***/ "./public/images/country_flags/9.png":
+/*!*******************************************!*\
+  !*** ./public/images/country_flags/9.png ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/9.png?33c3123cd59070c1870e6829ea856a77");
+
+/***/ }),
+
+/***/ "./public/images/country_flags/austria.png":
+/*!*************************************************!*\
+  !*** ./public/images/country_flags/austria.png ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/austria.png?3ad41bc613293cc09ee06da128f0014c");
+
+/***/ }),
+
+/***/ "./public/images/country_flags/belgium.png":
+/*!*************************************************!*\
+  !*** ./public/images/country_flags/belgium.png ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/belgium.png?7283bd169b5ea317efebebbf7ac2d13d");
+
+/***/ }),
+
+/***/ "./public/images/country_flags/croatia.png":
+/*!*************************************************!*\
+  !*** ./public/images/country_flags/croatia.png ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/croatia.png?8bfbb023f9fff40d87c6bf67f7a38016");
+
+/***/ }),
+
+/***/ "./public/images/country_flags/czechrepublic.png":
+/*!*******************************************************!*\
+  !*** ./public/images/country_flags/czechrepublic.png ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/czechrepublic.png?31690042b62286a06b18b31841c98325");
+
+/***/ }),
+
+/***/ "./public/images/country_flags/denmark.png":
+/*!*************************************************!*\
+  !*** ./public/images/country_flags/denmark.png ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/denmark.png?5fac618e8fbb69c400d72cf98cc011ed");
+
+/***/ }),
+
+/***/ "./public/images/country_flags/england.png":
+/*!*************************************************!*\
+  !*** ./public/images/country_flags/england.png ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/england.png?968ad2629fe193da72846349e4789b90");
+
+/***/ }),
+
+/***/ "./public/images/country_flags/finland.png":
+/*!*************************************************!*\
+  !*** ./public/images/country_flags/finland.png ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/finland.png?79ad2f29cc18508801995d8464e1b628");
+
+/***/ }),
+
+/***/ "./public/images/country_flags/france.png":
+/*!************************************************!*\
+  !*** ./public/images/country_flags/france.png ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/france.png?dc45071a56e7b0083e3966eb594393b0");
+
+/***/ }),
+
+/***/ "./public/images/country_flags/germany.png":
+/*!*************************************************!*\
+  !*** ./public/images/country_flags/germany.png ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/germany.png?9f0113cb79b0dbca182dc91c209e2fe7");
+
+/***/ }),
+
+/***/ "./public/images/country_flags/hungary.png":
+/*!*************************************************!*\
+  !*** ./public/images/country_flags/hungary.png ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/hungary.png?e80792849f49e0b842c25ea0dcabf2b2");
+
+/***/ }),
+
+/***/ "./public/images/country_flags/italy.png":
+/*!***********************************************!*\
+  !*** ./public/images/country_flags/italy.png ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/italy.png?c0e7a06145c5d0a338cbbb733d885a04");
+
+/***/ }),
+
+/***/ "./public/images/country_flags/netherlands.png":
+/*!*****************************************************!*\
+  !*** ./public/images/country_flags/netherlands.png ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/netherlands.png?4f203c59052de6ff2d1aed6e958fbef5");
+
+/***/ }),
+
+/***/ "./public/images/country_flags/northmacedonia.png":
+/*!********************************************************!*\
+  !*** ./public/images/country_flags/northmacedonia.png ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/northmacedonia.png?3b32dba8f69756e4757e1648b9d78718");
+
+/***/ }),
+
+/***/ "./public/images/country_flags/poland.png":
+/*!************************************************!*\
+  !*** ./public/images/country_flags/poland.png ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/poland.png?a56c9f0bded3abd7992c3b7c0efc06bc");
+
+/***/ }),
+
+/***/ "./public/images/country_flags/portugal.png":
+/*!**************************************************!*\
+  !*** ./public/images/country_flags/portugal.png ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/portugal.png?b840cbd2d633232a6ef71e7a54e16d9c");
+
+/***/ }),
+
+/***/ "./public/images/country_flags/qualifier.png":
+/*!***************************************************!*\
+  !*** ./public/images/country_flags/qualifier.png ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/qualifier.png?26aa2bf4e125b5cfb3693feaf2a0bff6");
+
+/***/ }),
+
+/***/ "./public/images/country_flags/russia.png":
+/*!************************************************!*\
+  !*** ./public/images/country_flags/russia.png ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/russia.png?c7e89229d822725dd9802cfe896b5bfa");
+
+/***/ }),
+
+/***/ "./public/images/country_flags/scotland.png":
+/*!**************************************************!*\
+  !*** ./public/images/country_flags/scotland.png ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/scotland.png?315c5e331cc1d3e75840c604943f0357");
+
+/***/ }),
+
+/***/ "./public/images/country_flags/slovakia.png":
+/*!**************************************************!*\
+  !*** ./public/images/country_flags/slovakia.png ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/slovakia.png?e005e542a364c798943dc6c31f39528f");
+
+/***/ }),
+
+/***/ "./public/images/country_flags/spain.png":
+/*!***********************************************!*\
+  !*** ./public/images/country_flags/spain.png ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/spain.png?33c3123cd59070c1870e6829ea856a77");
+
+/***/ }),
+
+/***/ "./public/images/country_flags/sweden.png":
+/*!************************************************!*\
+  !*** ./public/images/country_flags/sweden.png ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/sweden.png?5df016821818a1840b6ee48f99e4d179");
+
+/***/ }),
+
+/***/ "./public/images/country_flags/switzerland.png":
+/*!*****************************************************!*\
+  !*** ./public/images/country_flags/switzerland.png ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/switzerland.png?e85b62b872be6d967bc125730786f049");
+
+/***/ }),
+
+/***/ "./public/images/country_flags/turkey.png":
+/*!************************************************!*\
+  !*** ./public/images/country_flags/turkey.png ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/turkey.png?6ca3a0fe0b12ed0cdfc7b0d03cd76c69");
+
+/***/ }),
+
+/***/ "./public/images/country_flags/ukraine.png":
+/*!*************************************************!*\
+  !*** ./public/images/country_flags/ukraine.png ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/ukraine.png?47f8ef37ad8c04552107b9436f4f6843");
+
+/***/ }),
+
+/***/ "./public/images/country_flags/wales.png":
+/*!***********************************************!*\
+  !*** ./public/images/country_flags/wales.png ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/wales.png?27b64e3d22835e88142a0d8f4cc264d7");
 
 /***/ }),
 
@@ -56879,19 +57685,86 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { attrs: { id: "container" } }, [
+    _vm._v("\n    Which team do you root for?\n    "),
+    _c("br"),
+    _vm._v(" "),
+    _c(
+      "div",
+      { style: _vm.flaglistStyle, attrs: { id: "country_flags" } },
+      [
+        _c(
+          "transition-group",
+          { attrs: { name: "country_list", tag: "div" } },
+          _vm._l(_vm.countries, function (country) {
+            return _c(
+              "span",
+              {
+                key: country.id,
+                attrs: { id: "country_list-item" },
+                on: {
+                  click: function ($event) {
+                    return _vm.chooseFlagItem(country)
+                  },
+                },
+              },
+              [
+                _c("img", {
+                  attrs: {
+                    src: "/images/country_flags/" + country.flag_url,
+                    height: "60px",
+                    width: "60px",
+                    alt: "country",
+                  },
+                }),
+              ]
+            )
+          }),
+          0
+        ),
+      ],
+      1
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      { style: _vm.avatarslistStyle, attrs: { id: "avatars" } },
+      [
+        _c(
+          "transition-group",
+          { attrs: { name: "country_list", tag: "div" } },
+          _vm._l(_vm.avatars, function (gamer) {
+            return _c(
+              "span",
+              {
+                key: gamer.id,
+                attrs: { id: "avatar_list-item" },
+                on: {
+                  click: function ($event) {
+                    return _vm.chooseAvaItem(gamer)
+                  },
+                },
+              },
+              [
+                _c("img", {
+                  attrs: {
+                    src: "/images/avatars/" + gamer.url,
+                    height: "60px",
+                    width: "60px",
+                    alt: "profilepic",
+                  },
+                }),
+              ]
+            )
+          }),
+          0
+        ),
+      ],
+      1
+    ),
+  ])
 }
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { attrs: { id: "container" } }, [
-      _vm._v("\n    Which team do you root for?\n    "),
-      _c("br"),
-    ])
-  },
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -76449,6 +77322,86 @@ Vue.compile = compileToFunctions;
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Vue);
 
+
+/***/ }),
+
+/***/ "./public/images/country_flags sync recursive ^\\.\\/.*$":
+/*!****************************************************!*\
+  !*** ./public/images/country_flags/ sync ^\.\/.*$ ***!
+  \****************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var map = {
+	"./1.png": "./public/images/country_flags/1.png",
+	"./10.png": "./public/images/country_flags/10.png",
+	"./1099.png": "./public/images/country_flags/1099.png",
+	"./1105.png": "./public/images/country_flags/1105.png",
+	"./1108.png": "./public/images/country_flags/1108.png",
+	"./1118.png": "./public/images/country_flags/1118.png",
+	"./15.png": "./public/images/country_flags/15.png",
+	"./2.png": "./public/images/country_flags/2.png",
+	"./21.png": "./public/images/country_flags/21.png",
+	"./24.png": "./public/images/country_flags/24.png",
+	"./25.png": "./public/images/country_flags/25.png",
+	"./27.png": "./public/images/country_flags/27.png",
+	"./3.png": "./public/images/country_flags/3.png",
+	"./4.png": "./public/images/country_flags/4.png",
+	"./5.png": "./public/images/country_flags/5.png",
+	"./767.png": "./public/images/country_flags/767.png",
+	"./768.png": "./public/images/country_flags/768.png",
+	"./769.png": "./public/images/country_flags/769.png",
+	"./770.png": "./public/images/country_flags/770.png",
+	"./772.png": "./public/images/country_flags/772.png",
+	"./773.png": "./public/images/country_flags/773.png",
+	"./775.png": "./public/images/country_flags/775.png",
+	"./777.png": "./public/images/country_flags/777.png",
+	"./9.png": "./public/images/country_flags/9.png",
+	"./austria.png": "./public/images/country_flags/austria.png",
+	"./belgium.png": "./public/images/country_flags/belgium.png",
+	"./croatia.png": "./public/images/country_flags/croatia.png",
+	"./czechrepublic.png": "./public/images/country_flags/czechrepublic.png",
+	"./denmark.png": "./public/images/country_flags/denmark.png",
+	"./england.png": "./public/images/country_flags/england.png",
+	"./finland.png": "./public/images/country_flags/finland.png",
+	"./france.png": "./public/images/country_flags/france.png",
+	"./germany.png": "./public/images/country_flags/germany.png",
+	"./hungary.png": "./public/images/country_flags/hungary.png",
+	"./italy.png": "./public/images/country_flags/italy.png",
+	"./netherlands.png": "./public/images/country_flags/netherlands.png",
+	"./northmacedonia.png": "./public/images/country_flags/northmacedonia.png",
+	"./poland.png": "./public/images/country_flags/poland.png",
+	"./portugal.png": "./public/images/country_flags/portugal.png",
+	"./qualifier.png": "./public/images/country_flags/qualifier.png",
+	"./russia.png": "./public/images/country_flags/russia.png",
+	"./scotland.png": "./public/images/country_flags/scotland.png",
+	"./slovakia.png": "./public/images/country_flags/slovakia.png",
+	"./spain.png": "./public/images/country_flags/spain.png",
+	"./sweden.png": "./public/images/country_flags/sweden.png",
+	"./switzerland.png": "./public/images/country_flags/switzerland.png",
+	"./turkey.png": "./public/images/country_flags/turkey.png",
+	"./ukraine.png": "./public/images/country_flags/ukraine.png",
+	"./wales.png": "./public/images/country_flags/wales.png"
+};
+
+
+function webpackContext(req) {
+	var id = webpackContextResolve(req);
+	return __webpack_require__(id);
+}
+function webpackContextResolve(req) {
+	if(!__webpack_require__.o(map, req)) {
+		var e = new Error("Cannot find module '" + req + "'");
+		e.code = 'MODULE_NOT_FOUND';
+		throw e;
+	}
+	return map[req];
+}
+webpackContext.keys = function webpackContextKeys() {
+	return Object.keys(map);
+};
+webpackContext.resolve = webpackContextResolve;
+module.exports = webpackContext;
+webpackContext.id = "./public/images/country_flags sync recursive ^\\.\\/.*$";
 
 /***/ })
 
