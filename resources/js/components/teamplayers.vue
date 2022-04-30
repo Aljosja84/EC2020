@@ -534,7 +534,7 @@
 
     .tippy-tooltip.honeybee-theme {
         background-color: #313131;
-        color: #ff7800;
+        color: orange;
     }
     .tippy-tooltip.honeybee-theme .tippy-roundarrow{
         fill: #313131;

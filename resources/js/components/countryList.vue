@@ -1,11 +1,8 @@
 <template>
 <div id="container">
-    Which team do you root for?
-    <br>
-
     <div id="country_flags" :style="flaglistStyle">
         <transition-group name="country_list" tag="div">
-            <span v-for="country in countries" :key="country.id" id="country_list-item" @click="chooseFlagItem(country)">
+            <span v-for="country in countries" :key="country.id" id="country_list-item" @click="chooseFlagItem(country)" :content="country.name" v-tippy="{placement: 'top', appendTo: 'parent', arrow : true, arrowType : 'round', animation : 'scale', animateFill: true, followCursor: 'horizontal', theme: 'login'}">
                 <img :src="'/images/country_flags/' + country.flag_url" height="60px" width="60px" alt="country"></img>
             </span>
         </transition-group>
@@ -86,18 +83,7 @@
     }
 </script>
 
-<style scoped>
-    #container {
-        text-align: center;
-        padding: 20px 0 0 0;
-        font-family: "Roboto", sans-serif;
-        font-size: 14px;
-        color: #3382a0;
-        width: 793px;
-        height: 885px;
-        background-color: lightblue;
-    }
-
+<style>
     #country_flags, #avatars {
         border-radius: 8px;
         float: left;
@@ -106,13 +92,13 @@
         text-align: left;
         width: 200px;
         height: 335px;
-        background-color:lightskyblue;
+        background-color:white;
         overflow-y: scroll;
         overflow-x: hidden;
         transition: all 500ms cubic-bezier(1.000, 0.000, 0.000, 1.000); /* easeInOutExpo */
         transition-timing-function: cubic-bezier(1.000, 0.000, 0.000, 1.000); /* easeInOutExpo */
         /* scrollbar vars */
-        --scrollbarBG: lightskyblue;
+        --scrollbarBG: white;
         --thumbBG: #90A4AE;
         scrollbar-width: thin;
         scrollbar-color: var(--thumbBG) var(--scrollbarBG);
@@ -127,6 +113,8 @@
         display: inline-block;
         margin: 3px;
         cursor: pointer;
+        background-color: #efeded;
+        box-shadow: inset 0 2px 0 0 hsla(0,0%,100%,0.8);
     }
 
     #country_flags::-webkit-scrollbar, #avatars::-webkit-scrollbar {
@@ -140,5 +128,16 @@
         background-color: var(--thumbBG) ;
         border-radius: 6px;
         border: 3px solid var(--scrollbarBG);
+    }
+
+    .tippy-tooltip.login-theme {
+        background-color: #ccc;
+        color: #3382a0;
+        font-size: 11px;
+        box-shadow: inset 0 1px 0 0 hsla(0,0%,100%,0.8);
+        border: 1px solid #999898;
+    }
+    .tippy-tooltip.login-theme .tippy-roundarrow{
+        fill: #ccc;
     }
 </style>

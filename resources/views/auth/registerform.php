@@ -71,3 +71,7 @@
         </div>
     </div>
 </div>
+
+<div id="app">
+    <country-list :countries="{{ json_encode($countries) }}" :avatars="{{ json_encode($avatars) }}"></country-list>
+</div>

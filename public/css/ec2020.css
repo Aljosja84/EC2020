@@ -263,6 +263,42 @@ input:-webkit-autofill {
 }
 
 /* ----------------------------------------- END LOGIN PAGE -----------------------------------*/
+
+/* ----------------------------------------- REGISTRATION PAGE --------------------------------*/
+#registration_area {
+    width: 100%;
+    height: calc(100% - 65px);
+    position: absolute;
+    padding: 10px 0 0 10px;
+    background: rgb(91,169,241);
+    background: linear-gradient(180deg, rgba(91,169,241,1) 72%, rgba(255,255,255,1) 100%);
+    display: flex;
+    justify-content: center;
+}
+
+#registration_bg_pic {
+    background: url("../images/register_bg_llc.png");
+    width: 509px;
+    height: 339px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: 0;
+}
+
+#registration_container {
+    width: 793px;
+    height: 882px;
+    background-color: deeppink;
+    border-radius: 2px;
+    position: relative;
+    top: 10%;
+    z-index:1;
+    border-bottom: 6px solid #c9d466;
+    box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+}
+
+/* ----------------------------------------- END REGISTRATION PAGE ----------------------------*/
 .games_div_container {
     width: 100%;
     height: calc(100% - 65px);

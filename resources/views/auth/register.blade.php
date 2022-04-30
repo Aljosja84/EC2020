@@ -30,10 +30,9 @@
 $countries = App\Models\Country::all()->toArray();
 $avatars = App\Models\Avatar::all()->toArray();
 ?>
-<div id="login_area">
-<div id="app">
-    <country-list :countries="{{ json_encode($countries) }}" :avatars="{{ json_encode($avatars) }}"></country-list>
-</div>
+<div id="registration_area">
+    <div id="registration_container"></div>
+    <div id="registration_bg_pic"></div>
 </div>
 </body>
 </html>

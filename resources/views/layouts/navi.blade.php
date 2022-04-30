@@ -10,12 +10,10 @@
     <script defer src="{{ mix('js/app.js') }}"></script>
     <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
-    <script src={{ asset('js/drooltip.js') }}></script>
 
     <!-- Styles -->
     <link href={{ asset('css/topmenu.css') }} rel="stylesheet">
     <link href={{ asset('css/ec2020.css') }} rel="stylesheet">
-    <link href={{ asset('css/drooltip.css') }} rel="stylesheet">
     <title>Euro 2020</title>
 
     <!-- Fonts -->

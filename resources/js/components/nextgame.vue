@@ -1,5 +1,5 @@
 <template>
-    <div id="container">
+    <div id="next_game_container">
         <div class="loading_div_nextgame" v-bind:style="doneloading"><div id="pulseloader"/></div>
         <div class="timer_header">
             NEXT MATCH in
@@ -144,7 +144,7 @@
 </script>
 
 <style scoped>
-    #container {
+    #next_game_container {
         position: relative;
         z-index:1
     }
