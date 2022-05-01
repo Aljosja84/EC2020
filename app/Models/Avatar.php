@@ -11,6 +11,11 @@ class Avatar extends Model
 
     public function user()
     {
-        $this->belongsToMany('App\Models\User');
+        $this->belongsTo('App\Models\User');
+    }
+
+    public function ava_url()
+    {
+        return "../images/avatars/{$this->url}";
     }
 }

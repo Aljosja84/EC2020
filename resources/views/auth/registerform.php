@@ -75,3 +75,13 @@
 <div id="app">
     <country-list :countries="{{ json_encode($countries) }}" :avatars="{{ json_encode($avatars) }}"></country-list>
 </div>
+
+<div id="country_flags" :style="flaglistStyle">
+
+    <transition-group name="country_list" tag="div">
+                <span v-for="country in countries" :key="country.id" id="country_list-item" @click="chooseFlagItem(country)" :content="country.name" v-tippy="{placement: 'top', appendTo: 'parent', arrow : true, arrowType : 'round', animation : 'scale', animateFill: true, followCursor: 'horizontal', theme: 'login'}">
+                    <img :src="'/images/country_flags/' + country.flag_url" height="60px" width="60px" alt="country"></img>
+                </span>
+    </transition-group>
+
+</div>

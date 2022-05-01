@@ -67,6 +67,7 @@
                         </div>
                     </div>
                 </form>
+             <!-- end form -->
                 <div id="or_sign_in">------- or sign in with -------</div>
                 <div id="login__socials">
                     <a href="#"><img style="margin-right: 10px" src="{{ asset('images/login__google.png') }}" alt="sign in with Google"></a>

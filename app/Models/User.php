@@ -19,6 +19,8 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'avatar_id',
+        'country_id',
         'password',
     ];
 
@@ -43,6 +45,6 @@ class User extends Authenticatable
 
     public function avatar()
     {
-        $this->hasOne('App\Models\Avatar');
+        return $this->belongsTo('App\Models\Avatar');
     }
 }

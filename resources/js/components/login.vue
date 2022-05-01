@@ -2,7 +2,7 @@
     <div>
         <div id="login_icons">
             <div id="icon_notification" @click="readMessages"><span v-if="unread" class="notify-bubble">{{ unread }}</span></div>
-            <div id="icon_user" @click="toggleMenu"></div>
+            <div id="icon_user" @click="toggleMenu" v-bind:style="{ backgroundImage: 'url(' + avatar + ')' }"></div>
         </div>
         <!-- dropdown menu -->
         <div id="dropdown_container" :style="menuStyle">
@@ -51,7 +51,8 @@
         props: ['unread',
                 'username',
                 'spoiler',
-                'groups'
+                'groups',
+                'avatar'
                 ],
 
         methods: {
@@ -135,7 +136,7 @@
     }
 
     #icon_notification {
-        background: url("images/user__notification_2.png") no-repeat;
+        background: url('images/user__notification.png') no-repeat;
         filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.5));
         background-size: contain;
         width: 46px;
@@ -152,7 +153,7 @@
         border-radius: 50%;
     }
     #icon_user {
-        background: url("images/user__avatar.png") no-repeat;
+        background-repeat: no-repeat;
         filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.5));
         background-size: contain;
         width: 46px;

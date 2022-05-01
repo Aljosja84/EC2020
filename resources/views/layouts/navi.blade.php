@@ -30,6 +30,9 @@
     </style>
 </head>
 <body>
+<?php
+    $user = auth()->user();
+?>
 <header>
     <nav>
         <div class="topmenu">
@@ -174,7 +177,7 @@
             </div>
             <div id="login">
                 @auth
-                    <login :unread="3" username={{ \Illuminate\Support\Facades\Auth::user()->name }} :spoiler="false" :groups="['De Kolenschoppen', 'Nappy Fam', 'Moneymakers']"></login>
+                    <login :unread="3" username={{ $user->name }} avatar={{ $user->avatar->ava_url() }} :spoiler="false" :groups="['De Kolenschoppen', 'Nappy Fam', 'Moneymakers']"></login>
                 @endauth
                 @guest
                     <a href="{{ route('login') }}" class="login_button">Log in</a>

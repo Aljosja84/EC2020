@@ -2777,6 +2777,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "countryList",
   props: ['countries', 'avatars'],
@@ -2795,7 +2800,7 @@ __webpack_require__.r(__webpack_exports__);
     toggleFlagList: function toggleFlagList() {
       document.getElementById('country_flags').scrollTop = 0;
       this.flaglist = !this.flaglist;
-      this.flaglist ? this.flaglistStyle = "height: 80px; width: 80px; overflow-y:hidden; padding: 0" : this.flaglistStyle = "height: 335px; width: 200px; overflow-y: scroll";
+      this.flaglist ? this.flaglistStyle = "height: 80px; width: 80px; overflow-y:hidden; padding: 0" : this.flaglistStyle = "height: 340px; width: 195px; overflow-y: scroll";
       /*
       return this.countries = _.shuffle(this.countries);
       */
@@ -2803,7 +2808,7 @@ __webpack_require__.r(__webpack_exports__);
     toggleAvaList: function toggleAvaList() {
       document.getElementById('avatars').scrollTop = 0;
       this.avatarlist = !this.avatarlist;
-      this.avatarlist ? this.avatarslistStyle = "height: 80px; width: 80px; overflow-y:hidden; padding: 0" : this.avatarslistStyle = "height: 335px; width: 200px; overflow-y: scroll";
+      this.avatarlist ? this.avatarslistStyle = "height: 80px; width: 80px; overflow-y:hidden; padding: 0" : this.avatarslistStyle = "height: 340px; width: 195px; overflow-y: scroll";
       /*
       return this.countries = _.shuffle(this.countries);
       */
@@ -2819,7 +2824,9 @@ __webpack_require__.r(__webpack_exports__);
       } // collapse menu
 
 
-      this.toggleFlagList();
+      this.toggleFlagList(); // set hidden text field
+
+      document.getElementById('rooting').value = self.id;
     },
     chooseAvaItem: function chooseAvaItem(self) {
       // what index does the item have?
@@ -2832,8 +2839,14 @@ __webpack_require__.r(__webpack_exports__);
       } // collapse menu
 
 
-      this.toggleAvaList();
+      this.toggleAvaList(); // set hidden text field
+
+      document.getElementById('avatar').value = self.id;
     }
+  },
+  mounted: function mounted() {
+    document.getElementById('rooting').value = "1";
+    document.getElementById('avatar').value = "1";
   }
 });
 
@@ -3182,7 +3195,7 @@ __webpack_require__.r(__webpack_exports__);
       menuActive: true
     };
   },
-  props: ['unread', 'username', 'spoiler', 'groups'],
+  props: ['unread', 'username', 'spoiler', 'groups', 'avatar'],
   methods: {
     /*
     *
@@ -22751,7 +22764,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#country_flags, #avatars {\n    border-radius: 8px;\n    float: left;\n    margin-right: 25px;\n    padding: 10px 0 10px 15px;\n    text-align: left;\n    width: 200px;\n    height: 335px;\n    background-color:white;\n    overflow-y: scroll;\n    overflow-x: hidden;\n    transition: all 500ms cubic-bezier(1.000, 0.000, 0.000, 1.000); /* easeInOutExpo */\n    transition-timing-function: cubic-bezier(1.000, 0.000, 0.000, 1.000); /* easeInOutExpo */\n    /* scrollbar vars */\n    --scrollbarBG: white;\n    --thumbBG: #90A4AE;\n    scrollbar-width: thin;\n    scrollbar-color: var(--thumbBG) var(--scrollbarBG);\n    scroll-behavior: smooth;\n}\n#country_list-item, #avatar_list-item {\n    border: 1px solid #ccc;\n    border-radius: 6px;\n    padding: 6px;\n    transition: all 0.3s ease-out;\n    display: inline-block;\n    margin: 3px;\n    cursor: pointer;\n    background-color: #efeded;\n    box-shadow: inset 0 2px 0 0 hsla(0,0%,100%,0.8);\n}\n#country_flags::-webkit-scrollbar, #avatars::-webkit-scrollbar {\n    width: 11px;\n}\n#country_flags::-webkit-scrollbar-track, #avatars::-webkit-scrollbar-track {\n    background: var(--scrollbarBG);\n}\n#country_flags::-webkit-scrollbar-thumb, #avatars::-webkit-scrollbar-thumb {\n    background-color: var(--thumbBG) ;\n    border-radius: 6px;\n    border: 3px solid var(--scrollbarBG);\n}\n.tippy-tooltip.login-theme {\n    background-color: #ccc;\n    color: #3382a0;\n    font-size: 11px;\n    box-shadow: inset 0 1px 0 0 hsla(0,0%,100%,0.8);\n    border: 1px solid #999898;\n}\n.tippy-tooltip.login-theme .tippy-roundarrow{\n    fill: #ccc;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#container_countrylist {\n    width: 440px;\n    height: 360px;\n    position: absolute;\n    background: rgb(240,240,241);\n    background: linear-gradient(180deg, rgba(240,240,241,1) 0%, rgba(255,255,255,1) 100%);\n}\n#container_countries {\n    float: left;\n}\n#container_avatars {\n    float: left;\n}\n.choose_item {\n    font-family: 'Oswald', sans-serif;\n    font-size: small;\n    letter-spacing: .03rem;\n    color: #3382a0;\n    text-align: left;\n    width: 220px;\n    height:20px;\n    padding-left: 5px;\n}\n#country_flags, #avatars {\n    border-radius: 8px;\n    margin-right: 25px;\n    padding: 10px 0 10px 15px;\n    text-align: left;\n    float: left;\n    width: 195px;\n    height: 340px;\n    overflow-y: scroll;\n    overflow-x: hidden;\n    transition: all 800ms cubic-bezier(1.000, 0.000, 0.000, 1.000); /* easeInOutExpo */\n    transition-timing-function: cubic-bezier(1.000, 0.000, 0.000, 1.000); /* easeInOutExpo */\n    /* scrollbar vars */\n    --scrollbarBG: #90A4AE;\n    --thumbBG: #90A4AE;\n    scrollbar-width: thin;\n    scrollbar-color: var(--thumbBG) var(--scrollbarBG);\n    scroll-behavior: smooth;\n}\n#country_list-item, #avatar_list-item {\n    border: 1px solid #ccc;\n    border-radius: 6px;\n    padding: 6px;\n    transition: all 0.3s ease-out;\n    display: inline-block;\n    margin: 3px;\n    cursor: pointer;\n    background-color: #efeded;\n    box-shadow: inset 0 2px 0 0 hsla(0,0%,100%,0.8);\n}\n#country_list-item:hover, #avatar_list-item:hover {\n    background-color: #dedcdc;\n}\n#country_flags::-webkit-scrollbar, #avatars::-webkit-scrollbar {\n    width: 7px;\n}\n#country_flags::-webkit-scrollbar-track, #avatars::-webkit-scrollbar-track {\n    background: var(--scrollbarBG);\n    display: none;\n    -webkit-box-shadow: none;\n}\n#country_flags::-webkit-scrollbar-thumb, #avatars::-webkit-scrollbar-thumb {\n    background-color: var(--thumbBG) ;\n    border-radius: 6px;\n    border: 3px solid var(--scrollbarBG);\n}\n.tippy-tooltip.login-theme {\n    font-family: 'Oswald', sans-serif;\n    background-color: #ccc;\n    color: #3382a0;\n    font-size: 12px;\n    box-shadow: inset 0 1px 0 0 hsla(0,0%,100%,0.8);\n    border: 1px solid #999898;\n}\n.tippy-tooltip.login-theme .tippy-roundarrow{\n    fill: #ccc;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -22851,14 +22864,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/getUrl.js */ "./node_modules/css-loader/dist/runtime/getUrl.js");
 /* harmony import */ var _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _images_user_notification_2_png__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./images/user__notification_2.png */ "./resources/js/components/images/user__notification_2.png");
-/* harmony import */ var _images_user_avatar_png__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./images/user__avatar.png */ "./resources/js/components/images/user__avatar.png");
-/* harmony import */ var _images_login_bets_png__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./images/login__bets.png */ "./resources/js/components/images/login__bets.png");
-/* harmony import */ var _images_login_spoiler_png__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./images/login__spoiler.png */ "./resources/js/components/images/login__spoiler.png");
-/* harmony import */ var _images_login_groups_png__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./images/login__groups.png */ "./resources/js/components/images/login__groups.png");
-/* harmony import */ var _images_login_arrow_png__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./images/login__arrow.png */ "./resources/js/components/images/login__arrow.png");
-/* harmony import */ var _images_login_followed_png__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./images/login__followed.png */ "./resources/js/components/images/login__followed.png");
-/* harmony import */ var _images_login_signout_png__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./images/login__signout.png */ "./resources/js/components/images/login__signout.png");
+/* harmony import */ var _images_user_notification_png__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./images/user__notification.png */ "./resources/js/components/images/user__notification.png");
+/* harmony import */ var _images_login_bets_png__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./images/login__bets.png */ "./resources/js/components/images/login__bets.png");
+/* harmony import */ var _images_login_spoiler_png__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./images/login__spoiler.png */ "./resources/js/components/images/login__spoiler.png");
+/* harmony import */ var _images_login_groups_png__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./images/login__groups.png */ "./resources/js/components/images/login__groups.png");
+/* harmony import */ var _images_login_arrow_png__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./images/login__arrow.png */ "./resources/js/components/images/login__arrow.png");
+/* harmony import */ var _images_login_followed_png__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./images/login__followed.png */ "./resources/js/components/images/login__followed.png");
+/* harmony import */ var _images_login_signout_png__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./images/login__signout.png */ "./resources/js/components/images/login__signout.png");
 // Imports
 
 
@@ -22869,18 +22881,16 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
-var ___CSS_LOADER_URL_REPLACEMENT_0___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default()(_images_user_notification_2_png__WEBPACK_IMPORTED_MODULE_2__["default"]);
-var ___CSS_LOADER_URL_REPLACEMENT_1___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default()(_images_user_avatar_png__WEBPACK_IMPORTED_MODULE_3__["default"]);
-var ___CSS_LOADER_URL_REPLACEMENT_2___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default()(_images_login_bets_png__WEBPACK_IMPORTED_MODULE_4__["default"]);
-var ___CSS_LOADER_URL_REPLACEMENT_3___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default()(_images_login_spoiler_png__WEBPACK_IMPORTED_MODULE_5__["default"]);
-var ___CSS_LOADER_URL_REPLACEMENT_4___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default()(_images_login_groups_png__WEBPACK_IMPORTED_MODULE_6__["default"]);
-var ___CSS_LOADER_URL_REPLACEMENT_5___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default()(_images_login_arrow_png__WEBPACK_IMPORTED_MODULE_7__["default"]);
-var ___CSS_LOADER_URL_REPLACEMENT_6___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default()(_images_login_followed_png__WEBPACK_IMPORTED_MODULE_8__["default"]);
-var ___CSS_LOADER_URL_REPLACEMENT_7___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default()(_images_login_signout_png__WEBPACK_IMPORTED_MODULE_9__["default"]);
+var ___CSS_LOADER_URL_REPLACEMENT_0___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default()(_images_user_notification_png__WEBPACK_IMPORTED_MODULE_2__["default"]);
+var ___CSS_LOADER_URL_REPLACEMENT_1___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default()(_images_login_bets_png__WEBPACK_IMPORTED_MODULE_3__["default"]);
+var ___CSS_LOADER_URL_REPLACEMENT_2___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default()(_images_login_spoiler_png__WEBPACK_IMPORTED_MODULE_4__["default"]);
+var ___CSS_LOADER_URL_REPLACEMENT_3___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default()(_images_login_groups_png__WEBPACK_IMPORTED_MODULE_5__["default"]);
+var ___CSS_LOADER_URL_REPLACEMENT_4___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default()(_images_login_arrow_png__WEBPACK_IMPORTED_MODULE_6__["default"]);
+var ___CSS_LOADER_URL_REPLACEMENT_5___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default()(_images_login_followed_png__WEBPACK_IMPORTED_MODULE_7__["default"]);
+var ___CSS_LOADER_URL_REPLACEMENT_6___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default()(_images_login_signout_png__WEBPACK_IMPORTED_MODULE_8__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* ----------------------------- user login ------------------------------------------------------- */\n#login_icons[data-v-172b28a4] {\n    height: 65px;\n    width: 115px;\n    position: absolute;\n    background-color: transparent;\n    right: 85px;\n    top: 0;\n    z-index: 5;\n    display: flex;\n    justify-content: space-between;\n    padding-top: 10px;\n}\n#icon_notification[data-v-172b28a4] {\n    background: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ") no-repeat;\n    filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.5));\n    background-size: contain;\n    width: 46px;\n    cursor: pointer;\n}\n.notify-bubble[data-v-172b28a4] {\n    position: absolute;\n    top: -2px;\n    right: -5px;\n    padding: 2px 5px 2px 5px;\n    background-color: red;\n    color: white;\n    font-size: 0.65em;\n    border-radius: 50%;\n}\n#icon_user[data-v-172b28a4] {\n    background: url(" + ___CSS_LOADER_URL_REPLACEMENT_1___ + ") no-repeat;\n    filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.5));\n    background-size: contain;\n    width: 46px;\n    cursor: pointer;\n}\n#dropdown_container[data-v-172b28a4] {\n    /* set var */\n    --login_hover: #f7f9fa;\n    --login_subgroup_hover: white;\n    width: 195px;\n    height: auto;\n    background-color: white;\n    position: absolute;\n    right: 15px;\n    top: 70px;\n    border-radius: 5px;\n    /* shadow */\n    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;\n    border-bottom: solid 5px #c9d466;\n    visibility: hidden;\n    opacity: 0;\n    transition: all 0.2s ease-out;\n}\n#dropdown_container[data-v-172b28a4]::after {\n    content: \"\";\n    position: absolute;\n    top: -22px; /* At the top of the menu */\n    left: 50%;\n    margin-left: -5px;\n    border-width: 11px;\n    border-style: solid;\n    border-color: transparent transparent #fafcfe transparent;\n    border-radius: 1px;\n}\n#profile[data-v-172b28a4] {\n    width: 100%;\n    height: 67px;\n    background-color: #f7f9fa;\n}\n#username[data-v-172b28a4] {\n    font-family: 'Roboto Light', sans-serif;\n    font-size: 18px;\n    width: 100%;\n    height: 40px;\n    color: #c9d466;\n    padding-left: 15px;\n    padding-top: 5px;\n    line-height: 40px;\n}\n#view_profile[data-v-172b28a4] {\n    color: #a7acb7;\n    font-family: 'Helvetica', sans-serif;\n    font-size: 12px;\n    width: 100%;\n    padding-left: 15px;\n    line-height: 11px;\n    padding-top: 5px;\n}\n#view_profile a[data-v-172b28a4] {\n    color: inherit;\n    text-decoration: none;\n}\n#view_profile a[data-v-172b28a4]:hover {\n    color: #c9d466;\n    text-decoration: underline;\n}\n#options[data-v-172b28a4] {\n    position: relative;\n}\n#my_bets[data-v-172b28a4] {\n    font-family: 'Oswald', sans-serif;\n    font-size: 15px;\n    color: #69788a;\n    width: 100%;\n    height: 38px;\n    background: url(" + ___CSS_LOADER_URL_REPLACEMENT_2___ + ") no-repeat 15px;\n    padding-left: 40px;\n    line-height: 36px;\n    border-bottom: 1px solid #f3f2f3;\n    cursor: pointer;\n    /* animation */\n    transition: ease 0.2s;\n}\n#my_bets[data-v-172b28a4]:hover {\n    background-color: var(--login_hover);\n    padding-left: 42px;\n    color: #c9d466;\n}\n#spoiler[data-v-172b28a4] {\n    display: flex;\n    justify-content: space-between;\n    font-family: 'Oswald', sans-serif;\n    font-size: 15px;\n    color: #69788a;\n    width: 100%;\n    height: 37px;\n    background: url(" + ___CSS_LOADER_URL_REPLACEMENT_3___ + ") no-repeat 15px;\n    padding-left: 40px;\n    line-height: 36px;\n    cursor: pointer;\n    /* animation */\n    transition: ease 0.2s;\n}\n#spoiler[data-v-172b28a4]:hover {\n    background-color:  var(--login_hover);\n    padding-left: 42px;\n    color: darkorange;\n}\n#groups[data-v-172b28a4] {\n    display: flex;\n    justify-content: space-between;\n    font-family: 'Oswald', sans-serif;\n    font-size: 15px;\n    color: #69788a;\n    width: 100%;\n    height: 37px;\n    background: url(" + ___CSS_LOADER_URL_REPLACEMENT_4___ + ") no-repeat 14px;\n    padding-left: 40px;\n    line-height: 36px;\n    cursor: pointer;\n    /* animation */\n    transition: ease 0.2s;\n}\n#groups[data-v-172b28a4]:hover {\n    background-color:  var(--login_hover);\n    padding-left: 42px;\n    color: red;\n}\n#subgroups[data-v-172b28a4] {\n    z-index: 30;\n    height: 0;\n    visibility: visible;\n    overflow: hidden;\n    opacity: 100%;\n    width: 100%;\n    background-color: #f7f9fa;\n    /* create a nice dropdown effect for the subgroup menu */\n    transition: all 500ms cubic-bezier(0.680, -0.550, 0.265, 1.550); /* easeInOutBack */\n\n    transition-timing-function: cubic-bezier(0.680, -0.550, 0.265, 1.550); /* easeInOutBack */\n}\n.subgroup_option[data-v-172b28a4] {\n    font-family: \"Roboto\", sans-serif;\n    font-size: 12px;\n    color: #69788a;\n    width: 100%;\n    height: 37px;\n    cursor: pointer;\n    padding-left: 40px;\n    line-height: 36px;\n    /* animation */\n    transition: 0.2s linear;\n}\n.subgroup_option[data-v-172b28a4]:hover {\n    background-color: var(--login_subgroup_hover);\n    padding-left: 42px;\n    color: #515151;\n}\n#more_arrow[data-v-172b28a4] {\n    position: relative;\n    right: 7px;\n    top: 15px;\n    background: url(" + ___CSS_LOADER_URL_REPLACEMENT_5___ + ") no-repeat;\n    width: 8px;\n    height: 5px;\n}\n#followed[data-v-172b28a4] {\n    z-index: 40;\n    font-family: 'Oswald', sans-serif;\n    font-size: 15px;\n    color: #69788a;\n    width: 100%;\n    height: 37px;\n    background: url(" + ___CSS_LOADER_URL_REPLACEMENT_6___ + ") no-repeat 15px;\n    padding-left: 40px;\n    line-height: 36px;\n    border-bottom: 1px solid #f3f2f3;\n    padding-bottom: 10px;\n    cursor: pointer;\n    /* animation */\n    transition: ease 0.2s;\n}\n#followed[data-v-172b28a4]:hover {\n    background-color:  var(--login_hover);\n    padding-left: 42px;\n    color: mediumpurple;\n}\n#sign_out[data-v-172b28a4] {\n    font-family: 'Oswald', sans-serif;\n    font-size: 15px;\n    color: #69788a;\n    width: 100%;\n    height: 38px;\n    background: url(" + ___CSS_LOADER_URL_REPLACEMENT_7___ + ") no-repeat 15px;\n    padding-left: 40px;\n    line-height: 36px;\n    cursor: pointer;\n    /* animation */\n    transition: ease 0.2s;\n}\n#sign_out[data-v-172b28a4]:hover {\n    background-color:  var(--login_hover);\n    padding-left: 42px;\n    color: #5ba9f1;\n}\n\n/* switch button for spoiler alert menu item */\n.switch[data-v-172b28a4] {\n    position: relative;\n    display: inline-block;\n    width: 30px;\n    height: 17px;\n}\n.switch input[data-v-172b28a4] {\n    opacity: 0;\n    width: 0;\n    height: 0;\n}\n.slider[data-v-172b28a4] {\n    position: absolute;\n    cursor: pointer;\n    top: 0;\n    left: 0;\n    right: 0;\n    bottom: 0;\n    background-color: #ccc;\n    transition: .4s;\n}\n.slider[data-v-172b28a4]:before {\n    position: absolute;\n    content: \"\";\n    height: 13px;\n    width: 13px;\n    left: 2px;\n    bottom: 2px;\n    background-color: white;\n    transition: .4s;\n}\ninput:checked + .slider[data-v-172b28a4] {\n    background-color: darkorange;\n}\ninput:focus + .slider[data-v-172b28a4] {\n    box-shadow: 0 0 1px darkorange;\n}\ninput:checked + .slider[data-v-172b28a4]:before {\n    transform: translateX(13px);\n}\n\n/* Rounded sliders */\n.slider.round[data-v-172b28a4] {\n    border-radius: 34px;\n}\n.slider.round[data-v-172b28a4]:before {\n    border-radius: 50%;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* ----------------------------- user login ------------------------------------------------------- */\n#login_icons[data-v-172b28a4] {\n    height: 65px;\n    width: 115px;\n    position: absolute;\n    background-color: transparent;\n    right: 85px;\n    top: 0;\n    z-index: 5;\n    display: flex;\n    justify-content: space-between;\n    padding-top: 10px;\n}\n#icon_notification[data-v-172b28a4] {\n    background: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ") no-repeat;\n    filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.5));\n    background-size: contain;\n    width: 46px;\n    cursor: pointer;\n}\n.notify-bubble[data-v-172b28a4] {\n    position: absolute;\n    top: -2px;\n    right: -5px;\n    padding: 2px 5px 2px 5px;\n    background-color: red;\n    color: white;\n    font-size: 0.65em;\n    border-radius: 50%;\n}\n#icon_user[data-v-172b28a4] {\n    background-repeat: no-repeat;\n    filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.5));\n    background-size: contain;\n    width: 46px;\n    cursor: pointer;\n}\n#dropdown_container[data-v-172b28a4] {\n    /* set var */\n    --login_hover: #f7f9fa;\n    --login_subgroup_hover: white;\n    width: 195px;\n    height: auto;\n    background-color: white;\n    position: absolute;\n    right: 15px;\n    top: 70px;\n    border-radius: 5px;\n    /* shadow */\n    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;\n    border-bottom: solid 5px #c9d466;\n    visibility: hidden;\n    opacity: 0;\n    transition: all 0.2s ease-out;\n}\n#dropdown_container[data-v-172b28a4]::after {\n    content: \"\";\n    position: absolute;\n    top: -22px; /* At the top of the menu */\n    left: 50%;\n    margin-left: -5px;\n    border-width: 11px;\n    border-style: solid;\n    border-color: transparent transparent #fafcfe transparent;\n    border-radius: 1px;\n}\n#profile[data-v-172b28a4] {\n    width: 100%;\n    height: 67px;\n    background-color: #f7f9fa;\n}\n#username[data-v-172b28a4] {\n    font-family: 'Roboto Light', sans-serif;\n    font-size: 18px;\n    width: 100%;\n    height: 40px;\n    color: #c9d466;\n    padding-left: 15px;\n    padding-top: 5px;\n    line-height: 40px;\n}\n#view_profile[data-v-172b28a4] {\n    color: #a7acb7;\n    font-family: 'Helvetica', sans-serif;\n    font-size: 12px;\n    width: 100%;\n    padding-left: 15px;\n    line-height: 11px;\n    padding-top: 5px;\n}\n#view_profile a[data-v-172b28a4] {\n    color: inherit;\n    text-decoration: none;\n}\n#view_profile a[data-v-172b28a4]:hover {\n    color: #c9d466;\n    text-decoration: underline;\n}\n#options[data-v-172b28a4] {\n    position: relative;\n}\n#my_bets[data-v-172b28a4] {\n    font-family: 'Oswald', sans-serif;\n    font-size: 15px;\n    color: #69788a;\n    width: 100%;\n    height: 38px;\n    background: url(" + ___CSS_LOADER_URL_REPLACEMENT_1___ + ") no-repeat 15px;\n    padding-left: 40px;\n    line-height: 36px;\n    border-bottom: 1px solid #f3f2f3;\n    cursor: pointer;\n    /* animation */\n    transition: ease 0.2s;\n}\n#my_bets[data-v-172b28a4]:hover {\n    background-color: var(--login_hover);\n    padding-left: 42px;\n    color: #c9d466;\n}\n#spoiler[data-v-172b28a4] {\n    display: flex;\n    justify-content: space-between;\n    font-family: 'Oswald', sans-serif;\n    font-size: 15px;\n    color: #69788a;\n    width: 100%;\n    height: 37px;\n    background: url(" + ___CSS_LOADER_URL_REPLACEMENT_2___ + ") no-repeat 15px;\n    padding-left: 40px;\n    line-height: 36px;\n    cursor: pointer;\n    /* animation */\n    transition: ease 0.2s;\n}\n#spoiler[data-v-172b28a4]:hover {\n    background-color:  var(--login_hover);\n    padding-left: 42px;\n    color: darkorange;\n}\n#groups[data-v-172b28a4] {\n    display: flex;\n    justify-content: space-between;\n    font-family: 'Oswald', sans-serif;\n    font-size: 15px;\n    color: #69788a;\n    width: 100%;\n    height: 37px;\n    background: url(" + ___CSS_LOADER_URL_REPLACEMENT_3___ + ") no-repeat 14px;\n    padding-left: 40px;\n    line-height: 36px;\n    cursor: pointer;\n    /* animation */\n    transition: ease 0.2s;\n}\n#groups[data-v-172b28a4]:hover {\n    background-color:  var(--login_hover);\n    padding-left: 42px;\n    color: red;\n}\n#subgroups[data-v-172b28a4] {\n    z-index: 30;\n    height: 0;\n    visibility: visible;\n    overflow: hidden;\n    opacity: 100%;\n    width: 100%;\n    background-color: #f7f9fa;\n    /* create a nice dropdown effect for the subgroup menu */\n    transition: all 500ms cubic-bezier(0.680, -0.550, 0.265, 1.550); /* easeInOutBack */\n\n    transition-timing-function: cubic-bezier(0.680, -0.550, 0.265, 1.550); /* easeInOutBack */\n}\n.subgroup_option[data-v-172b28a4] {\n    font-family: \"Roboto\", sans-serif;\n    font-size: 12px;\n    color: #69788a;\n    width: 100%;\n    height: 37px;\n    cursor: pointer;\n    padding-left: 40px;\n    line-height: 36px;\n    /* animation */\n    transition: 0.2s linear;\n}\n.subgroup_option[data-v-172b28a4]:hover {\n    background-color: var(--login_subgroup_hover);\n    padding-left: 42px;\n    color: #515151;\n}\n#more_arrow[data-v-172b28a4] {\n    position: relative;\n    right: 7px;\n    top: 15px;\n    background: url(" + ___CSS_LOADER_URL_REPLACEMENT_4___ + ") no-repeat;\n    width: 8px;\n    height: 5px;\n}\n#followed[data-v-172b28a4] {\n    z-index: 40;\n    font-family: 'Oswald', sans-serif;\n    font-size: 15px;\n    color: #69788a;\n    width: 100%;\n    height: 37px;\n    background: url(" + ___CSS_LOADER_URL_REPLACEMENT_5___ + ") no-repeat 15px;\n    padding-left: 40px;\n    line-height: 36px;\n    border-bottom: 1px solid #f3f2f3;\n    padding-bottom: 10px;\n    cursor: pointer;\n    /* animation */\n    transition: ease 0.2s;\n}\n#followed[data-v-172b28a4]:hover {\n    background-color:  var(--login_hover);\n    padding-left: 42px;\n    color: mediumpurple;\n}\n#sign_out[data-v-172b28a4] {\n    font-family: 'Oswald', sans-serif;\n    font-size: 15px;\n    color: #69788a;\n    width: 100%;\n    height: 38px;\n    background: url(" + ___CSS_LOADER_URL_REPLACEMENT_6___ + ") no-repeat 15px;\n    padding-left: 40px;\n    line-height: 36px;\n    cursor: pointer;\n    /* animation */\n    transition: ease 0.2s;\n}\n#sign_out[data-v-172b28a4]:hover {\n    background-color:  var(--login_hover);\n    padding-left: 42px;\n    color: #5ba9f1;\n}\n\n/* switch button for spoiler alert menu item */\n.switch[data-v-172b28a4] {\n    position: relative;\n    display: inline-block;\n    width: 30px;\n    height: 17px;\n}\n.switch input[data-v-172b28a4] {\n    opacity: 0;\n    width: 0;\n    height: 0;\n}\n.slider[data-v-172b28a4] {\n    position: absolute;\n    cursor: pointer;\n    top: 0;\n    left: 0;\n    right: 0;\n    bottom: 0;\n    background-color: #ccc;\n    transition: .4s;\n}\n.slider[data-v-172b28a4]:before {\n    position: absolute;\n    content: \"\";\n    height: 13px;\n    width: 13px;\n    left: 2px;\n    bottom: 2px;\n    background-color: white;\n    transition: .4s;\n}\ninput:checked + .slider[data-v-172b28a4] {\n    background-color: darkorange;\n}\ninput:focus + .slider[data-v-172b28a4] {\n    box-shadow: 0 0 1px darkorange;\n}\ninput:checked + .slider[data-v-172b28a4]:before {\n    transform: translateX(13px);\n}\n\n/* Rounded sliders */\n.slider.round[data-v-172b28a4] {\n    border-radius: 34px;\n}\n.slider.round[data-v-172b28a4]:before {\n    border-radius: 50%;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -24033,10 +24043,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/images/user__avatar.png":
-/*!*********************************************************!*\
-  !*** ./resources/js/components/images/user__avatar.png ***!
-  \*********************************************************/
+/***/ "./resources/js/components/images/user__notification.png":
+/*!***************************************************************!*\
+  !*** ./resources/js/components/images/user__notification.png ***!
+  \***************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -24044,22 +24054,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/user__avatar.png?80e7485db201b9b0df5fb5ad66bd2048");
-
-/***/ }),
-
-/***/ "./resources/js/components/images/user__notification_2.png":
-/*!*****************************************************************!*\
-  !*** ./resources/js/components/images/user__notification_2.png ***!
-  \*****************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/user__notification_2.png?c234312566853b53a9faf6bbe89c23f1");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/user__notification.png?b22064277f4cd4831be4aacdbb2f92a7");
 
 /***/ }),
 
@@ -57682,98 +57677,110 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { attrs: { id: "container" } }, [
-    _c(
-      "div",
-      { style: _vm.flaglistStyle, attrs: { id: "country_flags" } },
-      [
-        _c(
-          "transition-group",
-          { attrs: { name: "country_list", tag: "div" } },
-          _vm._l(_vm.countries, function (country) {
-            return _c(
-              "span",
-              {
-                directives: [
-                  {
-                    name: "tippy",
-                    rawName: "v-tippy",
-                    value: {
-                      placement: "top",
-                      appendTo: "parent",
-                      arrow: true,
-                      arrowType: "round",
-                      animation: "scale",
-                      animateFill: true,
-                      followCursor: "horizontal",
-                      theme: "login",
+  return _c("div", { attrs: { id: "container_countrylist" } }, [
+    _c("div", { attrs: { id: "container_countries" } }, [
+      _c("div", { staticClass: "choose_item" }, [
+        _vm._v("Which team do you root for?"),
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        { style: _vm.flaglistStyle, attrs: { id: "country_flags" } },
+        [
+          _c(
+            "transition-group",
+            { attrs: { name: "country_list", tag: "div" } },
+            _vm._l(_vm.countries, function (country) {
+              return _c(
+                "span",
+                {
+                  directives: [
+                    {
+                      name: "tippy",
+                      rawName: "v-tippy",
+                      value: {
+                        placement: "top",
+                        appendTo: "parent",
+                        arrow: true,
+                        arrowType: "round",
+                        animation: "scale",
+                        animateFill: true,
+                        followCursor: "horizontal",
+                        theme: "login",
+                      },
+                      expression:
+                        "{placement: 'top', appendTo: 'parent', arrow : true, arrowType : 'round', animation : 'scale', animateFill: true, followCursor: 'horizontal', theme: 'login'}",
                     },
-                    expression:
-                      "{placement: 'top', appendTo: 'parent', arrow : true, arrowType : 'round', animation : 'scale', animateFill: true, followCursor: 'horizontal', theme: 'login'}",
-                  },
-                ],
-                key: country.id,
-                attrs: { id: "country_list-item", content: country.name },
-                on: {
-                  click: function ($event) {
-                    return _vm.chooseFlagItem(country)
+                  ],
+                  key: country.id,
+                  attrs: { id: "country_list-item", content: country.name },
+                  on: {
+                    click: function ($event) {
+                      return _vm.chooseFlagItem(country)
+                    },
                   },
                 },
-              },
-              [
-                _c("img", {
-                  attrs: {
-                    src: "/images/country_flags/" + country.flag_url,
-                    height: "60px",
-                    width: "60px",
-                    alt: "country",
-                  },
-                }),
-              ]
-            )
-          }),
-          0
-        ),
-      ],
-      1
-    ),
+                [
+                  _c("img", {
+                    attrs: {
+                      src: "/images/country_flags/" + country.flag_url,
+                      height: "60px",
+                      width: "60px",
+                      alt: "country",
+                    },
+                  }),
+                ]
+              )
+            }),
+            0
+          ),
+        ],
+        1
+      ),
+    ]),
     _vm._v(" "),
-    _c(
-      "div",
-      { style: _vm.avatarslistStyle, attrs: { id: "avatars" } },
-      [
-        _c(
-          "transition-group",
-          { attrs: { name: "country_list", tag: "div" } },
-          _vm._l(_vm.avatars, function (gamer) {
-            return _c(
-              "span",
-              {
-                key: gamer.id,
-                attrs: { id: "avatar_list-item" },
-                on: {
-                  click: function ($event) {
-                    return _vm.chooseAvaItem(gamer)
+    _c("div", { attrs: { id: "container_avatars" } }, [
+      _c("div", { staticClass: "choose_item" }, [
+        _vm._v("Choose your default avatar"),
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        { style: _vm.avatarslistStyle, attrs: { id: "avatars" } },
+        [
+          _c(
+            "transition-group",
+            { attrs: { name: "country_list", tag: "div" } },
+            _vm._l(_vm.avatars, function (gamer) {
+              return _c(
+                "span",
+                {
+                  key: gamer.id,
+                  attrs: { id: "avatar_list-item" },
+                  on: {
+                    click: function ($event) {
+                      return _vm.chooseAvaItem(gamer)
+                    },
                   },
                 },
-              },
-              [
-                _c("img", {
-                  attrs: {
-                    src: "/images/avatars/" + gamer.url,
-                    height: "60px",
-                    width: "60px",
-                    alt: "profilepic",
-                  },
-                }),
-              ]
-            )
-          }),
-          0
-        ),
-      ],
-      1
-    ),
+                [
+                  _c("img", {
+                    attrs: {
+                      src: "/images/avatars/" + gamer.url,
+                      height: "60px",
+                      width: "60px",
+                      alt: "profilepic",
+                    },
+                  }),
+                ]
+              )
+            }),
+            0
+          ),
+        ],
+        1
+      ),
+    ]),
   ])
 }
 var staticRenderFns = []
@@ -58192,7 +58199,11 @@ var render = function () {
         ]
       ),
       _vm._v(" "),
-      _c("div", { attrs: { id: "icon_user" }, on: { click: _vm.toggleMenu } }),
+      _c("div", {
+        style: { backgroundImage: "url(" + _vm.avatar + ")" },
+        attrs: { id: "icon_user" },
+        on: { click: _vm.toggleMenu },
+      }),
     ]),
     _vm._v(" "),
     _c("div", { style: _vm.menuStyle, attrs: { id: "dropdown_container" } }, [

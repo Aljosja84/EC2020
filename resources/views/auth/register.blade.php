@@ -30,9 +30,72 @@
 $countries = App\Models\Country::all()->toArray();
 $avatars = App\Models\Avatar::all()->toArray();
 ?>
+
 <div id="registration_area">
-    <div id="registration_container"></div>
+    <div id="app">
+    <div id="registration_container">
+        <div id="registration_title"><span>Register a new account</span></div>
+        <div id="registration_form_container">
+            <div id="registration_form">
+                <!-- form -->
+                <form method="POST" action="{{ route('register') }}" autocomplete="off" style="height: 270px;">
+                    @csrf
+                    <input type="hidden" id="rooting" name="rooting" required>
+                    <input type="hidden" id="avatar" name="avatar" required>
+                    <div id="registration_form_body">
+                        <div id="input_user_container">
+                            <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" placeholder="username" value="{{ old('name') }}" required autocomplete="false">
+
+                            @error('name')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                             </span>
+                            @enderror
+                        </div>
+
+                        <div id="input_email_container">
+                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" placeholder="email" value="{{ old('email') }}" required autocomplete="false">
+
+
+                            @error('email')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+
+                        <div id="input_pass_container">
+                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" placeholder="password" name="password" required autocomplete="chrome-off">
+
+                            @error('password')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+
+                        <div id="input_pass_container">
+                            <input id="password-confirm" type="password" class="form-control" name="password_confirmation" placeholder="confirm password" required autocomplete="new-password">
+                        </div>
+
+                        <div><button type="submit" id="submit">register</button></div>
+
+                    </div>
+                </form>
+                <!-- end form -->
+                <div id="or_sign_in" style="margin-top: 12px">------- or sign in with -------</div>
+                <div id="login__socials">
+                    <a href="#"><img style="margin-right: 10px" src="{{ asset('images/login__google.png') }}" alt="sign in with Google"></a>
+                    <a href="#"><img src="{{ asset('images/login__fb.png') }}" alt="sign in with Facebook"></a>
+                </div>
+            </div>
+            <div id="registration_team_and_avatar">
+                <country-list :countries="{{ json_encode($countries) }}" :avatars="{{ json_encode($avatars) }}"></country-list>
+            </div>
+        </div>
+    </div>
     <div id="registration_bg_pic"></div>
+</div>
 </div>
 </body>
 </html>
