@@ -2,21 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Game;
 use Illuminate\Http\Request;
+use App\Models\ChatRoom;
+use App\Models\ChatMessage;
+use Illuminate\Support\Facades\Auth;
 
-class GamesController extends Controller
+class ChatController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -48,16 +40,15 @@ class GamesController extends Controller
         //
     }
 
-    /**p
-     * @param Game $game
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
      */
-    public function show(Game $game)
+    public function show($id)
     {
-        return view('game', [
-            'game' => $game,
-            'stadium' => $game->stadium
-        ]);
+        //
     }
 
     /**
@@ -68,7 +59,7 @@ class GamesController extends Controller
      */
     public function edit($id)
     {
-
+        //
     }
 
     /**
@@ -92,5 +83,43 @@ class GamesController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * @param Request $request
+     * @return mixed
+     */
+    public function room(Request $request)
+    {
+        return ChatRoom::all();
+    }
+
+    /**
+     * @param Request $request
+     * @param $roomId
+     * @return mixed
+     */
+    public function messages(Request $request, $roomId)
+    {
+        return ChatMessage::where('chat_room_id', $roomId)
+            ->with('user')
+            ->orderBy('created_at', 'DESC')
+            ->get();
+    }
+
+    /**
+     * @param Request $request
+     * @param $roomId
+     */
+    public function newMessage(Request $request, $roomId)
+    {
+        $newMessage = new ChatMessage;
+        $newMessage->user_id = Auth::id();
+        $newMessage->chat_room_id = $roomId;
+        $newMessage->message = $request->message;
+        // commit to database
+        $newMessage->save();
+        // return the new message
+        return $newMessage;
     }
 }

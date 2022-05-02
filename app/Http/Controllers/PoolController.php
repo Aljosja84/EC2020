@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Game;
+use App\Models\Pool;
+use App\Models\ChatRoom;
+use App\Models\ChatMessage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class GamesController extends Controller
+class PoolController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -48,15 +51,16 @@ class GamesController extends Controller
         //
     }
 
-    /**p
-     * @param Game $game
+    /**
+     * Display the specified resource.
+     *
+     * @param Pool $pool
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function show(Game $game)
+    public function show(Pool $pool)
     {
-        return view('game', [
-            'game' => $game,
-            'stadium' => $game->stadium
+        return view('pool', [
+            'pool' => $pool
         ]);
     }
 
@@ -68,7 +72,7 @@ class GamesController extends Controller
      */
     public function edit($id)
     {
-
+        //
     }
 
     /**
@@ -92,5 +96,43 @@ class GamesController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * @param Request $request
+     * @return mixed
+     */
+    public function room(Request $request)
+    {
+        return ChatRoom::all();
+    }
+
+    /**
+     * @param Request $request
+     * @param $roomId
+     * @return mixed
+     */
+    public function messages(Request $request, $roomId)
+    {
+        return ChatMessage::where('chat_room_id', $roomId)
+            ->with('user')
+            ->orderBy('created_at', 'DESC')
+            ->get();
+    }
+
+    /**
+     * @param Request $request
+     * @param $roomId
+     */
+    public function newMessage(Request $request, $roomId)
+    {
+        $newMessage = new ChatMessage;
+        $newMessage->user_id = Auth::id();
+        $newMessage->chat_room_id = $roomId;
+        $newMessage->message = $request->message;
+        // commit to database
+        $newMessage->save();
+        // return the new message
+        return $newMessage;
     }
 }

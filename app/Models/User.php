@@ -47,4 +47,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo('App\Models\Avatar');
     }
+
+    public function pool()
+    {
+        return $this->belongsToMany('App\Models\Pool');
+    }
 }
