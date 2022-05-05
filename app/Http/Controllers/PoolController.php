@@ -60,7 +60,8 @@ class PoolController extends Controller
     public function show(Pool $pool)
     {
         return view('pool', [
-            'pool' => $pool
+            'pool' => $pool,
+            'chatroom' => $pool->chatroom
         ]);
     }
 

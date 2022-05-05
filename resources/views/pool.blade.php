@@ -2,10 +2,11 @@
 
 @section('content')
    <div class="games_div_container">
-       <div>
-           @foreach($pool->users as $user)
-               <span>{{ $user->email }}</span>
-           @endforeach
+       <div id="app">
+           <div>
+               {{ $chatroom->name }}
+               <chat />
+           </div>
        </div>
    </div>
 @endsection
