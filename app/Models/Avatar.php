@@ -16,6 +16,6 @@ class Avatar extends Model
 
     public function ava_url()
     {
-        return "../images/avatars/{$this->url}";
+        return "/images/avatars/{$this->url}";
     }
 }

@@ -89,9 +89,9 @@ class ChatController extends Controller
      * @param Request $request
      * @return mixed
      */
-    public function room(Request $request)
+    public function room(ChatRoom $room)
     {
-        return ChatRoom::all();
+        return $room;
     }
 
     /**

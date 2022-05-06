@@ -100,24 +100,25 @@ class PoolController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param Pool $pool
+     * @param ChatRoom $room
      * @return mixed
      */
-    public function room(Request $request)
+    public function room(Pool $pool, ChatRoom $room)
     {
-        return ChatRoom::all();
+        return $room;
     }
 
     /**
      * @param Request $request
-     * @param $roomId
+     * @param Pool $pool
      * @return mixed
      */
-    public function messages(Request $request, $roomId)
+    public function messages(Request $request, Pool $pool)
     {
-        return ChatMessage::where('chat_room_id', $roomId)
+        return ChatMessage::where('chat_room_id', $pool->chatroom->id)
             ->with('user')
-            ->orderBy('created_at', 'DESC')
+            ->orderBy('created_at', 'ASC')
             ->get();
     }
 

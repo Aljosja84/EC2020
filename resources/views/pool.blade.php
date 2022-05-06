@@ -5,7 +5,7 @@
        <div id="app">
            <div>
                {{ $chatroom->name }}
-               <chat />
+               <chat :poolid="{{ $pool->id }}" :roomid="{{ $chatroom->id }}" :userid="{{ auth()->user()->id }}"></chat>
            </div>
        </div>
    </div>

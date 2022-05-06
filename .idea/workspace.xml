@@ -21,10 +21,16 @@
   <component name="ChangeListManager">
     <list default="true" id="cf82d037-ce69-45df-857e-a29fb7732fae" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ChatController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ChatController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PoolController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/PoolController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Avatar.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Avatar.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/chat.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/chat.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/inputMessage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/inputMessage.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/messageContainer.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/messageContainer.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/messageItem.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/messageItem.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/pool.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pool.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -182,7 +188,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/js/components/images" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+    <property name="settings.editor.selected.configurable" value="reference.settings.ide.settings.web.browsers" />
     <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\PhpStorm 2020.1\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
   </component>
   <component name="RecentsManager">
@@ -443,7 +449,8 @@
       <workItem from="1651537845090" duration="610000" />
       <workItem from="1651578674470" duration="633000" />
       <workItem from="1651669339673" duration="1982000" />
-      <workItem from="1651752082762" duration="5084000" />
+      <workItem from="1651752082762" duration="9538000" />
+      <workItem from="1651834656596" duration="10142000" />
     </task>
     <servers />
   </component>
@@ -508,10 +515,11 @@
       <screen x="2560" y="0" width="1050" height="1650" />
     </state>
     <state x="2941" y="748" key="NewPhpFileDialog/2560.0.1050.1650/0.0.2560.1410@2560.0.1050.1650" timestamp="1651494160345" />
-    <state x="2601" y="215" key="SettingsEditor" timestamp="1647952405100">
-      <screen x="2560" y="-255" width="1050" height="1650" />
+    <state x="2601" y="470" key="SettingsEditor" timestamp="1651842745897">
+      <screen x="2560" y="0" width="1050" height="1650" />
     </state>
     <state x="2601" y="215" key="SettingsEditor/2560.-255.1050.1650/0.0.2560.1410@2560.-255.1050.1650" timestamp="1647952405100" />
+    <state x="2601" y="470" key="SettingsEditor/2560.0.1050.1650/0.0.2560.1410@2560.0.1050.1650" timestamp="1651842745897" />
     <state x="2741" y="520" key="run.anything.popup" timestamp="1650381336083">
       <screen x="2560" y="0" width="1050" height="1650" />
     </state>

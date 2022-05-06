@@ -26,6 +26,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/games/{game}', [App\Http\Controllers\GamesController::class, 'show']);
 Route::get('/bettingpool/{pool}', [App\Http\Controllers\PoolController::class, 'show']);
 Route::get('/bettingpool/{pool}/messages', [App\Http\Controllers\PoolController::class, 'messages']);
+Route::get('/bettingpool/{pool}/{room}', [App\Http\Controllers\PoolController::class, 'room']);
 Route::post('/bettingpool/{pool}/message', [App\Http\Controllers\PoolController::class, 'newMessage']);
 Route::get('/team/{country}', [App\Http\Controllers\CountryController::class, 'show']);
 Route::get('/test', [App\Http\Controllers\HomeController::class, 'test'])->name('test');
