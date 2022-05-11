@@ -4,7 +4,7 @@
             <ul>
                 <li v-for="message in messages" :key="message.id" :class="`message${message.user.id === userid ? ' sent' : ' received'}`">
                     <div class="text">
-                        {{ message.message }}
+                       <b>{{ message.user.name }}</b>: {{ message.message }}
                     </div>
                 </li>
             </ul>
@@ -13,10 +13,8 @@
 </template>
 
 <script>
-    import messageItem from "./messageItem.vue";
     export default {
         name: "messageContainer",
-        components: { messageItem },
         props: ['messages', 'userid'],
     }
 </script>

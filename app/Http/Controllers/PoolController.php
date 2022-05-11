@@ -7,6 +7,7 @@ use App\Models\ChatRoom;
 use App\Models\ChatMessage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Events\NewChatMessage;
 
 class PoolController extends Controller
 {
@@ -134,6 +135,8 @@ class PoolController extends Controller
         $newMessage->message = $request->message;
         // commit to database
         $newMessage->save();
+        // broadcast to others
+        broadcast(new NewChatMessage( $newMessage ));
         // return the new message
         return $newMessage;
     }

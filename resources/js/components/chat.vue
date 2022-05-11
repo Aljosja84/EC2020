@@ -1,7 +1,7 @@
 <template>
     <div>
         <message-container :messages="messages" :userid="userid"/>
-        <input-message :room="currentRoom" v-on:messagesent="getMessages" />
+        <input-message :room="currentRoom" />
     </div>
 </template>
 
@@ -23,7 +23,28 @@
             }
         },
 
+        watch: {
+          currentRoom() {
+              this.connect();
+          }
+        },
+
         methods: {
+            connect() {
+                if(this.currentRoom.id) {
+                    //let vm = this;
+                    this.getMessages();
+                    window.Echo.private("chatroom." + this.currentRoom.id)
+                    .listen('.message.new', e => {
+                        this.getMessages();
+                    });
+                }
+            },
+            
+            disconnect(room) {
+                window.Echo.leave("chatroom." + room.id)
+            },
+
             loadRoom() {
                 axios.get('/bettingpool/' + this.poolid + '/' + this.roomid)
                 .then( response => {
