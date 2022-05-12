@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Pool;
 use App\Models\ChatRoom;
 use App\Models\ChatMessage;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Events\NewChatMessage;
@@ -100,6 +101,11 @@ class PoolController extends Controller
         //
     }
 
+    public function avatar(User $user)
+    {
+        return $user->avatar;
+    }
+
     /**
      * @param Pool $pool
      * @param ChatRoom $room
@@ -126,18 +132,22 @@ class PoolController extends Controller
     /**
      * @param Request $request
      * @param $roomId
+     * @param $userId
+     * @return ChatMessage
      */
     public function newMessage(Request $request, $roomId)
     {
+        $user = Auth::user();
         $newMessage = new ChatMessage;
-        $newMessage->user_id = Auth::id();
+        $newMessage->user_id = $user->id;
         $newMessage->chat_room_id = $roomId;
         $newMessage->message = $request->message;
         // commit to database
         $newMessage->save();
         // broadcast to others
-        broadcast(new NewChatMessage( $newMessage ));
+        broadcast(new NewChatMessage( $user, $newMessage ));
         // return the new message
         return $newMessage;
+
     }
 }

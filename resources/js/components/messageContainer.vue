@@ -2,11 +2,13 @@
     <div class="message_container">
         <div class="message_contents">
             <ul>
-                <li v-for="message in messages" :key="message.id" :class="`message${message.user.id === userid ? ' sent' : ' received'}`">
-                    <div class="text">
-                       <b>{{ message.user.name }}</b>: {{ message.message }}
-                    </div>
-                </li>
+                <transition-group name="chats">
+                    <li v-for="message in messages" :key="message.id" :class="`message${message.user.id === userid ? ' sent' : ' received'}`">
+                        <div class="text">
+                           <b>{{ message.user.name }}</b>: {{ message.message }}
+                        </div>
+                    </li>
+                </transition-group>
             </ul>
         </div>
     </div>

@@ -20,24 +20,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cf82d037-ce69-45df-857e-a29fb7732fae" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/EC2020.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/EC2020.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Console/Commands/TweetsStream.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Console/Commands/TweetsStream.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Events/NewChatMessage.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Events/NewChatMessage.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PoolController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/PoolController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Providers/EventServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/EventServiceProvider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/User.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/bootstrap.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/bootstrap.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/chat.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/chat.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/inputMessage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/inputMessage.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/messageContainer.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/messageContainer.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/navi.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/navi.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/channels.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/channels.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webpack.mix.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.mix.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -461,7 +453,8 @@
       <workItem from="1651834656596" duration="14742000" />
       <workItem from="1651977533472" duration="38000" />
       <workItem from="1651977583235" duration="910000" />
-      <workItem from="1652271973765" duration="9660000" />
+      <workItem from="1652271973765" duration="10521000" />
+      <workItem from="1652352666971" duration="14077000" />
     </task>
     <servers />
   </component>
@@ -536,11 +529,11 @@
     </state>
     <state x="2741" y="265" key="run.anything.popup/2560.-255.1050.1650/0.0.2560.1410@2560.-255.1050.1650" timestamp="1648732612340" />
     <state x="2741" y="520" key="run.anything.popup/2560.0.1050.1650/0.0.2560.1410@2560.0.1050.1650" timestamp="1650381336083" />
-    <state x="2795" y="379" width="672" height="713" key="search.everywhere.popup" timestamp="1652277281893">
+    <state x="2795" y="379" width="672" height="713" key="search.everywhere.popup" timestamp="1652368760059">
       <screen x="2560" y="0" width="1050" height="1650" />
     </state>
     <state x="859" y="361" width="672" height="678" key="search.everywhere.popup/0.0.3840.1570@0.0.3840.1570" timestamp="1647533700338" />
     <state x="2795" y="124" width="672" height="713" key="search.everywhere.popup/2560.-255.1050.1650/0.0.2560.1410@2560.-255.1050.1650" timestamp="1649335821219" />
-    <state x="2795" y="379" width="672" height="713" key="search.everywhere.popup/2560.0.1050.1650/0.0.2560.1410@2560.0.1050.1650" timestamp="1652277281893" />
+    <state x="2795" y="379" width="672" height="713" key="search.everywhere.popup/2560.0.1050.1650/0.0.2560.1410@2560.0.1050.1650" timestamp="1652368760059" />
   </component>
 </project>

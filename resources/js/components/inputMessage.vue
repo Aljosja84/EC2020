@@ -10,7 +10,7 @@
 <script>
     export default {
         name: "inputMessage",
-        props: ['room'],
+        props: ['room', 'user'],
 
         data() {
             return {
@@ -25,12 +25,12 @@
                 }
 
                 axios.post('/bettingpool/' + this.room.id + '/message', {
-                    message: this.message
+                    message: this.message,
+                    user: this.user
                 })
                 .then(response => {
                     if(response.status === 201) {
                         this.message = '';
-                        this.$emit('messagesent');
                     }
                 })
                 .catch(error => {

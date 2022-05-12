@@ -52,4 +52,8 @@ class User extends Authenticatable
     {
         return $this->belongsToMany('App\Models\Pool');
     }
+
+    public function messages() {
+        return $this->hasMany('App\Models\Chatmessage');
+    }
 }
