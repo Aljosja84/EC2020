@@ -142,6 +142,12 @@
             loadGame(e) {
                 // get the 10 last matches that correspondents with the form
                 axios.get("https://v3.football.api-sports.io/fixtures?id=" + e, {
+                // for some reason this request gave a CORS header error
+                // so we have to manually delete the X-Socket-Id header for this one.
+                    transformRequest: [function (data, headers) {
+                        delete headers['X-Socket-Id'];
+                        return data;
+                    }],
                     headers: {
                         "X-RapidAPI-Host": process.env.MIX_API_URL,
                         "X-RapidAPI-Key": process.env.MIX_API_KEY

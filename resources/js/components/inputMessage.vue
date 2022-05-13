@@ -24,7 +24,7 @@
                     return;
                 }
 
-                axios.post('/bettingpool/' + this.room.id + '/message', {
+                axios.post('/bettingpool/' + this.room + '/message', {
                     message: this.message,
                     user: this.user
                 })

@@ -2777,6 +2777,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -2788,50 +2794,28 @@ __webpack_require__.r(__webpack_exports__);
   props: ['poolid', 'roomid', 'userid'],
   data: function data() {
     return {
-      currentRoom: [],
       messages: []
     };
   },
   methods: {
     getAva: function getAva(userid) {
       axios.get('/ava/' + userid).then(function (response) {
+        //console.log(response.data);
         return response.data;
       })["catch"](function (error) {
         console.log(error);
       });
     },
-    connect: function connect() {
-      if (this.currentRoom.id) {
-        //let vm = this;
-        this.getMessages();
-      }
-    },
-    disconnect: function disconnect(room) {
-      window.Echo.leave("chatroom." + room.id);
-    },
-    loadRoom: function loadRoom() {
+    getMessages: function getMessages() {
       var _this = this;
 
-      axios.get('/bettingpool/' + this.poolid + '/' + this.roomid).then(function (response) {
-        _this.setRoom(response.data);
-      })["catch"](function (error) {
-        console.log(error);
-      });
-    },
-    getMessages: function getMessages() {
-      var _this2 = this;
-
       axios.get('/bettingpool/' + this.poolid + '/messages').then(function (response) {
-        _this2.messages = response.data;
+        _this.messages = response.data;
       })["catch"](function (error) {
         console.log(error);
       });
     },
-    setRoom: function setRoom(room) {
-      this.currentRoom = room;
-      this.getMessages();
-    },
-    saveNewMessage: function saveNewMessage(e) {
+    pushNewMessage: function pushNewMessage(e) {
       var message = {};
       message = e.chatMessage;
       message.user = e.user;
@@ -2839,12 +2823,13 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   mounted: function mounted() {
-    var _this3 = this;
+    var _this2 = this;
 
-    this.loadRoom();
-    console.log("starting to listen");
+    this.getMessages();
+    console.log("starting to listen"); // start listening for fellow members
+
     window.Echo["private"]("chatroom." + this.roomid).listen('.message.new', function (e) {
-      _this3.saveNewMessage(e);
+      _this2.pushNewMessage(e);
     });
   }
 });
@@ -3159,6 +3144,12 @@ __webpack_require__.r(__webpack_exports__);
 
       // get the 10 last matches that correspondents with the form
       axios.get("https://v3.football.api-sports.io/fixtures?id=" + e, {
+        // for some reason this request gave a CORS header error
+        // so we have to manually delete the X-Socket-Id header for this one.
+        transformRequest: [function (data, headers) {
+          delete headers['X-Socket-Id'];
+          return data;
+        }],
         headers: {
           "X-RapidAPI-Host": "api-football-v1.p.rapidapi.com",
           "X-RapidAPI-Key": "b1ae4a3fca89630148dadaa295a0b5b7"
@@ -3223,7 +3214,7 @@ __webpack_require__.r(__webpack_exports__);
         return;
       }
 
-      axios.post('/bettingpool/' + this.room.id + '/message', {
+      axios.post('/bettingpool/' + this.room + '/message', {
         message: this.message,
         user: this.user
       }).then(function (response) {
@@ -22856,7 +22847,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".message_container[data-v-151b8bba] {\n  width: 400px;\n  height: 600px;\n  background-color: white;\n  display: flex;\n  flex-direction: column-reverse;\n  overflow-y: scroll;\n  overflow-x: hidden;\n}\n.chat-enter-active[data-v-151b8bba] {\n  transition: all 0.5s;\n}\n.chat-enter[data-v-151b8bba] {\n  opacity: 0;\n  transform: translateX(100px);\n}\n.chat-enter-to[data-v-151b8bba] {\n  opacity: 1;\n}\n.chat-move[data-v-151b8bba] {\n  transition: all 0.5s;\n}\n.message_contents ul[data-v-151b8bba] {\n  list-style-type: none;\n  padding: 5px;\n}\n.message_contents ul li.message[data-v-151b8bba] {\n  margin: 10px 0;\n  width: 100%;\n}\n.message_contents ul li .text[data-v-151b8bba] {\n  font-family: \"Roboto\", sans-serif;\n  font-size: 14px;\n  width: auto;\n  max-width: 400px;\n  border-radius: 5px;\n  padding: 12px;\n  display: inline-block;\n  text-align: left;\n}\n.message_contents ul li.received[data-v-151b8bba] {\n  text-align: left;\n}\n.message_contents ul li.received .text[data-v-151b8bba] {\n  background: lightgray;\n}\n.message_contents ul li.sent[data-v-151b8bba] {\n  text-align: right;\n}\n.message_contents ul li.sent .text[data-v-151b8bba] {\n  background: lightskyblue;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".message_container[data-v-151b8bba] {\n  padding-left: 39px;\n  padding-right: 39px;\n  width: 500px;\n  height: 700px;\n  background-color: white;\n  display: flex;\n  flex-direction: column-reverse;\n  overflow-y: scroll;\n  overflow-x: hidden;\n}\n.chat-enter-active[data-v-151b8bba] {\n  transition: all 0.5s;\n}\n.chat-enter[data-v-151b8bba] {\n  opacity: 0;\n  transform: translateX(100px);\n}\n.chat-enter-to[data-v-151b8bba] {\n  opacity: 1;\n}\n.chat-move[data-v-151b8bba] {\n  transition: all 0.5s;\n}\n.message_contents ul[data-v-151b8bba] {\n  list-style-type: none;\n  padding: 5px;\n}\n.message_contents ul li.message[data-v-151b8bba] {\n  margin: 10px 0;\n  width: 100%;\n}\n.message_contents ul li .text[data-v-151b8bba] {\n  font-family: \"Terminal Dosis\", sans-serif;\n  font-size: 13px;\n  width: auto;\n  max-width: 250px;\n  border-radius: 5px;\n  padding: 3px 10px 6px 10px;\n  display: inline-block;\n  text-align: left;\n  position: relative;\n  background-repeat: no-repeat;\n  height: -webkit-fit-content;\n  height: -moz-fit-content;\n  height: fit-content;\n}\n.message_contents ul li.received[data-v-151b8bba] {\n  text-align: left;\n}\n.message_contents ul li.received .text[data-v-151b8bba] {\n  background: lightgray;\n}\n.message_contents ul li.received .text[data-v-151b8bba]:after {\n  right: 100%;\n  top: 50%;\n  border: solid transparent;\n  content: \"\";\n  height: 0;\n  width: 0;\n  position: absolute;\n  pointer-events: none;\n  border-color: rgba(136, 183, 213, 0);\n  border-right-color: lightgray;\n  border-width: 5px;\n  margin-top: -5px;\n}\n.message_contents ul li.sent[data-v-151b8bba] {\n  text-align: right;\n  margin-right: 6px;\n}\n.message_contents ul li.sent .text[data-v-151b8bba] {\n  background: lightskyblue;\n}\n.message_contents ul li.sent .text[data-v-151b8bba]:after {\n  left: 100%;\n  top: 50%;\n  border: solid transparent;\n  content: \"\";\n  height: 0;\n  width: 0;\n  position: absolute;\n  pointer-events: none;\n  border-color: transparent;\n  border-left-color: lightskyblue;\n  border-width: 5px;\n  margin-top: -5px;\n}\n.message_contents ul li .text_container[data-v-151b8bba] {\n  display: flex;\n  position: relative;\n}\n.message_contents ul li .text_container.received[data-v-151b8bba] {\n  justify-content: start;\n}\n.message_contents ul li .text_container.received img[data-v-151b8bba] {\n  position: absolute;\n  bottom: 5px;\n  left: -39px;\n}\n.message_contents ul li .text_container.sent[data-v-151b8bba] {\n  justify-content: end;\n}\n.message_contents ul li .text_container.sent img[data-v-151b8bba] {\n  position: absolute;\n  bottom: 5px;\n  right: -39px;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -64656,15 +64647,36 @@ var render = function () {
                           : " received"),
                     },
                     [
-                      _c("div", { staticClass: "text" }, [
-                        _vm._v(
-                          "\n                           " +
-                            _vm._s(message.user.name) +
-                            "  : " +
-                            _vm._s(message.message) +
-                            "\n                        "
-                        ),
-                      ]),
+                      _c(
+                        "div",
+                        {
+                          class:
+                            "text_container" +
+                            (message.user.id === _vm.userid
+                              ? " sent"
+                              : " received"),
+                        },
+                        [
+                          _c("div", { staticClass: "text" }, [
+                            _c("span", [
+                              _vm._v(_vm._s(message.user.name) + ":"),
+                            ]),
+                            _c("br"),
+                            _vm._v(" "),
+                            _c("span", [_vm._v(_vm._s(message.message))]),
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "img_cont_msg" }, [
+                            _c("img", {
+                              attrs: {
+                                src: "/images/avatars/gamer_1.png",
+                                width: "31px",
+                                height: "31px",
+                              },
+                            }),
+                          ]),
+                        ]
+                      ),
                     ]
                   )
                 }),
@@ -64676,9 +64688,7 @@ var render = function () {
         ]),
       ]),
       _vm._v(" "),
-      _c("input-message", {
-        attrs: { room: _vm.currentRoom, user: _vm.userid },
-      }),
+      _c("input-message", { attrs: { room: _vm.roomid, user: _vm.userid } }),
     ],
     1
   )

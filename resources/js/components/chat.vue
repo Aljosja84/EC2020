@@ -5,15 +5,21 @@
                 <ul>
                     <transition-group name="chat">
                         <li v-for="message in messages" :key="message.id" :class="`message${message.user.id === userid ? ' sent' : ' received'}`">
-                            <div class="text">
-                               {{ message.user.name }}  : {{ message.message }}
+                            <div :class="`text_container${message.user.id === userid ? ' sent' : ' received'}`">
+                                <div class="text">
+                                    <span>{{ message.user.name }}:</span><br>
+                                    <span>{{ message.message }}</span>
+                                </div>
+                                <div class="img_cont_msg">
+                                    <img src="/images/avatars/gamer_1.png" width="31px" height="31px" />
+                                </div>
                             </div>
                         </li>
                     </transition-group>
                 </ul>
             </div>
         </div>
-        <input-message :room="currentRoom" :user="userid" />
+        <input-message :room="roomid" :user="userid" />
     </div>
 </template>
 
@@ -31,7 +37,6 @@
 
         data() {
             return {
-                currentRoom: [],
                 messages: []
             }
         },
@@ -40,31 +45,10 @@
             getAva(userid) {
                 axios.get('/ava/' + userid)
                 .then(response => {
+                    //console.log(response.data);
                     return response.data
                 }).catch(error => {
                     console.log(error)
-                })
-            },
-
-            connect() {
-                if(this.currentRoom.id) {
-                    //let vm = this;
-                    this.getMessages();
-
-                }
-            },
-
-            disconnect(room) {
-                window.Echo.leave("chatroom." + room.id)
-            },
-
-            loadRoom() {
-                axios.get('/bettingpool/' + this.poolid + '/' + this.roomid)
-                .then( response => {
-                    this.setRoom(response.data);
-                })
-                .catch( error => {
-                    console.log( error );
                 })
             },
 
@@ -78,12 +62,7 @@
                 })
             },
 
-            setRoom(room) {
-                this.currentRoom = room;
-                this.getMessages();
-            },
-
-            saveNewMessage(e) {
+            pushNewMessage(e) {
                 var message = {};
                 message = e.chatMessage;
                 message.user = e.user;
@@ -92,11 +71,13 @@
         },
 
         mounted() {
-            this.loadRoom();
+            this.getMessages();
             console.log("starting to listen");
+
+            // start listening for fellow members
             window.Echo.private("chatroom." + this.roomid)
                 .listen('.message.new', (e) => {
-                    this.saveNewMessage(e);
+                    this.pushNewMessage(e);
                 });
         }
 
@@ -106,8 +87,10 @@
 
 <style lang="scss" scoped>
     .message_container {
-        width: 400px;
-        height: 600px;
+        padding-left: 39px;
+        padding-right: 39px;
+        width: 500px;
+        height: 700px;
         background-color: white;
         display: flex;
         flex-direction: column-reverse;
@@ -143,14 +126,17 @@
                 }
 
                 .text {
-                    font-family: "Roboto", sans-serif;
-                    font-size: 14px;
+                    font-family: "Terminal Dosis", sans-serif;
+                    font-size: 13px;
                     width: auto;
-                    max-width: 400px;
+                    max-width: 250px;
                     border-radius: 5px;
-                    padding: 12px;
+                    padding: 3px 10px 6px 10px;
                     display: inline-block;
                     text-align: left;
+                    position: relative;
+                    background-repeat: no-repeat;
+                    height: fit-content;
                 }
 
                 &.received {
@@ -159,13 +145,69 @@
                     .text {
                         background: lightgray;
                     }
+
+                    .text:after {
+                        right: 100%;
+                        top: 50%;
+                        border: solid transparent;
+                        content: "";
+                        height: 0;
+                        width: 0;
+                        position: absolute;
+                        pointer-events: none;
+                        border-color: rgba(136, 183, 213, 0);
+                        border-right-color:lightgray;
+                        border-width: 5px;
+                        margin-top: -5px;
+                    }
                 }
 
                 &.sent {
                     text-align: right;
+                    margin-right: 6px;
 
                     .text {
                         background: lightskyblue;
+                    }
+
+                    .text:after {
+                        left: 100%;
+                        top: 50%;
+                        border: solid transparent;
+                        content: "";
+                        height: 0;
+                        width: 0;
+                        position: absolute;
+                        pointer-events: none;
+                        border-color: transparent;
+                        border-left-color: lightskyblue;
+                        border-width: 5px;
+                        margin-top: -5px;
+                    }
+                }
+
+                .text_container {
+                    display:flex;
+                    position: relative;
+
+                    &.received {
+                        justify-content: start;
+
+                        img {
+                            position: absolute;
+                            bottom: 5px;
+                            left: -39px;
+                        }
+                    }
+
+                    &.sent {
+                        justify-content: end;
+
+                        img {
+                            position: absolute;
+                            bottom: 5px;
+                            right: -39px;
+                        }
                     }
                 }
             }

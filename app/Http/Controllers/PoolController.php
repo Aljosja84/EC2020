@@ -103,7 +103,7 @@ class PoolController extends Controller
 
     public function avatar(User $user)
     {
-        return $user->avatar;
+        return $user->avatar->ava_url();
     }
 
     /**
@@ -124,7 +124,9 @@ class PoolController extends Controller
     public function messages(Request $request, Pool $pool)
     {
         return ChatMessage::where('chat_room_id', $pool->chatroom->id)
-            ->with('user')
+            ->with(['user' => function($user) {
+                $user->with('avatar')->get();
+            }])
             ->orderBy('created_at', 'ASC')
             ->get();
     }
