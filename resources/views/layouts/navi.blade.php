@@ -9,6 +9,13 @@
     <!-- Scripts -->
     <script src='https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.js'></script>
     <link href='https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.css' rel='stylesheet' />
+    <script>
+        window.Laravel = {!! json_encode([
+        'csrfToken' => csrf_token(),
+        'user' => Auth::user(),
+        'pusherKey' => config('broadcasting.connections.pusher.key'),
+         ]) !!};
+    </script>
 
     <script defer src="{{ mix('js/app.js') }}"></script>
     <script src="https://js.pusher.com/7.0/pusher.min.js"></script>

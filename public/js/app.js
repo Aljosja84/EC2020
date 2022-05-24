@@ -2783,6 +2783,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -2794,7 +2795,10 @@ __webpack_require__.r(__webpack_exports__);
   props: ['poolid', 'roomid', 'userid'],
   data: function data() {
     return {
-      messages: []
+      messages: [],
+      activeUsers: [],
+      user: '',
+      typing: false
     };
   },
   methods: {
@@ -2807,10 +2811,10 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     getMessages: function getMessages() {
-      var _this = this;
+      var _this2 = this;
 
       axios.get('/bettingpool/' + this.poolid + '/messages').then(function (response) {
-        _this.messages = response.data;
+        _this2.messages = response.data;
       })["catch"](function (error) {
         console.log(error);
       });
@@ -2823,13 +2827,28 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   mounted: function mounted() {
-    var _this2 = this;
+    var _this3 = this;
+
+    var _this = this;
 
     this.getMessages();
     console.log("starting to listen"); // start listening for fellow members
 
-    window.Echo["private"]("chatroom." + this.roomid).listen('.message.new', function (e) {
-      _this2.pushNewMessage(e);
+    window.Echo.join("chatroom." + this.roomid).here(function (users) {
+      _this3.activeUsers = users;
+    }).joining(function (user) {
+      _this3.activeUsers.push(user);
+    }).leaving(function (user) {
+      _this3.activeUsers.splice(_this3.activeUsers.indexOf(user), 1);
+    }).listenForWhisper('typing', function (e) {
+      _this3.user = e.user.name;
+      _this3.typing = e.typing; // remove is typing indicator after 0.8s
+
+      setTimeout(function () {
+        _this.typing = false;
+      }, 1800);
+    }).listen('.message.new', function (e) {
+      _this3.pushNewMessage(e);
     });
   }
 });
@@ -3207,6 +3226,15 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
+    isTyping: function isTyping() {
+      var channel = Echo.join('chatroom.' + this.room);
+      setTimeout(function () {
+        channel.whisper('typing', {
+          user: Laravel.user,
+          typing: true
+        });
+      }, 300);
+    },
     sendMessage: function sendMessage() {
       var _this = this;
 
@@ -64635,7 +64663,7 @@ var render = function () {
               _c(
                 "transition-group",
                 { attrs: { name: "chat" } },
-                _vm._l(_vm.messages, function (message) {
+                _vm._l(_vm.messages, function (message, index) {
                   return _c(
                     "li",
                     {
@@ -64658,9 +64686,7 @@ var render = function () {
                         },
                         [
                           _c("div", { staticClass: "text" }, [
-                            _c("span", [
-                              _vm._v(_vm._s(message.user.name) + ":"),
-                            ]),
+                            _c("span", [_vm._v(_vm._s(message.user.name))]),
                             _c("br"),
                             _vm._v(" "),
                             _c("span", [_vm._v(_vm._s(message.message))]),
@@ -64687,6 +64713,22 @@ var render = function () {
           ),
         ]),
       ]),
+      _vm._v(" "),
+      _c(
+        "span",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.typing,
+              expression: "typing",
+            },
+          ],
+          staticStyle: { "font-style": "italic" },
+        },
+        [_vm._v("@" + _vm._s(_vm.user) + " is typing...")]
+      ),
       _vm._v(" "),
       _c("input-message", { attrs: { room: _vm.roomid, user: _vm.userid } }),
     ],
@@ -65199,6 +65241,9 @@ var render = function () {
                 return null
               }
               return _vm.sendMessage()
+            },
+            keydown: function ($event) {
+              return _vm.isTyping()
             },
             input: function ($event) {
               if ($event.target.composing) {

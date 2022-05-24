@@ -4,10 +4,10 @@
             <div class="message_contents">
                 <ul>
                     <transition-group name="chat">
-                        <li v-for="message in messages" :key="message.id" :class="`message${message.user.id === userid ? ' sent' : ' received'}`">
+                        <li v-for="(message, index) in messages" :key="message.id" :class="`message${message.user.id === userid ? ' sent' : ' received'}`">
                             <div :class="`text_container${message.user.id === userid ? ' sent' : ' received'}`">
                                 <div class="text">
-                                    <span>{{ message.user.name }}:</span><br>
+                                    <span>{{ message.user.name }}</span><br>
                                     <span>{{ message.message }}</span>
                                 </div>
                                 <div class="img_cont_msg">
@@ -19,6 +19,7 @@
                 </ul>
             </div>
         </div>
+        <span v-show="typing" style="font-style: italic;">@{{ user }} is typing...</span>
         <input-message :room="roomid" :user="userid" />
     </div>
 </template>
@@ -37,7 +38,10 @@
 
         data() {
             return {
-                messages: []
+                messages: [],
+                activeUsers: [],
+                user: '',
+                typing: false
             }
         },
 
@@ -67,18 +71,40 @@
                 message = e.chatMessage;
                 message.user = e.user;
                 this.messages.push(message);
-            }
+            },
+
+
         },
 
         mounted() {
+            let _this = this;
+
             this.getMessages();
             console.log("starting to listen");
 
             // start listening for fellow members
-            window.Echo.private("chatroom." + this.roomid)
+            window.Echo.join("chatroom." + this.roomid)
+                .here((users) => {
+                    this.activeUsers = users;
+                })
+                .joining((user) => {
+                    this.activeUsers.push(user);
+                })
+                .leaving((user) => {
+                    this.activeUsers.splice(this.activeUsers.indexOf(user), 1);
+                })
+                .listenForWhisper('typing', (e) => {
+                    this.user = e.user.name;
+                    this.typing = e.typing;
+
+                    // remove is typing indicator after 0.8s
+                    setTimeout(function() {
+                        _this.typing = false
+                    }, 1800)
+                })
                 .listen('.message.new', (e) => {
-                    this.pushNewMessage(e);
-                });
+                this.pushNewMessage(e);
+                })
         }
 
 

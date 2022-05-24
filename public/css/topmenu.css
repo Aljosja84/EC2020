@@ -5,10 +5,11 @@ html, body {
     background-color: #ffffff;
     color: #636b6f;
     font-family: 'Roboto', sans-serif;
-    -webkit-font-smoothing: subpixel-antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-weight: 200;
     margin: 0;
+    scrollbar-base-color: #00acff;
+    scrollbar-width: thin;
 }
 /* width */
 ::-webkit-scrollbar {
@@ -29,6 +30,7 @@ html, body {
 ::-webkit-scrollbar-thumb {
     background: #b7dbfc;
 }
+
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
