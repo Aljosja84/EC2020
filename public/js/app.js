@@ -2784,6 +2784,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -2802,14 +2806,6 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    getAva: function getAva(userid) {
-      axios.get('/ava/' + userid).then(function (response) {
-        //console.log(response.data);
-        return response.data;
-      })["catch"](function (error) {
-        console.log(error);
-      });
-    },
     getMessages: function getMessages() {
       var _this2 = this;
 
@@ -2842,11 +2838,7 @@ __webpack_require__.r(__webpack_exports__);
       _this3.activeUsers.splice(_this3.activeUsers.indexOf(user), 1);
     }).listenForWhisper('typing', function (e) {
       _this3.user = e.user.name;
-      _this3.typing = e.typing; // remove is typing indicator after 0.8s
-
-      setTimeout(function () {
-        _this.typing = false;
-      }, 1800);
+      _this3.typing = e.typing;
     }).listen('.message.new', function (e) {
       _this3.pushNewMessage(e);
     });
@@ -3222,18 +3214,39 @@ __webpack_require__.r(__webpack_exports__);
   props: ['room', 'user'],
   data: function data() {
     return {
-      message: ''
+      message: '',
+      oldmessage: ''
     };
   },
   methods: {
+    /*
+    *
+    * Instead of letting the typing status disappear after .3 sec, we'll check
+    * if the message field is empty or not. If it's empty, the status
+    * disappears, but only if it has appeared.
+    *
+    */
     isTyping: function isTyping() {
-      var channel = Echo.join('chatroom.' + this.room);
-      setTimeout(function () {
-        channel.whisper('typing', {
-          user: Laravel.user,
-          typing: true
-        });
-      }, 300);
+      var channel = Echo.join('chatroom.' + this.room); // if old message is empty, nothing has been typed before
+      // or the message has been sent
+
+      if (this.oldmessage.length === 0) {
+        if (this.message.length > 0) {
+          channel.whisper('typing', {
+            user: Laravel.user,
+            typing: true
+          });
+          this.oldmessage = this.message;
+        }
+      } else {
+        if (this.message.length === 0) {
+          channel.whisper('typing', {
+            user: Laravel.user,
+            typing: false
+          });
+          this.oldmessage = this.message;
+        }
+      }
     },
     sendMessage: function sendMessage() {
       var _this = this;
@@ -3248,6 +3261,13 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (response) {
         if (response.status === 201) {
           _this.message = '';
+          _this.oldmessage = '';
+          var channel = Echo.join('chatroom.' + _this.room); // let other people know we're done typing
+
+          channel.whisper('typing', {
+            user: Laravel.user,
+            typing: false
+          });
         }
       })["catch"](function (error) {
         console.log(error);
@@ -22875,7 +22895,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".message_container[data-v-151b8bba] {\n  padding-left: 39px;\n  padding-right: 39px;\n  width: 500px;\n  height: 700px;\n  background-color: white;\n  display: flex;\n  flex-direction: column-reverse;\n  overflow-y: scroll;\n  overflow-x: hidden;\n}\n.chat-enter-active[data-v-151b8bba] {\n  transition: all 0.5s;\n}\n.chat-enter[data-v-151b8bba] {\n  opacity: 0;\n  transform: translateX(100px);\n}\n.chat-enter-to[data-v-151b8bba] {\n  opacity: 1;\n}\n.chat-move[data-v-151b8bba] {\n  transition: all 0.5s;\n}\n.message_contents ul[data-v-151b8bba] {\n  list-style-type: none;\n  padding: 5px;\n}\n.message_contents ul li.message[data-v-151b8bba] {\n  margin: 10px 0;\n  width: 100%;\n}\n.message_contents ul li .text[data-v-151b8bba] {\n  font-family: \"Terminal Dosis\", sans-serif;\n  font-size: 13px;\n  width: auto;\n  max-width: 250px;\n  border-radius: 5px;\n  padding: 3px 10px 6px 10px;\n  display: inline-block;\n  text-align: left;\n  position: relative;\n  background-repeat: no-repeat;\n  height: -webkit-fit-content;\n  height: -moz-fit-content;\n  height: fit-content;\n}\n.message_contents ul li.received[data-v-151b8bba] {\n  text-align: left;\n}\n.message_contents ul li.received .text[data-v-151b8bba] {\n  background: lightgray;\n}\n.message_contents ul li.received .text[data-v-151b8bba]:after {\n  right: 100%;\n  top: 50%;\n  border: solid transparent;\n  content: \"\";\n  height: 0;\n  width: 0;\n  position: absolute;\n  pointer-events: none;\n  border-color: rgba(136, 183, 213, 0);\n  border-right-color: lightgray;\n  border-width: 5px;\n  margin-top: -5px;\n}\n.message_contents ul li.sent[data-v-151b8bba] {\n  text-align: right;\n  margin-right: 6px;\n}\n.message_contents ul li.sent .text[data-v-151b8bba] {\n  background: lightskyblue;\n}\n.message_contents ul li.sent .text[data-v-151b8bba]:after {\n  left: 100%;\n  top: 50%;\n  border: solid transparent;\n  content: \"\";\n  height: 0;\n  width: 0;\n  position: absolute;\n  pointer-events: none;\n  border-color: transparent;\n  border-left-color: lightskyblue;\n  border-width: 5px;\n  margin-top: -5px;\n}\n.message_contents ul li .text_container[data-v-151b8bba] {\n  display: flex;\n  position: relative;\n}\n.message_contents ul li .text_container.received[data-v-151b8bba] {\n  justify-content: start;\n}\n.message_contents ul li .text_container.received img[data-v-151b8bba] {\n  position: absolute;\n  bottom: 5px;\n  left: -39px;\n}\n.message_contents ul li .text_container.sent[data-v-151b8bba] {\n  justify-content: end;\n}\n.message_contents ul li .text_container.sent img[data-v-151b8bba] {\n  position: absolute;\n  bottom: 5px;\n  right: -39px;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".message_container[data-v-151b8bba] {\n  padding-left: 39px;\n  padding-right: 39px;\n  width: 500px;\n  height: 700px;\n  background-color: white;\n  display: flex;\n  flex-direction: column-reverse;\n  overflow-y: scroll;\n  overflow-x: hidden;\n  margin-top: 25px;\n}\n.chat-enter-active[data-v-151b8bba] {\n  transition: all 0.5s;\n}\n.chat-enter[data-v-151b8bba] {\n  opacity: 0;\n  transform: translateX(100px);\n}\n.chat-enter-to[data-v-151b8bba] {\n  opacity: 1;\n}\n.chat-move[data-v-151b8bba] {\n  transition: all 0.5s;\n}\n.message_contents ul[data-v-151b8bba] {\n  list-style-type: none;\n  padding: 5px;\n}\n.message_contents ul li.message[data-v-151b8bba] {\n  margin: 10px 0;\n  width: 100%;\n}\n.message_contents ul li .text[data-v-151b8bba] {\n  font-family: \"Terminal Dosis\", sans-serif;\n  font-size: 13px;\n  width: auto;\n  max-width: 250px;\n  border-radius: 5px;\n  padding: 3px 10px 6px 10px;\n  display: inline-block;\n  text-align: left;\n  position: relative;\n  background-repeat: no-repeat;\n  height: -webkit-fit-content;\n  height: -moz-fit-content;\n  height: fit-content;\n}\n.message_contents ul li.received[data-v-151b8bba] {\n  text-align: left;\n}\n.message_contents ul li.received .text[data-v-151b8bba] {\n  background: lightgray;\n}\n.message_contents ul li.received .text[data-v-151b8bba]:after {\n  right: 100%;\n  top: 50%;\n  border: solid transparent;\n  content: \"\";\n  height: 0;\n  width: 0;\n  position: absolute;\n  pointer-events: none;\n  border-color: rgba(136, 183, 213, 0);\n  border-right-color: lightgray;\n  border-width: 5px;\n  margin-top: -5px;\n}\n.message_contents ul li.sent[data-v-151b8bba] {\n  text-align: right;\n  margin-right: 6px;\n}\n.message_contents ul li.sent .text[data-v-151b8bba] {\n  background: lightskyblue;\n}\n.message_contents ul li.sent .text[data-v-151b8bba]:after {\n  left: 100%;\n  top: 50%;\n  border: solid transparent;\n  content: \"\";\n  height: 0;\n  width: 0;\n  position: absolute;\n  pointer-events: none;\n  border-color: transparent;\n  border-left-color: lightskyblue;\n  border-width: 5px;\n  margin-top: -5px;\n}\n.message_contents ul li .text_container[data-v-151b8bba] {\n  display: flex;\n  position: relative;\n}\n.message_contents ul li .text_container.received[data-v-151b8bba] {\n  justify-content: start;\n}\n.message_contents ul li .text_container.received img[data-v-151b8bba] {\n  position: absolute;\n  bottom: 5px;\n  left: -39px;\n}\n.message_contents ul li .text_container.sent[data-v-151b8bba] {\n  justify-content: end;\n}\n.message_contents ul li .text_container.sent img[data-v-151b8bba] {\n  position: absolute;\n  bottom: 5px;\n  right: -39px;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -64655,6 +64675,27 @@ var render = function () {
   return _c(
     "div",
     [
+      _c("span", [_vm._v("Active users")]),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticStyle: {
+            width: "401px",
+            height: "50px",
+            "background-color": "white",
+          },
+        },
+        _vm._l(_vm.activeUsers, function (member) {
+          return _c("span", { key: member.id }, [
+            _c("img", {
+              attrs: { src: member.avatar_url, width: "50px", height: "50px" },
+            }),
+          ])
+        }),
+        0
+      ),
+      _vm._v(" "),
       _c("div", { staticClass: "message_container" }, [
         _c("div", { staticClass: "message_contents" }, [
           _c(
@@ -64695,7 +64736,8 @@ var render = function () {
                           _c("div", { staticClass: "img_cont_msg" }, [
                             _c("img", {
                               attrs: {
-                                src: "/images/avatars/gamer_1.png",
+                                src:
+                                  "/images/avatars/" + message.user.avatar.url,
                                 width: "31px",
                                 height: "31px",
                               },
@@ -65233,18 +65275,20 @@ var render = function () {
           attrs: { type: "text", placeholder: "Say something..." },
           domProps: { value: _vm.message },
           on: {
-            keyup: function ($event) {
-              if (
-                !$event.type.indexOf("key") &&
-                _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
-              ) {
-                return null
-              }
-              return _vm.sendMessage()
-            },
-            keydown: function ($event) {
-              return _vm.isTyping()
-            },
+            keyup: [
+              function ($event) {
+                if (
+                  !$event.type.indexOf("key") &&
+                  _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+                ) {
+                  return null
+                }
+                return _vm.sendMessage()
+              },
+              function ($event) {
+                return _vm.isTyping()
+              },
+            ],
             input: function ($event) {
               if ($event.target.composing) {
                 return

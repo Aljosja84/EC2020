@@ -11,6 +11,7 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 use App\Models\ChatMessage;
 use App\Models\User;
+use App\Models\Avatar;
 
 class NewChatMessage implements ShouldBroadcast
 {
@@ -18,6 +19,7 @@ class NewChatMessage implements ShouldBroadcast
 
     public $chatMessage;
     public $user;
+    public $avatar;
 
     /**
      * Create a new event instance.
@@ -28,6 +30,7 @@ class NewChatMessage implements ShouldBroadcast
     public function __construct(User $user, ChatMessage $chatMessage)
     {
         $this->user = $user;
+        $this->avatar = $user->avatar;
         $this->chatMessage = $chatMessage;
     }
 

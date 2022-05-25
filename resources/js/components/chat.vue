@@ -1,5 +1,9 @@
 <template>
     <div>
+        <span>Active users</span>
+        <div style="width: 401px; height: 50px; background-color: white">
+            <span v-for="member in activeUsers" :key="member.id"><img :src="member.avatar_url" width="50px" height="50px"></span>
+        </div>
         <div class="message_container">
             <div class="message_contents">
                 <ul>
@@ -11,7 +15,7 @@
                                     <span>{{ message.message }}</span>
                                 </div>
                                 <div class="img_cont_msg">
-                                    <img src="/images/avatars/gamer_1.png" width="31px" height="31px" />
+                                    <img :src="`/images/avatars/${message.user.avatar.url}`" width="31px" height="31px" />
                                 </div>
                             </div>
                         </li>
@@ -46,16 +50,6 @@
         },
 
         methods: {
-            getAva(userid) {
-                axios.get('/ava/' + userid)
-                .then(response => {
-                    //console.log(response.data);
-                    return response.data
-                }).catch(error => {
-                    console.log(error)
-                })
-            },
-
             getMessages() {
                 axios.get('/bettingpool/' + this.poolid + '/messages')
                 .then( response => {
@@ -96,14 +90,9 @@
                 .listenForWhisper('typing', (e) => {
                     this.user = e.user.name;
                     this.typing = e.typing;
-
-                    // remove is typing indicator after 0.8s
-                    setTimeout(function() {
-                        _this.typing = false
-                    }, 1800)
                 })
                 .listen('.message.new', (e) => {
-                this.pushNewMessage(e);
+                    this.pushNewMessage(e);
                 })
         }
 
@@ -122,6 +111,7 @@
         flex-direction: column-reverse;
         overflow-y: scroll;
         overflow-x: hidden;
+        margin-top: 25px;
     }
 
     .chat-enter-active {

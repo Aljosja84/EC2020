@@ -19,8 +19,12 @@ Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
 });
 
 Broadcast::channel('chatroom.{roomId}', function ($user, $roomId) {
-    if($user->id) {
-        return ['id' => $user->id, 'name' => $user->name];
+    if(Auth::check()) {
+        return [
+            'id' => $user->id,
+            'name' => $user->name,
+            'avatar_url' => $user->avatar->ava_url()
+        ];
     }
 });
 

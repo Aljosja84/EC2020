@@ -1,7 +1,7 @@
 <template>
     <div class="relative h-10 m-1">
         <div style="border-top: 1px solid lightgray; margin-top:15px; padding-top: 5px">
-            <input type="text" style="width: 100%; height: 30px" v-model="message" @keyup.enter="sendMessage()" @keydown="isTyping()" placeholder="Say something...">
+            <input type="text" style="width: 100%; height: 30px" v-model="message" @keyup.enter="sendMessage()" @keyup="isTyping()" placeholder="Say something...">
             <button @click="sendMessage()" style="width: 100%">Send</button>
         </div>
     </div>
@@ -14,20 +14,46 @@
 
         data() {
             return {
-                message: ''
+                message: '',
+                oldmessage: ''
             }
         },
 
         methods: {
+            /*
+            *
+            * Instead of letting the typing status disappear after .3 sec, we'll check
+            * if the message field is empty or not. If it's empty, the status
+            * disappears, but only if it has appeared.
+            *
+            */
             isTyping() {
                 let channel = Echo.join('chatroom.' + this.room);
 
-                setTimeout(function() {
-                    channel.whisper('typing', {
-                        user: Laravel.user,
-                        typing: true
-                    });
-                }, 300);
+                // if old message is empty, nothing has been typed before
+                // or the message has been sent
+                if(this.oldmessage.length === 0)
+                {
+                    if(this.message.length > 0)
+                    {
+                        channel.whisper('typing', {
+                            user: Laravel.user,
+                            typing: true
+                        });
+
+                        this.oldmessage = this.message;
+                    }
+                }   else {
+                    if(this.message.length === 0)
+                    {
+                        channel.whisper('typing', {
+                            user: Laravel.user,
+                            typing: false
+                        });
+
+                        this.oldmessage = this.message;
+                    }
+                }
             },
 
             sendMessage() {
@@ -42,6 +68,13 @@
                 .then(response => {
                     if(response.status === 201) {
                         this.message = '';
+                        this.oldmessage = '';
+                        let channel = Echo.join('chatroom.' + this.room);
+                        // let other people know we're done typing
+                        channel.whisper('typing', {
+                            user: Laravel.user,
+                            typing: false
+                        })
                     }
                 })
                 .catch(error => {
