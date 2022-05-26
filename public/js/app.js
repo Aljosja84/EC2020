@@ -2788,6 +2788,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -2806,6 +2807,12 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
+    /*
+    *
+    * get all messages by making a route call to /bettingpool/
+    * and setting it's response to the message array
+    * catch all errors, if there are any
+    */
     getMessages: function getMessages() {
       var _this2 = this;
 
@@ -2815,10 +2822,21 @@ __webpack_require__.r(__webpack_exports__);
         console.log(error);
       });
     },
+
+    /*
+    *
+    * push the message to the message array
+    * which then gets displayed in the chat window
+    *
+    */
     pushNewMessage: function pushNewMessage(e) {
-      var message = {};
-      message = e.chatMessage;
-      message.user = e.user;
+      // initialize the message as an object so we can read param e
+      var message = {}; // set message object to the chatMessage instance
+
+      message = e.chatMessage; // set user key
+
+      message.user = e.user; // finally, push it to message array
+
       this.messages.push(message);
     }
   },
@@ -22895,7 +22913,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".message_container[data-v-151b8bba] {\n  padding-left: 39px;\n  padding-right: 39px;\n  width: 500px;\n  height: 700px;\n  background-color: white;\n  display: flex;\n  flex-direction: column-reverse;\n  overflow-y: scroll;\n  overflow-x: hidden;\n  margin-top: 25px;\n}\n.chat-enter-active[data-v-151b8bba] {\n  transition: all 0.5s;\n}\n.chat-enter[data-v-151b8bba] {\n  opacity: 0;\n  transform: translateX(100px);\n}\n.chat-enter-to[data-v-151b8bba] {\n  opacity: 1;\n}\n.chat-move[data-v-151b8bba] {\n  transition: all 0.5s;\n}\n.message_contents ul[data-v-151b8bba] {\n  list-style-type: none;\n  padding: 5px;\n}\n.message_contents ul li.message[data-v-151b8bba] {\n  margin: 10px 0;\n  width: 100%;\n}\n.message_contents ul li .text[data-v-151b8bba] {\n  font-family: \"Terminal Dosis\", sans-serif;\n  font-size: 13px;\n  width: auto;\n  max-width: 250px;\n  border-radius: 5px;\n  padding: 3px 10px 6px 10px;\n  display: inline-block;\n  text-align: left;\n  position: relative;\n  background-repeat: no-repeat;\n  height: -webkit-fit-content;\n  height: -moz-fit-content;\n  height: fit-content;\n}\n.message_contents ul li.received[data-v-151b8bba] {\n  text-align: left;\n}\n.message_contents ul li.received .text[data-v-151b8bba] {\n  background: lightgray;\n}\n.message_contents ul li.received .text[data-v-151b8bba]:after {\n  right: 100%;\n  top: 50%;\n  border: solid transparent;\n  content: \"\";\n  height: 0;\n  width: 0;\n  position: absolute;\n  pointer-events: none;\n  border-color: rgba(136, 183, 213, 0);\n  border-right-color: lightgray;\n  border-width: 5px;\n  margin-top: -5px;\n}\n.message_contents ul li.sent[data-v-151b8bba] {\n  text-align: right;\n  margin-right: 6px;\n}\n.message_contents ul li.sent .text[data-v-151b8bba] {\n  background: lightskyblue;\n}\n.message_contents ul li.sent .text[data-v-151b8bba]:after {\n  left: 100%;\n  top: 50%;\n  border: solid transparent;\n  content: \"\";\n  height: 0;\n  width: 0;\n  position: absolute;\n  pointer-events: none;\n  border-color: transparent;\n  border-left-color: lightskyblue;\n  border-width: 5px;\n  margin-top: -5px;\n}\n.message_contents ul li .text_container[data-v-151b8bba] {\n  display: flex;\n  position: relative;\n}\n.message_contents ul li .text_container.received[data-v-151b8bba] {\n  justify-content: start;\n}\n.message_contents ul li .text_container.received img[data-v-151b8bba] {\n  position: absolute;\n  bottom: 5px;\n  left: -39px;\n}\n.message_contents ul li .text_container.sent[data-v-151b8bba] {\n  justify-content: end;\n}\n.message_contents ul li .text_container.sent img[data-v-151b8bba] {\n  position: absolute;\n  bottom: 5px;\n  right: -39px;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".online_win[data-v-151b8bba] {\n  width: 401px;\n  height: 60px;\n  background-color: white;\n  overflow: hidden;\n  padding: 5px;\n}\n.online_win span[data-v-151b8bba] {\n  display: block;\n  float: left;\n}\n.online_members-enter-active[data-v-151b8bba] {\n  transition: all 0.5s;\n}\n.online_members-enter[data-v-151b8bba] {\n  opacity: 0;\n  transform: translateY(50px);\n}\n.online_members-enter-to[data-v-151b8bba] {\n  opacity: 1;\n}\n.online_members-move[data-v-151b8bba] {\n  transition: all 0.5s;\n}\n.online_members-leave[data-v-151b8bba] {\n  opacity: 0;\n  transform: translateY(30px);\n}\n.online_members-leave-active[data-v-151b8bba] {\n  transition: all 0.5s ease;\n}\n.online_members-leave-to[data-v-151b8bba] {\n  opacity: 0;\n  transform: translateY(30px);\n}\n.message_container[data-v-151b8bba] {\n  padding-right: 39px;\n  width: 500px;\n  height: 700px;\n  background-color: white;\n  display: flex;\n  flex-direction: column-reverse;\n  overflow-y: scroll;\n  overflow-x: hidden;\n  margin-top: 25px;\n}\n.chat-enter-active[data-v-151b8bba] {\n  transition: all 0.5s;\n}\n.chat-enter[data-v-151b8bba] {\n  opacity: 0;\n  transform: translateX(100px);\n}\n.chat-enter-to[data-v-151b8bba] {\n  opacity: 1;\n}\n.chat-move[data-v-151b8bba] {\n  transition: all 0.5s;\n}\n.tippy-tooltip.chat-theme[data-v-151b8bba] {\n  font-family: \"Oswald\", sans-serif;\n  background-color: black;\n  color: orange;\n  font-size: 14px;\n  box-shadow: inset 0 2px 0 0 rgba(255, 255, 255, 0.8);\n  border: 1px solid #505050;\n}\n.tippy-tooltip.chat-theme .tippy-roundarrow[data-v-151b8bba] {\n  fill: black;\n}\n.message_contents ul[data-v-151b8bba] {\n  list-style-type: none;\n  padding: 5px;\n}\n.message_contents ul li.message[data-v-151b8bba] {\n  margin: 10px 0;\n  width: 100%;\n  display: inline-block;\n}\n.message_contents ul li .text[data-v-151b8bba] {\n  font-family: \"Terminal Dosis\", sans-serif;\n  font-size: 13px;\n  width: auto;\n  max-width: 250px;\n  border-radius: 5px;\n  padding: 3px 10px 6px 10px;\n  display: inline-block;\n  text-align: left;\n  position: relative;\n  background-repeat: no-repeat;\n  height: -webkit-fit-content;\n  height: -moz-fit-content;\n  height: fit-content;\n}\n.message_contents ul li.received[data-v-151b8bba] {\n  text-align: left;\n}\n.message_contents ul li.received .text[data-v-151b8bba] {\n  background: lightgray;\n  vertical-align: middle;\n}\n.message_contents ul li.received .text[data-v-151b8bba]:after {\n  right: 100%;\n  top: 50%;\n  border: solid transparent;\n  content: \"\";\n  height: 0;\n  width: 0;\n  position: absolute;\n  pointer-events: none;\n  border-color: rgba(136, 183, 213, 0);\n  border-right-color: lightgray;\n  border-width: 5px;\n  margin-top: -5px;\n}\n.message_contents ul li.sent[data-v-151b8bba] {\n  text-align: right;\n  margin-right: 6px;\n}\n.message_contents ul li.sent .text[data-v-151b8bba] {\n  background: lightskyblue;\n  vertical-align: middle;\n}\n.message_contents ul li.sent .text[data-v-151b8bba]:after {\n  left: 100%;\n  top: 50%;\n  border: solid transparent;\n  content: \"\";\n  height: 0;\n  width: 0;\n  position: absolute;\n  pointer-events: none;\n  border-color: transparent;\n  border-left-color: lightskyblue;\n  border-width: 5px;\n  margin-top: -5px;\n}\n.message_contents ul li .text_container[data-v-151b8bba] {\n  display: inline-block;\n  position: relative;\n  word-break: break-all;\n}\n.message_contents ul li .text_container.received[data-v-151b8bba] {\n  justify-content: start;\n  vertical-align: middle;\n}\n.message_contents ul li .text_container.received img[data-v-151b8bba] {\n  display: inline-block;\n  left: -39px;\n  vertical-align: middle;\n}\n.message_contents ul li .text_container.sent[data-v-151b8bba] {\n  justify-content: end;\n}\n.message_contents ul li .text_container.sent img[data-v-151b8bba] {\n  right: 0;\n  vertical-align: middle;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -64679,21 +64697,45 @@ var render = function () {
       _vm._v(" "),
       _c(
         "div",
-        {
-          staticStyle: {
-            width: "401px",
-            height: "50px",
-            "background-color": "white",
-          },
-        },
-        _vm._l(_vm.activeUsers, function (member) {
-          return _c("span", { key: member.id }, [
-            _c("img", {
-              attrs: { src: member.avatar_url, width: "50px", height: "50px" },
+        { staticClass: "online_win" },
+        [
+          _c(
+            "transition-group",
+            { attrs: { name: "online_members" } },
+            _vm._l(_vm.activeUsers, function (member) {
+              return _c("span", { key: member.id }, [
+                _c("img", {
+                  directives: [
+                    {
+                      name: "tippy",
+                      rawName: "v-tippy",
+                      value: {
+                        placement: "top",
+                        appendTo: "parent",
+                        arrow: true,
+                        arrowType: "round",
+                        animation: "scale",
+                        animateFill: true,
+                        followCursor: "horizontal",
+                        theme: "chat",
+                      },
+                      expression:
+                        "{placement: 'top', appendTo: 'parent', arrow : true, arrowType : 'round', animation : 'scale', animateFill: true, followCursor: 'horizontal', theme: 'chat'}",
+                    },
+                  ],
+                  attrs: {
+                    src: member.avatar_url,
+                    width: "50px",
+                    height: "50px",
+                    content: member.name,
+                  },
+                }),
+              ])
             }),
-          ])
-        }),
-        0
+            0
+          ),
+        ],
+        1
       ),
       _vm._v(" "),
       _c("div", { staticClass: "message_container" }, [
@@ -64726,22 +64768,23 @@ var render = function () {
                               : " received"),
                         },
                         [
+                          _c("img", {
+                            attrs: {
+                              src: "/images/avatars/" + message.user.avatar.url,
+                              width: "31px",
+                              height: "31px",
+                            },
+                          }),
+                          _vm._v(" "),
                           _c("div", { staticClass: "text" }, [
-                            _c("span", [_vm._v(_vm._s(message.user.name))]),
-                            _c("br"),
+                            message.user.id !== _vm.userid
+                              ? _c("span", [
+                                  _vm._v(_vm._s(message.user.name)),
+                                  _c("br"),
+                                ])
+                              : _vm._e(),
                             _vm._v(" "),
                             _c("span", [_vm._v(_vm._s(message.message))]),
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "img_cont_msg" }, [
-                            _c("img", {
-                              attrs: {
-                                src:
-                                  "/images/avatars/" + message.user.avatar.url,
-                                width: "31px",
-                                height: "31px",
-                              },
-                            }),
                           ]),
                         ]
                       ),

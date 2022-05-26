@@ -1,8 +1,10 @@
 <template>
     <div>
         <span>Active users</span>
-        <div style="width: 401px; height: 50px; background-color: white">
-            <span v-for="member in activeUsers" :key="member.id"><img :src="member.avatar_url" width="50px" height="50px"></span>
+        <div class="online_win">
+            <transition-group name="online_members">
+                <span v-for="member in activeUsers" :key="member.id"><img :src="member.avatar_url" width="50px" height="50px" :content="member.name" v-tippy="{placement: 'top', appendTo: 'parent', arrow : true, arrowType : 'round', animation : 'scale', animateFill: true, followCursor: 'horizontal', theme: 'chat'}"></span>
+            </transition-group>
         </div>
         <div class="message_container">
             <div class="message_contents">
@@ -10,13 +12,12 @@
                     <transition-group name="chat">
                         <li v-for="(message, index) in messages" :key="message.id" :class="`message${message.user.id === userid ? ' sent' : ' received'}`">
                             <div :class="`text_container${message.user.id === userid ? ' sent' : ' received'}`">
+                                <img :src="`/images/avatars/${message.user.avatar.url}`" width="31px" height="31px" />
                                 <div class="text">
-                                    <span>{{ message.user.name }}</span><br>
+                                    <span v-if="message.user.id !== userid">{{ message.user.name }}<br></span>
                                     <span>{{ message.message }}</span>
                                 </div>
-                                <div class="img_cont_msg">
-                                    <img :src="`/images/avatars/${message.user.avatar.url}`" width="31px" height="31px" />
-                                </div>
+
                             </div>
                         </li>
                     </transition-group>
@@ -50,6 +51,12 @@
         },
 
         methods: {
+            /*
+            *
+            * get all messages by making a route call to /bettingpool/
+            * and setting it's response to the message array
+            * catch all errors, if there are any
+            */
             getMessages() {
                 axios.get('/bettingpool/' + this.poolid + '/messages')
                 .then( response => {
@@ -60,10 +67,20 @@
                 })
             },
 
+            /*
+            *
+            * push the message to the message array
+            * which then gets displayed in the chat window
+            *
+            */
             pushNewMessage(e) {
+                // initialize the message as an object so we can read param e
                 var message = {};
+                // set message object to the chatMessage instance
                 message = e.chatMessage;
+                // set user key
                 message.user = e.user;
+                // finally, push it to message array
                 this.messages.push(message);
             },
 
@@ -101,8 +118,45 @@
 </script>
 
 <style lang="scss" scoped>
+    .online_win {
+        width: 401px;
+        height: 60px;
+        background-color: white;
+        overflow: hidden;
+        padding: 5px;
+    }
+
+    .online_win span {
+        display: block;
+        float: left;
+    }
+
+    .online_members-enter-active {
+        transition: all 0.5s;
+    }
+    .online_members-enter {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    .online_members-enter-to {
+        opacity: 1;
+    }
+    .online_members-move {
+        transition: all 0.5s;
+    }
+    .online_members-leave {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    .online_members-leave-active {
+        transition: all 0.5s ease;
+    }
+    .online_members-leave-to {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
     .message_container {
-        padding-left: 39px;
         padding-right: 39px;
         width: 500px;
         height: 700px;
@@ -129,6 +183,18 @@
         transition: all .5s;
     }
 
+    .tippy-tooltip.chat-theme {
+        font-family: 'Oswald', sans-serif;
+        background-color: black;
+        color: orange;
+        font-size: 14px;
+        box-shadow: inset 0 2px 0 0 hsla(0,0%,100%,0.8);
+        border: 1px solid #505050;
+    }
+    .tippy-tooltip.chat-theme .tippy-roundarrow{
+        fill: black;
+    }
+
     .message_contents {
         ul {
             list-style-type: none;
@@ -139,6 +205,7 @@
                 &.message {
                     margin: 10px 0;
                     width: 100%;
+                    display: inline-block;
                 }
 
                 .text {
@@ -160,6 +227,7 @@
 
                     .text {
                         background: lightgray;
+                        vertical-align: middle;
                     }
 
                     .text:after {
@@ -184,6 +252,7 @@
 
                     .text {
                         background: lightskyblue;
+                        vertical-align: middle;
                     }
 
                     .text:after {
@@ -203,16 +272,18 @@
                 }
 
                 .text_container {
-                    display:flex;
+                    display:inline-block;
                     position: relative;
+                    word-break: break-all;
 
                     &.received {
                         justify-content: start;
+                        vertical-align: middle;
 
                         img {
-                            position: absolute;
-                            bottom: 5px;
+                            display: inline-block;
                             left: -39px;
+                            vertical-align: middle;
                         }
                     }
 
@@ -220,9 +291,8 @@
                         justify-content: end;
 
                         img {
-                            position: absolute;
-                            bottom: 5px;
-                            right: -39px;
+                            right: 0;
+                            vertical-align: middle;
                         }
                     }
                 }
