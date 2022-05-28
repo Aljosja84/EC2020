@@ -57,6 +57,7 @@
             },
 
             sendMessage() {
+                // if there is no message, do nothing
                 if(!this.message) {
                     return;
                 }

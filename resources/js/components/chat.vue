@@ -203,7 +203,7 @@
             li {
 
                 &.message {
-                    margin: 10px 0;
+                    margin: 3px 0;
                     width: 100%;
                     display: inline-block;
                 }
@@ -233,7 +233,7 @@
                     .text:after {
                         right: 100%;
                         top: 50%;
-                        border: solid transparent;
+                        border: solid;
                         content: "";
                         height: 0;
                         width: 0;
@@ -264,7 +264,6 @@
                         width: 0;
                         position: absolute;
                         pointer-events: none;
-                        border-color: transparent;
                         border-left-color: lightskyblue;
                         border-width: 5px;
                         margin-top: -5px;
@@ -281,7 +280,6 @@
                         vertical-align: middle;
 
                         img {
-                            display: inline-block;
                             left: -39px;
                             vertical-align: middle;
                         }
