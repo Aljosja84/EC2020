@@ -12,12 +12,12 @@
                     <transition-group name="chat">
                         <li v-for="(message, index) in messages" :key="message.id" :class="`message${message.user.id === userid ? ' sent' : ' received'}`">
                             <div :class="`text_container${message.user.id === userid ? ' sent' : ' received'}`">
-                                <img :src="`/images/avatars/${message.user.avatar.url}`" width="31px" height="31px" />
+                                <img v-if="message.user.id !== userid" :src="`/images/avatars/${message.user.avatar.url}`" width="31px" height="31px" />
                                 <div class="text">
-                                    <span v-if="message.user.id !== userid">{{ message.user.name }}<br></span>
+                                    <span v-if="(getLastUserId(index) !== message.user.id)" style="font-weight: bold">{{ message.user.name }}<br></span>
                                     <span>{{ message.message }}</span>
                                 </div>
-
+                                <img v-if="message.user.id === userid" :src="`/images/avatars/${message.user.avatar.url}`" width="31px" height="31px" />
                             </div>
                         </li>
                     </transition-group>
@@ -84,6 +84,12 @@
                 this.messages.push(message);
             },
 
+            getLastUserId(e) {
+                if(e >= 1) {
+                    return this.messages[e - 1].user_id;
+                }
+            }
+
 
         },
 
@@ -117,7 +123,7 @@
     }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
     .online_win {
         width: 401px;
         height: 60px;
@@ -157,7 +163,6 @@
     }
 
     .message_container {
-        padding-right: 39px;
         width: 500px;
         height: 700px;
         background-color: white;
@@ -184,15 +189,15 @@
     }
 
     .tippy-tooltip.chat-theme {
-        font-family: 'Oswald', sans-serif;
-        background-color: black;
-        color: orange;
-        font-size: 14px;
-        box-shadow: inset 0 2px 0 0 hsla(0,0%,100%,0.8);
-        border: 1px solid #505050;
+        font-family: "Terminal Dosis", sans-serif;
+        background-color: #3c91a3;
+        color: white;
+        font-size: 15px;
+        border: 1px solid #1d5f6d;
+        box-shadow: inset 0 1px 0 0 hsla(0,0%,100%,0.8);
     }
     .tippy-tooltip.chat-theme .tippy-roundarrow{
-        fill: black;
+        fill: #3c91a3;
     }
 
     .message_contents {
@@ -203,7 +208,7 @@
             li {
 
                 &.message {
-                    margin: 3px 0;
+                    margin: 1px 0;
                     width: 100%;
                     display: inline-block;
                 }
@@ -220,6 +225,7 @@
                     position: relative;
                     background-repeat: no-repeat;
                     height: fit-content;
+                    margin: 3px;
                 }
 
                 &.received {
