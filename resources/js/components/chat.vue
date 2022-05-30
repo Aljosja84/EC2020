@@ -1,10 +1,18 @@
 <template>
     <div>
-        <span>Active users</span>
-        <div class="online_win">
-            <transition-group name="online_members">
-                <span v-for="member in activeUsers" :key="member.id"><img :src="member.avatar_url" width="50px" height="50px" :content="member.name" v-tippy="{placement: 'top', appendTo: 'parent', arrow : true, arrowType : 'round', animation : 'scale', animateFill: true, followCursor: 'horizontal', theme: 'chat'}"></span>
-            </transition-group>
+        <div id="online_container">
+            <div class="online_header">
+                online members
+            </div>
+            <div class="separator_bar"></div>
+            <div class="online_win">
+                <transition-group name="online_members">
+                    <span v-for="member in activeUsers" :key="member.id" style="position: relative">
+                        <img :src="member.avatar_url" width="50px" height="50px" :content="member.name" v-tippy="{placement: 'top', arrow : true, arrowType : 'round', animation : 'scale', animateFill: true, followCursor: 'horizontal', theme: 'chat'}">
+                        <span v-if="typing && typing_id === member.id" class="typing-bubble"></span>
+                    </span>
+                </transition-group>
+            </div>
         </div>
         <div class="message_container">
             <div class="message_contents">
@@ -24,7 +32,6 @@
                 </ul>
             </div>
         </div>
-        <span v-show="typing" style="font-style: italic;">@{{ user }} is typing...</span>
         <input-message :room="roomid" :user="userid" />
     </div>
 </template>
@@ -46,7 +53,8 @@
                 messages: [],
                 activeUsers: [],
                 user: '',
-                typing: false
+                typing: false,
+                typing_id: null,
             }
         },
 
@@ -113,6 +121,15 @@
                 .listenForWhisper('typing', (e) => {
                     this.user = e.user.name;
                     this.typing = e.typing;
+                    // set typing id for the active users avatar typing bubble
+                    this.typing_id = e.user.id;
+                    var message = {};
+                    message.user = e.user;
+                    message.message = "is typing...";
+                    // set a key for the list element
+                    message.id = e.user.created_at;
+                    // if typing is false, remove the indicator from the messages array
+                    // this.typing ? this.messages.push(message) : this.messages.pop();
                 })
                 .listen('.message.new', (e) => {
                     this.pushNewMessage(e);
@@ -124,17 +141,83 @@
 </script>
 
 <style lang="scss">
+    #online_container {
+        background-color: white;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+    }
+    .online_header {
+        width: 100%;
+        height: 40px;
+        font-family: 'Oswald', sans-serif;
+        font-size: 24px;
+        color: #515151;
+        text-align: center;
+        background-image: url("images/light_wool.png");
+    }
+    .separator_bar {
+        height: 2px;
+        background-image: linear-gradient(to right, transparent, #b5b5b5, transparent);
+    }
+
     .online_win {
-        width: 401px;
+        width: 500px;
         height: 60px;
         background-color: white;
         overflow: hidden;
         padding: 5px;
+        border-bottom-color: black;
+        border-bottom-width: 1px;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
     }
 
     .online_win span {
         display: block;
         float: left;
+    }
+
+    .typing-bubble {
+        position: absolute;
+        top: -5px;
+        right: -10px;
+        padding: 0px 2px 0px 5px;
+        background-color: #79b256;
+        color: white;
+        font-size: 0.95em;
+        border-radius: 20%;
+        width: 21px;
+        height: 25px;
+        z-index: 1000;
+        transition: all 0.2s ease-in;
+    }
+    .typing-bubble:after {
+        content: ' .';
+        animation: dots 1.5s steps(5, end) infinite;
+    }
+    @keyframes dots {
+        0%, 20% {
+            color: rgba(0,0,0,0);
+            text-shadow:
+                .25em 0 0 rgba(0,0,0,0),
+                .5em 0 0 rgba(0,0,0,0);
+        }
+        40% {
+            color: white;
+            text-shadow:
+                .25em 0 0 rgba(0,0,0,0),
+                .5em 0 0 rgba(0,0,0,0);
+        }
+        60% {
+            text-shadow:
+                .25em 0 0 white,
+                .5em 0 0 rgba(0,0,0,0);
+        }
+        80%, 100% {
+            text-shadow:
+                .25em 0 0 white,
+                .5em 0 0 white;
+        }
     }
 
     .online_members-enter-active {
@@ -163,6 +246,7 @@
     }
 
     .message_container {
+        border-radius: 5px;
         width: 500px;
         height: 700px;
         background-color: white;
@@ -170,7 +254,7 @@
         flex-direction: column-reverse;
         overflow-y: scroll;
         overflow-x: hidden;
-        margin-top: 25px;
+        margin-top: 10px;
     }
 
     .chat-enter-active {
@@ -183,21 +267,32 @@
     .chat-enter-to {
         opacity: 1;
     }
-
     .chat-move {
         transition: all .5s;
+    }
+    .chat-leave {
+        opacity: 0;
+        transform: translateX(100px);
+    }
+    .chat-leave-to {
+        opacity: 0;
+        transform: translateX(100px);
+    }
+    .chat-leave-active {
+        transition: all 0.3s ease;
     }
 
     .tippy-tooltip.chat-theme {
         font-family: "Terminal Dosis", sans-serif;
-        background-color: #3c91a3;
+        background-color: #40656c;
         color: white;
         font-size: 15px;
-        border: 1px solid #1d5f6d;
-        box-shadow: inset 0 1px 0 0 hsla(0,0%,100%,0.8);
+        border-top: 1px solid #2a8092;
+        box-shadow: inset 0 1px 0 0 hsla(0,0%,100%,0.3);
     }
     .tippy-tooltip.chat-theme .tippy-roundarrow{
-        fill: #3c91a3;
+        fill: #40656c;
+        border-right-color: #1d5f6d;
     }
 
     .message_contents {
@@ -279,7 +374,7 @@
                 .text_container {
                     display:inline-block;
                     position: relative;
-                    word-break: break-all;
+                    word-break: break-word;
 
                     &.received {
                         justify-content: start;

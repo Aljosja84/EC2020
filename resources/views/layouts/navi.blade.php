@@ -13,6 +13,7 @@
         window.Laravel = {!! json_encode([
         'csrfToken' => csrf_token(),
         'user' => Auth::user(),
+        'avatar' => Auth::user()->avatar,
         'pusherKey' => config('broadcasting.connections.pusher.key'),
          ]) !!};
     </script>

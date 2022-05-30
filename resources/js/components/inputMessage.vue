@@ -1,8 +1,8 @@
 <template>
     <div class="relative h-10 m-1">
-        <div style="border-top: 1px solid lightgray; margin-top:15px; padding-top: 5px">
-            <input type="text" style="width: 100%; height: 30px" v-model="message" @keyup.enter="sendMessage()" @keyup="isTyping()" placeholder="Say something...">
-            <button @click="sendMessage()" style="width: 100%">Send</button>
+        <div class="inputform">
+            <textarea class="input_text" v-model="message" @keyup.enter="sendMessage()" @keyup="isTyping()" placeholder="Say something..."/>
+            <button id="submit" @click="sendMessage()">Send</button>
         </div>
     </div>
 </template>
@@ -38,6 +38,7 @@
                     {
                         channel.whisper('typing', {
                             user: Laravel.user,
+                            avatar: Laravel.avatar,
                             typing: true
                         });
 
@@ -87,5 +88,41 @@
 </script>
 
 <style scoped>
+    .inputform {
+        display: flex;
+        align-content: space-between;
+        padding-top: 10px;
+    }
 
+    .input_text {
+        width: 390px;
+        height: 60px;
+        border-radius: 5px;
+        font-family: "Terminal Dosis", sans-serif;
+        font-size: 14px;
+        color: #5a6268;
+        padding: 4px;
+        margin-right: 10px;
+        resize: none;
+    }
+
+    #submit {
+        width: 20%;
+        height: 60px;
+        text-align: center;
+        text-transform: uppercase;
+        font-family: 'Roboto Light', sans-serif;
+        font-size: 16px;
+        color: white;
+        border: 1px solid darkolivegreen;
+        border-radius: 5px;
+        background-color: #79b256;
+        box-shadow: inset 0 1px 0 0 hsla(0,0%,100%,0.4);
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    #submit:hover {
+        background-color: #6ea14f;
+    }
 </style>
