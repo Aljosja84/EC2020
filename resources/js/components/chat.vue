@@ -9,7 +9,7 @@
                 <transition-group name="online_members">
                     <span v-for="member in activeUsers" :key="member.id" style="position: relative">
                         <img :src="member.avatar_url" width="50px" height="50px" :content="member.name" v-tippy="{placement: 'top', arrow : true, arrowType : 'round', animation : 'scale', animateFill: true, followCursor: 'horizontal', theme: 'chat'}">
-                        <span v-if="typing && typing_id === member.id" class="typing-bubble"></span>
+                        <span v-if="typing_users.includes(member.id)" class="typing-bubble"></span>
                     </span>
                 </transition-group>
             </div>
@@ -55,6 +55,7 @@
                 user: '',
                 typing: false,
                 typing_id: null,
+                typing_users: []
             }
         },
 
@@ -130,6 +131,18 @@
                     message.id = e.user.created_at;
                     // if typing is false, remove the indicator from the messages array
                     // this.typing ? this.messages.push(message) : this.messages.pop();
+                    if(this.typing) {
+                        _this.typing_users.push(_this.typing_id);
+                        return this.typing_users;
+                    }   else {
+                        Array.prototype.unset = function(value) {
+                            if(this.indexOf(value) !== -1) { // Make sure the value exists
+                                this.splice(this.indexOf(value), 1);
+                            }
+                        }
+                        this.typing_users.unset(this.typing_id);
+                    }
+
                 })
                 .listen('.message.new', (e) => {
                     this.pushNewMessage(e);

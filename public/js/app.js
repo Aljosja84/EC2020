@@ -2811,7 +2811,8 @@ __webpack_require__.r(__webpack_exports__);
       activeUsers: [],
       user: '',
       typing: false,
-      typing_id: null
+      typing_id: null,
+      typing_users: []
     };
   },
   methods: {
@@ -2878,6 +2879,21 @@ __webpack_require__.r(__webpack_exports__);
 
       message.id = e.user.created_at; // if typing is false, remove the indicator from the messages array
       // this.typing ? this.messages.push(message) : this.messages.pop();
+
+      if (_this3.typing) {
+        _this.typing_users.push(_this.typing_id);
+
+        return _this3.typing_users;
+      } else {
+        Array.prototype.unset = function (value) {
+          if (this.indexOf(value) !== -1) {
+            // Make sure the value exists
+            this.splice(this.indexOf(value), 1);
+          }
+        };
+
+        _this3.typing_users.unset(_this3.typing_id);
+      }
     }).listen('.message.new', function (e) {
       _this3.pushNewMessage(e);
     });
@@ -64836,7 +64852,7 @@ var render = function () {
                       },
                     }),
                     _vm._v(" "),
-                    _vm.typing && _vm.typing_id === member.id
+                    _vm.typing_users.includes(member.id)
                       ? _c("span", { staticClass: "typing-bubble" })
                       : _vm._e(),
                   ]

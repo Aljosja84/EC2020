@@ -23,8 +23,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/chat.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/chat.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/inputMessage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/inputMessage.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/navi.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/navi.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -458,7 +456,8 @@
       <workItem from="1653567718715" duration="8897000" />
       <workItem from="1653742514511" duration="3859000" />
       <workItem from="1653827979587" duration="6527000" />
-      <workItem from="1653912254760" duration="13230000" />
+      <workItem from="1653912254760" duration="13545000" />
+      <workItem from="1654006880157" duration="3916000" />
     </task>
     <servers />
   </component>
