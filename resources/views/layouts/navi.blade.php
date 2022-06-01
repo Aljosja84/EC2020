@@ -13,7 +13,6 @@
         window.Laravel = {!! json_encode([
         'csrfToken' => csrf_token(),
         'user' => Auth::user(),
-        'avatar' => Auth::user()->avatar,
         'pusherKey' => config('broadcasting.connections.pusher.key'),
          ]) !!};
     </script>
@@ -189,7 +188,7 @@
             </div>
             <div id="login">
                 @auth
-                    <login :unread="3" username={{ $user->name }} avatar={{ $user->avatar->ava_url() }} :spoiler="false" :groups="['De Kolenschoppen', 'Nappy Fam', 'Moneymakers']"></login>
+                    <login :unread="3" username={{ $user->name }} avatar={{ $user->avatar->ava_url() }} :spoiler="false" :groups='{{ $user->pool }}'></login>
                 @endauth
                 @guest
                     <a href="{{ route('login') }}" class="login_button">Log in</a>

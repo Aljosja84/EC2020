@@ -93,6 +93,12 @@
                 this.messages.push(message);
             },
 
+            /*
+            *
+            * get the user id of the message prior to the current one
+            * so we can determine if we should print the username
+            *
+            */
             getLastUserId(e) {
                 if(e >= 1) {
                     return this.messages[e - 1].user_id;

@@ -26,7 +26,7 @@
                     <span id="more_arrow"></span>
                 </div>
                 <div id="subgroups" :style="subGroupStyle">
-                    <div v-for="group in groups" class="subgroup_option">{{group}}</div>
+                    <div v-for="group in groups" class="subgroup_option">{{group.name}}</div>
                 </div>
                 <div id="followed">Followed Games</div>
                 <a onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><div id="sign_out">Sign out</div></a>

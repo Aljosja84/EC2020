@@ -2848,6 +2848,13 @@ __webpack_require__.r(__webpack_exports__);
 
       this.messages.push(message);
     },
+
+    /*
+    *
+    * get the user id of the message prior to the current one
+    * so we can determine if we should print the username
+    *
+    */
     getLastUserId: function getLastUserId(e) {
       if (e >= 1) {
         return this.messages[e - 1].user_id;
@@ -3289,7 +3296,6 @@ __webpack_require__.r(__webpack_exports__);
         if (this.message.length > 0) {
           channel.whisper('typing', {
             user: Laravel.user,
-            avatar: Laravel.avatar,
             typing: true
           });
           this.oldmessage = this.message;
@@ -65609,7 +65615,7 @@ var render = function () {
           { style: _vm.subGroupStyle, attrs: { id: "subgroups" } },
           _vm._l(_vm.groups, function (group) {
             return _c("div", { staticClass: "subgroup_option" }, [
-              _vm._v(_vm._s(group)),
+              _vm._v(_vm._s(group.name)),
             ])
           }),
           0

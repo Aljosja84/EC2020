@@ -38,7 +38,6 @@
                     {
                         channel.whisper('typing', {
                             user: Laravel.user,
-                            avatar: Laravel.avatar,
                             typing: true
                         });
 
