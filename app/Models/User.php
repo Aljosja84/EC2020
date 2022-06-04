@@ -50,7 +50,7 @@ class User extends Authenticatable
 
     public function pool()
     {
-        return $this->hasMany('App\Models\Pool');
+        return $this->belongsToMany('App\Models\Pool', 'pool_members');
     }
 
     public function messages()

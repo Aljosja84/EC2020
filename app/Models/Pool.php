@@ -9,13 +9,19 @@ class Pool extends Model
 {
     use HasFactory;
 
-    public function users()
+    public function members()
     {
-        return $this->hasMany('App\Models\User');
+        return $this->belongsToMany('App\Models\User', 'pool_members');
     }
 
     public function chatroom()
     {
         return $this->hasOne('App\Models\ChatRoom');
     }
+
+    public function invite(User $user)
+    {
+        return $this->members()->attach($user);
+    }
 }
+

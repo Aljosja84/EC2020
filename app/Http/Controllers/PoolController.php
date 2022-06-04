@@ -61,10 +61,13 @@ class PoolController extends Controller
      */
     public function show(Pool $pool)
     {
-        return view('pool', [
-            'pool' => $pool,
-            'chatroom' => $pool->chatroom
-        ]);
+        if($pool->members->contains(Auth::user()))
+            return view('pool', [
+                'pool' => $pool,
+                'chatroom' => $pool->chatroom
+            ]);
+
+        return redirect('home');
     }
 
     /**
@@ -152,4 +155,5 @@ class PoolController extends Controller
         return $newMessage;
 
     }
+
 }
