@@ -22,10 +22,7 @@
     <list default="true" id="cf82d037-ce69-45df-857e-a29fb7732fae" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PoolController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/PoolController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Kernel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Pool.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Pool.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/chat.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/chat.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/Pool.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/Pool.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -463,7 +460,8 @@
       <workItem from="1654006880157" duration="6168000" />
       <workItem from="1654120597215" duration="4043000" />
       <workItem from="1654139138585" duration="230000" />
-      <workItem from="1654343511894" duration="7770000" />
+      <workItem from="1654343511894" duration="8786000" />
+      <workItem from="1654423764741" duration="1184000" />
     </task>
     <servers />
   </component>

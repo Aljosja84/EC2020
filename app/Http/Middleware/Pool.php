@@ -16,15 +16,18 @@ class Pool
      * @param \Closure $next
      * @return mixed
      */
-    public function handle(Request $request, Closure $next, $pool)
+    public function handle(Request $request, Closure $next)
     {
-        if (!Auth::check())
+        if (!Auth::check()) {
             return redirect('login');
+        }
 
         $user = Auth::user();
+        $pool = $request->route('pool');
 
-        if($pool->members->contain($user))
+        if($pool->members->contains($user)) {
             return $next($request);
+        }
 
         return redirect('home');
     }

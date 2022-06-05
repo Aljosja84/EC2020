@@ -19,7 +19,7 @@ class PoolController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('pool');
     }
 
     /**
@@ -61,13 +61,10 @@ class PoolController extends Controller
      */
     public function show(Pool $pool)
     {
-        if($pool->members->contains(Auth::user()))
-            return view('pool', [
-                'pool' => $pool,
-                'chatroom' => $pool->chatroom
-            ]);
-
-        return redirect('home');
+        return view('pool', [
+            'pool' => $pool,
+            'chatroom' => $pool->chatroom
+        ]);
     }
 
     /**
