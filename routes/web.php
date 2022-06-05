@@ -25,7 +25,7 @@ Route::get('/api', function() {
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/games/{game}', [App\Http\Controllers\GamesController::class, 'show']);
 Route::get('/ava/{user}', [App\Http\Controllers\PoolController::class, 'avatar']);
-Route::get('/bettingpool/{pool}', [App\Http\Controllers\PoolController::class, 'show']);
+Route::get('/bettingpool/{pool}', [App\Http\Controllers\PoolController::class, 'show'])->middleware('pool');
 Route::get('/bettingpool/{pool}/messages', [App\Http\Controllers\PoolController::class, 'messages']);
 Route::get('/bettingpool/{pool}/{room}', [App\Http\Controllers\PoolController::class, 'room']);
 Route::post('/bettingpool/{pool}/message', [App\Http\Controllers\PoolController::class, 'newMessage']);

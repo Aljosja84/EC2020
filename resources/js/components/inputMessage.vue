@@ -61,10 +61,10 @@
                 if(!this.message) {
                     return;
                 }
-
                 axios.post('/bettingpool/' + this.room + '/message', {
                     message: this.message,
-                    user: this.user
+                    user: this.user,
+                    pool: this.room
                 })
                 .then(response => {
                     if(response.status === 201) {

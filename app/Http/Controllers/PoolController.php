@@ -19,7 +19,7 @@ class PoolController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('pool');
+        //$this->middleware('pool');
     }
 
     /**
@@ -123,12 +123,16 @@ class PoolController extends Controller
      */
     public function messages(Request $request, Pool $pool)
     {
-        return ChatMessage::where('chat_room_id', $pool->chatroom->id)
-            ->with(['user' => function($user) {
-                $user->with('avatar')->get();
-            }])
-            ->orderBy('created_at', 'ASC')
-            ->get();
+        if (Auth::check()) $user = Auth::user();
+
+        if ($pool->members->contains($user)) {
+            return ChatMessage::where('chat_room_id', $pool->chatroom->id)
+                ->with(['user' => function ($user) {
+                    $user->with('avatar')->get();
+                }])
+                ->orderBy('created_at', 'ASC')
+                ->get();
+        }
     }
 
     /**
@@ -139,18 +143,17 @@ class PoolController extends Controller
      */
     public function newMessage(Request $request, $roomId)
     {
-        $user = Auth::user();
-        $newMessage = new ChatMessage;
-        $newMessage->user_id = $user->id;
-        $newMessage->chat_room_id = $roomId;
-        $newMessage->message = $request->message;
-        // commit to database
-        $newMessage->save();
-        // broadcast to others
-        broadcast(new NewChatMessage( $user, $newMessage ));
-        // return the new message
-        return $newMessage;
-
+        if($user = Auth::user()) {
+            $newMessage = new ChatMessage;
+            $newMessage->user_id = $user->id;
+            $newMessage->chat_room_id = $roomId;
+            $newMessage->message = $request->message;
+            // commit to database
+            $newMessage->save();
+            // broadcast to others
+            broadcast(new NewChatMessage($user, $newMessage));
+            // return the new message
+            return $newMessage;
+        }
     }
-
 }

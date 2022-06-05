@@ -26,7 +26,7 @@
                     <span id="more_arrow"></span>
                 </div>
                 <div id="subgroups" :style="subGroupStyle">
-                    <div v-for="group in groups" class="subgroup_option">{{group.name}}</div>
+                    <div v-for="group in groups" class="subgroup_option"><a :href="`../bettingpool/${group.id}`">{{group.name}}</a></div>
                 </div>
                 <div id="followed">Followed Games</div>
                 <a onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><div id="sign_out">Sign out</div></a>
@@ -314,6 +314,11 @@
         line-height: 36px;
         /* animation */
         transition: 0.2s linear;
+    }
+
+    #subgroups a {
+        text-decoration: none;
+        color: #515151;
     }
 
     .subgroup_option:hover {
