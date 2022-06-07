@@ -61,6 +61,8 @@ class PoolController extends Controller
      */
     public function show(Pool $pool)
     {
+        //$this->authorize('view');
+
         return view('pool', [
             'pool' => $pool,
             'chatroom' => $pool->chatroom
@@ -99,21 +101,6 @@ class PoolController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    public function avatar(User $user)
-    {
-        return $user->avatar->ava_url();
-    }
-
-    /**
-     * @param Pool $pool
-     * @param ChatRoom $room
-     * @return mixed
-     */
-    public function room(Pool $pool, ChatRoom $room)
-    {
-        return $room;
     }
 
     /**
