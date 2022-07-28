@@ -20,8 +20,8 @@ class PoolPolicy
         //
     }
 
-    public function view(Pool $pool)
+    public function view(User $user, Pool $pool)
     {
-        return true; //$pool->members->contains($user);
+        return $pool->members->contains($user);
     }
 }

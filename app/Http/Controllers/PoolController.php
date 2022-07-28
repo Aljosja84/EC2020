@@ -61,7 +61,7 @@ class PoolController extends Controller
      */
     public function show(Pool $pool)
     {
-        //$this->authorize('view');
+        $this->authorize('view', $pool, auth()->user());
 
         return view('pool', [
             'pool' => $pool,
