@@ -19,9 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cf82d037-ce69-45df-857e-a29fb7732fae" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="cf82d037-ce69-45df-857e-a29fb7732fae" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -470,6 +468,7 @@
       <workItem from="1667225964370" duration="663000" />
       <workItem from="1667306020313" duration="944000" />
       <workItem from="1667433352541" duration="18000" />
+      <workItem from="1669822094971" duration="50000" />
     </task>
     <servers />
   </component>
@@ -489,65 +488,9 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="2887" y="622" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1648136947335">
-      <screen x="2560" y="-6" width="1050" height="1650" />
+    <state x="1136" y="628" key="NewPhpFileDialog" timestamp="1669822132656">
+      <screen x="0" y="0" width="2560" height="1410" />
     </state>
-    <state x="2887" y="622" key="#com.intellij.fileTypes.FileTypeChooser/2560.-6.1050.1650/0.0.2560.1410@2560.-6.1050.1650" timestamp="1648136947335" />
-    <state x="2880" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1651491362146">
-      <screen x="2560" y="0" width="1050" height="1650" />
-    </state>
-    <state x="2880" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/2560.0.1050.1650/0.0.2560.1410@2560.0.1050.1650" timestamp="1651491362146" />
-    <state x="926" y="532" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1647523350209">
-      <screen x="0" y="0" width="3840" height="1570" />
-    </state>
-    <state x="926" y="532" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.3840.1570@0.0.3840.1570" timestamp="1647523350209" />
-    <state x="2815" y="579" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1651508765997">
-      <screen x="2560" y="0" width="1050" height="1650" />
-    </state>
-    <state x="2815" y="579" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/2560.0.1050.1650/0.0.2560.1410@2560.0.1050.1650" timestamp="1651508765997" />
-    <state x="2887" y="737" key="ComposerInitDialogKey" timestamp="1651152227464">
-      <screen x="2560" y="0" width="1050" height="1650" />
-    </state>
-    <state x="2887" y="737" key="ComposerInitDialogKey/2560.0.1050.1650/0.0.2560.1410@2560.0.1050.1650" timestamp="1651152227464" />
-    <state x="2781" y="566" key="FileChooserDialogImpl" timestamp="1650551206832">
-      <screen x="2560" y="0" width="1050" height="1650" />
-    </state>
-    <state x="2781" y="566" key="FileChooserDialogImpl/2560.0.1050.1650/0.0.2560.1410@2560.0.1050.1650" timestamp="1650551206832" />
-    <state width="2332" height="453" key="GridCell.Tab.0.bottom" timestamp="1647360006385">
-      <screen x="0" y="0" width="3840" height="1570" />
-    </state>
-    <state width="2332" height="453" key="GridCell.Tab.0.bottom/0.0.3840.1570@0.0.3840.1570" timestamp="1647360006385" />
-    <state width="2332" height="453" key="GridCell.Tab.0.center" timestamp="1647360006385">
-      <screen x="0" y="0" width="3840" height="1570" />
-    </state>
-    <state width="2332" height="453" key="GridCell.Tab.0.center/0.0.3840.1570@0.0.3840.1570" timestamp="1647360006385" />
-    <state width="2332" height="453" key="GridCell.Tab.0.left" timestamp="1647360006385">
-      <screen x="0" y="0" width="3840" height="1570" />
-    </state>
-    <state width="2332" height="453" key="GridCell.Tab.0.left/0.0.3840.1570@0.0.3840.1570" timestamp="1647360006385" />
-    <state width="2332" height="453" key="GridCell.Tab.0.right" timestamp="1647360006385">
-      <screen x="0" y="0" width="3840" height="1570" />
-    </state>
-    <state width="2332" height="453" key="GridCell.Tab.0.right/0.0.3840.1570@0.0.3840.1570" timestamp="1647360006385" />
-    <state x="2941" y="748" key="NewPhpFileDialog" timestamp="1651494160345">
-      <screen x="2560" y="0" width="1050" height="1650" />
-    </state>
-    <state x="2941" y="748" key="NewPhpFileDialog/2560.0.1050.1650/0.0.2560.1410@2560.0.1050.1650" timestamp="1651494160345" />
-    <state x="2601" y="470" key="SettingsEditor" timestamp="1651842745897">
-      <screen x="2560" y="0" width="1050" height="1650" />
-    </state>
-    <state x="2601" y="215" key="SettingsEditor/2560.-255.1050.1650/0.0.2560.1410@2560.-255.1050.1650" timestamp="1647952405100" />
-    <state x="2601" y="470" key="SettingsEditor/2560.0.1050.1650/0.0.2560.1410@2560.0.1050.1650" timestamp="1651842745897" />
-    <state x="2741" y="520" key="run.anything.popup" timestamp="1650381336083">
-      <screen x="2560" y="0" width="1050" height="1650" />
-    </state>
-    <state x="2741" y="265" key="run.anything.popup/2560.-255.1050.1650/0.0.2560.1410@2560.-255.1050.1650" timestamp="1648732612340" />
-    <state x="2741" y="520" key="run.anything.popup/2560.0.1050.1650/0.0.2560.1410@2560.0.1050.1650" timestamp="1650381336083" />
-    <state x="2795" y="379" width="672" height="713" key="search.everywhere.popup" timestamp="1654634177903">
-      <screen x="2560" y="0" width="1050" height="1650" />
-    </state>
-    <state x="859" y="361" width="672" height="678" key="search.everywhere.popup/0.0.3840.1570@0.0.3840.1570" timestamp="1647533700338" />
-    <state x="2795" y="124" width="672" height="713" key="search.everywhere.popup/2560.-255.1050.1650/0.0.2560.1410@2560.-255.1050.1650" timestamp="1649335821219" />
-    <state x="2795" y="379" width="672" height="713" key="search.everywhere.popup/2560.0.1050.1650/0.0.2560.1410@2560.0.1050.1650" timestamp="1654634177903" />
+    <state x="1136" y="628" key="NewPhpFileDialog/2560.0.1050.1650/0.0.2560.1410@0.0.2560.1410" timestamp="1669822132656" />
   </component>
 </project>
