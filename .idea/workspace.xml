@@ -21,12 +21,6 @@
   <component name="ChangeListManager">
     <list default="true" id="cf82d037-ce69-45df-857e-a29fb7732fae" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PoolController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/PoolController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Pool.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Pool.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Policies/PoolPolicy.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Policies/PoolPolicy.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/ec2020.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/ec2020.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/pool.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pool.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -470,7 +464,12 @@
       <workItem from="1654632860015" duration="2876000" />
       <workItem from="1657053226390" duration="724000" />
       <workItem from="1657996598884" duration="887000" />
-      <workItem from="1659011631465" duration="4351000" />
+      <workItem from="1659011631465" duration="4644000" />
+      <workItem from="1663818564344" duration="282000" />
+      <workItem from="1665452332629" duration="685000" />
+      <workItem from="1667225964370" duration="663000" />
+      <workItem from="1667306020313" duration="944000" />
+      <workItem from="1667433352541" duration="18000" />
     </task>
     <servers />
   </component>
