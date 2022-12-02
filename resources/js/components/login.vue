@@ -4,7 +4,10 @@
             <div id="icon_notification" @click="readMessages"><span v-if="unread" class="notify-bubble">{{ unread }}</span></div>
             <div id="icon_user" @click="toggleMenu" v-bind:style="{ backgroundImage: 'url(' + avatar + ')' }"></div>
         </div>
-        <!-- dropdown menu -->
+        <!-- notification dropdown menu -->
+        <!-- end notification dropdown menu -->
+
+        <!-- user dropdown menu -->
         <div id="dropdown_container" :style="menuStyle">
             <div id="profile">
                 <div id="username">Hello, {{ username }}</div>
@@ -32,6 +35,7 @@
                 <a onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><div id="sign_out">Sign out</div></a>
             </div>
         </div>
+        <!-- end user dropdown menu -->
     </div>
 </template>
 
