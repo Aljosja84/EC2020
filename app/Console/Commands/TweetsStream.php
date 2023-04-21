@@ -50,7 +50,7 @@ class TweetsStream extends Command
     public function handle()
     {
         // set the hashtag we're listening to
-        $matchHash = "#Eurovision";
+        $matchHash = "#frapol";
         // start listening
         TwitterStreamingApi::publicStream()
             ->setLocale('en')

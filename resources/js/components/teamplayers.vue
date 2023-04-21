@@ -342,7 +342,7 @@
             // external API call and set most vars
             loadPlayers(e) {
                 // get the players (including qualifiers) from a particular team (e)
-                axios.get("https://v3.football.api-sports.io/players?league=4&season=2020&team=" + e, {
+                axios.get("https://v3.football.api-sports.io/players?league=1&season=2022&team=" + e, {
                     headers: {
                         "X-RapidAPI-Host": process.env.MIX_API_URL,
                         "X-RapidAPI-Key": process.env.MIX_API_KEY

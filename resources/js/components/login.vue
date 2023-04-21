@@ -112,9 +112,11 @@
             },
 
         },
+
         mounted() {
             document.getElementById('spoilerCheck').checked = this.spoiler;
         },
+
         computed : {
             maxHeight() {
                 return this.groups.length * 37 + 'px';

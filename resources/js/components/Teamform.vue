@@ -136,7 +136,7 @@
         background-color: white;
         float: left;
         margin-left: -9px;
-        box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+        box-shadow: rgba(0, 0, 0, 0.16) 0 3px 6px, rgba(0, 0, 0, 0.23) 0 3px 6px;
         overflow: hidden;
         position: relative;
     }
