@@ -1,19 +1,19 @@
 <template>
     <div>
         <div class="scoreboard_comp">
-            <scoreboard :data="data"></scoreboard>
+            <scoreboard :teller="this.teller" v-bind:data="this.data"></scoreboard>
         </div>
 
         <div class="lineup_home">
-            <lineup :data="data" team="hometeam"></lineup>
+            <lineup :data="this.data" team="hometeam"></lineup>
         </div>
 
         <div class="event_win">
-            <events-window :data="data"></events-window>
+            <events-window :data="this.data"></events-window>
         </div>
 
         <div class="lineup_away">
-            <lineup :data="data" team="awayteam"></lineup>
+            <lineup :data="this.data" team="awayteam"></lineup>
         </div>
 
         <div class="tweets_win">
@@ -21,7 +21,7 @@
         </div>
 
         <div class="stats_win">
-            <stats-win :data="data"></stats-win>
+            <stats-win v-bind:data="this.data"></stats-win>
         </div>
     </div>
 </template>
@@ -29,42 +29,48 @@
 <script>
     export default {
 
-        name: "Match",
-        props: ['matchid'],
-        data() {
-            return {
-                data: Object,
-            }
-        },
-
-        methods: {
-            callData() {
-                axios.get("https://v2.api-football.com/fixtures/id/" + this.matchid, {
-                    headers: {
-                        "X-RapidAPI-Host": "api-football-v1.p.rapidapi.com",
-                        "X-RapidAPI-Key": "b1ae4a3fca89630148dadaa295a0b5b7"
-                    }
-                }).then((response)=> {
-                    this.data = response.data.api.fixtures[0];
-                });
-            },
-
-            sayHello() {
-                alert('hello!');
-            }
-        },
-
-        mounted() {
-            this.callData();
-            // now refresh every one and a half minute
-
-            setInterval(() => {
-                this.callData();
-            }, 90000);
-
-
+    name: "Match",
+    props: ['matchid'],
+    data() {
+        return {
+            data: Object,
+            teller: 1,
         }
+    },
+
+    methods: {
+        callData() {
+            axios.get("https://v3.football.api-sports.io/fixtures?id=" + this.matchid, {
+                headers: {
+                    "x-rapidapi-host": process.env.MIX_API_URL,
+                    "x-rapidapi-key": process.env.MIX_API_KEY
+                }
+            }).then((response)=> {
+                console.log(response.data.response[0]);
+                this.data = response.data.response[0];
+                // if match is finished, stop the loading loop
+                // as to save api calls.
+                let MatchFinished = setInterval(() => {
+                    if(this.data.fixture.status.short === 'FT') {
+                        console.log('match is done');
+                        clearInterval(MatchFinished);
+                    }   else {
+                        this.callData();
+                    }
+                }, 15000);
+            });
+        },
+    },
+
+    mounted() {
+        this.callData();
+        console.log('data is loaded from mounted hook');
+        // now refresh every one and a half minute
+
+
+
     }
+}
 </script>
 
 <style>

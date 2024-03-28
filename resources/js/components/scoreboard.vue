@@ -3,7 +3,7 @@
     <div class="home_container">
         <img :src="home_img" v-cloak>
         <span class="countryhome" v-cloak>{{ home_team }}</span>
-        <span class="scorehome" v-cloak>{{ home_score}}</span>
+        <span class="scorehome" v-cloak>{{ home_score }}</span>
     </div>
     <div class="status_container">
         <span class="status" v-cloak>{{ status }}</span>
@@ -21,11 +21,8 @@
     export default {
         name: "scoreboard",
 
-        props: {
-            data: {
-                default: 'loading...'
-            }
-        },
+        props: ['data', 'teller']
+        ,
 
         data() {
             return {
@@ -41,20 +38,33 @@
         },
 
         watch: {
-            data: {
+           'data': {
+                deep: true,
                 immediate: false,
-                handler() {
-                    this.home_team = this.data.homeTeam.team_name;
-                    this.away_team = this.data.awayTeam.team_name;
-                    this.home_img = this.data.homeTeam.logo;
-                    this.away_img = this.data.awayTeam.logo;
-                    this.home_score = this.data.goalsHomeTeam;
-                    this.away_score = this.data.goalsAwayTeam;
-                    this.elapsed = this.data.elapsed;
-                    this.status = this.data.status;
+                handler(val, oldVal) {
+                    this.home_team = this.data.teams.home.name;
+                    this.away_team = this.data.teams.away.name;
+                    this.home_img = this.data.teams.home.logo;
+                    this.away_img = this.data.teams.away.logo;
+                    this.home_score = this.data.goals.home;
+                    this.away_score = this.data.goals.away;
+                    this.elapsed = this.data.fixture.status.elapsed;
+                    this.status = this.data.fixture.status.long;
                 }
             }
-        }
+        },
+
+        mounted() {
+          console.log("scoreboard is mounted");
+          console.log("data from scoreboard.vue mounted hook:" + this.data);
+
+          this.$nextTick(() => {
+              console.log("data from scoreboard.vue nextTick hook:" + this.data);
+          })
+        },
+        created() {
+            console.log("data from scoreboard.vue created hook:" + this.data);
+        },
     }
 </script>
 
@@ -63,7 +73,6 @@
         background-color: white;
         width: 1100px;
         height: 85px;
-
     }
 
     [v-cloak] {

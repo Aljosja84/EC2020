@@ -14,7 +14,7 @@ class AddPoolIDToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->unsignedBigInteger('pool_id');
+            $table->unsignedBigInteger('pool_id')->nullable();
         });
     }
 

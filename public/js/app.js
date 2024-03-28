@@ -2217,19 +2217,19 @@ __webpack_require__.r(__webpack_exports__);
       this.fulltime = true;
     },
     notice: function notice(e) {
-      if (e.team_id === this.hometeam) {
+      if (e.team.id === this.hometeam) {
         switch (e.type) {
           case "Goal":
-            var answer = '<span style="color: #CCC">(' + e.detail + ')</span> ' + e.player + ' <img src=' + assetBaseUrl + 'images/goal.png />';
+            var answer = '<span style="color: #CCC">(' + e.detail + ')</span> ' + e.player.name + ' <img src=' + assetBaseUrl + 'images/goal.png />';
             break;
 
           case "Card":
             var card = e.detail === 'Yellow Card' ? ' <img src=' + assetBaseUrl + 'images/yellowcard.png />' : ' <img src=' + assetBaseUrl + 'images/redcard.png />';
-            var answer = e.player + card;
+            var answer = e.player.name + card;
             break;
 
           case "Var":
-            var answer = '<span style="color: #CCC">(' + e.detail + ')</span>' + e.player + '&nbsp;<img src=' + assetBaseUrl + 'images/var.png />';
+            var answer = '<span style="color: #CCC">(' + e.detail + ')</span>' + e.player.name + '&nbsp;<img src=' + assetBaseUrl + 'images/var.png />';
             break;
 
           case "subst":
@@ -2239,16 +2239,16 @@ __webpack_require__.r(__webpack_exports__);
       } else {
         switch (e.type) {
           case "Goal":
-            var answer = '<img src=' + assetBaseUrl + 'images/goal.png /> ' + e.player + ' <span style="color: #CCC">(' + e.detail + ')</span>';
+            var answer = '<img src=' + assetBaseUrl + 'images/goal.png /> ' + e.player.name + ' <span style="color: #CCC">(' + e.detail + ')</span>';
             break;
 
           case "Card":
             var card = e.detail === 'Yellow Card' ? '<img src=' + assetBaseUrl + 'images/yellowcard.png /> ' : '<img src=' + assetBaseUrl + 'images/redcard.png /> ';
-            var answer = card + e.player;
+            var answer = card + e.player.name;
             break;
 
           case "Var":
-            var answer = '<img src=' + assetBaseUrl + 'images/var.png />&nbsp;' + e.player + ' <span style="color: #CCC">(' + e.detail + ')</span>';
+            var answer = '<img src=' + assetBaseUrl + 'images/var.png />&nbsp;' + e.player.name + ' <span style="color: #CCC">(' + e.detail + ')</span>';
             break;
 
           case "subst":
@@ -2260,56 +2260,56 @@ __webpack_require__.r(__webpack_exports__);
       return answer;
     },
     whichteam: function whichteam(e) {
-      return e.team_id === this.hometeam ? 'homeTeam' : 'awayTeam';
+      return e.team.id === this.hometeam ? 'homeTeam' : 'awayTeam';
     },
     whichPlayerHome: function whichPlayerHome(e) {
       /* --- notice: the API I'm consuming forced me to have this workaround ------*/
       // set teamname and the starting XI of that team
-      var teamname = e.teamName;
-      var team = this.fixture.lineups[teamname].startXI; // check if the event's player was in the starting XI
+      var teamname = e.team.id;
+      var team = this.fixture.lineups[0].startXI; // check if the event's player was in the starting XI
       // if so, that player will be subbed off in 99% of the cases
 
       for (var i = 0; i < team.length; ++i) {
-        if (team[i].player_id === e.player_id) {
+        if (team[i].player.id === e.player.id) {
           // if the player was in the starting XI, set the subbed on player in the subbed list
           // in case that player must also be subbed off due to injury or a coach's dismay
-          if (!this.priorSub.includes(e.assist_id)) {
-            this.priorSub.push(e.assist_id);
+          if (!this.priorSub.includes(e.assist.id)) {
+            this.priorSub.push(e.assist.id);
           }
 
-          return '<span style="color: #CCC">' + e.player + '</span> <img src=' + assetBaseUrl + 'images/sub_off.png /> ' + e.assist + ' <img src=' + assetBaseUrl + 'images/sub_on.png />';
+          return '<span style="color: #CCC">' + e.player.name + '</span> <img src=' + assetBaseUrl + 'images/sub_off.png /> ' + e.assist.name + ' <img src=' + assetBaseUrl + 'images/sub_on.png />';
         }
       } // check if the subbed player made a sub already
 
 
-      if (this.priorSub.includes(e.player_id)) {
-        return '<span style="color: #CCC">' + e.player + '</span> <img src=' + assetBaseUrl + 'images/sub_off.png /> ' + e.assist + ' <img src=' + assetBaseUrl + 'images/sub_on.png />';
+      if (this.priorSub.includes(e.player.id)) {
+        return '<span style="color: #CCC">' + e.player.name + '</span> <img src=' + assetBaseUrl + 'images/sub_off.png /> ' + e.assist.name + ' <img src=' + assetBaseUrl + 'images/sub_on.png />';
       }
 
-      return '<span style="color: #CCC">' + e.assist + '</span> <img src=' + assetBaseUrl + 'images/sub_off.png /> ' + e.player + ' <img src=' + assetBaseUrl + 'images/sub_on.png />';
+      return '<span style="color: #CCC">' + e.assist.name + '</span> <img src=' + assetBaseUrl + 'images/sub_off.png /> ' + e.player.name + ' <img src=' + assetBaseUrl + 'images/sub_on.png />';
     },
     whichPlayerAway: function whichPlayerAway(e) {
       // set teamname and the starting XI of that team
       var teamname = e.teamName;
-      var team = this.fixture.lineups[teamname].startXI; // check if the event's player was in the starting XI
+      var team = this.fixture.lineups[1].startXI; // check if the event's player was in the starting XI
       // if so, that player will be subbed off in 99% of the cases
 
       for (var i = 0; i < team.length; ++i) {
-        if (team[i].player_id === e.player_id) {
-          if (!this.priorSub.includes(e.assist_id)) {
-            this.priorSub.push(e.assist_id);
+        if (team[i].player.id === e.player.id) {
+          if (!this.priorSub.includes(e.assist.id)) {
+            this.priorSub.push(e.assist.id);
           }
 
-          return '<img src=' + assetBaseUrl + 'images/sub_on.png /> ' + e.assist + ' <img src=' + assetBaseUrl + 'images/sub_off.png /><span style="color: #CCC"> ' + e.player + '</span>';
+          return '<img src=' + assetBaseUrl + 'images/sub_on.png /> ' + e.assist.name + ' <img src=' + assetBaseUrl + 'images/sub_off.png /><span style="color: #CCC"> ' + e.player.name + '</span>';
         }
       } // check if the subbed player made a sub already
 
 
       if (this.priorSub.includes(e.player_id)) {
-        return '<img src=' + assetBaseUrl + 'images/sub_on.png /> ' + e.assist + ' <img src=' + assetBaseUrl + 'images/sub_off.png /><span style="color: #CCC"> ' + e.player + '</span>';
+        return '<img src=' + assetBaseUrl + 'images/sub_on.png /> ' + e.assist.name + ' <img src=' + assetBaseUrl + 'images/sub_off.png /><span style="color: #CCC"> ' + e.player.name + '</span>';
       }
 
-      return '<img src=' + assetBaseUrl + 'images/sub_on.png /> ' + e.player + ' <img src=' + assetBaseUrl + 'images/sub_off.png /><span style="color: #CCC"> ' + e.assist + '</span>';
+      return '<img src=' + assetBaseUrl + 'images/sub_on.png /> ' + e.player.name + ' <img src=' + assetBaseUrl + 'images/sub_off.png /><span style="color: #CCC"> ' + e.assist.name + '</span>';
     }
   },
   computed: {},
@@ -2319,9 +2319,9 @@ __webpack_require__.r(__webpack_exports__);
       handler: function handler() {
         this.fixture = this.data;
         this.events = this.data.events;
-        this.fulltime = this.data.statusShort === 'FT';
-        this.hometeam = this.data.homeTeam.team_id;
-        this.awayteam = this.data.awayTeam.team_id;
+        this.fulltime = this.data.fixture.status["short"] === 'FT';
+        this.hometeam = this.data.teams.home.id;
+        this.awayteam = this.data.teams.away.id;
       }
     }
   }
@@ -2437,34 +2437,38 @@ __webpack_require__.r(__webpack_exports__);
   props: ['matchid'],
   data: function data() {
     return {
-      data: Object
+      data: Object,
+      teller: 1
     };
   },
   methods: {
     callData: function callData() {
       var _this = this;
 
-      axios.get("https://v2.api-football.com/fixtures/id/" + this.matchid, {
+      axios.get("https://v3.football.api-sports.io/fixtures?id=" + this.matchid, {
         headers: {
-          "X-RapidAPI-Host": "api-football-v1.p.rapidapi.com",
-          "X-RapidAPI-Key": "b1ae4a3fca89630148dadaa295a0b5b7"
+          "x-rapidapi-host": "v3.football.api-sports.io",
+          "x-rapidapi-key": "6d32cb8b8dfb35683029e61b40dab0aa"
         }
       }).then(function (response) {
-        _this.data = response.data.api.fixtures[0];
+        console.log(response.data.response[0]);
+        _this.data = response.data.response[0]; // if match is finished, stop the loading loop
+        // as to save api calls.
+
+        var MatchFinished = setInterval(function () {
+          if (_this.data.fixture.status["short"] === 'FT') {
+            console.log('match is done');
+            clearInterval(MatchFinished);
+          } else {
+            _this.callData();
+          }
+        }, 15000);
       });
-    },
-    sayHello: function sayHello() {
-      alert('hello!');
     }
   },
   mounted: function mounted() {
-    var _this2 = this;
-
-    this.callData(); // now refresh every one and a half minute
-
-    setInterval(function () {
-      _this2.callData();
-    }, 90000);
+    this.callData();
+    console.log('data is loaded from mounted hook'); // now refresh every one and a half minute
   }
 });
 
@@ -2660,8 +2664,8 @@ __webpack_require__.r(__webpack_exports__);
       // get the 10 last matches that correspondents with the form
       axios.get("https://v3.football.api-sports.io/fixtures?team=" + e + "&last=10", {
         headers: {
-          "X-RapidAPI-Host": "api-football-v1.p.rapidapi.com",
-          "X-RapidAPI-Key": "b1ae4a3fca89630148dadaa295a0b5b7"
+          "X-RapidAPI-Host": "v3.football.api-sports.io",
+          "X-RapidAPI-Key": "6d32cb8b8dfb35683029e61b40dab0aa"
         }
       }).then(function (response) {
         var i = 1;
@@ -2898,7 +2902,9 @@ __webpack_require__.r(__webpack_exports__);
       _this3.typing_id = e.user.id;
       var message = {};
       message.user = e.user;
-      message.message = "is typing..."; // set a key for the list element
+      message.message = "is typing..."; //updated for new version
+
+      message.message_update = "busy typing..."; // set a key for the list element
 
       message.id = e.user.created_at; // if typing is false, remove the indicator from the messages array
       // this.typing ? this.messages.push(message) : this.messages.pop();
@@ -3240,8 +3246,8 @@ __webpack_require__.r(__webpack_exports__);
           return data;
         }],
         headers: {
-          "X-RapidAPI-Host": "api-football-v1.p.rapidapi.com",
-          "X-RapidAPI-Key": "b1ae4a3fca89630148dadaa295a0b5b7"
+          "X-RapidAPI-Host": "v3.football.api-sports.io",
+          "X-RapidAPI-Key": "6d32cb8b8dfb35683029e61b40dab0aa"
         }
       }).then(function (response) {
         // set all match data
@@ -3403,10 +3409,11 @@ __webpack_require__.r(__webpack_exports__);
     data: {
       immediate: false,
       handler: function handler() {
-        var team = this.team === 'hometeam' ? this.data.homeTeam.team_name : this.data.awayTeam.team_name;
+        // is this the hometeam or awayteam?
+        var team = this.team === 'hometeam' ? 0 : 1;
         this.players = this.data.lineups[team].startXI;
         this.subs = this.data.lineups[team].substitutes;
-        this.coach = this.data.lineups[team].coach;
+        this.coach = this.data.lineups[team].coach.name;
       }
     }
   }
@@ -3750,71 +3757,72 @@ __webpack_require__.r(__webpack_exports__);
     data: {
       immediate: false,
       handler: function handler() {
-        var stats = this.data.statistics;
+        var stats_home = this.data.statistics[0].statistics;
+        var stats_away = this.data.statistics[1].statistics;
         /* total shots -----------------------------------------------------------------------------------*/
 
-        this.total_shots_home = parseInt(stats["Total Shots"].home) || 0;
-        this.total_shots_away = parseInt(stats["Total Shots"].away) || 0;
+        this.total_shots_home = parseInt(stats_home[2].value) || 0;
+        this.total_shots_away = parseInt(stats_away[2].value) || 0;
         this.total_shots = this.total_shots_home + this.total_shots_away;
         this.total_shots_home_bar = Math.round(this.total_shots_home / this.total_shots * 100);
         this.total_shots_away_bar = Math.round(this.total_shots_away / this.total_shots * 100);
         /* shots on goal ---------------------------------------------------------------------------------*/
 
-        this.shots_on_goal_home = parseInt(stats["Shots on Goal"].home) || 0;
-        this.shots_on_goal_away = parseInt(stats["Shots on Goal"].away) || 0;
+        this.shots_on_goal_home = parseInt(stats_home[0].value) || 0;
+        this.shots_on_goal_away = parseInt(stats_away[0].value) || 0;
         this.total_shots_on_goal = this.shots_on_goal_home + this.shots_on_goal_away;
         this.shots_on_goal_home_bar = Math.round(this.shots_on_goal_home / this.total_shots_on_goal * 100);
         this.shots_on_goal_away_bar = Math.round(this.shots_on_goal_away / this.total_shots_on_goal * 100);
         /* fouls -----------------------------------------------------------------------------------------*/
 
-        this.fouls_home = parseInt(stats["Fouls"].home) || 0;
-        this.fouls_away = parseInt(stats["Fouls"].away) || 0;
+        this.fouls_home = parseInt(stats_home[6].value) || 0;
+        this.fouls_away = parseInt(stats_away[6].value) || 0;
         this.total_fouls = this.fouls_home + this.fouls_away;
         this.fouls_home_bar = Math.round(this.fouls_home / this.total_fouls * 100);
         this.fouls_away_bar = Math.round(this.fouls_away / this.total_fouls * 100);
         /* corner kicks ----------------------------------------------------------------------------------*/
 
-        this.corners_home = parseInt(stats["Corner Kicks"].home) || 0;
-        this.corners_away = parseInt(stats["Corner Kicks"].away) || 0;
+        this.corners_home = parseInt(stats_home[7].value) || 0;
+        this.corners_away = parseInt(stats_away[7].value) || 0;
         this.total_corners = this.corners_home + this.corners_away;
         this.corners_home_bar = Math.round(this.corners_home / this.total_corners * 100);
         this.corners_away_bar = Math.round(this.corners_away / this.total_corners * 100);
         /* offsides --------------------------------------------------------------------------------------*/
 
-        this.offside_home = parseInt(stats["Offsides"].home) || 0;
-        this.offside_away = parseInt(stats["Offsides"].away) || 0;
+        this.offside_home = parseInt(stats_home[8].value) || 0;
+        this.offside_away = parseInt(stats_away[8].value) || 0;
         this.total_offside = this.offside_home + this.offside_away;
         this.offside_home_bar = Math.round(this.offside_home / this.total_offside * 100);
         this.offside_away_bar = Math.round(this.offside_away / this.total_offside * 100);
         /* ball possession -------------------------------------------------------------------------------*/
 
-        this.possession_home = stats["Ball Possession"].home || 0;
-        this.possession_away = stats["Ball Possession"].away || 0;
+        this.possession_home = stats_home[9].value || 0;
+        this.possession_away = stats_away[9].value || 0;
         /* yellow cards ----------------------------------------------------------------------------------*/
 
-        this.yellow_cards_home = parseInt(stats["Yellow Cards"].home) || 0;
-        this.yellow_cards_away = parseInt(stats["Yellow Cards"].away) || 0;
+        this.yellow_cards_home = parseInt(stats_home[10].value) || 0;
+        this.yellow_cards_away = parseInt(stats_away[10].value) || 0;
         this.total_yellow_cards = this.yellow_cards_home + this.yellow_cards_away;
         this.yellow_cards_home_bar = Math.round(this.yellow_cards_home / this.total_yellow_cards * 100);
         this.yellow_cards_away_bar = Math.round(this.yellow_cards_away / this.total_yellow_cards * 100);
         /* red cards -------------------------------------------------------------------------------------*/
 
-        this.red_cards_home = parseInt(stats["Red Cards"].home) || 0;
-        this.red_cards_away = parseInt(stats["Red Cards"].away) || 0;
+        this.red_cards_home = parseInt(stats_home[11].value) || 0;
+        this.red_cards_away = parseInt(stats_away[11].value) || 0;
         this.total_red_cards = this.red_cards_home + this.red_cards_away;
         this.red_cards_home_bar = Math.round(this.red_cards_home / this.total_red_cards * 100);
         this.red_cards_away_bar = Math.round(this.red_cards_away / this.total_red_cards * 100);
         /* total passes ----------------------------------------------------------------------------------*/
 
-        this.passes_home = parseInt(stats["Total passes"].home) || 0;
-        this.passes_away = parseInt(stats["Total passes"].away) || 0;
+        this.passes_home = parseInt(stats_home[13].value) || 0;
+        this.passes_away = parseInt(stats_away[13].value) || 0;
         this.total_passes = this.passes_home + this.passes_away;
         this.passes_home_bar = Math.round(this.passes_home / this.total_passes * 100);
         this.passes_away_bar = Math.round(this.passes_away / this.total_passes * 100);
         /* pass accuracy ---------------------------------------------------------------------------------*/
 
-        this.passes_acc_home = stats["Passes %"].home || 0;
-        this.passes_acc_away = stats["Passes %"].away || 0;
+        this.passes_acc_home = stats_home[15].value || 0;
+        this.passes_acc_away = stats_away[15].value || 0;
       }
     }
   }
@@ -4016,8 +4024,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       // external API call and
       axios.get("https://v3.football.api-sports.io/fixtures?team=" + e + "&next=1", {
         headers: {
-          "X-RapidAPI-Host": "api-football-v1.p.rapidapi.com",
-          "X-RapidAPI-Key": "b1ae4a3fca89630148dadaa295a0b5b7"
+          "X-RapidAPI-Host": "v3.football.api-sports.io",
+          "X-RapidAPI-Key": "6d32cb8b8dfb35683029e61b40dab0aa"
         }
       }).then(function (response) {
         _this2.timetowait = response.data.response[0].fixture.date;
@@ -4136,11 +4144,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "scoreboard",
-  props: {
-    data: {
-      "default": 'loading...'
-    }
-  },
+  props: ['data', 'teller'],
   data: function data() {
     return {
       home_team: '',
@@ -4154,19 +4158,32 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   watch: {
-    data: {
+    'data': {
+      deep: true,
       immediate: false,
-      handler: function handler() {
-        this.home_team = this.data.homeTeam.team_name;
-        this.away_team = this.data.awayTeam.team_name;
-        this.home_img = this.data.homeTeam.logo;
-        this.away_img = this.data.awayTeam.logo;
-        this.home_score = this.data.goalsHomeTeam;
-        this.away_score = this.data.goalsAwayTeam;
-        this.elapsed = this.data.elapsed;
-        this.status = this.data.status;
+      handler: function handler(val, oldVal) {
+        this.home_team = this.data.teams.home.name;
+        this.away_team = this.data.teams.away.name;
+        this.home_img = this.data.teams.home.logo;
+        this.away_img = this.data.teams.away.logo;
+        this.home_score = this.data.goals.home;
+        this.away_score = this.data.goals.away;
+        this.elapsed = this.data.fixture.status.elapsed;
+        this.status = this.data.fixture.status["long"];
       }
     }
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    console.log("scoreboard is mounted");
+    console.log("data from scoreboard.vue mounted hook:" + this.data);
+    this.$nextTick(function () {
+      console.log("data from scoreboard.vue nextTick hook:" + _this.data);
+    });
+  },
+  created: function created() {
+    console.log("data from scoreboard.vue created hook:" + this.data);
   }
 });
 
@@ -4564,12 +4581,14 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       var _this2 = this;
 
       // get the players (including qualifiers) from a particular team (e)
-      axios.get("https://v3.football.api-sports.io/players?league=1&season=2022&team=" + e, {
+      axios.get("https://v3.football.api-sports.io/players?league=4&season=2020&team=" + e, {
         headers: {
-          "X-RapidAPI-Host": "api-football-v1.p.rapidapi.com",
-          "X-RapidAPI-Key": "b1ae4a3fca89630148dadaa295a0b5b7"
+          "x-rapidapi-host": "v3.football.api-sports.io",
+          "x-rapidapi-key": "6d32cb8b8dfb35683029e61b40dab0aa"
         }
       }).then(function (response) {
+        console.log(response); //console.log(process.env.MIX_VUE_APP_NAME);
+
         response.data.response.forEach(function (element) {
           // this is the main array with all players data in it
           _this2.playersArr.push(element);
@@ -4852,8 +4871,8 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get("https://v3.football.api-sports.io/teams/statistics?league=4&season=2020&team=" + e, {
         headers: {
-          "X-RapidAPI-Host": "api-football-v1.p.rapidapi.com",
-          "X-RapidAPI-Key": "b1ae4a3fca89630148dadaa295a0b5b7"
+          "X-RapidAPI-Host": "v3.football.api-sports.io",
+          "X-RapidAPI-Key": "6d32cb8b8dfb35683029e61b40dab0aa"
         }
       }).then(function (response) {
         e = response.data.response;
@@ -5192,8 +5211,8 @@ window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js")
 window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/dist/web/pusher.js");
 window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
   broadcaster: 'pusher',
-  key: "b058daf2bad752686e28",
-  cluster: "eu",
+  key: "",
+  cluster: "mt1",
   forceTLS: true
 });
 
@@ -23138,7 +23157,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#container_countrylist {\n    width: 440px;\n    height: 360px;\n    position: absolute;\n    background: rgb(240,240,241);\n    background: linear-gradient(180deg, rgba(240,240,241,1) 0%, rgba(255,255,255,1) 100%);\n}\n#container_countries {\n    float: left;\n}\n#container_avatars {\n    float: left;\n}\n.choose_item {\n    font-family: 'Oswald', sans-serif;\n    font-size: small;\n    letter-spacing: .03rem;\n    color: #3382a0;\n    text-align: left;\n    width: 220px;\n    height:20px;\n    padding-left: 5px;\n}\n#country_flags, #avatars {\n    border-radius: 8px;\n    margin-right: 25px;\n    padding: 10px 0 10px 15px;\n    text-align: left;\n    float: left;\n    width: 195px;\n    height: 340px;\n    overflow-y: scroll;\n    overflow-x: hidden;\n    transition: all 800ms cubic-bezier(1.000, 0.000, 0.000, 1.000); /* easeInOutExpo */\n    transition-timing-function: cubic-bezier(1.000, 0.000, 0.000, 1.000); /* easeInOutExpo */\n    /* scrollbar vars */\n    --scrollbarBG: #90A4AE;\n    --thumbBG: #90A4AE;\n    scrollbar-width: thin;\n    scrollbar-color: var(--thumbBG) var(--scrollbarBG);\n    scroll-behavior: smooth;\n}\n#country_list-item, #avatar_list-item {\n    border: 1px solid #ccc;\n    border-radius: 6px;\n    padding: 6px;\n    transition: all 0.3s ease-out;\n    display: inline-block;\n    margin: 3px;\n    cursor: pointer;\n    background-color: #efeded;\n    box-shadow: inset 0 2px 0 0 hsla(0,0%,100%,0.8);\n}\n#country_list-item:hover, #avatar_list-item:hover {\n    background-color: #dedcdc;\n}\n#country_flags::-webkit-scrollbar, #avatars::-webkit-scrollbar {\n    width: 7px;\n}\n#country_flags::-webkit-scrollbar-track, #avatars::-webkit-scrollbar-track {\n    background: var(--scrollbarBG);\n    display: none;\n    -webkit-box-shadow: none;\n}\n#country_flags::-webkit-scrollbar-thumb, #avatars::-webkit-scrollbar-thumb {\n    background-color: var(--thumbBG) ;\n    border-radius: 6px;\n    border: 3px solid var(--scrollbarBG);\n}\n.tippy-tooltip.login-theme {\n    font-family: 'Oswald', sans-serif;\n    background-color: #ccc;\n    color: #3382a0;\n    font-size: 12px;\n    box-shadow: inset 0 1px 0 0 hsla(0,0%,100%,0.8);\n    border: 1px solid #999898;\n}\n.tippy-tooltip.login-theme .tippy-roundarrow{\n    fill: #ccc;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#container_countrylist {\n    width: 440px;\n    height: 360px;\n    position: absolute;\n    background: rgb(240,240,241);\n    background: linear-gradient(180deg, rgba(240,240,241,1) 0%, rgba(255,255,255,1) 100%);\n}\n#container_countries {\n    float: left;\n}\n#container_avatars {\n    float: left;\n}\n.choose_item {\n    font-family: 'Oswald', sans-serif;\n    font-size: small;\n    letter-spacing: .03rem;\n    color: #3382a0;\n    text-align: left;\n    width: 220px;\n    height:20px;\n    padding-left: 5px;\n}\n#country_flags, #avatars {\n    border-radius: 8px;\n    margin-right: 25px;\n    padding: 10px 0 10px 15px;\n    text-align: left;\n    float: left;\n    width: 195px;\n    height: 340px;\n    overflow-y: scroll;\n    overflow-x: hidden;\n    transition: all 800ms cubic-bezier(1.000, 0.000, 0.000, 1.000); /* easeInOutExpo */\n    transition-timing-function: cubic-bezier(1.000, 0.000, 0.000, 1.000); /* easeInOutExpo */\n    /* scrollbar vars */\n    --scrollbarBG: #90A4AE;\n    --thumbBG: #90A4AE;\n    scroll-behavior: smooth;\n}\n#country_list-item, #avatar_list-item {\n    border: 1px solid #ccc;\n    border-radius: 6px;\n    padding: 6px;\n    transition: all 0.3s ease-out;\n    display: inline-block;\n    margin: 3px;\n    cursor: pointer;\n    background-color: #efeded;\n    box-shadow: inset 0 2px 0 0 hsla(0,0%,100%,0.8);\n}\n#country_list-item:hover, #avatar_list-item:hover {\n    background-color: #dedcdc;\n}\n#country_flags::-webkit-scrollbar, #avatars::-webkit-scrollbar {\n    width: 7px;\n}\n#country_flags::-webkit-scrollbar-track, #avatars::-webkit-scrollbar-track {\n    background: var(--scrollbarBG);\n    display: none;\n    -webkit-box-shadow: none;\n}\n#country_flags::-webkit-scrollbar-thumb, #avatars::-webkit-scrollbar-thumb {\n    background-color: var(--thumbBG) ;\n    border-radius: 6px;\n    border: 3px solid var(--scrollbarBG);\n}\n.tippy-tooltip.login-theme {\n    font-family: 'Oswald', sans-serif;\n    background-color: #ccc;\n    color: #3382a0;\n    font-size: 12px;\n    box-shadow: inset 0 1px 0 0 hsla(0,0%,100%,0.8);\n    border: 1px solid #999898;\n}\n.tippy-tooltip.login-theme .tippy-roundarrow{\n    fill: #ccc;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -23240,7 +23259,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.container[data-v-324b041a] {\n    background-color: white;\n    height: 588px;\n    width: 250px;\n    overflow-y: auto;\n}\n.header[data-v-324b041a] {\n    font-family: 'Oswald', sans-serif;\n    font-size: 11px;\n    line-height: 11px;\n    background-color: #f5f7f9;\n    color: #515151;\n    height: 26px;\n    padding: 8px 0 5px 24px;\n    border-bottom: 1px solid #e3e7ed;\n    text-transform: uppercase;\n}\n.non_player[data-v-324b041a] {\n    font-family: 'Roboto', sans-serif;\n    font-size: 12px;\n    line-height: 12px;\n    color: #515151;\n    border-bottom: 1px solid #e3e7ed;\n    height: 26px;\n    padding: 7px 0 5px 54px;\n}\n.player[data-v-324b041a] {\n    font-family: 'Roboto', sans-serif;\n    font-size: 12px;\n    line-height: 12px;\n    color: #515151;\n    border-bottom: 1px solid #e3e7ed;\n    height: 26px;\n    padding: 7px 0 5px 24px;\n}\n.player_number[data-v-324b041a] {\n    text-align: left;\n    display: inline-block;\n    color: #9c9fa4;\n    min-width: 30px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.container[data-v-324b041a] {\n    background-color: white;\n    height: 588px;\n    width: 250px;\n    overflow-y: auto;\n}\n.header[data-v-324b041a] {\n    font-family: ' Oswald', sans-serif;\n    font-size: 11px;\n    line-height: 11px;\n    background-color: #f5f7f9;\n    color: #515151;\n    height: 26px;\n    padding: 8px 0 5px 24px;\n    border-bottom: 1px solid #e3e7ed;\n    text-transform: uppercase;\n}\n.non_player[data-v-324b041a] {\n    font-family: 'Roboto', sans-serif;\n    font-size: 12px;\n    line-height: 12px;\n    color: #515151;\n    border-bottom: 1px solid #e3e7ed;\n    height: 26px;\n    padding: 7px 0 5px 54px;\n}\n.player[data-v-324b041a] {\n    font-family: 'Roboto', sans-serif;\n    font-size: 12px;\n    line-height: 12px;\n    color: #515151;\n    border-bottom: 1px solid #e3e7ed;\n    height: 26px;\n    padding: 7px 0 5px 24px;\n}\n.player_number[data-v-324b041a] {\n    text-align: left;\n    display: inline-block;\n    color: #9c9fa4;\n    min-width: 30px;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -23459,7 +23478,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.container[data-v-5b6abe5d] {\n    width: 1100px;\n    height: 475px;\n    background-color: #00ffc4;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.container[data-v-5b6abe5d] {\r\n    width: 1100px;\r\n    height: 475px;\r\n    background-color: #00ffc4;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -64431,7 +64450,7 @@ var render = function () {
                 return _c(
                   "li",
                   {
-                    key: event.elapsed + event.type,
+                    key: event.time.elapsed + event.type,
                     class: _vm.whichteam(event),
                   },
                   [
@@ -64442,7 +64461,7 @@ var render = function () {
                     ]),
                     _vm._v(" "),
                     _c("div", { class: _vm.whichteam(event) + "point" }, [
-                      _vm._v(_vm._s(event.elapsed + "'")),
+                      _vm._v(_vm._s(event.time.elapsed + "'")),
                     ]),
                   ]
                 )
@@ -64566,28 +64585,28 @@ var render = function () {
     _c(
       "div",
       { staticClass: "scoreboard_comp" },
-      [_c("scoreboard", { attrs: { data: _vm.data } })],
+      [_c("scoreboard", { attrs: { teller: this.teller, data: this.data } })],
       1
     ),
     _vm._v(" "),
     _c(
       "div",
       { staticClass: "lineup_home" },
-      [_c("lineup", { attrs: { data: _vm.data, team: "hometeam" } })],
+      [_c("lineup", { attrs: { data: this.data, team: "hometeam" } })],
       1
     ),
     _vm._v(" "),
     _c(
       "div",
       { staticClass: "event_win" },
-      [_c("events-window", { attrs: { data: _vm.data } })],
+      [_c("events-window", { attrs: { data: this.data } })],
       1
     ),
     _vm._v(" "),
     _c(
       "div",
       { staticClass: "lineup_away" },
-      [_c("lineup", { attrs: { data: _vm.data, team: "awayteam" } })],
+      [_c("lineup", { attrs: { data: this.data, team: "awayteam" } })],
       1
     ),
     _vm._v(" "),
@@ -64596,7 +64615,7 @@ var render = function () {
     _c(
       "div",
       { staticClass: "stats_win" },
-      [_c("stats-win", { attrs: { data: _vm.data } })],
+      [_c("stats-win", { attrs: { data: this.data } })],
       1
     ),
   ])
@@ -65538,9 +65557,9 @@ var render = function () {
         _vm._l(_vm.players, function (player) {
           return _c("li", { staticClass: "player" }, [
             _c("span", { staticClass: "player_number" }, [
-              _vm._v(_vm._s(player.number)),
+              _vm._v(_vm._s(player.player.number)),
             ]),
-            _vm._v(_vm._s(player.player)),
+            _vm._v(_vm._s(player.player.name)),
           ])
         }),
         _vm._v(" "),
@@ -65549,9 +65568,9 @@ var render = function () {
         _vm._l(_vm.subs, function (player) {
           return _c("li", { staticClass: "player" }, [
             _c("span", { staticClass: "player_number" }, [
-              _vm._v(_vm._s(player.number)),
+              _vm._v(_vm._s(player.player.number)),
             ]),
-            _vm._v(_vm._s(player.player)),
+            _vm._v(_vm._s(player.player.name)),
           ])
         }),
       ],

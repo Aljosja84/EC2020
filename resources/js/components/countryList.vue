@@ -5,7 +5,7 @@
         <div id="country_flags" :style="flaglistStyle">
             <transition-group name="country_list" tag="div">
                 <span v-for="country in countries" :key="country.id" id="country_list-item" @click="chooseFlagItem(country)" :content="country.name" v-tippy="{placement: 'top', appendTo: 'parent', arrow : true, arrowType : 'round', animation : 'scale', animateFill: true, followCursor: 'horizontal', theme: 'login'}">
-                    <img :src="'/images/country_flags/' + country.flag_url" height="60px" width="60px" alt="country"></img>
+                    <img :src="'/images/country_flags/' + country.flag_url" height="60px" width="60px" alt="country" />
                 </span>
             </transition-group>
         </div>
@@ -16,7 +16,7 @@
         <div id="avatars" :style="avatarslistStyle">
             <transition-group name="country_list" tag="div">
             <span v-for="gamer in avatars" :key="gamer.id" id="avatar_list-item" @click="chooseAvaItem(gamer)">
-                <img :src="'/images/avatars/' + gamer.url" height="60px" width="60px" alt="profilepic"></img>
+                <img :src="'/images/avatars/' + gamer.url" height="60px" width="60px" alt="profilepic" />
             </span>
             </transition-group>
         </div>
@@ -139,8 +139,6 @@
         /* scrollbar vars */
         --scrollbarBG: #90A4AE;
         --thumbBG: #90A4AE;
-        scrollbar-width: thin;
-        scrollbar-color: var(--thumbBG) var(--scrollbarBG);
         scroll-behavior: smooth;
     }
 

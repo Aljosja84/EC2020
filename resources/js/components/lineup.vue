@@ -4,9 +4,9 @@
             <li class="header">coach</li>
             <li class="non_player">{{ coach }}</li>
             <li class="header">starting XI</li>
-            <li v-for="player in players" class="player"><span class="player_number">{{player.number}}</span>{{player.player}}</li>
+            <li v-for="player in players" class="player"><span class="player_number">{{player.player.number}}</span>{{player.player.name}}</li>
             <li class="header">substitutes</li>
-            <li v-for="player in subs" class="player"><span class="player_number">{{player.number}}</span>{{player.player}}</li>
+            <li v-for="player in subs" class="player"><span class="player_number">{{player.player.number}}</span>{{player.player.name}}</li>
         </ul>
     </div>
 </template>
@@ -36,10 +36,11 @@
             data: {
                 immediate: false,
                 handler() {
-                    var team = this.team === 'hometeam' ? this.data.homeTeam.team_name : this.data.awayTeam.team_name;
+                    // is this the hometeam or awayteam?
+                    let team = this.team === 'hometeam' ? 0 : 1;
                     this.players = this.data.lineups[team].startXI;
                     this.subs = this.data.lineups[team].substitutes;
-                    this.coach = this.data.lineups[team].coach;
+                    this.coach = this.data.lineups[team].coach.name;
                 }
             }
         },
@@ -56,7 +57,7 @@
     }
 
     .header {
-        font-family: 'Oswald', sans-serif;
+        font-family: ' Oswald', sans-serif;
         font-size: 11px;
         line-height: 11px;
         background-color: #f5f7f9;

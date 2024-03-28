@@ -149,6 +149,8 @@
                     var message = {};
                     message.user = e.user;
                     message.message = "is typing...";
+                    //updated for new version
+                    message.message_update = "busy typing...";
                     // set a key for the list element
                     message.id = e.user.created_at;
                     // if typing is false, remove the indicator from the messages array

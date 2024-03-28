@@ -4,11 +4,11 @@
             <ul>
                 <transition-group name="new_event">
                     <li class="homeTeam" v-bind:key="timer"><div class="homeTeamcontent"></div><div class="clock"><img :src="'/images/start_timer.png'"></div></li>
-                    <li v-for="event in events" v-bind:class="whichteam(event)" v-bind:key="event.elapsed+event.type">
+                    <li v-for="event in events" v-bind:class="whichteam(event)" v-bind:key="event.time.elapsed+event.type">
                         <div v-bind:class="whichteam(event) + 'content'">
                             <p v-html="notice(event)"></p>
                         </div>
-                        <div v-bind:class="whichteam(event) + 'point'">{{ event.elapsed + '\'' }}</div>
+                        <div v-bind:class="whichteam(event) + 'point'">{{ event.time.elapsed + '\'' }}</div>
                     </li>
                     <li v-show="fulltime" class="homeTeam" v-bind:key="fulltime"><div class="homeTeamcontent"></div><div class="fulltime">FULL TIME</div></li>
                 </transition-group>
@@ -42,20 +42,20 @@
         methods: {
             addEvent() {
                 this.fulltime = true;
-                },
+            },
 
             notice(e) {
-                if(e.team_id === this.hometeam) {
+                if(e.team.id === this.hometeam) {
                     switch(e.type) {
                         case "Goal":
-                            var answer = '<span style="color: #CCC">(' + e.detail + ')</span> ' + e.player + ' <img src=' + assetBaseUrl + 'images/goal.png />';
+                            var answer = '<span style="color: #CCC">(' + e.detail + ')</span> ' + e.player.name + ' <img src=' + assetBaseUrl + 'images/goal.png />';
                             break;
                         case "Card":
                             var card = e.detail === 'Yellow Card' ? ' <img src=' + assetBaseUrl + 'images/yellowcard.png />' : ' <img src=' + assetBaseUrl + 'images/redcard.png />';
-                            var answer = e.player + card;
+                            var answer = e.player.name + card;
                             break;
                         case "Var":
-                            var answer ='<span style="color: #CCC">(' + e.detail + ')</span>' + e.player + '&nbsp;<img src=' + assetBaseUrl + 'images/var.png />';
+                            var answer ='<span style="color: #CCC">(' + e.detail + ')</span>' + e.player.name + '&nbsp;<img src=' + assetBaseUrl + 'images/var.png />';
                             break;
                         case "subst":
                             var answer = this.whichPlayerHome(e);
@@ -64,14 +64,14 @@
                 }   else {
                     switch(e.type) {
                         case "Goal":
-                            var answer = '<img src=' + assetBaseUrl + 'images/goal.png /> ' + e.player + ' <span style="color: #CCC">(' + e.detail + ')</span>';
+                            var answer = '<img src=' + assetBaseUrl + 'images/goal.png /> ' + e.player.name + ' <span style="color: #CCC">(' + e.detail + ')</span>';
                             break;
                         case "Card":
                             var card = e.detail === 'Yellow Card' ? '<img src=' + assetBaseUrl + 'images/yellowcard.png /> ' : '<img src=' + assetBaseUrl + 'images/redcard.png /> ';
-                            var answer = card + e.player;
+                            var answer = card + e.player.name;
                             break;
                         case "Var":
-                            var answer = '<img src=' + assetBaseUrl + 'images/var.png />&nbsp;' + e.player + ' <span style="color: #CCC">(' + e.detail + ')</span>';
+                            var answer = '<img src=' + assetBaseUrl + 'images/var.png />&nbsp;' + e.player.name + ' <span style="color: #CCC">(' + e.detail + ')</span>';
                             break;
                         case "subst":
                             var answer = this.whichPlayerAway(e);
@@ -82,57 +82,56 @@
             },
 
             whichteam(e) {
-                return e.team_id === this.hometeam ? 'homeTeam' : 'awayTeam';
+                return e.team.id === this.hometeam ? 'homeTeam' : 'awayTeam';
             },
 
             whichPlayerHome(e) {
                 /* --- notice: the API I'm consuming forced me to have this workaround ------*/
                 // set teamname and the starting XI of that team
-                var teamname = e.teamName;
-                var team = this.fixture.lineups[teamname].startXI;
-
+                var teamname = e.team.id;
+                var team = this.fixture.lineups[0].startXI;
                 // check if the event's player was in the starting XI
                 // if so, that player will be subbed off in 99% of the cases
                 for (var i = 0; i < team.length; ++i) {
-                    if (team[i].player_id === e.player_id) {
+                    if (team[i].player.id === e.player.id) {
                         // if the player was in the starting XI, set the subbed on player in the subbed list
                         // in case that player must also be subbed off due to injury or a coach's dismay
-                        if (!this.priorSub.includes(e.assist_id))
+                        if (!this.priorSub.includes(e.assist.id))
                         {
-                            this.priorSub.push(e.assist_id);
+                            this.priorSub.push(e.assist.id);
                         }
-                        return '<span style="color: #CCC">' + e.player + '</span> <img src=' + assetBaseUrl + 'images/sub_off.png /> ' + e.assist + ' <img src=' + assetBaseUrl + 'images/sub_on.png />';
+                        return '<span style="color: #CCC">' + e.player.name + '</span> <img src=' + assetBaseUrl + 'images/sub_off.png /> ' + e.assist.name + ' <img src=' + assetBaseUrl + 'images/sub_on.png />';
                     }
                 }
                 // check if the subbed player made a sub already
-                if(this.priorSub.includes(e.player_id)) {
-                    return '<span style="color: #CCC">' + e.player + '</span> <img src=' + assetBaseUrl + 'images/sub_off.png /> ' + e.assist + ' <img src=' + assetBaseUrl + 'images/sub_on.png />';
+                if(this.priorSub.includes(e.player.id)) {
+                    return '<span style="color: #CCC">' + e.player.name + '</span> <img src=' + assetBaseUrl + 'images/sub_off.png /> ' + e.assist.name + ' <img src=' + assetBaseUrl + 'images/sub_on.png />';
                 }
 
-                return '<span style="color: #CCC">' + e.assist + '</span> <img src=' + assetBaseUrl + 'images/sub_off.png /> ' + e.player + ' <img src=' + assetBaseUrl + 'images/sub_on.png />';
+                return '<span style="color: #CCC">' + e.assist.name + '</span> <img src=' + assetBaseUrl + 'images/sub_off.png /> ' + e.player.name + ' <img src=' + assetBaseUrl + 'images/sub_on.png />';
             },
 
             whichPlayerAway(e) {
                 // set teamname and the starting XI of that team
                 var teamname = e.teamName;
-                var team = this.fixture.lineups[teamname].startXI;
+                var team = this.fixture.lineups[1].startXI;
                 // check if the event's player was in the starting XI
                 // if so, that player will be subbed off in 99% of the cases
                 for (var i = 0; i < team.length; ++i) {
-                    if (team[i].player_id === e.player_id) {
-                        if (!this.priorSub.includes(e.assist_id))
+                    if (team[i].player.id === e.player.id) {
+                        if (!this.priorSub.includes(e.assist.id))
                         {
-                            this.priorSub.push(e.assist_id);
+                            this.priorSub.push(e.assist.id);
                         }
-                        return '<img src=' + assetBaseUrl + 'images/sub_on.png /> ' + e.assist + ' <img src=' + assetBaseUrl + 'images/sub_off.png /><span style="color: #CCC"> ' + e.player + '</span>';
+                        return '<img src=' + assetBaseUrl + 'images/sub_on.png /> ' + e.assist.name + ' <img src=' + assetBaseUrl + 'images/sub_off.png /><span style="color: #CCC"> ' + e.player.name + '</span>';
                     }
                 }
                 // check if the subbed player made a sub already
                 if(this.priorSub.includes(e.player_id)) {
-                    return '<img src=' + assetBaseUrl + 'images/sub_on.png /> ' + e.assist + ' <img src=' + assetBaseUrl + 'images/sub_off.png /><span style="color: #CCC"> ' + e.player + '</span>';
+                    return '<img src=' + assetBaseUrl + 'images/sub_on.png /> ' + e.assist.name + ' <img src=' + assetBaseUrl + 'images/sub_off.png /><span style="color: #CCC"> ' + e.player.name + '</span>';
                 }
 
-                return '<img src=' + assetBaseUrl + 'images/sub_on.png /> ' + e.player + ' <img src=' + assetBaseUrl + 'images/sub_off.png /><span style="color: #CCC"> ' + e.assist + '</span>';
+                return '<img src=' + assetBaseUrl + 'images/sub_on.png /> ' + e.player.name + ' <img src=' + assetBaseUrl + 'images/sub_off.png /><span style="color: #CCC"> ' + e.assist.name + '</span>';
             },
 
         },
@@ -147,9 +146,9 @@
                 handler() {
                     this.fixture = this.data;
                     this.events = this.data.events;
-                    this.fulltime =this.data.statusShort === 'FT';
-                    this.hometeam = this.data.homeTeam.team_id;
-                    this.awayteam = this.data.awayTeam.team_id;
+                    this.fulltime = this.data.fixture.status.short === 'FT';
+                    this.hometeam = this.data.teams.home.id;
+                    this.awayteam = this.data.teams.away.id;
                 }
             }
         }
