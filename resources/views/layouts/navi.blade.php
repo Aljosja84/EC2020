@@ -183,9 +183,16 @@
                     </li>
                 </ul>
             </div>
-            <div id="login">
+            <div id="notify_user_icons">
                 @auth
-                    <login :unread="3" username={{ $user->name }} avatar={{ $user->avatar->ava_url() }} :spoiler="false" :groups='{{ $user->pool }}'></login>
+                    <div style="padding-top: 10px">
+                        <button style="border:none">
+                            <div id="icon_notification"><span class="notify-bubble">3</span></div>
+                        </button>
+                    </div>
+                    <div>
+                        <login :unread="3" username={{ $user->name }} avatar={{ $user->avatar->ava_url() }} :spoiler="false" :groups='{{ $user->pool }}'></login>
+                    </div>
                 @endauth
                 @guest
                     <a href="{{ route('login') }}" class="login_button">Log in</a>

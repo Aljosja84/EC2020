@@ -52,5 +52,5 @@ const app = new Vue({
 });
 
 const login = new Vue({
-    el: '#login',
+    el: '#notify_user_icons',
 });

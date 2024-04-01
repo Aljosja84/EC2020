@@ -1,12 +1,9 @@
 <template>
-    <div>
-        <div id="login_icons">
-            <div id="icon_notification" @click="readMessages"><span v-if="unread" class="notify-bubble">{{ unread }}</span></div>
-            <div id="icon_user" @click="toggleMenu" v-bind:style="{ backgroundImage: 'url(' + avatar + ')' }"></div>
-        </div>
+    <div id="wrapper_icon">
+        <!--<div id="icon_notification" @click="readMessages"><span v-if="unread" class="notify-bubble">{{ unread }}</span></div>-->
+        <div id="icon_user" @click="toggleMenu" v-bind:style="{ backgroundImage: 'url(' + avatar + ')' }"></div>
         <!-- notification dropdown menu -->
         <!-- end notification dropdown menu -->
-
         <!-- user dropdown menu -->
         <div id="dropdown_container" :style="menuStyle">
             <div id="profile">
@@ -128,17 +125,13 @@
 
 <style scoped>
     /* ----------------------------- user login ------------------------------------------------------- */
-       #login_icons {
-        height: 65px;
-        width: 115px;
-        position: absolute;
-        background-color: transparent;
-        right: 85px;
-        top: 0;
-        z-index: 5;
-        display: flex;
-        justify-content: space-between;
-        padding-top: 10px;
+    #wrapper_icon {
+       padding-top:10px;
+       width: 100px;
+       height: 65px;
+       display: flex;
+       justify-content: center;
+       background-color: transparent;
     }
 
     #icon_notification {
@@ -146,8 +139,10 @@
         filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.5));
         background-size: contain;
         width: 46px;
+        height: 46px;
         cursor: pointer;
     }
+
     .notify-bubble {
         position: absolute;
         top: -2px;
@@ -158,11 +153,12 @@
         font-size: 0.65em;
         border-radius: 50%;
     }
+
     #icon_user {
-        background-repeat: no-repeat;
         filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.5));
         background-size: contain;
         width: 46px;
+        height: 46px;
         cursor: pointer;
     }
 
@@ -189,7 +185,7 @@
         content: "";
         position: absolute;
         top: -22px; /* At the top of the menu */
-        left: 50%;
+        left: 80%;
         margin-left: -5px;
         border-width: 11px;
         border-style: solid;
