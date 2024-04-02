@@ -1,5 +1,5 @@
 <template>
-    <div id="wrapper_icon">
+    <div id="wrapper_icon" v-cloak>
         <!--<div id="icon_notification" @click="readMessages"><span v-if="unread" class="notify-bubble">{{ unread }}</span></div>-->
         <div id="icon_user" @click="toggleMenu" v-bind:style="{ backgroundImage: 'url(' + avatar + ')' }"></div>
         <!-- notification dropdown menu -->
