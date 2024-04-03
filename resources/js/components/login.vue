@@ -75,6 +75,8 @@
                 !this.subGroupActive ? this.accessGroups() : '';
                 // toggle the main menu
                 this.menuActive = !this.menuActive;
+                // close the notification menu
+                this.$root.$emit('closeSister');
                 this.menuActive ?
                     this.menuStyle = "top: 70px;" +
                         "opacity: 0%;" +
@@ -83,6 +85,12 @@
                     this.menuStyle = "top: 85px;" +
                         "opacity: 100%;" +
                         "visibility: visible"
+            },
+
+            closeMenu() {
+                this.menuStyle = "top: 70px;" +
+                    "opacity: 0%;" +
+                    "visibility: hidden"
             },
             /*
             *
@@ -112,6 +120,14 @@
 
         mounted() {
             document.getElementById('spoilerCheck').checked = this.spoiler;
+
+            /*
+            // close menu in brother component
+            */
+            this.$root.$on('closeBrother', () => {
+                this.menuActive = true;
+                this.closeMenu();
+            });
         },
 
         computed : {

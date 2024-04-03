@@ -187,30 +187,7 @@
             <!-- user notifications and user settings -->
             <div id="notify_user_icons">
                 @auth
-                    <div x-data="{ notifyMenu: false }" style="padding-top: 10px;">
-                        <button @click.outside="notifyMenu = false" @click="notifyMenu = !notifyMenu" style="border:none">
-                            <div id="icon_notification"><span class="notify-bubble">3</span></div>
-                        </button>
-                        <ul class="notify_ul" x-show="notifyMenu" x-cloak>
-                            <div id="notify_menu_header">
-                                <div id="header_title">
-                                    Your Notifications
-                                </div>
-                                <div id="mark_as_read">
-                                    <a href="#">Mark all as read</a>
-                                </div>
-                            </div>
-                            <li class="notify_unread">
-                                You have been invited to join bettingpool ‘<a href="3">Nappy Fam</a>’. Click <a href="#">here</a> to accept, or <a href="#">here</a> to politely decline.
-                                <div class="notify_timestamp">2 hours ago</div>
-                            </li>
-                            <li>
-                                Welcome aboard! This is your notification center.
-                                Looks like you aren’t in a betting pool yet. Create one <a href="#">here</a>!
-                                <div class="notify_timestamp">2 hours ago</div>
-                            </li>
-                        </ul>
-                    </div>
+                    <div><notifications></notifications></div>
                     <div>
                         <login username={{ $user->name }} avatar={{ $user->avatar->ava_url() }} :spoiler="false" :groups='{{ $user->pool }}'></login>
                     </div>
