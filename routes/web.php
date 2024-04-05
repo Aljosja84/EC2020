@@ -13,10 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
+Route::get('/comment', [App\Http\Controllers\CommentController::class, 'index'])->name('comment');
+Route::post('/comment', [App\Http\Controllers\CommentController::class, 'store'])->name('comment.store');
 Auth::routes();
 
 Route::get('/api', function() {
@@ -41,6 +39,7 @@ Route::get('/main', function() {
 Route::get('/welcome', function() {
     return view('welcome');
 });
+
 
 
 Route::get('/game', [App\Http\Controllers\HomeController::class, 'game'])->name('game');

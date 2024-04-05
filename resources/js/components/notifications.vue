@@ -12,15 +12,51 @@
                     <a href="#">Mark all as read</a>
                 </div>
             </div>
-            <li class="notify_unread">
-                You have been invited to join bettingpool ‘<a href="3">Nappy Fam</a>’. Click <a href="#">here</a> to accept, or <a href="#">here</a> to politely decline.
-                <div class="notify_timestamp">2 hours ago</div>
-            </li>
-            <li class="notify_read">
-                Welcome aboard! This is your notification center.
-                Looks like you aren’t in a betting pool yet. Create one <a href="#">here</a>!
-                <div class="notify_timestamp">2 hours ago</div>
-            </li>
+            <div id="notify_items">
+                <li class="notify_read">
+                    You have been invited to join bettingpool ‘<a href="3">Nappy Fam</a>’. Click <a href="#">here</a> to accept, or <a href="#">here</a> to politely decline.
+                    <div class="notify_timestamp">2 hours ago</div>
+                </li>
+                <li class="notify_read">
+                    Welcome aboard! This is your notification center.
+                    Looks like you aren’t in a betting pool yet. Create one <a href="#">here</a>!
+                    <div class="notify_timestamp">2 hours ago</div>
+                </li>
+                <li class="notify_read">
+                    <div class="notify_comment" style="padding-right: 20px">
+                        <img src="images/avatars/gamer_2.png" style="width: 40px; height: 40px"/>
+                        <div style="margin-left: 5px">
+                            <span><a href="#">Gerda</a></span>
+                            commented on your betslip:
+                            <span>Wat een kankergare bets heb je joh. Nederland gaat echt niet winnen van Frankrijk lol.
+                            En als je dat ook maar even serious neemt dan hoef je ook niet te komen janken</span>
+                        </div>
+                    </div>
+                    <div class="notify_timestamp">2 hours ago</div>
+                </li>
+                <li class="notify_read">
+                    <div class="notify_comment" style="padding-right: 20px">
+                        <img src="images/avatars/gamer_7.png" style="width: 40px; height: 40px"/>
+                        <div style="margin-left: 5px">
+                            <span><a href="#">Gabriel</a></span>
+                            commented on your betslip:
+                            <span>Veel geluk en plezier vanavond! :D</span>
+                        </div>
+                    </div>
+                    <div class="notify_timestamp">7 hours ago</div>
+                </li>
+                <li class="notify_read">
+                    <div class="notify_comment" style="padding-right: 20px">
+                        <img src="images/avatars/gamer_11.png" style="width: 40px; height: 40px"/>
+                        <div style="margin-left: 5px">
+                            <span><a href="#">Sh@nkie</a></span>
+                            commented on your betslip:
+                            <span>Vind het een prima slip, alleen gaat Depay er twee maken ipv 1 :P</span>
+                        </div>
+                    </div>
+                    <div class="notify_timestamp">12 hours ago</div>
+                </li>
+            </div>
         </ul>
     </div>
 </template>
@@ -99,6 +135,33 @@
     border-radius: 50%;
 }
 
+#notify_items {
+    height: fit-content;
+    max-height: 600px;
+    overflow-y: scroll;
+    transition: all 800ms cubic-bezier(1.000, 0.000, 0.000, 1.000); /* easeInOutExpo */
+    transition-timing-function: cubic-bezier(1.000, 0.000, 0.000, 1.000); /* easeInOutExpo */
+    /* scrollbar vars */
+    --scrollbarBG: #90A4AE;
+    --thumbBG: #90A4AE;
+    scroll-behavior: smooth;
+}
+
+#notify_items::-webkit-scrollbar {
+    width: 7px;
+}
+
+#notify_items::-webkit-scrollbar-track {
+    background: var(--scrollbarBG);
+    display: none;
+    -webkit-box-shadow: none;
+}
+#notify_items::-webkit-scrollbar-thumb {
+    background-color: var(--thumbBG) ;
+    border-radius: 6px;
+    border: 3px solid var(--scrollbarBG);
+}
+
 .notify_ul {
     position: absolute;
     margin-left: -25px;
@@ -107,7 +170,6 @@
     top: 125%;
     width: 360px;
     background-color: white;
-    height: 300px;
     /* shadow */
     box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
     border-radius: 1%;
@@ -132,7 +194,7 @@
 }
 
 .notify_ul li:hover {
-    background-color: #dfebf5;
+    background-color: #f7f9fa;;
 }
 .notify_ul li a {
     color: #e28633;
@@ -200,5 +262,8 @@
 #mark_as_read a:hover {
     color: #c9d466;
     text-decoration: underline;
+}
+.notify_comment {
+    display: flex;
 }
 </style>

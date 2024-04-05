@@ -349,8 +349,8 @@ nav li:hover .menu_sub_groups {
     z-index: -1;
     transition: 0.3s ease-in-out;
     border-bottom: solid #c34c26 3px;
-    -webkit-box-shadow: 0px 6px 11px -2px #000000;
-    box-shadow: 0px 6px 11px -2px #000000;
+    -webkit-box-shadow: 0 6px 11px -2px #000000;
+    box-shadow: 0 6px 11px -2px #000000;
 }
 
 nav li:hover .menu_sub_teams {
@@ -404,7 +404,7 @@ nav li:hover .menu_sub_teams {
     border-bottom: solid #b180b0 7px;
     width: auto;
     padding-bottom: 3px;
-    margin-top: 10px;
+    margin-top: 0;
 }
 
 .menu_sub_games {

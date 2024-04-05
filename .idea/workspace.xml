@@ -21,11 +21,13 @@
   <component name="ChangeListManager">
     <list default="true" id="cf82d037-ce69-45df-857e-a29fb7732fae" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/factories/UserFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/factories/UserFactory.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/ec2020.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/ec2020.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/css/topmenu.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/topmenu.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/login.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/navi.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/navi.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/notifications.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/notifications.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -521,7 +523,7 @@
       <workItem from="1709737701741" duration="12000" />
       <workItem from="1711635482202" duration="13342000" />
       <workItem from="1711997391128" duration="1887000" />
-      <workItem from="1712054316927" duration="21894000" />
+      <workItem from="1712054316927" duration="47269000" />
     </task>
     <servers />
   </component>
@@ -541,37 +543,17 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="2925" y="712" key="ComposerDumpAutoloadDialog" timestamp="1701291720573">
+    <state x="2815" y="579" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1712226703286">
       <screen x="2560" y="0" width="1050" height="1650" />
     </state>
-    <state x="2925" y="712" key="ComposerDumpAutoloadDialog/2560.0.1050.1650/0.0.2560.1410@2560.0.1050.1650" timestamp="1701291720573" />
-    <state x="2887" y="737" key="ComposerInitDialogKey" timestamp="1701291717652">
-      <screen x="2560" y="0" width="1050" height="1650" />
-    </state>
-    <state x="2887" y="737" key="ComposerInitDialogKey/2560.0.1050.1650/0.0.2560.1410@2560.0.1050.1650" timestamp="1701291717652" />
+    <state x="2815" y="579" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/2560.0.1050.1650/0.0.2560.1410@2560.0.1050.1650" timestamp="1712226703286" />
     <state x="2865" y="579" key="FileChooserDialogImpl" timestamp="1709737712693">
       <screen x="2560" y="0" width="1050" height="1650" />
     </state>
     <state x="2865" y="579" key="FileChooserDialogImpl/2560.0.1050.1650/0.0.2560.1410@2560.0.1050.1650" timestamp="1709737712693" />
-    <state width="1007" height="482" key="GridCell.Tab.0.bottom" timestamp="1701291392269">
+    <state x="2748" y="377" width="672" height="678" key="search.everywhere.popup" timestamp="1712333107426">
       <screen x="2560" y="0" width="1050" height="1650" />
     </state>
-    <state width="1007" height="482" key="GridCell.Tab.0.bottom/2560.0.1050.1650/0.0.2560.1410@2560.0.1050.1650" timestamp="1701291392269" />
-    <state width="1007" height="482" key="GridCell.Tab.0.center" timestamp="1701291392269">
-      <screen x="2560" y="0" width="1050" height="1650" />
-    </state>
-    <state width="1007" height="482" key="GridCell.Tab.0.center/2560.0.1050.1650/0.0.2560.1410@2560.0.1050.1650" timestamp="1701291392269" />
-    <state width="1007" height="482" key="GridCell.Tab.0.left" timestamp="1701291392269">
-      <screen x="2560" y="0" width="1050" height="1650" />
-    </state>
-    <state width="1007" height="482" key="GridCell.Tab.0.left/2560.0.1050.1650/0.0.2560.1410@2560.0.1050.1650" timestamp="1701291392269" />
-    <state width="1007" height="482" key="GridCell.Tab.0.right" timestamp="1701291392269">
-      <screen x="2560" y="0" width="1050" height="1650" />
-    </state>
-    <state width="1007" height="482" key="GridCell.Tab.0.right/2560.0.1050.1650/0.0.2560.1410@2560.0.1050.1650" timestamp="1701291392269" />
-    <state x="2748" y="377" width="672" height="678" key="search.everywhere.popup" timestamp="1709141109324">
-      <screen x="2560" y="0" width="1050" height="1650" />
-    </state>
-    <state x="2748" y="377" width="672" height="678" key="search.everywhere.popup/2560.0.1050.1650/0.0.2560.1410@2560.0.1050.1650" timestamp="1709141109324" />
+    <state x="2748" y="377" width="672" height="678" key="search.everywhere.popup/2560.0.1050.1650/0.0.2560.1410@2560.0.1050.1650" timestamp="1712333107426" />
   </component>
 </project>

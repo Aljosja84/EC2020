@@ -273,6 +273,22 @@ input:-webkit-autofill {
     border-radius: 3px;
     line-height: 33px;
 }
+.comment_submit_button {
+    width: 100%;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    color: whitesmoke;
+    display: inline-block;
+    border: 1px solid transparent;
+    height: 33px;
+    background-color: #9636e0;
+    box-shadow: inset 0 1px 0 0 hsla(0,0%,100%,0.4);
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    border-radius: 3px;
+    line-height: 33px;
+}
 
 /* ----------------------------------------- END LOGIN PAGE -----------------------------------*/
 
