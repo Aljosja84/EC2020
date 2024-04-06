@@ -24,7 +24,7 @@
                 </li>
                 <li class="notify_read">
                     <div class="notify_comment" style="padding-right: 20px">
-                        <img src="images/avatars/gamer_2.png" style="width: 40px; height: 40px"/>
+                        <img :src="getAvatar()" class="notify_user_icon"/>
                         <div style="margin-left: 5px">
                             <span><a href="#">Gerda</a></span>
                             commented on your betslip:
@@ -36,7 +36,7 @@
                 </li>
                 <li class="notify_read">
                     <div class="notify_comment" style="padding-right: 20px">
-                        <img src="images/avatars/gamer_7.png" style="width: 40px; height: 40px"/>
+                        <img src="/images/avatars/gamer_5.png" style="width: 40px; height: 40px; filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.5));"/>
                         <div style="margin-left: 5px">
                             <span><a href="#">Gabriel</a></span>
                             commented on your betslip:
@@ -47,7 +47,7 @@
                 </li>
                 <li class="notify_read">
                     <div class="notify_comment" style="padding-right: 20px">
-                        <img src="images/avatars/gamer_11.png" style="width: 40px; height: 40px"/>
+                        <img src="/images/avatars/gamer_11.png" style="width: 40px; height: 40px; filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.5));"/>
                         <div style="margin-left: 5px">
                             <span><a href="#">Sh@nkie</a></span>
                             commented on your betslip:
@@ -69,6 +69,8 @@
             return {
                 menuStyle: '',
                 menuActive: true,
+                avatar: '/images/avatars/gamer_1.png',
+                notifications: [],
             }
         },
 
@@ -96,7 +98,24 @@
 
             setAsRead() {
                 // set style as read and let database know
+            },
+
+            getAvatar() {
+                return this.avatar;
+            },
+
+            // fetch notifications
+            fetchNotifications() {
+                axios.get('/notifications')
+                    .then(response => {
+                        this.notifications = response.data;
+                    })
+                .catch(error => {
+             // something went wrong
+                    console.error('Error fetching notifications:', error);
+                });
             }
+
         },
 
         mounted() {
@@ -104,19 +123,28 @@
                 this.menuActive = true;
                 this.closeMenu();
             });
+
+            // fetch notifications for logged in user
+            this.fetchNotifications();
         }
     }
 </script>
 
 <style scoped>
 #icon_notification {
-    background: url('images/user__notification.png') no-repeat;
+    background: url('/images/user__notification.png') no-repeat;
     filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.5));
     background-size: contain;
     width: 46px;
     height: 46px;
     cursor: pointer;
     position: relative;
+}
+
+.notify_user_icon {
+    filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.5));
+    width: 40px;
+    height: 40px;
 }
 
 .notify-bubble {
