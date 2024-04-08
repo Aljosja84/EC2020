@@ -96,12 +96,12 @@
                     "visibility: hidden"
             },
 
-            setAsRead() {
-                // set style as read and let database know
-            },
-
             getAvatar() {
                 return this.avatar;
+            },
+
+            setAsRead() {
+              // do something
             },
 
             // fetch notifications
@@ -109,12 +109,13 @@
                 axios.get('/notifications')
                     .then(response => {
                         this.notifications = response.data;
+                        console.log(response);
                     })
                 .catch(error => {
              // something went wrong
                     console.error('Error fetching notifications:', error);
                 });
-            }
+            },
 
         },
 
@@ -126,6 +127,10 @@
 
             // fetch notifications for logged in user
             this.fetchNotifications();
+            // run test decipher
+            const ciphertext = "ymj nxvzy nx tsq jmfi";
+            const knownWord = "fire";
+            console.log(this.decipher(ciphertext, knownWord));
         }
     }
 </script>

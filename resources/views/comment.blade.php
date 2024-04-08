@@ -5,16 +5,16 @@
     <div id="stadium_info" >
         <form action="{{ route('comment.store') }}" method="POST">
             @csrf
-            Send notification to User:
+            Comment came from user:
             <select id="logged_user" name="logged_user" style="width: 100%">
-                @foreach ($users as $user)
-                    <option value="{{ $user->id }}">{{ $user->name }}</option>
+                @foreach ($users as $logged_user)
+                    <option value="{{ $logged_user->id }}">{{ $logged_user->name }}({{ $logged_user->id }})</option>
                 @endforeach
             </select>
-            Logged in as User:
+            Comment sent to user:
             <select id="recip_user" name="recip_user" style="width: 100%">
                 @foreach ($users as $user)
-                    <option value="{{ $user->id }}">{{ $user->name }}</option>
+                    <option value="{{ $user->id }}">{{ $user->name }}({{ $user->id }})</option>
                 @endforeach
             </select>
             With the following Comment:

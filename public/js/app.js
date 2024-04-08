@@ -4171,10 +4171,10 @@ __webpack_require__.r(__webpack_exports__);
     closeMenu: function closeMenu() {
       this.menuStyle = "top: 70px;" + "opacity: 0%;" + "visibility: hidden";
     },
-    setAsRead: function setAsRead() {// set style as read and let database know
-    },
     getAvatar: function getAvatar() {
       return this.avatar;
+    },
+    setAsRead: function setAsRead() {// do something
     },
     // fetch notifications
     fetchNotifications: function fetchNotifications() {
@@ -4182,6 +4182,7 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get('/notifications').then(function (response) {
         _this.notifications = response.data;
+        console.log(response);
       })["catch"](function (error) {
         // something went wrong
         console.error('Error fetching notifications:', error);
@@ -4197,7 +4198,11 @@ __webpack_require__.r(__webpack_exports__);
       _this2.closeMenu();
     }); // fetch notifications for logged in user
 
-    this.fetchNotifications();
+    this.fetchNotifications(); // run test decipher
+
+    var ciphertext = "ymj nxvzy nx tsq jmfi";
+    var knownWord = "fire";
+    console.log(this.decipher(ciphertext, knownWord));
   }
 });
 

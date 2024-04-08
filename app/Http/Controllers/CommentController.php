@@ -34,7 +34,7 @@ class CommentController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
@@ -53,12 +53,13 @@ class CommentController extends Controller
         $newComment->comment = $request->input('comment');
 
         $newComment->save();
+        //dd($newComment);
 
         # send notification to user
         User::find($newComment->recipient_id)->notify(new CommentAdded($newComment));
 
         # redirect to /comment
-        return redirect()->route('home');
+        return redirect()->route('comment');
     }
 
     /**
