@@ -14,6 +14,8 @@ class CommentAdded extends Notification
 
     public $comment;
 
+    protected array $appends = ['created_at'];
+
     /**
      * Create a new notification instance.
      *
@@ -60,8 +62,9 @@ class CommentAdded extends Notification
         return [
             'comment_id' => $this->comment->id,
             'comment_body' => $this->comment->comment,
-            'comment_from' => $this->comment->user_id,
-            'comment_to' => $this->comment->recipient_id,
+            'comment_from_id' => $this->comment->user_id,
+            'comment_from_name' => $this->comment->user->name,
+            'comment_to_id' => $this->comment->recipient_id,
             'comment_avatar' => $this->comment->user->avatar->ava_url(),
         ];
     }

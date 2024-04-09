@@ -4120,44 +4120,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "notifications",
   data: function data() {
     return {
       menuStyle: '',
       menuActive: true,
-      avatar: '/images/avatars/gamer_1.png',
-      notifications: []
+      notifications: [],
+      unreadbadge: null
     };
   },
   methods: {
@@ -4168,13 +4138,14 @@ __webpack_require__.r(__webpack_exports__);
       this.$root.$emit('closeBrother');
       this.menuActive ? this.menuStyle = "top: 70px;" + "opacity: 0%;" + "visibility: hidden" : this.menuStyle = "top: 85px;" + "opacity: 100%;" + "visibility: visible";
     },
+    setStyleReadStatus: function setStyleReadStatus(e) {
+      return e.read_at == null ? 'notify_unread' : 'notify_read';
+    },
     closeMenu: function closeMenu() {
       this.menuStyle = "top: 70px;" + "opacity: 0%;" + "visibility: hidden";
     },
-    getAvatar: function getAvatar() {
-      return this.avatar;
-    },
-    setAsRead: function setAsRead() {// do something
+    setAsRead: function setAsRead(id) {
+      console.log(id);
     },
     // fetch notifications
     fetchNotifications: function fetchNotifications() {
@@ -4182,7 +4153,7 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get('/notifications').then(function (response) {
         _this.notifications = response.data;
-        console.log(response);
+        _this.notifications.length === 0 ? _this.unreadbadge = null : _this.unreadbadge = response.data[0].unread_count; //console.log(this.notifications);
       })["catch"](function (error) {
         // something went wrong
         console.error('Error fetching notifications:', error);
@@ -4198,11 +4169,13 @@ __webpack_require__.r(__webpack_exports__);
       _this2.closeMenu();
     }); // fetch notifications for logged in user
 
-    this.fetchNotifications(); // run test decipher
+    this.fetchNotifications(); // check for new notifications every 3 seconds
 
-    var ciphertext = "ymj nxvzy nx tsq jmfi";
-    var knownWord = "fire";
-    console.log(this.decipher(ciphertext, knownWord));
+    setInterval(function () {
+      _this2.fetchNotifications();
+
+      console.log("loaded");
+    }, 3000);
   }
 });
 
@@ -23534,7 +23507,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#icon_notification[data-v-ad8086a6] {\n    background: url('/images/user__notification.png') no-repeat;\n    filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.5));\n    background-size: contain;\n    width: 46px;\n    height: 46px;\n    cursor: pointer;\n    position: relative;\n}\n.notify_user_icon[data-v-ad8086a6] {\n    filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.5));\n    width: 40px;\n    height: 40px;\n}\n.notify-bubble[data-v-ad8086a6] {\n    position: absolute;\n    border: 2px solid white;\n    top: -2px;\n    right: -5px;\n    width: 20px;\n    height: 20px;\n    background-color: red;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    color: white;\n    font-size: 1em;\n    border-radius: 50%;\n}\n#notify_items[data-v-ad8086a6] {\n    height: -webkit-fit-content;\n    height: -moz-fit-content;\n    height: fit-content;\n    max-height: 600px;\n    overflow-y: scroll;\n    transition: all 800ms cubic-bezier(1.000, 0.000, 0.000, 1.000); /* easeInOutExpo */\n    transition-timing-function: cubic-bezier(1.000, 0.000, 0.000, 1.000); /* easeInOutExpo */\n    /* scrollbar vars */\n    --scrollbarBG: #90A4AE;\n    --thumbBG: #90A4AE;\n    scroll-behavior: smooth;\n}\n#notify_items[data-v-ad8086a6]::-webkit-scrollbar {\n    width: 7px;\n}\n#notify_items[data-v-ad8086a6]::-webkit-scrollbar-track {\n    background: var(--scrollbarBG);\n    display: none;\n    -webkit-box-shadow: none;\n}\n#notify_items[data-v-ad8086a6]::-webkit-scrollbar-thumb {\n    background-color: var(--thumbBG) ;\n    border-radius: 6px;\n    border: 3px solid var(--scrollbarBG);\n}\n.notify_ul[data-v-ad8086a6] {\n    position: absolute;\n    margin-left: -25px;\n    padding: 0;\n    right: 60%;\n    top: 125%;\n    width: 360px;\n    background-color: white;\n    /* shadow */\n    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;\n    border-radius: 1%;\n    border-bottom: solid 5px #e28633;\n    visibility: hidden;\n    opacity: 0;\n    transition: all 0.2s ease-out;\n}\n.notify_ul li[data-v-ad8086a6] {\n    width: 100%;\n    height: auto;\n    background-color: white;\n    margin: 0;\n    font-family: Arial, sans-serif;\n    font-size: 11px;\n    padding: 5px 5px 5px 15px;\n    border-bottom: 1px solid #f3f2f3;\n    line-height: 15px;\n    cursor: pointer;\n    transition: all 0.2s ease-out;\n}\n.notify_ul li[data-v-ad8086a6]:hover {\n    background-color: #f7f9fa;\n}\n.notify_ul li a[data-v-ad8086a6] {\n    color: #e28633;\n    font-weight: bold;\n}\n.notify_unread[data-v-ad8086a6] {\n    border-left: 4px solid #c9d466;\n    font-weight: bold;\n    color: black !important;\n}\n.notify_read[data-v-ad8086a6] {\n    border-left: none;\n    font-weight: normal;\n    color: #ccc;\n}\n.notify_ul[data-v-ad8086a6]::after {\n    content: \"\";\n    position: absolute;\n    top: -22px; /* At the top of the menu */\n    left: 88%;\n    margin-left: -5px;\n    border-width: 11px;\n    border-style: solid;\n    border-color: transparent transparent #fafcfe transparent;\n    border-radius: 1px;\n}\n.notify_timestamp[data-v-ad8086a6] {\n    padding-top: 3px;\n    font-size: 10px;\n    color: #c9d466 !important;\n}\n#notify_menu_header[data-v-ad8086a6] {\n    width: 100%;\n    height: 67px;\n    background-color: #f7f9fa;\n}\n#header_title[data-v-ad8086a6] {\n    font-family: 'Roboto Light', sans-serif;\n    font-size: 18px;\n    width: 100%;\n    height: 40px;\n    color: #c9d466;\n    padding-left: 15px;\n    padding-top: 5px;\n    line-height: 40px;\n}\n#mark_as_read[data-v-ad8086a6] {\n    color: #a7acb7;\n    font-family: 'Helvetica', sans-serif;\n    font-weight: normal !important;\n    font-size: 12px;\n    width: 100%;\n    padding-left: 15px;\n    line-height: 11px;\n    padding-top: 5px;\n}\n#mark_as_read a[data-v-ad8086a6] {\n    color: inherit;\n    text-decoration: none;\n}\n#mark_as_read a[data-v-ad8086a6]:hover {\n    color: #c9d466;\n    text-decoration: underline;\n}\n.notify_comment[data-v-ad8086a6] {\n    display: flex;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.notifications_trans_group-enter-active[data-v-ad8086a6] {\n    transition: all .5s;\n}\n.notifications_trans_group-enter[data-v-ad8086a6] {\n    opacity: 0;\n    transform: translateX(100px);\n}\n.notifications_trans_group-enter-to[data-v-ad8086a6] {\n    opacity: 1;\n}\n.notifications_trans_group-leave-active[data-v-ad8086a6] {\n    transition: all 0.5s;\n}\n.notifications_trans_group-leave[data-v-ad8086a6] {\n    opacity: 1;\n}\n.notifications_trans_group-leave-to[data-v-ad8086a6] {\n    opacity: 0;\n    transform: translateY(30px);\n}\n.notifications_trans_group-move[data-v-ad8086a6] {\n    transition: all .5s;\n}\n#icon_notification[data-v-ad8086a6] {\n    background: url('/images/user__notification.png') no-repeat;\n    filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.5));\n    background-size: contain;\n    width: 46px;\n    height: 46px;\n    cursor: pointer;\n    position: relative;\n}\n.notify_user_icon[data-v-ad8086a6] {\n    filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.5));\n    width: 40px;\n    height: 40px;\n}\n.notify-bubble[data-v-ad8086a6] {\n    position: absolute;\n    border: 2px solid white;\n    top: -2px;\n    right: -5px;\n    width: 20px;\n    height: 20px;\n    background-color: red;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    color: white;\n    font-size: 1em;\n    border-radius: 50%;\n}\n#notify_items[data-v-ad8086a6] {\n    height: -webkit-fit-content;\n    height: -moz-fit-content;\n    height: fit-content;\n    max-height: 600px;\n    overflow-y: scroll;\n    transition: all 800ms cubic-bezier(1.000, 0.000, 0.000, 1.000); /* easeInOutExpo */\n    transition-timing-function: cubic-bezier(1.000, 0.000, 0.000, 1.000); /* easeInOutExpo */\n    /* scrollbar vars */\n    --scrollbarBG: #90A4AE;\n    --thumbBG: #90A4AE;\n    scroll-behavior: smooth;\n}\n#notify_items[data-v-ad8086a6]::-webkit-scrollbar {\n    width: 7px;\n}\n#notify_items[data-v-ad8086a6]::-webkit-scrollbar-track {\n    background: var(--scrollbarBG);\n    display: none;\n    -webkit-box-shadow: none;\n}\n#notify_items[data-v-ad8086a6]::-webkit-scrollbar-thumb {\n    background-color: var(--thumbBG) ;\n    border-radius: 6px;\n    border: 3px solid var(--scrollbarBG);\n}\n.notify_ul[data-v-ad8086a6] {\n    position: absolute;\n    margin-left: -25px;\n    padding: 0;\n    right: 60%;\n    top: 125%;\n    width: 360px;\n    background-color: white;\n    /* shadow */\n    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;\n    border-radius: 1%;\n    border-bottom: solid 5px #e28633;\n    visibility: hidden;\n    opacity: 0;\n    transition: all 0.2s ease-out;\n}\n.notify_ul li[data-v-ad8086a6] {\n    width: 100%;\n    height: auto;\n    background-color: white;\n    margin: 0;\n    font-family: Arial, sans-serif;\n    font-size: 11px;\n    padding: 5px 5px 5px 15px;\n    border-bottom: 1px solid #f3f2f3;\n    line-height: 15px;\n    cursor: pointer;\n    transition: all 0.2s ease-out;\n}\n.notify_ul li[data-v-ad8086a6]:hover {\n    background-color: #f7f9fa;\n}\n.notify_ul li a[data-v-ad8086a6] {\n    color: #e28633;\n    font-weight: bold;\n}\n.notify_unread[data-v-ad8086a6] {\n    border-left: 4px solid #c9d466;\n    font-weight: bold;\n    color: black !important;\n}\n.notify_read[data-v-ad8086a6] {\n    border-left: none;\n    font-weight: normal;\n    color: #ccc;\n}\n.notify_ul[data-v-ad8086a6]::after {\n    content: \"\";\n    position: absolute;\n    top: -22px; /* At the top of the menu */\n    left: 88%;\n    margin-left: -5px;\n    border-width: 11px;\n    border-style: solid;\n    border-color: transparent transparent #fafcfe transparent;\n    border-radius: 1px;\n}\n.notify_timestamp[data-v-ad8086a6] {\n    padding-top: 3px;\n    font-size: 10px;\n    color: #c9d466 !important;\n}\n#notify_menu_header[data-v-ad8086a6] {\n    width: 100%;\n    height: 67px;\n    background-color: #f7f9fa;\n}\n#header_title[data-v-ad8086a6] {\n    font-family: 'Roboto Light', sans-serif;\n    font-size: 18px;\n    width: 100%;\n    height: 40px;\n    color: #c9d466;\n    padding-left: 15px;\n    padding-top: 5px;\n    line-height: 40px;\n}\n#mark_as_read[data-v-ad8086a6] {\n    color: #a7acb7;\n    font-family: 'Helvetica', sans-serif;\n    font-weight: normal !important;\n    font-size: 12px;\n    width: 100%;\n    padding-left: 15px;\n    line-height: 11px;\n    padding-top: 5px;\n}\n#mark_as_read a[data-v-ad8086a6] {\n    color: inherit;\n    text-decoration: none;\n}\n#mark_as_read a[data-v-ad8086a6]:hover {\n    color: #c9d466;\n    text-decoration: underline;\n}\n.notify_comment[data-v-ad8086a6] {\n    display: flex;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -66423,7 +66396,25 @@ var render = function () {
     _c(
       "button",
       { staticStyle: { border: "none" }, on: { click: _vm.toggleMenu } },
-      [_vm._m(0)]
+      [
+        _c("div", { attrs: { id: "icon_notification" } }, [
+          _c(
+            "span",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.unreadbadge,
+                  expression: "unreadbadge",
+                },
+              ],
+              staticClass: "notify-bubble",
+            },
+            [_vm._v(_vm._s(_vm.unreadbadge))]
+          ),
+        ]),
+      ]
     ),
     _vm._v(" "),
     _c("ul", { staticClass: "notify_ul", style: _vm.menuStyle }, [
@@ -66434,40 +66425,74 @@ var render = function () {
           [_vm._v("\n                Your Notifications\n            ")]
         ),
         _vm._v(" "),
-        _vm._m(1),
+        _vm._m(0),
       ]),
       _vm._v(" "),
-      _c("div", { attrs: { id: "notify_items" } }, [
-        _vm._m(2),
-        _vm._v(" "),
-        _vm._m(3),
-        _vm._v(" "),
-        _c("li", { staticClass: "notify_read" }, [
+      _c(
+        "div",
+        { attrs: { id: "notify_items" } },
+        [
           _c(
-            "div",
-            {
-              staticClass: "notify_comment",
-              staticStyle: { "padding-right": "20px" },
-            },
-            [
-              _c("img", {
-                staticClass: "notify_user_icon",
-                attrs: { src: _vm.getAvatar() },
-              }),
-              _vm._v(" "),
-              _vm._m(4),
-            ]
+            "transition-group",
+            { attrs: { name: "notifications_trans_group" } },
+            _vm._l(_vm.notifications, function (notification) {
+              return _c(
+                "li",
+                {
+                  key: notification.id,
+                  class: _vm.setStyleReadStatus(notification),
+                  on: {
+                    click: function ($event) {
+                      return _vm.setAsRead(notification.id)
+                    },
+                  },
+                },
+                [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "notify_comment",
+                      staticStyle: { "padding-right": "20px" },
+                    },
+                    [
+                      _c("img", {
+                        staticClass: "notify_user_icon",
+                        attrs: { src: notification["data"].comment_avatar },
+                      }),
+                      _vm._v(" "),
+                      _c("div", { staticStyle: { "margin-left": "10px" } }, [
+                        _c("span", [
+                          _c("a", { attrs: { href: "#" } }, [
+                            _vm._v(
+                              _vm._s(notification["data"].comment_from_name)
+                            ),
+                          ]),
+                        ]),
+                        _vm._v(
+                          "\n                            commented on your betslip:\n                            "
+                        ),
+                        _c("span", [
+                          _vm._v(
+                            '"' +
+                              _vm._s(notification["data"].comment_body) +
+                              '"'
+                          ),
+                        ]),
+                      ]),
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "notify_timestamp" }, [
+                    _vm._v(_vm._s(notification["sent_date"])),
+                  ]),
+                ]
+              )
+            }),
+            0
           ),
-          _vm._v(" "),
-          _c("div", { staticClass: "notify_timestamp" }, [
-            _vm._v("2 hours ago"),
-          ]),
-        ]),
-        _vm._v(" "),
-        _vm._m(5),
-        _vm._v(" "),
-        _vm._m(6),
-      ]),
+        ],
+        1
+      ),
     ]),
   ])
 }
@@ -66476,136 +66501,8 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { attrs: { id: "icon_notification" } }, [
-      _c("span", { staticClass: "notify-bubble" }, [_vm._v("3")]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("div", { attrs: { id: "mark_as_read" } }, [
       _c("a", { attrs: { href: "#" } }, [_vm._v("Mark all as read")]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "notify_read" }, [
-      _vm._v("\n                You have been invited to join bettingpool ‘"),
-      _c("a", { attrs: { href: "3" } }, [_vm._v("Nappy Fam")]),
-      _vm._v("’. Click "),
-      _c("a", { attrs: { href: "#" } }, [_vm._v("here")]),
-      _vm._v(" to accept, or "),
-      _c("a", { attrs: { href: "#" } }, [_vm._v("here")]),
-      _vm._v(" to politely decline.\n                "),
-      _c("div", { staticClass: "notify_timestamp" }, [_vm._v("2 hours ago")]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "notify_read" }, [
-      _vm._v(
-        "\n                Welcome aboard! This is your notification center.\n                Looks like you aren’t in a betting pool yet. Create one "
-      ),
-      _c("a", { attrs: { href: "#" } }, [_vm._v("here")]),
-      _vm._v("!\n                "),
-      _c("div", { staticClass: "notify_timestamp" }, [_vm._v("2 hours ago")]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticStyle: { "margin-left": "5px" } }, [
-      _c("span", [_c("a", { attrs: { href: "#" } }, [_vm._v("Gerda")])]),
-      _vm._v(
-        "\n                        commented on your betslip:\n                        "
-      ),
-      _c("span", [
-        _vm._v(
-          "Wat een kankergare bets heb je joh. Nederland gaat echt niet winnen van Frankrijk lol.\n                        En als je dat ook maar even serious neemt dan hoef je ook niet te komen janken"
-        ),
-      ]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "notify_read" }, [
-      _c(
-        "div",
-        {
-          staticClass: "notify_comment",
-          staticStyle: { "padding-right": "20px" },
-        },
-        [
-          _c("img", {
-            staticStyle: {
-              width: "40px",
-              height: "40px",
-              filter: "drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.5))",
-            },
-            attrs: { src: "/images/avatars/gamer_5.png" },
-          }),
-          _vm._v(" "),
-          _c("div", { staticStyle: { "margin-left": "5px" } }, [
-            _c("span", [
-              _c("a", { attrs: { href: "#" } }, [_vm._v("Gabriel")]),
-            ]),
-            _vm._v(
-              "\n                        commented on your betslip:\n                        "
-            ),
-            _c("span", [_vm._v("Veel geluk en plezier vanavond! :D")]),
-          ]),
-        ]
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "notify_timestamp" }, [_vm._v("7 hours ago")]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "notify_read" }, [
-      _c(
-        "div",
-        {
-          staticClass: "notify_comment",
-          staticStyle: { "padding-right": "20px" },
-        },
-        [
-          _c("img", {
-            staticStyle: {
-              width: "40px",
-              height: "40px",
-              filter: "drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.5))",
-            },
-            attrs: { src: "/images/avatars/gamer_11.png" },
-          }),
-          _vm._v(" "),
-          _c("div", { staticStyle: { "margin-left": "5px" } }, [
-            _c("span", [
-              _c("a", { attrs: { href: "#" } }, [_vm._v("Sh@nkie")]),
-            ]),
-            _vm._v(
-              "\n                        commented on your betslip:\n                        "
-            ),
-            _c("span", [
-              _vm._v(
-                "Vind het een prima slip, alleen gaat Depay er twee maken ipv 1 :P"
-              ),
-            ]),
-          ]),
-        ]
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "notify_timestamp" }, [_vm._v("12 hours ago")]),
     ])
   },
 ]

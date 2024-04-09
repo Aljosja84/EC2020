@@ -1,7 +1,7 @@
 <template>
     <div style="padding-top: 10px;">
         <button style="border:none" @click="toggleMenu">
-            <div id="icon_notification"><span class="notify-bubble">3</span></div>
+            <div id="icon_notification"><span class="notify-bubble" v-show="unreadbadge">{{ unreadbadge }}</span></div>
         </button>
         <ul class="notify_ul" :style="menuStyle" v-cloak>
             <div id="notify_menu_header">
@@ -13,49 +13,19 @@
                 </div>
             </div>
             <div id="notify_items">
-                <li class="notify_read">
-                    You have been invited to join bettingpool ‘<a href="3">Nappy Fam</a>’. Click <a href="#">here</a> to accept, or <a href="#">here</a> to politely decline.
-                    <div class="notify_timestamp">2 hours ago</div>
-                </li>
-                <li class="notify_read">
-                    Welcome aboard! This is your notification center.
-                    Looks like you aren’t in a betting pool yet. Create one <a href="#">here</a>!
-                    <div class="notify_timestamp">2 hours ago</div>
-                </li>
-                <li class="notify_read">
-                    <div class="notify_comment" style="padding-right: 20px">
-                        <img :src="getAvatar()" class="notify_user_icon"/>
-                        <div style="margin-left: 5px">
-                            <span><a href="#">Gerda</a></span>
-                            commented on your betslip:
-                            <span>Wat een kankergare bets heb je joh. Nederland gaat echt niet winnen van Frankrijk lol.
-                            En als je dat ook maar even serious neemt dan hoef je ook niet te komen janken</span>
+                <transition-group name="notifications_trans_group">
+                    <li @click=setAsRead(notification.id) :class=setStyleReadStatus(notification) v-for="notification in notifications" :key=notification.id>
+                        <div class="notify_comment" style="padding-right: 20px">
+                            <img :src="notification['data'].comment_avatar" class="notify_user_icon"/>
+                            <div style="margin-left: 10px">
+                                <span><a href="#">{{ notification['data'].comment_from_name }}</a></span>
+                                commented on your betslip:
+                                <span>"{{ notification['data'].comment_body }}"</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="notify_timestamp">2 hours ago</div>
-                </li>
-                <li class="notify_read">
-                    <div class="notify_comment" style="padding-right: 20px">
-                        <img src="/images/avatars/gamer_5.png" style="width: 40px; height: 40px; filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.5));"/>
-                        <div style="margin-left: 5px">
-                            <span><a href="#">Gabriel</a></span>
-                            commented on your betslip:
-                            <span>Veel geluk en plezier vanavond! :D</span>
-                        </div>
-                    </div>
-                    <div class="notify_timestamp">7 hours ago</div>
-                </li>
-                <li class="notify_read">
-                    <div class="notify_comment" style="padding-right: 20px">
-                        <img src="/images/avatars/gamer_11.png" style="width: 40px; height: 40px; filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.5));"/>
-                        <div style="margin-left: 5px">
-                            <span><a href="#">Sh@nkie</a></span>
-                            commented on your betslip:
-                            <span>Vind het een prima slip, alleen gaat Depay er twee maken ipv 1 :P</span>
-                        </div>
-                    </div>
-                    <div class="notify_timestamp">12 hours ago</div>
-                </li>
+                        <div class="notify_timestamp">{{ notification['sent_date'] }}</div>
+                    </li>
+                </transition-group>
             </div>
         </ul>
     </div>
@@ -69,8 +39,8 @@
             return {
                 menuStyle: '',
                 menuActive: true,
-                avatar: '/images/avatars/gamer_1.png',
                 notifications: [],
+                unreadbadge: null,
             }
         },
 
@@ -87,7 +57,11 @@
                     :
                     this.menuStyle = "top: 85px;" +
                         "opacity: 100%;" +
-                        "visibility: visible"
+                        "visibility: visible";
+            },
+
+            setStyleReadStatus(e) {
+                return e.read_at == null ? 'notify_unread' : 'notify_read';
             },
 
             closeMenu() {
@@ -96,12 +70,8 @@
                     "visibility: hidden"
             },
 
-            getAvatar() {
-                return this.avatar;
-            },
-
-            setAsRead() {
-              // do something
+            setAsRead(id) {
+                console.log(id);
             },
 
             // fetch notifications
@@ -109,7 +79,8 @@
                 axios.get('/notifications')
                     .then(response => {
                         this.notifications = response.data;
-                        console.log(response);
+                        this.notifications.length === 0 ? this.unreadbadge = null : this.unreadbadge = response.data[0].unread_count;
+                        //console.log(this.notifications);
                     })
                 .catch(error => {
              // something went wrong
@@ -127,15 +98,40 @@
 
             // fetch notifications for logged in user
             this.fetchNotifications();
-            // run test decipher
-            const ciphertext = "ymj nxvzy nx tsq jmfi";
-            const knownWord = "fire";
-            console.log(this.decipher(ciphertext, knownWord));
+            // check for new notifications every 3 seconds
+            setInterval(() => {
+                this.fetchNotifications();
+                console.log("loaded");
+            }, 3000);
         }
     }
 </script>
 
 <style scoped>
+.notifications_trans_group-enter-active {
+    transition: all .5s;
+}
+.notifications_trans_group-enter {
+    opacity: 0;
+    transform: translateX(100px);
+}
+.notifications_trans_group-enter-to {
+    opacity: 1;
+}
+.notifications_trans_group-leave-active {
+    transition: all 0.5s;
+}
+.notifications_trans_group-leave {
+    opacity: 1;
+}
+.notifications_trans_group-leave-to {
+    opacity: 0;
+    transform: translateY(30px);
+}
+.notifications_trans_group-move {
+    transition: all .5s;
+}
+
 #icon_notification {
     background: url('/images/user__notification.png') no-repeat;
     filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.5));
