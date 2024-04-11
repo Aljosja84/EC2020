@@ -4120,6 +4120,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "notifications",
   data: function data() {
@@ -4127,7 +4133,8 @@ __webpack_require__.r(__webpack_exports__);
       menuStyle: '',
       menuActive: true,
       notifications: [],
-      unreadbadge: null
+      unreadbadge: null,
+      hoveredItem: null
     };
   },
   methods: {
@@ -4144,35 +4151,103 @@ __webpack_require__.r(__webpack_exports__);
     closeMenu: function closeMenu() {
       this.menuStyle = "top: 70px;" + "opacity: 0%;" + "visibility: hidden";
     },
-    setAsRead: function setAsRead(id) {
-      console.log(id);
+    // set a notification as read
+    setAsRead: function setAsRead(notification) {
+      var _this = this;
+
+      var notificationId = notification.id;
+
+      if (notification.read_at !== null) {
+        console.log('notification is already marked as read');
+        return;
+      }
+
+      console.log('setting notification as read');
+      axios.post('/notifications/' + notificationId + '/mark-as-read').then(function (response) {
+        _this.notifications = response.data;
+        _this.notifications.length === 0 ? _this.unreadbadge = null : _this.unreadbadge = response.data[0].unread_count;
+      }) // something went wrong with setting the notification as read
+      ["catch"](function (error) {
+        console.error('Error marking notification as read:', error);
+      });
+    },
+    // set all unread notifications as read
+    setAllUnreadAsRead: function setAllUnreadAsRead() {
+      var _this2 = this;
+
+      axios.get('/notifications/mark-all-as-read').then(function (response) {
+        _this2.notifications = response.data;
+        _this2.notifications.length === 0 ? _this2.unreadbadge = null : _this2.unreadbadge = response.data[0].unread_count;
+      }) // something went wrong with setting the unread notifications as read
+      ["catch"](function (error) {
+        console.error('Error marking all unread notifications as read:', error);
+      });
     },
     // fetch notifications
     fetchNotifications: function fetchNotifications() {
-      var _this = this;
+      var _this3 = this;
 
       axios.get('/notifications').then(function (response) {
-        _this.notifications = response.data;
-        _this.notifications.length === 0 ? _this.unreadbadge = null : _this.unreadbadge = response.data[0].unread_count; //console.log(this.notifications);
+        _this3.notifications = response.data;
+        _this3.notifications.length === 0 ? _this3.unreadbadge = null : _this3.unreadbadge = response.data[0].unread_count; //console.log(this.notifications);
       })["catch"](function (error) {
         // something went wrong
         console.error('Error fetching notifications:', error);
       });
+    },
+    showDelete: function showDelete(index) {
+      this.hoveredItem = index;
+    },
+    hideDelete: function hideDelete() {
+      this.hoveredItem = null;
+    },
+    whichDelete: function whichDelete(notification) {
+      var _this4 = this;
+
+      // find what position the notification takes in the (multidim) array
+      // and then remove it from the array. After that, tell the
+      // backend to remove it from the database as well and ask for a refresh.
+      var index = this.notifications.map(function (el) {
+        return el.id;
+      }).indexOf(notification.id); //this.notifications.splice(index, 1);
+
+      var notificationId = notification.id; // delete notification
+
+      axios.post('/notifications/' + notificationId + '/delete').then(function (response) {
+        _this4.notifications = response.data;
+        _this4.notifications.length === 0 ? _this4.unreadbadge = null : _this4.unreadbadge = response.data[0].unread_count;
+      }) // something went wrong trying to delete the notification
+      ["catch"](function (error) {
+        console.log('Error deleting notification:', error);
+      });
+      console.log("deleted notification with id:" + notificationId);
+    },
+    deleteAllNotifications: function deleteAllNotifications() {
+      var _this5 = this;
+
+      // delete all notifications from database
+      axios.get('/notifications/delete-all').then(function (response) {
+        _this5.notifications = response.data;
+        _this5.notifications.length === 0 ? _this5.unreadbadge = null : _this5.unreadbadge = response.data[0].unread_count;
+      }) // something went wrong deleting all notifications
+      ["catch"](function (error) {
+        console.log('Error deleting all notifications: '.error);
+      });
     }
   },
   mounted: function mounted() {
-    var _this2 = this;
+    var _this6 = this;
 
     this.$root.$on('closeSister', function () {
-      _this2.menuActive = true;
+      _this6.menuActive = true;
 
-      _this2.closeMenu();
+      _this6.closeMenu();
     }); // fetch notifications for logged in user
 
     this.fetchNotifications(); // check for new notifications every 3 seconds
 
     setInterval(function () {
-      _this2.fetchNotifications();
+      _this6.fetchNotifications();
 
       console.log("loaded");
     }, 3000);
@@ -23507,7 +23582,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.notifications_trans_group-enter-active[data-v-ad8086a6] {\n    transition: all .5s;\n}\n.notifications_trans_group-enter[data-v-ad8086a6] {\n    opacity: 0;\n    transform: translateX(100px);\n}\n.notifications_trans_group-enter-to[data-v-ad8086a6] {\n    opacity: 1;\n}\n.notifications_trans_group-leave-active[data-v-ad8086a6] {\n    transition: all 0.5s;\n}\n.notifications_trans_group-leave[data-v-ad8086a6] {\n    opacity: 1;\n}\n.notifications_trans_group-leave-to[data-v-ad8086a6] {\n    opacity: 0;\n    transform: translateY(30px);\n}\n.notifications_trans_group-move[data-v-ad8086a6] {\n    transition: all .5s;\n}\n#icon_notification[data-v-ad8086a6] {\n    background: url('/images/user__notification.png') no-repeat;\n    filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.5));\n    background-size: contain;\n    width: 46px;\n    height: 46px;\n    cursor: pointer;\n    position: relative;\n}\n.notify_user_icon[data-v-ad8086a6] {\n    filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.5));\n    width: 40px;\n    height: 40px;\n}\n.notify-bubble[data-v-ad8086a6] {\n    position: absolute;\n    border: 2px solid white;\n    top: -2px;\n    right: -5px;\n    width: 20px;\n    height: 20px;\n    background-color: red;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    color: white;\n    font-size: 1em;\n    border-radius: 50%;\n}\n#notify_items[data-v-ad8086a6] {\n    height: -webkit-fit-content;\n    height: -moz-fit-content;\n    height: fit-content;\n    max-height: 600px;\n    overflow-y: scroll;\n    transition: all 800ms cubic-bezier(1.000, 0.000, 0.000, 1.000); /* easeInOutExpo */\n    transition-timing-function: cubic-bezier(1.000, 0.000, 0.000, 1.000); /* easeInOutExpo */\n    /* scrollbar vars */\n    --scrollbarBG: #90A4AE;\n    --thumbBG: #90A4AE;\n    scroll-behavior: smooth;\n}\n#notify_items[data-v-ad8086a6]::-webkit-scrollbar {\n    width: 7px;\n}\n#notify_items[data-v-ad8086a6]::-webkit-scrollbar-track {\n    background: var(--scrollbarBG);\n    display: none;\n    -webkit-box-shadow: none;\n}\n#notify_items[data-v-ad8086a6]::-webkit-scrollbar-thumb {\n    background-color: var(--thumbBG) ;\n    border-radius: 6px;\n    border: 3px solid var(--scrollbarBG);\n}\n.notify_ul[data-v-ad8086a6] {\n    position: absolute;\n    margin-left: -25px;\n    padding: 0;\n    right: 60%;\n    top: 125%;\n    width: 360px;\n    background-color: white;\n    /* shadow */\n    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;\n    border-radius: 1%;\n    border-bottom: solid 5px #e28633;\n    visibility: hidden;\n    opacity: 0;\n    transition: all 0.2s ease-out;\n}\n.notify_ul li[data-v-ad8086a6] {\n    width: 100%;\n    height: auto;\n    background-color: white;\n    margin: 0;\n    font-family: Arial, sans-serif;\n    font-size: 11px;\n    padding: 5px 5px 5px 15px;\n    border-bottom: 1px solid #f3f2f3;\n    line-height: 15px;\n    cursor: pointer;\n    transition: all 0.2s ease-out;\n}\n.notify_ul li[data-v-ad8086a6]:hover {\n    background-color: #f7f9fa;\n}\n.notify_ul li a[data-v-ad8086a6] {\n    color: #e28633;\n    font-weight: bold;\n}\n.notify_unread[data-v-ad8086a6] {\n    border-left: 4px solid #c9d466;\n    font-weight: bold;\n    color: black !important;\n}\n.notify_read[data-v-ad8086a6] {\n    border-left: none;\n    font-weight: normal;\n    color: #ccc;\n}\n.notify_ul[data-v-ad8086a6]::after {\n    content: \"\";\n    position: absolute;\n    top: -22px; /* At the top of the menu */\n    left: 88%;\n    margin-left: -5px;\n    border-width: 11px;\n    border-style: solid;\n    border-color: transparent transparent #fafcfe transparent;\n    border-radius: 1px;\n}\n.notify_timestamp[data-v-ad8086a6] {\n    padding-top: 3px;\n    font-size: 10px;\n    color: #c9d466 !important;\n}\n#notify_menu_header[data-v-ad8086a6] {\n    width: 100%;\n    height: 67px;\n    background-color: #f7f9fa;\n}\n#header_title[data-v-ad8086a6] {\n    font-family: 'Roboto Light', sans-serif;\n    font-size: 18px;\n    width: 100%;\n    height: 40px;\n    color: #c9d466;\n    padding-left: 15px;\n    padding-top: 5px;\n    line-height: 40px;\n}\n#mark_as_read[data-v-ad8086a6] {\n    color: #a7acb7;\n    font-family: 'Helvetica', sans-serif;\n    font-weight: normal !important;\n    font-size: 12px;\n    width: 100%;\n    padding-left: 15px;\n    line-height: 11px;\n    padding-top: 5px;\n}\n#mark_as_read a[data-v-ad8086a6] {\n    color: inherit;\n    text-decoration: none;\n}\n#mark_as_read a[data-v-ad8086a6]:hover {\n    color: #c9d466;\n    text-decoration: underline;\n}\n.notify_comment[data-v-ad8086a6] {\n    display: flex;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.container[data-v-ad8086a6] {\n    overflow-x: hidden;\n    position: relative;\n}\n#icon_notification[data-v-ad8086a6] {\n    background: url('/images/user__notification.png') no-repeat;\n    filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.5));\n    background-size: contain;\n    width: 46px;\n    height: 46px;\n    cursor: pointer;\n    position: relative;\n}\n.notify_user_icon[data-v-ad8086a6] {\n    filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.5));\n    width: 40px;\n    height: 40px;\n}\n.notify-bubble[data-v-ad8086a6] {\n    position: absolute;\n    border: 2px solid white;\n    top: -2px;\n    right: -5px;\n    width: 20px;\n    height: 20px;\n    background-color: red;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    color: white;\n    font-size: 1em;\n    border-radius: 50%;\n}\n#notify_items[data-v-ad8086a6] {\n    min-height: 200px;\n    max-height: 400px;\n    overflow-y: scroll;\n    /* scrollbar vars */\n    --scrollbarBG: #90A4AE;\n    --thumbBG: #90A4AE;\n    scroll-behavior: smooth;\n    overflow-x: hidden;\n}\n#notify_items[data-v-ad8086a6]::-webkit-scrollbar {\n    width: 7px;\n}\n#notify_items[data-v-ad8086a6]::-webkit-scrollbar-track {\n    background: var(--scrollbarBG);\n    display: none;\n    -webkit-box-shadow: none;\n}\n#notify_items[data-v-ad8086a6]::-webkit-scrollbar-thumb {\n    background-color: var(--thumbBG) ;\n    border-radius: 6px;\n    border: 3px solid var(--scrollbarBG);\n}\n.notify_ul[data-v-ad8086a6] {\n    position: absolute;\n    margin-left: -25px;\n    padding: 0;\n    right: 60%;\n    top: 125%;\n    width: 360px;\n    background-color: white;\n    /* shadow */\n    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;\n    border-radius: 1%;\n    border-bottom: solid 5px #e28633;\n    opacity: 0;\n    transition: all 0.2s ease-out;\n}\n.notify_ul li[data-v-ad8086a6] {\n    width: 100%;\n    height: auto;\n    background-color: white;\n    margin: 0;\n    font-family: Arial, sans-serif;\n    font-size: 11px;\n    padding: 5px 5px 5px 15px;\n    border-bottom: 1px solid #f3f2f3;\n    line-height: 15px;\n    -webkit-backface-visibility: hidden;\n            backface-visibility: hidden;\n}\n.notify_ul li[data-v-ad8086a6]:hover {\n    background-color: #f7f9fa;\n}\n.notify_ul li:hover .notify_delete[data-v-ad8086a6] {\n    opacity: 1;\n    transition: all 0.2s ease-out;\n}\n.notify_ul li a[data-v-ad8086a6] {\n    color: #e28633;\n    font-weight: bold;\n}\n.notify_unread[data-v-ad8086a6] {\n    border-left: 4px solid #c9d466;\n    font-weight: bold;\n    color: black !important;\n    display: inline-block;\n}\n.notify_read[data-v-ad8086a6] {\n    border-left: none;\n    font-weight: normal;\n    color: #a7a5a5;\n    display: inline-block;\n}\n.notify_ul[data-v-ad8086a6]::after {\n    content: \"\";\n    position: absolute;\n    top: -22px; /* At the top of the menu */\n    left: 88%;\n    margin-left: -5px;\n    border-width: 11px;\n    border-style: solid;\n    border-color: transparent transparent #ffffff transparent;\n    border-radius: 1px;\n}\n.notify_timestamp[data-v-ad8086a6] {\n    padding-top: 3px;\n    font-size: 10px;\n    color: #c9d466 !important;\n}\n#notify_menu_header[data-v-ad8086a6] {\n    width: 100%;\n    height: 67px;\n    background-color: #f7f9fa;\n}\n#header_title[data-v-ad8086a6] {\n    font-family: 'Roboto Light', sans-serif;\n    font-size: 18px;\n    width: 100%;\n    height: 40px;\n    color: #c9d466;\n    padding-left: 15px;\n    padding-top: 5px;\n    line-height: 40px;\n}\n.mark_as_read[data-v-ad8086a6] {\n    color: #a7acb7;\n    font-family: 'Helvetica', sans-serif;\n    font-weight: normal !important;\n    font-size: 12px;\n    width: 100%;\n    padding-left: 15px;\n    line-height: 11px;\n    padding-top: 5px;\n}\n.mark_as_read a[data-v-ad8086a6] {\n    color: inherit;\n    text-decoration: none;\n}\n.mark_as_read a[data-v-ad8086a6]:hover {\n    color: #c9d466;\n    text-decoration: underline;\n}\n.notify_comment[data-v-ad8086a6] {\n    display: flex;\n}\n.notify_delete[data-v-ad8086a6] {\n    width: -webkit-fit-content;\n    width: fit-content;\n    height: 0;\n    width: -moz-fit-content;\n    cursor: pointer;\n    position: relative;\n    right: -315px;\n    top: -40px;\n    align-content: center;\n    opacity: 0;\n    transition: all 0.2s ease-out;\n}\n.notify_none[data-v-ad8086a6] {\n    font-size: 12px;\n    display: flex;\n    justify-content: center;\n    justify-items: center;\n    align-items: center;\n    flex-direction: column;\n    min-height: 200px;\n}\n#notify_none_bgimage[data-v-ad8086a6] {\n    width: 150px;\n    height: 150px;\n    opacity: 50%;\n    margin-bottom: 20px;\n}\n.inactive_link[data-v-ad8086a6] {\n    color: #c5c6c0; /* Change text color */\n    cursor: not-allowed; /* Change cursor */\n    pointer-events: none; /* Disable pointer events */\n    text-decoration: none; /* Remove underline */\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -66417,7 +66492,7 @@ var render = function () {
       ]
     ),
     _vm._v(" "),
-    _c("ul", { staticClass: "notify_ul", style: _vm.menuStyle }, [
+    _c("div", { staticClass: "notify_ul", style: _vm.menuStyle }, [
       _c("div", { attrs: { id: "notify_menu_header" } }, [
         _c(
           "div",
@@ -66425,17 +66500,52 @@ var render = function () {
           [_vm._v("\n                Your Notifications\n            ")]
         ),
         _vm._v(" "),
-        _vm._m(0),
+        _vm.notifications.length > 0
+          ? _c("div", { staticClass: "mark_as_read" }, [
+              _c(
+                "a",
+                {
+                  attrs: { href: "#" },
+                  on: {
+                    click: function ($event) {
+                      $event.preventDefault()
+                      return _vm.setAllUnreadAsRead()
+                    },
+                  },
+                },
+                [_vm._v("Mark all as read")]
+              ),
+              _vm._v(" | "),
+              _c(
+                "a",
+                {
+                  attrs: { href: "#" },
+                  on: {
+                    click: function ($event) {
+                      $event.preventDefault()
+                      return _vm.deleteAllNotifications()
+                    },
+                  },
+                },
+                [_vm._v("Delete all")]
+              ),
+            ])
+          : _c("div", { staticClass: "mark_as_read" }, [
+              _c("a", { staticClass: "inactive_link", attrs: { href: "#" } }, [
+                _vm._v("Mark all as read"),
+              ]),
+              _vm._v(" | "),
+              _c("a", { staticClass: "inactive_link", attrs: { href: "#" } }, [
+                _vm._v("Delete all"),
+              ]),
+            ]),
       ]),
       _vm._v(" "),
-      _c(
-        "div",
-        { attrs: { id: "notify_items" } },
-        [
-          _c(
-            "transition-group",
-            { attrs: { name: "notifications_trans_group" } },
-            _vm._l(_vm.notifications, function (notification) {
+      _vm.notifications.length > 0
+        ? _c(
+            "div",
+            { key: 1, attrs: { id: "notify_items" } },
+            _vm._l(_vm.notifications, function (notification, index) {
               return _c(
                 "li",
                 {
@@ -66443,7 +66553,13 @@ var render = function () {
                   class: _vm.setStyleReadStatus(notification),
                   on: {
                     click: function ($event) {
-                      return _vm.setAsRead(notification.id)
+                      return _vm.setAsRead(notification)
+                    },
+                    mouseenter: function ($event) {
+                      return _vm.showDelete(index)
+                    },
+                    mouseleave: function ($event) {
+                      return _vm.hideDelete()
                     },
                   },
                 },
@@ -66469,7 +66585,7 @@ var render = function () {
                           ]),
                         ]),
                         _vm._v(
-                          "\n                            commented on your betslip:\n                            "
+                          "\n                                commented on your betslip:\n                                "
                         ),
                         _c("span", [
                           _vm._v(
@@ -66482,6 +66598,28 @@ var render = function () {
                     ]
                   ),
                   _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "notify_delete",
+                      on: {
+                        click: function ($event) {
+                          $event.stopPropagation()
+                          return _vm.whichDelete(notification)
+                        },
+                      },
+                    },
+                    [
+                      _c("img", {
+                        attrs: {
+                          src: "/images/sign-delete-light.png",
+                          width: "16px",
+                          height: "16px",
+                        },
+                      }),
+                    ]
+                  ),
+                  _vm._v(" "),
                   _c("div", { staticClass: "notify_timestamp" }, [
                     _vm._v(_vm._s(notification["sent_date"])),
                   ]),
@@ -66489,23 +66627,21 @@ var render = function () {
               )
             }),
             0
-          ),
-        ],
-        1
-      ),
+          )
+        : _c("div", { key: 2, staticClass: "notify_none" }, [
+            _c("img", {
+              attrs: {
+                src: "/images/no_notifications.png",
+                id: "notify_none_bgimage",
+              },
+            }),
+            _vm._v(" "),
+            _c("div", [_vm._v("No notifications yet.")]),
+          ]),
     ]),
   ])
 }
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { attrs: { id: "mark_as_read" } }, [
-      _c("a", { attrs: { href: "#" } }, [_vm._v("Mark all as read")]),
-    ])
-  },
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
