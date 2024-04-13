@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
+use App\Models\Country;
+use App\Models\Game;
 use App\Models\User;
 use App\Notifications\CommentAdded;
 use Illuminate\Http\Request;
@@ -17,17 +19,23 @@ class CommentController extends Controller
     public function index()
     {
         $users = User::all();
-        return view('comment', compact('users'));
+        $countries = Country::all();
+
+        return view('comment', compact(['users', 'countries']));
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Return the first fixture where hometeam is equal to the api country code
+     * so that we can pass it to function in playerselect vue component.
      *
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return void
      */
-    public function create()
+    public function findFixture($id)
     {
-        //
+        return $fixture_id = Game::whereHas('homeTeam', function ($query) use ($id) {
+               $query->where('api_country_code', $id);
+               })->value('api_id');
     }
 
     /**

@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/comment', [App\Http\Controllers\CommentController::class, 'index'])->name('comment');
 Route::post('/comment', [App\Http\Controllers\CommentController::class, 'store'])->name('comment.store');
+Route::post('/comment/fixture/{id}', [App\Http\Controllers\CommentController::class, 'findFixture']);
 Route::get('/notifications', [App\Http\Controllers\NotificationController::class, 'index']);
 Route::get('/notifications/mark-all-as-read', [App\Http\Controllers\NotificationController::class, 'markAllAsRead']);
 Route::get('/notifications/delete-all', [App\Http\Controllers\NotificationController::class, 'deleteAll']);

@@ -21,9 +21,11 @@
   <component name="ChangeListManager">
     <list default="true" id="cf82d037-ce69-45df-857e-a29fb7732fae" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/NotificationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/NotificationController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CommentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CommentController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Game.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Game.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/notifications.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/notifications.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/comment.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/comment.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -524,7 +526,7 @@
       <workItem from="1712360045836" duration="1308000" />
       <workItem from="1712397645861" duration="8406000" />
       <workItem from="1712568372793" duration="2773000" />
-      <workItem from="1712576306263" duration="66697000" />
+      <workItem from="1712576306263" duration="96858000" />
     </task>
     <servers />
   </component>
@@ -552,9 +554,9 @@
       <screen x="2560" y="0" width="1050" height="1650" />
     </state>
     <state x="2865" y="579" key="FileChooserDialogImpl/2560.0.1050.1650/0.0.2560.1410@2560.0.1050.1650" timestamp="1712576303193" />
-    <state x="2748" y="377" width="672" height="678" key="search.everywhere.popup" timestamp="1712855205465">
+    <state x="2748" y="377" width="672" height="678" key="search.everywhere.popup" timestamp="1713015257630">
       <screen x="2560" y="0" width="1050" height="1650" />
     </state>
-    <state x="2748" y="377" width="672" height="678" key="search.everywhere.popup/2560.0.1050.1650/0.0.2560.1410@2560.0.1050.1650" timestamp="1712855205465" />
+    <state x="2748" y="377" width="672" height="678" key="search.everywhere.popup/2560.0.1050.1650/0.0.2560.1410@2560.0.1050.1650" timestamp="1713015257630" />
   </component>
 </project>
