@@ -28,6 +28,10 @@
         <div id="stadium_info" style="margin-left: 15px">
             <player-select :countries="{{ $countries }}"></player-select>
         </div>
+        <!-- dropdown menu for goal notifications -->
+        <div id="stadium_info" style="margin-left: 15px">
+            <player-dropdown :items="{{ $players }}"></player-dropdown>
+        </div>
     </div>
 </div>
 @endsection

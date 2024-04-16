@@ -42,6 +42,7 @@ Vue.component('countryList', require('./components/countryList').default);
 Vue.component('chat', require('./components/chat').default);
 Vue.component('notifications', require('./components/notifications').default);
 Vue.component('player-select', require('./components/playerSelect').default);
+Vue.component('player-dropdown', require('./components/playerDropdown').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

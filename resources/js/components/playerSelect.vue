@@ -13,8 +13,8 @@
         <select style="width: 100%; margin-bottom:7px;" v-model="countryPlayers">
             <option v-for="player in players" :value="player.player.id">{{ player.player.name }}</option>
         </select>
-        <div class="button">
-            <p class="button_text">
+        <div class="button" @click="persistPlayers()">
+            <p class="button_text" >
                 submit to database
             </p>
         </div>
@@ -32,6 +32,9 @@
                 selectedCountry: this.countries[0].api_country_code,
                 players: Array,
                 countryPlayers: '',
+                randomArray: [
+                    '1', '2', '3'
+                ],
             }
         },
 
@@ -63,8 +66,24 @@
                     // set the dropdown menu to the first player
                     this.countryPlayers = this.players[0].player.id;
                 });
+            },
+
+            persistPlayers() {
+                const requestData = {
+                    teamId: this.selectedCountry,
+                    teamPlayers: this.players
+                };
+                console.log(requestData);
+                axios.post('/players/save-players', requestData)
+                    .then(response => {
+                        console.log(response.data)
+                    })
+                    .catch(error => {
+                        console.log('Error persisting players to database: ', error);
+                    })
             }
-        }
+        },
+
     }
 </script>
 

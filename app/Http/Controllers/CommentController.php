@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Comment;
 use App\Models\Country;
 use App\Models\Game;
+use App\Models\Player;
 use App\Models\User;
 use App\Notifications\CommentAdded;
 use Illuminate\Http\Request;
@@ -20,8 +21,12 @@ class CommentController extends Controller
     {
         $users = User::all();
         $countries = Country::all();
+        $players = Country::has('players')->with('players')->get();
 
-        return view('comment', compact(['users', 'countries']));
+        return view('comment', compact(['users', 'countries', 'players']));
+
+
+
     }
 
     /**

@@ -22,4 +22,9 @@ class Country extends Model
     {
         return $this->belongsTo('App\Models\Group');
     }
+
+    public function players()
+    {
+        return $this->hasMany(Player::class, 'country_id', 'api_country_code');
+    }
 }

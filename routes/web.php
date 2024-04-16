@@ -21,6 +21,7 @@ Route::get('/notifications/mark-all-as-read', [App\Http\Controllers\Notification
 Route::get('/notifications/delete-all', [App\Http\Controllers\NotificationController::class, 'deleteAll']);
 Route::post('/notifications/{notificationId}/mark-as-read', [App\Http\Controllers\NotificationController::class, 'markAsRead']);
 Route::post('/notifications/{notificationId}/delete', [App\Http\Controllers\NotificationController::class, 'delete']);
+Route::post('/players/save-players', [App\Http\Controllers\PlayerController::class, 'store']);
 Auth::routes();
 
 Route::get('/api', function() {
