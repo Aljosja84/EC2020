@@ -1,13 +1,16 @@
 <template>
     <div class="autocomplete">
         <span>Player who scored the goal:</span>
-        <input type="text" class="search" v-model="search" @input="handleInput" placeholder="Search player..."/>
-        <div v-if="isOpen && filteredOptions.length > 0">
-            <ul class="autocomplete-results">
+            <input type="text" class="search" v-model="search" @input="handleInput" placeholder="Search player..."/>
+        <div class="resultsWin" :style="resultStyle">
+            <ul class="autocomplete-results" ref="list">
                 <li v-for="(option, index) in filteredOptions" :key="index">
-                    {{ option.label }}
+                    <div class="countryGroup">
+                        <img :src="option.flagUrl"/>
+                        <div>{{ option.label }}</div>
+                    </div>
                     <ul v-if="option.subgroups">
-                        <li v-for="(subgroup, subIndex) in option.subgroups" :key="subIndex" class="autocomplete-result">
+                        <li v-for="(subgroup, subIndex) in option.subgroups" :key="subIndex" :id="subgroup.player_id" class="autocomplete-result" @click="setResult(subgroup.name)" @mouseenter="onOptionMouseMove($event, subgroup.player_id)">
                             {{ subgroup.name }}
                         </li>
                     </ul>
@@ -19,6 +22,7 @@
 
 <script>
     export default {
+
         name: "playerDropdown",
 
         props: {
@@ -31,7 +35,11 @@
                 type: Array,
                 required: false,
                 default: () => []
-            }
+            },
+            focusOnHover: {
+                type: Boolean,
+                default: true
+            },
         },
 
         data() {
@@ -39,17 +47,10 @@
                 search: '',
                 results: [],
                 isOpen: false,
+                searching: false,
+                resultsWin: false,
                 playersByCountryArray: [],
-                options: [
-                    {
-                        label: 'Fruits',
-                        subgroups: [
-                            { name: 'Apple' },
-                            { name: 'Banana' },
-                            { name: 'Orange' }
-                        ]
-                    },
-                    ]
+                resultStyle: "opacity: 0%; visibility: hidden",
             }
         },
 
@@ -64,33 +65,27 @@
         },
 
         methods: {
-            filterResults() {
-                this.results = this.items.filter(item => item.toLowerCase().indexOf(this.search.toLowerCase()) > -1);
-            },
-
-            onChange() {
-                this.$emit('input', this.search);
-
-                if(this.isAsync) {
-                    this.isLoading = true;
-                }   else {
-                    this.filterResults();
-                    this.isOpen = true;
-                }
-            },
-
             handleInput() {
-                this.isOpen = true;
-            },
-
-            setResult(result) {
-                this.search = result;
-                this.isOpen = false;
+                this.search.length > 0 ? this.resultStyle = "opacity: 100%; visibility: visible" : this.resultStyle = "opacity: 0%; visibility: hidden";
             },
 
             handleClickOutside(event) {
                 if (!this.$el.contains(event.target)) {
-                    this.isOpen = false;
+                    this.resultStyle = "opacity: 0%; visibility: hidden";
+                }
+            },
+
+            setResult(result) {
+                this.resultStyle = "opacity: 0%; visibility: hidden";
+                setTimeout(() => {
+                    this.search = result;
+                }, 200);
+            },
+
+            onOptionMouseMove(event, index) {
+                const element = document.getElementById(index);
+                if(element) {
+                    element.scrollIntoView && element.scrollIntoView({ block: 'nearest', behavior: 'smooth'});
                 }
             }
         },
@@ -105,13 +100,17 @@
                     if (matchingSubgroups.length > 0) {
                         filtered.push({
                             label: option.name,
-                            flagUrl: option.flag_url,
+                            flagUrl: "/images/" + option.flag_url,
                             subgroups: matchingSubgroups
                         });
                     }
                 });
                 return filtered;
             },
+
+            resultStyleCom() {
+                return this.resultsWin === true ? 'opacity: 100%; visibility: visible' : 'opacity: 0%; visibility: hidden';
+            }
         },
 
         mounted() {
@@ -142,16 +141,36 @@
         color: slategray;
     }
 
+    .resultsWin {
+        transition: all 0.2s ease-out;
+    }
+
+    .countryGroup {
+        font-family: 'Roboto', sans-serif;
+        font-weight: bold;
+        font-size: 14px;
+        color: #9badbf;
+        padding: 2px 2px 2px 10px;
+        display: flex;
+        align-items: center;
+    }
+
+    .countryGroup img {
+        width: 18px;
+        height: 18px;
+        margin-right: 5px;
+    }
+
     .autocomplete {
-        position: relative;
         transition: all 0.3s ease-out;
     }
 
     .autocomplete-results {
+        font-family: "Roboto", sans-serif;
+        font-size: 13px;
         margin: 3px;
         border: 1px solid #eee;
-        height: 300px;
-        min-height: 1em;
+        height: fit-content;
         max-height: 300px;
         overflow: auto;
         transition: all 0.3s ease-out;
@@ -164,15 +183,20 @@
         box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
     }
 
+    .autocomplete-results li:last-child {
+        margin-bottom: 2px;
+    }
+
     .autocomplete-result {
         list-style: none;
         text-align: left;
         padding: 5px 2px 5px 7px;
-        margin: 2px;
+        margin: 0 2px 0 2px;
         cursor: pointer;
         transition: all 0.3s ease-out;
         border-radius: 5px;
     }
+
     .autocomplete-result.is-active,
     .autocomplete-result:hover {
         background-color: #e6f3ff;

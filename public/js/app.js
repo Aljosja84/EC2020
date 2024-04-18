@@ -4286,6 +4286,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "playerDropdown",
   props: {
@@ -4300,6 +4303,10 @@ __webpack_require__.r(__webpack_exports__);
       "default": function _default() {
         return [];
       }
+    },
+    focusOnHover: {
+      type: Boolean,
+      "default": true
     }
   },
   data: function data() {
@@ -4307,17 +4314,10 @@ __webpack_require__.r(__webpack_exports__);
       search: '',
       results: [],
       isOpen: false,
+      searching: false,
+      resultsWin: false,
       playersByCountryArray: [],
-      options: [{
-        label: 'Fruits',
-        subgroups: [{
-          name: 'Apple'
-        }, {
-          name: 'Banana'
-        }, {
-          name: 'Orange'
-        }]
-      }]
+      resultStyle: "opacity: 0%; visibility: hidden"
     };
   },
   watch: {
@@ -4330,33 +4330,30 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
-    filterResults: function filterResults() {
-      var _this = this;
-
-      this.results = this.items.filter(function (item) {
-        return item.toLowerCase().indexOf(_this.search.toLowerCase()) > -1;
-      });
-    },
-    onChange: function onChange() {
-      this.$emit('input', this.search);
-
-      if (this.isAsync) {
-        this.isLoading = true;
-      } else {
-        this.filterResults();
-        this.isOpen = true;
-      }
-    },
     handleInput: function handleInput() {
-      this.isOpen = true;
-    },
-    setResult: function setResult(result) {
-      this.search = result;
-      this.isOpen = false;
+      this.search.length > 0 ? this.resultStyle = "opacity: 100%; visibility: visible" : this.resultStyle = "opacity: 0%; visibility: hidden";
     },
     handleClickOutside: function handleClickOutside(event) {
       if (!this.$el.contains(event.target)) {
-        this.isOpen = false;
+        this.resultStyle = "opacity: 0%; visibility: hidden";
+      }
+    },
+    setResult: function setResult(result) {
+      var _this = this;
+
+      this.resultStyle = "opacity: 0%; visibility: hidden";
+      setTimeout(function () {
+        _this.search = result;
+      }, 200);
+    },
+    onOptionMouseMove: function onOptionMouseMove(event, index) {
+      var element = document.getElementById(index);
+
+      if (element) {
+        element.scrollIntoView && element.scrollIntoView({
+          block: 'nearest',
+          behavior: 'smooth'
+        });
       }
     }
   },
@@ -4373,12 +4370,15 @@ __webpack_require__.r(__webpack_exports__);
         if (matchingSubgroups.length > 0) {
           filtered.push({
             label: option.name,
-            flagUrl: option.flag_url,
+            flagUrl: "/images/" + option.flag_url,
             subgroups: matchingSubgroups
           });
         }
       });
       return filtered;
+    },
+    resultStyleCom: function resultStyleCom() {
+      return this.resultsWin === true ? 'opacity: 100%; visibility: visible' : 'opacity: 0%; visibility: hidden';
     }
   },
   mounted: function mounted() {
@@ -23814,7 +23814,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.container[data-v-ad8086a6] {\n    overflow-x: hidden;\n    position: relative;\n}\n#icon_notification[data-v-ad8086a6] {\n    background: url('/images/user__notification.png') no-repeat;\n    filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.5));\n    background-size: contain;\n    width: 46px;\n    height: 46px;\n    cursor: pointer;\n    position: relative;\n}\n.notify_user_icon[data-v-ad8086a6] {\n    filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.5));\n    width: 40px;\n    height: 40px;\n}\n.notify-bubble[data-v-ad8086a6] {\n    position: absolute;\n    border: 2px solid white;\n    top: -2px;\n    right: -5px;\n    width: 20px;\n    height: 20px;\n    background-color: red;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    color: white;\n    font-size: 1em;\n    border-radius: 50%;\n}\n#notify_items[data-v-ad8086a6] {\n    min-height: 200px;\n    max-height: 400px;\n    overflow-y: scroll;\n    /* scrollbar vars */\n    --scrollbarBG: #90A4AE;\n    --thumbBG: #90A4AE;\n    scroll-behavior: smooth;\n    overflow-x: hidden;\n}\n#notify_items[data-v-ad8086a6]::-webkit-scrollbar {\n    width: 7px;\n}\n#notify_items[data-v-ad8086a6]::-webkit-scrollbar-track {\n    background: var(--scrollbarBG);\n    display: none;\n    -webkit-box-shadow: none;\n}\n#notify_items[data-v-ad8086a6]::-webkit-scrollbar-thumb {\n    background-color: var(--thumbBG) ;\n    border-radius: 6px;\n    border: 3px solid var(--scrollbarBG);\n}\n.notify_ul[data-v-ad8086a6] {\n    position: absolute;\n    margin-left: -25px;\n    padding: 0;\n    right: 60%;\n    top: 125%;\n    width: 360px;\n    background-color: white;\n    /* shadow */\n    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;\n    border-radius: 1%;\n    border-bottom: solid 5px #e28633;\n    opacity: 0;\n    transition: all 0.2s ease-out;\n}\n.notify_ul li[data-v-ad8086a6] {\n    width: 100%;\n    height: auto;\n    background-color: white;\n    margin: 0;\n    font-family: Arial, sans-serif;\n    font-size: 11px;\n    padding: 5px 5px 5px 15px;\n    border-bottom: 1px solid #f3f2f3;\n    line-height: 15px;\n    -webkit-backface-visibility: hidden;\n            backface-visibility: hidden;\n}\n.notify_ul li[data-v-ad8086a6]:hover {\n    background-color: #f7f9fa;\n}\n.notify_ul li:hover .notify_delete[data-v-ad8086a6] {\n    opacity: 1;\n    transition: all 0.2s ease-out;\n}\n.notify_ul li a[data-v-ad8086a6] {\n    color: #e28633;\n    font-weight: bold;\n}\n.notify_unread[data-v-ad8086a6] {\n    border-left: 4px solid #c9d466;\n    font-weight: bold;\n    color: black !important;\n    display: inline-block;\n}\n.notify_read[data-v-ad8086a6] {\n    border-left: none;\n    font-weight: normal;\n    color: #a7a5a5;\n    display: inline-block;\n}\n.notify_ul[data-v-ad8086a6]::after {\n    content: \"\";\n    position: absolute;\n    top: -22px; /* At the top of the menu */\n    left: 88%;\n    margin-left: -5px;\n    border-width: 11px;\n    border-style: solid;\n    border-color: transparent transparent #ffffff transparent;\n    border-radius: 1px;\n}\n.notify_timestamp[data-v-ad8086a6] {\n    padding-top: 3px;\n    font-size: 10px;\n    color: #c9d466 !important;\n}\n#notify_menu_header[data-v-ad8086a6] {\n    width: 100%;\n    height: 67px;\n    background-color: #f7f9fa;\n}\n#header_title[data-v-ad8086a6] {\n    font-family: 'Roboto Light', sans-serif;\n    font-size: 18px;\n    width: 100%;\n    height: 40px;\n    color: #c9d466;\n    padding-left: 15px;\n    padding-top: 5px;\n    line-height: 40px;\n}\n.mark_as_read[data-v-ad8086a6] {\n    color: #a7acb7;\n    font-family: 'Helvetica', sans-serif;\n    font-weight: normal !important;\n    font-size: 12px;\n    width: 100%;\n    padding-left: 15px;\n    line-height: 11px;\n    padding-top: 5px;\n}\n.mark_as_read a[data-v-ad8086a6] {\n    color: inherit;\n    text-decoration: none;\n}\n.mark_as_read a[data-v-ad8086a6]:hover {\n    color: #c9d466;\n    text-decoration: underline;\n}\n.notify_comment[data-v-ad8086a6] {\n    display: flex;\n}\n.notify_delete[data-v-ad8086a6] {\n    width: -webkit-fit-content;\n    width: fit-content;\n    height: 0;\n    width: -moz-fit-content;\n    cursor: pointer;\n    position: relative;\n    right: -315px;\n    top: -40px;\n    align-content: center;\n    opacity: 0;\n    transition: all 0.2s ease-out;\n}\n.notify_none[data-v-ad8086a6] {\n    font-size: 12px;\n    display: flex;\n    justify-content: center;\n    justify-items: center;\n    align-items: center;\n    flex-direction: column;\n    min-height: 200px;\n}\n#notify_none_bgimage[data-v-ad8086a6] {\n    width: 150px;\n    height: 150px;\n    opacity: 50%;\n    margin-bottom: 20px;\n}\n.inactive_link[data-v-ad8086a6] {\n    color: #c5c6c0; /* Change text color */\n    cursor: not-allowed; /* Change cursor */\n    pointer-events: none; /* Disable pointer events */\n    text-decoration: none; /* Remove underline */\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.container[data-v-ad8086a6] {\n    overflow-x: hidden;\n    position: relative;\n}\n#icon_notification[data-v-ad8086a6] {\n    background: url('/images/user__notification.png') no-repeat;\n    filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.5));\n    background-size: contain;\n    width: 46px;\n    height: 46px;\n    cursor: pointer;\n    position: relative;\n}\n.notify_user_icon[data-v-ad8086a6] {\n    filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.5));\n    width: 40px;\n    height: 40px;\n}\n.notify-bubble[data-v-ad8086a6] {\n    position: absolute;\n    border: 2px solid white;\n    top: -2px;\n    right: -5px;\n    width: 20px;\n    height: 20px;\n    background-color: red;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    color: white;\n    font-size: 1em;\n    border-radius: 50%;\n}\n#notify_items[data-v-ad8086a6] {\n    min-height: 200px;\n    max-height: 400px;\n    overflow-y: scroll;\n    /* scrollbar vars */\n    --scrollbarBG: #90A4AE;\n    --thumbBG: #90A4AE;\n    scroll-behavior: smooth;\n    overflow-x: hidden;\n}\n#notify_items[data-v-ad8086a6]::-webkit-scrollbar {\n    width: 7px;\n}\n#notify_items[data-v-ad8086a6]::-webkit-scrollbar-track {\n    background: var(--scrollbarBG);\n    display: none;\n    -webkit-box-shadow: none;\n}\n#notify_items[data-v-ad8086a6]::-webkit-scrollbar-thumb {\n    background-color: var(--thumbBG) ;\n    border-radius: 6px;\n    border: 3px solid var(--scrollbarBG);\n}\n.notify_ul[data-v-ad8086a6] {\n    position: absolute;\n    margin-left: -25px;\n    padding: 0;\n    right: 60%;\n    top: 125%;\n    width: 360px;\n    background-color: white;\n    /* shadow */\n    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;\n    border-radius: 1%;\n    border-bottom: solid 5px #e28633;\n    opacity: 0;\n    visibility: hidden;\n    transition: all 0.2s ease-out;\n}\n.notify_ul li[data-v-ad8086a6] {\n    width: 100%;\n    height: auto;\n    background-color: white;\n    margin: 0;\n    font-family: Arial, sans-serif;\n    font-size: 11px;\n    padding: 5px 5px 5px 15px;\n    border-bottom: 1px solid #f3f2f3;\n    line-height: 15px;\n    -webkit-backface-visibility: hidden;\n            backface-visibility: hidden;\n}\n.notify_ul li[data-v-ad8086a6]:hover {\n    background-color: #f7f9fa;\n}\n.notify_ul li:hover .notify_delete[data-v-ad8086a6] {\n    opacity: 1;\n    transition: all 0.2s ease-out;\n}\n.notify_ul li a[data-v-ad8086a6] {\n    color: #e28633;\n    font-weight: bold;\n}\n.notify_unread[data-v-ad8086a6] {\n    border-left: 4px solid #c9d466;\n    font-weight: bold;\n    color: black !important;\n    display: inline-block;\n}\n.notify_read[data-v-ad8086a6] {\n    border-left: none;\n    font-weight: normal;\n    color: #a7a5a5;\n    display: inline-block;\n}\n.notify_ul[data-v-ad8086a6]::after {\n    content: \"\";\n    position: absolute;\n    top: -22px; /* At the top of the menu */\n    left: 88%;\n    margin-left: -5px;\n    border-width: 11px;\n    border-style: solid;\n    border-color: transparent transparent #ffffff transparent;\n    border-radius: 1px;\n}\n.notify_timestamp[data-v-ad8086a6] {\n    padding-top: 3px;\n    font-size: 10px;\n    color: #c9d466 !important;\n}\n#notify_menu_header[data-v-ad8086a6] {\n    width: 100%;\n    height: 67px;\n    background-color: #f7f9fa;\n}\n#header_title[data-v-ad8086a6] {\n    font-family: 'Roboto Light', sans-serif;\n    font-size: 18px;\n    width: 100%;\n    height: 40px;\n    color: #c9d466;\n    padding-left: 15px;\n    padding-top: 5px;\n    line-height: 40px;\n}\n.mark_as_read[data-v-ad8086a6] {\n    color: #a7acb7;\n    font-family: 'Helvetica', sans-serif;\n    font-weight: normal !important;\n    font-size: 12px;\n    width: 100%;\n    padding-left: 15px;\n    line-height: 11px;\n    padding-top: 5px;\n}\n.mark_as_read a[data-v-ad8086a6] {\n    color: inherit;\n    text-decoration: none;\n}\n.mark_as_read a[data-v-ad8086a6]:hover {\n    color: #c9d466;\n    text-decoration: underline;\n}\n.notify_comment[data-v-ad8086a6] {\n    display: flex;\n}\n.notify_delete[data-v-ad8086a6] {\n    width: -webkit-fit-content;\n    width: fit-content;\n    height: 0;\n    width: -moz-fit-content;\n    cursor: pointer;\n    position: relative;\n    right: -315px;\n    top: -40px;\n    align-content: center;\n    opacity: 0;\n    transition: all 0.2s ease-out;\n}\n.notify_none[data-v-ad8086a6] {\n    font-size: 12px;\n    display: flex;\n    justify-content: center;\n    justify-items: center;\n    align-items: center;\n    flex-direction: column;\n    min-height: 200px;\n}\n#notify_none_bgimage[data-v-ad8086a6] {\n    width: 150px;\n    height: 150px;\n    opacity: 50%;\n    margin-bottom: 20px;\n}\n.inactive_link[data-v-ad8086a6] {\n    color: #c5c6c0; /* Change text color */\n    cursor: not-allowed; /* Change cursor */\n    pointer-events: none; /* Disable pointer events */\n    text-decoration: none; /* Remove underline */\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -23838,7 +23838,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.search[data-v-7c0d281d] {\n    width: 100%;\n    box-sizing: border-box;\n    border: 1px solid lightslategray;\n    border-radius: 5px;\n    background-color: white;\n    background-image: url('/images/icons8-search-24.png');\n    background-position: 7px 7px;\n    background-repeat: no-repeat;\n    background-size: 20px 20px;\n    padding: 9px 20px 9px 30px;\n    font-family: \"Roboto\", sans-serif;\n    font-size: 14px;\n    color: slategray;\n}\n.autocomplete[data-v-7c0d281d] {\n    position: relative;\n    transition: all 0.3s ease-out;\n}\n.autocomplete-results[data-v-7c0d281d] {\n    margin: 3px;\n    border: 1px solid #eee;\n    height: 300px;\n    min-height: 1em;\n    max-height: 300px;\n    overflow: auto;\n    transition: all 0.3s ease-out;\n    /* scrollbar vars */\n    --scrollbarBG: #90A4AE;\n    --thumbBG: #90A4AE;\n    scroll-behavior: smooth;\n    border-radius: 5px;\n    /* shadow */\n    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;\n}\n.autocomplete-result[data-v-7c0d281d] {\n    list-style: none;\n    text-align: left;\n    padding: 5px 2px 5px 7px;\n    margin: 2px;\n    cursor: pointer;\n    transition: all 0.3s ease-out;\n    border-radius: 5px;\n}\n.autocomplete-result.is-active[data-v-7c0d281d],\n.autocomplete-result[data-v-7c0d281d]:hover {\n    background-color: #e6f3ff;\n    color: slategray;\n    padding-left: 10px;\n}\n.autocomplete-results[data-v-7c0d281d]::-webkit-scrollbar {\n    width: 7px;\n}\n.autocomplete-results[data-v-7c0d281d]::-webkit-scrollbar-track {\n    background: var(--scrollbarBG);\n    display: none;\n    -webkit-box-shadow: none;\n}\n.autocomplete-results[data-v-7c0d281d]::-webkit-scrollbar-thumb {\n    background-color: var(--thumbBG) ;\n    border-radius: 6px;\n    border: 3px solid var(--scrollbarBG);\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.search[data-v-7c0d281d] {\n    width: 100%;\n    box-sizing: border-box;\n    border: 1px solid lightslategray;\n    border-radius: 5px;\n    background-color: white;\n    background-image: url('/images/icons8-search-24.png');\n    background-position: 7px 7px;\n    background-repeat: no-repeat;\n    background-size: 20px 20px;\n    padding: 9px 20px 9px 30px;\n    font-family: \"Roboto\", sans-serif;\n    font-size: 14px;\n    color: slategray;\n}\n.resultsWin[data-v-7c0d281d] {\n    transition: all 0.2s ease-out;\n}\n.countryGroup[data-v-7c0d281d] {\n    font-family: 'Roboto', sans-serif;\n    font-weight: bold;\n    font-size: 14px;\n    color: #9badbf;\n    padding: 2px 2px 2px 10px;\n    display: flex;\n    align-items: center;\n}\n.countryGroup img[data-v-7c0d281d] {\n    width: 18px;\n    height: 18px;\n    margin-right: 5px;\n}\n.autocomplete[data-v-7c0d281d] {\n    transition: all 0.3s ease-out;\n}\n.autocomplete-results[data-v-7c0d281d] {\n    font-family: \"Roboto\", sans-serif;\n    font-size: 13px;\n    margin: 3px;\n    border: 1px solid #eee;\n    height: -webkit-fit-content;\n    height: -moz-fit-content;\n    height: fit-content;\n    max-height: 300px;\n    overflow: auto;\n    transition: all 0.3s ease-out;\n    /* scrollbar vars */\n    --scrollbarBG: #90A4AE;\n    --thumbBG: #90A4AE;\n    scroll-behavior: smooth;\n    border-radius: 5px;\n    /* shadow */\n    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;\n}\n.autocomplete-results li[data-v-7c0d281d]:last-child {\n    margin-bottom: 2px;\n}\n.autocomplete-result[data-v-7c0d281d] {\n    list-style: none;\n    text-align: left;\n    padding: 5px 2px 5px 7px;\n    margin: 0 2px 0 2px;\n    cursor: pointer;\n    transition: all 0.3s ease-out;\n    border-radius: 5px;\n}\n.autocomplete-result.is-active[data-v-7c0d281d],\n.autocomplete-result[data-v-7c0d281d]:hover {\n    background-color: #e6f3ff;\n    color: slategray;\n    padding-left: 10px;\n}\n.autocomplete-results[data-v-7c0d281d]::-webkit-scrollbar {\n    width: 7px;\n}\n.autocomplete-results[data-v-7c0d281d]::-webkit-scrollbar-track {\n    background: var(--scrollbarBG);\n    display: none;\n    -webkit-box-shadow: none;\n}\n.autocomplete-results[data-v-7c0d281d]::-webkit-scrollbar-thumb {\n    background-color: var(--thumbBG) ;\n    border-radius: 6px;\n    border: 3px solid var(--scrollbarBG);\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -67206,43 +67206,57 @@ var render = function () {
       },
     }),
     _vm._v(" "),
-    _vm.isOpen && _vm.filteredOptions.length > 0
-      ? _c("div", [
-          _c(
-            "ul",
-            { staticClass: "autocomplete-results" },
-            _vm._l(_vm.filteredOptions, function (option, index) {
-              return _c("li", { key: index }, [
-                _vm._v(
-                  "\n                " +
-                    _vm._s(option.label) +
-                    "\n                "
-                ),
-                option.subgroups
-                  ? _c(
-                      "ul",
-                      _vm._l(option.subgroups, function (subgroup, subIndex) {
-                        return _c(
-                          "li",
-                          { key: subIndex, staticClass: "autocomplete-result" },
-                          [
-                            _vm._v(
-                              "\n                        " +
-                                _vm._s(subgroup.name) +
-                                "\n                    "
-                            ),
-                          ]
-                        )
-                      }),
-                      0
+    _c("div", { staticClass: "resultsWin", style: _vm.resultStyle }, [
+      _c(
+        "ul",
+        { ref: "list", staticClass: "autocomplete-results" },
+        _vm._l(_vm.filteredOptions, function (option, index) {
+          return _c("li", { key: index }, [
+            _c("div", { staticClass: "countryGroup" }, [
+              _c("img", { attrs: { src: option.flagUrl } }),
+              _vm._v(" "),
+              _c("div", [_vm._v(_vm._s(option.label))]),
+            ]),
+            _vm._v(" "),
+            option.subgroups
+              ? _c(
+                  "ul",
+                  _vm._l(option.subgroups, function (subgroup, subIndex) {
+                    return _c(
+                      "li",
+                      {
+                        key: subIndex,
+                        staticClass: "autocomplete-result",
+                        attrs: { id: subgroup.player_id },
+                        on: {
+                          click: function ($event) {
+                            return _vm.setResult(subgroup.name)
+                          },
+                          mouseenter: function ($event) {
+                            return _vm.onOptionMouseMove(
+                              $event,
+                              subgroup.player_id
+                            )
+                          },
+                        },
+                      },
+                      [
+                        _vm._v(
+                          "\n                        " +
+                            _vm._s(subgroup.name) +
+                            "\n                    "
+                        ),
+                      ]
                     )
-                  : _vm._e(),
-              ])
-            }),
-            0
-          ),
-        ])
-      : _vm._e(),
+                  }),
+                  0
+                )
+              : _vm._e(),
+          ])
+        }),
+        0
+      ),
+    ]),
   ])
 }
 var staticRenderFns = []

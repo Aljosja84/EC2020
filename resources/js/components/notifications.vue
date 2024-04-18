@@ -265,6 +265,7 @@
         border-radius: 1%;
         border-bottom: solid 5px #e28633;
         opacity: 0;
+        visibility: hidden;
         transition: all 0.2s ease-out;
     }
 
