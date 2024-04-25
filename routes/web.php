@@ -22,6 +22,8 @@ Route::get('/notifications/delete-all', [App\Http\Controllers\NotificationContro
 Route::post('/notifications/{notificationId}/mark-as-read', [App\Http\Controllers\NotificationController::class, 'markAsRead']);
 Route::post('/notifications/{notificationId}/delete', [App\Http\Controllers\NotificationController::class, 'delete']);
 Route::post('/players/save-players', [App\Http\Controllers\PlayerController::class, 'store']);
+
+Route::get('/user/following/{id}', [App\Http\Controllers\UserController::class, 'isFollowing']);
 Auth::routes();
 
 Route::get('/api', function() {
@@ -40,9 +42,7 @@ Route::get('/test', [App\Http\Controllers\HomeController::class, 'test'])->name(
 Route::get('/navi', function() {
     return view('navi');
 });
-Route::get('/main', function() {
-    return view('main');
-});
+Route::get('/main', [App\Http\Controllers\HomeController::class, 'index'])->name('main');
 Route::get('/welcome', function() {
     return view('welcome');
 });

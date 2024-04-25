@@ -417,6 +417,8 @@ input:-webkit-autofill {
     float: left;
 }
 .scoreboard_comp {
+    display: flex;
+    justify-items: normal;
     padding: 0 0 8px 0;
 }
 

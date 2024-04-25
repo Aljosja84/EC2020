@@ -3,15 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\Country;
+use App\Models\Game;
+use App\Models\Group;
+use App\Models\Stadium;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
-    /**
-     * @var Country[]|\Illuminate\Database\Eloquent\Collection
-     */
-    private $countries;
+    public $stadiums;
+    public $groups;
+    public $countries;
+    public $gamesdates;
 
     /**
      * Create a new controller instance.
@@ -21,7 +24,10 @@ class HomeController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->countries = Country::all();
+        $this->stadiums = Stadium::orderBy('city', 'asc')->get();
+        $this->groups = Group::orderBy('name', 'asc')->get();
+        $this->countries = Country::orderBy('name', 'asc')->get();
+        $this->gamesdates = Game::selectRaw("DISTINCT DATE_FORMAT(game_date, '%Y-%m-%d') date")->get();
     }
 
     /**
@@ -31,8 +37,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $countries = Country::all();
-        return view('main', compact($countries));
+        return view('main', [
+            'stadiums' => $this->stadiums,
+            'groups' => $this->groups,
+            'countries' => $this->countries,
+            'gamesdates' => $this->gamesdates,
+            ]);
     }
 
     public function game()

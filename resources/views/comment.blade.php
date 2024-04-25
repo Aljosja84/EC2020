@@ -32,7 +32,6 @@
         <div id="stadium_info" style="margin-left: 15px">
             <player-select :countries="{{ $countries }}"></player-select>
         </div>
-
     </div>
 </div>
 @endsection

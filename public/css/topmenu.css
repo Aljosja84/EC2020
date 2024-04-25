@@ -571,10 +571,15 @@ nav li:hover .menu_sub_games {
     margin-right: 4px;
 }
 
+.gameday_container a {
+    text-decoration: none;
+}
+
 .gameday_container li {
     padding-top: 7px;
     width: inherit;
     scroll-snap-align: start;
+    text-decoration: none;
 }
 
 .gameday_three {
@@ -590,6 +595,7 @@ nav li:hover .menu_sub_games {
     padding-top: 19px;
     cursor: pointer;
     transition: all 0.3s ease;
+    position: relative;
 }
 
 .gameday_four {
@@ -606,6 +612,7 @@ nav li:hover .menu_sub_games {
     padding-top:9px;
     cursor: pointer;
     transition: all 0.3s ease;
+    position: relative;
 }
 
 .gameday_container li:hover {
@@ -719,15 +726,37 @@ nav li:hover .menu_sub_games {
     clear: both;
     margin-bottom: 3px;
     height: 20px;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    justify-items: center;
 }
 
 #notify_user_icons {
     display: flex;
     justify-content: space-between;
     position: absolute;
-    top: 0px;
-    right: 0px;
+    top: 0;
+    right: 0;
 }
+.follow_icon {
+    display: none;
+    width: 16px;
+    height: 16px;
+}
+.gameday_three:hover .follow_icon{
+    display: inline-block;
+    position: absolute;
+    right: 4px;
+    top: 4px;
+}
+.gameday_four:hover .follow_icon {
+    display: inline-block;
+    position: absolute;
+    right: 4px;
+    top: 4px;
+}
+
 
 /* -------------------- NOTIFICATION MENU ------------------------- /*
    ----------------------------------------------------------------

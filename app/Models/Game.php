@@ -51,4 +51,9 @@ class Game extends Model
         $time = strtotime($this->date);
         return strtolower(date('F', $time)) . date('j', $time);
     }
+
+    public function users()
+    {
+        return $this->belongsToMany('App\Models\User', 'user_game');
+    }
 }

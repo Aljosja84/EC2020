@@ -62,4 +62,9 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\Comment');
     }
+
+    public function games()
+    {
+        return $this->belongsToMany('App\Models\Game', 'user_game');
+    }
 }

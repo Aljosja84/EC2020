@@ -31,7 +31,7 @@
             </ul>
         </div>
         <div id="app">
-            <match matchid="{{ $game->api_id }}"></match>
+            <match matchid="{{ $game->api_id }}" :gameid="{{ $game->id }}"></match>
         </div>
     </div>
 @endsection

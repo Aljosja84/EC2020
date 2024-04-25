@@ -2,32 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Country;
 use App\Models\Game;
-use App\Models\Group;
-use App\Models\Stadium;
+use App\Models\User;
 use Illuminate\Http\Request;
 
-class GamesController extends Controller
+class UserController extends Controller
 {
-    public $stadiums;
-    public $groups;
-    public $countries;
-    public $gamesdates;
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-        $this->stadiums = Stadium::orderBy('city', 'asc')->get();
-        $this->groups = Group::orderBy('name', 'asc')->get();
-        $this->countries = Country::orderBy('name', 'asc')->get();
-        $this->gamesdates = Game::selectRaw("DISTINCT DATE_FORMAT(game_date, '%Y-%m-%d') date")->get();
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -59,20 +39,15 @@ class GamesController extends Controller
         //
     }
 
-    /**p
-     * @param Game $game
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
      */
-    public function show(Game $game)
+    public function show($id)
     {
-        return view('game', [
-            'game' => $game,
-            'stadium' => $game->stadium,
-            'stadiums' => $this->stadiums,
-            'groups' => $this->groups,
-            'countries' => $this->countries,
-            'gamesdates' => $this->gamesdates,
-        ]);
+        //
     }
 
     /**
@@ -83,7 +58,7 @@ class GamesController extends Controller
      */
     public function edit($id)
     {
-
+        //
     }
 
     /**
@@ -107,5 +82,47 @@ class GamesController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * @param Request $request
+     * @param User $user
+     * @param Game $game
+     * @return string
+     */
+    public function followGame(Request $request, User $user, Game $game)
+    {
+        $user->games()->attach($game);
+
+        return 'user has followd game';
+    }
+
+    /**
+     * @param Request $request
+     * @param User $user
+     * @param Game $game
+     */
+    public function unfollowGame(Request $request, User $user, Game $game)
+    {
+        $user->games()->detach();
+
+        return 'user has unfollowed game';
+    }
+
+    /**
+     * @param $id
+     * @return bool
+     */
+    public function isFollowing($id)
+    {
+        // user must be the logged in user
+        $user = auth()->user();
+
+        // check if logged in user has an entry in the pivot table
+        // meaning they're following the game
+        if($user->games()->find($id)) {
+            return true;
+        }
+        return false;
     }
 }

@@ -1,4 +1,4 @@
-var lekker = document.getElementById('games_container');
+var games_container = document.getElementById('games_container');
 var formScroll = document.getElementsByClassName('last_ten_matches_container');
 // Define the offset of the calendar
 var offsetX = 190;
@@ -28,8 +28,8 @@ var july7 = document.getElementById('july7').getBoundingClientRect().x;
 var july11 = document.getElementById('july11').getBoundingClientRect().x;
 
 // This function will scroll to the desired playdate
-function scrollWin(waarheen) {
-    lekker.scroll(waarheen-offsetX, 0);
+function scrollWin(pos) {
+    games_container.scroll(pos - offsetX, 0);
 }
 
 

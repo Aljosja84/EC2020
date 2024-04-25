@@ -36,7 +36,6 @@
     <script>
         var assetBaseUrl = "{{ asset('') }}";
     </script>
-    <livewire:styles />
 </head>
 <body>
 <?php
@@ -54,8 +53,8 @@
                 <ul class="menu-main">
                     <li id="sub_item_stadium"><a id="main_link" href="#">Stadiums</a><img src={{ asset('images/arrow-drop-down.svg') }}>
                         <div class="menu_sub_stadium">
-                            <ul>
-                                @foreach(App\Models\Stadium::orderBy('city', 'asc')->get() as $stadium)
+                            <ul>>
+                                @foreach($stadiums as $stadium)
                                     <li id="stadium">
                                         <div class="stadium_link" id="{{ $stadium->abv }}">
                                             <p><img src="{{ asset('images/' . $stadium->url_menu) }}"></p>
@@ -72,7 +71,7 @@
                     <li id="sub_item_groups"><a id="main_link" href="#">Groups</a><img src={{ asset('images/arrow-drop-down.svg') }}>
                         <div class="menu_sub_groups">
                             <ul>
-                                @foreach(App\Models\Group::orderBy('name', 'asc')->get() as $group)
+                                @foreach($groups as $group)
                                 <li id="group">
                                     <div class="group_link">
                                         <a href="#">group {{ $group->name }}</a><img src={{ asset('images/arrow-drop-down.svg') }}>
@@ -93,7 +92,7 @@
                     <li id="sub_item_teams"><a id="main_link" href="#">Teams</a><img src={{ asset('images/arrow-drop-down.svg') }}>
                         <div class="menu_sub_teams">
                             <ul>
-                                @foreach(App\Models\Country::orderBy('name', 'asc')->get() as $country)
+                                @foreach($countries as $country)
                                     <li id="team">
                                         <a href="/team/{{ $country->id }}">
                                             <div class="team_link">
@@ -155,7 +154,8 @@
                             </div>
 
                             <div class="games_container" id="games_container">
-                                @foreach(App\Models\Game::selectRaw("DISTINCT DATE_FORMAT(game_date, '%Y-%m-%d') date")->get() as $games_dates)
+                                <div id="games_scroll_vue">
+                                @foreach($gamesdates as $games_dates)
                                     <div class="gameday_container" id="{{ $games_dates->scroll_anchor() }}">
                                         <div class="gameday_date">
                                             {!! $games_dates->playdate() !!}
@@ -164,6 +164,8 @@
                                             @foreach($fixturenum = App\Models\Game::where("game_date", "LIKE", "%" . $games_dates->date ."%")->get() as $fixture)
                                                 <a href="{{ $fixture->path() }}">
                                                     <li class="{{ $fixturenum->count() > 3 ? 'gameday_four' : 'gameday_three' }}" id="{{ $fixture->id }}">
+                                                        <!-- follow game vue component -->
+                                                        <div class="follow_icon"><follow-game-button :topmenu="true"></follow-game-button></div>
                                                         <span id="gameday_time">{{ $fixture->playtime() }}</span>
                                                         <span id="gameday_homeTeam">{{ $fixture->home_team_id == 0 ? $fixture->hometeam_name : $fixture->homeTeam->name }}</span>
                                                         <span id="gameday_homeTeam_flag"><img src="{{ asset($fixture->home_team_id == 0 ? "images/country_flags/qualifier.png" : $fixture->homeTeam->flag_url()) }}"></span>
@@ -179,6 +181,7 @@
                                         </ul>
                                     </div>
                                 @endforeach
+                                </div>
                             </div>
                         </div>
                     </li>
@@ -206,7 +209,6 @@
 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
     {{ csrf_field() }}
 </form>
-<livewire:scripts />
 </body>
 <script src={{ asset('js/topmenu.js') }}></script>
 </html>

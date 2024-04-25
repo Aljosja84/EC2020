@@ -2432,9 +2432,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Match",
-  props: ['matchid'],
+  props: ['matchid', 'gameid'],
   data: function data() {
     return {
       data: Object,
@@ -2442,33 +2445,34 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    callData: function callData() {
-      var _this = this;
-
-      axios.get("https://v3.football.api-sports.io/fixtures?id=" + this.matchid, {
-        headers: {
-          "x-rapidapi-host": "v3.football.api-sports.io",
-          "x-rapidapi-key": "6d32cb8b8dfb35683029e61b40dab0aa"
-        }
-      }).then(function (response) {
-        console.log(response.data.response[0]);
-        _this.data = response.data.response[0]; // if match is finished, stop the loading loop
-        // as to save api calls.
-
-        var MatchFinished = setInterval(function () {
-          if (_this.data.fixture.status["short"] === 'FT') {
-            console.log('match is done');
-            clearInterval(MatchFinished);
-          } else {
-            _this.callData();
-          }
-        }, 15000);
-      });
-    }
-  },
-  mounted: function mounted() {
+    /**
+    callData() {
+    axios.get("https://v3.football.api-sports.io/fixtures?id=" + this.matchid, {
+     headers: {
+         "x-rapidapi-host": process.env.MIX_API_URL,
+         "x-rapidapi-key": process.env.MIX_API_KEY
+     }
+    }).then((response)=> {
+     console.log(response.data.response[0]);
+     this.data = response.data.response[0];
+     // if match is finished, stop the loading loop
+     // as to save api calls.
+     let MatchFinished = setInterval(() => {
+         if(this.data.fixture.status.short === 'FT') {
+             console.log('match is done');
+             clearInterval(MatchFinished);
+         }   else {
+             this.callData();
+         }
+     }, 15000);
+    });
+    },
+    },
+    mounted() {
     this.callData();
-    console.log('data is loaded from mounted hook'); // now refresh every one and a half minute
+    console.log('data is loaded from mounted hook');
+    // now refresh every one and a half minute
+    */
   }
 });
 
@@ -3070,6 +3074,79 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     style: function style() {
       return "font-family:'Oswald', sans-serif; color: #515151; font-size: " + this.fontsize + 'px';
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/followGameButton.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/followGameButton.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: "followGameButton",
+  data: function data() {
+    return {
+      buttonStyle: '',
+      buttonImage: '',
+      following: false
+    };
+  },
+  props: {
+    topmenu: false,
+    matchId: Number,
+    gameId: Number
+  },
+  methods: {
+    toggleFollow: function toggleFollow() {
+      this.following = !this.following;
+    },
+    loadFollow: function loadFollow($gameId) {
+      var _this = this;
+
+      axios.get('/user/following/' + $gameId).then(function (response) {
+        if (response.data === 1) {
+          _this.following = true;
+          console.log('following!');
+        } else {
+          _this.following = false;
+          console.log('not following!');
+        }
+      })["catch"](function (error) {
+        console.log('ERROR FOLLOWING DATA: ', error);
+      });
+    }
+  },
+  mounted: function mounted() {
+    if (!this.topmenu) {
+      this.loadFollow(this.gameId);
+      console.log('requesting user data regarding: ' + this.gameId);
     }
   }
 });
@@ -5582,6 +5659,7 @@ vue__WEBPACK_IMPORTED_MODULE_1__["default"].component('chat', (__webpack_require
 vue__WEBPACK_IMPORTED_MODULE_1__["default"].component('notifications', (__webpack_require__(/*! ./components/notifications */ "./resources/js/components/notifications.vue")["default"]));
 vue__WEBPACK_IMPORTED_MODULE_1__["default"].component('player-select', (__webpack_require__(/*! ./components/playerSelect */ "./resources/js/components/playerSelect.vue")["default"]));
 vue__WEBPACK_IMPORTED_MODULE_1__["default"].component('player-dropdown', (__webpack_require__(/*! ./components/playerDropdown */ "./resources/js/components/playerDropdown.vue")["default"]));
+vue__WEBPACK_IMPORTED_MODULE_1__["default"].component('follow-game-button', (__webpack_require__(/*! ./components/followGameButton */ "./resources/js/components/followGameButton.vue")["default"]));
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -5593,6 +5671,9 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_1__["default"]({
 });
 var login = new vue__WEBPACK_IMPORTED_MODULE_1__["default"]({
   el: '#notify_user_icons'
+});
+var topmenu = new vue__WEBPACK_IMPORTED_MODULE_1__["default"]({
+  el: '#games_scroll_vue'
 });
 
 /***/ }),
@@ -23608,6 +23689,30 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
 ___CSS_LOADER_EXPORT___.push([module.id, "\n.relative[data-v-0da89719] {\n    position: relative;\n}\n.absolute-center[data-v-0da89719] {\n    position:absolute;\n    top: 53%;\n    left: 49%;\n    transform: translate(-50%, -55%);\n}\n.text-center[data-v-0da89719]{\n    text-align: center;\n    z-index: 0;\n}\ncanvas[data-v-0da89719] {\n    position: relative;\n    z-index: 1;\n}\n", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/followGameButton.vue?vue&type=style&index=0&id=6b5587c0&scoped=true&lang=css&":
+/*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/followGameButton.vue?vue&type=style&index=0&id=6b5587c0&scoped=true&lang=css& ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, "\n.follow_container[data-v-6b5587c0] {\n    background-color: white;\n    width: 200px;\n    height: 85px;\n    margin-left: 7px;\n    padding: 4px 8px 4px 8px;\n    font-family: \"Roboto\", sans-serif;\n    font-size: 12px;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    flex-direction: column;\n}\n.follow_container p[data-v-6b5587c0] {\n    padding: 6px 0 12px 0;\n}\n.button[data-v-6b5587c0] {\n    position: relative;\n    cursor: pointer;\n    width: 85%;\n    height: 50%;\n    border-radius: 10px;\n    transition: all 0.1s;\n    display: inline-flex;\n    justify-content: center;\n    align-items: center;\n    padding: 12px 16px;\n    font-size: 12px;\n}\n.button img[data-v-6b5587c0] {\n    position: absolute;\n    top: 8px;\n    left: 5px;\n}\n.not_following[data-v-6b5587c0] {\n    --var-red: red;\n    border: 1px solid var(--var-red);\n    border-bottom: 5px solid var(--var-red);\n    color: var(--var-red);\n}\n.following[data-v-6b5587c0] {\n    --var-green: green;\n    border: 1px solid var(--var-green);\n    border-bottom: 5px solid var(--var-green);\n    color: var(--var-green);\n}\n.button[data-v-6b5587c0]:active {\n    border-bottom: 2px solid;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -62551,6 +62656,36 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/followGameButton.vue?vue&type=style&index=0&id=6b5587c0&scoped=true&lang=css&":
+/*!***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/followGameButton.vue?vue&type=style&index=0&id=6b5587c0&scoped=true&lang=css& ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_followGameButton_vue_vue_type_style_index_0_id_6b5587c0_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./followGameButton.vue?vue&type=style&index=0&id=6b5587c0&scoped=true&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/followGameButton.vue?vue&type=style&index=0&id=6b5587c0&scoped=true&lang=css&");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_followGameButton_vue_vue_type_style_index_0_id_6b5587c0_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"], options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_followGameButton_vue_vue_type_style_index_0_id_6b5587c0_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/goalscorers.vue?vue&type=style&index=0&id=6a0138e5&scoped=true&lang=css&":
 /*!******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/goalscorers.vue?vue&type=style&index=0&id=6a0138e5&scoped=true&lang=css& ***!
@@ -63585,6 +63720,47 @@ component.options.__file = "resources/js/components/donutTest.vue"
 
 /***/ }),
 
+/***/ "./resources/js/components/followGameButton.vue":
+/*!******************************************************!*\
+  !*** ./resources/js/components/followGameButton.vue ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _followGameButton_vue_vue_type_template_id_6b5587c0_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./followGameButton.vue?vue&type=template&id=6b5587c0&scoped=true& */ "./resources/js/components/followGameButton.vue?vue&type=template&id=6b5587c0&scoped=true&");
+/* harmony import */ var _followGameButton_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./followGameButton.vue?vue&type=script&lang=js& */ "./resources/js/components/followGameButton.vue?vue&type=script&lang=js&");
+/* harmony import */ var _followGameButton_vue_vue_type_style_index_0_id_6b5587c0_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./followGameButton.vue?vue&type=style&index=0&id=6b5587c0&scoped=true&lang=css& */ "./resources/js/components/followGameButton.vue?vue&type=style&index=0&id=6b5587c0&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+;
+
+
+/* normalize component */
+
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _followGameButton_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _followGameButton_vue_vue_type_template_id_6b5587c0_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _followGameButton_vue_vue_type_template_id_6b5587c0_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  "6b5587c0",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/followGameButton.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/goalscorers.vue":
 /*!*************************************************!*\
   !*** ./resources/js/components/goalscorers.vue ***!
@@ -64342,6 +64518,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/followGameButton.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************!*\
+  !*** ./resources/js/components/followGameButton.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_followGameButton_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./followGameButton.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/followGameButton.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_followGameButton_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/components/goalscorers.vue?vue&type=script&lang=js&":
 /*!**************************************************************************!*\
   !*** ./resources/js/components/goalscorers.vue?vue&type=script&lang=js& ***!
@@ -64686,6 +64878,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/followGameButton.vue?vue&type=style&index=0&id=6b5587c0&scoped=true&lang=css&":
+/*!***************************************************************************************************************!*\
+  !*** ./resources/js/components/followGameButton.vue?vue&type=style&index=0&id=6b5587c0&scoped=true&lang=css& ***!
+  \***************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_followGameButton_vue_vue_type_style_index_0_id_6b5587c0_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader/dist/cjs.js!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./followGameButton.vue?vue&type=style&index=0&id=6b5587c0&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/followGameButton.vue?vue&type=style&index=0&id=6b5587c0&scoped=true&lang=css&");
+
+
+/***/ }),
+
 /***/ "./resources/js/components/goalscorers.vue?vue&type=style&index=0&id=6a0138e5&scoped=true&lang=css&":
 /*!**********************************************************************************************************!*\
   !*** ./resources/js/components/goalscorers.vue?vue&type=style&index=0&id=6a0138e5&scoped=true&lang=css& ***!
@@ -65004,6 +65209,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_donutTest_vue_vue_type_template_id_0da89719_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_donutTest_vue_vue_type_template_id_0da89719_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./donutTest.vue?vue&type=template&id=0da89719&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/donutTest.vue?vue&type=template&id=0da89719&scoped=true&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/followGameButton.vue?vue&type=template&id=6b5587c0&scoped=true&":
+/*!*************************************************************************************************!*\
+  !*** ./resources/js/components/followGameButton.vue?vue&type=template&id=6b5587c0&scoped=true& ***!
+  \*************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_followGameButton_vue_vue_type_template_id_6b5587c0_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_followGameButton_vue_vue_type_template_id_6b5587c0_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_followGameButton_vue_vue_type_template_id_6b5587c0_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./followGameButton.vue?vue&type=template&id=6b5587c0&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/followGameButton.vue?vue&type=template&id=6b5587c0&scoped=true&");
 
 
 /***/ }),
@@ -65434,7 +65656,13 @@ var render = function () {
     _c(
       "div",
       { staticClass: "scoreboard_comp" },
-      [_c("scoreboard", { attrs: { teller: this.teller, data: this.data } })],
+      [
+        _c("scoreboard", { attrs: { data: this.data } }),
+        _vm._v(" "),
+        _c("follow-game-button", {
+          attrs: { topmenu: false, gameId: _vm.gameid },
+        }),
+      ],
       1
     ),
     _vm._v(" "),
@@ -66004,6 +66232,66 @@ var render = function () {
   ])
 }
 var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/followGameButton.vue?vue&type=template&id=6b5587c0&scoped=true&":
+/*!****************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/followGameButton.vue?vue&type=template&id=6b5587c0&scoped=true& ***!
+  \****************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _vm.topmenu
+        ? [_vm._m(0)]
+        : [
+            _c("div", { staticClass: "follow_container" }, [
+              _c("p", [_vm._v("You're not following this game")]),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "button following",
+                  on: { click: _vm.toggleFollow },
+                },
+                [
+                  _c("img", { attrs: { src: "/images/unfollow_game.png" } }),
+                  _c("span", [
+                    _vm._v("Follow this game: " + _vm._s(_vm.following)),
+                  ]),
+                ]
+              ),
+            ]),
+          ],
+    ],
+    2
+  )
+}
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [
+      _c("img", { attrs: { src: "/images/unfollow_game.png" } }),
+    ])
+  },
+]
 render._withStripped = true
 
 

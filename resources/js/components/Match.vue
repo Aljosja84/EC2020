@@ -1,8 +1,11 @@
 <template>
     <div>
         <div class="scoreboard_comp">
-            <scoreboard :teller="this.teller" v-bind:data="this.data"></scoreboard>
+            <scoreboard v-bind:data="this.data"></scoreboard>
+            <follow-game-button :topmenu="false" :gameId="gameid"></follow-game-button>
         </div>
+
+
 
         <div class="lineup_home">
             <lineup :data="this.data" team="hometeam"></lineup>
@@ -30,7 +33,7 @@
     export default {
 
     name: "Match",
-    props: ['matchid'],
+    props: ['matchid', 'gameid'],
     data() {
         return {
             data: Object,
@@ -38,7 +41,7 @@
         }
     },
 
-    methods: {
+    methods: { /**
         callData() {
             axios.get("https://v3.football.api-sports.io/fixtures?id=" + this.matchid, {
                 headers: {
@@ -67,7 +70,7 @@
         console.log('data is loaded from mounted hook');
         // now refresh every one and a half minute
 
-
+*/
 
     }
 }
