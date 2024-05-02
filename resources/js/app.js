@@ -44,6 +44,7 @@ Vue.component('notifications', require('./components/notifications').default);
 Vue.component('player-select', require('./components/playerSelect').default);
 Vue.component('player-dropdown', require('./components/playerDropdown').default);
 Vue.component('follow-game-button', require('./components/followGameButton').default);
+Vue.component('followed-game-dropdown', require('./components/followedGamesDropdown').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

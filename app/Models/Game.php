@@ -11,6 +11,16 @@ class Game extends Model
 
     protected $dates = ['game_date'];
 
+    /**
+     * Get the route key for the model.
+     *
+     * @return string
+     */
+    public function getRouteKeyName()
+    {
+        return 'id';
+    }
+
     public function stadium() {
         return $this->belongsTo('App\Models\Stadium');
     }

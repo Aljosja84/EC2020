@@ -32,6 +32,11 @@
         <div id="stadium_info" style="margin-left: 15px">
             <player-select :countries="{{ $countries }}"></player-select>
         </div>
+        <!-- form to submit match event notifications -->
+        <div id="stadium_info" style="margin-left: 15px">
+            You're logged in as: {{ Auth()->user()->name }}
+            <followed-game-dropdown :followedgames="{{ $games }}"></followed-game-dropdown>
+        </div>
     </div>
 </div>
 @endsection

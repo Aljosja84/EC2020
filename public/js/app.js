@@ -3109,33 +3109,58 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "followGameButton",
   data: function data() {
     return {
-      buttonStyle: '',
       buttonImage: '',
-      following: false
+      following: false,
+      loaded: false
     };
   },
   props: {
     topmenu: false,
     matchId: Number,
-    gameId: Number
+    gameId: Number,
+    followed: Array
   },
   methods: {
     toggleFollow: function toggleFollow() {
       this.following = !this.following;
     },
-    loadFollow: function loadFollow($gameId) {
+    setFollow: function setFollow(followStatus, gameId) {
       var _this = this;
 
-      axios.get('/user/following/' + $gameId).then(function (response) {
+      var url = '/user/setfollow/' + gameId + '/' + followStatus;
+      axios.get(url).then(function (response) {
         if (response.data === 1) {
           _this.following = true;
-          console.log('following!');
         } else {
           _this.following = false;
+        }
+      })["catch"](function (error) {
+        console.log('ERROR WITH SETTING FOLLOW STATUS: ', error);
+      });
+    },
+    sayHello: function sayHello() {
+      console.log('HELLO');
+    },
+    loadFollow: function loadFollow($gameId) {
+      var _this2 = this;
+
+      axios.get('/user/following/' + $gameId).then(function (response) {
+        // set loaded to true so we can show the component
+        _this2.loaded = true;
+
+        if (response.data === 1) {
+          _this2.following = true;
+          console.log('following!');
+        } else {
+          _this2.following = false;
           console.log('not following!');
         }
       })["catch"](function (error) {
@@ -3143,10 +3168,135 @@ __webpack_require__.r(__webpack_exports__);
       });
     }
   },
+  computed: {
+    buttonStyle: function buttonStyle() {
+      return this.following === true ? 'not_following' : 'following';
+    },
+    topText: function topText() {
+      return this.following === true ? 'You are following this game' : 'You are not following this game';
+    }
+  },
   mounted: function mounted() {
     if (!this.topmenu) {
       this.loadFollow(this.gameId);
       console.log('requesting user data regarding: ' + this.gameId);
+    }
+
+    if (this.topmenu) {
+      if (this.followed.length > 0) {
+        // logged in user is following
+        console.log('FOLLOWED FROM MAIN MENU');
+        this.loaded = true;
+      } else {
+        console.log('NOT FOLLOWED FROM MAIN MENU');
+        this.loaded = true;
+      }
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/followedGamesDropdown.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/followedGamesDropdown.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: "followedGamesDropdown",
+  props: ['followedgames'],
+  methods: {
+    formatDate: function formatDate(date) {
+      // You may use a library like moment.js to format dates, or use JavaScript Date methods
+      var dateString = new Date(date).toLocaleDateString();
+      var dateParts = dateString.split('-');
+      var year = parseInt(dateParts[2]);
+      var month = parseInt(dateParts[1]) - 1; // Months are zero-based in JavaScript
+
+      var day = parseInt(dateParts[0]);
+      var datum = new Date(year, month, day);
+      var options = {
+        weekday: 'long',
+        month: 'long',
+        day: 'numeric'
+      };
+      return datum.toLocaleDateString('en-US', options);
+    },
+    formatTime: function formatTime(dateTime) {
+      // Convert dateTime to Amsterdam time zone
+      // and make the clock 24 hours instead of AM or PM
+      var amsterdamTime = new Date(dateTime);
+      var amsterdamOptions = {
+        timeZone: 'Europe/Amsterdam',
+        hour12: false,
+        hour: '2-digit',
+        minute: '2-digit'
+      };
+      return amsterdamTime.toLocaleTimeString('nl-NL', amsterdamOptions);
+    },
+    sortedGames: function sortedGames(date) {
+      // Sort games within each group (date) based on their times
+      return this.groupedGames[date].sort(function (a, b) {
+        return new Date(a.game_date) - new Date(b.game_date);
+      });
+    },
+    onOptionMouseMove: function onOptionMouseMove(event, index) {
+      var element = document.getElementById(index);
+
+      if (element) {
+        var listContainer = this.$refs.list;
+        element.scrollIntoView && element.scrollIntoView({
+          block: 'nearest',
+          behavior: 'smooth'
+        });
+      }
+    },
+    getFlagUrl: function getFlagUrl(flagUrl) {
+      // Construct full URL for flag image
+      return "/images/".concat(flagUrl);
+    }
+  },
+  computed: {
+    groupedGames: function groupedGames() {
+      // Group games by date
+      var grouped = {};
+      this.followedgames.forEach(function (game) {
+        var date = game.game_date.split('T')[0]; // Extract date without time
+
+        if (!grouped[date]) {
+          grouped[date] = [];
+        }
+
+        grouped[date].push(game);
+      });
+      return grouped;
+    },
+    sortedDates: function sortedDates() {
+      // Sort dates in ascending order
+      return Object.keys(this.groupedGames).sort();
     }
   }
 });
@@ -5660,6 +5810,7 @@ vue__WEBPACK_IMPORTED_MODULE_1__["default"].component('notifications', (__webpac
 vue__WEBPACK_IMPORTED_MODULE_1__["default"].component('player-select', (__webpack_require__(/*! ./components/playerSelect */ "./resources/js/components/playerSelect.vue")["default"]));
 vue__WEBPACK_IMPORTED_MODULE_1__["default"].component('player-dropdown', (__webpack_require__(/*! ./components/playerDropdown */ "./resources/js/components/playerDropdown.vue")["default"]));
 vue__WEBPACK_IMPORTED_MODULE_1__["default"].component('follow-game-button', (__webpack_require__(/*! ./components/followGameButton */ "./resources/js/components/followGameButton.vue")["default"]));
+vue__WEBPACK_IMPORTED_MODULE_1__["default"].component('followed-game-dropdown', (__webpack_require__(/*! ./components/followedGamesDropdown */ "./resources/js/components/followedGamesDropdown.vue")["default"]));
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -23712,7 +23863,31 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.follow_container[data-v-6b5587c0] {\n    background-color: white;\n    width: 200px;\n    height: 85px;\n    margin-left: 7px;\n    padding: 4px 8px 4px 8px;\n    font-family: \"Roboto\", sans-serif;\n    font-size: 12px;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    flex-direction: column;\n}\n.follow_container p[data-v-6b5587c0] {\n    padding: 6px 0 12px 0;\n}\n.button[data-v-6b5587c0] {\n    position: relative;\n    cursor: pointer;\n    width: 85%;\n    height: 50%;\n    border-radius: 10px;\n    transition: all 0.1s;\n    display: inline-flex;\n    justify-content: center;\n    align-items: center;\n    padding: 12px 16px;\n    font-size: 12px;\n}\n.button img[data-v-6b5587c0] {\n    position: absolute;\n    top: 8px;\n    left: 5px;\n}\n.not_following[data-v-6b5587c0] {\n    --var-red: red;\n    border: 1px solid var(--var-red);\n    border-bottom: 5px solid var(--var-red);\n    color: var(--var-red);\n}\n.following[data-v-6b5587c0] {\n    --var-green: green;\n    border: 1px solid var(--var-green);\n    border-bottom: 5px solid var(--var-green);\n    color: var(--var-green);\n}\n.button[data-v-6b5587c0]:active {\n    border-bottom: 2px solid;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.follow_container[data-v-6b5587c0] {\n    background-color: white;\n    width: 200px;\n    height: 85px;\n    margin-left: 7px;\n    padding: 4px 8px 4px 8px;\n    font-family: \"Roboto\", sans-serif;\n    font-size: 12px;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    flex-direction: column;\n}\n.follow_container p[data-v-6b5587c0] {\n    padding: 6px 0 12px 0;\n}\n.button[data-v-6b5587c0] {\n    position: relative;\n    cursor: pointer;\n    width: 85%;\n    height: 50%;\n    border-radius: 10px;\n    transition: all 0.1s;\n    display: inline-flex;\n    justify-content: center;\n    align-items: center;\n    padding: 12px 16px;\n    font-size: 12px;\n}\n.button img[data-v-6b5587c0] {\n    position: absolute;\n    top: 8px;\n    left: 5px;\n}\n.not_following[data-v-6b5587c0] {\n    --var-red: red;\n    border: 1px solid var(--var-red);\n    border-bottom: 5px solid var(--var-red);\n    color: var(--var-red);\n}\n.following[data-v-6b5587c0] {\n    --var-green: #7ed63e;\n    border: 1px solid var(--var-green);\n    border-bottom: 5px solid var(--var-green);\n    color: var(--var-green);\n}\n.button[data-v-6b5587c0]:active {\n    border-bottom: 2px solid;\n}\n", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/followedGamesDropdown.vue?vue&type=style&index=0&id=04c3e187&scoped=true&lang=css&":
+/*!************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/followedGamesDropdown.vue?vue&type=style&index=0&id=04c3e187&scoped=true&lang=css& ***!
+  \************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, "\n.games_window[data-v-04c3e187] {\n    font-family: \"Roboto\", sans-serif;\n    font-size: 13px;\n    margin: 3px;\n    border: 1px solid #eee;\n    height: -webkit-fit-content;\n    height: -moz-fit-content;\n    height: fit-content;\n    max-height: 300px;\n    overflow-y: auto;\n    transition: all 0.3s ease-out;\n    /* scrollbar vars */\n    --scrollbarBG: #90A4AE;\n    --thumbBG: #90A4AE;\n    scroll-behavior: smooth;\n    border-radius: 5px;\n    /* shadow */\n    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;\n}\n.games_window[data-v-04c3e187]::-webkit-scrollbar {\n    width: 7px;\n}\n.games_window[data-v-04c3e187]::-webkit-scrollbar-track {\n    background: var(--scrollbarBG);\n    display: none;\n    -webkit-box-shadow: none;\n}\n.games_window[data-v-04c3e187]::-webkit-scrollbar-thumb {\n    background-color: var(--thumbBG) ;\n    border-radius: 6px;\n    border: 3px solid var(--scrollbarBG);\n}\n.games_window ul[data-v-04c3e187] {\n    list-style: none;\n}\n.group[data-v-04c3e187] {\n    font-family: 'Roboto', sans-serif;\n    font-weight: bold;\n    font-size: 14px;\n    color: #9badbf;\n    padding: 2px 2px 2px 10px;\n}\n.autocomplete-results li[data-v-04c3e187]:last-child {\n    margin-bottom: 5px;\n}\n.game[data-v-04c3e187] {\n    font-family: \"Roboto\", sans-serif;\n    font-size: 13px;\n    font-weight: normal;\n    list-style: none;\n    text-align: left;\n    padding: 5px 2px 5px 7px;\n    margin: 0 2px 0 2px;\n    cursor: pointer;\n    transition: all 0.3s ease-out;\n    border-radius: 5px;\n    display: flex;\n    justify-content: space-around;\n    align-items: center;\n}\n.game img[data-v-04c3e187] {\n    width: 16px;\n    height: 16px;\n}\n.game.is-active[data-v-04c3e187],\n.game[data-v-04c3e187]:hover {\n    background-color: #e6f3ff;\n    color: slategray;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -62686,6 +62861,36 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/followedGamesDropdown.vue?vue&type=style&index=0&id=04c3e187&scoped=true&lang=css&":
+/*!****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/followedGamesDropdown.vue?vue&type=style&index=0&id=04c3e187&scoped=true&lang=css& ***!
+  \****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_followedGamesDropdown_vue_vue_type_style_index_0_id_04c3e187_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./followedGamesDropdown.vue?vue&type=style&index=0&id=04c3e187&scoped=true&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/followedGamesDropdown.vue?vue&type=style&index=0&id=04c3e187&scoped=true&lang=css&");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_followedGamesDropdown_vue_vue_type_style_index_0_id_04c3e187_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"], options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_followedGamesDropdown_vue_vue_type_style_index_0_id_04c3e187_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/goalscorers.vue?vue&type=style&index=0&id=6a0138e5&scoped=true&lang=css&":
 /*!******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/goalscorers.vue?vue&type=style&index=0&id=6a0138e5&scoped=true&lang=css& ***!
@@ -63761,6 +63966,47 @@ component.options.__file = "resources/js/components/followGameButton.vue"
 
 /***/ }),
 
+/***/ "./resources/js/components/followedGamesDropdown.vue":
+/*!***********************************************************!*\
+  !*** ./resources/js/components/followedGamesDropdown.vue ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _followedGamesDropdown_vue_vue_type_template_id_04c3e187_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./followedGamesDropdown.vue?vue&type=template&id=04c3e187&scoped=true& */ "./resources/js/components/followedGamesDropdown.vue?vue&type=template&id=04c3e187&scoped=true&");
+/* harmony import */ var _followedGamesDropdown_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./followedGamesDropdown.vue?vue&type=script&lang=js& */ "./resources/js/components/followedGamesDropdown.vue?vue&type=script&lang=js&");
+/* harmony import */ var _followedGamesDropdown_vue_vue_type_style_index_0_id_04c3e187_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./followedGamesDropdown.vue?vue&type=style&index=0&id=04c3e187&scoped=true&lang=css& */ "./resources/js/components/followedGamesDropdown.vue?vue&type=style&index=0&id=04c3e187&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+;
+
+
+/* normalize component */
+
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _followedGamesDropdown_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _followedGamesDropdown_vue_vue_type_template_id_04c3e187_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _followedGamesDropdown_vue_vue_type_template_id_04c3e187_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  "04c3e187",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/followedGamesDropdown.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/goalscorers.vue":
 /*!*************************************************!*\
   !*** ./resources/js/components/goalscorers.vue ***!
@@ -64534,6 +64780,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/followedGamesDropdown.vue?vue&type=script&lang=js&":
+/*!************************************************************************************!*\
+  !*** ./resources/js/components/followedGamesDropdown.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_followedGamesDropdown_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./followedGamesDropdown.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/followedGamesDropdown.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_followedGamesDropdown_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/components/goalscorers.vue?vue&type=script&lang=js&":
 /*!**************************************************************************!*\
   !*** ./resources/js/components/goalscorers.vue?vue&type=script&lang=js& ***!
@@ -64891,6 +65153,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/followedGamesDropdown.vue?vue&type=style&index=0&id=04c3e187&scoped=true&lang=css&":
+/*!********************************************************************************************************************!*\
+  !*** ./resources/js/components/followedGamesDropdown.vue?vue&type=style&index=0&id=04c3e187&scoped=true&lang=css& ***!
+  \********************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_followedGamesDropdown_vue_vue_type_style_index_0_id_04c3e187_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader/dist/cjs.js!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./followedGamesDropdown.vue?vue&type=style&index=0&id=04c3e187&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/followedGamesDropdown.vue?vue&type=style&index=0&id=04c3e187&scoped=true&lang=css&");
+
+
+/***/ }),
+
 /***/ "./resources/js/components/goalscorers.vue?vue&type=style&index=0&id=6a0138e5&scoped=true&lang=css&":
 /*!**********************************************************************************************************!*\
   !*** ./resources/js/components/goalscorers.vue?vue&type=style&index=0&id=6a0138e5&scoped=true&lang=css& ***!
@@ -65226,6 +65501,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_followGameButton_vue_vue_type_template_id_6b5587c0_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_followGameButton_vue_vue_type_template_id_6b5587c0_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./followGameButton.vue?vue&type=template&id=6b5587c0&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/followGameButton.vue?vue&type=template&id=6b5587c0&scoped=true&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/followedGamesDropdown.vue?vue&type=template&id=04c3e187&scoped=true&":
+/*!******************************************************************************************************!*\
+  !*** ./resources/js/components/followedGamesDropdown.vue?vue&type=template&id=04c3e187&scoped=true& ***!
+  \******************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_followedGamesDropdown_vue_vue_type_template_id_04c3e187_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_followedGamesDropdown_vue_vue_type_template_id_04c3e187_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_followedGamesDropdown_vue_vue_type_template_id_04c3e187_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./followedGamesDropdown.vue?vue&type=template&id=04c3e187&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/followedGamesDropdown.vue?vue&type=template&id=04c3e187&scoped=true&");
 
 
 /***/ }),
@@ -66256,24 +66548,60 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c(
     "div",
+    {
+      directives: [
+        {
+          name: "show",
+          rawName: "v-show",
+          value: _vm.loaded,
+          expression: "loaded",
+        },
+      ],
+    },
     [
       _vm.topmenu
-        ? [_vm._m(0)]
+        ? [
+            _c(
+              "div",
+              {
+                on: {
+                  click: function ($event) {
+                    $event.stopPropagation()
+                    $event.preventDefault()
+                    return _vm.sayHello($event)
+                  },
+                },
+              },
+              [
+                _vm.followed.length > 0
+                  ? _c("img", { attrs: { src: "/images/follow_game.png" } })
+                  : _c("img", { attrs: { src: "/images/unfollow_game.png" } }),
+              ]
+            ),
+          ]
         : [
             _c("div", { staticClass: "follow_container" }, [
-              _c("p", [_vm._v("You're not following this game")]),
+              _c("p", [_vm._v(_vm._s(_vm.topText))]),
               _vm._v(" "),
               _c(
                 "div",
                 {
-                  staticClass: "button following",
-                  on: { click: _vm.toggleFollow },
+                  staticClass: "button ",
+                  class: _vm.buttonStyle,
+                  on: {
+                    click: function ($event) {
+                      return _vm.setFollow(_vm.following, _vm.gameId)
+                    },
+                  },
                 },
                 [
-                  _c("img", { attrs: { src: "/images/unfollow_game.png" } }),
-                  _c("span", [
-                    _vm._v("Follow this game: " + _vm._s(_vm.following)),
-                  ]),
+                  _vm.following
+                    ? _c("img", { attrs: { src: "/images/unfollow_game.png" } })
+                    : _c("img", { attrs: { src: "/images/follow_game.png" } }),
+                  _vm._v(" "),
+                  _vm.following
+                    ? _c("span", [_vm._v("Unfollow this game")])
+                    : _c("span", [_vm._v("Follow this game")]),
                 ]
               ),
             ]),
@@ -66282,16 +66610,79 @@ var render = function () {
     2
   )
 }
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("img", { attrs: { src: "/images/unfollow_game.png" } }),
-    ])
-  },
-]
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/followedGamesDropdown.vue?vue&type=template&id=04c3e187&scoped=true&":
+/*!*********************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/followedGamesDropdown.vue?vue&type=template&id=04c3e187&scoped=true& ***!
+  \*********************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", [
+      _c(
+        "ul",
+        { ref: "list", staticClass: "games_window" },
+        _vm._l(_vm.sortedDates, function (date, index) {
+          return _c("li", { key: index, staticClass: "group" }, [
+            _vm._v(
+              "\n                " +
+                _vm._s(_vm.formatDate(date)) +
+                "\n                "
+            ),
+            _c(
+              "ul",
+              _vm._l(_vm.sortedGames(date), function (game) {
+                return _c(
+                  "li",
+                  {
+                    key: game.id,
+                    staticClass: "game",
+                    attrs: { id: game.api_id },
+                    on: {
+                      mouseenter: function ($event) {
+                        return _vm.onOptionMouseMove($event, game.api_id)
+                      },
+                    },
+                  },
+                  [
+                    _c("img", {
+                      attrs: { src: _vm.getFlagUrl(game.home_team.flag_url) },
+                    }),
+                    _c("span", [_vm._v(_vm._s(game.home_team.name))]),
+                    _c("span", [_vm._v(" VS ")]),
+                    _c("span", [_vm._v(_vm._s(game.away_team.name))]),
+                    _c("img", {
+                      attrs: { src: _vm.getFlagUrl(game.away_team.flag_url) },
+                    }),
+                  ]
+                )
+              }),
+              0
+            ),
+          ])
+        }),
+        0
+      ),
+    ]),
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -67497,7 +67888,7 @@ var render = function () {
     _c("div", { staticClass: "resultsWin", style: _vm.resultStyle }, [
       _c(
         "ul",
-        { ref: "list", staticClass: "autocomplete-results" },
+        { staticClass: "autocomplete-results" },
         _vm._l(_vm.filteredOptions, function (option, index) {
           return _c("li", { key: index }, [
             _c("div", { staticClass: "countryGroup" }, [

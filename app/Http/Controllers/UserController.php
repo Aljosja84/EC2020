@@ -125,4 +125,24 @@ class UserController extends Controller
         }
         return false;
     }
+
+    public function setStatus(Request $request, Game $game, $status)
+    {
+        // user must be logged in
+        $user = auth()->user();
+        //$game = Game::findorFail($game);
+
+        if($status === 'true') {
+            $user->games()->detach($game);
+        }   else {
+            $user->games()->attach($game);
+        }
+
+        // make sure backend response gets returned
+        if($user->games()->find($game->id)) {
+            return true;
+        }
+
+        return false;
+    }
 }

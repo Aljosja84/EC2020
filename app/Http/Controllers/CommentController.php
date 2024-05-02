@@ -5,13 +5,32 @@ namespace App\Http\Controllers;
 use App\Models\Comment;
 use App\Models\Country;
 use App\Models\Game;
+use App\Models\Group;
 use App\Models\Player;
+use App\Models\Stadium;
 use App\Models\User;
 use App\Notifications\CommentAdded;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
+    public $stadiums;
+    public $groups;
+    public $countries;
+    public $gamesdates;
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->stadiums = Stadium::orderBy('city', 'asc')->get();
+        $this->groups = Group::orderBy('name', 'asc')->get();
+        $this->countries = Country::orderBy('name', 'asc')->get();
+        $this->gamesdates = Game::selectRaw("DISTINCT DATE_FORMAT(game_date, '%Y-%m-%d') date")->get();
+    }
     /**
      * Display a listing of the resource.
      *
@@ -20,12 +39,21 @@ class CommentController extends Controller
     public function index()
     {
         $users = User::all();
-        $countries = Country::all();
+        $user = Auth()->user();
         $players = Country::has('players')->with('players')->get();
+        $games = $user->games()->with('homeTeam')->with('awayTeam')->get();
 
-        return view('comment', compact(['users', 'countries', 'players']));
+        return view('comment', [
+            'user' => $user,
+            'users' => $users,
+            'players' => $players,
+            'games' => $games,
+            'stadiums' => $this->stadiums,
+            'groups' => $this->groups,
+            'countries' => $this->countries,
+            'gamesdates' => $this->gamesdates,
 
-
+        ]);
 
     }
 

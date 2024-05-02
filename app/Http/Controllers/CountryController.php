@@ -3,11 +3,32 @@
 namespace App\Http\Controllers;
 
 use App\Models\Country;
+use App\Models\Game;
+use App\Models\Group;
+use App\Models\Stadium;
 use Illuminate\Http\Request;
 
 class CountryController extends Controller
 {
-     /**
+    public $stadiums;
+    public $groups;
+    public $countries;
+    public $gamesdates;
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->stadiums = Stadium::orderBy('city', 'asc')->get();
+        $this->groups = Group::orderBy('name', 'asc')->get();
+        $this->countries = Country::orderBy('name', 'asc')->get();
+        $this->gamesdates = Game::selectRaw("DISTINCT DATE_FORMAT(game_date, '%Y-%m-%d') date")->get();
+    }
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -48,7 +69,11 @@ class CountryController extends Controller
     {
 
         return view('team', [
-            'country' => $country
+            'country' => $country,
+            'stadiums' => $this->stadiums,
+            'groups' => $this->groups,
+            'countries' => $this->countries,
+            'gamesdates' => $this->gamesdates,
         ]);
     }
 

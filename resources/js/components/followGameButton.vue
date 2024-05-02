@@ -1,15 +1,19 @@
 <template>
-    <div>
+    <div v-show="loaded">
         <template v-if="topmenu">
-            <div>
-                <img src="/images/unfollow_game.png" />
+            <div @click.stop.prevent="sayHello">
+                <img v-if="followed.length > 0" src="/images/follow_game.png" />
+                <img v-else src="/images/unfollow_game.png" />
             </div>
         </template>
         <template v-else>
             <div class="follow_container">
-                <p>You're not following this game</p>
-                <div class="button following" @click="toggleFollow">
-                    <img src="/images/unfollow_game.png"><span>Follow this game: {{following}}</span>
+                <p>{{ topText }}</p>
+                <div class="button " :class="buttonStyle" @click="setFollow(following, gameId)">
+                    <img v-if="following" src="/images/unfollow_game.png">
+                    <img v-else src="/images/follow_game.png">
+                    <span v-if="following">Unfollow this game</span>
+                    <span v-else>Follow this game</span>
                 </div>
             </div>
         </template>
@@ -22,9 +26,9 @@
 
         data() {
             return {
-                buttonStyle: '',
                 buttonImage: '',
                 following: false,
+                loaded: false,
             }
         },
 
@@ -32,6 +36,7 @@
             topmenu: false,
             matchId: Number,
             gameId: Number,
+            followed: Array,
         },
 
         methods: {
@@ -39,21 +44,55 @@
                 this.following = !this.following;
             },
 
-            loadFollow($gameId) {
-                axios.get('/user/following/' + $gameId)
+            setFollow(followStatus, gameId) {
+                const url = '/user/setfollow/' + gameId + '/' + followStatus;
+
+                axios.get(url)
                     .then(response => {
                         if(response.data === 1) {
                             this.following = true;
-                            console.log('following!')
                         }   else {
                             this.following = false;
-                            console.log('not following!');
+                        }
+                    })
+                    .catch(error => {
+                        console.log('ERROR WITH SETTING FOLLOW STATUS: ', error);
+                    })
+            },
+
+            sayHello() {
+                console.log('HELLO');
+            },
+
+            loadFollow($gameId) {
+                axios.get('/user/following/' + $gameId)
+                    .then(response => {
+                        // set loaded to true so we can show the component
+                        this.loaded = true;
+
+                        if(response.data === 1) {
+                            this.following = true;
+                             console.log('following!')
+                        }   else {
+                            this.following = false;
+                             console.log('not following!');
                         }
 
                     })
                     .catch(error => {
                         console.log('ERROR FOLLOWING DATA: ', error);
                     })
+
+            }
+        },
+
+        computed: {
+            buttonStyle() {
+                return this.following === true ? 'not_following' : 'following';
+            },
+
+            topText() {
+                return this.following === true ? 'You are following this game' : 'You are not following this game';
             }
         },
 
@@ -61,6 +100,18 @@
             if(!this.topmenu) {
                 this.loadFollow(this.gameId);
                 console.log('requesting user data regarding: ' + this.gameId);
+            }
+
+            if(this.topmenu) {
+                if(this.followed.length > 0) {
+
+                    // logged in user is following
+                    console.log('FOLLOWED FROM MAIN MENU');
+                    this.loaded = true;
+                }   else {
+                    console.log('NOT FOLLOWED FROM MAIN MENU');
+                    this.loaded = true;
+                }
             }
         }
     }
@@ -113,7 +164,7 @@
     }
 
     .following {
-        --var-green: green;
+        --var-green: #7ed63e;
         border: 1px solid var(--var-green);
         border-bottom: 5px solid var(--var-green);
         color: var(--var-green);

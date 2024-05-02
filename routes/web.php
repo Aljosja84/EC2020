@@ -24,6 +24,7 @@ Route::post('/notifications/{notificationId}/delete', [App\Http\Controllers\Noti
 Route::post('/players/save-players', [App\Http\Controllers\PlayerController::class, 'store']);
 
 Route::get('/user/following/{id}', [App\Http\Controllers\UserController::class, 'isFollowing']);
+Route::get('/user/setfollow/{game}/{status}', [App\Http\Controllers\UserController::class, 'setStatus']);
 Auth::routes();
 
 Route::get('/api', function() {

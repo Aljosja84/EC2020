@@ -3,7 +3,7 @@
         <span>Player who scored the goal:</span>
             <input type="text" class="search" v-model="search" @input="handleInput" placeholder="Search player..."/>
         <div class="resultsWin" :style="resultStyle">
-            <ul class="autocomplete-results" ref="list">
+            <ul class="autocomplete-results">
                 <li v-for="(option, index) in filteredOptions" :key="index">
                     <div class="countryGroup">
                         <img :src="option.flagUrl"/>

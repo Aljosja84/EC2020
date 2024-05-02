@@ -40,6 +40,7 @@
 <body>
 <?php
     $user = auth()->user();
+    $userId = $user->id;
 ?>
 <header>
     <nav>
@@ -161,11 +162,11 @@
                                             {!! $games_dates->playdate() !!}
                                         </div>
                                         <ul>
-                                            @foreach($fixturenum = App\Models\Game::where("game_date", "LIKE", "%" . $games_dates->date ."%")->get() as $fixture)
+                                            @foreach($fixturenum = App\Models\Game::with(['users' => function ($query) use ($userId) { $query->where('user_id', $userId); }])->where("game_date", "LIKE", "%" . $games_dates->date ."%")->get() as $fixture)
                                                 <a href="{{ $fixture->path() }}">
                                                     <li class="{{ $fixturenum->count() > 3 ? 'gameday_four' : 'gameday_three' }}" id="{{ $fixture->id }}">
                                                         <!-- follow game vue component -->
-                                                        <div class="follow_icon"><follow-game-button :topmenu="true"></follow-game-button></div>
+                                                        <div class="follow_icon"><follow-game-button :topmenu="true" :followed="{{ $fixture->users }}" :game-id="{{ $fixture->id }}"></follow-game-button></div>
                                                         <span id="gameday_time">{{ $fixture->playtime() }}</span>
                                                         <span id="gameday_homeTeam">{{ $fixture->home_team_id == 0 ? $fixture->hometeam_name : $fixture->homeTeam->name }}</span>
                                                         <span id="gameday_homeTeam_flag"><img src="{{ asset($fixture->home_team_id == 0 ? "images/country_flags/qualifier.png" : $fixture->homeTeam->flag_url()) }}"></span>
