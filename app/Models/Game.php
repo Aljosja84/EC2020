@@ -66,4 +66,9 @@ class Game extends Model
     {
         return $this->belongsToMany('App\Models\User', 'user_game');
     }
+
+    public function players()
+    {
+        return $this->hasManyThrough(Player::class, Country::class);
+    }
 }

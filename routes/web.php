@@ -22,6 +22,7 @@ Route::get('/notifications/delete-all', [App\Http\Controllers\NotificationContro
 Route::post('/notifications/{notificationId}/mark-as-read', [App\Http\Controllers\NotificationController::class, 'markAsRead']);
 Route::post('/notifications/{notificationId}/delete', [App\Http\Controllers\NotificationController::class, 'delete']);
 Route::post('/players/save-players', [App\Http\Controllers\PlayerController::class, 'store']);
+Route::get('/players/game/{gameId}', [App\Http\Controllers\PlayerController::class, 'getPlayersFromGame']);
 
 Route::get('/user/following/{id}', [App\Http\Controllers\UserController::class, 'isFollowing']);
 Route::get('/user/setfollow/{game}/{status}', [App\Http\Controllers\UserController::class, 'setStatus']);

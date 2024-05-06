@@ -1,8 +1,8 @@
 <template>
     <div v-show="loaded">
         <template v-if="topmenu">
-            <div @click.stop.prevent="sayHello">
-                <img v-if="followed.length > 0" src="/images/follow_game.png" />
+            <div @click.stop.prevent="setFollow(topFollowed, gameId)">
+                <img v-if="topFollowed" src="/images/follow_game.png" />
                 <img v-else src="/images/unfollow_game.png" />
             </div>
         </template>
@@ -29,6 +29,7 @@
                 buttonImage: '',
                 following: false,
                 loaded: false,
+                topFollowed : ''
             }
         },
 
@@ -42,6 +43,7 @@
         methods: {
             toggleFollow() {
                 this.following = !this.following;
+                this.topFollowed = !this.topFollowed;
             },
 
             setFollow(followStatus, gameId) {
@@ -49,19 +51,12 @@
 
                 axios.get(url)
                     .then(response => {
-                        if(response.data === 1) {
-                            this.following = true;
-                        }   else {
-                            this.following = false;
-                        }
+                        this.following = response.data === 1;
+                        this.topFollowed = response.data === 1;
                     })
                     .catch(error => {
                         console.log('ERROR WITH SETTING FOLLOW STATUS: ', error);
                     })
-            },
-
-            sayHello() {
-                console.log('HELLO');
             },
 
             loadFollow($gameId) {
@@ -70,13 +65,7 @@
                         // set loaded to true so we can show the component
                         this.loaded = true;
 
-                        if(response.data === 1) {
-                            this.following = true;
-                             console.log('following!')
-                        }   else {
-                            this.following = false;
-                             console.log('not following!');
-                        }
+                        this.following = response.data === 1;
 
                     })
                     .catch(error => {
@@ -93,7 +82,7 @@
 
             topText() {
                 return this.following === true ? 'You are following this game' : 'You are not following this game';
-            }
+            },
         },
 
         mounted() {
@@ -104,12 +93,10 @@
 
             if(this.topmenu) {
                 if(this.followed.length > 0) {
-
-                    // logged in user is following
-                    console.log('FOLLOWED FROM MAIN MENU');
+                    this.topFollowed = true;
                     this.loaded = true;
                 }   else {
-                    console.log('NOT FOLLOWED FROM MAIN MENU');
+                    this.topFollowed = false;
                     this.loaded = true;
                 }
             }

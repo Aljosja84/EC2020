@@ -3119,7 +3119,8 @@ __webpack_require__.r(__webpack_exports__);
     return {
       buttonImage: '',
       following: false,
-      loaded: false
+      loaded: false,
+      topFollowed: ''
     };
   },
   props: {
@@ -3131,23 +3132,18 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     toggleFollow: function toggleFollow() {
       this.following = !this.following;
+      this.topFollowed = !this.topFollowed;
     },
     setFollow: function setFollow(followStatus, gameId) {
       var _this = this;
 
       var url = '/user/setfollow/' + gameId + '/' + followStatus;
       axios.get(url).then(function (response) {
-        if (response.data === 1) {
-          _this.following = true;
-        } else {
-          _this.following = false;
-        }
+        _this.following = response.data === 1;
+        _this.topFollowed = response.data === 1;
       })["catch"](function (error) {
         console.log('ERROR WITH SETTING FOLLOW STATUS: ', error);
       });
-    },
-    sayHello: function sayHello() {
-      console.log('HELLO');
     },
     loadFollow: function loadFollow($gameId) {
       var _this2 = this;
@@ -3155,14 +3151,7 @@ __webpack_require__.r(__webpack_exports__);
       axios.get('/user/following/' + $gameId).then(function (response) {
         // set loaded to true so we can show the component
         _this2.loaded = true;
-
-        if (response.data === 1) {
-          _this2.following = true;
-          console.log('following!');
-        } else {
-          _this2.following = false;
-          console.log('not following!');
-        }
+        _this2.following = response.data === 1;
       })["catch"](function (error) {
         console.log('ERROR FOLLOWING DATA: ', error);
       });
@@ -3184,11 +3173,10 @@ __webpack_require__.r(__webpack_exports__);
 
     if (this.topmenu) {
       if (this.followed.length > 0) {
-        // logged in user is following
-        console.log('FOLLOWED FROM MAIN MENU');
+        this.topFollowed = true;
         this.loaded = true;
       } else {
-        console.log('NOT FOLLOWED FROM MAIN MENU');
+        this.topFollowed = false;
         this.loaded = true;
       }
     }
@@ -3208,6 +3196,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _playerDropdown_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./playerDropdown.vue */ "./resources/js/components/playerDropdown.vue");
 //
 //
 //
@@ -3225,10 +3214,50 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  components: {
+    playerDropdown: _playerDropdown_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
   name: "followedGamesDropdown",
   props: ['followedgames'],
+  data: function data() {
+    return {
+      chooseText: 'Choose a game you follow (' + this.followedgames.length + ')',
+      resultWin: false,
+      selectedGame: null,
+      players: []
+    };
+  },
   methods: {
+    showResults: function showResults() {
+      this.resultWin = !this.resultWin;
+    },
+    setGame: function setGame(gameId) {
+      var _this = this;
+
+      this.resultWin = false; // find the game we just selected
+
+      this.selectedGame = this.followedgames.find(function (game) {
+        return game.id === gameId;
+      }); // set game in the choice field
+
+      this.chooseText = this.selectedGame.home_team.name + ' VS ' + this.selectedGame.away_team.name; // get all players from home_team and away_team
+
+      axios.get('/players/game/' + gameId).then(function (response) {
+        console.log(response.data);
+        _this.players = response.data;
+      })["catch"](function (error) {
+        console.log('error fetching players: ', error);
+      });
+    },
+    handleClickOutside: function handleClickOutside(event) {
+      if (!this.$el.contains(event.target)) {
+        this.resultWin = false;
+      }
+    },
     formatDate: function formatDate(date) {
       // You may use a library like moment.js to format dates, or use JavaScript Date methods
       var dateString = new Date(date).toLocaleDateString();
@@ -3297,7 +3326,17 @@ __webpack_require__.r(__webpack_exports__);
     sortedDates: function sortedDates() {
       // Sort dates in ascending order
       return Object.keys(this.groupedGames).sort();
+    },
+    resultStyle: function resultStyle() {
+      return this.resultWin === true ? 'opacity: 100%; visibility: visible' : 'opacity: 0%; visibility: hidden; height: 0px';
     }
+  },
+  mounted: function mounted() {
+    document.addEventListener('click', this.handleClickOutside);
+  },
+  destroyed: function destroyed() {
+    document.removeEventListener('click', this.handleClickOutside);
+    ;
   }
 });
 
@@ -4610,6 +4649,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     //this.playersByCountryArray = JSON.parse(this.items);
+    console.log(this.items);
     document.addEventListener('click', this.handleClickOutside);
   },
   destroyed: function destroyed() {
@@ -23887,7 +23927,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.games_window[data-v-04c3e187] {\n    font-family: \"Roboto\", sans-serif;\n    font-size: 13px;\n    margin: 3px;\n    border: 1px solid #eee;\n    height: -webkit-fit-content;\n    height: -moz-fit-content;\n    height: fit-content;\n    max-height: 300px;\n    overflow-y: auto;\n    transition: all 0.3s ease-out;\n    /* scrollbar vars */\n    --scrollbarBG: #90A4AE;\n    --thumbBG: #90A4AE;\n    scroll-behavior: smooth;\n    border-radius: 5px;\n    /* shadow */\n    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;\n}\n.games_window[data-v-04c3e187]::-webkit-scrollbar {\n    width: 7px;\n}\n.games_window[data-v-04c3e187]::-webkit-scrollbar-track {\n    background: var(--scrollbarBG);\n    display: none;\n    -webkit-box-shadow: none;\n}\n.games_window[data-v-04c3e187]::-webkit-scrollbar-thumb {\n    background-color: var(--thumbBG) ;\n    border-radius: 6px;\n    border: 3px solid var(--scrollbarBG);\n}\n.games_window ul[data-v-04c3e187] {\n    list-style: none;\n}\n.group[data-v-04c3e187] {\n    font-family: 'Roboto', sans-serif;\n    font-weight: bold;\n    font-size: 14px;\n    color: #9badbf;\n    padding: 2px 2px 2px 10px;\n}\n.autocomplete-results li[data-v-04c3e187]:last-child {\n    margin-bottom: 5px;\n}\n.game[data-v-04c3e187] {\n    font-family: \"Roboto\", sans-serif;\n    font-size: 13px;\n    font-weight: normal;\n    list-style: none;\n    text-align: left;\n    padding: 5px 2px 5px 7px;\n    margin: 0 2px 0 2px;\n    cursor: pointer;\n    transition: all 0.3s ease-out;\n    border-radius: 5px;\n    display: flex;\n    justify-content: space-around;\n    align-items: center;\n}\n.game img[data-v-04c3e187] {\n    width: 16px;\n    height: 16px;\n}\n.game.is-active[data-v-04c3e187],\n.game[data-v-04c3e187]:hover {\n    background-color: #e6f3ff;\n    color: slategray;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.choice_field[data-v-04c3e187] {\n    width: 100%;\n    border: 1px slategray solid;\n    border-radius: 6px;\n    height: 30px;\n    padding: 2px 2px 2px 10px;\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n    cursor: pointer;\n    display: flex;\n    align-items: center;\n}\n.games_window[data-v-04c3e187] {\n    font-family: \"Roboto\", sans-serif;\n    font-size: 13px;\n    margin: 3px;\n    border: 1px solid #eee;\n    height: -webkit-fit-content;\n    height: -moz-fit-content;\n    height: fit-content;\n    max-height: 250px;\n    overflow-y: auto;\n    transition: all 0.5s ease-out;\n    /* scrollbar vars */\n    --scrollbarBG: #90A4AE;\n    --thumbBG: #90A4AE;\n    scroll-behavior: smooth;\n    border-radius: 5px;\n    /* shadow */\n    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;\n}\n.games_window[data-v-04c3e187]::-webkit-scrollbar {\n    width: 7px;\n}\n.games_window[data-v-04c3e187]::-webkit-scrollbar-track {\n    background: var(--scrollbarBG);\n    display: none;\n    -webkit-box-shadow: none;\n}\n.games_window[data-v-04c3e187]::-webkit-scrollbar-thumb {\n    background-color: var(--thumbBG) ;\n    border-radius: 6px;\n    border: 3px solid var(--scrollbarBG);\n}\n.games_window ul[data-v-04c3e187] {\n    list-style: none;\n}\n.group[data-v-04c3e187] {\n    font-family: 'Roboto', sans-serif;\n    font-weight: bold;\n    font-size: 14px;\n    color: #9badbf;\n    padding: 2px 2px 2px 0;\n}\n.autocomplete-results li[data-v-04c3e187]:last-child {\n    margin-bottom: 5px;\n}\n.game[data-v-04c3e187] {\n    font-family: \"Roboto\", sans-serif;\n    font-size: 13px;\n    font-weight: normal;\n    list-style: none;\n    text-align: left;\n    padding: 5px 2px 5px 7px;\n    margin: 0 2px 0 4px;\n    cursor: pointer;\n    transition: all 0.3s ease-out;\n    border-radius: 5px;\n    display: flex;\n    justify-content: space-around;\n    align-items: center;\n    -webkit-user-select: none; /* Chrome, Safari, Opera */\n    -moz-user-select: none; /* Firefox */\n    -ms-user-select: none; /* Internet Explorer/Edge */\n    user-select: none; /* Non-prefixed version */\n}\n.game img[data-v-04c3e187] {\n    width: 16px;\n    height: 16px;\n}\n.game.is-active[data-v-04c3e187],\n.game[data-v-04c3e187]:hover {\n    background-color: #e6f3ff;\n    color: slategray;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -24118,7 +24158,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.search[data-v-7c0d281d] {\n    width: 100%;\n    box-sizing: border-box;\n    border: 1px solid lightslategray;\n    border-radius: 5px;\n    background-color: white;\n    background-image: url('/images/icons8-search-24.png');\n    background-position: 7px 7px;\n    background-repeat: no-repeat;\n    background-size: 20px 20px;\n    padding: 9px 20px 9px 30px;\n    font-family: \"Roboto\", sans-serif;\n    font-size: 14px;\n    color: slategray;\n}\n.resultsWin[data-v-7c0d281d] {\n    transition: all 0.2s ease-out;\n}\n.countryGroup[data-v-7c0d281d] {\n    font-family: 'Roboto', sans-serif;\n    font-weight: bold;\n    font-size: 14px;\n    color: #9badbf;\n    padding: 2px 2px 2px 10px;\n    display: flex;\n    align-items: center;\n}\n.countryGroup img[data-v-7c0d281d] {\n    width: 18px;\n    height: 18px;\n    margin-right: 5px;\n}\n.autocomplete[data-v-7c0d281d] {\n    transition: all 0.3s ease-out;\n}\n.autocomplete-results[data-v-7c0d281d] {\n    font-family: \"Roboto\", sans-serif;\n    font-size: 13px;\n    margin: 3px;\n    border: 1px solid #eee;\n    height: -webkit-fit-content;\n    height: -moz-fit-content;\n    height: fit-content;\n    max-height: 300px;\n    overflow: auto;\n    transition: all 0.3s ease-out;\n    /* scrollbar vars */\n    --scrollbarBG: #90A4AE;\n    --thumbBG: #90A4AE;\n    scroll-behavior: smooth;\n    border-radius: 5px;\n    /* shadow */\n    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;\n}\n.autocomplete-results li[data-v-7c0d281d]:last-child {\n    margin-bottom: 2px;\n}\n.autocomplete-result[data-v-7c0d281d] {\n    list-style: none;\n    text-align: left;\n    padding: 5px 2px 5px 7px;\n    margin: 0 2px 0 2px;\n    cursor: pointer;\n    transition: all 0.3s ease-out;\n    border-radius: 5px;\n}\n.autocomplete-result.is-active[data-v-7c0d281d],\n.autocomplete-result[data-v-7c0d281d]:hover {\n    background-color: #e6f3ff;\n    color: slategray;\n    padding-left: 10px;\n}\n.autocomplete-results[data-v-7c0d281d]::-webkit-scrollbar {\n    width: 7px;\n}\n.autocomplete-results[data-v-7c0d281d]::-webkit-scrollbar-track {\n    background: var(--scrollbarBG);\n    display: none;\n    -webkit-box-shadow: none;\n}\n.autocomplete-results[data-v-7c0d281d]::-webkit-scrollbar-thumb {\n    background-color: var(--thumbBG) ;\n    border-radius: 6px;\n    border: 3px solid var(--scrollbarBG);\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.search[data-v-7c0d281d] {\n    width: 100%;\n    box-sizing: border-box;\n    border: 1px solid lightslategray;\n    border-radius: 5px;\n    background-color: white;\n    background-image: url('/images/icons8-search-24.png');\n    background-position: 7px 7px;\n    background-repeat: no-repeat;\n    background-size: 20px 20px;\n    padding: 9px 20px 9px 30px;\n    font-family: \"Roboto\", sans-serif;\n    font-size: 14px;\n    color: slategray;\n}\n.resultsWin[data-v-7c0d281d] {\n    transition: all 0.2s ease-out;\n}\n.countryGroup[data-v-7c0d281d] {\n    font-family: 'Roboto', sans-serif;\n    font-weight: bold;\n    font-size: 14px;\n    color: #9badbf;\n    padding: 2px 2px 2px 10px;\n    display: flex;\n    align-items: center;\n}\n.countryGroup img[data-v-7c0d281d] {\n    width: 18px;\n    height: 18px;\n    margin-right: 5px;\n}\n.autocomplete[data-v-7c0d281d] {\n    transition: all 0.3s ease-out;\n}\n.autocomplete-results[data-v-7c0d281d] {\n    font-family: \"Roboto\", sans-serif;\n    font-size: 13px;\n    margin: 3px;\n    border: 1px solid #eee;\n    height: -webkit-fit-content;\n    height: -moz-fit-content;\n    height: fit-content;\n    max-height: 300px;\n    overflow: auto;\n    transition: all 0.3s ease-out;\n    /* scrollbar vars */\n    --scrollbarBG: #90A4AE;\n    --thumbBG: #90A4AE;\n    scroll-behavior: smooth;\n    border-radius: 5px;\n    /* shadow */\n    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;\n}\n.autocomplete-results li[data-v-7c0d281d]:last-child {\n    margin-bottom: 2px;\n}\n.autocomplete-result[data-v-7c0d281d] {\n    list-style: none;\n    text-align: left;\n    padding: 5px 2px 5px 7px;\n    margin: 0 2px 0 2px;\n    cursor: pointer;\n    transition: all 0.3s ease-out;\n    border-radius: 5px;\n    -webkit-user-select: none; /* Chrome, Safari, Opera */\n    -moz-user-select: none; /* Firefox */\n    -ms-user-select: none; /* Internet Explorer/Edge */\n    user-select: none; /* Non-prefixed version */\n}\n.autocomplete-result.is-active[data-v-7c0d281d],\n.autocomplete-result[data-v-7c0d281d]:hover {\n    background-color: #e6f3ff;\n    color: slategray;\n    padding-left: 10px;\n}\n.autocomplete-results[data-v-7c0d281d]::-webkit-scrollbar {\n    width: 7px;\n}\n.autocomplete-results[data-v-7c0d281d]::-webkit-scrollbar-track {\n    background: var(--scrollbarBG);\n    display: none;\n    -webkit-box-shadow: none;\n}\n.autocomplete-results[data-v-7c0d281d]::-webkit-scrollbar-thumb {\n    background-color: var(--thumbBG) ;\n    border-radius: 6px;\n    border: 3px solid var(--scrollbarBG);\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -66568,12 +66608,12 @@ var render = function () {
                   click: function ($event) {
                     $event.stopPropagation()
                     $event.preventDefault()
-                    return _vm.sayHello($event)
+                    return _vm.setFollow(_vm.topFollowed, _vm.gameId)
                   },
                 },
               },
               [
-                _vm.followed.length > 0
+                _vm.topFollowed
                   ? _c("img", { attrs: { src: "/images/follow_game.png" } })
                   : _c("img", { attrs: { src: "/images/unfollow_game.png" } }),
               ]
@@ -66634,52 +66674,74 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("div", [
-      _c(
-        "ul",
-        { ref: "list", staticClass: "games_window" },
-        _vm._l(_vm.sortedDates, function (date, index) {
-          return _c("li", { key: index, staticClass: "group" }, [
-            _vm._v(
-              "\n                " +
-                _vm._s(_vm.formatDate(date)) +
-                "\n                "
-            ),
-            _c(
-              "ul",
-              _vm._l(_vm.sortedGames(date), function (game) {
-                return _c(
-                  "li",
-                  {
-                    key: game.id,
-                    staticClass: "game",
-                    attrs: { id: game.api_id },
-                    on: {
-                      mouseenter: function ($event) {
-                        return _vm.onOptionMouseMove($event, game.api_id)
+    _c(
+      "div",
+      [
+        _c(
+          "div",
+          {
+            staticClass: "choice_field",
+            on: {
+              click: function ($event) {
+                return _vm.showResults()
+              },
+            },
+          },
+          [_vm._v(_vm._s(_vm.chooseText))]
+        ),
+        _vm._v(" "),
+        _c(
+          "ul",
+          { ref: "list", staticClass: "games_window", style: _vm.resultStyle },
+          _vm._l(_vm.sortedDates, function (date, index) {
+            return _c("li", { key: index, staticClass: "group" }, [
+              _vm._v(
+                "\n                " +
+                  _vm._s(_vm.formatDate(date)) +
+                  "\n                "
+              ),
+              _c(
+                "ul",
+                _vm._l(_vm.sortedGames(date), function (game) {
+                  return _c(
+                    "li",
+                    {
+                      key: game.id,
+                      staticClass: "game",
+                      attrs: { id: game.api_id },
+                      on: {
+                        click: function ($event) {
+                          return _vm.setGame(game.id)
+                        },
+                        mouseenter: function ($event) {
+                          return _vm.onOptionMouseMove($event, game.api_id)
+                        },
                       },
                     },
-                  },
-                  [
-                    _c("img", {
-                      attrs: { src: _vm.getFlagUrl(game.home_team.flag_url) },
-                    }),
-                    _c("span", [_vm._v(_vm._s(game.home_team.name))]),
-                    _c("span", [_vm._v(" VS ")]),
-                    _c("span", [_vm._v(_vm._s(game.away_team.name))]),
-                    _c("img", {
-                      attrs: { src: _vm.getFlagUrl(game.away_team.flag_url) },
-                    }),
-                  ]
-                )
-              }),
-              0
-            ),
-          ])
-        }),
-        0
-      ),
-    ]),
+                    [
+                      _c("img", {
+                        attrs: { src: _vm.getFlagUrl(game.home_team.flag_url) },
+                      }),
+                      _c("span", [_vm._v(_vm._s(game.home_team.name))]),
+                      _c("span", [_vm._v(" VS ")]),
+                      _c("span", [_vm._v(_vm._s(game.away_team.name))]),
+                      _c("img", {
+                        attrs: { src: _vm.getFlagUrl(game.away_team.flag_url) },
+                      }),
+                    ]
+                  )
+                }),
+                0
+              ),
+            ])
+          }),
+          0
+        ),
+        _vm._v(" "),
+        _c("player-dropdown", { attrs: { items: this.players } }),
+      ],
+      1
+    ),
   ])
 }
 var staticRenderFns = []

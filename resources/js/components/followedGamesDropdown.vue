@@ -1,27 +1,71 @@
 <template>
     <div>
         <div>
-            <ul class="games_window" ref="list">
+            <div class="choice_field" @click="showResults()">{{ chooseText }}</div>
+            <ul class="games_window" ref="list" :style="resultStyle">
                 <li v-for="(date, index) in sortedDates" :key="index" class="group">
                     {{ formatDate(date) }}
                     <ul>
-                        <li v-for="game in sortedGames(date)" :key="game.id" class="game" :id="game.api_id" @mouseenter="onOptionMouseMove($event, game.api_id)">
+                        <li v-for="game in sortedGames(date)" :key="game.id" class="game" :id="game.api_id" @click="setGame(game.id)" @mouseenter="onOptionMouseMove($event, game.api_id)">
                             <img :src="getFlagUrl(game.home_team.flag_url)"><span>{{ game.home_team.name }}</span><span> VS </span><span>{{ game.away_team.name }}</span><img :src="getFlagUrl(game.away_team.flag_url)">
                         </li>
                     </ul>
                 </li>
             </ul>
+            <player-dropdown :items="this.players"></player-dropdown>
         </div>
     </div>
 </template>
 
 <script>
+    import playerDropdown from './playerDropdown.vue';
+
     export default {
+        components: {
+           playerDropdown
+        },
+
         name: "followedGamesDropdown",
 
         props: ['followedgames'],
 
+        data() {
+            return {
+                chooseText: 'Choose a game you follow (' + this.followedgames.length + ')',
+                resultWin : false,
+                selectedGame : null,
+                players: [],
+            }
+        },
+
         methods: {
+            showResults() {
+                this.resultWin = !this.resultWin;
+            },
+
+            setGame(gameId) {
+                this.resultWin = false;
+                // find the game we just selected
+                this.selectedGame = this.followedgames.find(game => game.id === gameId);
+                // set game in the choice field
+                this.chooseText = this.selectedGame.home_team.name + ' VS ' + this.selectedGame.away_team.name;
+                // get all players from home_team and away_team
+                axios.get('/players/game/' + gameId)
+                    .then(response => {
+                        console.log(response.data);
+                        this.players = response.data;
+                    })
+                    .catch(error => {
+                        console.log('error fetching players: ', error);
+                    })
+            },
+
+            handleClickOutside(event) {
+                if (!this.$el.contains(event.target)) {
+                    this.resultWin = false;
+                }
+            },
+
             formatDate(date) {
                 // You may use a library like moment.js to format dates, or use JavaScript Date methods
                 const dateString =  new Date(date).toLocaleDateString();
@@ -78,21 +122,46 @@
             sortedDates() {
                 // Sort dates in ascending order
                 return Object.keys(this.groupedGames).sort();
+            },
+
+            resultStyle() {
+               return this.resultWin === true ? 'opacity: 100%; visibility: visible'
+                    : 'opacity: 0%; visibility: hidden; height: 0px';
             }
         },
+
+        mounted() {
+            document.addEventListener('click', this.handleClickOutside);
+        },
+
+        destroyed() {
+            document.removeEventListener('click', this.handleClickOutside);;
+        }
     }
 </script>
 
 <style scoped>
+    .choice_field {
+        width: 100%;
+        border: 1px slategray solid;
+        border-radius: 6px;
+        height: 30px;
+        padding: 2px 2px 2px 10px;
+        user-select: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+    }
+
     .games_window {
         font-family: "Roboto", sans-serif;
         font-size: 13px;
         margin: 3px;
         border: 1px solid #eee;
         height: fit-content;
-        max-height: 300px;
+        max-height: 250px;
         overflow-y: auto;
-        transition: all 0.3s ease-out;
+        transition: all 0.5s ease-out;
         /* scrollbar vars */
         --scrollbarBG: #90A4AE;
         --thumbBG: #90A4AE;
@@ -126,7 +195,7 @@
         font-weight: bold;
         font-size: 14px;
         color: #9badbf;
-        padding: 2px 2px 2px 10px;
+        padding: 2px 2px 2px 0;
     }
 
     .autocomplete-results li:last-child {
@@ -140,14 +209,17 @@
         list-style: none;
         text-align: left;
         padding: 5px 2px 5px 7px;
-        margin: 0 2px 0 2px;
+        margin: 0 2px 0 4px;
         cursor: pointer;
         transition: all 0.3s ease-out;
         border-radius: 5px;
         display: flex;
         justify-content: space-around;
         align-items: center;
-
+        -webkit-user-select: none; /* Chrome, Safari, Opera */
+        -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+        user-select: none; /* Non-prefixed version */
 
     }
 

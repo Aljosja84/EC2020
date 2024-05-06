@@ -115,6 +115,7 @@
 
         mounted() {
             //this.playersByCountryArray = JSON.parse(this.items);
+            console.log(this.items);
             document.addEventListener('click', this.handleClickOutside);
         },
 
@@ -195,6 +196,10 @@
         cursor: pointer;
         transition: all 0.3s ease-out;
         border-radius: 5px;
+        -webkit-user-select: none; /* Chrome, Safari, Opera */
+        -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+        user-select: none; /* Non-prefixed version */
     }
 
     .autocomplete-result.is-active,
