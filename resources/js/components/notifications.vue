@@ -17,6 +17,7 @@
             </div>
                 <div id="notify_items" v-cloak v-if="notifications.length > 0" :key="1">
                         <li @click=setAsRead(notification) :class=setStyleReadStatus(notification) v-for="(notification, index) in notifications" v-bind:key=notification.id @mouseenter="showDelete(index)" @mouseleave="hideDelete()">
+                            <div class="notify_delete" @click.stop=whichDelete(notification)><img src="/images/sign-delete-light.png" width="16px" height="16px" /></div>
                             <div class="notify_comment" style="padding-right: 20px">
                                 <img :src="notification['data'].comment_avatar" class="notify_user_icon"/>
                                 <div style="margin-left: 10px">
@@ -25,7 +26,6 @@
                                     <span>"{{ notification['data'].comment_body }}"</span>
                                 </div>
                             </div>
-                            <div class="notify_delete" @click.stop=whichDelete(notification)><img src="/images/sign-delete-light.png" width="16px" height="16px" /></div>
                             <div class="notify_timestamp">{{ notification['sent_date'] }}</div>
                         </li>
                 </div>
@@ -371,7 +371,7 @@
         cursor: pointer;
         position: relative;
         right: -315px;
-        top: -40px;
+        top: 0;
         align-content: center;
         opacity: 0;
         transition: all 0.2s ease-out;

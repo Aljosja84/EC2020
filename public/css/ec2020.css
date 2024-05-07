@@ -454,6 +454,7 @@ input:-webkit-autofill {
 
 /* ------------------------- stadium info ------------------------- */
 #stadium_info {
+    position: relative;
     width: 267px;
     min-height: 530px;
     height: auto;

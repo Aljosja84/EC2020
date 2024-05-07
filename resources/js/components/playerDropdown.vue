@@ -143,6 +143,10 @@
     }
 
     .resultsWin {
+        position: absolute;
+        z-index: 999;
+        background-color: white;
+        width: 100%;
         transition: all 0.2s ease-out;
     }
 

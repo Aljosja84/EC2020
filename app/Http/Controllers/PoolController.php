@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Country;
+use App\Models\Game;
+use App\Models\Group;
 use App\Models\Pool;
 use App\Models\ChatRoom;
 use App\Models\ChatMessage;
+use App\Models\Stadium;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,6 +16,10 @@ use App\Events\NewChatMessage;
 
 class PoolController extends Controller
 {
+    public $stadiums;
+    public $groups;
+    public $countries;
+    public $gamesdates;
     /**
      * Create a new controller instance.
      *
@@ -19,7 +27,11 @@ class PoolController extends Controller
      */
     public function __construct()
     {
-        //$this->middleware('pool');
+        $this->middleware('auth');
+        $this->stadiums = Stadium::orderBy('city', 'asc')->get();
+        $this->groups = Group::orderBy('name', 'asc')->get();
+        $this->countries = Country::orderBy('name', 'asc')->get();
+        $this->gamesdates = Game::selectRaw("DISTINCT DATE_FORMAT(game_date, '%Y-%m-%d') date")->get();
     }
 
     /**
@@ -65,7 +77,11 @@ class PoolController extends Controller
 
         return view('pool', [
             'pool' => $pool,
-            'chatroom' => $pool->chatroom
+            'chatroom' => $pool->chatroom,
+            'stadiums' => $this->stadiums,
+            'groups' => $this->groups,
+            'countries' => $this->countries,
+            'gamesdates' => $this->gamesdates,
         ]);
     }
 

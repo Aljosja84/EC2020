@@ -3216,6 +3216,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
@@ -3247,7 +3264,6 @@ __webpack_require__.r(__webpack_exports__);
       this.chooseText = this.selectedGame.home_team.name + ' VS ' + this.selectedGame.away_team.name; // get all players from home_team and away_team
 
       axios.get('/players/game/' + gameId).then(function (response) {
-        console.log(response.data);
         _this.players = response.data;
       })["catch"](function (error) {
         console.log('error fetching players: ', error);
@@ -3328,7 +3344,7 @@ __webpack_require__.r(__webpack_exports__);
       return Object.keys(this.groupedGames).sort();
     },
     resultStyle: function resultStyle() {
-      return this.resultWin === true ? 'opacity: 100%; visibility: visible' : 'opacity: 0%; visibility: hidden; height: 0px';
+      return this.resultWin === true ? 'opacity: 100%; visibility: visible' : 'opacity: 0%; visibility: hidden';
     }
   },
   mounted: function mounted() {
@@ -23927,7 +23943,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.choice_field[data-v-04c3e187] {\n    width: 100%;\n    border: 1px slategray solid;\n    border-radius: 6px;\n    height: 30px;\n    padding: 2px 2px 2px 10px;\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n    cursor: pointer;\n    display: flex;\n    align-items: center;\n}\n.games_window[data-v-04c3e187] {\n    font-family: \"Roboto\", sans-serif;\n    font-size: 13px;\n    margin: 3px;\n    border: 1px solid #eee;\n    height: -webkit-fit-content;\n    height: -moz-fit-content;\n    height: fit-content;\n    max-height: 250px;\n    overflow-y: auto;\n    transition: all 0.5s ease-out;\n    /* scrollbar vars */\n    --scrollbarBG: #90A4AE;\n    --thumbBG: #90A4AE;\n    scroll-behavior: smooth;\n    border-radius: 5px;\n    /* shadow */\n    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;\n}\n.games_window[data-v-04c3e187]::-webkit-scrollbar {\n    width: 7px;\n}\n.games_window[data-v-04c3e187]::-webkit-scrollbar-track {\n    background: var(--scrollbarBG);\n    display: none;\n    -webkit-box-shadow: none;\n}\n.games_window[data-v-04c3e187]::-webkit-scrollbar-thumb {\n    background-color: var(--thumbBG) ;\n    border-radius: 6px;\n    border: 3px solid var(--scrollbarBG);\n}\n.games_window ul[data-v-04c3e187] {\n    list-style: none;\n}\n.group[data-v-04c3e187] {\n    font-family: 'Roboto', sans-serif;\n    font-weight: bold;\n    font-size: 14px;\n    color: #9badbf;\n    padding: 2px 2px 2px 0;\n}\n.autocomplete-results li[data-v-04c3e187]:last-child {\n    margin-bottom: 5px;\n}\n.game[data-v-04c3e187] {\n    font-family: \"Roboto\", sans-serif;\n    font-size: 13px;\n    font-weight: normal;\n    list-style: none;\n    text-align: left;\n    padding: 5px 2px 5px 7px;\n    margin: 0 2px 0 4px;\n    cursor: pointer;\n    transition: all 0.3s ease-out;\n    border-radius: 5px;\n    display: flex;\n    justify-content: space-around;\n    align-items: center;\n    -webkit-user-select: none; /* Chrome, Safari, Opera */\n    -moz-user-select: none; /* Firefox */\n    -ms-user-select: none; /* Internet Explorer/Edge */\n    user-select: none; /* Non-prefixed version */\n}\n.game img[data-v-04c3e187] {\n    width: 16px;\n    height: 16px;\n}\n.game.is-active[data-v-04c3e187],\n.game[data-v-04c3e187]:hover {\n    background-color: #e6f3ff;\n    color: slategray;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.choice_field[data-v-04c3e187] {\n    width: 100%;\n    border: 1px slategray solid;\n    border-radius: 6px;\n    padding: 6px 20px 6px 30px;\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n    cursor: pointer;\n    display: flex;\n    align-items: center;\n    font-family: \"Roboto\", sans-serif;\n    font-size: 14px;\n    color: slategray;\n}\n.games_window[data-v-04c3e187] {\n    position: absolute;\n    width: 100%;\n    z-index: 1000;\n    font-family: \"Roboto\", sans-serif;\n    font-size: 13px;\n    border: 1px solid #eee;\n    background-color: white;\n    height: -webkit-fit-content;\n    height: -moz-fit-content;\n    height: fit-content;\n    max-height: 250px;\n    overflow-y: auto;\n    transition: all 0.3s ease-out;\n    /* scrollbar vars */\n    --scrollbarBG: #90A4AE;\n    --thumbBG: #90A4AE;\n    scroll-behavior: smooth;\n    border-radius: 5px;\n    /* shadow */\n    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;\n}\n.games_window[data-v-04c3e187]::-webkit-scrollbar {\n    width: 7px;\n}\n.games_window[data-v-04c3e187]::-webkit-scrollbar-track {\n    background: var(--scrollbarBG);\n    display: none;\n    -webkit-box-shadow: none;\n}\n.games_window[data-v-04c3e187]::-webkit-scrollbar-thumb {\n    background-color: var(--thumbBG) ;\n    border-radius: 6px;\n    border: 3px solid var(--scrollbarBG);\n}\n.games_window ul[data-v-04c3e187] {\n    list-style: none;\n}\n.group[data-v-04c3e187] {\n    width: 100%;\n    font-family: 'Roboto', sans-serif;\n    font-weight: bold;\n    font-size: 14px;\n    color: #9badbf;\n    padding: 2px 2px 2px 0;\n}\n.autocomplete-results li[data-v-04c3e187]:last-child {\n    margin-bottom: 5px;\n}\n.game[data-v-04c3e187] {\n    font-family: \"Roboto\", sans-serif;\n    font-size: 13px;\n    font-weight: normal;\n    list-style: none;\n    text-align: left;\n    padding: 5px 2px 5px 2px;\n    margin: 0 2px 0 4px;\n    cursor: pointer;\n    transition: all 0.3s ease-out;\n    border-radius: 5px;\n    display: flex;\n    justify-content: space-evenly;\n    align-items: center;\n    -webkit-user-select: none; /* Chrome, Safari, Opera */\n    -moz-user-select: none; /* Firefox */\n    -ms-user-select: none; /* Internet Explorer/Edge */\n    user-select: none; /* Non-prefixed version */\n}\n.game img[data-v-04c3e187] {\n    width: 16px;\n    height: 16px;\n}\n.game.is-active[data-v-04c3e187],\n.game[data-v-04c3e187]:hover {\n    background-color: #e6f3ff;\n    color: slategray;\n}\n.options[data-v-04c3e187] {\n    margin: 10px 0 10px 0;\n}\n#minute[data-v-04c3e187] {\n    width: 100%;\n    border: 1px slategray solid;\n    border-radius: 6px;\n    padding: 9px 20px 9px 30px;\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n    display: flex;\n    align-items: center;\n    font-family: \"Roboto\", sans-serif;\n    font-size: 14px;\n    color: slategray;\n}\n.button[data-v-04c3e187] {\n    cursor: pointer;\n    min-width: 100%;\n    border-radius: 16px;\n    border: 2px solid #e5e5e5;\n    border-bottom: 6px solid #e5e5e5;\n    transition: all 0.1s;\n    display: inline-flex;\n    padding: 12px 16px;\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n}\n.button[data-v-04c3e187]:hover {\n    background-color: #ddf4ff;\n    border-color: #1cb0f6;\n}\n.button[data-v-04c3e187]:active {\n    border-bottom: 2px solid #1cb0f6;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -24134,7 +24150,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.container[data-v-ad8086a6] {\n    overflow-x: hidden;\n    position: relative;\n}\n#icon_notification[data-v-ad8086a6] {\n    background: url('/images/user__notification.png') no-repeat;\n    filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.5));\n    background-size: contain;\n    width: 46px;\n    height: 46px;\n    cursor: pointer;\n    position: relative;\n}\n.notify_user_icon[data-v-ad8086a6] {\n    filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.5));\n    width: 40px;\n    height: 40px;\n}\n.notify-bubble[data-v-ad8086a6] {\n    position: absolute;\n    border: 2px solid white;\n    top: -2px;\n    right: -5px;\n    width: 20px;\n    height: 20px;\n    background-color: red;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    color: white;\n    font-size: 1em;\n    border-radius: 50%;\n}\n#notify_items[data-v-ad8086a6] {\n    min-height: 200px;\n    max-height: 400px;\n    overflow-y: scroll;\n    /* scrollbar vars */\n    --scrollbarBG: #90A4AE;\n    --thumbBG: #90A4AE;\n    scroll-behavior: smooth;\n    overflow-x: hidden;\n}\n#notify_items[data-v-ad8086a6]::-webkit-scrollbar {\n    width: 7px;\n}\n#notify_items[data-v-ad8086a6]::-webkit-scrollbar-track {\n    background: var(--scrollbarBG);\n    display: none;\n    -webkit-box-shadow: none;\n}\n#notify_items[data-v-ad8086a6]::-webkit-scrollbar-thumb {\n    background-color: var(--thumbBG) ;\n    border-radius: 6px;\n    border: 3px solid var(--scrollbarBG);\n}\n.notify_ul[data-v-ad8086a6] {\n    position: absolute;\n    margin-left: -25px;\n    padding: 0;\n    right: 60%;\n    top: 125%;\n    width: 360px;\n    background-color: white;\n    /* shadow */\n    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;\n    border-radius: 1%;\n    border-bottom: solid 5px #e28633;\n    opacity: 0;\n    visibility: hidden;\n    transition: all 0.2s ease-out;\n}\n.notify_ul li[data-v-ad8086a6] {\n    width: 100%;\n    height: auto;\n    background-color: white;\n    margin: 0;\n    font-family: Arial, sans-serif;\n    font-size: 11px;\n    padding: 5px 5px 5px 15px;\n    border-bottom: 1px solid #f3f2f3;\n    line-height: 15px;\n    -webkit-backface-visibility: hidden;\n            backface-visibility: hidden;\n}\n.notify_ul li[data-v-ad8086a6]:hover {\n    background-color: #f7f9fa;\n}\n.notify_ul li:hover .notify_delete[data-v-ad8086a6] {\n    opacity: 1;\n    transition: all 0.2s ease-out;\n}\n.notify_ul li a[data-v-ad8086a6] {\n    color: #e28633;\n    font-weight: bold;\n}\n.notify_unread[data-v-ad8086a6] {\n    border-left: 4px solid #c9d466;\n    font-weight: bold;\n    color: black !important;\n    display: inline-block;\n}\n.notify_read[data-v-ad8086a6] {\n    border-left: none;\n    font-weight: normal;\n    color: #a7a5a5;\n    display: inline-block;\n}\n.notify_ul[data-v-ad8086a6]::after {\n    content: \"\";\n    position: absolute;\n    top: -22px; /* At the top of the menu */\n    left: 88%;\n    margin-left: -5px;\n    border-width: 11px;\n    border-style: solid;\n    border-color: transparent transparent #ffffff transparent;\n    border-radius: 1px;\n}\n.notify_timestamp[data-v-ad8086a6] {\n    padding-top: 3px;\n    font-size: 10px;\n    color: #c9d466 !important;\n}\n#notify_menu_header[data-v-ad8086a6] {\n    width: 100%;\n    height: 67px;\n    background-color: #f7f9fa;\n}\n#header_title[data-v-ad8086a6] {\n    font-family: 'Roboto Light', sans-serif;\n    font-size: 18px;\n    width: 100%;\n    height: 40px;\n    color: #c9d466;\n    padding-left: 15px;\n    padding-top: 5px;\n    line-height: 40px;\n}\n.mark_as_read[data-v-ad8086a6] {\n    color: #a7acb7;\n    font-family: 'Helvetica', sans-serif;\n    font-weight: normal !important;\n    font-size: 12px;\n    width: 100%;\n    padding-left: 15px;\n    line-height: 11px;\n    padding-top: 5px;\n}\n.mark_as_read a[data-v-ad8086a6] {\n    color: inherit;\n    text-decoration: none;\n}\n.mark_as_read a[data-v-ad8086a6]:hover {\n    color: #c9d466;\n    text-decoration: underline;\n}\n.notify_comment[data-v-ad8086a6] {\n    display: flex;\n}\n.notify_delete[data-v-ad8086a6] {\n    width: -webkit-fit-content;\n    width: fit-content;\n    height: 0;\n    width: -moz-fit-content;\n    cursor: pointer;\n    position: relative;\n    right: -315px;\n    top: -40px;\n    align-content: center;\n    opacity: 0;\n    transition: all 0.2s ease-out;\n}\n.notify_none[data-v-ad8086a6] {\n    font-size: 12px;\n    display: flex;\n    justify-content: center;\n    justify-items: center;\n    align-items: center;\n    flex-direction: column;\n    min-height: 200px;\n}\n#notify_none_bgimage[data-v-ad8086a6] {\n    width: 150px;\n    height: 150px;\n    opacity: 50%;\n    margin-bottom: 20px;\n}\n.inactive_link[data-v-ad8086a6] {\n    color: #c5c6c0; /* Change text color */\n    cursor: not-allowed; /* Change cursor */\n    pointer-events: none; /* Disable pointer events */\n    text-decoration: none; /* Remove underline */\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.container[data-v-ad8086a6] {\n    overflow-x: hidden;\n    position: relative;\n}\n#icon_notification[data-v-ad8086a6] {\n    background: url('/images/user__notification.png') no-repeat;\n    filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.5));\n    background-size: contain;\n    width: 46px;\n    height: 46px;\n    cursor: pointer;\n    position: relative;\n}\n.notify_user_icon[data-v-ad8086a6] {\n    filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.5));\n    width: 40px;\n    height: 40px;\n}\n.notify-bubble[data-v-ad8086a6] {\n    position: absolute;\n    border: 2px solid white;\n    top: -2px;\n    right: -5px;\n    width: 20px;\n    height: 20px;\n    background-color: red;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    color: white;\n    font-size: 1em;\n    border-radius: 50%;\n}\n#notify_items[data-v-ad8086a6] {\n    min-height: 200px;\n    max-height: 400px;\n    overflow-y: scroll;\n    /* scrollbar vars */\n    --scrollbarBG: #90A4AE;\n    --thumbBG: #90A4AE;\n    scroll-behavior: smooth;\n    overflow-x: hidden;\n}\n#notify_items[data-v-ad8086a6]::-webkit-scrollbar {\n    width: 7px;\n}\n#notify_items[data-v-ad8086a6]::-webkit-scrollbar-track {\n    background: var(--scrollbarBG);\n    display: none;\n    -webkit-box-shadow: none;\n}\n#notify_items[data-v-ad8086a6]::-webkit-scrollbar-thumb {\n    background-color: var(--thumbBG) ;\n    border-radius: 6px;\n    border: 3px solid var(--scrollbarBG);\n}\n.notify_ul[data-v-ad8086a6] {\n    position: absolute;\n    margin-left: -25px;\n    padding: 0;\n    right: 60%;\n    top: 125%;\n    width: 360px;\n    background-color: white;\n    /* shadow */\n    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;\n    border-radius: 1%;\n    border-bottom: solid 5px #e28633;\n    opacity: 0;\n    visibility: hidden;\n    transition: all 0.2s ease-out;\n}\n.notify_ul li[data-v-ad8086a6] {\n    width: 100%;\n    height: auto;\n    background-color: white;\n    margin: 0;\n    font-family: Arial, sans-serif;\n    font-size: 11px;\n    padding: 5px 5px 5px 15px;\n    border-bottom: 1px solid #f3f2f3;\n    line-height: 15px;\n    -webkit-backface-visibility: hidden;\n            backface-visibility: hidden;\n}\n.notify_ul li[data-v-ad8086a6]:hover {\n    background-color: #f7f9fa;\n}\n.notify_ul li:hover .notify_delete[data-v-ad8086a6] {\n    opacity: 1;\n    transition: all 0.2s ease-out;\n}\n.notify_ul li a[data-v-ad8086a6] {\n    color: #e28633;\n    font-weight: bold;\n}\n.notify_unread[data-v-ad8086a6] {\n    border-left: 4px solid #c9d466;\n    font-weight: bold;\n    color: black !important;\n    display: inline-block;\n}\n.notify_read[data-v-ad8086a6] {\n    border-left: none;\n    font-weight: normal;\n    color: #a7a5a5;\n    display: inline-block;\n}\n.notify_ul[data-v-ad8086a6]::after {\n    content: \"\";\n    position: absolute;\n    top: -22px; /* At the top of the menu */\n    left: 88%;\n    margin-left: -5px;\n    border-width: 11px;\n    border-style: solid;\n    border-color: transparent transparent #ffffff transparent;\n    border-radius: 1px;\n}\n.notify_timestamp[data-v-ad8086a6] {\n    padding-top: 3px;\n    font-size: 10px;\n    color: #c9d466 !important;\n}\n#notify_menu_header[data-v-ad8086a6] {\n    width: 100%;\n    height: 67px;\n    background-color: #f7f9fa;\n}\n#header_title[data-v-ad8086a6] {\n    font-family: 'Roboto Light', sans-serif;\n    font-size: 18px;\n    width: 100%;\n    height: 40px;\n    color: #c9d466;\n    padding-left: 15px;\n    padding-top: 5px;\n    line-height: 40px;\n}\n.mark_as_read[data-v-ad8086a6] {\n    color: #a7acb7;\n    font-family: 'Helvetica', sans-serif;\n    font-weight: normal !important;\n    font-size: 12px;\n    width: 100%;\n    padding-left: 15px;\n    line-height: 11px;\n    padding-top: 5px;\n}\n.mark_as_read a[data-v-ad8086a6] {\n    color: inherit;\n    text-decoration: none;\n}\n.mark_as_read a[data-v-ad8086a6]:hover {\n    color: #c9d466;\n    text-decoration: underline;\n}\n.notify_comment[data-v-ad8086a6] {\n    display: flex;\n}\n.notify_delete[data-v-ad8086a6] {\n    width: -webkit-fit-content;\n    width: fit-content;\n    height: 0;\n    width: -moz-fit-content;\n    cursor: pointer;\n    position: relative;\n    right: -315px;\n    top: 0;\n    align-content: center;\n    opacity: 0;\n    transition: all 0.2s ease-out;\n}\n.notify_none[data-v-ad8086a6] {\n    font-size: 12px;\n    display: flex;\n    justify-content: center;\n    justify-items: center;\n    align-items: center;\n    flex-direction: column;\n    min-height: 200px;\n}\n#notify_none_bgimage[data-v-ad8086a6] {\n    width: 150px;\n    height: 150px;\n    opacity: 50%;\n    margin-bottom: 20px;\n}\n.inactive_link[data-v-ad8086a6] {\n    color: #c5c6c0; /* Change text color */\n    cursor: not-allowed; /* Change cursor */\n    pointer-events: none; /* Disable pointer events */\n    text-decoration: none; /* Remove underline */\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -24158,7 +24174,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.search[data-v-7c0d281d] {\n    width: 100%;\n    box-sizing: border-box;\n    border: 1px solid lightslategray;\n    border-radius: 5px;\n    background-color: white;\n    background-image: url('/images/icons8-search-24.png');\n    background-position: 7px 7px;\n    background-repeat: no-repeat;\n    background-size: 20px 20px;\n    padding: 9px 20px 9px 30px;\n    font-family: \"Roboto\", sans-serif;\n    font-size: 14px;\n    color: slategray;\n}\n.resultsWin[data-v-7c0d281d] {\n    transition: all 0.2s ease-out;\n}\n.countryGroup[data-v-7c0d281d] {\n    font-family: 'Roboto', sans-serif;\n    font-weight: bold;\n    font-size: 14px;\n    color: #9badbf;\n    padding: 2px 2px 2px 10px;\n    display: flex;\n    align-items: center;\n}\n.countryGroup img[data-v-7c0d281d] {\n    width: 18px;\n    height: 18px;\n    margin-right: 5px;\n}\n.autocomplete[data-v-7c0d281d] {\n    transition: all 0.3s ease-out;\n}\n.autocomplete-results[data-v-7c0d281d] {\n    font-family: \"Roboto\", sans-serif;\n    font-size: 13px;\n    margin: 3px;\n    border: 1px solid #eee;\n    height: -webkit-fit-content;\n    height: -moz-fit-content;\n    height: fit-content;\n    max-height: 300px;\n    overflow: auto;\n    transition: all 0.3s ease-out;\n    /* scrollbar vars */\n    --scrollbarBG: #90A4AE;\n    --thumbBG: #90A4AE;\n    scroll-behavior: smooth;\n    border-radius: 5px;\n    /* shadow */\n    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;\n}\n.autocomplete-results li[data-v-7c0d281d]:last-child {\n    margin-bottom: 2px;\n}\n.autocomplete-result[data-v-7c0d281d] {\n    list-style: none;\n    text-align: left;\n    padding: 5px 2px 5px 7px;\n    margin: 0 2px 0 2px;\n    cursor: pointer;\n    transition: all 0.3s ease-out;\n    border-radius: 5px;\n    -webkit-user-select: none; /* Chrome, Safari, Opera */\n    -moz-user-select: none; /* Firefox */\n    -ms-user-select: none; /* Internet Explorer/Edge */\n    user-select: none; /* Non-prefixed version */\n}\n.autocomplete-result.is-active[data-v-7c0d281d],\n.autocomplete-result[data-v-7c0d281d]:hover {\n    background-color: #e6f3ff;\n    color: slategray;\n    padding-left: 10px;\n}\n.autocomplete-results[data-v-7c0d281d]::-webkit-scrollbar {\n    width: 7px;\n}\n.autocomplete-results[data-v-7c0d281d]::-webkit-scrollbar-track {\n    background: var(--scrollbarBG);\n    display: none;\n    -webkit-box-shadow: none;\n}\n.autocomplete-results[data-v-7c0d281d]::-webkit-scrollbar-thumb {\n    background-color: var(--thumbBG) ;\n    border-radius: 6px;\n    border: 3px solid var(--scrollbarBG);\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.search[data-v-7c0d281d] {\n    width: 100%;\n    box-sizing: border-box;\n    border: 1px solid lightslategray;\n    border-radius: 5px;\n    background-color: white;\n    background-image: url('/images/icons8-search-24.png');\n    background-position: 7px 7px;\n    background-repeat: no-repeat;\n    background-size: 20px 20px;\n    padding: 9px 20px 9px 30px;\n    font-family: \"Roboto\", sans-serif;\n    font-size: 14px;\n    color: slategray;\n}\n.resultsWin[data-v-7c0d281d] {\n    position: absolute;\n    z-index: 999;\n    background-color: white;\n    width: 100%;\n    transition: all 0.2s ease-out;\n}\n.countryGroup[data-v-7c0d281d] {\n    font-family: 'Roboto', sans-serif;\n    font-weight: bold;\n    font-size: 14px;\n    color: #9badbf;\n    padding: 2px 2px 2px 10px;\n    display: flex;\n    align-items: center;\n}\n.countryGroup img[data-v-7c0d281d] {\n    width: 18px;\n    height: 18px;\n    margin-right: 5px;\n}\n.autocomplete[data-v-7c0d281d] {\n    transition: all 0.3s ease-out;\n}\n.autocomplete-results[data-v-7c0d281d] {\n    font-family: \"Roboto\", sans-serif;\n    font-size: 13px;\n    margin: 3px;\n    border: 1px solid #eee;\n    height: -webkit-fit-content;\n    height: -moz-fit-content;\n    height: fit-content;\n    max-height: 300px;\n    overflow: auto;\n    transition: all 0.3s ease-out;\n    /* scrollbar vars */\n    --scrollbarBG: #90A4AE;\n    --thumbBG: #90A4AE;\n    scroll-behavior: smooth;\n    border-radius: 5px;\n    /* shadow */\n    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;\n}\n.autocomplete-results li[data-v-7c0d281d]:last-child {\n    margin-bottom: 2px;\n}\n.autocomplete-result[data-v-7c0d281d] {\n    list-style: none;\n    text-align: left;\n    padding: 5px 2px 5px 7px;\n    margin: 0 2px 0 2px;\n    cursor: pointer;\n    transition: all 0.3s ease-out;\n    border-radius: 5px;\n    -webkit-user-select: none; /* Chrome, Safari, Opera */\n    -moz-user-select: none; /* Firefox */\n    -ms-user-select: none; /* Internet Explorer/Edge */\n    user-select: none; /* Non-prefixed version */\n}\n.autocomplete-result.is-active[data-v-7c0d281d],\n.autocomplete-result[data-v-7c0d281d]:hover {\n    background-color: #e6f3ff;\n    color: slategray;\n    padding-left: 10px;\n}\n.autocomplete-results[data-v-7c0d281d]::-webkit-scrollbar {\n    width: 7px;\n}\n.autocomplete-results[data-v-7c0d281d]::-webkit-scrollbar-track {\n    background: var(--scrollbarBG);\n    display: none;\n    -webkit-box-shadow: none;\n}\n.autocomplete-results[data-v-7c0d281d]::-webkit-scrollbar-thumb {\n    background-color: var(--thumbBG) ;\n    border-radius: 6px;\n    border: 3px solid var(--scrollbarBG);\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -66739,12 +66755,50 @@ var render = function () {
         ),
         _vm._v(" "),
         _c("player-dropdown", { attrs: { items: this.players } }),
+        _vm._v(" "),
+        _vm._m(0),
+        _vm._v(" "),
+        _c("div", { staticClass: "button" }, [
+          _vm._v("\n            Send Notification\n        "),
+        ]),
       ],
       1
     ),
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "options" }, [
+      _vm._v("\n            Type of notification\n            "),
+      _c("div", { staticStyle: { width: "100%" } }, [
+        _c("select", { staticStyle: { width: "100%" } }, [
+          _c("option", { attrs: { value: "goal", selected: "" } }, [
+            _vm._v("Goal"),
+          ]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "yellow card" } }, [
+            _vm._v("Yellow card"),
+          ]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "red card" } }, [_vm._v("Red card")]),
+        ]),
+      ]),
+      _vm._v("\n            This happened in minute:\n            "),
+      _c("div", [
+        _c("input", {
+          attrs: {
+            type: "text",
+            id: "minute",
+            placeholder: "Enter minute of Event",
+          },
+        }),
+      ]),
+    ])
+  },
+]
 render._withStripped = true
 
 
@@ -67822,6 +67876,28 @@ var render = function () {
                   _c(
                     "div",
                     {
+                      staticClass: "notify_delete",
+                      on: {
+                        click: function ($event) {
+                          $event.stopPropagation()
+                          return _vm.whichDelete(notification)
+                        },
+                      },
+                    },
+                    [
+                      _c("img", {
+                        attrs: {
+                          src: "/images/sign-delete-light.png",
+                          width: "16px",
+                          height: "16px",
+                        },
+                      }),
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
                       staticClass: "notify_comment",
                       staticStyle: { "padding-right": "20px" },
                     },
@@ -67850,28 +67926,6 @@ var render = function () {
                           ),
                         ]),
                       ]),
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      staticClass: "notify_delete",
-                      on: {
-                        click: function ($event) {
-                          $event.stopPropagation()
-                          return _vm.whichDelete(notification)
-                        },
-                      },
-                    },
-                    [
-                      _c("img", {
-                        attrs: {
-                          src: "/images/sign-delete-light.png",
-                          width: "16px",
-                          height: "16px",
-                        },
-                      }),
                     ]
                   ),
                   _vm._v(" "),

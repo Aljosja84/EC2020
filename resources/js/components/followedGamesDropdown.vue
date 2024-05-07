@@ -13,6 +13,23 @@
                 </li>
             </ul>
             <player-dropdown :items="this.players"></player-dropdown>
+            <div class="options">
+                Type of notification
+                <div style="width: 100%">
+                    <select style="width: 100%">
+                        <option value="goal" selected>Goal</option>
+                        <option value="yellow card">Yellow card</option>
+                        <option value="red card">Red card</option>
+                    </select>
+                </div>
+                This happened in minute:
+                <div>
+                    <input type="text" id="minute" placeholder="Enter minute of Event">
+                </div>
+            </div>
+            <div class="button">
+                Send Notification
+            </div>
         </div>
     </div>
 </template>
@@ -52,7 +69,6 @@
                 // get all players from home_team and away_team
                 axios.get('/players/game/' + gameId)
                     .then(response => {
-                        console.log(response.data);
                         this.players = response.data;
                     })
                     .catch(error => {
@@ -126,7 +142,7 @@
 
             resultStyle() {
                return this.resultWin === true ? 'opacity: 100%; visibility: visible'
-                    : 'opacity: 0%; visibility: hidden; height: 0px';
+                    : 'opacity: 0%; visibility: hidden';
             }
         },
 
@@ -145,23 +161,28 @@
         width: 100%;
         border: 1px slategray solid;
         border-radius: 6px;
-        height: 30px;
-        padding: 2px 2px 2px 10px;
+        padding: 6px 20px 6px 30px;
         user-select: none;
         cursor: pointer;
         display: flex;
         align-items: center;
+        font-family: "Roboto", sans-serif;
+        font-size: 14px;
+        color: slategray;
     }
 
     .games_window {
+        position: absolute;
+        width: 100%;
+        z-index: 1000;
         font-family: "Roboto", sans-serif;
         font-size: 13px;
-        margin: 3px;
         border: 1px solid #eee;
+        background-color: white;
         height: fit-content;
         max-height: 250px;
         overflow-y: auto;
-        transition: all 0.5s ease-out;
+        transition: all 0.3s ease-out;
         /* scrollbar vars */
         --scrollbarBG: #90A4AE;
         --thumbBG: #90A4AE;
@@ -191,6 +212,7 @@
     }
 
     .group {
+        width: 100%;
         font-family: 'Roboto', sans-serif;
         font-weight: bold;
         font-size: 14px;
@@ -208,13 +230,13 @@
         font-weight: normal;
         list-style: none;
         text-align: left;
-        padding: 5px 2px 5px 7px;
+        padding: 5px 2px 5px 2px;
         margin: 0 2px 0 4px;
         cursor: pointer;
         transition: all 0.3s ease-out;
         border-radius: 5px;
         display: flex;
-        justify-content: space-around;
+        justify-content: space-evenly;
         align-items: center;
         -webkit-user-select: none; /* Chrome, Safari, Opera */
         -moz-user-select: none; /* Firefox */
@@ -232,5 +254,42 @@
     .game:hover {
         background-color: #e6f3ff;
         color: slategray;
+    }
+
+    .options {
+        margin: 10px 0 10px 0;
+    }
+
+    #minute {
+        width: 100%;
+        border: 1px slategray solid;
+        border-radius: 6px;
+        padding: 9px 20px 9px 30px;
+        user-select: none;
+        display: flex;
+        align-items: center;
+        font-family: "Roboto", sans-serif;
+        font-size: 14px;
+        color: slategray;
+    }
+
+    .button {
+        cursor: pointer;
+        min-width: 100%;
+        border-radius: 16px;
+        border: 2px solid #e5e5e5;
+        border-bottom: 6px solid #e5e5e5;
+        transition: all 0.1s;
+        display: inline-flex;
+        padding: 12px 16px;
+        user-select: none;
+    }
+    .button:hover {
+        background-color: #ddf4ff;
+        border-color: #1cb0f6;
+    }
+
+    .button:active {
+        border-bottom: 2px solid #1cb0f6;
     }
 </style>
