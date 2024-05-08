@@ -73,7 +73,7 @@ class PoolController extends Controller
      */
     public function show(Pool $pool)
     {
-        $this->authorize('view', $pool, auth()->user());
+        $this->authorize('view', $pool);
 
         return view('pool', [
             'pool' => $pool,
@@ -146,7 +146,8 @@ class PoolController extends Controller
      */
     public function newMessage(Request $request, $roomId)
     {
-        if($user = Auth::user()) {
+        if(Auth::check()) {
+            $user = Auth::user();
             $newMessage = new ChatMessage;
             $newMessage->user_id = $user->id;
             $newMessage->chat_room_id = $roomId;

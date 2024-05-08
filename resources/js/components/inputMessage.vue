@@ -28,7 +28,7 @@
             *
             */
             isTyping() {
-                let channel = Echo.join('chatroom.' + this.room);
+                let channel = Echo.join('presence-chatroom.' + this.room);
 
                 // if old message is empty, nothing has been typed before
                 // or the message has been sent
@@ -67,10 +67,12 @@
                     pool: this.room
                 })
                 .then(response => {
+
                     if(response.status === 201) {
+                        console.log('gelukt!');
                         this.message = '';
                         this.oldmessage = '';
-                        let channel = Echo.join('chatroom.' + this.room);
+                        let channel = Echo.join('presence-chatroom.' + this.room);
                         // let other people know we're done typing
                         channel.whisper('typing', {
                             user: Laravel.user,

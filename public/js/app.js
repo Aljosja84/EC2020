@@ -2885,7 +2885,7 @@ __webpack_require__.r(__webpack_exports__);
       return "hsl(".concat(h, ",").concat(s, "%,").concat(l, "%)");
     }
   },
-  mounted: function mounted() {
+  created: function created() {
     var _this3 = this;
 
     var _this = this;
@@ -2893,8 +2893,9 @@ __webpack_require__.r(__webpack_exports__);
     this.getMessages();
     console.log("starting to listen"); // start listening for fellow members
 
-    window.Echo.join("chatroom." + this.roomid).here(function (users) {
+    var channel = Echo.join("presence-chatroom." + this.roomid).here(function (users) {
       _this3.activeUsers = users;
+      console.log(users);
     }).joining(function (user) {
       _this3.activeUsers.push(user);
     }).leaving(function (user) {
@@ -2929,6 +2930,10 @@ __webpack_require__.r(__webpack_exports__);
       }
     }).listen('.message.new', function (e) {
       _this3.pushNewMessage(e);
+
+      console.log('pushed new message');
+    }).error(function (error) {
+      console.log('error');
     });
   }
 });
@@ -3593,7 +3598,7 @@ __webpack_require__.r(__webpack_exports__);
     *
     */
     isTyping: function isTyping() {
-      var channel = Echo.join('chatroom.' + this.room); // if old message is empty, nothing has been typed before
+      var channel = Echo.join('presence-chatroom.' + this.room); // if old message is empty, nothing has been typed before
       // or the message has been sent
 
       if (this.oldmessage.length === 0) {
@@ -3628,9 +3633,10 @@ __webpack_require__.r(__webpack_exports__);
         pool: this.room
       }).then(function (response) {
         if (response.status === 201) {
+          console.log('gelukt!');
           _this.message = '';
           _this.oldmessage = '';
-          var channel = Echo.join('chatroom.' + _this.room); // let other people know we're done typing
+          var channel = Echo.join('presence-chatroom.' + _this.room); // let other people know we're done typing
 
           channel.whisper('typing', {
             user: Laravel.user,
@@ -5923,11 +5929,12 @@ window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js")
 
 
 window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/dist/web/pusher.js");
+Pusher.logToConsole = true;
 window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
   broadcaster: 'pusher',
-  key: "",
-  cluster: "mt1",
-  forceTLS: true
+  key: 'b45a3e267b9d7807b966',
+  cluster: "eu",
+  forceTLS: false
 });
 
 /***/ }),
@@ -23695,10 +23702,10 @@ function styleChanged(style, prevStyle) {
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[3]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/chat.vue?vue&type=style&index=0&lang=scss&":
-/*!**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[3]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/chat.vue?vue&type=style&index=0&lang=scss& ***!
-  \**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[3]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/chat.vue?vue&type=style&index=0&id=151b8bba&lang=scss&scoped=true&":
+/*!**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[3]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/chat.vue?vue&type=style&index=0&id=151b8bba&lang=scss&scoped=true& ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -23718,7 +23725,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 var ___CSS_LOADER_URL_REPLACEMENT_0___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default()(_images_light_wool_png__WEBPACK_IMPORTED_MODULE_2__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "#online_container {\n  background-color: white;\n  border-bottom-left-radius: 5px;\n  border-bottom-right-radius: 5px;\n}\n.online_header {\n  width: 100%;\n  height: 40px;\n  font-family: \"Oswald\", sans-serif;\n  font-size: 24px;\n  color: #515151;\n  text-align: center;\n  background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ");\n}\n.separator_bar {\n  height: 2px;\n  background-image: linear-gradient(to right, transparent, #b5b5b5, transparent);\n}\n.online_win {\n  width: 500px;\n  height: 60px;\n  background-color: white;\n  overflow: hidden;\n  padding: 5px;\n  border-bottom-color: black;\n  border-bottom-width: 1px;\n  border-bottom-left-radius: 5px;\n  border-bottom-right-radius: 5px;\n}\n.online_win span {\n  display: block;\n  float: left;\n}\n.typing-bubble {\n  position: absolute;\n  top: -5px;\n  right: -10px;\n  padding: 0px 2px 0px 5px;\n  background-color: #79b256;\n  color: white;\n  font-size: 0.95em;\n  border-radius: 20%;\n  width: 21px;\n  height: 25px;\n  z-index: 1000;\n  transition: all 0.2s ease-in;\n}\n.typing-bubble:after {\n  content: \" .\";\n  -webkit-animation: dots 1.5s steps(5, end) infinite;\n          animation: dots 1.5s steps(5, end) infinite;\n}\n@-webkit-keyframes dots {\n0%, 20% {\n    color: rgba(0, 0, 0, 0);\n    text-shadow: 0.25em 0 0 rgba(0, 0, 0, 0), 0.5em 0 0 rgba(0, 0, 0, 0);\n}\n40% {\n    color: white;\n    text-shadow: 0.25em 0 0 rgba(0, 0, 0, 0), 0.5em 0 0 rgba(0, 0, 0, 0);\n}\n60% {\n    text-shadow: 0.25em 0 0 white, 0.5em 0 0 rgba(0, 0, 0, 0);\n}\n80%, 100% {\n    text-shadow: 0.25em 0 0 white, 0.5em 0 0 white;\n}\n}\n@keyframes dots {\n0%, 20% {\n    color: rgba(0, 0, 0, 0);\n    text-shadow: 0.25em 0 0 rgba(0, 0, 0, 0), 0.5em 0 0 rgba(0, 0, 0, 0);\n}\n40% {\n    color: white;\n    text-shadow: 0.25em 0 0 rgba(0, 0, 0, 0), 0.5em 0 0 rgba(0, 0, 0, 0);\n}\n60% {\n    text-shadow: 0.25em 0 0 white, 0.5em 0 0 rgba(0, 0, 0, 0);\n}\n80%, 100% {\n    text-shadow: 0.25em 0 0 white, 0.5em 0 0 white;\n}\n}\n.online_members-enter-active {\n  transition: all 0.5s;\n}\n.online_members-enter {\n  opacity: 0;\n  transform: translateY(50px);\n}\n.online_members-enter-to {\n  opacity: 1;\n}\n.online_members-move {\n  transition: all 0.5s;\n}\n.online_members-leave {\n  opacity: 0;\n  transform: translateY(30px);\n}\n.online_members-leave-active {\n  transition: all 0.5s ease;\n}\n.online_members-leave-to {\n  opacity: 0;\n  transform: translateY(30px);\n}\n.message_container {\n  border-radius: 5px;\n  width: 500px;\n  height: 700px;\n  background-color: white;\n  display: flex;\n  flex-direction: column-reverse;\n  overflow-y: scroll;\n  overflow-x: hidden;\n  margin-top: 10px;\n}\n.chat-enter-active {\n  transition: all 0.5s;\n}\n.chat-enter {\n  opacity: 0;\n  transform: translateX(100px);\n}\n.chat-enter-to {\n  opacity: 1;\n}\n.chat-move {\n  transition: all 0.5s;\n}\n.chat-leave {\n  opacity: 0;\n  transform: translateX(100px);\n}\n.chat-leave-to {\n  opacity: 0;\n  transform: translateX(100px);\n}\n.chat-leave-active {\n  transition: all 0.3s ease;\n}\n.tippy-tooltip.chat-theme {\n  font-family: \"Terminal Dosis\", sans-serif;\n  background-color: #40656c;\n  color: white;\n  font-size: 15px;\n  border-top: 1px solid #2a8092;\n  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.3);\n}\n.tippy-tooltip.chat-theme .tippy-roundarrow {\n  fill: #40656c;\n  border-right-color: #1d5f6d;\n}\n.message_contents ul {\n  list-style-type: none;\n  padding: 5px;\n}\n.message_contents ul li.message {\n  margin: 1px 0;\n  width: 100%;\n  display: inline-block;\n}\n.message_contents ul li .text {\n  font-family: \"Terminal Dosis\", sans-serif;\n  font-size: 13px;\n  width: auto;\n  max-width: 250px;\n  border-radius: 5px;\n  padding: 3px 10px 6px 10px;\n  display: inline-block;\n  text-align: left;\n  position: relative;\n  background-repeat: no-repeat;\n  height: -webkit-fit-content;\n  height: -moz-fit-content;\n  height: fit-content;\n  margin: 3px;\n}\n.message_contents ul li.received {\n  text-align: left;\n}\n.message_contents ul li.received .text {\n  background: lightgray;\n  vertical-align: middle;\n}\n.message_contents ul li.received .text:after {\n  right: 100%;\n  top: 50%;\n  border: solid;\n  content: \"\";\n  height: 0;\n  width: 0;\n  position: absolute;\n  pointer-events: none;\n  border-color: rgba(136, 183, 213, 0);\n  border-right-color: lightgray;\n  border-width: 5px;\n  margin-top: -5px;\n}\n.message_contents ul li.sent {\n  text-align: right;\n  margin-right: 6px;\n}\n.message_contents ul li.sent .text {\n  background: lightskyblue;\n  vertical-align: middle;\n}\n.message_contents ul li.sent .text:after {\n  left: 100%;\n  top: 50%;\n  border: solid transparent;\n  content: \"\";\n  height: 0;\n  width: 0;\n  position: absolute;\n  pointer-events: none;\n  border-left-color: lightskyblue;\n  border-width: 5px;\n  margin-top: -5px;\n}\n.message_contents ul li .text_container {\n  display: inline-block;\n  position: relative;\n  word-break: break-word;\n}\n.message_contents ul li .text_container.received {\n  justify-content: start;\n  vertical-align: middle;\n}\n.message_contents ul li .text_container.received img {\n  left: -39px;\n  vertical-align: middle;\n}\n.message_contents ul li .text_container.sent {\n  justify-content: end;\n}\n.message_contents ul li .text_container.sent img {\n  right: 0;\n  vertical-align: middle;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "#online_container[data-v-151b8bba] {\n  background-color: white;\n  border-bottom-left-radius: 5px;\n  border-bottom-right-radius: 5px;\n}\n.online_header[data-v-151b8bba] {\n  width: 100%;\n  height: 40px;\n  font-family: \"Oswald\", sans-serif;\n  font-size: 24px;\n  color: #515151;\n  text-align: center;\n  background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ");\n}\n.separator_bar[data-v-151b8bba] {\n  height: 2px;\n  background-image: linear-gradient(to right, transparent, #b5b5b5, transparent);\n}\n.online_win[data-v-151b8bba] {\n  width: 500px;\n  height: 60px;\n  background-color: white;\n  overflow: hidden;\n  padding: 5px;\n  border-bottom-color: black;\n  border-bottom-width: 1px;\n  border-bottom-left-radius: 5px;\n  border-bottom-right-radius: 5px;\n}\n.online_win span[data-v-151b8bba] {\n  display: block;\n  float: left;\n}\n.typing-bubble[data-v-151b8bba] {\n  position: absolute;\n  top: -5px;\n  right: -10px;\n  padding: 0px 2px 0px 5px;\n  background-color: #79b256;\n  color: white;\n  font-size: 0.95em;\n  border-radius: 20%;\n  width: 21px;\n  height: 25px;\n  z-index: 1000;\n  transition: all 0.2s ease-in;\n}\n.typing-bubble[data-v-151b8bba]:after {\n  content: \" .\";\n  -webkit-animation: dots-data-v-151b8bba 1.5s steps(5, end) infinite;\n          animation: dots-data-v-151b8bba 1.5s steps(5, end) infinite;\n}\n@-webkit-keyframes dots-data-v-151b8bba {\n0%, 20% {\n    color: rgba(0, 0, 0, 0);\n    text-shadow: 0.25em 0 0 rgba(0, 0, 0, 0), 0.5em 0 0 rgba(0, 0, 0, 0);\n}\n40% {\n    color: white;\n    text-shadow: 0.25em 0 0 rgba(0, 0, 0, 0), 0.5em 0 0 rgba(0, 0, 0, 0);\n}\n60% {\n    text-shadow: 0.25em 0 0 white, 0.5em 0 0 rgba(0, 0, 0, 0);\n}\n80%, 100% {\n    text-shadow: 0.25em 0 0 white, 0.5em 0 0 white;\n}\n}\n@keyframes dots-data-v-151b8bba {\n0%, 20% {\n    color: rgba(0, 0, 0, 0);\n    text-shadow: 0.25em 0 0 rgba(0, 0, 0, 0), 0.5em 0 0 rgba(0, 0, 0, 0);\n}\n40% {\n    color: white;\n    text-shadow: 0.25em 0 0 rgba(0, 0, 0, 0), 0.5em 0 0 rgba(0, 0, 0, 0);\n}\n60% {\n    text-shadow: 0.25em 0 0 white, 0.5em 0 0 rgba(0, 0, 0, 0);\n}\n80%, 100% {\n    text-shadow: 0.25em 0 0 white, 0.5em 0 0 white;\n}\n}\n.online_members-enter-active[data-v-151b8bba] {\n  transition: all 0.5s;\n}\n.online_members-enter[data-v-151b8bba] {\n  opacity: 0;\n  transform: translateY(50px);\n}\n.online_members-enter-to[data-v-151b8bba] {\n  opacity: 1;\n}\n.online_members-move[data-v-151b8bba] {\n  transition: all 0.5s;\n}\n.online_members-leave[data-v-151b8bba] {\n  opacity: 0;\n  transform: translateY(30px);\n}\n.online_members-leave-active[data-v-151b8bba] {\n  transition: all 0.5s ease;\n}\n.online_members-leave-to[data-v-151b8bba] {\n  opacity: 0;\n  transform: translateY(30px);\n}\n.message_container[data-v-151b8bba] {\n  border-radius: 5px;\n  width: 500px;\n  height: 700px;\n  background-color: white;\n  display: flex;\n  flex-direction: column-reverse;\n  overflow-y: scroll;\n  overflow-x: hidden;\n  margin-top: 10px;\n}\n.chat-enter-active[data-v-151b8bba] {\n  transition: all 0.5s;\n}\n.chat-enter[data-v-151b8bba] {\n  opacity: 0;\n  transform: translateX(100px);\n}\n.chat-enter-to[data-v-151b8bba] {\n  opacity: 1;\n}\n.chat-move[data-v-151b8bba] {\n  transition: all 0.5s;\n}\n.chat-leave[data-v-151b8bba] {\n  opacity: 0;\n  transform: translateX(100px);\n}\n.chat-leave-to[data-v-151b8bba] {\n  opacity: 0;\n  transform: translateX(100px);\n}\n.chat-leave-active[data-v-151b8bba] {\n  transition: all 0.3s ease;\n}\n.tippy-tooltip.chat-theme[data-v-151b8bba] {\n  font-family: \"Terminal Dosis\", sans-serif;\n  background-color: #40656c;\n  color: white;\n  font-size: 15px;\n  border-top: 1px solid #2a8092;\n  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.3);\n}\n.tippy-tooltip.chat-theme .tippy-roundarrow[data-v-151b8bba] {\n  fill: #40656c;\n  border-right-color: #1d5f6d;\n}\n.message_contents ul[data-v-151b8bba] {\n  list-style-type: none;\n  padding: 5px;\n}\n.message_contents ul li.message[data-v-151b8bba] {\n  margin: 1px 0;\n  width: 100%;\n  display: inline-block;\n}\n.message_contents ul li .text[data-v-151b8bba] {\n  font-family: \"Terminal Dosis\", sans-serif;\n  font-size: 13px;\n  width: auto;\n  max-width: 250px;\n  border-radius: 5px;\n  padding: 3px 10px 6px 10px;\n  display: inline-block;\n  text-align: left;\n  position: relative;\n  background-repeat: no-repeat;\n  height: -webkit-fit-content;\n  height: -moz-fit-content;\n  height: fit-content;\n  margin: 3px;\n}\n.message_contents ul li.received[data-v-151b8bba] {\n  text-align: left;\n}\n.message_contents ul li.received .text[data-v-151b8bba] {\n  background: lightgray;\n  vertical-align: middle;\n}\n.message_contents ul li.received .text[data-v-151b8bba]:after {\n  right: 100%;\n  top: 50%;\n  border: solid;\n  content: \"\";\n  height: 0;\n  width: 0;\n  position: absolute;\n  pointer-events: none;\n  border-color: rgba(136, 183, 213, 0);\n  border-right-color: lightgray;\n  border-width: 5px;\n  margin-top: -5px;\n}\n.message_contents ul li.sent[data-v-151b8bba] {\n  text-align: right;\n  margin-right: 6px;\n}\n.message_contents ul li.sent .text[data-v-151b8bba] {\n  background: lightskyblue;\n  vertical-align: middle;\n}\n.message_contents ul li.sent .text[data-v-151b8bba]:after {\n  left: 100%;\n  top: 50%;\n  border: solid transparent;\n  content: \"\";\n  height: 0;\n  width: 0;\n  position: absolute;\n  pointer-events: none;\n  border-left-color: lightskyblue;\n  border-width: 5px;\n  margin-top: -5px;\n}\n.message_contents ul li .text_container[data-v-151b8bba] {\n  display: inline-block;\n  position: relative;\n  word-break: break-word;\n}\n.message_contents ul li .text_container.received[data-v-151b8bba] {\n  justify-content: start;\n  vertical-align: middle;\n}\n.message_contents ul li .text_container.received img[data-v-151b8bba] {\n  left: -39px;\n  vertical-align: middle;\n}\n.message_contents ul li .text_container.sent[data-v-151b8bba] {\n  justify-content: end;\n}\n.message_contents ul li .text_container.sent img[data-v-151b8bba] {\n  right: 0;\n  vertical-align: middle;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -36202,8 +36209,20 @@ return jQuery;
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Channel": () => (/* binding */ Channel),
+/* harmony export */   "Connector": () => (/* binding */ Connector),
+/* harmony export */   "EventFormatter": () => (/* binding */ EventFormatter),
 /* harmony export */   "default": () => (/* binding */ Echo)
 /* harmony export */ });
+function _typeof(obj) {
+  "@babel/helpers - typeof";
+
+  return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) {
+    return typeof obj;
+  } : function (obj) {
+    return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+  }, _typeof(obj);
+}
+
 function _classCallCheck(instance, Constructor) {
   if (!(instance instanceof Constructor)) {
     throw new TypeError("Cannot call a class as a function");
@@ -36381,7 +36400,7 @@ var EventFormatter = /*#__PURE__*/function () {
   function EventFormatter(namespace) {
     _classCallCheck(this, EventFormatter);
 
-    this.setNamespace(namespace);
+    this.namespace = namespace; //
   }
   /**
    * Format the given event name.
@@ -36391,8 +36410,8 @@ var EventFormatter = /*#__PURE__*/function () {
   _createClass(EventFormatter, [{
     key: "format",
     value: function format(event) {
-      if (event.charAt(0) === '.' || event.charAt(0) === '\\') {
-        return event.substr(1);
+      if (['.', '\\'].includes(event.charAt(0))) {
+        return event.substring(1);
       } else if (this.namespace) {
         event = this.namespace + '.' + event;
       }
@@ -36578,7 +36597,7 @@ var PusherPrivateChannel = /*#__PURE__*/function (_PusherChannel) {
     key: "whisper",
     value:
     /**
-     * Trigger client event on the channel.
+     * Send a whisper event to other clients in the channel.
      */
     function whisper(eventName, data) {
       this.pusher.channels.channels[this.name].trigger("client-".concat(eventName), data);
@@ -36608,7 +36627,7 @@ var PusherEncryptedPrivateChannel = /*#__PURE__*/function (_PusherChannel) {
     key: "whisper",
     value:
     /**
-     * Trigger client event on the channel.
+     * Send a whisper event to other clients in the channel.
      */
     function whisper(eventName, data) {
       this.pusher.channels.channels[this.name].trigger("client-".concat(eventName), data);
@@ -36661,6 +36680,16 @@ var PusherPresenceChannel = /*#__PURE__*/function (_PusherChannel) {
       return this;
     }
     /**
+     * Send a whisper event to other clients in the channel.
+     */
+
+  }, {
+    key: "whisper",
+    value: function whisper(eventName, data) {
+      this.pusher.channels.channels[this.name].trigger("client-".concat(eventName), data);
+      return this;
+    }
+    /**
      * Listen for someone leaving the channel.
      */
 
@@ -36670,16 +36699,6 @@ var PusherPresenceChannel = /*#__PURE__*/function (_PusherChannel) {
       this.on('pusher:member_removed', function (member) {
         callback(member.info);
       });
-      return this;
-    }
-    /**
-     * Trigger client event on the channel.
-     */
-
-  }, {
-    key: "whisper",
-    value: function whisper(eventName, data) {
-      this.pusher.channels.channels[this.name].trigger("client-".concat(eventName), data);
       return this;
     }
   }]);
@@ -36878,7 +36897,7 @@ var SocketIoPrivateChannel = /*#__PURE__*/function (_SocketIoChannel) {
     key: "whisper",
     value:
     /**
-     * Trigger client event on the channel.
+     * Send a whisper event to other clients in the channel.
      */
     function whisper(eventName, data) {
       this.socket.emit('client event', {
@@ -36931,6 +36950,20 @@ var SocketIoPresenceChannel = /*#__PURE__*/function (_SocketIoPrivateChann) {
     value: function joining(callback) {
       this.on('presence:joining', function (member) {
         return callback(member.user_info);
+      });
+      return this;
+    }
+    /**
+     * Send a whisper event to other clients in the channel.
+     */
+
+  }, {
+    key: "whisper",
+    value: function whisper(eventName, data) {
+      this.socket.emit('client event', {
+        channel: this.name,
+        event: "client-".concat(eventName),
+        data: data
       });
       return this;
     }
@@ -36989,6 +37022,15 @@ var NullChannel = /*#__PURE__*/function (_Channel) {
   }, {
     key: "listen",
     value: function listen(event, callback) {
+      return this;
+    }
+    /**
+     * Listen for all events on the channel instance.
+     */
+
+  }, {
+    key: "listenToAll",
+    value: function listenToAll(callback) {
       return this;
     }
     /**
@@ -37051,7 +37093,7 @@ var NullPrivateChannel = /*#__PURE__*/function (_NullChannel) {
     key: "whisper",
     value:
     /**
-     * Trigger client event on the channel.
+     * Send a whisper event to other clients in the channel.
      */
     function whisper(eventName, data) {
       return this;
@@ -37095,21 +37137,21 @@ var NullPresenceChannel = /*#__PURE__*/function (_NullChannel) {
       return this;
     }
     /**
+     * Send a whisper event to other clients in the channel.
+     */
+
+  }, {
+    key: "whisper",
+    value: function whisper(eventName, data) {
+      return this;
+    }
+    /**
      * Listen for someone leaving the channel.
      */
 
   }, {
     key: "leaving",
     value: function leaving(callback) {
-      return this;
-    }
-    /**
-     * Trigger client event on the channel.
-     */
-
-  }, {
-    key: "whisper",
-    value: function whisper(eventName, data) {
       return this;
     }
   }]);
@@ -37132,8 +37174,13 @@ var Connector = /*#__PURE__*/function () {
         headers: {}
       },
       authEndpoint: '/broadcasting/auth',
+      userAuthentication: {
+        endpoint: '/broadcasting/user-auth',
+        headers: {}
+      },
       broadcaster: 'pusher',
       csrfToken: null,
+      bearerToken: null,
       host: null,
       key: null,
       namespace: 'App.Events'
@@ -37150,9 +37197,18 @@ var Connector = /*#__PURE__*/function () {
     key: "setOptions",
     value: function setOptions(options) {
       this.options = _extends(this._defaultOptions, options);
+      var token = this.csrfToken();
 
-      if (this.csrfToken()) {
-        this.options.auth.headers['X-CSRF-TOKEN'] = this.csrfToken();
+      if (token) {
+        this.options.auth.headers['X-CSRF-TOKEN'] = token;
+        this.options.userAuthentication.headers['X-CSRF-TOKEN'] = token;
+      }
+
+      token = this.options.bearerToken;
+
+      if (token) {
+        this.options.auth.headers['Authorization'] = 'Bearer ' + token;
+        this.options.userAuthentication.headers['Authorization'] = 'Bearer ' + token;
       }
 
       return options;
@@ -37213,9 +37269,20 @@ var PusherConnector = /*#__PURE__*/function (_Connector) {
     value: function connect() {
       if (typeof this.options.client !== 'undefined') {
         this.pusher = this.options.client;
+      } else if (this.options.Pusher) {
+        this.pusher = new this.options.Pusher(this.options.key, this.options);
       } else {
         this.pusher = new Pusher(this.options.key, this.options);
       }
+    }
+    /**
+     * Sign in the user via Pusher user authentication (https://pusher.com/docs/channels/using_channels/user-authentication/).
+     */
+
+  }, {
+    key: "signin",
+    value: function signin() {
+      this.pusher.signin();
     }
     /**
      * Listen for an event on a channel instance.
@@ -37287,7 +37354,7 @@ var PusherConnector = /*#__PURE__*/function (_Connector) {
     value: function leave(name) {
       var _this2 = this;
 
-      var channels = [name, 'private-' + name, 'presence-' + name];
+      var channels = [name, 'private-' + name, 'private-encrypted-' + name, 'presence-' + name];
       channels.forEach(function (name, index) {
         _this2.leaveChannel(name);
       });
@@ -37541,6 +37608,15 @@ var NullConnector = /*#__PURE__*/function (_Connector) {
       return new NullPrivateChannel();
     }
     /**
+     * Get a private encrypted channel instance by name.
+     */
+
+  }, {
+    key: "encryptedPrivateChannel",
+    value: function encryptedPrivateChannel(name) {
+      return new NullPrivateChannel();
+    }
+    /**
      * Get a presence channel instance by name.
      */
 
@@ -37622,7 +37698,11 @@ var Echo = /*#__PURE__*/function () {
   }, {
     key: "connect",
     value: function connect() {
-      if (this.options.broadcaster == 'pusher') {
+      if (this.options.broadcaster == 'reverb') {
+        this.connector = new PusherConnector(_extends(_extends({}, this.options), {
+          cluster: ''
+        }));
+      } else if (this.options.broadcaster == 'pusher') {
         this.connector = new PusherConnector(this.options);
       } else if (this.options.broadcaster == 'socket.io') {
         this.connector = new SocketIoConnector(this.options);
@@ -37630,6 +37710,8 @@ var Echo = /*#__PURE__*/function () {
         this.connector = new NullConnector(this.options);
       } else if (typeof this.options.broadcaster == 'function') {
         this.connector = new this.options.broadcaster(this.options);
+      } else {
+        throw new Error("Broadcaster ".concat(_typeof(this.options.broadcaster), " ").concat(this.options.broadcaster, " is not supported."));
       }
     }
     /**
@@ -37667,6 +37749,17 @@ var Echo = /*#__PURE__*/function () {
     key: "leaveChannel",
     value: function leaveChannel(channel) {
       this.connector.leaveChannel(channel);
+    }
+    /**
+     * Leave all channels.
+     */
+
+  }, {
+    key: "leaveAllChannels",
+    value: function leaveAllChannels() {
+      for (var channel in this.connector.channels) {
+        this.leaveChannel(channel);
+      }
     }
     /**
      * Listen for an event on a channel instance.
@@ -37723,6 +37816,10 @@ var Echo = /*#__PURE__*/function () {
       if (typeof jQuery === 'function') {
         this.registerjQueryAjaxSetup();
       }
+
+      if ((typeof Turbo === "undefined" ? "undefined" : _typeof(Turbo)) === 'object') {
+        this.registerTurboRequestInterceptor();
+      }
     }
     /**
      * Register a Vue HTTP interceptor to add the X-Socket-ID header.
@@ -37774,6 +37871,19 @@ var Echo = /*#__PURE__*/function () {
           }
         });
       }
+    }
+    /**
+     * Register the Turbo Request interceptor to add the X-Socket-ID header.
+     */
+
+  }, {
+    key: "registerTurboRequestInterceptor",
+    value: function registerTurboRequestInterceptor() {
+      var _this4 = this;
+
+      document.addEventListener('turbo:before-fetch-request', function (event) {
+        event.detail.fetchOptions.headers['X-Socket-Id'] = _this4.socketId();
+      });
     }
   }]);
 
@@ -57842,7 +57952,7 @@ process.umask = function() { return 0; };
 /***/ ((module) => {
 
 /*!
- * Pusher JavaScript Library v7.0.6
+ * Pusher JavaScript Library v7.6.0
  * https://pusher.com/
  *
  * Copyright 2020, Pusher
@@ -58431,7 +58541,7 @@ var ScriptReceivers = new ScriptReceiverFactory('_pusher_script_', 'Pusher.Scrip
 
 // CONCATENATED MODULE: ./src/core/defaults.ts
 var Defaults = {
-    VERSION: "7.0.6",
+    VERSION: "7.6.0",
     PROTOCOL: 7,
     wsPort: 80,
     wssPort: 443,
@@ -58700,6 +58810,12 @@ var ajax = function (context, query, authOptions, authRequestType, callback) {
     for (var headerName in authOptions.headers) {
         xhr.setRequestHeader(headerName, authOptions.headers[headerName]);
     }
+    if (authOptions.headersProvider != null) {
+        var dynamicHeaders = authOptions.headersProvider();
+        for (var headerName in dynamicHeaders) {
+            xhr.setRequestHeader(headerName, dynamicHeaders[headerName]);
+        }
+    }
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
             if (xhr.status === 200) {
@@ -58723,7 +58839,7 @@ var ajax = function (context, query, authOptions, authRequestType, callback) {
                         suffix = url_store.buildLogSuffix('authenticationEndpoint');
                         break;
                     case AuthRequestType.ChannelAuthorization:
-                        suffix = "Clients must be authenticated to join private or presence channels. " + url_store.buildLogSuffix('authorizationEndpoint');
+                        suffix = "Clients must be authorized to join private or presence channels. " + url_store.buildLogSuffix('authorizationEndpoint');
                         break;
                 }
                 callback(new HTTPAuthError(xhr.status, "Unable to retrieve auth string from " + authRequestType.toString() + " endpoint - " +
@@ -59139,7 +59255,8 @@ var logger_Logger = (function () {
 // CONCATENATED MODULE: ./src/runtimes/web/auth/jsonp_auth.ts
 
 var jsonp = function (context, query, authOptions, authRequestType, callback) {
-    if (authOptions.headers !== undefined) {
+    if (authOptions.headers !== undefined ||
+        authOptions.headersProvider != null) {
         logger.warn("To send headers with the " + authRequestType.toString() + " request, you must use AJAX, rather than JSONP.");
     }
     var callbackName = context.nextAuthCallbackID.toString();
@@ -60146,6 +60263,9 @@ var channel_Channel = (function (_super) {
         if (eventName === 'pusher_internal:subscription_succeeded') {
             this.handleSubscriptionSucceededEvent(event);
         }
+        else if (eventName === 'pusher_internal:subscription_count') {
+            this.handleSubscriptionCountEvent(event);
+        }
         else if (eventName.indexOf('pusher_internal:') !== 0) {
             var metadata = {};
             this.emit(eventName, data, metadata);
@@ -60160,6 +60280,12 @@ var channel_Channel = (function (_super) {
         else {
             this.emit('pusher:subscription_succeeded', event.data);
         }
+    };
+    Channel.prototype.handleSubscriptionCountEvent = function (event) {
+        if (event.data.subscription_count) {
+            this.subscriptionCount = event.data.subscription_count;
+        }
+        this.emit('pusher:subscription_count', event.data);
     };
     Channel.prototype.subscribe = function () {
         var _this = this;
@@ -60302,6 +60428,42 @@ var presence_channel_extends = ( false) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __awaiter = ( false) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = ( false) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
 
 
 
@@ -60315,21 +60477,38 @@ var presence_channel_PresenceChannel = (function (_super) {
     }
     PresenceChannel.prototype.authorize = function (socketId, callback) {
         var _this = this;
-        _super.prototype.authorize.call(this, socketId, function (error, authData) {
-            if (!error) {
-                authData = authData;
-                if (authData.channel_data === undefined) {
-                    var suffix = url_store.buildLogSuffix('authenticationEndpoint');
-                    logger.error("Invalid auth response for channel '" + _this.name + "'," +
-                        ("expected 'channel_data' field. " + suffix));
-                    callback('Invalid auth response');
-                    return;
+        _super.prototype.authorize.call(this, socketId, function (error, authData) { return __awaiter(_this, void 0, void 0, function () {
+            var channelData, suffix;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        if (!!error) return [3, 3];
+                        authData = authData;
+                        if (!(authData.channel_data != null)) return [3, 1];
+                        channelData = JSON.parse(authData.channel_data);
+                        this.members.setMyID(channelData.user_id);
+                        return [3, 3];
+                    case 1: return [4, this.pusher.user.signinDonePromise];
+                    case 2:
+                        _a.sent();
+                        if (this.pusher.user.user_data != null) {
+                            this.members.setMyID(this.pusher.user.user_data.id);
+                        }
+                        else {
+                            suffix = url_store.buildLogSuffix('authorizationEndpoint');
+                            logger.error("Invalid auth response for channel '" + this.name + "', " +
+                                ("expected 'channel_data' field. " + suffix + ", ") +
+                                "or the user should be signed in.");
+                            callback('Invalid auth response');
+                            return [2];
+                        }
+                        _a.label = 3;
+                    case 3:
+                        callback(error, authData);
+                        return [2];
                 }
-                var channelData = JSON.parse(authData.channel_data);
-                _this.members.setMyID(channelData.user_id);
-            }
-            callback(error, authData);
-        });
+            });
+        }); });
     };
     PresenceChannel.prototype.handleEvent = function (event) {
         var eventName = event.event;
@@ -60351,6 +60530,9 @@ var presence_channel_PresenceChannel = (function (_super) {
         switch (eventName) {
             case 'pusher_internal:subscription_succeeded':
                 this.handleSubscriptionSucceededEvent(event);
+                break;
+            case 'pusher_internal:subscription_count':
+                this.handleSubscriptionCountEvent(event);
                 break;
             case 'pusher_internal:member_added':
                 var addedMember = this.members.addMember(data);
@@ -61649,7 +61831,7 @@ function replaceHost(url, hostname) {
     return urlParts[1] + hostname + urlParts[3];
 }
 function randomNumber(max) {
-    return Math.floor(Math.random() * max);
+    return runtime.randomInt(max);
 }
 function randomString(length) {
     var result = [];
@@ -61895,6 +62077,14 @@ var Runtime = {
         else if (window.detachEvent !== undefined) {
             window.detachEvent('onunload', listener);
         }
+    },
+    randomInt: function (max) {
+        var random = function () {
+            var crypto = window.crypto || window['msCrypto'];
+            var random = crypto.getRandomValues(new Uint32Array(1))[0];
+            return random / Math.pow(2, 32);
+        };
+        return Math.floor(random() * max);
     }
 };
 /* harmony default export */ var runtime = (Runtime);
@@ -62121,12 +62311,22 @@ var strategy_builder_UnsupportedStrategy = {
 
 var composeChannelQuery = function (params, authOptions) {
     var query = 'socket_id=' + encodeURIComponent(params.socketId);
-    for (var i in authOptions.params) {
+    for (var key in authOptions.params) {
         query +=
             '&' +
-                encodeURIComponent(i) +
+                encodeURIComponent(key) +
                 '=' +
-                encodeURIComponent(authOptions.params[i]);
+                encodeURIComponent(authOptions.params[key]);
+    }
+    if (authOptions.paramsProvider != null) {
+        var dynamicParams = authOptions.paramsProvider();
+        for (var key in dynamicParams) {
+            query +=
+                '&' +
+                    encodeURIComponent(key) +
+                    '=' +
+                    encodeURIComponent(dynamicParams[key]);
+        }
     }
     return query;
 };
@@ -62147,12 +62347,22 @@ var UserAuthenticator = function (authOptions) {
 var channel_authorizer_composeChannelQuery = function (params, authOptions) {
     var query = 'socket_id=' + encodeURIComponent(params.socketId);
     query += '&channel_name=' + encodeURIComponent(params.channelName);
-    for (var i in authOptions.params) {
+    for (var key in authOptions.params) {
         query +=
             '&' +
-                encodeURIComponent(i) +
+                encodeURIComponent(key) +
                 '=' +
-                encodeURIComponent(authOptions.params[i]);
+                encodeURIComponent(authOptions.params[key]);
+    }
+    if (authOptions.paramsProvider != null) {
+        var dynamicParams = authOptions.paramsProvider();
+        for (var key in dynamicParams) {
+            query +=
+                '&' +
+                    encodeURIComponent(key) +
+                    '=' +
+                    encodeURIComponent(dynamicParams[key]);
+        }
     }
     return query;
 };
@@ -62274,7 +62484,7 @@ function getEnableStatsConfig(opts) {
     return false;
 }
 function buildUserAuthenticator(opts) {
-    var userAuthentication = __assign({}, defaults.userAuthentication, opts.userAuthentication);
+    var userAuthentication = __assign(__assign({}, defaults.userAuthentication), opts.userAuthentication);
     if ('customHandler' in userAuthentication &&
         userAuthentication['customHandler'] != null) {
         return userAuthentication['customHandler'];
@@ -62284,7 +62494,7 @@ function buildUserAuthenticator(opts) {
 function buildChannelAuth(opts, pusher) {
     var channelAuthorization;
     if ('channelAuthorization' in opts) {
-        channelAuthorization = __assign({}, defaults.channelAuthorization, opts.channelAuthorization);
+        channelAuthorization = __assign(__assign({}, defaults.channelAuthorization), opts.channelAuthorization);
     }
     else {
         channelAuthorization = {
@@ -62311,6 +62521,62 @@ function buildChannelAuthorizer(opts, pusher) {
     return channel_authorizer(channelAuthorization);
 }
 
+// CONCATENATED MODULE: ./src/core/watchlist.ts
+var watchlist_extends = ( false) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+
+
+var watchlist_WatchlistFacade = (function (_super) {
+    watchlist_extends(WatchlistFacade, _super);
+    function WatchlistFacade(pusher) {
+        var _this = _super.call(this, function (eventName, data) {
+            logger.debug("No callbacks on watchlist events for " + eventName);
+        }) || this;
+        _this.pusher = pusher;
+        _this.bindWatchlistInternalEvent();
+        return _this;
+    }
+    WatchlistFacade.prototype.handleEvent = function (pusherEvent) {
+        var _this = this;
+        pusherEvent.data.events.forEach(function (watchlistEvent) {
+            _this.emit(watchlistEvent.name, watchlistEvent);
+        });
+    };
+    WatchlistFacade.prototype.bindWatchlistInternalEvent = function () {
+        var _this = this;
+        this.pusher.connection.bind('message', function (pusherEvent) {
+            var eventName = pusherEvent.event;
+            if (eventName === 'pusher_internal:watchlist_events') {
+                _this.handleEvent(pusherEvent);
+            }
+        });
+    };
+    return WatchlistFacade;
+}(dispatcher));
+/* harmony default export */ var watchlist = (watchlist_WatchlistFacade);
+
+// CONCATENATED MODULE: ./src/core/utils/flat_promise.ts
+function flatPromise() {
+    var resolve, reject;
+    var promise = new Promise(function (res, rej) {
+        resolve = res;
+        reject = rej;
+    });
+    return { promise: promise, resolve: resolve, reject: reject };
+}
+/* harmony default export */ var flat_promise = (flatPromise);
+
 // CONCATENATED MODULE: ./src/core/user.ts
 var user_extends = ( false) || (function () {
     var extendStatics = function (d, b) {
@@ -62328,6 +62594,8 @@ var user_extends = ( false) || (function () {
 
 
 
+
+
 var user_UserFacade = (function (_super) {
     user_extends(UserFacade, _super);
     function UserFacade(pusher) {
@@ -62337,16 +62605,31 @@ var user_UserFacade = (function (_super) {
         _this.signin_requested = false;
         _this.user_data = null;
         _this.serverToUserChannel = null;
+        _this.signinDonePromise = null;
+        _this._signinDoneResolve = null;
+        _this._onAuthorize = function (err, authData) {
+            if (err) {
+                logger.warn("Error during signin: " + err);
+                _this._cleanup();
+                return;
+            }
+            _this.pusher.send_event('pusher:signin', {
+                auth: authData.auth,
+                user_data: authData.user_data
+            });
+        };
         _this.pusher = pusher;
-        _this.pusher.connection.bind('connected', function () {
-            _this._signin();
+        _this.pusher.connection.bind('state_change', function (_a) {
+            var previous = _a.previous, current = _a.current;
+            if (previous !== 'connected' && current === 'connected') {
+                _this._signin();
+            }
+            if (previous === 'connected' && current !== 'connected') {
+                _this._cleanup();
+                _this._newSigninPromiseIfNeeded();
+            }
         });
-        _this.pusher.connection.bind('connecting', function () {
-            _this._disconnect();
-        });
-        _this.pusher.connection.bind('disconnected', function () {
-            _this._disconnect();
-        });
+        _this.watchlist = new watchlist(pusher);
         _this.pusher.connection.bind('message', function (event) {
             var eventName = event.event;
             if (eventName === 'pusher:signin_success') {
@@ -62367,26 +62650,16 @@ var user_UserFacade = (function (_super) {
         this._signin();
     };
     UserFacade.prototype._signin = function () {
-        var _this = this;
         if (!this.signin_requested) {
             return;
         }
+        this._newSigninPromiseIfNeeded();
         if (this.pusher.connection.state !== 'connected') {
             return;
         }
-        var onAuthorize = function (err, authData) {
-            if (err) {
-                logger.warn("Error during signin: " + err);
-                return;
-            }
-            _this.pusher.send_event('pusher:signin', {
-                auth: authData.auth,
-                user_data: authData.user_data
-            });
-        };
         this.pusher.config.userAuthenticator({
             socketId: this.pusher.connection.socket_id
-        }, onAuthorize);
+        }, this._onAuthorize);
     };
     UserFacade.prototype._onSigninSuccess = function (data) {
         try {
@@ -62394,12 +62667,15 @@ var user_UserFacade = (function (_super) {
         }
         catch (e) {
             logger.error("Failed parsing user data after signin: " + data.user_data);
+            this._cleanup();
             return;
         }
         if (typeof this.user_data.id !== 'string' || this.user_data.id === '') {
             logger.error("user_data doesn't contain an id. user_data: " + this.user_data);
+            this._cleanup();
             return;
         }
+        this._signinDoneResolve();
         this._subscribeChannels();
     };
     UserFacade.prototype._subscribeChannels = function () {
@@ -62423,13 +62699,32 @@ var user_UserFacade = (function (_super) {
         });
         ensure_subscribed(this.serverToUserChannel);
     };
-    UserFacade.prototype._disconnect = function () {
+    UserFacade.prototype._cleanup = function () {
         this.user_data = null;
         if (this.serverToUserChannel) {
             this.serverToUserChannel.unbind_all();
             this.serverToUserChannel.disconnect();
             this.serverToUserChannel = null;
         }
+        if (this.signin_requested) {
+            this._signinDoneResolve();
+        }
+    };
+    UserFacade.prototype._newSigninPromiseIfNeeded = function () {
+        if (!this.signin_requested) {
+            return;
+        }
+        if (this.signinDonePromise && !this.signinDonePromise.done) {
+            return;
+        }
+        var _a = flat_promise(), promise = _a.promise, resolve = _a.resolve, _ = _a.reject;
+        promise.done = false;
+        var setDone = function () {
+            promise.done = true;
+        };
+        promise.then(setDone)["catch"](setDone);
+        this.signinDonePromise = promise;
+        this._signinDoneResolve = resolve;
     };
     return UserFacade;
 }(dispatcher));
@@ -62465,7 +62760,7 @@ var pusher_Pusher = (function () {
         this.config = getConfig(options, this);
         this.channels = factory.createChannels();
         this.global_emitter = new dispatcher();
-        this.sessionID = Math.floor(Math.random() * 1000000000);
+        this.sessionID = runtime.randomInt(1000000000);
         this.timeline = new timeline_timeline(this.key, this.sessionID, {
             cluster: this.config.cluster,
             features: Pusher.getClientFeatures(),
@@ -62647,10 +62942,10 @@ runtime.setup(pusher_Pusher);
 
 /***/ }),
 
-/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[3]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/chat.vue?vue&type=style&index=0&lang=scss&":
-/*!******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[3]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/chat.vue?vue&type=style&index=0&lang=scss& ***!
-  \******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[3]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/chat.vue?vue&type=style&index=0&id=151b8bba&lang=scss&scoped=true&":
+/*!******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[3]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/chat.vue?vue&type=style&index=0&id=151b8bba&lang=scss&scoped=true& ***!
+  \******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -62660,7 +62955,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_12_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_12_0_rules_0_use_2_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_12_0_rules_0_use_3_node_modules_vue_loader_lib_index_js_vue_loader_options_chat_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[2]!../../../node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[3]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./chat.vue?vue&type=style&index=0&lang=scss& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[3]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/chat.vue?vue&type=style&index=0&lang=scss&");
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_12_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_12_0_rules_0_use_2_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_12_0_rules_0_use_3_node_modules_vue_loader_lib_index_js_vue_loader_options_chat_vue_vue_type_style_index_0_id_151b8bba_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[2]!../../../node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[3]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./chat.vue?vue&type=style&index=0&id=151b8bba&lang=scss&scoped=true& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[3]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/chat.vue?vue&type=style&index=0&id=151b8bba&lang=scss&scoped=true&");
 
             
 
@@ -62669,11 +62964,11 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_12_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_12_0_rules_0_use_2_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_12_0_rules_0_use_3_node_modules_vue_loader_lib_index_js_vue_loader_options_chat_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_1__["default"], options);
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_12_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_12_0_rules_0_use_2_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_12_0_rules_0_use_3_node_modules_vue_loader_lib_index_js_vue_loader_options_chat_vue_vue_type_style_index_0_id_151b8bba_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_1__["default"], options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_12_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_12_0_rules_0_use_2_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_12_0_rules_0_use_3_node_modules_vue_loader_lib_index_js_vue_loader_options_chat_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_12_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_12_0_rules_0_use_2_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_12_0_rules_0_use_3_node_modules_vue_loader_lib_index_js_vue_loader_options_chat_vue_vue_type_style_index_0_id_151b8bba_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
 
 /***/ }),
 
@@ -63869,9 +64164,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _chat_vue_vue_type_template_id_151b8bba___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./chat.vue?vue&type=template&id=151b8bba& */ "./resources/js/components/chat.vue?vue&type=template&id=151b8bba&");
+/* harmony import */ var _chat_vue_vue_type_template_id_151b8bba_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./chat.vue?vue&type=template&id=151b8bba&scoped=true& */ "./resources/js/components/chat.vue?vue&type=template&id=151b8bba&scoped=true&");
 /* harmony import */ var _chat_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./chat.vue?vue&type=script&lang=js& */ "./resources/js/components/chat.vue?vue&type=script&lang=js&");
-/* harmony import */ var _chat_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chat.vue?vue&type=style&index=0&lang=scss& */ "./resources/js/components/chat.vue?vue&type=style&index=0&lang=scss&");
+/* harmony import */ var _chat_vue_vue_type_style_index_0_id_151b8bba_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chat.vue?vue&type=style&index=0&id=151b8bba&lang=scss&scoped=true& */ "./resources/js/components/chat.vue?vue&type=style&index=0&id=151b8bba&lang=scss&scoped=true&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -63883,11 +64178,11 @@ __webpack_require__.r(__webpack_exports__);
 
 var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
   _chat_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _chat_vue_vue_type_template_id_151b8bba___WEBPACK_IMPORTED_MODULE_0__.render,
-  _chat_vue_vue_type_template_id_151b8bba___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  _chat_vue_vue_type_template_id_151b8bba_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _chat_vue_vue_type_template_id_151b8bba_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
   false,
   null,
-  null,
+  "151b8bba",
   null
   
 )
@@ -65092,15 +65387,15 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/chat.vue?vue&type=style&index=0&lang=scss&":
-/*!****************************************************************************!*\
-  !*** ./resources/js/components/chat.vue?vue&type=style&index=0&lang=scss& ***!
-  \****************************************************************************/
+/***/ "./resources/js/components/chat.vue?vue&type=style&index=0&id=151b8bba&lang=scss&scoped=true&":
+/*!****************************************************************************************************!*\
+  !*** ./resources/js/components/chat.vue?vue&type=style&index=0&id=151b8bba&lang=scss&scoped=true& ***!
+  \****************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_12_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_12_0_rules_0_use_2_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_12_0_rules_0_use_3_node_modules_vue_loader_lib_index_js_vue_loader_options_chat_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader/dist/cjs.js!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[2]!../../../node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[3]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./chat.vue?vue&type=style&index=0&lang=scss& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[3]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/chat.vue?vue&type=style&index=0&lang=scss&");
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_12_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_12_0_rules_0_use_2_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_12_0_rules_0_use_3_node_modules_vue_loader_lib_index_js_vue_loader_options_chat_vue_vue_type_style_index_0_id_151b8bba_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader/dist/cjs.js!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[2]!../../../node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[3]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./chat.vue?vue&type=style&index=0&id=151b8bba&lang=scss&scoped=true& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[3]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/chat.vue?vue&type=style&index=0&id=151b8bba&lang=scss&scoped=true&");
 
 
 /***/ }),
@@ -65493,19 +65788,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/chat.vue?vue&type=template&id=151b8bba&":
-/*!*************************************************************************!*\
-  !*** ./resources/js/components/chat.vue?vue&type=template&id=151b8bba& ***!
-  \*************************************************************************/
+/***/ "./resources/js/components/chat.vue?vue&type=template&id=151b8bba&scoped=true&":
+/*!*************************************************************************************!*\
+  !*** ./resources/js/components/chat.vue?vue&type=template&id=151b8bba&scoped=true& ***!
+  \*************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_chat_vue_vue_type_template_id_151b8bba___WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_chat_vue_vue_type_template_id_151b8bba___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_chat_vue_vue_type_template_id_151b8bba_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_chat_vue_vue_type_template_id_151b8bba_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_chat_vue_vue_type_template_id_151b8bba___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./chat.vue?vue&type=template&id=151b8bba& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/chat.vue?vue&type=template&id=151b8bba&");
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_chat_vue_vue_type_template_id_151b8bba_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./chat.vue?vue&type=template&id=151b8bba&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/chat.vue?vue&type=template&id=151b8bba&scoped=true&");
 
 
 /***/ }),
@@ -66259,10 +66554,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/chat.vue?vue&type=template&id=151b8bba&":
-/*!****************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/chat.vue?vue&type=template&id=151b8bba& ***!
-  \****************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/chat.vue?vue&type=template&id=151b8bba&scoped=true&":
+/*!****************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/chat.vue?vue&type=template&id=151b8bba&scoped=true& ***!
+  \****************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -69543,20 +69838,19 @@ __webpack_require__.r(__webpack_exports__);
 // This module is a runtime utility for cleaner component module output and will
 // be included in the final webpack user bundle.
 
-function normalizeComponent (
+function normalizeComponent(
   scriptExports,
   render,
   staticRenderFns,
   functionalTemplate,
   injectStyles,
   scopeId,
-  moduleIdentifier, /* server only */
+  moduleIdentifier /* server only */,
   shadowMode /* vue-cli only */
 ) {
   // Vue.extend constructor export interop
-  var options = typeof scriptExports === 'function'
-    ? scriptExports.options
-    : scriptExports
+  var options =
+    typeof scriptExports === 'function' ? scriptExports.options : scriptExports
 
   // render functions
   if (render) {
@@ -69576,7 +69870,8 @@ function normalizeComponent (
   }
 
   var hook
-  if (moduleIdentifier) { // server build
+  if (moduleIdentifier) {
+    // server build
     hook = function (context) {
       // 2.3 injection
       context =
@@ -69602,11 +69897,11 @@ function normalizeComponent (
   } else if (injectStyles) {
     hook = shadowMode
       ? function () {
-        injectStyles.call(
-          this,
-          (options.functional ? this.parent : this).$root.$options.shadowRoot
-        )
-      }
+          injectStyles.call(
+            this,
+            (options.functional ? this.parent : this).$root.$options.shadowRoot
+          )
+        }
       : injectStyles
   }
 
@@ -69617,16 +69912,14 @@ function normalizeComponent (
       options._injectStyles = hook
       // register for functional component in vue file
       var originalRender = options.render
-      options.render = function renderWithStyleInjection (h, context) {
+      options.render = function renderWithStyleInjection(h, context) {
         hook.call(context)
         return originalRender(h, context)
       }
     } else {
       // inject component registration as beforeCreate hook
       var existing = options.beforeCreate
-      options.beforeCreate = existing
-        ? [].concat(existing, hook)
-        : [hook]
+      options.beforeCreate = existing ? [].concat(existing, hook) : [hook]
     }
   }
 

@@ -124,16 +124,17 @@
 
         },
 
-        mounted() {
+        created() {
             let _this = this;
 
             this.getMessages();
             console.log("starting to listen");
 
             // start listening for fellow members
-            window.Echo.join("chatroom." + this.roomid)
+            let channel = Echo.join("presence-chatroom." + this.roomid)
                 .here((users) => {
                     this.activeUsers = users;
+                    console.log(users);
                 })
                 .joining((user) => {
                     this.activeUsers.push(user);
@@ -170,14 +171,20 @@
                 })
                 .listen('.message.new', (e) => {
                     this.pushNewMessage(e);
+                    console.log('pushed new message');
                 })
+            .error(error => {
+                console.log('error');
+            })
+
+
         }
 
 
     }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
     #online_container {
         background-color: white;
         border-bottom-left-radius: 5px;

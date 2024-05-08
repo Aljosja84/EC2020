@@ -32,10 +32,12 @@ window.axios = require('axios');
  import Echo from 'laravel-echo';
 
  window.Pusher = require('pusher-js');
+ Pusher.logToConsole = true;
 
  window.Echo = new Echo({
      broadcaster: 'pusher',
-     key: process.env.MIX_PUSHER_APP_KEY,
-     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
-     forceTLS: true
+     key: 'b45a3e267b9d7807b966',
+     cluster: `eu`,
+     forceTLS: false,
+
  });

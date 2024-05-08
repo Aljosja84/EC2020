@@ -18,7 +18,7 @@ Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
     return (int) $user->id === (int) $id;
 });
 
-Broadcast::channel('chatroom.{roomId}', function ($user, $roomId) {
+Broadcast::channel('presence-chatroom.{roomId}', function ($user, $roomId) {
     if(Auth::check()) {
         return [
             'id' => $user->id,

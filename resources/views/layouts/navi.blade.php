@@ -19,7 +19,7 @@
 
     <script defer src="{{ mix('js/app.js') }}"></script>
 
-    <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+    <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
 
     <!-- Styles -->
@@ -35,6 +35,7 @@
     <!-- Styles -->
     <script>
         var assetBaseUrl = "{{ asset('') }}";
+        Pusher.logToConsole = true;
     </script>
 </head>
 <body>
