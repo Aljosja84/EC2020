@@ -460,9 +460,9 @@ input:-webkit-autofill {
     height: auto;
     background-color: white;
     float: left;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Terminal Dosis', sans-serif;;
     color: #515151;
-    font-size: 13px;
+    font-size: 14px;
     line-height: 21px;
 }
 

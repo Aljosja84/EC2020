@@ -65,6 +65,9 @@
                     this.players = startXI.concat(bench);
                     // set the dropdown menu to the first player
                     this.countryPlayers = this.players[0].player.id;
+                })
+                .catch(error => {
+                    console.log('Error catching players: ', error);
                 });
             },
 

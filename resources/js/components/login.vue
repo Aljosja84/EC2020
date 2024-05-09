@@ -227,8 +227,8 @@
     }
     #view_profile {
         color: #a7acb7;
-        font-family: 'Helvetica', sans-serif;
-        font-size: 12px;
+        font-family: 'Terminal Dosis', sans-serif;
+        font-size: 14px;
         width: 100%;
         padding-left: 15px;
         line-height: 11px;

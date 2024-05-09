@@ -2,7 +2,7 @@
     <div class="relative h-10 m-1">
         <div class="inputform">
             <textarea class="input_text" v-model="message" @keyup.enter="sendMessage()" @keyup="isTyping()" placeholder="Say something..."/>
-            <button id="submit" @click="sendMessage()">Send</button>
+            <button id="submit" @click="sendMessage()">SEND</button>
         </div>
     </div>
 </template>

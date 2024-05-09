@@ -24,14 +24,6 @@
                 <button class="comment_submit_button" type="submit">Send Notification</button>
             </form>
         </div>
-        <!-- dropdown menu for goal notifications -->
-        <div id="stadium_info" style="margin-left: 15px">
-            <player-dropdown :items="{{ $players }}"></player-dropdown>
-        </div>
-        <!-- form to get countries and players loaded -->
-        <div id="stadium_info" style="margin-left: 15px">
-            <player-select :countries="{{ $countries }}"></player-select>
-        </div>
         <!-- form to submit match event notifications -->
         <div id="stadium_info" style="margin-left: 15px">
             You're logged in as: {{ Auth()->user()->name }}

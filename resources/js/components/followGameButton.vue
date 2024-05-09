@@ -111,8 +111,8 @@
         height: 85px;
         margin-left: 7px;
         padding: 4px 8px 4px 8px;
-        font-family: "Roboto", sans-serif;
-        font-size: 12px;
+        font-family: "Terminal Dosis", sans-serif;
+        font-size: 14px;
         display: flex;
         justify-content: center;
         align-items: center;

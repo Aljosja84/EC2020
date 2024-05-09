@@ -269,7 +269,7 @@
     .stats_num_left {
         float:left;
         color: #a3a7ab;
-        font-family: 'Roboto', sans-serif;
+        font-family: 'Terminal Dosis', sans-serif;
         font-size: 13px;
         width: 35px;
         text-align: center;
@@ -280,7 +280,7 @@
     .stats_num_right {
         float: right;
         color: #a3a7ab;
-        font-family: 'Roboto', sans-serif;
+        font-family: 'Terminal Dosis', sans-serif;
         font-size: 13px;
         width: 35px;
         text-align: center;
@@ -289,7 +289,7 @@
     }
 
     .stats_title {
-        font-family: 'Oswald', sans-serif;
+        font-family: 'Terminal Dosis', sans-serif;
         font-size: 13px;
         text-align: center;
         margin: 10px 0 2px 0;

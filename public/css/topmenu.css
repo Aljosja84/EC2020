@@ -135,14 +135,16 @@ nav li:hover {
     width: auto;
     padding-bottom: 3px;
     margin-top: 10px;
+    font-family: 'Terminal Dosis', sans-serif;
 }
 
 .menu_sub_stadium {
     position: absolute;
+    font-family: 'Terminal Dosis', sans-serif;
     top: 55px;
     left: 0;
     visibility: hidden;
-    font-size: 10px;
+    font-size: 14px;
     opacity: 0;
     background-color: #ffffff;
     width: 375px;
@@ -170,6 +172,7 @@ nav li:hover .menu_sub_stadium {
 
 #stadium {
     padding-bottom: 7px;
+    font-family: 'Terminal Dosis', sans-serif;
 }
 
 .stadium_link {
@@ -189,7 +192,6 @@ nav li:hover .menu_sub_stadium {
 
 .stadium_link a {
     color: red;
-    font-family: 'Roboto', sans-serif;
     font-size: 12px;
 }
 
@@ -209,15 +211,15 @@ nav li:hover .menu_sub_stadium {
 }
 
 .stadium_link p:nth-child(3) {
-    font-family: 'Roboto', sans-serif;
-    font-size: 11px;
+    font-family: 'Terminal Dosis', sans-serif;
+    font-size: 12px;
     color: #515151;
     padding-bottom: 5px;
 }
 
 .stadium_link p:nth-child(4) {
-    font-family: 'Roboto', sans-serif;
-    font-size: 11px;
+    font-family: 'Terminal Dosis', sans-serif;
+    font-size: 12px;
     color: #515151;
 }
 /* --------------------------------------- */
@@ -641,7 +643,7 @@ nav li:hover .menu_sub_games {
 }
 
 #gameday_time {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Terminal Dosis', sans-serif;
     font-size: 14px;
     margin-left: 7px;
     margin-right: 7px;
@@ -651,7 +653,7 @@ nav li:hover .menu_sub_games {
     height: 33px;
 }
 #gameday_homeTeam {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Terminal Dosis', sans-serif;
     font-size: 14px;
     text-align: right;
     margin-right: 7px;
@@ -708,7 +710,7 @@ nav li:hover .menu_sub_games {
 }
 
 #gameday_awayTeam {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Terminal Dosis', sans-serif;
     font-size: 14px;
     text-align: left;
     margin-right: 7px;
@@ -719,8 +721,9 @@ nav li:hover .menu_sub_games {
     min-width: 80px;
 }
 #gameday_stadium {
+    font-family: 'Terminal Dosis', sans-serif;;
     vertical-align: bottom;
-    font-size: 10px;
+    font-size: 11px;
     line-height: 10px;
     text-align: center;
     clear: both;

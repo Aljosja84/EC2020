@@ -127,8 +127,8 @@
         created() {
             let _this = this;
 
+            // load messages from database
             this.getMessages();
-            console.log("starting to listen");
 
             // start listening for fellow members
             let channel = Echo.join("presence-chatroom." + this.roomid)
@@ -155,7 +155,6 @@
                     // set a key for the list element
                     message.id = e.user.created_at;
                     // if typing is false, remove the indicator from the messages array
-                    // this.typing ? this.messages.push(message) : this.messages.pop();
                     if(this.typing) {
                         _this.typing_users.push(_this.typing_id);
                         return this.typing_users;

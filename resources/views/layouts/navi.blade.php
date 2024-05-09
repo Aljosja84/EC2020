@@ -48,7 +48,7 @@
         <div class="topmenu">
             <!-- EURO 2020 LOGO -->
             <div style="float: left">
-                <img title="hello there" class="logo" src={{ asset('images/logo_euro2020.png') }}>
+                <img class="logo" src={{ asset('images/logo_euro2020.png') }}>
             </div>
             <!-------------------->
             <div class="container">

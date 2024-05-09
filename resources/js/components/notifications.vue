@@ -274,8 +274,8 @@
         height: auto;
         background-color: white;
         margin: 0;
-        font-family: Arial, sans-serif;
-        font-size: 11px;
+        font-family: 'Terminal Dosis', sans-serif;
+        font-size: 14px;
         padding: 5px 5px 5px 15px;
         border-bottom: 1px solid #f3f2f3;
         line-height: 15px;
@@ -344,9 +344,9 @@
     }
     .mark_as_read {
         color: #a7acb7;
-        font-family: 'Helvetica', sans-serif;
+        font-family: 'Terminal Dosis', sans-serif;
         font-weight: normal !important;
-        font-size: 12px;
+        font-size: 14px;
         width: 100%;
         padding-left: 15px;
         line-height: 11px;

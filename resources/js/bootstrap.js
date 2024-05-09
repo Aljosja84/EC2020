@@ -36,8 +36,8 @@ window.axios = require('axios');
 
  window.Echo = new Echo({
      broadcaster: 'pusher',
-     key: 'b45a3e267b9d7807b966',
-     cluster: `eu`,
+     key: process.env.MIX_PUSHER_APP_KEY,
+     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
      forceTLS: false,
 
  });

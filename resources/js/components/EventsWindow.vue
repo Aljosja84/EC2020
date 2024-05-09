@@ -196,7 +196,7 @@
         position: relative;
         left: -13px;
         text-align: center;
-        font-family: 'Roboto', sans-serif;
+        font-family: 'Terminal Dosis', sans-serif;
         color: #515151;
         font-size: 14px;
         padding-top: 2px;
@@ -211,7 +211,7 @@
         position: relative;
         left: 15px;
         text-align: center;
-        font-family: 'Roboto', sans-serif;
+        font-family: 'Terminal Dosis', sans-serif;
         color: #515151;
         font-size: 14px;
         padding-top: 2px;
@@ -225,7 +225,7 @@
         position: relative;
         left: -8px;
         text-align: center;
-        font-family: 'Roboto', sans-serif;
+        font-family: 'Terminal Dosis', sans-serif;
         color: #515151;
         font-size: 14px;
         padding-top: 2px;
@@ -246,9 +246,9 @@
     }
 
     .timeline ul li {
-        font-family: 'Roboto', sans-serif;
+        font-family: 'Terminal Dosis', sans-serif;
         color: #515151;
-        font-size: 13px;
+        font-size: 14px;
         height: auto;
         transition: 0.3s all linear;
     }

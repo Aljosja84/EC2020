@@ -41,7 +41,7 @@
         }
     },
 
-    methods: { /**
+    methods: {
         callData() {
             axios.get("https://v3.football.api-sports.io/fixtures?id=" + this.matchid, {
                 headers: {
@@ -70,7 +70,7 @@
         console.log('data is loaded from mounted hook');
         // now refresh every one and a half minute
 
-*/
+
 
     }
 }

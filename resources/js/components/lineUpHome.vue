@@ -42,7 +42,7 @@
 
 <style scoped>
     .container {
-        background-color: white;
+        background-color: black;
         height: 588px;
         width: 250px;
         overflow-y: auto;
@@ -50,7 +50,7 @@
 
     .header {
         font-family: 'Oswald', sans-serif;
-        font-size: 11px;
+        font-size: 19px;
         line-height: 11px;
         background-color: #f5f7f9;
         color: #515151;
@@ -61,7 +61,7 @@
     }
 
     .non_player {
-        font-family: 'Roboto', sans-serif;
+        font-family: 'Terminal Dosis', sans-serif;
         font-size: 12px;
         line-height: 12px;
         color: #515151;
@@ -72,7 +72,7 @@
     }
 
     .player {
-        font-family: 'Roboto', sans-serif;
+        font-family: 'Terminal Dosis', sans-serif;
         font-size: 12px;
         line-height: 12px;
         color: #515151;

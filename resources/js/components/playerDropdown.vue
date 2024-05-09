@@ -137,8 +137,8 @@
         background-repeat: no-repeat;
         background-size: 20px 20px;
         padding: 9px 20px 9px 30px;
-        font-family: "Roboto", sans-serif;
-        font-size: 14px;
+        font-family: "Terminal Dosis", sans-serif;
+        font-size: 15px;
         color: slategray;
     }
 
@@ -151,9 +151,9 @@
     }
 
     .countryGroup {
-        font-family: 'Roboto', sans-serif;
+        font-family: 'Terminal Dosis', sans-serif;
         font-weight: bold;
-        font-size: 14px;
+        font-size: 17px;
         color: #9badbf;
         padding: 2px 2px 2px 10px;
         display: flex;
@@ -171,8 +171,8 @@
     }
 
     .autocomplete-results {
-        font-family: "Roboto", sans-serif;
-        font-size: 13px;
+        font-family: "Terminal Dosis", sans-serif;
+        font-size: 14px;
         margin: 3px;
         border: 1px solid #eee;
         height: fit-content;

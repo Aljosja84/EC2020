@@ -166,7 +166,7 @@
         cursor: pointer;
         display: flex;
         align-items: center;
-        font-family: "Roboto", sans-serif;
+        font-family: "Terminal Dosis", sans-serif;
         font-size: 14px;
         color: slategray;
     }
@@ -175,7 +175,7 @@
         position: absolute;
         width: 100%;
         z-index: 1000;
-        font-family: "Roboto", sans-serif;
+        font-family: "Terminal Dosis", sans-serif;
         font-size: 13px;
         border: 1px solid #eee;
         background-color: white;
@@ -225,8 +225,8 @@
     }
 
     .game {
-        font-family: "Roboto", sans-serif;
-        font-size: 13px;
+        font-family: "Terminal Dosis", sans-serif;
+        font-size: 14px;
         font-weight: normal;
         list-style: none;
         text-align: left;
@@ -268,7 +268,7 @@
         user-select: none;
         display: flex;
         align-items: center;
-        font-family: "Roboto", sans-serif;
+        font-family: "Terminal Dosis", sans-serif;
         font-size: 14px;
         color: slategray;
     }

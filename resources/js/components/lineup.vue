@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <ul>
-            <li class="header">coach</li>
+            <li class="header">COACH</li>
             <li class="non_player">{{ coach }}</li>
             <li class="header">starting XI</li>
             <li v-for="player in players" class="player"><span class="player_number">{{player.player.number}}</span>{{player.player.name}}</li>
@@ -69,7 +69,7 @@
     }
 
     .non_player {
-        font-family: 'Roboto', sans-serif;
+        font-family: 'Terminal Dosis', sans-serif;
         font-size: 12px;
         line-height: 12px;
         color: #515151;
@@ -80,7 +80,7 @@
     }
 
     .player {
-        font-family: 'Roboto', sans-serif;
+        font-family: 'Terminal Dosis', sans-serif;
         font-size: 12px;
         line-height: 12px;
         color: #515151;
