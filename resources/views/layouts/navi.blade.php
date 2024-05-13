@@ -35,7 +35,6 @@
     <!-- Styles -->
     <script>
         var assetBaseUrl = "{{ asset('') }}";
-        Pusher.logToConsole = true;
     </script>
 </head>
 <body>

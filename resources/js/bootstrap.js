@@ -32,12 +32,11 @@ window.axios = require('axios');
  import Echo from 'laravel-echo';
 
  window.Pusher = require('pusher-js');
- Pusher.logToConsole = true;
 
  window.Echo = new Echo({
      broadcaster: 'pusher',
      key: process.env.MIX_PUSHER_APP_KEY,
      cluster: process.env.MIX_PUSHER_APP_CLUSTER,
-     forceTLS: false,
-
+     // the following is necessary for CORS policy of the api we're loading
+     withoutInterceptors: true,
  });
