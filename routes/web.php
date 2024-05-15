@@ -17,6 +17,7 @@ Route::get('/comment', [App\Http\Controllers\CommentController::class, 'index'])
 Route::post('/comment', [App\Http\Controllers\CommentController::class, 'store'])->name('comment.store');
 Route::post('/comment/fixture/{id}', [App\Http\Controllers\CommentController::class, 'findFixture']);
 Route::get('/notifications', [App\Http\Controllers\NotificationController::class, 'index']);
+Route::post('/notifications/matchEvent', [App\Http\Controllers\NotificationController::class, 'saveMatchEvent']);
 Route::get('/notifications/mark-all-as-read', [App\Http\Controllers\NotificationController::class, 'markAllAsRead']);
 Route::get('/notifications/delete-all', [App\Http\Controllers\NotificationController::class, 'deleteAll']);
 Route::post('/notifications/{notificationId}/mark-as-read', [App\Http\Controllers\NotificationController::class, 'markAsRead']);

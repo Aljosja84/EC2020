@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Game;
+use App\Models\Player;
+use App\Notifications\MatchEvent;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\DatabaseNotification;
 
@@ -99,5 +102,26 @@ class NotificationController extends Controller
 
             return ($n);
         })->take(10);
+    }
+
+    public function saveMatchEvent(Request $request)
+    {
+        $game = Game::with('homeTeam', 'awayTeam')->find($request->input('game_id'));
+        $gamewithnames = $game->with('homeTeam')->with('awayTeam')->get();
+        $minute = $request->input('minute');
+        $player_id = $request->input('player_id');
+        $type = $request->input('type');
+
+
+        // send all followers of this game an notification
+        $followers = $game->users()->get();
+
+        foreach($followers as $user) {
+            $user->notify(new MatchEvent($game, $minute, $player_id, $type));
+        }
+
+        // send success back
+        return response()->json(['message' => 'done!']);
+
     }
 }

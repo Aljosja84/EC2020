@@ -18,12 +18,24 @@
                 <div id="notify_items" v-cloak v-if="notifications.length > 0" :key="1">
                         <li @click=setAsRead(notification) :class=setStyleReadStatus(notification) v-for="(notification, index) in notifications" v-bind:key=notification.id @mouseenter="showDelete(index)" @mouseleave="hideDelete()">
                             <div class="notify_delete" @click.stop=whichDelete(notification)><img src="/images/sign-delete-light.png" width="16px" height="16px" /></div>
-                            <div class="notify_comment" style="padding-right: 20px">
-                                <img :src="notification['data'].comment_avatar" class="notify_user_icon"/>
-                                <div style="margin-left: 10px">
-                                    <span><a href="#">{{ notification['data'].comment_from_name }}</a></span>
-                                    commented on your betslip:
-                                    <span>"{{ notification['data'].comment_body }}"</span>
+                            <div v-if="notification.type === 'App\\Notifications\\CommentAdded'">
+                                <div class="notify_comment" style="padding-right: 20px">
+                                    <img :src="notification['data'].comment_avatar" class="notify_user_icon"/>
+                                    <div style="margin-left: 10px">
+                                        <span><a href="#">{{ notification['data'].comment_from_name }}</a></span>
+                                        commented on your betslip:
+                                        <span>"{{ notification['data'].comment_body }}"</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div v-else-if="notification.type === 'App\\Notifications\\MatchEvent'">
+                                <div class="notify_comment" style="padding-right: 20px">
+                                    <img :src="parsedType(notification)" class="notify_user_icon"/>
+                                    <div style="margin-left: 10px">
+                                        <span><a href="#">{{ notification['data'].comment_from_name }}</a></span>
+                                        scored a goal:
+                                        <span>"{{ notification['data'].comment_body }}"</span>
+                                    </div>
                                 </div>
                             </div>
                             <div class="notify_timestamp">{{ notification['sent_date'] }}</div>
@@ -165,10 +177,18 @@
                     .catch(error => {
                         console.log('Error deleting all notifications: '. error);
                     });
+            },
+
+            parsedType(e) {
+                switch (e.data.event_type) {
+                    case 'goal':
+                        return '/images/notify_goal.png';
+                    case 'yellowCard':
+                        return '/images/referee_yellow.png';
+                    case 'redCard':
+                        return '/images/referee_red.png';
+                }
             }
-
-
-
         },
 
         mounted() {
@@ -371,7 +391,7 @@
         cursor: pointer;
         position: relative;
         right: -315px;
-        top: 0;
+        top: 10px;
         align-content: center;
         opacity: 0;
         transition: all 0.2s ease-out;

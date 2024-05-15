@@ -1,35 +1,37 @@
 <template>
     <div>
         <div>
-            <div class="choice_field" @click="showResults()">{{ chooseText }}</div>
-            <ul class="games_window" ref="list" :style="resultStyle">
-                <li v-for="(date, index) in sortedDates" :key="index" class="group">
-                    {{ formatDate(date) }}
-                    <ul>
-                        <li v-for="game in sortedGames(date)" :key="game.id" class="game" :id="game.api_id" @click="setGame(game.id)" @mouseenter="onOptionMouseMove($event, game.api_id)">
-                            <img :src="getFlagUrl(game.home_team.flag_url)"><span>{{ game.home_team.name }}</span><span> VS </span><span>{{ game.away_team.name }}</span><img :src="getFlagUrl(game.away_team.flag_url)">
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-            <player-dropdown :items="this.players"></player-dropdown>
-            <div class="options">
-                Type of notification
-                <div style="width: 100%">
-                    <select style="width: 100%">
-                        <option value="goal" selected>Goal</option>
-                        <option value="yellow card">Yellow card</option>
-                        <option value="red card">Red card</option>
-                    </select>
+            <form>
+                <div class="choice_field" @click="showResults()">{{ chooseText }}</div>
+                <ul class="games_window" ref="list" :style="resultStyle">
+                    <li v-for="(date, index) in sortedDates" :key="index" class="group">
+                        {{ formatDate(date) }}
+                        <ul>
+                            <li v-for="game in sortedGames(date)" :key="game.id" class="game" :id="game.api_id" @click="setGame(game.id)" @mouseenter="onOptionMouseMove($event, game.api_id)">
+                                <img :src="getFlagUrl(game.home_team.flag_url)"><span>{{ game.home_team.name }}</span><span> VS </span><span>{{ game.away_team.name }}</span><img :src="getFlagUrl(game.away_team.flag_url)">
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <player-dropdown v-model="form.player_id" :items="this.players"></player-dropdown>
+                <div class="options">
+                    Type of notification
+                    <div style="width: 100%">
+                        <select style="width: 100%" v-model="form.type">
+                            <option value="goal" selected>Goal</option>
+                            <option value="yellowCard">Yellow card</option>
+                            <option value="redCard">Red card</option>
+                        </select>
+                    </div>
+                    This happened in minute:
+                    <div>
+                        <input type="text" id="minute" v-model="form.minute" placeholder="Enter minute of Event">
+                    </div>
                 </div>
-                This happened in minute:
-                <div>
-                    <input type="text" id="minute" placeholder="Enter minute of Event">
+                <div class="button" @click="submitEvent">
+                    Send Notification
                 </div>
-            </div>
-            <div class="button">
-                Send Notification
-            </div>
+            </form>
         </div>
     </div>
 </template>
@@ -52,10 +54,29 @@
                 resultWin : false,
                 selectedGame : null,
                 players: [],
+                form: {
+                    game_id: '',
+                    player_id: '',
+                    type: '',
+                    minute: '',
+                }
             }
         },
 
         methods: {
+            submitEvent() {
+                // Send form data to Controller
+                axios.post('/notifications/matchEvent', this.form)
+                    .then(response => {
+                        console.log(response.data)
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    })
+
+
+            },
+
             showResults() {
                 this.resultWin = !this.resultWin;
             },
@@ -66,6 +87,8 @@
                 this.selectedGame = this.followedgames.find(game => game.id === gameId);
                 // set game in the choice field
                 this.chooseText = this.selectedGame.home_team.name + ' VS ' + this.selectedGame.away_team.name;
+                // set the game ID for the form
+                this.form.game_id = gameId;
                 // get all players from home_team and away_team
                 axios.get('/players/game/' + gameId)
                     .then(response => {

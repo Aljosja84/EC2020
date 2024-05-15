@@ -2,6 +2,8 @@
 
 namespace App\Notifications;
 
+use App\Models\Game;
+use App\Models\Player;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -11,14 +13,26 @@ class MatchEvent extends Notification
 {
     use Queueable;
 
+    public $game;
+    public $event_type;
+    public $player_id;
+    public $minute;
+
     /**
      * Create a new notification instance.
      *
-     * @return void
+     * @param Game $game
+     * @param $event_type
+     * @param $player_id
+     * @param $minute
      */
-    public function __construct()
+    public function __construct(Game $game, $minute, $player_id, $event_type)
     {
-        //
+        $this->game = $game;
+        $this->event_type = $event_type;
+        $this->player_id = $player_id;
+        $this->minute = $minute;
+
     }
 
     /**
@@ -55,7 +69,10 @@ class MatchEvent extends Notification
     public function toArray($notifiable)
     {
         return [
-            //
+            'game' => $this->game,
+            'event_type' => $this->event_type,
+            'player_name' => Player::where('player_id', $this->player_id)->first()->name,
+            'minute' => $this->minute,
         ];
     }
 }

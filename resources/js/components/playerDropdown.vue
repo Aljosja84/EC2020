@@ -10,7 +10,7 @@
                         <div>{{ option.label }}</div>
                     </div>
                     <ul v-if="option.subgroups">
-                        <li v-for="(subgroup, subIndex) in option.subgroups" :key="subIndex" :id="subgroup.player_id" class="autocomplete-result" @click="setResult(subgroup.name)" @mouseenter="onOptionMouseMove($event, subgroup.player_id)">
+                        <li v-for="(subgroup, subIndex) in option.subgroups" :key="subIndex" :id="subgroup.player_id" class="autocomplete-result" @click="setResult(subgroup.name, subgroup.player_id)" @mouseenter="onOptionMouseMove($event, subgroup.player_id)">
                             {{ subgroup.name }}
                         </li>
                     </ul>
@@ -45,6 +45,7 @@
         data() {
             return {
                 search: '',
+                player_id: '',
                 results: [],
                 isOpen: false,
                 searching: false,
@@ -75,10 +76,11 @@
                 }
             },
 
-            setResult(result) {
+            setResult(result, player_id) {
                 this.resultStyle = "opacity: 0%; visibility: hidden";
                 setTimeout(() => {
                     this.search = result;
+                    this.$emit('input', player_id);
                 }, 200);
             },
 
