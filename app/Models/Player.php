@@ -18,4 +18,9 @@ class Player extends Model
     {
         return $this->belongsTo(Country::class, 'api_country_code','country_id');
     }
+
+    public function country()
+    {
+        return $this->belongsTo(Country::class, 'country_id', 'api_country_code');
+    }
 }

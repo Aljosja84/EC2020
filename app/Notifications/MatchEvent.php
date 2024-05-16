@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use App\Models\Country;
 use App\Models\Game;
 use App\Models\Player;
 use Illuminate\Bus\Queueable;
@@ -26,7 +27,7 @@ class MatchEvent extends Notification
      * @param $player_id
      * @param $minute
      */
-    public function __construct(Game $game, $minute, $player_id, $event_type)
+    public function __construct($game, $minute, $player_id, $event_type)
     {
         $this->game = $game;
         $this->event_type = $event_type;
@@ -68,10 +69,15 @@ class MatchEvent extends Notification
      */
     public function toArray($notifiable)
     {
+        // set player first
+        $player = Player::where('player_id', $this->player_id)->first();
+        $player_country = Country::where('api_country_code', $player->country_id)->first()->name;
+        // this array will be stored in DB
         return [
             'game' => $this->game,
             'event_type' => $this->event_type,
-            'player_name' => Player::where('player_id', $this->player_id)->first()->name,
+            'player_name' => $player->name,
+            'player_country' => $player_country,
             'minute' => $this->minute,
         ];
     }

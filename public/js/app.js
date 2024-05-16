@@ -3249,6 +3249,7 @@ __webpack_require__.r(__webpack_exports__);
       form: {
         game_id: '',
         player_id: '',
+        player_country: '',
         type: '',
         minute: ''
       }
@@ -4381,6 +4382,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -24183,7 +24199,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.container[data-v-ad8086a6] {\n    overflow-x: hidden;\n    position: relative;\n}\n#icon_notification[data-v-ad8086a6] {\n    background: url('/images/user__notification.png') no-repeat;\n    filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.5));\n    background-size: contain;\n    width: 46px;\n    height: 46px;\n    cursor: pointer;\n    position: relative;\n}\n.notify_user_icon[data-v-ad8086a6] {\n    filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.5));\n    width: 40px;\n    height: 40px;\n}\n.notify-bubble[data-v-ad8086a6] {\n    position: absolute;\n    border: 2px solid white;\n    top: -2px;\n    right: -5px;\n    width: 20px;\n    height: 20px;\n    background-color: red;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    color: white;\n    font-size: 1em;\n    border-radius: 50%;\n}\n#notify_items[data-v-ad8086a6] {\n    min-height: 200px;\n    max-height: 400px;\n    overflow-y: scroll;\n    /* scrollbar vars */\n    --scrollbarBG: #90A4AE;\n    --thumbBG: #90A4AE;\n    scroll-behavior: smooth;\n    overflow-x: hidden;\n}\n#notify_items[data-v-ad8086a6]::-webkit-scrollbar {\n    width: 7px;\n}\n#notify_items[data-v-ad8086a6]::-webkit-scrollbar-track {\n    background: var(--scrollbarBG);\n    display: none;\n    -webkit-box-shadow: none;\n}\n#notify_items[data-v-ad8086a6]::-webkit-scrollbar-thumb {\n    background-color: var(--thumbBG) ;\n    border-radius: 6px;\n    border: 3px solid var(--scrollbarBG);\n}\n.notify_ul[data-v-ad8086a6] {\n    position: absolute;\n    margin-left: -25px;\n    padding: 0;\n    right: 60%;\n    top: 125%;\n    width: 360px;\n    background-color: white;\n    /* shadow */\n    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;\n    border-radius: 1%;\n    border-bottom: solid 5px #e28633;\n    opacity: 0;\n    visibility: hidden;\n    transition: all 0.2s ease-out;\n}\n.notify_ul li[data-v-ad8086a6] {\n    width: 100%;\n    height: auto;\n    background-color: white;\n    margin: 0;\n    font-family: 'Terminal Dosis', sans-serif;\n    font-size: 14px;\n    padding: 5px 5px 5px 15px;\n    border-bottom: 1px solid #f3f2f3;\n    line-height: 15px;\n    backface-visibility: hidden;\n}\n.notify_ul li[data-v-ad8086a6]:hover {\n    background-color: #f7f9fa;\n}\n.notify_ul li:hover .notify_delete[data-v-ad8086a6] {\n    opacity: 1;\n    transition: all 0.2s ease-out;\n}\n.notify_ul li a[data-v-ad8086a6] {\n    color: #e28633;\n    font-weight: bold;\n}\n.notify_unread[data-v-ad8086a6] {\n    border-left: 4px solid #c9d466;\n    font-weight: bold;\n    color: black !important;\n    display: inline-block;\n}\n.notify_read[data-v-ad8086a6] {\n    border-left: none;\n    font-weight: normal;\n    color: #a7a5a5;\n    display: inline-block;\n}\n.notify_ul[data-v-ad8086a6]::after {\n    content: \"\";\n    position: absolute;\n    top: -22px; /* At the top of the menu */\n    left: 88%;\n    margin-left: -5px;\n    border-width: 11px;\n    border-style: solid;\n    border-color: transparent transparent #ffffff transparent;\n    border-radius: 1px;\n}\n.notify_timestamp[data-v-ad8086a6] {\n    padding-top: 3px;\n    font-size: 10px;\n    color: #c9d466 !important;\n}\n#notify_menu_header[data-v-ad8086a6] {\n    width: 100%;\n    height: 67px;\n    background-color: #f7f9fa;\n}\n#header_title[data-v-ad8086a6] {\n    font-family: 'Roboto Light', sans-serif;\n    font-size: 18px;\n    width: 100%;\n    height: 40px;\n    color: #c9d466;\n    padding-left: 15px;\n    padding-top: 5px;\n    line-height: 40px;\n}\n.mark_as_read[data-v-ad8086a6] {\n    color: #a7acb7;\n    font-family: 'Terminal Dosis', sans-serif;\n    font-weight: normal !important;\n    font-size: 14px;\n    width: 100%;\n    padding-left: 15px;\n    line-height: 11px;\n    padding-top: 5px;\n}\n.mark_as_read a[data-v-ad8086a6] {\n    color: inherit;\n    text-decoration: none;\n}\n.mark_as_read a[data-v-ad8086a6]:hover {\n    color: #c9d466;\n    text-decoration: underline;\n}\n.notify_comment[data-v-ad8086a6] {\n    display: flex;\n}\n.notify_delete[data-v-ad8086a6] {\n    width: fit-content;\n    height: 0;\n    width: -moz-fit-content;\n    cursor: pointer;\n    position: relative;\n    right: -315px;\n    top: 10px;\n    align-content: center;\n    opacity: 0;\n    transition: all 0.2s ease-out;\n}\n.notify_none[data-v-ad8086a6] {\n    font-size: 12px;\n    display: flex;\n    justify-content: center;\n    justify-items: center;\n    align-items: center;\n    flex-direction: column;\n    min-height: 200px;\n}\n#notify_none_bgimage[data-v-ad8086a6] {\n    width: 150px;\n    height: 150px;\n    opacity: 50%;\n    margin-bottom: 20px;\n}\n.inactive_link[data-v-ad8086a6] {\n    color: #c5c6c0; /* Change text color */\n    cursor: not-allowed; /* Change cursor */\n    pointer-events: none; /* Disable pointer events */\n    text-decoration: none; /* Remove underline */\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.container[data-v-ad8086a6] {\n    overflow-x: hidden;\n    position: relative;\n}\n#icon_notification[data-v-ad8086a6] {\n    background: url('/images/user__notification.png') no-repeat;\n    filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.5));\n    background-size: contain;\n    width: 46px;\n    height: 46px;\n    cursor: pointer;\n    position: relative;\n}\n.notify_text[data-v-ad8086a6] {\n    margin-left: 10px;\n    line-height: 18px;\n}\n.notify_user_icon[data-v-ad8086a6] {\n    filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.5));\n    width: 40px;\n    height: 40px;\n}\n.notify-bubble[data-v-ad8086a6] {\n    position: absolute;\n    border: 2px solid white;\n    top: -2px;\n    right: -5px;\n    width: 20px;\n    height: 20px;\n    background-color: red;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    color: white;\n    font-size: 1em;\n    border-radius: 50%;\n}\n#notify_items[data-v-ad8086a6] {\n    min-height: 200px;\n    max-height: 400px;\n    overflow-y: scroll;\n    /* scrollbar vars */\n    --scrollbarBG: #90A4AE;\n    --thumbBG: #90A4AE;\n    scroll-behavior: smooth;\n    overflow-x: hidden;\n}\n#notify_items[data-v-ad8086a6]::-webkit-scrollbar {\n    width: 7px;\n}\n#notify_items[data-v-ad8086a6]::-webkit-scrollbar-track {\n    background: var(--scrollbarBG);\n    display: none;\n    -webkit-box-shadow: none;\n}\n#notify_items[data-v-ad8086a6]::-webkit-scrollbar-thumb {\n    background-color: var(--thumbBG) ;\n    border-radius: 6px;\n    border: 3px solid var(--scrollbarBG);\n}\n.notify_ul[data-v-ad8086a6] {\n    position: absolute;\n    margin-left: -25px;\n    padding: 0;\n    right: 60%;\n    top: 125%;\n    width: 360px;\n    background-color: white;\n    /* shadow */\n    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;\n    border-radius: 1%;\n    border-bottom: solid 5px #e28633;\n    opacity: 0;\n    visibility: hidden;\n    transition: all 0.2s ease-out;\n}\n.notify_ul li[data-v-ad8086a6] {\n    width: 100%;\n    height: auto;\n    background-color: white;\n    margin: 0;\n    font-family: 'Terminal Dosis', sans-serif;\n    font-size: 14px;\n    padding: 5px 5px 5px 15px;\n    border-bottom: 1px solid #f3f2f3;\n    line-height: 15px;\n    backface-visibility: hidden;\n}\n.notify_ul li[data-v-ad8086a6]:hover {\n    background-color: #f7f9fa;\n}\n.notify_ul li:hover .notify_delete[data-v-ad8086a6] {\n    opacity: 1;\n    transition: all 0.2s ease-out;\n}\n.notify_ul li a[data-v-ad8086a6] {\n    color: #e28633;\n    font-weight: bold;\n}\n.notify_unread[data-v-ad8086a6] {\n    border-left: 4px solid #c9d466;\n    font-weight: revert;\n    color: slategray !important;\n    display: inline-block;\n    transition: all 0.5s ease-out;\n}\n.notify_read[data-v-ad8086a6] {\n    border-left: none;\n    font-weight: normal;\n    color: #a7a5a5;\n    display: inline-block;\n    transition: all 0.5s ease-out;\n}\n.notify_ul[data-v-ad8086a6]::after {\n    content: \"\";\n    position: absolute;\n    top: -22px; /* At the top of the menu */\n    left: 88%;\n    margin-left: -5px;\n    border-width: 11px;\n    border-style: solid;\n    border-color: transparent transparent #ffffff transparent;\n    border-radius: 1px;\n}\n.notify_timestamp[data-v-ad8086a6] {\n    padding-top: 3px;\n    font-size: 10px;\n    color: #c9d466 !important;\n}\n#notify_menu_header[data-v-ad8086a6] {\n    width: 100%;\n    height: 67px;\n    background-color: #f7f9fa;\n}\n#header_title[data-v-ad8086a6] {\n    font-family: 'Roboto Light', sans-serif;\n    font-size: 18px;\n    width: 100%;\n    height: 40px;\n    color: #c9d466;\n    padding-left: 15px;\n    padding-top: 5px;\n    line-height: 40px;\n}\n.mark_as_read[data-v-ad8086a6] {\n    color: #a7acb7;\n    font-family: 'Terminal Dosis', sans-serif;\n    font-weight: normal !important;\n    font-size: 14px;\n    width: 100%;\n    padding-left: 15px;\n    line-height: 11px;\n    padding-top: 5px;\n}\n.mark_as_read a[data-v-ad8086a6] {\n    color: inherit;\n    text-decoration: none;\n}\n.mark_as_read a[data-v-ad8086a6]:hover {\n    color: #c9d466;\n    text-decoration: underline;\n}\n.notify_comment[data-v-ad8086a6] {\n    display: flex;\n}\n.notify_delete[data-v-ad8086a6] {\n    width: fit-content;\n    height: 0;\n    width: -moz-fit-content;\n    cursor: pointer;\n    position: relative;\n    right: -315px;\n    top: 10px;\n    align-content: center;\n    opacity: 0;\n    transition: all 0.2s ease-out;\n}\n.notify_none[data-v-ad8086a6] {\n    font-size: 12px;\n    display: flex;\n    justify-content: center;\n    justify-items: center;\n    align-items: center;\n    flex-direction: column;\n    min-height: 200px;\n}\n#notify_none_bgimage[data-v-ad8086a6] {\n    width: 150px;\n    height: 150px;\n    opacity: 50%;\n    margin-bottom: 20px;\n}\n.inactive_link[data-v-ad8086a6] {\n    color: #c5c6c0; /* Change text color */\n    cursor: not-allowed; /* Change cursor */\n    pointer-events: none; /* Disable pointer events */\n    text-decoration: none; /* Remove underline */\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -68342,33 +68358,149 @@ var render = function () {
                               attrs: { src: _vm.parsedType(notification) },
                             }),
                             _vm._v(" "),
-                            _c(
-                              "div",
-                              { staticStyle: { "margin-left": "10px" } },
-                              [
-                                _c("span", [
-                                  _c("a", { attrs: { href: "#" } }, [
-                                    _vm._v(
+                            notification.data.event_type === "goal"
+                              ? _c("div", { staticClass: "notify_text" }, [
+                                  _vm._v(
+                                    "\n                                    Update on followed game! (" +
                                       _vm._s(
-                                        notification["data"].comment_from_name
-                                      )
+                                        notification.data.game.home_team.name
+                                      ) +
+                                      " - " +
+                                      _vm._s(
+                                        notification.data.game.away_team.name
+                                      ) +
+                                      ")\n                                    "
+                                  ),
+                                  _c("div", [
+                                    _vm._v(
+                                      _vm._s(notification.data.minute) +
+                                        "' : " +
+                                        _vm._s(notification.data.player_name) +
+                                        " (" +
+                                        _vm._s(
+                                          notification.data.player_country
+                                        ) +
+                                        ") scored a goal!"
                                     ),
                                   ]),
-                                ]),
-                                _vm._v(
-                                  "\n                                    scored a goal:\n                                    "
-                                ),
-                                _c("span", [
                                   _vm._v(
-                                    '"' +
-                                      _vm._s(
-                                        notification["data"].comment_body
-                                      ) +
-                                      '"'
+                                    "\n                                    Click "
                                   ),
-                                ]),
-                              ]
-                            ),
+                                  _c(
+                                    "a",
+                                    {
+                                      attrs: {
+                                        href:
+                                          "/games/" + notification.data.game.id,
+                                      },
+                                    },
+                                    [_vm._v("here")]
+                                  ),
+                                  _vm._v(
+                                    " to go the match page.\n                                "
+                                  ),
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            notification.data.event_type === "yellowCard"
+                              ? _c("div", { staticClass: "notify_text" }, [
+                                  _vm._v(
+                                    "\n                                    Update on followed game! (" +
+                                      _vm._s(
+                                        notification.data.game.home_team.name
+                                      ) +
+                                      " - " +
+                                      _vm._s(
+                                        notification.data.game.away_team.name
+                                      ) +
+                                      ")\n                                    "
+                                  ),
+                                  _c("div", [
+                                    _vm._v(
+                                      _vm._s(notification.data.minute) +
+                                        "' : " +
+                                        _vm._s(notification.data.player_name) +
+                                        " (" +
+                                        _vm._s(
+                                          notification.data.player_country
+                                        ) +
+                                        ") received a "
+                                    ),
+                                    _c(
+                                      "span",
+                                      { staticStyle: { color: "gold" } },
+                                      [_vm._v("yellow")]
+                                    ),
+                                    _vm._v(" card!"),
+                                  ]),
+                                  _vm._v(
+                                    "\n                                    Click "
+                                  ),
+                                  _c(
+                                    "a",
+                                    {
+                                      attrs: {
+                                        href:
+                                          "/games/" + notification.data.game.id,
+                                      },
+                                    },
+                                    [_vm._v("here")]
+                                  ),
+                                  _vm._v(
+                                    " to go the match page.\n                                "
+                                  ),
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            notification.data.event_type === "redCard"
+                              ? _c("div", { staticClass: "notify_text" }, [
+                                  _vm._v(
+                                    "\n                                    Update on followed game! (" +
+                                      _vm._s(
+                                        notification.data.game.home_team.name
+                                      ) +
+                                      " - " +
+                                      _vm._s(
+                                        notification.data.game.away_team.name
+                                      ) +
+                                      ")\n                                    "
+                                  ),
+                                  _c("div", [
+                                    _vm._v(
+                                      _vm._s(notification.data.minute) +
+                                        "' : " +
+                                        _vm._s(notification.data.player_name) +
+                                        " (" +
+                                        _vm._s(
+                                          notification.data.player_country
+                                        ) +
+                                        ") received a "
+                                    ),
+                                    _c(
+                                      "span",
+                                      { staticStyle: { color: "red" } },
+                                      [_vm._v("red")]
+                                    ),
+                                    _vm._v(" card!"),
+                                  ]),
+                                  _vm._v(
+                                    "\n                                    Click "
+                                  ),
+                                  _c(
+                                    "a",
+                                    {
+                                      attrs: {
+                                        href:
+                                          "/games/" + notification.data.game.id,
+                                      },
+                                    },
+                                    [_vm._v("here")]
+                                  ),
+                                  _vm._v(
+                                    " to go the match page.\n                                "
+                                  ),
+                                ])
+                              : _vm._e(),
                           ]
                         ),
                       ])

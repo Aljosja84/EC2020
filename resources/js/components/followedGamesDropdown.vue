@@ -57,6 +57,7 @@
                 form: {
                     game_id: '',
                     player_id: '',
+                    player_country: '',
                     type: '',
                     minute: '',
                 }

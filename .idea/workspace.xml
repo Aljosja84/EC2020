@@ -21,13 +21,11 @@
   <component name="ChangeListManager">
     <list default="true" id="cf82d037-ce69-45df-857e-a29fb7732fae" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/NotificationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/NotificationController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Player.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Player.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Notifications/MatchEvent.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Notifications/MatchEvent.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/followedGamesDropdown.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/followedGamesDropdown.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/notifications.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/notifications.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/playerDropdown.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/playerDropdown.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -533,7 +531,7 @@
       <workItem from="1715253480770" duration="10263000" />
       <workItem from="1715601153111" duration="1775000" />
       <workItem from="1715603855220" duration="13055000" />
-      <workItem from="1715714682476" duration="9258000" />
+      <workItem from="1715714682476" duration="17934000" />
     </task>
     <servers />
   </component>

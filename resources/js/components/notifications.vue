@@ -18,6 +18,7 @@
                 <div id="notify_items" v-cloak v-if="notifications.length > 0" :key="1">
                         <li @click=setAsRead(notification) :class=setStyleReadStatus(notification) v-for="(notification, index) in notifications" v-bind:key=notification.id @mouseenter="showDelete(index)" @mouseleave="hideDelete()">
                             <div class="notify_delete" @click.stop=whichDelete(notification)><img src="/images/sign-delete-light.png" width="16px" height="16px" /></div>
+                            <!-- comment notifications -->
                             <div v-if="notification.type === 'App\\Notifications\\CommentAdded'">
                                 <div class="notify_comment" style="padding-right: 20px">
                                     <img :src="notification['data'].comment_avatar" class="notify_user_icon"/>
@@ -28,13 +29,27 @@
                                     </div>
                                 </div>
                             </div>
+                            <!-- match events notifications -->
                             <div v-else-if="notification.type === 'App\\Notifications\\MatchEvent'">
                                 <div class="notify_comment" style="padding-right: 20px">
                                     <img :src="parsedType(notification)" class="notify_user_icon"/>
-                                    <div style="margin-left: 10px">
-                                        <span><a href="#">{{ notification['data'].comment_from_name }}</a></span>
-                                        scored a goal:
-                                        <span>"{{ notification['data'].comment_body }}"</span>
+                                    <!-- match event is a GOAL -->
+                                    <div v-if="notification.data.event_type === 'goal'" class="notify_text">
+                                        Update on followed game! ({{ notification.data.game.home_team.name}} - {{ notification.data.game.away_team.name}})
+                                        <div>{{ notification.data.minute}}' : {{ notification.data.player_name }} ({{ notification.data.player_country }}) scored a goal!</div>
+                                        Click <a :href="`/games/${notification.data.game.id}`">here</a> to go the match page.
+                                    </div>
+                                    <!-- match event is a YELLOW CARD -->
+                                    <div v-if="notification.data.event_type === 'yellowCard'" class="notify_text">
+                                        Update on followed game! ({{ notification.data.game.home_team.name}} - {{ notification.data.game.away_team.name}})
+                                        <div>{{ notification.data.minute}}' : {{ notification.data.player_name }} ({{ notification.data.player_country }}) received a <span style="color: gold">yellow</span> card!</div>
+                                        Click <a :href="`/games/${notification.data.game.id}`">here</a> to go the match page.
+                                    </div>
+                                    <!-- match even is a RED CARD -->
+                                    <div v-if="notification.data.event_type === 'redCard'" class="notify_text">
+                                        Update on followed game! ({{ notification.data.game.home_team.name}} - {{ notification.data.game.away_team.name}})
+                                        <div>{{ notification.data.minute}}' : {{ notification.data.player_name }} ({{ notification.data.player_country }}) received a <span style="color: red">red</span> card!</div>
+                                        Click <a :href="`/games/${notification.data.game.id}`">here</a> to go the match page.
                                     </div>
                                 </div>
                             </div>
@@ -224,6 +239,11 @@
         position: relative;
     }
 
+    .notify_text {
+        margin-left: 10px;
+        line-height: 18px;
+    }
+
     .notify_user_icon {
         filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.5));
         width: 40px;
@@ -318,15 +338,17 @@
 
     .notify_unread {
         border-left: 4px solid #c9d466;
-        font-weight: bold;
-        color: black !important;
+        font-weight: revert;
+        color: slategray !important;
         display: inline-block;
+        transition: all 0.5s ease-out;
     }
     .notify_read {
         border-left: none;
         font-weight: normal;
         color: #a7a5a5;
         display: inline-block;
+        transition: all 0.5s ease-out;
     }
 
     .notify_ul::after {
