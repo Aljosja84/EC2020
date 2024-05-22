@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Country;
 use App\Models\Game;
 use App\Models\Player;
 use App\Notifications\MatchEvent;
@@ -107,17 +108,27 @@ class NotificationController extends Controller
     public function saveMatchEvent(Request $request)
     {
         $game = Game::with('homeTeam', 'awayTeam')->find($request->input('game_id'));
-        $gamewithnames = $game->with('homeTeam')->with('awayTeam')->get();
         $minute = $request->input('minute');
         $player_id = $request->input('player_id');
         $type = $request->input('type');
-
-
+        // set player first
+        $player = Player::where('player_id', $player_id)->first();
+        $player_country = Country::where('api_country_code', $player->country_id)->first()->name;
+        // bundle all data in a single array
+        $notificationData = [
+            'game' => $game,
+            'minute' => $minute,
+            'player' => $player,
+            'player_id' => $player_id,
+            'player_country' => $player_country,
+            'player_name' => $player->name,
+            'event_type' => $type
+        ];
         // send all followers of this game an notification
         $followers = $game->users()->get();
 
         foreach($followers as $user) {
-            $user->notify(new MatchEvent($game, $minute, $player_id, $type));
+            $user->notify(new MatchEvent($notificationData));
         }
 
         // send success back
