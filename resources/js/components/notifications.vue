@@ -412,7 +412,7 @@
         width: -moz-fit-content;
         cursor: pointer;
         position: relative;
-        right: -315px;
+        left: 375px;
         top: 10px;
         align-content: center;
         opacity: 0;

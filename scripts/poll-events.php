@@ -1,11 +1,14 @@
 <?php
 
+use App\Jobs\SendMatchEventNotification;
 use App\Models\Country;
 use App\Models\Game;
+use App\Models\NotifiedEvent;
 use App\Models\Player;
 use Illuminate\Support\Facades\Http;
 use App\Models\User;
 use App\Notifications\MatchEvent;
+use Illuminate\Support\Facades\RateLimiter;
 
 require __DIR__ . '/../vendor/autoload.php';
 
@@ -46,6 +49,15 @@ while (true) {
         $events = $data['response'][0]['events'];
 
         foreach ($events as $event) {
+            // Generate unique key for this event
+            $uniqueKey = md5(json_encode([
+                'time'      => $event['time']['elapsed'],
+                'team_id'   => $event['team']['id'],
+                'player_id' => $event['player']['id'],
+                'type'      => $event['type'],
+                'detail'    => $event['detail']
+            ]));
+
             $eventType = $event['type'];
 
             // change the event types so our notification can deal with it
@@ -96,10 +108,36 @@ while (true) {
             // only send out notifications if the events are either a 'goal' or a 'card'
             if($event['type'] !== 'Goal' && $event['type'] !== 'Card') {
                 echo "Event is not eligible for notification: it is of type '{$event['type']}'\n";
+                continue;
             }   else {
             // send notifications to all followers of this game
                 foreach ($followers as $user) {
+                    // skip notification if the notification has been sent before
+                    $notifiedEvent = NotifiedEvent::where('unique_key', $uniqueKey)
+                        ->where('user_id', $user->id)
+                        ->first();
+
+                    if($notifiedEvent) {
+                        continue;
+                    }
+
+                    // Check rate limit for the user
+                    $rateLimiterKey = "send-notification:{$user->id}";
+                    if (RateLimiter::tooManyAttempts($rateLimiterKey, 30)) {
+                        continue;
+                    }
+
+                    // Increment the rate limit counter
+                    RateLimiter::hit($rateLimiterKey, 60);
+
+                    // send notification
                     $user->notify(new MatchEvent($notificationData));
+
+                    // store notification record
+                    NotifiedEvent::create([
+                        'unique_key' => $uniqueKey,
+                        'user_id' => $user->id
+                    ]);
                 }
                 echo "Notifications have been sent out successfully!\n";
             }
