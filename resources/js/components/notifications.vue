@@ -65,6 +65,8 @@
 </template>
 
 <script>
+    import Pusher from 'pusher-js';
+
     export default {
         name: "notifications",
 
@@ -77,6 +79,10 @@
                 unreadbadge: null,
                 hoveredItem: null
             }
+        },
+
+        props: {
+            userId: '',
         },
 
         methods: {
@@ -207,6 +213,25 @@
         },
 
         mounted() {
+            /*
+            const pusher = new Pusher(process.env.MIX_PUSHER_APP_KEY, {
+                cluster: process.env.MIX_PUSHER_APP_CLUSTER,
+                encrypted: true,
+            });
+
+            const channel = pusher.subscribe('notifications');
+            channel.bind('App\\Events\\NewNotification', (data) => {
+                console.log(data.message);
+                // Fetch new notifications from the database
+                this.fetchNotifications();
+            });
+            */
+            const userId = this.userId;
+            Echo.private(`user.${userId}`)
+                .listen('NewNotification', (event) => {
+                    this.fetchNotifications();
+                })
+
             this.$root.$on('closeSister', () => {
                 this.menuActive = true;
                 this.closeMenu();
@@ -214,11 +239,6 @@
 
             // fetch notifications for logged in user
             this.fetchNotifications();
-            // check for new notifications every 3 seconds
-            setInterval(() => {
-                this.fetchNotifications();
-                console.log("loaded");
-            }, 3000);
         }
     }
 </script>

@@ -4382,6 +4382,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var pusher_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/dist/web/pusher.js");
+/* harmony import */ var pusher_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(pusher_js__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -4449,6 +4451,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "notifications",
   data: function data() {
@@ -4459,6 +4462,9 @@ __webpack_require__.r(__webpack_exports__);
       unreadbadge: null,
       hoveredItem: null
     };
+  },
+  props: {
+    userId: ''
   },
   methods: {
     toggleMenu: function toggleMenu() {
@@ -4569,6 +4575,22 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     var _this6 = this;
+    /*
+    const pusher = new Pusher(process.env.MIX_PUSHER_APP_KEY, {
+        cluster: process.env.MIX_PUSHER_APP_CLUSTER,
+        encrypted: true,
+    });
+     const channel = pusher.subscribe('notifications');
+    channel.bind('App\\Events\\NewNotification', (data) => {
+        console.log(data.message);
+        // Fetch new notifications from the database
+        this.fetchNotifications();
+    });
+    */
+    var userId = this.userId;
+    Echo["private"]("user.".concat(userId)).listen('NewNotification', function (event) {
+      _this6.fetchNotifications();
+    });
     this.$root.$on('closeSister', function () {
       _this6.menuActive = true;
       _this6.closeMenu();
@@ -4576,11 +4598,6 @@ __webpack_require__.r(__webpack_exports__);
 
     // fetch notifications for logged in user
     this.fetchNotifications();
-    // check for new notifications every 3 seconds
-    setInterval(function () {
-      _this6.fetchNotifications();
-      console.log("loaded");
-    }, 3000);
   }
 });
 

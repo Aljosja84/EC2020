@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Http;
 use App\Models\User;
 use App\Notifications\MatchEvent;
 use Illuminate\Support\Facades\RateLimiter;
+use App\Events\NewNotification;
 
 require __DIR__ . '/../vendor/autoload.php';
 
@@ -112,6 +113,9 @@ while (true) {
             }   else {
             // send notifications to all followers of this game
                 foreach ($followers as $user) {
+                    // message for the private event
+                    $message = "New events for game $matchId";
+
                     // skip notification if the notification has been sent before
                     $notifiedEvent = NotifiedEvent::where('unique_key', $uniqueKey)
                         ->where('user_id', $user->id)
@@ -138,7 +142,11 @@ while (true) {
                         'unique_key' => $uniqueKey,
                         'user_id' => $user->id
                     ]);
+
+                    // fire event so vue component will check for notification
+                    event(new NewNotification($user->id, $message));
                 }
+
                 echo "Notifications have been sent out successfully!\n";
             }
 

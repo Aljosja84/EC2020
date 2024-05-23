@@ -191,7 +191,7 @@
             <!-- user notifications and user settings -->
             <div id="notify_user_icons">
                 @auth
-                    <div><notifications></notifications></div>
+                    <div><notifications :user-id={{ $user->id }}></notifications></div>
                     <div>
                         <login username={{ $user->name }} avatar={{ $user->avatar->ava_url() }} :spoiler="false" :groups='{{ $user->pool }}'></login>
                     </div>
