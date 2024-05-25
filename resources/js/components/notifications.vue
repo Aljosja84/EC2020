@@ -33,10 +33,28 @@
                             <div v-else-if="notification.type === 'App\\Notifications\\MatchEvent'">
                                 <div class="notify_comment" style="padding-right: 20px">
                                     <img :src="parsedType(notification)" class="notify_user_icon"/>
-                                    <!-- match event is a GOAL -->
-                                    <div v-if="notification.data.event_type === 'goal'" class="notify_text">
+                                    <!-- match event is a NORMAL GOAL -->
+                                    <div v-if="notification.data.event_type === 'normalGoal'" class="notify_text">
                                         Update on followed game! ({{ notification.data.game.home_team.name}} - {{ notification.data.game.away_team.name}})
-                                        <div>{{ notification.data.minute}}' : {{ notification.data.player_name }} ({{ notification.data.player_country }}) scored a goal!</div>
+                                        <div>{{ notification.data.minute}}' : goal <b>{{ notification.data.teamScoredName }}</b>! -- {{ notification.data.player_name }} scored the <span v-html="scoreline(notification.data)"></span>.</div>
+                                        Click <a :href="`/games/${notification.data.game.id}`">here</a> to go the match page.
+                                    </div>
+                                    <!-- match event is an OWN GOAL -->
+                                    <div v-if="notification.data.event_type === 'ownGoal'" class="notify_text">
+                                        Update on followed game! ({{ notification.data.game.home_team.name}} - {{ notification.data.game.away_team.name}})
+                                        <div>{{ notification.data.minute}}' : goal <b>{{ notification.data.teamScoredName }}</b>! -- Oh no, {{ notification.data.player_name }} scored an own goal, making it <span v-html="scoreline(notification.data)"></span>.</div>
+                                        Click <a :href="`/games/${notification.data.game.id}`">here</a> to go the match page.
+                                    </div>
+                                    <!-- match event is a PENALTY -->
+                                    <div v-if="notification.data.event_type === 'Penalty'" class="notify_text">
+                                        Update on followed game! ({{ notification.data.game.home_team.name}} - {{ notification.data.game.away_team.name}})
+                                        <div>{{ notification.data.minute}}' : Penalty <b>{{ notification.data.teamScoredName }}</b>! -- {{ notification.data.player_name }} doesn't miss and makes it <span v-html="scoreline(notification.data)"></span>.</div>
+                                        Click <a :href="`/games/${notification.data.game.id}`">here</a> to go the match page.
+                                    </div>
+                                    <!-- match event is a MISSED PENALTY -->
+                                    <div v-if="notification.data.event_type === 'missedPenalty'" class="notify_text">
+                                        Update on followed game! ({{ notification.data.game.home_team.name}} - {{ notification.data.game.away_team.name}})
+                                        <div>{{ notification.data.minute}}' : Oh my days! -- <b>{{ notification.data.teamScoredName }}</b> is awarded a penalty but {{ notification.data.player_name }} doesn't score.</div>
                                         Click <a :href="`/games/${notification.data.game.id}`">here</a> to go the match page.
                                     </div>
                                     <!-- match event is a YELLOW CARD -->
@@ -86,6 +104,14 @@
         },
 
         methods: {
+            scoreline(e) {
+                if(e.latestGoal === 'home') {
+                    return "<b>" + e.homeTeamScore + "</b>" + "-" + e.awayTeamScore;
+                }   else {
+                    return e.homeTeamScore + "-" + "<b>" + e.awayTeamScore + "</b>";
+                }
+            },
+
             toggleMenu() {
                 // toggle the main menu
                 this.menuActive = !this.menuActive;
@@ -202,30 +228,23 @@
 
             parsedType(e) {
                 switch (e.data.event_type) {
-                    case 'goal':
+                    case 'normalGoal':
+                        return '/images/notify_goal.png';
+                    case 'ownGoal':
                         return '/images/notify_goal.png';
                     case 'yellowCard':
                         return '/images/referee_yellow.png';
                     case 'redCard':
                         return '/images/referee_red.png';
+                    case 'Penalty':
+                        return '/images/penalty-kick.png';
+                    case 'missedPenalty':
+                        return '/images/penalty-kick.png';
                 }
             }
         },
 
         mounted() {
-            /*
-            const pusher = new Pusher(process.env.MIX_PUSHER_APP_KEY, {
-                cluster: process.env.MIX_PUSHER_APP_CLUSTER,
-                encrypted: true,
-            });
-
-            const channel = pusher.subscribe('notifications');
-            channel.bind('App\\Events\\NewNotification', (data) => {
-                console.log(data.message);
-                // Fetch new notifications from the database
-                this.fetchNotifications();
-            });
-            */
             const userId = this.userId;
             Echo.private(`user.${userId}`)
                 .listen('NewNotification', (event) => {

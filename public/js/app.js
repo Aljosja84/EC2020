@@ -4450,6 +4450,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -4467,6 +4485,13 @@ __webpack_require__.r(__webpack_exports__);
     userId: ''
   },
   methods: {
+    scoreline: function scoreline(e) {
+      if (e.latestGoal === 'home') {
+        return "<b>" + e.homeTeamScore + "</b>" + "-" + e.awayTeamScore;
+      } else {
+        return e.homeTeamScore + "-" + "<b>" + e.awayTeamScore + "</b>";
+      }
+    },
     toggleMenu: function toggleMenu() {
       // toggle the main menu
       this.menuActive = !this.menuActive;
@@ -4564,29 +4589,23 @@ __webpack_require__.r(__webpack_exports__);
     },
     parsedType: function parsedType(e) {
       switch (e.data.event_type) {
-        case 'goal':
+        case 'normalGoal':
+          return '/images/notify_goal.png';
+        case 'ownGoal':
           return '/images/notify_goal.png';
         case 'yellowCard':
           return '/images/referee_yellow.png';
         case 'redCard':
           return '/images/referee_red.png';
+        case 'Penalty':
+          return '/images/penalty-kick.png';
+        case 'missedPenalty':
+          return '/images/penalty-kick.png';
       }
     }
   },
   mounted: function mounted() {
     var _this6 = this;
-    /*
-    const pusher = new Pusher(process.env.MIX_PUSHER_APP_KEY, {
-        cluster: process.env.MIX_PUSHER_APP_CLUSTER,
-        encrypted: true,
-    });
-     const channel = pusher.subscribe('notifications');
-    channel.bind('App\\Events\\NewNotification', (data) => {
-        console.log(data.message);
-        // Fetch new notifications from the database
-        this.fetchNotifications();
-    });
-    */
     var userId = this.userId;
     Echo["private"]("user.".concat(userId)).listen('NewNotification', function (event) {
       _this6.fetchNotifications();
@@ -67164,9 +67183,11 @@ var render = function () {
                   },
                 },
                 [
-                  _c("option", { attrs: { value: "goal", selected: "" } }, [
-                    _vm._v("Goal"),
-                  ]),
+                  _c(
+                    "option",
+                    { attrs: { value: "normalGoal", selected: "" } },
+                    [_vm._v("Goal")]
+                  ),
                   _vm._v(" "),
                   _c("option", { attrs: { value: "yellowCard" } }, [
                     _vm._v("Yellow card"),
@@ -68375,7 +68396,7 @@ var render = function () {
                               attrs: { src: _vm.parsedType(notification) },
                             }),
                             _vm._v(" "),
-                            notification.data.event_type === "goal"
+                            notification.data.event_type === "normalGoal"
                               ? _c("div", { staticClass: "notify_text" }, [
                                   _vm._v(
                                     "\n                                    Update on followed game! (" +
@@ -68391,13 +68412,185 @@ var render = function () {
                                   _c("div", [
                                     _vm._v(
                                       _vm._s(notification.data.minute) +
-                                        "' : " +
+                                        "' : goal "
+                                    ),
+                                    _c("b", [
+                                      _vm._v(
+                                        _vm._s(notification.data.teamScoredName)
+                                      ),
+                                    ]),
+                                    _vm._v(
+                                      "! -- " +
                                         _vm._s(notification.data.player_name) +
-                                        " (" +
-                                        _vm._s(
-                                          notification.data.player_country
-                                        ) +
-                                        ") scored a goal!"
+                                        " scored the "
+                                    ),
+                                    _c("span", {
+                                      domProps: {
+                                        innerHTML: _vm._s(
+                                          _vm.scoreline(notification.data)
+                                        ),
+                                      },
+                                    }),
+                                    _vm._v("."),
+                                  ]),
+                                  _vm._v(
+                                    "\n                                    Click "
+                                  ),
+                                  _c(
+                                    "a",
+                                    {
+                                      attrs: {
+                                        href:
+                                          "/games/" + notification.data.game.id,
+                                      },
+                                    },
+                                    [_vm._v("here")]
+                                  ),
+                                  _vm._v(
+                                    " to go the match page.\n                                "
+                                  ),
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            notification.data.event_type === "ownGoal"
+                              ? _c("div", { staticClass: "notify_text" }, [
+                                  _vm._v(
+                                    "\n                                    Update on followed game! (" +
+                                      _vm._s(
+                                        notification.data.game.home_team.name
+                                      ) +
+                                      " - " +
+                                      _vm._s(
+                                        notification.data.game.away_team.name
+                                      ) +
+                                      ")\n                                    "
+                                  ),
+                                  _c("div", [
+                                    _vm._v(
+                                      _vm._s(notification.data.minute) +
+                                        "' : goal "
+                                    ),
+                                    _c("b", [
+                                      _vm._v(
+                                        _vm._s(notification.data.teamScoredName)
+                                      ),
+                                    ]),
+                                    _vm._v(
+                                      "! -- Oh no, " +
+                                        _vm._s(notification.data.player_name) +
+                                        " scored an own goal, making it "
+                                    ),
+                                    _c("span", {
+                                      domProps: {
+                                        innerHTML: _vm._s(
+                                          _vm.scoreline(notification.data)
+                                        ),
+                                      },
+                                    }),
+                                    _vm._v("."),
+                                  ]),
+                                  _vm._v(
+                                    "\n                                    Click "
+                                  ),
+                                  _c(
+                                    "a",
+                                    {
+                                      attrs: {
+                                        href:
+                                          "/games/" + notification.data.game.id,
+                                      },
+                                    },
+                                    [_vm._v("here")]
+                                  ),
+                                  _vm._v(
+                                    " to go the match page.\n                                "
+                                  ),
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            notification.data.event_type === "Penalty"
+                              ? _c("div", { staticClass: "notify_text" }, [
+                                  _vm._v(
+                                    "\n                                    Update on followed game! (" +
+                                      _vm._s(
+                                        notification.data.game.home_team.name
+                                      ) +
+                                      " - " +
+                                      _vm._s(
+                                        notification.data.game.away_team.name
+                                      ) +
+                                      ")\n                                    "
+                                  ),
+                                  _c("div", [
+                                    _vm._v(
+                                      _vm._s(notification.data.minute) +
+                                        "' : Penalty "
+                                    ),
+                                    _c("b", [
+                                      _vm._v(
+                                        _vm._s(notification.data.teamScoredName)
+                                      ),
+                                    ]),
+                                    _vm._v(
+                                      "! -- " +
+                                        _vm._s(notification.data.player_name) +
+                                        " doesn't miss and makes it "
+                                    ),
+                                    _c("span", {
+                                      domProps: {
+                                        innerHTML: _vm._s(
+                                          _vm.scoreline(notification.data)
+                                        ),
+                                      },
+                                    }),
+                                    _vm._v("."),
+                                  ]),
+                                  _vm._v(
+                                    "\n                                    Click "
+                                  ),
+                                  _c(
+                                    "a",
+                                    {
+                                      attrs: {
+                                        href:
+                                          "/games/" + notification.data.game.id,
+                                      },
+                                    },
+                                    [_vm._v("here")]
+                                  ),
+                                  _vm._v(
+                                    " to go the match page.\n                                "
+                                  ),
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            notification.data.event_type === "missedPenalty"
+                              ? _c("div", { staticClass: "notify_text" }, [
+                                  _vm._v(
+                                    "\n                                    Update on followed game! (" +
+                                      _vm._s(
+                                        notification.data.game.home_team.name
+                                      ) +
+                                      " - " +
+                                      _vm._s(
+                                        notification.data.game.away_team.name
+                                      ) +
+                                      ")\n                                    "
+                                  ),
+                                  _c("div", [
+                                    _vm._v(
+                                      _vm._s(notification.data.minute) +
+                                        "' : Oh my days! -- "
+                                    ),
+                                    _c("b", [
+                                      _vm._v(
+                                        _vm._s(notification.data.teamScoredName)
+                                      ),
+                                    ]),
+                                    _vm._v(
+                                      " is awarded a penalty but " +
+                                        _vm._s(notification.data.player_name) +
+                                        " doesn't score."
                                     ),
                                   ]),
                                   _vm._v(

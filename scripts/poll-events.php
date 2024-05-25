@@ -5,6 +5,7 @@ use App\Models\Country;
 use App\Models\Game;
 use App\Models\NotifiedEvent;
 use App\Models\Player;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Http;
 use App\Models\User;
 use App\Notifications\MatchEvent;
@@ -30,6 +31,7 @@ $pollingInterval = 60; // 60 seconds (1 minute)
 
 while (true) {
     echo "Polling match events for match ID: $matchId\n";
+    echo "-------------------------------------------\n";
 
     // Poll the external API
     $response = Http::withHeaders([
@@ -46,9 +48,25 @@ while (true) {
         // get the Game Model
         $game = Game::with('homeTeam', 'awayTeam')->where('api_id', $data['response'][0]['fixture']['id'])->first();
 
-        //$events = $match['events'];
-        $events = $data['response'][0]['events'];
+        // initialize some data we'll need later on
+        $events =           $data['response'][0]['events'];
+        $hometeamId =       $data['response'][0]['teams']['home']['id'];
+        $awayteamId =       $data['response'][0]['teams']['away']['id'];
+        $hometeamScore =    0;
+        $awayteamScore =    0;
+        $latestGoal =       '';
+        $teamscoredName =   '';
+        $followers =        $game->users()->get();
+        $followersCount =   $followers->count();
+        $notificationsAreSent = false;
 
+        // game details
+        echo "Game: " . $data['response'][0]['teams']['home']['name'] . " - " . $data['response'][0]['teams']['away']['name'] . "\n";
+        // how many followers are here
+        echo "This game has " . $followersCount . " follower(s)\n";
+        echo "-------------------------------------------\n";
+
+        // Iterate over the match events
         foreach ($events as $event) {
             // Generate unique key for this event
             $uniqueKey = md5(json_encode([
@@ -71,7 +89,55 @@ while (true) {
                     }
                     break;
                 case 'Goal':
-                    $event_type = 'goal';
+                    if($event['detail'] === 'Normal Goal') {
+                        $event_type = 'normalGoal';
+                        // is the goal scored by home team or away team?
+                        // set scoreline accordingly
+                        if ($event['team']['id'] === $hometeamId) {
+                            $hometeamScore++;
+                            $latestGoal = 'home';
+                            $teamscoredName = $event['team']['name'];
+                        }   else {
+                            $awayteamScore++;
+                            $latestGoal = 'away';
+                            $teamscoredName = $event['team']['name'];
+                        }
+                    }   elseif($event['detail'] === 'Own Goal') {
+                            $event_type = 'ownGoal';
+                            // is the goal scored by home team or away team?
+                            // set scoreline accordingly
+                            if ($event['team']['id'] === $hometeamId) {
+                                $hometeamScore++;
+                                $latestGoal = 'home';
+                                $teamscoredName = $event['team']['name'];
+                            }   else {
+                                $awayteamScore++;
+                                $latestGoal = 'away';
+                                $teamscoredName = $event['team']['name'];
+                            }
+                    }   elseif($event['detail'] === 'Penalty') {
+                            $event_type = 'Penalty';
+                            // is the goal scored by home team or away team?
+                            // set scoreline accordingly
+                            if ($event['team']['id'] === $hometeamId) {
+                                $hometeamScore++;
+                                $latestGoal = 'home';
+                                $teamscoredName = $event['team']['name'];
+                            }   else {
+                                $awayteamScore++;
+                                $latestGoal = 'away';
+                                $teamscoredName = $event['team']['name'];
+                            }
+                    }   elseif($event['detail'] === 'Missed Penalty') {
+                        $event_type = 'missedPenalty';
+                        // is the goal scored by home team or away team?
+                        // set scoreline accordingly
+                        if ($event['team']['id'] === $hometeamId) {
+                            $teamscoredName = $event['team']['name'];
+                        }   else {
+                            $teamscoredName = $event['team']['name'];
+                        }
+                    }
                     break;
                 default:
                     $event_type = 'other';
@@ -92,18 +158,20 @@ while (true) {
                 $nonDB_playerName = $event['player']['name'];
             }
 
-            // send all followers of this game an notification
-            $followers = $game->users()->get();
             $player_name = $player ? $player->name : $nonDB_playerName;
 
             // array to send to notification handler
             $notificationData = [
-                'game' => $game,
-                'minute' => $event['time']['elapsed'],
-                'player_id' => $event['player']['id'],
-                'player_country' => $player_country,
-                'player_name' => $player_name,
-                'event_type' => $event_type
+                'game'              => $game,
+                'minute'            => $event['time']['elapsed'],
+                'player_id'         => $event['player']['id'],
+                'player_country'    => $player_country,
+                'player_name'       => $player_name,
+                'event_type'        => $event_type,
+                'homeTeamScore'     => $hometeamScore,
+                'awayTeamScore'     => $awayteamScore,
+                'latestGoal'        => $latestGoal,
+                'teamScoredName'    => $teamscoredName
             ];
 
             // only send out notifications if the events are either a 'goal' or a 'card'
@@ -112,6 +180,7 @@ while (true) {
                 continue;
             }   else {
             // send notifications to all followers of this game
+
                 foreach ($followers as $user) {
                     // message for the private event
                     $message = "New events for game $matchId";
@@ -136,6 +205,9 @@ while (true) {
 
                     // send notification
                     $user->notify(new MatchEvent($notificationData));
+                    echo $notificationData['event_type'] . " notification sent to " . $user->name . "\n";
+                    // remember that notifications have been sent
+                    $notificationsAreSent = true;
 
                     // store notification record
                     NotifiedEvent::create([
@@ -143,18 +215,25 @@ while (true) {
                         'user_id' => $user->id
                     ]);
 
-                    // fire event so vue component will check for notification
-                    event(new NewNotification($user->id, $message));
+
                 }
 
-                echo "Notifications have been sent out successfully!\n";
             }
-
+            // add a small delay so notifications aren't sent in the same second
+            sleep(1);
+        }
+        // if notifications have been sent, let user know to check DB
+        if($notificationsAreSent) {
+            foreach($followers as $user) {
+                // fire event so vue component will check for notification
+                event(new NewNotification($user->id, $message));
+            }
         }
     } else {
         echo "Failed to fetch match events\n";
     }
 
     // Sleep for the polling interval
+    echo "Going to sleep for " . $pollingInterval . " seconds. After I will check for more events.";
     sleep($pollingInterval);
 }

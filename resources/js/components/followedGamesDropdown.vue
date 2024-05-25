@@ -18,7 +18,7 @@
                     Type of notification
                     <div style="width: 100%">
                         <select style="width: 100%" v-model="form.type">
-                            <option value="goal" selected>Goal</option>
+                            <option value="normalGoal" selected>Goal</option>
                             <option value="yellowCard">Yellow card</option>
                             <option value="redCard">Red card</option>
                         </select>

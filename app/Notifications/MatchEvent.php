@@ -60,11 +60,15 @@ class MatchEvent extends Notification
     {
         // this array will be stored in DB
         return [
-            'game' => $this->notificationData['game'],
-            'event_type' => $this->notificationData['event_type'],
-            'player_name' => $this->notificationData['player_name'],
-            'player_country' => $this->notificationData['player_country'],
-            'minute' => $this->notificationData['minute'],
+            'game'              => $this->notificationData['game'],
+            'event_type'        => $this->notificationData['event_type'],
+            'player_name'       => $this->notificationData['player_name'],
+            'player_country'    => $this->notificationData['player_country'],
+            'minute'            => $this->notificationData['minute'],
+            'homeTeamScore'     => $this->notificationData['homeTeamScore'],
+            'awayTeamScore'     => $this->notificationData['awayTeamScore'],
+            'latestGoal'        => $this->notificationData['latestGoal'],
+            'teamScoredName'    => $this->notificationData['teamScoredName'],
         ];
     }
 }

@@ -10,6 +10,7 @@
     "require": {
         "php": "^7.4",
         "ext-json": "*",
+        "doctrine/dbal": "^3.8",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
@@ -17,7 +18,8 @@
         "laravel/tinker": "^2.0",
         "livewire/livewire": "^2.12",
         "pusher/pusher-php-server": "^7.2",
-        "spatie/laravel-twitter-streaming-api": "^1.4"
+        "spatie/laravel-twitter-streaming-api": "^1.4",
+        "ext-pdo": "*"
     },
     "require-dev": {
         "facade/ignition": "^2.3.6",
