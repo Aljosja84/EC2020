@@ -470,6 +470,7 @@ nav li:hover .menu_sub_games {
 }
 
 .flex-container {
+    font-family: "Terminal Dosis", sans-serif;
     padding: 0;
     margin-top: 15px;
     width: 170px;

@@ -27,11 +27,15 @@ Route::get('/players/game/{gameId}', [App\Http\Controllers\PlayerController::cla
 
 Route::get('/user/following/{id}', [App\Http\Controllers\UserController::class, 'isFollowing']);
 Route::get('/user/setfollow/{game}/{status}', [App\Http\Controllers\UserController::class, 'setStatus']);
+Route::get('/followed-games', [App\Http\Controllers\HomeController::class, 'followedgames']);
 Auth::routes();
 
 Route::get('/api', function() {
     return view('api');
 });
+
+
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/games/{game}', [App\Http\Controllers\GamesController::class, 'show']);
 Route::get('/ava/{user}', [App\Http\Controllers\PoolController::class, 'avatar']);

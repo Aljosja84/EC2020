@@ -28,7 +28,7 @@
                 <div id="subgroups" :style="subGroupStyle">
                     <div v-for="group in groups" class="subgroup_option"><a :href="`../bettingpool/${group.id}`">{{group.name}}</a></div>
                 </div>
-                <div id="followed">Followed Games</div>
+                <a href="/followed-games/"><div id="followed">Followed Games</div></a>
                 <a onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><div id="sign_out">Sign out</div></a>
             </div>
         </div>
@@ -245,6 +245,10 @@
 
     #options {
         position: relative;
+    }
+
+    #options a {
+        text-decoration: none;
     }
 
     #my_bets {

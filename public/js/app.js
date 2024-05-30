@@ -5897,6 +5897,36 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/userFollowedGames.vue?vue&type=script&lang=js":
+/*!***********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/userFollowedGames.vue?vue&type=script&lang=js ***!
+  \***********************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: "userFollowedGames",
+  props: {
+    'user': Object,
+    'gamesdates': Array
+  }
+});
+
+/***/ }),
+
 /***/ "./resources/js/app.js":
 /*!*****************************!*\
   !*** ./resources/js/app.js ***!
@@ -5912,12 +5942,13 @@ __webpack_require__.r(__webpack_exports__);
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
-__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
+__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 
 vue__WEBPACK_IMPORTED_MODULE_1__["default"].use(vue_tippy__WEBPACK_IMPORTED_MODULE_0__["default"]);
 vue__WEBPACK_IMPORTED_MODULE_1__["default"].component("tippy", vue_tippy__WEBPACK_IMPORTED_MODULE_0__.TippyComponent);
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -5925,6 +5956,7 @@ vue__WEBPACK_IMPORTED_MODULE_1__["default"].component("tippy", vue_tippy__WEBPAC
  *
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
+
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
@@ -5950,6 +5982,8 @@ vue__WEBPACK_IMPORTED_MODULE_1__["default"].component('player-select', (__webpac
 vue__WEBPACK_IMPORTED_MODULE_1__["default"].component('player-dropdown', (__webpack_require__(/*! ./components/playerDropdown */ "./resources/js/components/playerDropdown.vue")["default"]));
 vue__WEBPACK_IMPORTED_MODULE_1__["default"].component('follow-game-button', (__webpack_require__(/*! ./components/followGameButton */ "./resources/js/components/followGameButton.vue")["default"]));
 vue__WEBPACK_IMPORTED_MODULE_1__["default"].component('followed-game-dropdown', (__webpack_require__(/*! ./components/followedGamesDropdown */ "./resources/js/components/followedGamesDropdown.vue")["default"]));
+vue__WEBPACK_IMPORTED_MODULE_1__["default"].component('user-followed-games', (__webpack_require__(/*! ./components/userFollowedGames */ "./resources/js/components/userFollowedGames.vue")["default"]));
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -24154,7 +24188,7 @@ var ___CSS_LOADER_URL_REPLACEMENT_4___ = _node_modules_css_loader_dist_runtime_g
 var ___CSS_LOADER_URL_REPLACEMENT_5___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default()(_images_login_followed_png__WEBPACK_IMPORTED_MODULE_7__["default"]);
 var ___CSS_LOADER_URL_REPLACEMENT_6___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default()(_images_login_signout_png__WEBPACK_IMPORTED_MODULE_8__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* ----------------------------- user login ------------------------------------------------------- */\n#wrapper_icon[data-v-172b28a4] {\n   padding-top:10px;\n   width: 100px;\n   height: 65px;\n   display: flex;\n   justify-content: center;\n   background-color: transparent;\n}\n#icon_notification[data-v-172b28a4] {\n    background: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ") no-repeat;\n    filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.5));\n    background-size: contain;\n    width: 46px;\n    height: 46px;\n    cursor: pointer;\n}\n.notify-bubble[data-v-172b28a4] {\n    position: absolute;\n    top: -2px;\n    right: -5px;\n    padding: 2px 5px 2px 5px;\n    background-color: red;\n    color: white;\n    font-size: 0.65em;\n    border-radius: 50%;\n}\n#icon_user[data-v-172b28a4] {\n    filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.5));\n    background-size: contain;\n    width: 46px;\n    height: 46px;\n    cursor: pointer;\n}\n#dropdown_container[data-v-172b28a4] {\n    /* set var */\n    --login_hover: #f7f9fa;\n    --login_subgroup_hover: white;\n    width: 195px;\n    height: auto;\n    background-color: white;\n    position: absolute;\n    right: 15px;\n    top: 70px;\n    border-radius: 5px;\n    /* shadow */\n    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;\n    border-bottom: solid 5px #c9d466;\n    visibility: hidden;\n    opacity: 0;\n    transition: all 0.2s ease-out;\n}\n#dropdown_container[data-v-172b28a4]::after {\n    content: \"\";\n    position: absolute;\n    top: -22px; /* At the top of the menu */\n    left: 80%;\n    margin-left: -5px;\n    border-width: 11px;\n    border-style: solid;\n    border-color: transparent transparent #fafcfe transparent;\n    border-radius: 1px;\n}\n#profile[data-v-172b28a4] {\n    width: 100%;\n    height: 67px;\n    background-color: #f7f9fa;\n}\n#username[data-v-172b28a4] {\n    font-family: 'Roboto Light', sans-serif;\n    font-size: 18px;\n    width: 100%;\n    height: 40px;\n    color: #c9d466;\n    padding-left: 15px;\n    padding-top: 5px;\n    line-height: 40px;\n}\n#view_profile[data-v-172b28a4] {\n    color: #a7acb7;\n    font-family: 'Terminal Dosis', sans-serif;\n    font-size: 14px;\n    width: 100%;\n    padding-left: 15px;\n    line-height: 11px;\n    padding-top: 5px;\n}\n#view_profile a[data-v-172b28a4] {\n    color: inherit;\n    text-decoration: none;\n}\n#view_profile a[data-v-172b28a4]:hover {\n    color: #c9d466;\n    text-decoration: underline;\n}\n#options[data-v-172b28a4] {\n    position: relative;\n}\n#my_bets[data-v-172b28a4] {\n    font-family: 'Oswald', sans-serif;\n    font-size: 15px;\n    color: #69788a;\n    width: 100%;\n    height: 38px;\n    background: url(" + ___CSS_LOADER_URL_REPLACEMENT_1___ + ") no-repeat 15px;\n    padding-left: 40px;\n    line-height: 36px;\n    border-bottom: 1px solid #f3f2f3;\n    cursor: pointer;\n    /* animation */\n    transition: ease 0.2s;\n}\n#my_bets[data-v-172b28a4]:hover {\n    background-color: var(--login_hover);\n    padding-left: 42px;\n    color: #c9d466;\n}\n#spoiler[data-v-172b28a4] {\n    display: flex;\n    justify-content: space-between;\n    font-family: 'Oswald', sans-serif;\n    font-size: 15px;\n    color: #69788a;\n    width: 100%;\n    height: 37px;\n    background: url(" + ___CSS_LOADER_URL_REPLACEMENT_2___ + ") no-repeat 15px;\n    padding-left: 40px;\n    line-height: 36px;\n    cursor: pointer;\n    /* animation */\n    transition: ease 0.2s;\n}\n#spoiler[data-v-172b28a4]:hover {\n    background-color:  var(--login_hover);\n    padding-left: 42px;\n    color: darkorange;\n}\n#groups[data-v-172b28a4] {\n    display: flex;\n    justify-content: space-between;\n    font-family: 'Oswald', sans-serif;\n    font-size: 15px;\n    color: #69788a;\n    width: 100%;\n    height: 37px;\n    background: url(" + ___CSS_LOADER_URL_REPLACEMENT_3___ + ") no-repeat 14px;\n    padding-left: 40px;\n    line-height: 36px;\n    cursor: pointer;\n    /* animation */\n    transition: ease 0.2s;\n}\n#groups[data-v-172b28a4]:hover {\n    background-color:  var(--login_hover);\n    padding-left: 42px;\n    color: red;\n}\n#subgroups[data-v-172b28a4] {\n    z-index: 30;\n    height: 0;\n    visibility: visible;\n    overflow: hidden;\n    opacity: 100%;\n    width: 100%;\n    background-color: #f7f9fa;\n    /* create a nice dropdown effect for the subgroup menu */\n    transition: all 500ms cubic-bezier(0.680, -0.550, 0.265, 1.550); /* easeInOutBack */\n\n    transition-timing-function: cubic-bezier(0.680, -0.550, 0.265, 1.550); /* easeInOutBack */\n}\n.subgroup_option[data-v-172b28a4] {\n    font-family: \"Roboto\", sans-serif;\n    font-size: 12px;\n    color: #69788a;\n    width: 100%;\n    height: 37px;\n    cursor: pointer;\n    padding-left: 40px;\n    line-height: 36px;\n    /* animation */\n    transition: 0.2s linear;\n}\n#subgroups a[data-v-172b28a4] {\n    text-decoration: none;\n    color: #515151;\n}\n.subgroup_option[data-v-172b28a4]:hover {\n    background-color: var(--login_subgroup_hover);\n    padding-left: 42px;\n    color: #515151;\n}\n#more_arrow[data-v-172b28a4] {\n    position: relative;\n    right: 7px;\n    top: 15px;\n    background: url(" + ___CSS_LOADER_URL_REPLACEMENT_4___ + ") no-repeat;\n    width: 8px;\n    height: 5px;\n}\n#followed[data-v-172b28a4] {\n    z-index: 40;\n    font-family: 'Oswald', sans-serif;\n    font-size: 15px;\n    color: #69788a;\n    width: 100%;\n    height: 37px;\n    background: url(" + ___CSS_LOADER_URL_REPLACEMENT_5___ + ") no-repeat 15px;\n    padding-left: 40px;\n    line-height: 36px;\n    border-bottom: 1px solid #f3f2f3;\n    padding-bottom: 10px;\n    cursor: pointer;\n    /* animation */\n    transition: ease 0.2s;\n}\n#followed[data-v-172b28a4]:hover {\n    background-color:  var(--login_hover);\n    padding-left: 42px;\n    color: mediumpurple;\n}\n#sign_out[data-v-172b28a4] {\n    font-family: 'Oswald', sans-serif;\n    font-size: 15px;\n    color: #69788a;\n    width: 100%;\n    height: 38px;\n    background: url(" + ___CSS_LOADER_URL_REPLACEMENT_6___ + ") no-repeat 15px;\n    padding-left: 40px;\n    line-height: 36px;\n    cursor: pointer;\n    /* animation */\n    transition: ease 0.2s;\n}\n#sign_out[data-v-172b28a4]:hover {\n    background-color:  var(--login_hover);\n    padding-left: 42px;\n    color: #5ba9f1;\n}\n\n/* switch button for spoiler alert menu item */\n.switch[data-v-172b28a4] {\n    position: relative;\n    display: inline-block;\n    width: 30px;\n    height: 17px;\n}\n.switch input[data-v-172b28a4] {\n    opacity: 0;\n    width: 0;\n    height: 0;\n}\n.slider[data-v-172b28a4] {\n    position: absolute;\n    cursor: pointer;\n    top: 0;\n    left: 0;\n    right: 0;\n    bottom: 0;\n    background-color: #ccc;\n    transition: .4s;\n}\n.slider[data-v-172b28a4]:before {\n    position: absolute;\n    content: \"\";\n    height: 13px;\n    width: 13px;\n    left: 2px;\n    bottom: 2px;\n    background-color: white;\n    transition: .4s;\n}\ninput:checked + .slider[data-v-172b28a4] {\n    background-color: darkorange;\n}\ninput:focus + .slider[data-v-172b28a4] {\n    box-shadow: 0 0 1px darkorange;\n}\ninput:checked + .slider[data-v-172b28a4]:before {\n    transform: translateX(13px);\n}\n\n/* Rounded sliders */\n.slider.round[data-v-172b28a4] {\n    border-radius: 34px;\n}\n.slider.round[data-v-172b28a4]:before {\n    border-radius: 50%;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* ----------------------------- user login ------------------------------------------------------- */\n#wrapper_icon[data-v-172b28a4] {\n   padding-top:10px;\n   width: 100px;\n   height: 65px;\n   display: flex;\n   justify-content: center;\n   background-color: transparent;\n}\n#icon_notification[data-v-172b28a4] {\n    background: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ") no-repeat;\n    filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.5));\n    background-size: contain;\n    width: 46px;\n    height: 46px;\n    cursor: pointer;\n}\n.notify-bubble[data-v-172b28a4] {\n    position: absolute;\n    top: -2px;\n    right: -5px;\n    padding: 2px 5px 2px 5px;\n    background-color: red;\n    color: white;\n    font-size: 0.65em;\n    border-radius: 50%;\n}\n#icon_user[data-v-172b28a4] {\n    filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.5));\n    background-size: contain;\n    width: 46px;\n    height: 46px;\n    cursor: pointer;\n}\n#dropdown_container[data-v-172b28a4] {\n    /* set var */\n    --login_hover: #f7f9fa;\n    --login_subgroup_hover: white;\n    width: 195px;\n    height: auto;\n    background-color: white;\n    position: absolute;\n    right: 15px;\n    top: 70px;\n    border-radius: 5px;\n    /* shadow */\n    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;\n    border-bottom: solid 5px #c9d466;\n    visibility: hidden;\n    opacity: 0;\n    transition: all 0.2s ease-out;\n}\n#dropdown_container[data-v-172b28a4]::after {\n    content: \"\";\n    position: absolute;\n    top: -22px; /* At the top of the menu */\n    left: 80%;\n    margin-left: -5px;\n    border-width: 11px;\n    border-style: solid;\n    border-color: transparent transparent #fafcfe transparent;\n    border-radius: 1px;\n}\n#profile[data-v-172b28a4] {\n    width: 100%;\n    height: 67px;\n    background-color: #f7f9fa;\n}\n#username[data-v-172b28a4] {\n    font-family: 'Roboto Light', sans-serif;\n    font-size: 18px;\n    width: 100%;\n    height: 40px;\n    color: #c9d466;\n    padding-left: 15px;\n    padding-top: 5px;\n    line-height: 40px;\n}\n#view_profile[data-v-172b28a4] {\n    color: #a7acb7;\n    font-family: 'Terminal Dosis', sans-serif;\n    font-size: 14px;\n    width: 100%;\n    padding-left: 15px;\n    line-height: 11px;\n    padding-top: 5px;\n}\n#view_profile a[data-v-172b28a4] {\n    color: inherit;\n    text-decoration: none;\n}\n#view_profile a[data-v-172b28a4]:hover {\n    color: #c9d466;\n    text-decoration: underline;\n}\n#options[data-v-172b28a4] {\n    position: relative;\n}\n#options a[data-v-172b28a4] {\n    text-decoration: none;\n}\n#my_bets[data-v-172b28a4] {\n    font-family: 'Oswald', sans-serif;\n    font-size: 15px;\n    color: #69788a;\n    width: 100%;\n    height: 38px;\n    background: url(" + ___CSS_LOADER_URL_REPLACEMENT_1___ + ") no-repeat 15px;\n    padding-left: 40px;\n    line-height: 36px;\n    border-bottom: 1px solid #f3f2f3;\n    cursor: pointer;\n    /* animation */\n    transition: ease 0.2s;\n}\n#my_bets[data-v-172b28a4]:hover {\n    background-color: var(--login_hover);\n    padding-left: 42px;\n    color: #c9d466;\n}\n#spoiler[data-v-172b28a4] {\n    display: flex;\n    justify-content: space-between;\n    font-family: 'Oswald', sans-serif;\n    font-size: 15px;\n    color: #69788a;\n    width: 100%;\n    height: 37px;\n    background: url(" + ___CSS_LOADER_URL_REPLACEMENT_2___ + ") no-repeat 15px;\n    padding-left: 40px;\n    line-height: 36px;\n    cursor: pointer;\n    /* animation */\n    transition: ease 0.2s;\n}\n#spoiler[data-v-172b28a4]:hover {\n    background-color:  var(--login_hover);\n    padding-left: 42px;\n    color: darkorange;\n}\n#groups[data-v-172b28a4] {\n    display: flex;\n    justify-content: space-between;\n    font-family: 'Oswald', sans-serif;\n    font-size: 15px;\n    color: #69788a;\n    width: 100%;\n    height: 37px;\n    background: url(" + ___CSS_LOADER_URL_REPLACEMENT_3___ + ") no-repeat 14px;\n    padding-left: 40px;\n    line-height: 36px;\n    cursor: pointer;\n    /* animation */\n    transition: ease 0.2s;\n}\n#groups[data-v-172b28a4]:hover {\n    background-color:  var(--login_hover);\n    padding-left: 42px;\n    color: red;\n}\n#subgroups[data-v-172b28a4] {\n    z-index: 30;\n    height: 0;\n    visibility: visible;\n    overflow: hidden;\n    opacity: 100%;\n    width: 100%;\n    background-color: #f7f9fa;\n    /* create a nice dropdown effect for the subgroup menu */\n    transition: all 500ms cubic-bezier(0.680, -0.550, 0.265, 1.550); /* easeInOutBack */\n\n    transition-timing-function: cubic-bezier(0.680, -0.550, 0.265, 1.550); /* easeInOutBack */\n}\n.subgroup_option[data-v-172b28a4] {\n    font-family: \"Roboto\", sans-serif;\n    font-size: 12px;\n    color: #69788a;\n    width: 100%;\n    height: 37px;\n    cursor: pointer;\n    padding-left: 40px;\n    line-height: 36px;\n    /* animation */\n    transition: 0.2s linear;\n}\n#subgroups a[data-v-172b28a4] {\n    text-decoration: none;\n    color: #515151;\n}\n.subgroup_option[data-v-172b28a4]:hover {\n    background-color: var(--login_subgroup_hover);\n    padding-left: 42px;\n    color: #515151;\n}\n#more_arrow[data-v-172b28a4] {\n    position: relative;\n    right: 7px;\n    top: 15px;\n    background: url(" + ___CSS_LOADER_URL_REPLACEMENT_4___ + ") no-repeat;\n    width: 8px;\n    height: 5px;\n}\n#followed[data-v-172b28a4] {\n    z-index: 40;\n    font-family: 'Oswald', sans-serif;\n    font-size: 15px;\n    color: #69788a;\n    width: 100%;\n    height: 37px;\n    background: url(" + ___CSS_LOADER_URL_REPLACEMENT_5___ + ") no-repeat 15px;\n    padding-left: 40px;\n    line-height: 36px;\n    border-bottom: 1px solid #f3f2f3;\n    padding-bottom: 10px;\n    cursor: pointer;\n    /* animation */\n    transition: ease 0.2s;\n}\n#followed[data-v-172b28a4]:hover {\n    background-color:  var(--login_hover);\n    padding-left: 42px;\n    color: mediumpurple;\n}\n#sign_out[data-v-172b28a4] {\n    font-family: 'Oswald', sans-serif;\n    font-size: 15px;\n    color: #69788a;\n    width: 100%;\n    height: 38px;\n    background: url(" + ___CSS_LOADER_URL_REPLACEMENT_6___ + ") no-repeat 15px;\n    padding-left: 40px;\n    line-height: 36px;\n    cursor: pointer;\n    /* animation */\n    transition: ease 0.2s;\n}\n#sign_out[data-v-172b28a4]:hover {\n    background-color:  var(--login_hover);\n    padding-left: 42px;\n    color: #5ba9f1;\n}\n\n/* switch button for spoiler alert menu item */\n.switch[data-v-172b28a4] {\n    position: relative;\n    display: inline-block;\n    width: 30px;\n    height: 17px;\n}\n.switch input[data-v-172b28a4] {\n    opacity: 0;\n    width: 0;\n    height: 0;\n}\n.slider[data-v-172b28a4] {\n    position: absolute;\n    cursor: pointer;\n    top: 0;\n    left: 0;\n    right: 0;\n    bottom: 0;\n    background-color: #ccc;\n    transition: .4s;\n}\n.slider[data-v-172b28a4]:before {\n    position: absolute;\n    content: \"\";\n    height: 13px;\n    width: 13px;\n    left: 2px;\n    bottom: 2px;\n    background-color: white;\n    transition: .4s;\n}\ninput:checked + .slider[data-v-172b28a4] {\n    background-color: darkorange;\n}\ninput:focus + .slider[data-v-172b28a4] {\n    box-shadow: 0 0 1px darkorange;\n}\ninput:checked + .slider[data-v-172b28a4]:before {\n    transform: translateX(13px);\n}\n\n/* Rounded sliders */\n.slider.round[data-v-172b28a4] {\n    border-radius: 34px;\n}\n.slider.round[data-v-172b28a4]:before {\n    border-radius: 50%;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -24398,6 +24432,30 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
 ___CSS_LOADER_EXPORT___.push([module.id, "\n.container[data-v-5b6abe5d] {\r\n    width: 1100px;\r\n    height: 475px;\r\n    background-color: #00ffc4;\n}\r\n", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/userFollowedGames.vue?vue&type=style&index=0&id=408b066a&scoped=true&lang=css":
+/*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/userFollowedGames.vue?vue&type=style&index=0&id=408b066a&scoped=true&lang=css ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, "\n#gamedays_container[data-v-408b066a] {\n    width: 200px;\n    height: 500px;\n    background-color: whitesmoke;\n    box-shadow: rgba(0, 0, 0, 0.16) 0 3px 6px, rgba(0, 0, 0, 0.23) 0 3px 6px;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -63710,6 +63768,36 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/userFollowedGames.vue?vue&type=style&index=0&id=408b066a&scoped=true&lang=css":
+/*!***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/userFollowedGames.vue?vue&type=style&index=0&id=408b066a&scoped=true&lang=css ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_userFollowedGames_vue_vue_type_style_index_0_id_408b066a_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./userFollowedGames.vue?vue&type=style&index=0&id=408b066a&scoped=true&lang=css */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/userFollowedGames.vue?vue&type=style&index=0&id=408b066a&scoped=true&lang=css");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_userFollowedGames_vue_vue_type_style_index_0_id_408b066a_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_1__["default"], options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_userFollowedGames_vue_vue_type_style_index_0_id_408b066a_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js":
 /*!****************************************************************************!*\
   !*** ./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js ***!
@@ -65049,6 +65137,47 @@ component.options.__file = "resources/js/components/test.vue"
 
 /***/ }),
 
+/***/ "./resources/js/components/userFollowedGames.vue":
+/*!*******************************************************!*\
+  !*** ./resources/js/components/userFollowedGames.vue ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _userFollowedGames_vue_vue_type_template_id_408b066a_scoped_true__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./userFollowedGames.vue?vue&type=template&id=408b066a&scoped=true */ "./resources/js/components/userFollowedGames.vue?vue&type=template&id=408b066a&scoped=true");
+/* harmony import */ var _userFollowedGames_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./userFollowedGames.vue?vue&type=script&lang=js */ "./resources/js/components/userFollowedGames.vue?vue&type=script&lang=js");
+/* harmony import */ var _userFollowedGames_vue_vue_type_style_index_0_id_408b066a_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./userFollowedGames.vue?vue&type=style&index=0&id=408b066a&scoped=true&lang=css */ "./resources/js/components/userFollowedGames.vue?vue&type=style&index=0&id=408b066a&scoped=true&lang=css");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+;
+
+
+/* normalize component */
+
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _userFollowedGames_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"],
+  _userFollowedGames_vue_vue_type_template_id_408b066a_scoped_true__WEBPACK_IMPORTED_MODULE_0__.render,
+  _userFollowedGames_vue_vue_type_template_id_408b066a_scoped_true__WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  "408b066a",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/userFollowedGames.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/EventsWindow.vue?vue&type=script&lang=js":
 /*!**************************************************************************!*\
   !*** ./resources/js/components/EventsWindow.vue?vue&type=script&lang=js ***!
@@ -65465,6 +65594,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/userFollowedGames.vue?vue&type=script&lang=js":
+/*!*******************************************************************************!*\
+  !*** ./resources/js/components/userFollowedGames.vue?vue&type=script&lang=js ***!
+  \*******************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_userFollowedGames_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./userFollowedGames.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/userFollowedGames.vue?vue&type=script&lang=js");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_userFollowedGames_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/components/chat.vue?vue&type=style&index=0&id=151b8bba&lang=scss&scoped=true":
 /*!***************************************************************************************************!*\
   !*** ./resources/js/components/chat.vue?vue&type=style&index=0&id=151b8bba&lang=scss&scoped=true ***!
@@ -65760,6 +65905,19 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_test_vue_vue_type_style_index_0_id_5b6abe5d_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader/dist/cjs.js!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./test.vue?vue&type=style&index=0&id=5b6abe5d&scoped=true&lang=css */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/test.vue?vue&type=style&index=0&id=5b6abe5d&scoped=true&lang=css");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/userFollowedGames.vue?vue&type=style&index=0&id=408b066a&scoped=true&lang=css":
+/*!***************************************************************************************************************!*\
+  !*** ./resources/js/components/userFollowedGames.vue?vue&type=style&index=0&id=408b066a&scoped=true&lang=css ***!
+  \***************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_userFollowedGames_vue_vue_type_style_index_0_id_408b066a_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader/dist/cjs.js!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./userFollowedGames.vue?vue&type=style&index=0&id=408b066a&scoped=true&lang=css */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/userFollowedGames.vue?vue&type=style&index=0&id=408b066a&scoped=true&lang=css");
 
 
 /***/ }),
@@ -66202,6 +66360,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   staticRenderFns: () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_test_vue_vue_type_template_id_5b6abe5d_scoped_true__WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_test_vue_vue_type_template_id_5b6abe5d_scoped_true__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./test.vue?vue&type=template&id=5b6abe5d&scoped=true */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/test.vue?vue&type=template&id=5b6abe5d&scoped=true");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/userFollowedGames.vue?vue&type=template&id=408b066a&scoped=true":
+/*!*************************************************************************************************!*\
+  !*** ./resources/js/components/userFollowedGames.vue?vue&type=template&id=408b066a&scoped=true ***!
+  \*************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   render: () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_userFollowedGames_vue_vue_type_template_id_408b066a_scoped_true__WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   staticRenderFns: () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_userFollowedGames_vue_vue_type_template_id_408b066a_scoped_true__WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_userFollowedGames_vue_vue_type_template_id_408b066a_scoped_true__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./userFollowedGames.vue?vue&type=template&id=408b066a&scoped=true */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/userFollowedGames.vue?vue&type=template&id=408b066a&scoped=true");
 
 
 /***/ }),
@@ -67734,9 +67909,9 @@ var render = function () {
           0
         ),
         _vm._v(" "),
-        _c("div", { attrs: { id: "followed" } }, [_vm._v("Followed Games")]),
-        _vm._v(" "),
         _vm._m(2),
+        _vm._v(" "),
+        _vm._m(3),
       ]),
     ]),
   ])
@@ -67765,6 +67940,14 @@ var staticRenderFns = [
         ]),
       ]
     )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("a", { attrs: { href: "/followed-games/" } }, [
+      _c("div", { attrs: { id: "followed" } }, [_vm._v("Followed Games")]),
+    ])
   },
   function () {
     var _vm = this
@@ -70310,6 +70493,42 @@ var render = function () {
   return _c("div", { staticClass: "container" }, [_vm._v(_vm._s(_vm.naam))])
 }
 var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/userFollowedGames.vue?vue&type=template&id=408b066a&scoped=true":
+/*!****************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/userFollowedGames.vue?vue&type=template&id=408b066a&scoped=true ***!
+  \****************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   render: () => (/* binding */ render),
+/* harmony export */   staticRenderFns: () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [
+      _c("div", { attrs: { id: "gamedays_container" } }, [
+        _vm._v("\n        Sunday\n    "),
+      ]),
+    ])
+  },
+]
 render._withStripped = true
 
 

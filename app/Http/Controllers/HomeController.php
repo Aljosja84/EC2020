@@ -50,8 +50,13 @@ class HomeController extends Controller
         return view('game');
     }
 
-    public function test()
+    public function followedgames()
     {
-        return view('test');
+        return view('followedGames', [
+            'stadiums' => $this->stadiums,
+            'groups' => $this->groups,
+            'countries' => $this->countries,
+            'gamesdates' => $this->gamesdates,
+        ]);
     }
 }
