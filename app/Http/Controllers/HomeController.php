@@ -15,6 +15,8 @@ class HomeController extends Controller
     public $groups;
     public $countries;
     public $gamesdates;
+    public $games;
+    public $user;
 
     /**
      * Create a new controller instance.
@@ -57,6 +59,7 @@ class HomeController extends Controller
             'groups' => $this->groups,
             'countries' => $this->countries,
             'gamesdates' => $this->gamesdates,
+            'games' => auth()->user()->games()->get(),
         ]);
     }
 }

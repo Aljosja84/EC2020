@@ -5916,12 +5916,71 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "userFollowedGames",
   props: {
     'user': Object,
-    'gamesdates': Array
+    'gamesdates': Array,
+    'followedgames': Array,
+    'countries': Array
+  },
+  data: function data() {
+    return {};
+  },
+  methods: {
+    formatDate: function formatDate(dateString) {
+      // Parse the date string into a Date object
+      var date = new Date(dateString);
+
+      // Define arrays for days of the week and months
+      var daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+      var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+      // Extract day of the week, month, and day of the month
+      var dayOfWeek = daysOfWeek[date.getDay()];
+      var month = months[date.getMonth()];
+      var dayOfMonth = date.getDate();
+
+      // Format the date as 'Friday June 11'
+      return "".concat(dayOfWeek, " ").concat(month, " ").concat(dayOfMonth);
+    },
+    countryFlag: function countryFlag(e) {
+      return "/images/" + e.flag_url;
+    }
+  },
+  computed: {
+    followedGamesByDate: function followedGamesByDate() {
+      return this.followedgames.reduce(function (acc, game) {
+        var date = game.game_date.split('T')[0];
+        if (!acc[date]) {
+          acc[date] = [];
+        }
+        acc[date].push(game);
+        var plural = acc.length > 1 ? 'games' : 'game';
+        return acc;
+      }, {});
+    }
   }
 });
 
@@ -24455,7 +24514,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#gamedays_container[data-v-408b066a] {\n    width: 200px;\n    height: 500px;\n    background-color: whitesmoke;\n    box-shadow: rgba(0, 0, 0, 0.16) 0 3px 6px, rgba(0, 0, 0, 0.23) 0 3px 6px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.gamedays_header[data-v-408b066a] {\n    width: 220px;\n    height: 50px;\n    background-image: url(\"/images/light_wool.png\");\n    font-family: 'Oswald', sans-serif;\n    font-size: 18px;\n    color: #515151;\n    text-transform: uppercase;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n#filter_columns[data-v-408b066a] {\n    display: flex;\n    flex-direction: column;\n}\n#filter_teams[data-v-408b066a] {\n    width: 220px;\n    height: -moz-fit-content;\n    height: fit-content;\n    background-color: whitesmoke;\n    box-shadow: rgba(0, 0, 0, 0.16) 0 3px 6px, rgba(0, 0, 0, 0.23) 0 3px 6px;\n    padding: 2px 2px 2px 2px;\n    border-radius: 3px;\n}\n.flag-container[data-v-408b066a] {\n    display: grid;\n    grid-template-columns: repeat(5, 1fr); /* 5 equal-width columns */\n    grid-template-rows: repeat(4, 1fr); /* 4 equal-height rows */\n    grid-gap: 10px; /* Optional gap between grid items */\n}\n.flag-item[data-v-408b066a] {\n    background-color: whitesmoke; /* Optional background color for better visibility */\n    padding: 2px; /* Optional padding for content */\n}\n.flag-img[data-v-408b066a] {\n    filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.5));\n    width: 30px; height: 30px;\n}\n#gamedays_container[data-v-408b066a] {\n    width: 220px;\n    height: -moz-fit-content;\n    height: fit-content;\n    background-color: whitesmoke;\n    box-shadow: rgba(0, 0, 0, 0.16) 0 3px 6px, rgba(0, 0, 0, 0.23) 0 3px 6px;\n    padding: 2px 2px 2px 2px;\n    border-radius: 3px;\n    margin-bottom: 10px;\n}\n.gamedate_option[data-v-408b066a] {\n    display: flex;\n    align-items: center;\n    justify-content: left;\n    width: 100%;\n    height: 30px;\n    font-family: \"Terminal Dosis\", sans-serif;\n    font-size: 14px;\n    color: slategray;\n    line-height: 14px;\n    cursor: pointer;\n    transition: all 0.3s ease-out;\n    border-radius: 5px;\n    -webkit-user-select: none; /* Chrome, Safari, Opera */\n    -moz-user-select: none; /* Firefox */ /* Internet Explorer/Edge */\n    user-select: none; /* Non-prefixed version */\n}\n.gamedate_option span[data-v-408b066a] {\n    padding: 5px 0 5px 5px;\n}\n.gamedate_option.is-active[data-v-408b066a],\n.gamedate_option[data-v-408b066a]:hover {\n    background-color: #cde5fc;\n    color: slategray;\n    padding-left: 5px;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -70515,20 +70574,61 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("div", { attrs: { id: "gamedays_container" } }, [
-        _vm._v("\n        Sunday\n    "),
+  return _c("div", [
+    _c("div", { staticClass: "gamedays_header" }, [
+      _vm._v("\n        followed games by date\n    "),
+    ]),
+    _vm._v(" "),
+    _c("div", { attrs: { id: "filter_columns" } }, [
+      _c(
+        "div",
+        { attrs: { id: "gamedays_container" } },
+        _vm._l(_vm.gamesdates, function (date) {
+          return _c("div", { staticClass: "gamedate_option" }, [
+            _c("span", [
+              _vm._v(
+                "\n                    " +
+                  _vm._s(_vm.formatDate(date.date)) +
+                  "\n                    "
+              ),
+              _vm.followedGamesByDate[date.date]
+                ? _c("span", { staticStyle: { color: "darkorange" } }, [
+                    _vm._v(
+                      "[ " +
+                        _vm._s(_vm.followedGamesByDate[date.date].length) +
+                        " ]"
+                    ),
+                  ])
+                : _vm._e(),
+            ]),
+          ])
+        }),
+        0
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "gamedays_header" }, [
+        _vm._v("\n            followed games by teams\n        "),
       ]),
-    ])
-  },
-]
+      _vm._v(" "),
+      _c("div", { attrs: { id: "filter_teams" } }, [
+        _c(
+          "div",
+          { staticClass: "flag-container" },
+          _vm._l(_vm.countries, function (country) {
+            return _c("div", { staticClass: "flag-item" }, [
+              _c("img", {
+                staticClass: "flag-img",
+                attrs: { src: _vm.countryFlag(country) },
+              }),
+            ])
+          }),
+          0
+        ),
+      ]),
+    ]),
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
