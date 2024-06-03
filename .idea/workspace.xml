@@ -23,6 +23,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/followedGamesDropdown.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/followedGamesDropdown.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/userFollowedGames.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/userFollowedGames.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/followedGames.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/followedGames.blade.php" afterDir="false" />
     </list>
@@ -536,7 +537,7 @@
       <workItem from="1715601153111" duration="1775000" />
       <workItem from="1715603855220" duration="13055000" />
       <workItem from="1715714682476" duration="27762000" />
-      <workItem from="1716201097480" duration="96806000" />
+      <workItem from="1716201097480" duration="104107000" />
     </task>
     <servers />
   </component>

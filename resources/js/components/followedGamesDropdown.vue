@@ -140,6 +140,7 @@
                     element.scrollIntoView && element.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
                 }
             },
+
             getFlagUrl(flagUrl) {
                 // Construct full URL for flag image
                 return `/images/${flagUrl}`;

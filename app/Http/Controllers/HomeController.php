@@ -16,6 +16,7 @@ class HomeController extends Controller
     public $countries;
     public $gamesdates;
     public $games;
+    public $followedgames;
     public $user;
 
     /**
@@ -30,6 +31,7 @@ class HomeController extends Controller
         $this->groups = Group::orderBy('name', 'asc')->get();
         $this->countries = Country::orderBy('name', 'asc')->get();
         $this->gamesdates = Game::selectRaw("DISTINCT DATE_FORMAT(game_date, '%Y-%m-%d') date")->get();
+        $this->games = Game::with(['homeTeam', 'awayTeam'])->get();
     }
 
     /**
@@ -55,11 +57,12 @@ class HomeController extends Controller
     public function followedgames()
     {
         return view('followedGames', [
-            'stadiums' => $this->stadiums,
-            'groups' => $this->groups,
-            'countries' => $this->countries,
-            'gamesdates' => $this->gamesdates,
-            'games' => auth()->user()->games()->get(),
+            'stadiums' =>       $this->stadiums,
+            'groups' =>         $this->groups,
+            'countries' =>      $this->countries,
+            'gamesdates' =>     $this->gamesdates,
+            'games' =>          $this->games,
+            'followed_games' =>  auth()->user()->games()->get(),
         ]);
     }
 }

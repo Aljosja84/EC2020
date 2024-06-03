@@ -6,9 +6,11 @@
     <div id="app">
         <user-followed-games :user="{{auth()->user()}}"
                              :gamesdates="{{$gamesdates}}"
-                             :followedgames="{{$games}}"
+                             :followedgames="{{$followed_games}}"
                              :countries="{{$countries}}"
+                             :games="{{$games}}"
         ></user-followed-games>
     </div>
+    <div id="bg_pic"></div>
 </div>
 @endsection
