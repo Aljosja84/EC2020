@@ -31,7 +31,7 @@ class HomeController extends Controller
         $this->groups = Group::orderBy('name', 'asc')->get();
         $this->countries = Country::orderBy('name', 'asc')->get();
         $this->gamesdates = Game::selectRaw("DISTINCT DATE_FORMAT(game_date, '%Y-%m-%d') date")->get();
-        $this->games = Game::with(['homeTeam', 'awayTeam'])->get();
+        $this->games = Game::with(['homeTeam', 'awayTeam', 'stadium'])->get();
     }
 
     /**
