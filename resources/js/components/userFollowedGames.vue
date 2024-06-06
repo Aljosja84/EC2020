@@ -6,7 +6,7 @@
                     followed games by date
                 </div>
                 <div id="gamedays_container">
-                    <div v-for="date in gamesdates" class="gamedate_option">
+                    <div v-for="(date, index) in gamesdates" class="gamedate_option" :key="index" @click="scrollDate(index)">
                         <span>
                             {{ formatDate(date.date) }}
                             <span v-if="followedGamesByDate[date.date]" style="color: darkorange">[ {{ followedGamesByDate[date.date].length }} ]</span>
@@ -14,12 +14,12 @@
                     </div>
                 </div>
                 <div class="gamedays_header">
-                    followed games by teams
+                    find games by teams
                 </div>
                 <div id="filter_teams">
                     <div class="flag-container">
-                        <div v-for="country in countries" class="flag-item">
-                            <img :src="countryFlag(country)" class="flag-img">
+                        <div v-for="(country, index) in countries" class="flag-item" >
+                            <img :src="countryFlag(country)" class="flag-img" :class="{'flag_active': activeIndex === country.api_country_code }" @click="setActive(country.api_country_code)">
                         </div>
                     </div>
                 </div>
@@ -27,9 +27,9 @@
             <div class="filter_games">
                 <div ref="list" id="allgames_container">
                     <div v-for="(date, index) in sortedDates" :key="index">
-                        <div class="allgames_date_header">{{ formatDate(date) }}</div>
+                        <div class="allgames_date_header" :id="'date-' + index">{{ formatDate(date) }}</div>
                         <div class="allgames_date_container">
-                            <div v-for="game in sortedGames(date)" :key="game.id"  :id="game.api_id" class="button non_active">
+                            <div v-for="game in sortedGames(date)" :key="game.id"  :id="game.api_id" class="button" :class="isActive(game)">
                                 <div class="button_column">
                                     <div class="button_flex">
                                         <span class="separator">{{ game.home_team.abv }}</span><img class="teamflagimg" :src="getFlagUrl(game.home_team.flag_url)"><span class="separator_vs">vs</span><img class="teamflagimg" :src="getFlagUrl(game.away_team.flag_url)"><span class="separator">{{ game.away_team.abv }}</span>
@@ -62,11 +62,24 @@
 
         data() {
             return {
-
+                followedGameIds:    Array,
+                activeIndex:        undefined,
             }
         },
 
         methods: {
+            setActive(index) {
+                if(this.activeIndex === index) {
+                    this.activeIndex = undefined;
+                }   else {
+                    this.activeIndex = index;
+                }
+            },
+
+            scrollDate(index) {
+                document.getElementById(`date-${index}`).scrollIntoView({ behavior: 'smooth', block: 'start'});
+            },
+
             formatDate(dateString) {
                 // Parse the date string into a Date object
                 const date = new Date(dateString);
@@ -110,6 +123,14 @@
                 return `/images/${flagUrl}`;
             },
 
+            isActive(game) {
+                return this.followedGameIds.has(game.api_id) ? 'active' : null;
+            },
+
+            initializeFollowedGameIds() {
+                this.followedGameIds = new Set(this.followedgames.map(fg => fg.api_id));
+            },
+
         },
 
         computed: {
@@ -137,6 +158,7 @@
                 });
                 return grouped;
             },
+
             sortedDates() {
                 // Sort dates in ascending order
                 return Object.keys(this.groupedGames).sort();
@@ -147,7 +169,11 @@
                     : 'opacity: 0%; visibility: hidden';
             }
 
-        }
+        },
+
+        created() {
+            this.initializeFollowedGameIds();
+        },
 
     }
 </script>
@@ -250,11 +276,20 @@
     .flag-item {
         background-color: whitesmoke; /* Optional background color for better visibility */
         padding: 2px; /* Optional padding for content */
+
     }
 
     .flag-img {
         filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.5));
         width: 27px; height: 27px;
+        cursor: pointer;
+        border-radius: 100%;
+        transition: all 0.1s ease;
+        border: 0 solid transparent;
+    }
+
+    .flag_active {
+        border: 3px solid orange;
     }
 
     .teamflagimg {
@@ -325,6 +360,11 @@
     .non_active {
         color: slategray;
         filter: grayscale(100%);
+    }
+
+    .active {
+        border: 1px solid limegreen;
+        border-bottom: 5px solid limegreen;
     }
 
     .button:hover {
