@@ -19,7 +19,7 @@
                 <div id="filter_teams">
                     <div class="flag-container">
                         <div v-for="(country, index) in countries" class="flag-item" >
-                            <img :src="countryFlag(country)" class="flag-img" :class="{'flag_active': activeIndex === country.api_country_code }" @click="setActive(country.api_country_code)">
+                            <img :src="countryFlag(country)" class="flag-img" :class="{'flag_active': activeIndex.includes(country.api_country_code) }" @click="setActive(country.api_country_code)">
                         </div>
                     </div>
                 </div>
@@ -63,16 +63,19 @@
         data() {
             return {
                 followedGameIds:    Array,
-                activeIndex:        undefined,
+                activeIndex:        [],
             }
         },
 
         methods: {
             setActive(index) {
-                if(this.activeIndex === index) {
-                    this.activeIndex = undefined;
-                }   else {
-                    this.activeIndex = index;
+                const pos = this.activeIndex.indexOf(index);
+                if (pos !== -1) {
+                    // Remove the index from the array
+                    this.activeIndex.splice(pos, 1);
+                } else {
+                    // Add the index to the array
+                    this.activeIndex.push(index);
                 }
             },
 
@@ -124,16 +127,44 @@
             },
 
             isActive(game) {
-                return this.followedGameIds.has(game.api_id) ? 'active' : null;
+                if(this.teamgames.length > 0) {
+                    if(this.teamgames.includes(game.api_id)) {
+                        if(this.followedGameIds.has(game.api_id)) {
+                            return 'followed';
+                        }
+                        return null;
+                    }
+                    return 'non_active';
+                }   else {
+                    if(this.followedGameIds.has(game.api_id)) {
+                        return 'followed';
+                    }
+                    return null;
+                }
             },
 
             initializeFollowedGameIds() {
                 this.followedGameIds = new Set(this.followedgames.map(fg => fg.api_id));
             },
 
+            getGameApiIdsByCountryCodes() {
+                const api_country_codes = this.activeIndex;
+                return this.games
+                    .filter(game =>
+                        api_country_codes.includes(game.home_team.api_country_code) ||
+                        api_country_codes.includes(game.away_team.api_country_code)
+                    )
+                    .map(game => game.api_id);
+            },
+
+
         },
 
         computed: {
+            teamgames() {
+                return this.getGameApiIdsByCountryCodes();
+            },
+
             followedGamesByDate() {
                 return this.followedgames.reduce((acc, game) => {
                     const date = game.game_date.split('T')[0];
@@ -289,7 +320,7 @@
     }
 
     .flag_active {
-        border: 3px solid orange;
+        border: 3px solid greenyellow;
     }
 
     .teamflagimg {
@@ -362,7 +393,7 @@
         filter: grayscale(100%);
     }
 
-    .active {
+    .followed {
         border: 1px solid limegreen;
         border-bottom: 5px solid limegreen;
     }
