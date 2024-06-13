@@ -5970,11 +5970,22 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      followedGames: Array,
       followedGameIds: Array,
       activeIndex: []
     };
   },
   methods: {
+    toggleFollow: function toggleFollow(gameId) {
+      var _this = this;
+      axios.get('/user/setfollow/' + gameId).then(function (response) {
+        // set followedgames to new values
+        _this.followedGames = response.data.followedGames;
+        _this.followedGameIds = new Set(response.data.followedGames.map(function (fg) {
+          return fg.api_id;
+        }));
+      });
+    },
     setActive: function setActive(index) {
       var pos = this.activeIndex.indexOf(index);
       if (pos !== -1) {
@@ -6065,8 +6076,8 @@ __webpack_require__.r(__webpack_exports__);
     teamgames: function teamgames() {
       return this.getGameApiIdsByCountryCodes();
     },
-    followedGamesByDate: function followedGamesByDate() {
-      return this.followedgames.reduce(function (acc, game) {
+    followedGamesByDate: function followedGamesByDate(data) {
+      return this.followedGames.reduce(function (acc, game) {
         var date = game.game_date.split('T')[0];
         if (!acc[date]) {
           acc[date] = [];
@@ -6097,7 +6108,13 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   created: function created() {
+    this.followedGames = this.followedgames;
     this.initializeFollowedGameIds();
+  },
+  watch: {
+    followedgames: function followedgames(newVal) {
+      this.followedGames = newVal;
+    }
   }
 });
 
@@ -70793,6 +70810,11 @@ var render = function () {
                       staticClass: "button",
                       class: _vm.isActive(game),
                       attrs: { id: game.api_id },
+                      on: {
+                        click: function ($event) {
+                          return _vm.toggleFollow(game.id)
+                        },
+                      },
                     },
                     [
                       _c("div", { staticClass: "button_column" }, [

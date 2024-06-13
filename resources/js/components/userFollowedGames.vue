@@ -29,7 +29,7 @@
                     <div v-for="(date, index) in sortedDates" :key="index">
                         <div class="allgames_date_header" :id="'date-' + index">{{ formatDate(date) }}</div>
                         <div class="allgames_date_container">
-                            <div v-for="game in sortedGames(date)" :key="game.id"  :id="game.api_id" class="button" :class="isActive(game)">
+                            <div v-for="game in sortedGames(date)" :key="game.id"  :id="game.api_id" class="button" :class="isActive(game)" @click="toggleFollow(game.id)">
                                 <div class="button_column">
                                     <div class="button_flex">
                                         <span class="separator">{{ game.home_team.abv }}</span><img class="teamflagimg" :src="getFlagUrl(game.home_team.flag_url)"><span class="separator_vs">vs</span><img class="teamflagimg" :src="getFlagUrl(game.away_team.flag_url)"><span class="separator">{{ game.away_team.abv }}</span>
@@ -62,12 +62,22 @@
 
         data() {
             return {
+                followedGames:      Array,
                 followedGameIds:    Array,
                 activeIndex:        [],
             }
         },
 
         methods: {
+            toggleFollow(gameId) {
+                axios.get('/user/setfollow/' + gameId)
+                    .then(response => {
+                        // set followedgames to new values
+                        this.followedGames = response.data.followedGames;
+                        this.followedGameIds = new Set(response.data.followedGames.map(fg => fg.api_id));
+                    })
+            },
+
             setActive(index) {
                 const pos = this.activeIndex.indexOf(index);
                 if (pos !== -1) {
@@ -165,8 +175,8 @@
                 return this.getGameApiIdsByCountryCodes();
             },
 
-            followedGamesByDate() {
-                return this.followedgames.reduce((acc, game) => {
+            followedGamesByDate(data) {
+                return this.followedGames.reduce((acc, game) => {
                     const date = game.game_date.split('T')[0];
                     if(!acc[date]) {
                         acc[date] = [];
@@ -203,8 +213,15 @@
         },
 
         created() {
+            this.followedGames = this.followedgames;
             this.initializeFollowedGameIds();
         },
+
+        watch: {
+            followedgames(newVal) {
+                this.followedGames = newVal;
+            }
+        }
 
     }
 </script>

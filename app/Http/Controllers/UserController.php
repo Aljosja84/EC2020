@@ -145,4 +145,23 @@ class UserController extends Controller
 
         return false;
     }
+
+    public function toggleFollow(Game $game)
+    {
+        // user must be logged in
+        $user = auth()->user();
+        // check if game is listed in user's followed list
+        $followed_games = $user->games()->pluck('game_id')->toArray();
+
+        // check if the game is followed or not
+        if(in_array($game->id, $followed_games)) {
+            // if followed, detach the game
+            $user->games()->detach($game);
+        }   else {
+            // if not followed, attach it
+            $user->games()->attach($game);
+        }
+
+        return response()->json(['followedGames' => $user->games()->get()]);
+    }
 }
