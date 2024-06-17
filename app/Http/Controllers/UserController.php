@@ -157,11 +157,13 @@ class UserController extends Controller
         if(in_array($game->id, $followed_games)) {
             // if followed, detach the game
             $user->games()->detach($game);
+            $status = 'unfollow';
         }   else {
             // if not followed, attach it
             $user->games()->attach($game);
+            $status = 'follow';
         }
 
-        return response()->json(['followedGames' => $user->games()->get()]);
+        return response()->json(['followedGames' => $user->games()->get(), 'status' => $status]);
     }
 }

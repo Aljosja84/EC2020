@@ -44,6 +44,15 @@
                     </div>
                 </div>
             </div>
+            <div class="notifications_container">
+                <ul>
+                    <transition-group name="notifications">
+                        <li class="tweet_body" v-for="(notification, index) in notifications" :key="idNum()">
+                            <p>{{ notification.game}}: {{ notification.status }}</p>
+                        </li>
+                    </transition-group>
+                </ul>
+            </div>
         </div>
     </div>
 </template>
@@ -65,6 +74,10 @@
                 followedGames:      Array,
                 followedGameIds:    Array,
                 activeIndex:        [],
+                notifications:      [
+                    {'game': 657674, 'status': 'follow'},
+                    {'game': 657675, 'status': 'unfollow'},
+                ],
             }
         },
 
@@ -75,7 +88,10 @@
                         // set followedgames to new values
                         this.followedGames = response.data.followedGames;
                         this.followedGameIds = new Set(response.data.followedGames.map(fg => fg.api_id));
-                    })
+                        console.log(response.data);
+                    }).catch(error => {
+                        console.log('error setting follow status: ' + error);
+                })
             },
 
             setActive(index) {
@@ -91,6 +107,10 @@
 
             scrollDate(index) {
                 document.getElementById(`date-${index}`).scrollIntoView({ behavior: 'smooth', block: 'start'});
+            },
+
+            idNum() {
+                return Math.floor(Math.random() * 10000);
             },
 
             formatDate(dateString) {
@@ -455,6 +475,13 @@
     .separator_vs {
         margin: 5px;
         text-transform: lowercase !important;
+    }
+
+    .notifications_container {
+        margin-left: 10px;
+        height: 500px;
+        width: 300px;
+        background-color: whitesmoke;
     }
 
 </style>
