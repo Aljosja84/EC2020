@@ -45,13 +45,15 @@
                 </div>
             </div>
             <div class="notifications_container">
-                <ul>
-                    <transition-group name="notifications">
-                        <li class="tweet_body" v-for="(notification, index) in notifications" :key="idNum()">
-                            <p>{{ notification.game}}: {{ notification.status }}</p>
+
+                    <transition-group name="twit" tag="ul">
+                        <li class="noti_body" v-for="(notification, index) in notifications" :key="notification.id">
+                            <div>
+                                {{ notification.game}}: {{ notification.status }}
+                            </div>
                         </li>
                     </transition-group>
-                </ul>
+
             </div>
         </div>
     </div>
@@ -74,10 +76,8 @@
                 followedGames:      Array,
                 followedGameIds:    Array,
                 activeIndex:        [],
-                notifications:      [
-                    {'game': 657674, 'status': 'follow'},
-                    {'game': 657675, 'status': 'unfollow'},
-                ],
+                notifications:      [],
+                idCounter:          1,
             }
         },
 
@@ -88,7 +88,7 @@
                         // set followedgames to new values
                         this.followedGames = response.data.followedGames;
                         this.followedGameIds = new Set(response.data.followedGames.map(fg => fg.api_id));
-                        console.log(response.data);
+                        this.addNotification(gameId, response.data.status);
                     }).catch(error => {
                         console.log('error setting follow status: ' + error);
                 })
@@ -105,12 +105,27 @@
                 }
             },
 
+            addNotification(match, status) {
+                let newNotification = {
+                    'id' : this.idNum(),
+                    'game' : match,
+                    'status': status
+                }
+                this.notifications.unshift(newNotification);
+
+                // remove the notification after a few seconds
+                let removeNotification = setInterval(() => {
+                    this.notifications.pop();
+                    clearInterval(removeNotification);
+                }, 3000);
+            },
+
             scrollDate(index) {
                 document.getElementById(`date-${index}`).scrollIntoView({ behavior: 'smooth', block: 'start'});
             },
 
             idNum() {
-                return Math.floor(Math.random() * 10000);
+                return this.idCounter++;
             },
 
             formatDate(dateString) {
@@ -484,4 +499,38 @@
         background-color: whitesmoke;
     }
 
+    ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .noti_body {
+        width: 100%;
+        height: 30px;
+        background-color: #95c5ed;
+        color: #515151;
+    }
+    .twit-enter-active {
+        transition: all .5s;
+    }
+    .twit-enter {
+        opacity: 0;
+        transform: translateX(100px);
+    }
+    .twit-enter-to {
+        opacity: 1;
+    }
+    .twit-leave-active {
+        transition: all 0.5s;
+    }
+    .twit-leave {
+        opacity: 1;
+    }
+    .twit-leave-to {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    .twit-move {
+        transition: all .5s;
+    }
 </style>
