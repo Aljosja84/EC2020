@@ -45,15 +45,11 @@
                 </div>
             </div>
             <div class="notifications_container">
-
-                    <transition-group name="twit" tag="ul">
-                        <li class="noti_body" v-for="(notification, index) in notifications" :key="notification.id">
-                            <div>
-                                {{ notification.game}}: {{ notification.status }}
-                            </div>
-                        </li>
-                    </transition-group>
-
+                <transition-group name="twit" tag="ul">
+                    <li class="noti_body" v-for="(notification, index) in notifications" :key="notification.id">
+                        <div v-html="notificationText(notification.game, notification.status)"></div>
+                    </li>
+                </transition-group>
             </div>
         </div>
     </div>
@@ -92,6 +88,20 @@
                     }).catch(error => {
                         console.log('error setting follow status: ' + error);
                 })
+            },
+
+            // text for notification
+            notificationText(gameId, status) {
+                const game = this.games.find(game => game.id === gameId);
+                if(game) {
+                    if(status === 'follow') {
+                        return '<span style="margin-right: 7px"><img src="/images/check.png" width="16px" height="16px"></span>' + `<span>You followed ` + `${game.home_team.name} vs ${game.away_team.name}</span>`;
+                    }   else {
+                        return '<span style="margin-right: 7px"><img src="/images/delete.png" width="16px" height="16px"></span>' + `<span>You unfollowed ` + `${game.home_team.name} vs ${game.away_team.name}</span>`;
+                    }
+                }   else {
+                    return 'Game not found';
+                }
             },
 
             setActive(index) {
@@ -496,7 +506,8 @@
         margin-left: 10px;
         height: 500px;
         width: 300px;
-        background-color: whitesmoke;
+        background-color: transparent;
+        overflow-x: hidden;
     }
 
     ul {
@@ -506,12 +517,24 @@
 
     .noti_body {
         width: 100%;
-        height: 30px;
-        background-color: #95c5ed;
+        height: 40px;
+        background-color: whitesmoke;
+        border-radius: 6px;
         color: #515151;
+        font-family: "Terminal Dosis", sans-serif;
+        font-size: 0.9rem;
+        padding: 5px;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        margin-bottom: 7px;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
     }
+
     .twit-enter-active {
-        transition: all .5s;
+        transition: all 500ms cubic-bezier(0.680, -0.550, 0.265, 1.550); /* easeInOutBack */
+
+        transition-timing-function: cubic-bezier(0.680, -0.550, 0.265, 1.550); /* easeInOutBack */
     }
     .twit-enter {
         opacity: 0;
@@ -521,7 +544,9 @@
         opacity: 1;
     }
     .twit-leave-active {
-        transition: all 0.5s;
+        transition: all 500ms cubic-bezier(0.680, -0.550, 0.265, 1.550); /* easeInOutBack */
+
+        transition-timing-function: cubic-bezier(0.680, -0.550, 0.265, 1.550); /* easeInOutBack */
     }
     .twit-leave {
         opacity: 1;
@@ -531,6 +556,8 @@
         transform: translateY(30px);
     }
     .twit-move {
-        transition: all .5s;
+        transition: all 500ms cubic-bezier(0.680, -0.550, 0.265, 1.550); /* easeInOutBack */
+
+        transition-timing-function: cubic-bezier(0.680, -0.550, 0.265, 1.550); /* easeInOutBack */
     }
 </style>
