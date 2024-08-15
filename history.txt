@@ -1,0 +1,8 @@
+php artisan poll-events.php
+php artisan poll-event
+php artisan poll-events
+poll events
+poll-events
+Get-History
+Invoke-History -Id 5
+doskey /history > history.txt

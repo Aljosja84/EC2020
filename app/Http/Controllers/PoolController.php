@@ -20,6 +20,8 @@ class PoolController extends Controller
     public $groups;
     public $countries;
     public $gamesdates;
+    public $members;
+
     /**
      * Create a new controller instance.
      *
@@ -82,6 +84,7 @@ class PoolController extends Controller
             'groups' => $this->groups,
             'countries' => $this->countries,
             'gamesdates' => $this->gamesdates,
+            'members' => $pool->members,
         ]);
     }
 
