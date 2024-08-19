@@ -588,13 +588,14 @@ input:-webkit-autofill {
     width: 510px;
     height: 138px;
     background-color: whitesmoke;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0 3px 6px, rgba(0, 0, 0, 0.23) 0 3px 6px;
 }
 
 /* ---------------------------- bettingpool page -------------------------------------------------- */
 .chatwindow_container {
     position: absolute;
     right: 10px;
+    top: -7px;
     z-index: 600;
 }
 
@@ -616,6 +617,42 @@ input:-webkit-autofill {
     color: #515151;
     text-align: center;
     background-image: url("../images/light_wool.png");
+}
+
+.group_standing_win_sub_header {
+    height: 30px;
+    font-family: 'Terminal Dosis', sans-serif;
+    font-size: 18px;
+    color: #515151;
+    text-align: center;
+}
+
+.group_standing_win_sub_header span {
+    display: inline-flex;
+    justify-content: space-between;
+
+}
+
+.group_standing_win_player_div {
+    height: 35px;
+    font-family: 'Terminal Dosis', sans-serif;
+    font-size: 14px;
+    color: #515151;
+    text-align: center;
+    background-color: #cce3f6;
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.group_standing_win_player_div span {
+    display: inline-flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.group_standing_win_player_div img {
+    vertical-align: middle; /* Additional precaution */
 }
 
 /*----------------------------- notification and user menu ----------------------------------------- */

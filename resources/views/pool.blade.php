@@ -8,8 +8,18 @@
                    group standings
                </div>
                <div class="separator_bar"></div>
+               <div class="group_standing_win_sub_header">
+                   <span style="width: 20px">#</span><span style="width: 170px">name</span><span style="width: 40px">points</span>
+               </div>
                @foreach($members as $member)
-                   <div><span>{{ $member->avatar->ava_url() }}</span>{{ $member->name }}</div>
+                   <div class="group_standing_win_player_div" style="padding-left: 10px">
+                       <span style="width: 20px;">{{$member->id}}</span>
+                       <span style="width: 170px; display: flex; align-items: center;">
+                            <img width="20px" height="20px" src="{{ $member->avatar->ava_url() }}" />
+                            <span>{{ $member->name }}</span>
+                        </span>
+                       <span style="width: 40px;">23</span>
+                   </div>
                @endforeach
            </div>
 

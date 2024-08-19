@@ -234,10 +234,12 @@
         z-index: 1000;
         transition: all 0.2s ease-in;
     }
+
     .typing-bubble:after {
         content: ' .';
         animation: dots 1.5s steps(5, end) infinite;
     }
+
     @keyframes dots {
         0%, 20% {
             color: rgba(0,0,0,0);
