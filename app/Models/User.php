@@ -67,4 +67,14 @@ class User extends Authenticatable
     {
         return $this->belongsToMany('App\Models\Game', 'user_game');
     }
+
+    public function bets()
+    {
+        return $this->hasMany(Bet::class);
+    }
+
+    public function totalPoints()
+    {
+        return $this->bets()->sum('points');
+    }
 }

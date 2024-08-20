@@ -71,4 +71,9 @@ class Game extends Model
     {
         return $this->hasManyThrough(Player::class, Country::class);
     }
+
+    public function bets()
+    {
+        return $this->hasMany('bets');
+    }
 }
