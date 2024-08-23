@@ -13,6 +13,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Events\NewChatMessage;
+use Illuminate\Support\Facades\DB;
 
 class PoolController extends Controller
 {
@@ -84,7 +85,14 @@ class PoolController extends Controller
             'groups' => $this->groups,
             'countries' => $this->countries,
             'gamesdates' => $this->gamesdates,
-            'members' => $pool->members,
+            'members' => $pool->members()
+                ->get()
+                ->map(function ($member) {
+                    // Add total points attribute to each member
+                    $member->total_points = $member->totalPoints();
+                    return $member;
+                })
+                ->sortByDesc('total_points')
         ]);
     }
 

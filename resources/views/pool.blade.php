@@ -18,7 +18,7 @@
                             <img width="20px" height="20px" src="{{ $member->avatar->ava_url() }}" />
                             <span>{{ $member->name }}</span>
                         </span>
-                       <span style="width: 40px;">23</span>
+                       <span style="width: 40px;">{{ $member->totalPoints() }}</span>
                    </div>
                @endforeach
            </div>

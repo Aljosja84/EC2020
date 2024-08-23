@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Pool extends Model
 {
@@ -31,6 +32,10 @@ class Pool extends Model
     public function invite(User $user)
     {
         return $this->members()->attach($user);
+    }
+
+    public function membersWithPoints()
+    {
     }
 }
 
