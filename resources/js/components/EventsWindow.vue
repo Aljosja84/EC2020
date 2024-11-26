@@ -82,6 +82,7 @@
             },
 
             whichteam(e) {
+                // determine which team called the event.
                 return e.team.id === this.hometeam ? 'homeTeam' : 'awayTeam';
             },
 
@@ -142,6 +143,7 @@
 
         watch: {
             data: {
+                // here we check for changes
                 immediate: false,
                 handler() {
                     this.fixture = this.data;

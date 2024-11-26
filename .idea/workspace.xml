@@ -21,9 +21,14 @@
   <component name="ChangeListManager">
     <list default="true" id="cf82d037-ce69-45df-857e-a29fb7732fae" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PoolController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/PoolController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Pool.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Pool.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/pool.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pool.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/EventsWindow.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/EventsWindow.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/countryList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/countryList.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/followGameButton.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/followGameButton.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/followedGamesDropdown.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/followedGamesDropdown.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/lineUpAway.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/lineUpAway.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/lineup.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/lineup.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/login.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/notifications.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/notifications.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -542,7 +547,11 @@
       <workItem from="1720893636739" duration="4359000" />
       <workItem from="1721392945840" duration="2396000" />
       <workItem from="1721995414998" duration="1534000" />
-      <workItem from="1723718323693" duration="31669000" />
+      <workItem from="1723718323693" duration="37908000" />
+      <workItem from="1728085406831" duration="2000" />
+      <workItem from="1730733449661" duration="555000" />
+      <workItem from="1732483685437" duration="3322000" />
+      <workItem from="1732655689665" duration="1652000" />
     </task>
     <servers />
   </component>

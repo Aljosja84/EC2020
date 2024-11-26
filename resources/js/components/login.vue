@@ -98,7 +98,6 @@
             *
             */
             accessGroups() {
-                console.log(this.subGroupActive);
                 this.subGroupActive = !this.subGroupActive;
                 this.subGroupActive ?
                     this.subGroupStyle = "height: 0px;"

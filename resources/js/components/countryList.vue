@@ -91,6 +91,7 @@
         },
 
         mounted() {
+            // set default choises
             document.getElementById('rooting').value="1";
             document.getElementById('avatar').value="1";
         }

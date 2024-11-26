@@ -60,6 +60,7 @@
             },
 
             loadFollow($gameId) {
+                // check if the logged in user is also following the game
                 axios.get('/user/following/' + $gameId)
                     .then(response => {
                         // set loaded to true so we can show the component
@@ -69,6 +70,7 @@
 
                     })
                     .catch(error => {
+                        // throw error
                         console.log('ERROR FOLLOWING DATA: ', error);
                     })
 

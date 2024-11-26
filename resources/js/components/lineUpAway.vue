@@ -30,6 +30,7 @@
                     "X-RapidAPI-Key": "b1ae4a3fca89630148dadaa295a0b5b7"
                 }
             }).then((response)=> {
+                // set data
                 var data = response.data.api.fixtures[0];
                 var awayteam = data.awayTeam.team_name;
                 this.players = data.lineups[awayteam].startXI;

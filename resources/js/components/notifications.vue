@@ -105,6 +105,7 @@
 
         methods: {
             scoreline(e) {
+                // scoreline when latest goal was scored by hometeam
                 if(e.latestGoal === 'home') {
                     return "<b>" + e.homeTeamScore + "</b>" + "-" + e.awayTeamScore;
                 }   else {
@@ -117,6 +118,7 @@
                 this.menuActive = !this.menuActive;
                 // close the user menu
                 this.$root.$emit('closeBrother');
+                // toggle opacity
                 this.menuActive ?
                     this.menuStyle = "top: 70px;" +
                         "opacity: 0%;" +
@@ -127,6 +129,7 @@
                         "visibility: visible";
             },
 
+            // the status of the notification.
             setStyleReadStatus(e) {
                 return e.read_at == null ? 'notify_unread' : 'notify_read';
             },
@@ -144,7 +147,7 @@
                     console.log('notification is already marked as read');
                     return;
                 }
-                console.log('setting notification as read');
+
                 axios.post('/notifications/' + notificationId + '/mark-as-read')
                     .then(response => {
                         this.notifications = response.data;
@@ -227,6 +230,7 @@
             },
 
             parsedType(e) {
+                // return the icons of each event.
                 switch (e.data.event_type) {
                     case 'normalGoal':
                         return '/images/notify_goal.png';
@@ -246,6 +250,7 @@
 
         mounted() {
             const userId = this.userId;
+
             Echo.private(`user.${userId}`)
                 .listen('NewNotification', (event) => {
                     this.fetchNotifications();

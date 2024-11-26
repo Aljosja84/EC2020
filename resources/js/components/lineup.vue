@@ -38,8 +38,11 @@
                 handler() {
                     // is this the hometeam or awayteam?
                     let team = this.team === 'hometeam' ? 0 : 1;
+                    // set players
                     this.players = this.data.lineups[team].startXI;
+                    // set substitutions
                     this.subs = this.data.lineups[team].substitutes;
+                    // set the coach
                     this.coach = this.data.lineups[team].coach.name;
                 }
             }

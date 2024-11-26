@@ -166,6 +166,7 @@
             },
 
             resultStyle() {
+                // set visibility depending on the current style
                return this.resultWin === true ? 'opacity: 100%; visibility: visible'
                     : 'opacity: 0%; visibility: hidden';
             }
