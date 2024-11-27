@@ -20,38 +20,74 @@ What this project is and isn't:
 
 ## Screenshots
 
+User registration
+
 ![register](https://github.com/user-attachments/assets/2f8fd0be-0871-4e41-b5a9-f4c7676b4459)
 
+User login
 
-## Laravel Sponsors
+![login](https://github.com/user-attachments/assets/f4fe92b3-430f-4837-95b7-e37b9782018a)
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+Player / Team Statistics
 
-### Premium Partners
+![team](https://github.com/user-attachments/assets/05f6d6f9-76ab-4348-bb68-2448b6aae269)
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[OP.GG](https://op.gg)**
+Game Statistics
 
-## Contributing
+![game](https://github.com/user-attachments/assets/7ef01670-13bd-4855-b763-bcf924e8614e)
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Before Elon Musk took over Twitter they had a very nice accesible api with a realtime timeline you could access. I leveraged it in a way it would should realtime tweets during a match.
 
-## Code of Conduct
+https://github.com/user-attachments/assets/0744d1a8-31e0-40b0-8eb4-94203d3e69a9
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Followed Games
 
-## Security Vulnerabilities
+![followed](https://github.com/user-attachments/assets/e9383879-5068-4ad2-84dc-41cdf538d8da)
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Start of bettingpool page
 
-## License
+![pool](https://github.com/user-attachments/assets/bd78be23-2968-47c9-babd-6ad8ec786520)
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+This is to be the main functionality of the app, where you can compare your luck / knowledge of the games and makes wagers. It would have statistics of your bets and compare them to other users / friends.
+
+## Videos of the app's functionality
+
+REGISTER
+
+https://github.com/user-attachments/assets/ad480653-2cef-4806-9ded-e22b1e78d7b8
+
+MAIN
+
+https://github.com/user-attachments/assets/809318b1-0386-4ec6-9f7d-ec2e4bfef8e6
+
+TEAMS
+
+https://github.com/user-attachments/assets/42d157be-4801-4ba8-b6ac-7475f133acef
+
+GAME
+
+https://github.com/user-attachments/assets/94fa6ff2-e733-43d2-8377-93a657be26dc
+
+FOLLOWED GAMES
+
+https://github.com/user-attachments/assets/435b5be0-fad1-4331-8e6b-71de600659ef
+
+NOTIFICATIONS
+
+https://github.com/user-attachments/assets/3fad4204-4e12-4f0c-9e5a-23516dc55faa
+
+### Some remarks on the project and my decisions
+
+- Why did I use Laravel over let's say Symfony?
+  I choose Laravel over it's slower learning curve-- I really wanted to just start building right out of the gate and not deal with a steep learning curve. 
+  I do realize now later on that Symfony has a more modular approach which could've been more beneficial to my needs.
+  Laravel does have the advantage of more community support which I found helpful over the years. Symfony does as well, but it's more geared to enterprise-level solutions and I wanted this to just be a hobby project.
+
+  For smaller apps like these hobby projects Laravel's performance is sufficient enough. As I would grow this app I would swap to Symfony due to it's optimization capabalities.
+
+- Why did I go with Vue.js instead of React?
+  Again I chose beginner friendly over a learning curve. Straigh forward syntax, ability to write my own custom CSS which was very important to me-- single file components make all the difference to me.
+  With React, relying on third-party libraries like Redux, MobX would slow down development time. Felt like a bit of an overkill.
+    
+
+
